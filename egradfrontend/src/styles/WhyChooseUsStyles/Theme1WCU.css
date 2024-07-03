@@ -12,8 +12,16 @@
     padding: 15px;
     color: rgb(247, 239, 239);
     display: flex;
+    border: 1px solid #689851;
+    padding: 10px;
+    margin: 10px 10px 10px 10px;
+    border-radius: 10px;
     justify-content: space-around;
 }
+.t1CPHeaderUl li{
+    background-color: rgb(175, 197, 175);
+}
+
 
 .t1CPHeaderUl li a {
     color: rgb(10, 10, 10);
@@ -21,8 +29,12 @@
     font-weight: bold;
 }
 
-.t1CPHeaderUl li a:hover{
-    color: rgb(0, 119, 36);
+.t1CPHeaderUl li a:hover {
+    color: rgb(250, 246, 246);
+}
+
+.t1CPHeaderUl li:hover{
+    box-shadow: rgb(185 226 198 / 1%) 59px 54px 55px, rgb(185 226 198) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 2px 3px, rgba(0, 0, 0, 0.09) 0px -3px 5px;    
 }
 
 .t1_COURSES {
@@ -37,9 +49,8 @@
     display: inline-block;
     margin: 0;
     font-size: 30px;
-     background-color: #2f8d46;
-    background-image: url(
-'https://images.pexels.com/photos/2943603/pexels-photo-2943603.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-color: #2f8d46;
+    background-image: url('https://images.pexels.com/photos/2943603/pexels-photo-2943603.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -48,7 +59,7 @@
     -webkit-background-clip: text;
 }
 
-.t1BuyCourseSpan span{
+.t1BuyCourseSpan span {
     font-size: 15px;
     font-style: italic;
 }
@@ -61,7 +72,7 @@
     margin: 0 auto;
 }
 
-.greenCardBody .t1BuyButtonInCP{
+.greenCardBody .t1BuyButtonInCP {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,14 +80,14 @@
 }
 
 
-.t1BuyButtonInCP a{
+.t1BuyButtonInCP a {
     background-color: rgb(26, 82, 26);
     color: #f3eeee;
     text-align: center;
     width: 150px;
 }
 
-.t1BuyButtonInCP a:hover{
+.t1BuyButtonInCP a:hover {
     color: black;
     background-color: rgb(140, 167, 140);
 }
@@ -152,7 +163,7 @@
     color: rgb(85, 50, 50);
 }
 
-.t1TabContentSplittedText{
+.t1TabContentSplittedText {
     padding: 20px;
     display: flex;
     flex-direction: row;
@@ -168,8 +179,8 @@
     box-shadow: rgba(230, 227, 227, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.t1TabContentSplittedTextInDiv p{
-padding: 10px;
+.t1TabContentSplittedTextInDiv p {
+    padding: 10px;
 }
 
 
@@ -179,23 +190,21 @@ padding: 10px;
         display: flex;
         flex-direction: column;
     }
-    
+
 
     .t1TabsSubContainer .t1TabButtonUl {
         flex-direction: row;
-flex-wrap: wrap;
+        flex-wrap: wrap;
     }
 
     .t1TabsSubContainer {
         flex-direction: column;
     }
-    
+
 
     .t1TabsChange button {
-        width:100%;
+        width: 100%;
         height: 50px;
         font-size: 12px;
     }
 }
-
-
