@@ -44,9 +44,11 @@
     position: relative;
     display: flex;
     align-items: center;
+    /* color: white; */
     gap: 2rem;
     position: relative;
     box-shadow: none;
+    background: linear-gradient(160deg, #2e8c9275, #e8ebf4, #2e8c9273, #12455700);
 }
 .card_container .before_login_first_card.orangeImgDiv img{
     height: 148px;
@@ -181,18 +183,19 @@ h2#orange_examName{
         gap: 10px;
     }
     .card_container .before_login_first_card.orangeImgDiv {
-       /* height: 210px; */
-       /* width: 442px; */
-       height: auto;
-       width: auto;
-         position: relative;
-         display: flex;
-         align-items: center;
-         gap: 2rem;
-         position: relative;
-         flex-direction: column;
-         box-shadow: none;
-       }
+        /* height: 210px; */
+        /* width: 442px; */
+        height: auto;
+        width: 90%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        position: relative;
+        flex-direction: column;
+        padding-top: 10px;
+        box-shadow: none;
+    }
        .card_container.orangeCard {
         display: flex;
         align-items: center;
@@ -223,16 +226,14 @@ h2#orange_examName{
         padding: 0;
     }
 }
-/* .before_start_now {
-    background-color: red;
-} */
 .before_start_now.t2BuyButtonInCP {
     width: 50%;
     background-color: #1f4c60;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     color: white;
     border-radius: 20px;
     text-align: center;
+    margin: 12px 57px;
 }
 .before_start_now.t2BuyButtonInCP a{
 color: white;

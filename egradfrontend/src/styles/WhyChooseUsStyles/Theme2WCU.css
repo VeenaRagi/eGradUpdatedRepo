@@ -184,14 +184,16 @@ h2.orangeContant {
   margin: auto;
  }
  .t2TabDetailsDiv {
-  height: 400px;
-  width: 300px;
+  /* height: 400px; */
+  /* width: 300px; */
   background: linear-gradient(45deg, #2e8c92, #e8ebf4, #2e8c9200, #124557);
   display: flex;
   padding: 1rem;
   justify-content: center;
-  border: 1px solid #456776;
- }
+  /* border: 1px solid #456776; */
+  width: 95%;
+  margin: auto;
+}
 }
 @media (max-width: 1024px) and (min-width: 768px) {
   .t2CPHeaderUl {
@@ -227,7 +229,7 @@ h2.orangeContant {
   align-items: center;
   justify-content: center;
   font-weight: 500;
-  padding: 2rem;
+  padding: 1rem;
   width: 350px;
   height: 350px;
   transition: transform 0.3s ease-in-out;
@@ -237,4 +239,94 @@ h2.orangeContant {
 }
 .t2SelectedTabContentDiv {
   width: 100%;
+}
+.t2BuyCourseSpan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  padding: 0;
+  font-size: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+@media (max-width: 768px) {
+  .t2CPHeaderUl li a {
+    color: white;
+    font-size: 15px;
+}
+.t2CPHeaderUl{
+  display: none;
+}
+.CoursePage_header_Container.undefined {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* gap: 14rem; */
+}
+.menu-link.mobileMenuLink.CoursePageItemsContainer.t2CoursePageHeaderContainer {
+  width: 210px;
+  top: 0%;
+  right: 14%;
+  position: absolute;
+  display: flex;
+  top: 1%;
+  border-radius: 20px;
+  right: 9%;
+  flex-direction: column;
+  padding: 3rem 3px 2rem 10px;
+  align-items: start;
+  border: 1px solid #1f4c60;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.t2TabContentSplittedText div {
+  /* border: 1px solid black; */
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  /* height: 200px; */
+  text-align: center;
+  /* width: 500px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  padding: 1rem;
+  /* width: 350px; */
+  width: 250px;
+  height: 250px;
+  /* height: 350px; */
+  transition: transform 0.3s ease-in-out;
+}
+
+.hamburgerMenu.courseHMenu {
+  display: flex;
+  position: relative;
+  z-index: 99;
+  left: -14%;
+  /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+}
+
+}
+@media (max-width: 568px) {
+  .mobileMenuLink {
+    position: absolute;
+    display: flex;
+    top: 0%;
+    border-radius: 20px;
+    right: 3%;
+    flex-direction: column;
+    padding: 3rem 3px 2rem 10px;
+    align-items: start;
+    border: 1px solid #1f4c60;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+}
+.menu-link.mobileMenuLink.CoursePageItemsContainer.t2CoursePageHeaderContainer ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+@media (max-width: 768px) {
+  .t2BuyCourseSpan {
+      font-size: 16px;
+  }
 }
