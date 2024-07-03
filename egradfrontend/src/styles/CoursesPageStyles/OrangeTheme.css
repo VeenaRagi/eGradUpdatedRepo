@@ -193,6 +193,7 @@ h2#orange_examName{
         gap: 2rem;
         position: relative;
         flex-direction: column;
+        padding-top: 10px;
         box-shadow: none;
     }
        .card_container.orangeCard {
