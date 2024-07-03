@@ -31,15 +31,15 @@
     width: 150px;
     padding: 0.6em -1em;
     background: #faf6f6;
+    border: 0.5px solid #00800045;
     cursor: pointer;
 }
 
 .t1UgHeaderLi:hover {
-    background: linear-gradient(to right, #a8e6cf57, var(--bs-white), #a8e6cf57);
+    background: linear-gradient(to right, #608166, var(--bs-white), #688f8157);
     border-radius: 10px;
     transition: ease-in-out 1s;
 }
-
 
 /* @media (min-width:700px){
 
