@@ -691,6 +691,8 @@ const JSONClasses = {
     themeSelectedTabContentDiv:"t2SelectedTabContentDiv",
     themeTabContentSplittedText:"t2TabContentSplittedText",
     themeCardsToBeFlexed:"t2CardsToBeFlexed",
+    themeTabContentSplittedTextInDiv:"t2TabContentSplittedTextInDiv",
+    
     
   },
 };
