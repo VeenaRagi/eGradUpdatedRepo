@@ -1,24 +1,19 @@
-import React, { useContext, useState, useEffect } from 'react';
-import LandingPageExamdataEdit from './LandingPageExamdataEdit';
-import { ThemeContext } from '../../../../ThemesFolder/ThemeContext/Context';
-import JSONClasses from '../../../../ThemesFolder/JSONForCSS/JSONClasses';
-import BASE_URL from '../../../../apiConfig';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-// import '../../../../styles/LandingPage_main.css'
-import '../../../../styles/Theme2_landingPage_styles.css';
-import '../../../../styles/Theme1_landingPage_styles.css';
-import '../../../../styles/Default_landingPage_styles.css';
-import ugImg from '../../../../styles/Girl.png';
-import women_img from "../../../../styles/women_image.png";
+import React, { useContext, useState, useEffect } from "react";
+import LandingPageExamdataEdit from "./LandingPageExamdataEdit";
+import { ThemeContext } from "../../../../ThemesFolder/ThemeContext/Context";
+import JSONClasses from "../../../../ThemesFolder/JSONForCSS/JSONClasses";
+import BASE_URL from "../../../../apiConfig";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import "../../../../styles/Theme2_landingPage_styles.css";
+import "../../../../styles/Theme1_landingPage_styles.css";
+import "../../../../styles/Default_landingPage_styles.css";
 import { FcGraduationCap } from "react-icons/fc";
 import { MdFileUpload } from "react-icons/md";
 import { LiaEditSolid } from "react-icons/lia";
 import { IoMdAddCircleOutline } from "react-icons/io";
 
-
-
-const LandingPageExamdata = ({ enableEditFromP,isEditMode }) => {
+const LandingPageExamdata = ({ enableEditFromP, isEditMode }) => {
   const [image, setImage] = useState(null);
   const [branches, setBranches] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,25 +22,24 @@ const LandingPageExamdata = ({ enableEditFromP,isEditMode }) => {
   const themeColor = themeFromContext[0]?.current_theme;
   const themeDetails = JSONClasses[themeColor] || [];
   const [openAddExamForm, setOpenAddExamForm] = useState(false);
-const [examImages,setExamImages] = useState(null);
+  const [examImages, setExamImages] = useState([]);
 
   const OpenAddExamForm = (branchBranch_Id) => {
     console.log(branchBranch_Id);
     setOpenAddExamForm(branchBranch_Id); // Set the state to the branch's ID
   };
-  // In the page that needs to be refreshed
+
   const refreshChannel = new BroadcastChannel("refresh_channel");
-  // Listen for messages from other pages
   refreshChannel.onmessage = function (event) {
     if (event.data === "refresh_page") {
       window.location.reload(); // Reload the page
     }
   };
-  
+
   const [openUgExamImageUpload, setOpenUgExamImageUpload] = useState(false);
   const OpenExamImageUplaod = () => {
     setOpenUgExamImageUpload(true);
-  }
+  };
 
   const handleEditClick = (branch) => {
     setSelectedBranch(branch);
@@ -55,11 +49,9 @@ const [examImages,setExamImages] = useState(null);
   const [selectedBranch, setSelectedBranch] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
 
-
-  // fetching the main header logo image
   const fetchImage = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/Main_Header/image`, {
+      const response = await axios.get(`${BASE_URL}/Logo/image`, {
         responseType: "arraybuffer",
       });
       const imageBlob = new Blob([response.data], { type: "image/png" });
@@ -74,7 +66,6 @@ const [examImages,setExamImages] = useState(null);
     fetchImage();
   }, []);
 
-  // fetching the branches
   const fetchBranches = async () => {
     try {
       const response = await fetch(`${BASE_URL}/LandingPageExamData/branches`);
@@ -90,12 +81,15 @@ const [examImages,setExamImages] = useState(null);
       setLoading(false);
     }
   };
+
   const fetchExamImages = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/LandingPageExamData/getExamImages`);
-      setExamImages(response.data.examImages);
+      const response = await axios.get(
+        `${BASE_URL}/LandingPageExamData/getExamImages`
+      );
+      setExamImages(response.data.examImages || []);
     } catch (error) {
-      console.error('Error fetching exam images:', error);
+      console.error("Error fetching exam images:", error);
     }
   };
 
@@ -122,145 +116,167 @@ const [examImages,setExamImages] = useState(null);
 
   return (
     <>
-    {themeColor==='Theme-1' ? 
-      <div className={`${themeDetails.theme1welcomecontainer}`}>
-        {/* {isEditMode && (
-          <div>
-            <button onClick={() => setShowImage(!showImage)}>
-              {showImage ? "Close" : "Add Logo"}
-            </button>
-            {showImage && <LandingPageExamdataEdit type="addLogo" />}
-          </div>
-        )} */}
-      <div className={`${themeDetails.theme1UGEntranceExamsContainer}`}>
-        {branches.map((branch) => (
-          <div
-            className={`Newlandingpage_branch_box ${themeDetails.themeBranchBox}`}
-            key={branch.Branch_Id}
-          >
-            <div className={`${themeDetails.themeInBranchBox}`}>
-              <button className={`${themeDetails.themeUgAndPgButtons}`}>
-                <Link to={{ pathname: `/BranchHomePage/${branch.Branch_Id}` }}>
-                <FcGraduationCap style={{"fontSize":"30px"}}/>
-                  {branch.Branch_Name}{" "}
-                </Link>
-              </button>
-              <div className={`NewlandingPage_exams_image ${themeDetails.themeExamImageBox}`}>
-                {themeColor === 'Theme-1' &&
-                  <img src={women_img} alt="" />
-                }
-              </div>
-            </div>
-
-
-            <div className={`Newlandingpage_exams_button_box ${themeDetails.themeExamButtonsBox}`}>
-              <div className={`${themeDetails.themeLanding_branch_box_btns}`}>
-                <ul >
-                  {branch.EntranceExams.slice(0, 4).map((exam) => (
-                    <li key={exam.EntranceExams_Id} className={`${themeDetails.themeLanding_branch_box_li_buttons}`}>
-                      <Link to={`/ExamHomePage/${exam.EntranceExams_Id}`}>
-                        {exam.EntranceExams_name}
+      {themeColor === "Theme-1" ? (
+        <div className={`${themeDetails.theme1welcomecontainer}`}>
+          <div className={`${themeDetails.theme1UGEntranceExamsContainer}`}>
+            {branches && branches.length > 0 ? (
+              branches.map((branch) => (
+                <div
+                  className={`Newlandingpage_branch_box ${themeDetails.themeBranchBox}`}
+                  key={branch.Branch_Id}
+                >
+                  <div className={`${themeDetails.themeInBranchBox}`}>
+                    <button className={`${themeDetails.themeUgAndPgButtons}`}>
+                      <Link
+                        to={{ pathname: `/BranchHomePage/${branch.Branch_Id}` }}
+                      >
+                        <FcGraduationCap style={{ fontSize: "30px" }} />
+                        {branch.Branch_Name}
                       </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-   
-    </div>
-    :
-    <div className='Newlandingpage'>
-
-    {/* =======================Exam cards starts here============================== */}
-    <div className={`Newlandingpage_branchescontainer ${themeDetails.themeBranchesContainer}`}>
-      <div className={`Newlandingpage_branchessubcontainer ${themeDetails.themeBranchesSubContainer}`}>
-        {branches.map((branch) => (
-          <div
-            className={`Newlandingpage_branch_box ${themeDetails.themeBranchBox}`}
-            key={branch.Branch_Id}
-          >
-            <button className={`${themeDetails.themeUgAndPgButtons}`}>
-              <Link to={{ pathname: `/BranchHomePage/${branch.Branch_Id}` }}>
-                {branch.Branch_Name}{" "}
-              </Link>
-            </button>
-
-{/* Exam Image  */}
-            {examImages.map((image, index) => (
-          <div key={index} className="image-item">
-            {image.Exam_Image && (
-              <img
-                src={`data:image/jpeg;base64,${image.Exam_Image}`} // Adjust the MIME type if necessary
-                alt={`Exam ${index + 1}`}
-                style={{ width: '200px', height: 'auto' }}
-              />
+                    </button>
+                    <div
+                      className={`NewlandingPage_exams_image ${themeDetails.themeExamImageBox}`}
+                    >
+                      {themeColor === "Theme-1" &&
+                        examImages?.map((image, index) => (
+                          <div key={index} className="image-item">
+                            {image.Exam_Image && (
+                              <img
+                                src={`data:image/jpeg;base64,${image.Exam_Image}`} // Adjust the MIME type if necessary
+                                alt={`Exam ${index + 1}`}
+                                style={{ width: "200px", height: "auto" }}
+                              />
+                            )}
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                  <div
+                    className={`Newlandingpage_exams_button_box ${themeDetails.themeExamButtonsBox}`}
+                  >
+                    <div
+                      className={`${themeDetails.themeLanding_branch_box_btns}`}
+                    >
+                      <ul>
+                        {branch.EntranceExams.slice(0, 4).map((exam) => (
+                          <li
+                            key={exam.EntranceExams_Id}
+                            className={`${themeDetails.themeLanding_branch_box_li_buttons}`}
+                          >
+                            <Link to={`/ExamHomePage/${exam.EntranceExams_Id}`}>
+                              {exam.EntranceExams_name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>No branches available</p>
             )}
           </div>
-        ))}
-{/* Exam Image End */}
-
-            <div className={`Newlandingpage_exams_button_box ${themeDetails.themeExamButtonsBox}`}>
-              <div className={`NewlandingPage_exams_image ${themeDetails.themeExamImageBox}`}>
-                {themeColor === 'Theme-2' &&
-                  <img src={ugImg} alt="" />
-                }
-
-              </div>
-              <div className={`${themeDetails.themeLanding_branch_box_btns}`}>
-
-                <ul >
-                  {branch.EntranceExams.slice(0, 4).map((exam) => (
-                    <li key={exam.EntranceExams_Id} className={`${themeDetails.themeLanding_branch_box_li_buttons}`}>
-                      <Link to={`/ExamHomePage/${exam.EntranceExams_Id}`}>
-                        {exam.EntranceExams_name}
+        </div>
+      ) : (
+        <div className="Newlandingpage">
+          <div
+            className={`Newlandingpage_branchescontainer ${themeDetails.themeBranchesContainer}`}
+          >
+            <div
+              className={`Newlandingpage_branchessubcontainer ${themeDetails.themeBranchesSubContainer}`}
+            >
+              {branches && branches.length > 0 ? (
+                branches.map((branch) => (
+                  <div
+                    className={`Newlandingpage_branch_box ${themeDetails.themeBranchBox}`}
+                    key={branch.Branch_Id}
+                  >
+                    <button className={`${themeDetails.themeUgAndPgButtons}`}>
+                      <Link
+                        to={{ pathname: `/BranchHomePage/${branch.Branch_Id}` }}
+                      >
+                        {branch.Branch_Name}
                       </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                    </button>
+
+                    {/* Exam Image */}
+                    {examImages?.map((image, index) => (
+                      <div key={index} className="image-item">
+                        {image.Exam_Image && (
+                          <img
+                            src={`data:image/jpeg;base64,${image.Exam_Image}`} // Adjust the MIME type if necessary
+                            alt={`Exam ${index + 1}`}
+                            style={{ width: "200px", height: "auto" }}
+                          />
+                        )}
+                      </div>
+                    ))}
+                    {/* Exam Image End */}
+
+                    <div
+                      className={`Newlandingpage_exams_button_box ${themeDetails.themeExamButtonsBox}`}
+                    >
+                      <div
+                        className={`NewlandingPage_exams_image ${themeDetails.themeExamImageBox}`}
+                      >
+                        {themeColor === "Theme-2" &&
+                          examImages?.map((image, index) => (
+                            <div key={index} className="image-item">
+                              {image.Exam_Image && (
+                                <img
+                                  src={`data:image/jpeg;base64,${image.Exam_Image}`} // Adjust the MIME type if necessary
+                                  alt={`Exam ${index + 1}`}
+                                  style={{ width: "200px", height: "auto" }}
+                                />
+                              )}
+                            </div>
+                          ))}
+                      </div>
+                      <div
+                        className={`${themeDetails.themeLanding_branch_box_btns}`}
+                      >
+                        <ul>
+                          {branch.EntranceExams.slice(0, 4).map((exam) => (
+                            <li
+                              key={exam.EntranceExams_Id}
+                              className={`${themeDetails.themeLanding_branch_box_li_buttons}`}
+                            >
+                              <Link
+                                to={`/ExamHomePage/${exam.EntranceExams_Id}`}
+                              >
+                                {exam.EntranceExams_name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>No branches available</p>
+              )}
             </div>
           </div>
-        ))}
-      </div>
-    </div>
 
-    {isEditMode && (
-      <div>
- {/* {branches.map((branch) => (
-        <div className={`${themeDetails.ThemeExamADD_EDIT_Buttons}`}>
+          {isEditMode && (
+            <div>
+              <button
+                onClick={() => setOpenUgExamImageUpload(!openUgExamImageUpload)}
+              >
+                <MdFileUpload /> Image Uplaod
+              </button>
 
-        
-
-
-          <button onClick={() => handleEditClick(branch)}>
-            <LiaEditSolid />
-            Edit
-          </button>
-
-          <button onClick={() => OpenAddExamForm(branch.Branch_Id)}>
-            <IoMdAddCircleOutline />
-            Add
-          </button>
-
+              {openUgExamImageUpload && (
+                <LandingPageExamdataEdit type="UploadExamImage" />
+              )}
+            </div>
+          )}
         </div>
-      ))} */}
-
-<button onClick={() => setOpenUgExamImageUpload(!openUgExamImageUpload)}><MdFileUpload /> Image Uplaod</button>
-
-{openUgExamImageUpload && <LandingPageExamdataEdit type = "UploadExamImage" />}
-      </div>
-   
-    )}
-    {/* =======================Exam cards ends here============================== */}
-
-  </div>
-    }
-    
+      )}
     </>
   );
-}
+};
 
 export default LandingPageExamdata;
