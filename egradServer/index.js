@@ -96,6 +96,11 @@ app.use('/courseTab',courseTab);
 const Login = require("./EgradTutorWebsite/LoginSystem/Login");
 app.use("/Login", Login);
 
+
+
+const LandingPageExamEdit = require("./EgradTutorWebsite/LandingPage/LandingPageExamEdit");
+app.use("/LandingPageExamEdit", LandingPageExamEdit);
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

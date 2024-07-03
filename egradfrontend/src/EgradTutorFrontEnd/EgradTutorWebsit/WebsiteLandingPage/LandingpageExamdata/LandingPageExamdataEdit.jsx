@@ -36,7 +36,7 @@ const LandingPageExamdataEdit = ({ enableButton, type }) => {
     formData.append('Exam_Image', examImage);
 
 
-    axios.post(`${BASE_URL}/Landingpage/uploadExamImage`, formData, {
+    axios.post(`${BASE_URL}/LandingPageExamEdit/uploadExamImage`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -52,7 +52,7 @@ const LandingPageExamdataEdit = ({ enableButton, type }) => {
   };
   const fetchExamImages = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/Landingpage/getExamImages`);
+      const response = await axios.get(`${BASE_URL}/LandingPageExamData/getExamImages`);
       setExamImages(response.data.examImages);
     } catch (error) {
       console.error('Error fetching exam images:', error);
@@ -68,7 +68,7 @@ const LandingPageExamdataEdit = ({ enableButton, type }) => {
     formData.append('Exam_Image', examImageFile);
     console.log(formData);
     try {
-      const response = await axios.put(`${BASE_URL}/Landingpage/updateExamImage/${selectedImageId}`, formData, {
+      const response = await axios.put(`${BASE_URL}/LandingPageExamEdit/updateExamImage/${selectedImageId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -80,29 +80,9 @@ const LandingPageExamdataEdit = ({ enableButton, type }) => {
       alert('Failed to update exam image');
     }
   };
-  useEffect(() => {
-    const fetchBranches = async () => {
-      try {
-        console.log('Fetching branches...'); // Add this line
-        const response = await axios.get(`${BASE_URL}/Landingpage/branchesData`);
-        console.log('Branches fetched:', response.data); // Add this line
-        setExamBranches(response.data);
-      } catch (error) {
-        console.error('There was an error fetching the branches!', error);
-      }
-    };
 
-    fetchBranches();
-  }, []);
 
-  const fetchAllBranches = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/BHPNavBar/branches`);
-      setBranches(response.data);
-    } catch (error) {
-      console.error("Error fetching branches:", error);
-    }
-  };
+
 
   const handleBranchIdChange = (e) => {
     const selectedId = e.target.value;
@@ -125,9 +105,10 @@ const LandingPageExamdataEdit = ({ enableButton, type }) => {
   useEffect(() => {
     fetchBranches();
   }, []);
+
   const fetchBranches = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/Landingpage/branches`);
+      const response = await fetch(`${BASE_URL}/BHPNavBar/branches`);
       const data = await response.json();
       setBranches(data);
     } catch (error) {
@@ -143,7 +124,7 @@ const LandingPageExamdataEdit = ({ enableButton, type }) => {
 
       for (const exam of updatedExams) {
         await axios.put(
-          `${BASE_URL}/Landingpage/updateentrance_exam/${exam.EntranceExams_Id}`,
+          `${BASE_URL}/LandingPageExamEdit/updateentrance_exam/${exam.EntranceExams_Id}`,
           {
             EntranceExams_name: exam.EntranceExams_name,
           }
@@ -163,7 +144,7 @@ const LandingPageExamdataEdit = ({ enableButton, type }) => {
   const handleDeleteExam = async (examId) => {
     console.log(examId);
     try {
-      await axios.delete(`${BASE_URL}/Landingpage/entrance_exam/${examId}`);
+      await axios.delete(`${BASE_URL}/LandingPageExamEdit/entrance_exam/${examId}`);
       alert("Entrance exam deleted successfully.");
     } catch (error) {
       console.error(error);
@@ -178,7 +159,7 @@ const LandingPageExamdataEdit = ({ enableButton, type }) => {
   };
   const handleAddExam = async (branchId) => {
     try {
-      await axios.post(`${BASE_URL}/Landingpage/addNewentrance_exam`, {
+      await axios.post(`${BASE_URL}/LandingPageExamEdit/addNewentrance_exam`, {
         Branch_Id: branchId, // Corrected field name to match the backend
         EntranceExams_name: newExamName, // Corrected field name to match the backend
       });

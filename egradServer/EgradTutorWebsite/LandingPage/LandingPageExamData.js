@@ -38,4 +38,34 @@ router.get('/branches', async (req, res) => {
   });
 
 
+  
+  router.get('/getExamImages', async (req, res) => {
+    try {
+      // Query database to fetch all exam images
+      const [rows] = await db.query('SELECT * FROM ug_exams_images');
+  
+      // Check if rows are present
+      if (rows.length > 0) {
+        const images = rows.map(row => {
+          // Convert row to an object and set Exam_Image to base64 string if it exists
+          const image = { ...row };
+          if (row.Exam_Image) {
+            image.Exam_Image = row.Exam_Image.toString('base64');
+          } else {
+            image.Exam_Image = null;
+          }
+          return image;
+        });
+  
+        res.json({ examImages: images });
+      } else {
+        res.status(404).json({ message: 'No images found' });
+      }
+    } catch (error) {
+      console.error('Error fetching exam images:', error);
+      res.status(500).json({ error: true, message: 'Failed to fetch exam images' });
+    }
+  });
+
+
 module.exports = router;

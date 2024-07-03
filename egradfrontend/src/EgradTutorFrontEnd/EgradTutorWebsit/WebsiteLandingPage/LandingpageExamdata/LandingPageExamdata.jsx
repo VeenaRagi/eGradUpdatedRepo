@@ -27,7 +27,7 @@ const LandingPageExamdata = ({ enableEditFromP,isEditMode }) => {
   const themeColor = themeFromContext[0]?.current_theme;
   const themeDetails = JSONClasses[themeColor] || [];
   const [openAddExamForm, setOpenAddExamForm] = useState(false);
-
+const [examImages,setExamImages] = useState(null);
 
   const OpenAddExamForm = (branchBranch_Id) => {
     console.log(branchBranch_Id);
@@ -90,9 +90,22 @@ const LandingPageExamdata = ({ enableEditFromP,isEditMode }) => {
       setLoading(false);
     }
   };
+  const fetchExamImages = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/LandingPageExamData/getExamImages`);
+      setExamImages(response.data.examImages);
+    } catch (error) {
+      console.error('Error fetching exam images:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchExamImages();
+  }, []);
 
   useEffect(() => {
     fetchBranches();
+    fetchExamImages();
   }, []);
 
   if (loading) {
@@ -173,8 +186,21 @@ const LandingPageExamdata = ({ enableEditFromP,isEditMode }) => {
               <Link to={{ pathname: `/BranchHomePage/${branch.Branch_Id}` }}>
                 {branch.Branch_Name}{" "}
               </Link>
-              {/* <MdOutlineTouchApp /> */}
             </button>
+
+{/* Exam Image  */}
+            {examImages.map((image, index) => (
+          <div key={index} className="image-item">
+            {image.Exam_Image && (
+              <img
+                src={`data:image/jpeg;base64,${image.Exam_Image}`} // Adjust the MIME type if necessary
+                alt={`Exam ${index + 1}`}
+                style={{ width: '200px', height: 'auto' }}
+              />
+            )}
+          </div>
+        ))}
+{/* Exam Image End */}
 
             <div className={`Newlandingpage_exams_button_box ${themeDetails.themeExamButtonsBox}`}>
               <div className={`NewlandingPage_exams_image ${themeDetails.themeExamImageBox}`}>
@@ -203,12 +229,10 @@ const LandingPageExamdata = ({ enableEditFromP,isEditMode }) => {
 
     {isEditMode && (
       <div>
- {branches.map((branch) => (
+ {/* {branches.map((branch) => (
         <div className={`${themeDetails.ThemeExamADD_EDIT_Buttons}`}>
 
-          <button onClick={() => setOpenUgExamImageUpload(!openUgExamImageUpload)}><MdFileUpload /> Image Uplaod</button>
-
-          {openUgExamImageUpload && <LandingPageExamdataEdit type = "UploadExamImage" />}
+        
 
 
           <button onClick={() => handleEditClick(branch)}>
@@ -222,7 +246,11 @@ const LandingPageExamdata = ({ enableEditFromP,isEditMode }) => {
           </button>
 
         </div>
-      ))}
+      ))} */}
+
+<button onClick={() => setOpenUgExamImageUpload(!openUgExamImageUpload)}><MdFileUpload /> Image Uplaod</button>
+
+{openUgExamImageUpload && <LandingPageExamdataEdit type = "UploadExamImage" />}
       </div>
    
     )}
