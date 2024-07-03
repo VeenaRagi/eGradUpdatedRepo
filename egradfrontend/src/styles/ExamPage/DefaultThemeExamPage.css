@@ -1,0 +1,357 @@
+* {
+    letter-spacing: 0;
+    line-height: 160%;
+    list-style-type: none;
+   
+    padding: 0;
+    text-decoration: none;
+    word-spacing: .2rem;
+}
+.exampage_heading.JEEHeading.themeExamPageHeaderHeading h1 {
+    text-align: center;
+    color: black;
+    padding: 32px;
+    font-size: 28px;
+}
+
+.themeExamPageHeaderMainContainer {
+        background: white;
+        top: .5rem;
+        z-index: 10;
+}
+ 
+.themeExamPageHeaderContainer {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px;
+    height: 100px;
+}
+ 
+.Ug_examsPage_Container.themeExamPageHeaderContainer a {
+    /* background-color: #fef0f0; */
+    border-radius: 20px;
+    /* border: 1px solid rgb(207, 160, 160); */
+    padding: 10px;
+    height: 50px;
+    width: 150px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    /* margin-right: -11px; */
+    gap:1rem;
+}
+ 
+.Ug_examsPage_Container.themeExamPageHeaderContainer :hover{
+   text-decoration: solid;
+    text-decoration-color:rgb(16, 164, 223);
+}
+
+ 
+.Ug_examsPage_Container.themeExamPageHeaderContainer img {
+        border-radius: 5px;
+        width: 330px;
+}
+
+.Ug_examsPage_Container.themeExamPageHeaderContainer img, svg {
+    vertical-align: middle;
+    /* margin: 10px; */
+}
+ 
+.exampage_heading.themeExamPageHeaderHeading h1{
+        background: #d9d9ff;
+        height: 9vh;
+ 
+        
+}
+.exampage_heading.themeExamPageHeaderHeading p {
+    color: #070606;
+    font-size: 30px;
+    margin-bottom: 0;
+    text-align: center;
+    font-weight: bold;
+    padding: 25px;
+}
+p#more_info {
+        border-style: solid;
+        border-width: 1.5px;
+        border-top: none;
+        box-shadow: 0 5px 5px rgba(0,0,0,.5);
+        color: #000;
+        height: auto;
+        margin-top: 2px;
+        padding: 10px;
+        transition: all 1s;
+}
+.exam_portal_btn.defaultExamPortalBtn a:hover {
+    border: none;
+    border-radius: .3rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .5rem 1rem;
+    transition: .2s ease-in-out;
+    white-space: nowrap;
+    color: white;
+}
+
+.portal_names.defaultPortalNames li:hover {
+    box-shadow: 0 0 23px -8px #1400c7;
+    -webkit-transform: translateY(-21px);
+    transform: translateY(-21px);
+}
+.exam_login_menu {
+    align-items: center;
+    display: flex;
+}
+
+
+/* iNFORMATION BROUCHER SECTION CSS */
+
+.exams_info_btn_container.defaultExamInfoBtnsContainer {
+    padding: 1rem 9rem;
+}
+
+
+.exam_info_divs.defaultExamInfoDivs  h3#info_title {
+    background: #d9d9ff;
+    /* height: 9vh; */
+    font-size: 1rem;
+    padding: 10px 20px;
+    margin-bottom: 32px;
+}
+.toggles.defaultToggles  h3#info_title {
+    background: #d9d9ff;
+    /* height: 9vh; */
+    font-size: 1rem;
+    padding: 10px 20px;
+    margin-bottom: 32px;
+}
+.defaultExamInfoToggles .defaultToggles h3#info_title {
+    border: none;
+    /* border-radius: .3rem; */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: .5rem 1rem;
+    transition: 5.2s ease-in-out;
+    white-space: nowrap;
+}
+.defaultExamCoursesContainer {
+    background-color: #d9d9ff;
+    width: 100%;
+    border: none !important;
+    text-align: center;
+    padding-top: 150px;
+}
+.portal_names.defaultPortalNames h1 {
+    color: #000;
+    /* font-family: Roboto; */
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+    
+}
+
+.portal_names.defaultPortalNames li{
+        border-radius: 20px;
+        box-shadow: 0 0 78px -19px #000;
+        transition: 1s;
+        width:100%;
+        text-align: center;
+        margin:10px;
+       
+}
+
+
+.test_btn h3 {
+    background-color: #fff;
+    border-radius: 20px 20px 0 0;
+    font-size: 1.5rem;
+    font-weight: 900;
+    padding: 1rem;
+}
+.portal_names.defaultPortalNames h2 {
+    background-color: #fff;
+    border-radius: 20px 20px 0 0;
+    font-size: 1.2rem;
+    /* font-weight: 900; */
+    padding: 1rem;
+}
+.defaultExamPortalImgDivInCard img {
+    height: 255px;
+    width: 300px;
+}
+.exam_portal_btn.defaultExamPortalBtn {
+    background-color: #fff;
+    border-radius: 0 0 20px 20px;
+    height: 7vh;
+    margin-top: 20px;
+    text-align: center;
+    padding: 17px;
+}
+.exam_portal_btn.defaultExamPortalBtn a {
+    margin: 10px;
+    background: #d9d9ff;
+    border-radius: 8px;
+    padding: 9px;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 500;
+    /* margin-top: 33px; */
+}
+
+.neetcourses .online_courses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: flex-start;
+    margin: 0 auto;
+    width: 75%;
+}
+.exam_courses_sub_container.defaultExamCoursesSubContainer ul {
+    display: flex;
+    /* flex-direction: row; */
+    /* width: 95%; */
+    /* text-align: center; */
+    justify-content: center;
+    /* align-items: center; */
+}
+.portal_names.defaultPortalNames {
+    margin-right: 15px;
+    height: 200px;
+    width: 389px;
+}
+.exam_courses_sub_container.defaultExamCoursesSubContainer {
+    height: 70vh;
+}
+.toggles.defaultToggles h3{
+    display: flex;
+    justify-content: space-between;
+    font-weight:800;
+    font-size:20px;
+    && span {
+        font-weight:800;
+        font-size:20px;
+    }
+}
+
+.defaultToggles p#more_info  {
+    background-color:white;
+    color:black;
+    padding:10px;
+    border-width:1px;
+    border-color: black;
+}
+.exam_info_divs.defaultExamInfoDivs h3 {
+    width:200px;
+    margin-right: 10px;
+}
+.defaultExamInfoBtns {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+   
+}
+
+.exampage_heading.JEEHeading.themeExamPageHeaderHeading a {
+    background-color: white;
+}
+
+
+.Footer_Contact_Us_Content.themeFooterContactUsContentDefault p {
+    color: white;
+}
+/* media queries for exam page */
+
+@media (max-width: 600px) {
+    .themeExamPageHeaderContainer {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        /* align-items: center; */
+        margin: 0 auto;
+        padding: 10px;
+        height: 100px;
+    }
+    .Ug_examsPage_Container.themeExamPageHeaderContainer img {
+        border-radius: 5px;
+        width: 181px !important;
+    }
+
+    .exampage_heading.themeExamPageHeaderHeading p {
+        color: #070606;
+        font-size: 20px;
+        margin-bottom: 0;
+        text-align: center;
+        font-weight: bold;
+        padding: 25px;
+    }
+    .exams_info_btn_container.defaultExamInfoBtnsContainer {
+        padding: 1rem 1rem;
+    }
+    .defaultExamInfoBtns {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .exams_info_btn_container.defaultExamInfoBtnsContainer {
+        padding: 0rem 1rem;
+    }
+    .exam_courses_sub_container.defaultExamCoursesSubContainer ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .portal_names.defaultPortalNames li {
+        height: 320px;
+        width: 315px;
+        margin-bottom: 3rem; /* Ensure correct unit */
+        list-style: none; /* Remove default list styles */
+      }
+  
+    .defaultExamCoursesContainer {
+        background-color: #d9d9ff;
+        width: 100%;
+        border: none !important;
+        text-align: center;
+         padding-top: 0px;
+         height:80%;
+    }
+    .exam_courses_sub_container.defaultExamCoursesSubContainer {
+        height: 130vh;
+    }
+    .portal_names.defaultPortalNames li {
+        height: 235px;
+        width: 351px;
+        /* margin-bottom: 40px; */
+    }
+    .portal_names.defaultPortalNames h2 {
+        background-color: #fff;
+        border-radius: 20px 20px 0 0;
+        font-size: 0.8rem;
+        /* font-weight: 900; */
+        padding: 0.8rem;
+    }
+    .defaultExamPortalImgDivInCard img {
+        height: 200px;
+        width: 200px;
+    }
+}
+@media (max-width: 1280px) {
+  
+    .portal_names.defaultPortalNames li {
+
+    };
+}
+
+

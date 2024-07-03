@@ -1,0 +1,1013 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Kalam:wght@300;400;700&display=swap');
+
+/* ******************* ?For t1-header css? ********************* */
+.Newlandingpage_logocontainer .t1HeaderColor {
+    box-shadow: 0px 0px 10px 0px #d7cdcd;
+    border: none;
+    height: 120px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    margin: 0 auto;
+}
+
+.Newlandingpage_logosubcontainer.t1SubContainer {
+    border: none !important;
+}
+
+.t1SubContainer img {
+    /* width: 320px; */
+    height: 150px;
+}
+
+
+img.t1LogoImg {
+    height: 100%;
+    /* width: 100%; */
+    padding: 20px;
+}
+
+
+
+/* ************************** ?For image & Welcome text css? **************************** */
+.t1LandingParentContainer {
+    width: 100%;
+    background-position: center;
+    background-color: #fff5d75c;
+    justify-content: end;
+    align-items: center;
+    /* background-image: url('../Imgs/DeWatermark.ai_1718342258588.png'); */
+    background-size: cover;
+    background-position: inherit;
+    background-repeat: no-repeat;
+    display: flex;
+}
+
+
+.landing_img_div.t1LCapImgDiv {
+    display: flex;
+}
+
+.t1LandingParentContainer {
+    width: 100%;
+    background-position: center;
+    background-color: #b2b2e7d9;
+    justify-content: end;
+    align-items: center;
+    /* background-image: url('../Imgs/DeWatermark.ai_1718342258588.png'); */
+    background-size: cover;
+    background-position: inherit;
+    background-repeat: no-repeat;
+    display: flex;
+    height: 32vh;
+    background: linear-gradient(to right, #a8e6cf57, var(--bs-white), #a8e6cf57);
+}
+.t1UgAndPgButtons {
+    background: transparent;
+    margin: 10px;
+    border: 1px solid darkseagreen;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
+ 
+.landing_img_div.t1LCapImgDiv img {
+    background: #fff;
+    box-shadow: 0px 1px 9px 0px #328990e6;
+    max-width: 270px;
+    margin-right: 2rem;
+    max-height: 310px;
+}
+.t1CapTextContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+        text-align: center;
+        font-size: 50px;
+        color: rgb(54 52 53);
+        font-family: "Kalam", cursive;
+        font-weight: 300;
+        font-style: normal;
+        margin: 0px 40px 0px 0px;
+    }
+
+    & p {
+        align-items: end;
+        text-align: end;
+        margin: 0px 45px;
+        font-family: "Kalam", cursive;
+        font-weight: 400;
+        font-style: normal;
+        color: black;
+    }
+
+}
+
+@media (max-width:600px) {
+    .t1CapTextContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+            text-align: center;
+            font-size: 25px;
+            color: rgb(54 52 53);
+            justify-content: center;
+            align-items: center;
+            margin: 0px 45px;
+
+        }
+
+        & p {
+            font-size: 15px;
+            text-align: end;
+            margin: 0px 45px;
+        }
+    }
+}
+
+@media (max-width:968px) {
+    .t1CapTextContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+            text-align: center;
+            font-size: 30px;
+            color: rgb(54 52 53);
+            justify-content: center;
+            align-items: center;
+
+
+        }
+
+        & p {
+            font-size: 15px;
+            text-align: end;
+            margin: 0px 45px;
+        }
+    }
+}
+
+
+
+@media (min-width:1160px) {
+    .t1LandingParentContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .t1LCapImgDiv {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .t1CapTextContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        h1 {
+            text-align: center;
+            font-size: 65px;
+            color: #ff5e6c;
+            ;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        & p {
+            font-size: 25px;
+            text-align: end;
+        }
+
+    }
+
+
+}
+
+/* ************************** ?For UG and PG entrance exams css? ****************** */
+
+
+
+
+
+/* *************************************************************************************************************************************** */
+/* ********* NEW CSS FOR LANDING PAGE ****************************************************************************************************** */
+/* *************************************************************************************************************************************** */
+
+.theme1welcomecontainer {
+    /* padding: 10px; */
+   
+}
+
+/* For 2 containers */
+.theme1UGEntranceExamsContainer {
+    width: 80%;
+    display: flex;
+    gap: 10px;
+    /* flex-direction: column; */
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.theme1UGEntranceExamsContainer .t1BranchBox {
+    text-align: center;
+    display: flex;
+    /* width: 50%; */
+    /* padding: 15px; */
+    /* justify-content: space-around; */
+    border: 2px solid aliceblue;
+    background: (353deg, #eeeff8 0, #fcefca 0, #fcefca 19%, #52be8082)
+}
+
+
+.theme1UGEntranceExamsContainer .t1BranchBox .t1ExamButtonsBox {
+    flex-direction: row;
+    /* display: flex; */
+    /* width: 50%; */
+    justify-content: space-evenly;
+}
+
+.t1UgAndPgButtons a svg{
+    margin-right: 10px;
+}
+
+/* For heading and image ug and pg */
+.themeInBranchBox {
+    display: flex;
+  background: transparent;
+    flex-direction: column;
+}
+
+.theme1UGEntranceExamsContainer .t1BranchBox:nth-child(1) {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    background: linear-gradient(353deg, #eeeff8 0, #fcefca08 0, #fcefca05 19%, #52be8082);
+    box-shadow: 0 4px 8px rgb(241 15 15 / 23%);
+}
+
+.theme1UGEntranceExamsContainer .t1BranchBox:nth-child(2) {
+    flex-direction: row-reverse;
+    background: linear-gradient(353deg, #eeeff8 0, #fcefca08 0, #fcefca05 19%, #52be8082);
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgb(249 9 9 / 21%);
+}
+
+/* .themeInBranchBox button.t1UgAndPgButtons {
+    background: #cceafb;
+    padding: 10px;
+    border-radius: 39px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px outset hsla(0, 60%, 70%, .5);
+} */
+
+.themeInBranchBox button.t1UgAndPgButtons a {
+    color: rgb(25, 27, 26);
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.theme1UGEntranceExamsContainer .t1BranchBox .t1ExamButtonsBox .t1Landing_branch_box_btns {
+    align-items: center;
+    justify-content: center;
+}
+
+.t1Landing_branch_box_btns ul {
+    width: 300px;
+    margin-top: 49px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.t1Landing_branch_box_btns ul li a {
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: black;
+    font-size: 20px;
+    margin-bottom: 7px;
+    text-align: center;
+    font-weight: 400;
+    width: 260px;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.NewlandingPage_exams_image.t1ExamImageBox {
+    padding: 22px;
+}
+
+.NewlandingPage_exams_image.t1ExamImageBox img {
+    height: 240px !important;
+    border-radius: 140px;
+    box-shadow: 0 4px 8px rgba(34, 28, 28, 0.1);
+}
+
+.t1Landing_branch_box_btns ul li {
+    cursor: pointer;
+    font-size: 30px;
+    height: auto;
+    margin-bottom: 10px;
+    text-decoration: none;
+    background: linear-gradient(to right, #a8e6cf57, var(--bs-white), #a8e6cf57);
+    border-radius: 20px;
+    color: #fff;
+    box-shadow: 0 0 3px 3px rgb(0 0 0 / 5%);
+    text-shadow: 0 0 3px rgb(0 0 0 / 30%);
+    transition: all .3s;
+}
+
+.t1Landing_branch_box_btns ul li:hover {
+    background-color:  rgb(18 70 89);
+}
+
+
+
+@media (max-width:768px) {
+    .t1BranchBox {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .theme1UGEntranceExamsContainer {
+        width: 100%;
+    }
+
+    .t1BranchBox:nth-child(2) {
+        flex-direction: column !important;
+    }
+
+    .theme1UGEntranceExamsContainer .t1BranchBox:nth-child(1) {
+            width: 100%;
+        
+        
+    }
+
+    .theme1UGEntranceExamsContainer .t1BranchBox:nth-child(2) {
+        flex-direction: row-reverse;
+        width: 100%;
+        height: auto;
+        background: linear-gradient(353deg, #eeeff8 0, #fcefca08 0, #fcefca05 19%, #52be8082);
+    }
+}
+
+@media (max-width:468px) {
+
+    
+    .t1UgAndPgButtons {
+        margin-top: 20px !important;
+    }
+
+    .themeInBranchBox {
+        width: 100%;
+        border-top-left-radius: 29px;
+        border-top-right-radius: 29px;
+    }
+
+    .t1LandingParentContainer {
+        object-fit: cover;
+    }
+
+    .t1LCapImgDiv {
+        width: 150px;
+        height: 165px;
+        margin-left: 30px;
+    }
+
+    .t1ExamImageBox img {
+        width: 200px;
+        height: 100px;
+    }
+
+    .t1UgAndPgButtons a {
+        text-decoration: none;
+        font-size: 12px;
+        color: #3db0f2;
+    }
+
+    .t1Landing_branch_box_btns ul {
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .t1Landing_branch_box_btns ul li a {
+        font-size: 15px;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        width: 100%;
+    }
+
+    .t1Landing_branch_box_btns ul li {
+        height: auto;
+        width: 200px;
+        text-align: center;
+    }
+
+    .theme1UGEntranceExamsContainer .t1BranchBox:nth-child(1) {
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .theme1UGEntranceExamsContainer .t1BranchBox:nth-child(2) {
+        flex-direction: row-reverse;
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(353deg, #eeeff8 0, #fcefca08 0, #fcefca05 19%, #52be8082);
+    }
+
+ 
+
+    .theme1UGEntranceExamsContainer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 0 auto;
+    }
+    
+    .themeInBranchBox {
+        width: 100%;
+        border-top-left-radius: 29px;
+        border-top-right-radius: 29px;
+    }
+    .t1Landing_branch_box_btns ul {
+        width: 300px;
+        margin-top: 33px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .t1TextContainer h1 {
+        text-align: center;
+        font-size: 25px;
+        color: rgb(54 52 53);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .t1CapTextContainer p{
+            font-size: 10px;
+            text-align: end;
+            margin: 0px 45px;
+        
+    }
+
+
+}
+
+@media (min-width:800px) and (max-width:900px){
+    .theme1UGEntranceExamsContainer .t1BranchBox .t1ExamButtonsBox .t1Landing_branch_box_btns {
+        display: flex;
+        margin-left: 22px;
+        margin-right: 39px;
+        align-items: center;
+        justify-content: center;
+    }
+  
+
+    .theme1UGEntranceExamsContainer .t1BranchBox .t1ExamButtonsBox {
+        flex-direction: row;
+        width: 50%;
+        justify-content: space-evenly;
+    }
+    .theme1UGEntranceExamsContainer {
+        width: 90%;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        padding: 10px;
+        margin: 0 auto;
+    }
+    
+
+}
+
+@media (min-width:900px) and (max-width:1440px) {
+    .theme1UGEntranceExamsContainer .t1BranchBox .t1ExamButtonsBox .t1Landing_branch_box_btns {
+        display: flex;
+        margin-left: 100px;
+        margin-right: 100px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .theme1UGEntranceExamsContainer .t1BranchBox:nth-child(1) {
+        /* border-radius: 30px; */
+    }
+
+    .theme1UGEntranceExamsContainer .t1BranchBox:nth-child(2) {
+        flex-direction: row-reverse;
+        /* border-radius: 30px; */
+        height: auto;
+    }
+
+    .t1Landing_branch_box_btns ul {
+        height: 200px;
+        width: 105px;
+    }
+
+    .landing_img_div.t1LCapImgDiv img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .t1TextContainer div h1 {
+        font-size: 50px;
+    }
+
+    .t1TextContainer div p {
+        font-size: 20px;
+    }
+
+    .theme1UGEntranceExamsContainer {
+        display: flex;
+        width: 80%;
+        margin: 0 auto;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .theme1UGEntranceExamsContainer .t1BranchBox .t1ExamButtonsBox {
+        flex-direction: row;
+        display: flex;
+        width: 50%;
+        justify-content: space-evenly;
+    }
+
+   
+    
+    
+}
+
+.themeInBranchBox button.t1UgAndPgButtons:hover {
+    background-color: rgb(207 249 237 / 55%);
+    border: 1px dashed green;
+}
+
+
+
+
+
+
+
+
+/* ************************** For Footer Part ***************************************** */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* a {
+    color: #fff;
+    text-decoration: none;
+} */
+
+.pg-footer {
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.footer {
+    background: linear-gradient(353deg, #eeeff8 0, #fcefca0a 0, #fcefca00 19%, #52be8082);
+margin-bottom: 0px;
+    color: #fff;
+}
+
+.footer-wave-svg {
+    background-color: transparent;
+    display: block;
+    height: 30px;
+    position: relative;
+    top: -1px;
+    width: 100%;
+}
+
+.footer-wave-path {
+    fill: #ffffff;
+}
+
+
+
+
+.footer-logo-link {
+    display: inline-block;
+}
+
+.footer-menu {
+    margin-top: 30px;
+}
+
+.footer-menu-name {
+    color: #fffff2;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: .1em;
+    line-height: 18px;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+.footer-menu-list {
+    list-style: none;
+    margin-bottom: 0;
+    margin-top: 10px;
+    padding-left: 0;
+}
+
+.footer-menu-list li {
+    margin-top: 5px;
+}
+
+.footer-call-to-action-description {
+    color: #fffff2;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.footer-call-to-action-button:hover {
+    background-color: #fffff2;
+    color: #00bef0;
+}
+
+.button:last-of-type {
+    margin-right: 0;
+}
+
+.footer-call-to-action-button {
+    background-color: #027b9a;
+    border-radius: 21px;
+    color: #fffff2;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .1em;
+    line-height: 18px;
+    padding: 12px 30px;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color .2s;
+    cursor: pointer;
+    position: relative;
+}
+
+.footer-call-to-action {
+    margin-top: 30px;
+}
+
+.footer-call-to-action-title {
+    color: #fffff2;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: .1em;
+    line-height: 18px;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+.footer-call-to-action-link-wrapper {
+    margin-bottom: 0;
+    margin-top: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-call-to-action-link-wrapper a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+
+
+
+.footer-social-links {
+    bottom: 0;
+    height: 54px;
+    position: absolute;
+    right: 0;
+    top: 1830px;
+    width: 236px;
+}
+
+.footer-social-amoeba-svg {
+    height: 54px;
+    left: 0;
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 236px;
+}
+
+.footer-social-amoeba-path {
+    fill: #027b9a;
+}
+
+.footer-social-link.linkedin {
+    height: 26px;
+    left: 3px;
+    top: 11px;
+    width: 26px;
+}
+
+.footer-social-link {
+    display: block;
+    padding: 10px;
+    position: absolute;
+}
+
+.hidden-link-text {
+    position: absolute;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    -webkit-clip-path: inset(0px 0px 99.9% 99.9%);
+    clip-path: inset(0px 0px 99.9% 99.9%);
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    padding: 0;
+    border: 0;
+    top: 50%;
+}
+
+.footer-social-icon-svg {
+    display: block;
+}
+
+.footer-social-icon-path {
+    fill: #fffff2;
+    transition: fill .2s;
+}
+
+.footer-social-link.twitter {
+    height: 28px;
+    left: 62px;
+    top: 3px;
+    width: 28px;
+}
+
+.footer-social-link.youtube {
+    height: 24px;
+    left: 123px;
+    top: 12px;
+    width: 24px;
+}
+
+.footer-social-link.github {
+    height: 34px;
+    left: 172px;
+    top: 7px;
+    width: 34px;
+}
+
+/* .footer-copyright-link {
+    color: #fff;
+    text-decoration: none;
+} */
+
+
+
+/* .t1FootereGRADTtutoContent {
+    width: 200px;
+} */
+
+
+.t1FooterFirstContentContainer {
+    margin-left: 60px;
+}
+
+/* 
+.t1FooterFirstContent {
+    padding: 10px;
+} */
+
+.t1FooterFirstContent #Footer_Heading {
+    color:black;
+}
+
+.t1FooterFirstContent p {
+    color: #004658;
+    padding: 10px;
+}
+
+.t1FootereGRADTtutoContent .new_landingfooter_conatinerfristpart_item {
+    color: black;
+}
+
+.Footer_eGRADTtutor__Content.t1FootereGRADTtutoContent {
+    width: 100%;
+}
+
+.t1FooterLinksContent a:hover{
+color: rgb(25 73 135);;
+}
+
+
+
+.t1InnerMainFooterContentContainer {
+    margin-right: auto;
+    max-width: 1230px;
+    padding: 25px 15px 115px;
+    position: relative;
+}
+
+.t1InnerMainFooterContentColumnContainer {
+    box-sizing: border-box;
+    float: left;
+    padding-left: 65px;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+}
+
+.t1FooterContentColumn ul li {
+    line-height: 2rem;
+}
+
+.t1FooterContentColumn ul li a {
+    color: black;
+    text-decoration: none;
+    padding: 15px;
+}
+
+.t1FooterContactData h2 {
+    color: black;
+}
+
+.t1FooterContactUsContent p.new_landingfooter_conatinersecondpart_item {
+    color: black;
+}
+
+.t1ContactFooterContentContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.t1FooterCopyrightData {
+    display: flex;
+    justify-content: center;
+    background-color:inherit;
+    color: black;
+    padding: 15px 30px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+    text-align: center;
+    /* border-top: 5px solid transparent; */
+/* background-image: linear-gradient(to right, lightgreen, lightcoral); */
+background-size: 100% 2px;
+background-repeat: no-repeat;
+}
+
+.t1FooterCopyrightWrapperData {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+}
+
+.t1FooterCopyrightTextData {
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.t1FooterContentColumn {
+    box-sizing: border-box;
+    float: left;
+    /* padding-left: 15px;
+    padding-right: 15px; */
+    width: 100%;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+}
+
+.t1FooterLinksContent ul {
+    padding: 10px;
+}
+
+@media (max-width:568px) {
+    .t1ContactFooterContentContainer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-left: 20px;
+    }
+
+
+    .t1FooterContentColumn {
+        margin-left: 10px;
+    }
+
+    .t1FooterContactUsContent {
+        font-size: 20px;
+    }
+
+    .t1FooterFirstContentContainer {
+        margin-left: 0px;
+    }
+
+    .t1InnerMainFooterContentColumnContainer {
+        padding-left: 15px;
+
+    }
+
+    .t1FootereGRADTtutoContent .new_landingfooter_conatinerfristpart_item {
+        color: black;
+        font-size: 14px;
+    }
+
+    .t1FooterLinksContent ul {
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    p.new_landingfooter_conatinersecondpart_item {
+        font-size: 13px;
+    }
+
+    .themeInBranchBox button.t1UgAndPgButtons a {
+        color: rgb(25, 27, 26);
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    .themeInBranchBox button.t1UgAndPgButtons {
+        background: #cceafb;
+        padding: 10px;
+        border-radius: 39px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        height: 50px;
+        align-items: center;
+        border: 2px outset hsla(0, 60%, 70%, .5);
+    }
+}
+
+@media (max-width:1224px) {
+    .t1InnerMainFooterContainer {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .t1InnerMainFooterContentContainer {
+        margin-right: auto;
+        max-width: 1230px;
+        padding: 05px 5px 15px;
+        position: relative;
+    }
+
+    .t1FooterFirstContent #Footer_Heading {
+        color:black;
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .footer-wave-svg {
+        background-color: transparent;
+        display: block;
+        height: 30px;
+        position: relative;
+        top: -10px;
+        width: 100%;
+    }
+
+}

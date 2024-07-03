@@ -1,0 +1,444 @@
+.Ug_Home_Container.t1UgHomeContainer {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px;
+}
+
+.Ug_HeaderSection.t1UgHeaderSec {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.t1UgHeaderContainer {
+    display: flex;
+    align-items: center;
+    height: 130px;
+    justify-content: space-between;
+}
+
+
+.t1UgDivLinksOfHeader li {
+    border: none !important;
+}
+.t1UgDivLinksOfHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.t1UgDivLinksOfHeader a {
+    padding: 10px;
+    border: 0.1px solid #0080004d;
+    border-radius: 5px;
+    background: linear-gradient(to right, #a8e6cf57, var(--bs-white), #a8e6cf57);
+    color: rgb(14, 6, 6);
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+
+.t1UgDivLinksOfHeader a:hover {
+    background-color: #2a5e82c2;
+    color: black;
+}
+
+.t1MarqData span {
+    font-style: oblique;
+    font-weight: 400;
+}
+
+
+
+@media screen and (max-width:430px) {
+    .Ug_examsPage_Main_Container.t1ExamPageHeaderMainContainer {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .t1ExamPageHeaderContainer {
+        width: 80%;
+        align-items: center;
+      
+    }
+
+    .t1ExamPageHeaderContainer .t1ExamPageHeaderHeading{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .t1TotalExamContainer .t1ExamPageHeaderHeading h1{
+        font-size: 20px;
+    }
+
+    .t1ExamPageHeaderMainContainer .t1ExamPageHeaderContainer img {
+        height: 58px;
+        width: 120px;
+    }
+
+    .t1ExamPageHeaderMainContainer .t1ExamPageHeaderContainer a {
+        /* background-color: #fef0f0; */
+        width: 100px;
+        height: 30px;
+    }
+
+    .t1ExamPageHeaderHeading p {
+        font-size: 15px;
+        color: black;
+    }
+
+
+    .t1ExamInfoBtns .t1ExamInfoDivs {
+        width: 100px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .t1ExamInfoBtns .t1ExamInfoDivs #info_title {
+        font-size: 13px;
+    }
+}
+
+
+/* for exams page ****************************************************************************************************/
+
+.t1ExamPageHeaderMainContainer {
+    width: 100%;
+    align-items: center;
+    background-color: white;
+}
+
+.t1ExamPageHeaderContainer {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px;
+    height: 100px;
+}
+
+
+
+.t1ExamPageHeaderHeading a {
+    background-color: #134659;
+    border-radius: 20px;
+    border: 1px solid rgb(207, 160, 160);
+    padding: 10px;
+    height: 50px;
+    width: 150px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.t1ExamPageHeaderContainer a:hover {
+    /* background-color: rgb(25 135 84 / 52%); */
+    color: #1fe3f1;
+}
+.t1ExamPageHeaderContainer a img {
+    height: 100%;
+    width:350px;
+}
+
+.t1TotalExamContainer{
+    background: linear-gradient(353deg, #eeeff8 0, #fcefca0a 0, #fcefca00 19%, #52be8082);
+}
+
+.t1ExamPageHeaderHeading {
+    /* background-color: rgb(241, 241, 233); */
+    color: black;
+    font-size: 20px;
+    height: 50px;
+    font-weight: bold;
+    text-align: center;
+    justify-content: center;
+
+    & h1{
+font-size: 27px;
+padding: 10px;
+font-family: "Roboto";
+background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif);
+background-size: cover;
+color: transparent;
+font-weight: bolder;
+-moz-background-clip: text;
+-webkit-background-clip: text;
+text-transform: uppercase;
+margin: 10px 0;
+    }
+
+    & p {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        background-image: linear-gradient(45deg, #fdf0f0, #a5bac3);
+    }
+}
+
+
+
+/* ********* exam page Information Brochure ********************************************************************************* */
+
+/* Main container for the accordion */
+.t1ExamInfoMainContainer {
+    /* background-color: rgb(243, 238, 238); */
+    margin: 0 auto;
+    width: 100%;
+    padding: 10px;
+}
+
+.t1ExamInfoBtnsContainer {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Sub-container for each accordion section */
+.t1ExamInfoSubContainer {
+    border-bottom: 1px solid #ddd;
+}
+
+/* Buttons to toggle accordion sections */
+.t1ExamInfoBtns {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #d9efdfc9;
+    color: #333;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    
+}
+
+/* Hover effect for buttons */
+.t1ExamInfoBtns:hover {
+    background-color: #eee7e7;
+}
+
+
+/* Container for the toggles content */
+.t1ExamInfoToggles {
+    padding: 0 18px;
+    background-color: white;
+    transition: max-height 0.2s ease-out;
+    
+}
+
+/* Additional styling for toggle content */
+.t1Toggles {
+    padding: 18px;
+    border-top: 1px solid #ddd;
+    
+ 
+}
+
+.t1ExamInfoDivs {
+    background-color: #6692a9;
+    height: 45px;
+    border-radius: 35px;
+    display: flex;
+    width: 200px;
+    border: 1px solid rgb(199 215 224);
+}
+.t1ExamInfoDivs #info_title {
+    text-align: center;
+    font-size: 17px;
+    font-family: "Roboto";
+    font-weight: 800;
+    width: 100%;
+    padding: 10px;
+   color: white;
+    transition: all .8s ease-in-out;
+}
+
+.t1ExamInfoDivs:hover {
+    color: #507284;
+    background-color: #4a565c;
+}
+.t1Toggles #info_title {
+    font-size: 16px;
+}
+
+.t1Toggles span {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.t1Toggles #more_info {
+    background-color: #d9efdf52;
+    padding: 20px;
+    line-break: anywhere;
+    line-height: 28px;
+    transform: translateX(5px);
+  
+}
+.t1Toggles.active #more_info {
+    max-height: 200px;
+    
+   
+}
+
+
+@media (max-width:768px) {
+    .t1ExamInfoMainContainer {
+        width: 100%;
+    }
+
+    .t1ExamCoursesSubContainer ul {
+        width: 90% !important;
+    }
+
+
+    .t1PortalNames {
+        align-items: center;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+
+/* ***************** COURSES****************************************************************************************** */
+
+.t1ExamCoursesContainer {
+    width: 100%;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.exam_courses_sub_container.t1ExamCoursesSubContainer {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.t1ExamCoursesNameHeading {
+    font-size: 30px;
+    text-align: center;
+    color: rgb(217, 223, 216);
+    background-color: var(--bs-gray-100);
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 10px;
+    height: auto;
+
+}
+/* .undefined {
+    display: flex;
+    width: 58%;
+    flex-direction: row;
+    flex-wrap: wrap;
+} */
+.t1ExamCoursesSubContainer ul {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.t1PortalNames {
+    width: 300px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    margin: 5px;
+    box-shadow: -16px -12px 10px -8px #c0e5cb7a;
+    border-radius: 10px;
+    border: 1px solid rgb(185, 167, 167);
+}
+
+
+.t1PortalNames li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    flex-direction: column;
+    color: rgb(5, 5, 5);
+
+}
+
+.t1PortalNames li h2{
+    font-size: 20px;
+    padding: 10px;
+}
+
+.t1PortalNames li img {
+    height: 240px;
+    margin: 10px auto;
+}
+
+.t1PortalNames li a {
+    height: 40px;
+    width: 100px;
+    justify-content: center;
+    margin: 10px auto;
+    display: flex;
+    padding: 7px;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    border: 2px solid rgb(224, 199, 199);
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.banner_section {
+    margin: 0px;
+}
+
+.t1PortalNames li a:hover {
+    background-color: rgb(189 228 201);
+    color: rgb(30 96 142);
+}
+
+.t1PortalNames svg {
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+hr {
+    display: block;
+    background-color: rgb(250, 128, 114);
+    border: none;
+    font-weight: bolder;
+    height: 3px;
+    margin: 0px 10px 0px 10px;
+
+}
+
+
+
+.center {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}

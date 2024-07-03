@@ -1,0 +1,191 @@
+.t1CoursePageHeaderContainer .t1CPHeaderUl {
+    display: flex;
+    flex-direction: row;
+}
+
+.t1CPHeaderUl {
+    background-color: #bae2c6;
+}
+
+
+.t1CPHeaderUl li {
+    padding: 15px;
+    color: rgb(247, 239, 239);
+    display: flex;
+    justify-content: space-around;
+}
+
+.t1CPHeaderUl li a {
+    color: rgb(10, 10, 10);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.t1CPHeaderUl li a:hover{
+    color: rgb(0, 119, 36);
+}
+
+.t1_COURSES {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.t1HeadingInCp {
+    margin: 0 auto;
+}
+
+.t1_COURSES span {
+    margin: 0 auto;
+}
+
+.greenCardBody .t1BuyButtonInCP{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.t1BuyButtonInCP a{
+    background-color: rgb(26, 82, 26);
+    color: #f3eeee;
+    text-align: center;
+    width: 150px;
+}
+
+.t1BuyButtonInCP a:hover{
+    color: black;
+    background-color: rgb(140, 167, 140);
+}
+
+
+
+
+
+
+/* For why choose us  */
+.t1TabsDivMainContainer {
+    /* background-color: red; */
+}
+
+.t1TabsDiv {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.t1TabsSubContainer {
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    width: 100%;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.t1TabsSubContainer .t1TabButtonUl {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.t1SelectedTabContentDiv {
+    width: 85%;
+    box-shadow: rgb(185 226 198 / 1%) 59px 54px 55px, rgb(185 226 198) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 2px 3px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+
+
+
+.t1TabImageDiv {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.t1TabContentDiv {
+    padding: 20px;
+}
+
+.t1TabImageDiv img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.t1TabsChange {
+    padding: 10px;
+}
+
+.t1TabsChange button {
+    width: 200px;
+    height: 100px;
+    box-shadow: rgba(230, 227, 227, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.t1TabContentDiv p span {
+    margin-right: 10px;
+    color: rgb(85, 50, 50);
+}
+
+.t1TabContentSplittedText{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.t1TabContentSplittedTextInDiv {
+    border: 1px solid rgb(129, 122, 122);
+    padding: 10px;
+    width: 290px;
+    margin: 10px 10px 10px 10px;
+    /* height: 200px; */
+    box-shadow: rgba(230, 227, 227, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.t1TabContentSplittedTextInDiv p{
+padding: 10px;
+}
+
+
+@media (max-width:600px) {
+
+    .t1CoursePageHeaderContainer .t1CPHeaderUl {
+        display: flex;
+        flex-direction: column;
+    }
+    
+
+    .t1TabsSubContainer .t1TabButtonUl {
+        flex-direction: row;
+flex-wrap: wrap;
+    }
+
+    .t1TabsSubContainer {
+        flex-direction: column;
+    }
+    
+
+    .t1TabsChange button {
+        width:100%;
+        height: 50px;
+        font-size: 12px;
+    }
+}
+
+
+
+.t1TabContentSplittedText {
+    display: grid;
+    margin: 0;
+    padding: 1.5rem;
+    box-shadow: none;
+    border: 1px solid var(--pico-muted-border-color);
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+    counter-increment: num;
+}

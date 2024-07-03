@@ -1,0 +1,134 @@
+.t1ContactusMainsContainer {
+    background-color: #ffffff;
+}
+
+.t1ContactUsSubbMainContainer {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.t1ContactUsContentsDataContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.contactt_us {
+    border: 1px solid rgb(184, 171, 171);
+    border-radius: 5px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.contactt_us span {
+    margin-right: 20px;
+}
+
+.t1ContactUsDataContainer svg{
+    margin: 10px;
+}
+
+input[type="text"], input[type="date"], input[type="email"], input[type="number"], select, textarea {
+    margin-top: 5px;
+    width: 349px;
+    height: 51px;
+    border-radius: 8px;
+}
+textarea#message.ContactUsForMessage.undefined{
+    margin-top: 20px;
+}
+
+.t1ContactUsFormData button{
+    background-color: #b8e2c4;
+    color: black;
+}
+
+.t1ContactUsFormData button:hover{
+    background: #504e4f;   
+    color: white;
+}
+
+.t1ContactUsContentsDataContainer h1 {
+    color: black;
+    font-size: 25px;
+    background: #bae2c659;
+    margin-bottom: 50px;
+    font-weight: 600;
+    padding: 10px;
+    font-family: "Roboto";
+    text-align: center;
+    width: 300px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    display: flex;
+}
+
+.t1ContactsUsMapContainer {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.t1ContactUsMapData iframe {
+    background-color: honeydew;
+    width: 100%;
+    height: 300px;
+}
+
+.t1ContactUsFormAndAdressContainer {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    flex-direction: row;
+}
+
+.t1ContactUsContentContainer {
+    padding: 30px;
+    display: flex;
+    width: 50%;
+    justify-content: start;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 3px -4px 3px #bae3c6;
+    margin-top: 3rem;
+    height: 30%;
+}
+
+.t1ContactUsFormContainer {
+    padding: 10px;
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.t1ContactUsFormData {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #e8f5eb;
+    box-shadow: 3px -4px 3px #bae3c6;
+    width: 408px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.contactt_us {
+    margin-bottom: 30px;
+}
+
+@media (max-width:600px){
+    .t1ContactUsFormAndAdressContainer{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .t1ContactUsContentContainer{
+        width: 100%;
+    }
+}

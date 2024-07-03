@@ -1,0 +1,1020 @@
+
+.\"Ug_header_Container.themeUgHeaderContainerDefault {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    flex-direction: row;
+    margin: 0 auto;
+    justify-content: space-between;
+    /* padding: 19px; */
+    width: 80%;
+}
+
+
+.menu-link.mobileMenuLink.themeUgDivLinksOfHeaderDefault {
+    align-items: center;
+    animation: mobile_menu .4s linear alternate forwards;
+    background: #00000067;
+    display: flex;
+    height: 100%;
+    /* justify-content: center; */
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+}
+
+
+ 
+.themeUgDivLinksOfHeaderDefault {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+ 
+.themeUgDivLinksOfHeaderDefault a {
+    align-items: center;
+    background: #01c3ff;
+    border-radius: 0 20px;
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, .2);
+    display: flex;
+    justify-content: center;
+    /* width: 120px; */
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+.ug_container.themeUgHContainerDefault {
+    align-items: center;
+    background-color: #000;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.5);
+    display: block;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: -30.5rem 0;
+    height: 60px;
+}
+ 
+ul.themeUgHeaderUlDefault {
+    display: flex;
+    gap: 1.5rem;
+    flex-direction: row;
+}
+li.themeUgHeaderLiDefault {
+        color: #fff;
+        position: relative;
+        font-size: 1.3rem;
+        font-weight: 500;
+}
+ 
+li.themeUgHeaderLiDefault:hover {
+    -webkit-animation: navhover .5s alternate forwards;
+    animation: navhover .5s alternate forwards;
+    color: #fff;
+    font-weight: 900;
+    text-decoration: underline;
+    text-decoration-color: #099bdf;
+}
+.navItemsContainer.themeUgNavContainerDefault {
+    /* width: 80%; */
+    margin-left: 164px;
+}
+ul.themeUgHeaderUlDefault {
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+}
+.themeMarqDataDefault {
+    background-color: white;
+    box-shadow: rgb(117, 117, 117) 0 0 5px;
+    padding: 15px;
+    margin-top: 19px;
+}
+.themeMarqDataDefault  span{
+        color: black;
+        font-weight: 400;
+}
+ 
+.defaultCoursesSubContainer h2 {
+    color: #00a3ff;
+    font-size: 2rem;
+    margin: 1rem auto;
+    text-align: center;
+}
+/* .defaultCoursesUl {
+    grid-gap: 2rem;
+    display: grid;
+    gap: 2rem;
+    margin: .5rem auto;
+    width: 80%;
+} */
+ 
+ 
+ 
+ 
+.themeCoursesBoxContainerDefault {
+        grid-gap: 2rem;
+        align-items: center;
+        background: #e2f7fb;
+        border: 2px solid#000;
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 35% 30% 25%;
+        justify-content: space-around;
+        margin: 0 auto;
+        padding: .8rem;
+        grid-gap: 2rem;
+        display: grid;
+        gap: 2rem;
+        margin: .5rem auto;
+        width: 80%;
+}
+.themeCoursesBoxContainerDefault :hover {
+    -webkit-animation: UG_course 3s infinite alternate;
+    animation: UG_course 3s infinite alternate;
+}
+.PortalName_ImageContainerDefault {
+    display: flex;
+    flex-direction: column;
+}
+ 
+/* EXPLORE EXAMS CSS */
+.NewExploreExams_Main_Container.themeExploreExamsMainContainerDefault {
+        background: #e2f7fb;
+        padding: 20px 0;
+        text-align: center;
+        width: 100%;
+}
+h2#EXPLORE_Exam_Heading {
+    color: #00a3ff;
+    font-size: 2rem;
+    margin: 2rem auto;
+}
+.NewExploreExams_Sub_Container.themeExploreExamsSubContainerDefault {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    gap: 5rem;
+    justify-content: center;
+    margin: 0 auto;
+    width: 95%;
+}
+.NewExploreExams_ExamCard_Container.NewExploreExams_ExamCard_ContainerDefault {
+    grid-column-gap: 7.8rem;
+    grid-row-gap: 3rem;
+    -webkit-column-gap: 7.8rem;
+    column-gap: 7.8rem;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    padding: 0 2rem;
+    row-gap: 3rem;
+}
+.exam_box_left img {
+    width: 100%;
+}
+.NewExploreExams_ExamCard_MainContainer.NewExploreExams_ExamCard_ContainerDefault {
+    display: flex;
+    justify-content: space-evenly;
+}
+.NewExploreExams_ExamName_Container.NewExploreExams_ExamName_ContainerDefault {
+    background: #279eff69;
+    background: #fff;
+    border-radius: 13px;
+    box-shadow: 0 0 5px rgba(0,0,0,.5);
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    /* height: 166px; */
+    /* justify-content: center; */
+    padding: 1.5rem;
+    text-align: center;
+    text-transform: capitalize;
+    width: 256px;
+    height: 249px;
+}
+.NewExploreExams_EachCard_Container.NewExploreExams_EachCard_ContainerDefault ul li.defaultLinkToSpecificExam{
+    background: #3ad4ba;
+    border-radius: 13px;
+    color: #070707 !important;
+    font-family: Noto Sans Display,sans-serif;
+    font-weight: 700;
+    padding: .3rem .5rem;
+    font-size:1.3rem;
+}
+.NewExploreExams_PortalNames_Container.NewExploreExams_PortalNames_ContainerDefault li a {
+    color: black;
+    line-height: 2.2rem;
+    font-size: 15px;
+    font-weight: 500;
+}
+li.defaultLinkToSpecificExam a{
+    color:white;
+    font-weight:bold;
+}
+.NewExploreExams_PortalNames_Container.NewExploreExams_PortalNames_ContainerDefault li a:hover {
+    color: rgb(48, 4, 129);
+    font-weight: bold;
+    text-decoration: underline;
+}
+ 
+/* OUR COURSES CSS PART */
+ 
+.defaultCoursesHeadding {
+    background: #fff;
+    padding: .5rem 0;
+}
+h2#Our_Courses_heading{
+        color: #00a3ff;
+        font-size: 2rem;
+        margin: 1rem auto;
+        text-align: center;
+}
+.defaultCoursesSubContainer {
+    grid-gap: 2rem;
+    display: grid;
+    gap: 2rem;
+    margin: .5rem auto;
+    width: 80%;
+}
+.defaultCoursesSubContainer .ul.defaultCoursesUl li {
+    grid-gap: 2rem;
+    background: #e2f7fb;
+    border: 2px solid #000; /* Corrected border syntax */
+    gap: 2rem;
+    grid-template-columns: 35% 30% 25%;
+    justify-content: space-around;
+    margin: 0 auto;
+    padding: 1.5rem;
+    width: 95%;
+    margin-bottom: 15px;
+}
+ 
+ 
+ 
+ 
+ 
+li.defaultCourseLi {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #e2f7fb;
+    margin: 15px;
+    border: 1px solid black; /* Updated border property */
+    padding:20px;
+}
+ 
+.themeCoursePortalNameImageContainerDefault{
+        display: flex;
+        flex-direction: column;
+}
+strong.defaultPortalName {
+    background: #2d6891;
+    color: #fff;
+    font-size: 1.2rem;
+    margin: .3rem auto;
+    padding: .5rem;
+    text-align: center;
+    width: 165%;
+    display: block;
+}
+.defaultFeatureImgC img {
+    height: 250px;
+    width: 250px;
+}
+ 
+.defaultFeaturesContainer {
+    /* line-height: 32px; */
+    padding-top: 4.6rem;
+    text-align: justify;
+    font-weight: 600;
+}
+h3.undefined {
+    font-family: Roboto,sans-serif;
+}
+.DefaultthemeArrowWithFeatures li.DefaultthemeFeatures{
+    list-style: disc;
+    margin-left: 22px;
+}
+.defaultExamsNames {
+    /* height: 20px; */
+    display: grid;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    grid-template-columns: repeat(1fr,1fr);
+    justify-content: center;
+    margin-right: 90px;
+    margin-top: 75px;
+}
+.defaultExamsNames a {
+    background: #2d6891;
+    border-radius: 10px;
+    color: #fff;
+    font-family: Noto Sans Display,sans-serif;
+    font-weight: 700;
+    padding: 0.5rem;
+    text-align: center;
+    /* text-transform: uppercase; */
+    text-decoration: none;
+    width: 179px;
+    font-size: 13px;
+    height: 42px;
+}
+ 
+ul.defaultCoursesUl li:hover {
+    background-color: white;
+    box-shadow: black 0 0 5px;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+@media (max-width: 325px) {
+    .AboutUsImgContainerDefault img {
+        border-radius: 5px;
+        width: 170px;
+    }
+    .ContactUsContentContainer.ContactUsContentContainerDefault {
+        box-shadow: 0 0 10px rgba(0,0,0,.5);
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding: 1.8rem;
+        width: 18rem;
+        text-align: left;
+    }
+    .NewExploreExams_EachCard_Container.NewExploreExams_EachCard_ContainerDefault ul li.defaultLinkToSpecificExam {
+       
+        padding:0px;
+        
+    }
+    .NewExploreExams_PortalNames_Container.NewExploreExams_PortalNames_ContainerDefault li a {
+        color: black;
+        line-height: 2.2rem;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    .NewExploreExams_ExamName_Container.NewExploreExams_ExamName_ContainerDefault {
+        background: #279eff69;
+        background: #fff;
+        border-radius: 13px;
+        box-shadow: 0 0 5px rgba(0,0,0,.5);
+        display: flex;
+        flex-direction: column;
+        gap: .8rem;
+        /* height: 166px; */
+        /* justify-content: center; */
+        padding: 1.5rem;
+        text-align: center;
+        text-transform: capitalize;
+        width: 246px;
+        height: 206px;
+    }
+}
+
+@media (max-width: 391px) {
+  .AboutUsImgContainer.AboutUsImgContainerDefault span {
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}
+@media (max-width: 376px) {
+    li.themeUgHeaderLiDefault {
+      color: #fff;
+      font-size: 13px !important;
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+@media (max-width: 600px) {
+
+
+    .Ug_header_logoIMG img {
+        width: 145px;
+    }
+  
+
+
+    .navItemsContainer.themeUgNavContainerDefault {
+        width: 95%;
+        margin-left:0px;
+    }
+    li.themeUgHeaderLiDefault {
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: center;
+    }
+   
+    #EXPLORE_Exam_Heading {
+        color: #00a3ff;
+        text-align: center;
+        font-size: 1.5rem;
+        margin: 2rem auto;
+        color: #1ba2d9;
+    }
+    .NewExploreExams_ExamCard_MainContainer.NewExploreExams_ExamCard_ContainerDefault {
+        align-items: center;
+        display: flex;
+      flex-direction: column;
+        justify-content: center;
+        margin: 0 auto;
+        width: 65%;
+    }
+
+    .NewExploreExams_ExamCard_Container.NewExploreExams_ExamCard_ContainerDefault {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+    .NewExploreExams_ExamCard_Container.NewExploreExams_ExamCard_ContainerDefault {
+        display: flex;
+        align-items: center;
+        width: 100px;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .themeNewExploreExams_Exam_Container  li a {
+        background-color: red !important;
+        color:green;
+
+    }
+    .NewExploreExams_Image.themeNewExploreExams_ImageDefault img{
+        width:100px;
+    }
+    .NewExploreExams_Image.themeNewExploreExams_ImageDefault img {
+        width: 289px;
+        margin-top: 20px;
+    }
+    li.defaultCourseLi {
+        display: flex;
+        flex-direction: column;
+     height: auto;
+        background: #e3f2fd;
+        margin: 15px;
+        border: 1px solid black;
+        padding: 20px;
+    }
+    .defaultCoursesSubContainer ul.defaultCoursesUl {
+        padding-left: 0px;
+    }
+    .defaultFeatureImgC img {
+        height: 220px;
+        width: 220px;
+    }
+    strong.defaultPortalName {
+        background: #2d6891;
+        color: #fff;
+        font-size: 1.2rem;
+        margin: .3rem auto;
+        padding: .5rem;
+        text-align: center;
+        width: 80%;
+        display: block;
+    }
+    .defaultFeaturesContainer {
+        /* line-height: 32px; */
+        padding-top:0px;
+        text-align: justify;
+    }
+    .defaultExamsNames {
+        margin-top: 2.5rem;
+    }
+    .defaultCoursesSubContainer {
+        grid-gap: 2rem;
+        /* display: grid; */
+        gap: 2rem;
+        /* margin: .5rem auto; */
+        width: 100%;
+    }
+    h2#EXPLORE_Exam_Heading {
+        font-weight: bold;
+        color: #00a3ff;
+        font-size: 1.5rem;
+        margin: 2rem auto;
+    }
+    ul.themeUgHeaderUlDefault {
+        display: flex;
+        /* gap: 1.5rem; */
+        flex-direction: row;
+        align-items: center;
+    }
+
+}
+ 
+@media (max-width:884px) {
+    .NewExploreExams_Image.themeNewExploreExams_ImageDefault img {
+        margin-left: 20px;
+    }
+    .NewExploreExams_ExamCard_MainContainer.NewExploreExams_ExamCard_ContainerDefault {
+        align-items: center;
+        /* display: flex; */
+        flex-direction: row;
+        /* flex-wrap: wrap-reverse; */
+        /* gap: 5rem; */
+        justify-content: center;
+        margin: 0 auto;
+        width: 65%;
+    }
+ 
+    .NewExploreExams_ExamCard_MainContainer.NewExploreExams_ExamCard_ContainerDefault {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-evenly; */
+    }
+    .defaultCoursesSubContainer {
+        grid-gap: 2rem;
+        display: grid;
+        gap: 2rem;
+        margin:0px;
+        width: 5%;
+    }
+    li.defaultCourseLi {
+        width: 92vw;
+    }
+    li.defaultCourseLi {
+        padding: 6px;
+    }
+    strong.defaultPortalName {
+        background: #2d6891;
+        color: #fff;
+        font-size: 1rem;
+        margin: .3rem auto;
+        padding: .6rem;
+        text-align: center;
+        width: 88%;
+        display: block;
+    }
+    .defaultExamsNames {
+        /* height: 20px; */
+        display: grid;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        grid-template-columns: repeat(1fr,1fr);
+        justify-content: center;
+        margin-right: 0px;
+        margin-top: 56px;
+        margin-left: 20px;
+    }
+    .defaultFeaturesContainer {
+        /* line-height: 32px; */
+        padding-top: 4.6rem;
+        text-align: justify;
+        font-weight: 500;
+        margin-left: 18px;
+    }
+    .defaultExamsNames a {
+        background: #2d6891;
+        border-radius: 10px;
+        color: #fff;
+        font-family: Noto Sans Display,sans-serif;
+        font-weight: 700;
+        padding: 0.3rem;
+        text-align: center;
+        /* text-transform: uppercase; */
+        text-decoration: none;
+        width: 155px;
+        font-size: 13px;
+        height: 40px;
+    }
+    .Footer_Sub_Container.themeFooterSubContainerDefault {
+        padding: 2rem 3rem 0;
+    }
+    
+}
+
+
+
+@media (max-width: 1114px) {
+    .NewExploreExams_ExamCard_MainContainer.NewExploreExams_ExamCard_ContainerDefault {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+    .themeUgDivLinksOfHeaderDefault {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem; /* Ensure the unit is specified */
+    }
+  }
+  ul.themeUgHeaderUlDefault {
+    display: flex;
+    gap:1.5rem;
+    padding-left: 0px;
+    flex-direction: row;
+}
+@media (max-width:1280px) {
+
+.themeUgDivLinksOfHeaderDefault a {
+    align-items: center;
+    background: #01c3ff;
+    border-radius: 0 20px;
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, .2);
+    display: flex;
+    justify-content: center;
+    /* width: 120px; */
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 13px;
+}
+.menu-link.mobileMenuLink.themeUgDivLinksOfHeaderDefault a {
+    align-items: center;
+    background: transparent;
+    position: relative;
+    line-height: 6rem;
+    color:white;
+    font-size:15px;
+}
+}
+@media (max-width:1114px) {
+
+    }
+
+/* About Us Styles */
+
+.AboutUsImgContainerDefault{
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        padding: 10px;
+        height: 100px;
+        padding-top: 3rem;
+}
+.AboutUsImgContainerDefault img {
+    border-radius: 5px;
+    width: 330px;
+}
+.AboutUsContentMainContainer.AboutUsContentMainContainerDefault{
+        margin: 0 auto;
+        text-align: center;
+        width: 100%;
+            background: #e2f7fb;
+           
+}
+.AboutUsContentSubContainerDefault {
+    padding: 3rem 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6rem;
+}
+
+.AboutUs1stContentContainer.AboutUs1stContentContainerDefault {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    justify-content:center;
+    max-width: 48%;
+    gap:5rem;
+}
+
+.AboutUs1stContentContainer.AboutUs1stContentContainerDefault p {
+    color: black;
+    text-align: left;
+
+}
+.AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault {
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,.5);
+    width: 500px;
+    padding:20px;
+    margin-bottom: 2rem;
+}
+.AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault h2 {
+    color: #00a3ff;
+    font-size: 1.5rem;
+    padding-bottom: 5px;
+}
+.AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault p {
+    color: black;
+    text-align: left;
+}
+
+.AboutUsContentMainContainer.AboutUsContentMainContainerDefault h1{
+    color: #00a3ff;
+    font-size: 3rem;
+    margin: 2rem auto;
+}
+.AboutUsImgDataContentContainer.AboutUsImgDataContentContainerDefault img {
+    width:400px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    background-color: white;
+}
+.AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault img {
+    width:100px;
+}
+.AboutUs_Main_Container.AboutUsMainContainerDefault .AboutUsImgContainer.AboutUsImgContainerDefault span {
+    color:rgb(97, 3, 3) !important;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+}
+
+/* About_Us_Responsive */
+
+@media (max-width: 600px) {
+    .AboutUsImgContainerDefault img {
+        border-radius: 5px;
+        width: 185px;
+      }
+      .AboutUsImgDataContentContainer.AboutUsImgDataContentContainerDefault img {
+        width: 343px; 
+      }
+      .AboutUsContentSubContainerDefault {
+        padding: 0.5rem 10rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6rem;
+    }
+    .AboutUs1stContentContainer.AboutUs1stContentContainerDefault .AboutUsImgDataContentContainer.AboutUsImgDataContentContainerDefault img {
+        width: 345px;
+        border-radius: 15px;
+    }
+    .AboutUs1stContentContainer.AboutUs1stContentContainerDefault p {
+        text-align: left;
+        font-size: 18px;
+    }
+    .AboutUs_VisionContent_Container.AboutUsVisionContentContainerDefault .AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault {
+        background: #fff;
+        box-shadow: 0 0 5px rgba(0,0,0,.5);
+        width: 375px;
+        padding: 20px;
+        margin-bottom: 2rem;
+    }
+  
+}
+
+
+
+
+@media (max-width: 1024px) {
+    .AboutUsImgContainerDefault img {
+        border-radius: 5px;
+        width: 275px;
+    }
+    .AboutUsImgContainerDefault {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        padding: 10px;
+        height: 50px;
+    }
+    .AboutUsImgContainerDefault {
+      
+        padding-top: 40px;
+       
+    }
+    .AboutUsContentMainContainer.AboutUsContentMainContainerDefault h1 {
+        font-size: 2.5rem;
+    }
+    .AboutUsContentSubContainerDefault{
+        display: flex;
+        flex-direction: column;
+    }
+    .AboutUsImgDataContentContainer.AboutUsImgDataContentContainerDefault img {
+        width: 490px;
+        border-radius: 15px;
+        /* margin-bottom: 20px; */
+        /* margin-top: 0px; */
+    }
+    .AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault {
+        background: #fff;
+        box-shadow: 0 0 5px rgba(0,0,0,.5);
+        width: 359px;
+        padding: 20px;
+        margin-bottom: 2rem;
+    }
+    .AboutUs1stContentContainer.AboutUs1stContentContainerDefault p {
+        text-align: left;
+        font-size: 20px;
+    }
+    .AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault {
+        background: #fff;
+        box-shadow: 0 0 5px rgba(0,0,0,.5);
+        width: 555px;
+        padding: 20px;
+        margin-bottom: 2rem;
+    }
+}
+
+/* Contact Us Css styles */
+.ContactUsContentDataContainer.ContactUsContentDataContainerDefault {
+    padding: 8rem 0;
+    width: 100%;
+}
+.ContactUsContentDataContainer.ContactUsContentDataContainerDefault {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding: 3rem 0;
+}
+.ContactUsContentContainer.ContactUsContentContainerDefault {
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+    display: flex;
+    flex-direction: column;
+    height: 25rem;
+    padding: 1.8rem;
+    width: 25rem;
+    text-align: left;
+}
+ .ContactUsMapData.ContactUsMapDataDefault iframe{
+    height: 25rem;
+    width: 25rem;
+}
+form.ContactUsFormData.ContactUsFormDataDefault{
+    /* grid-gap: 1rem; */
+    align-items: center;
+    display: grid;
+    gap: rem;
+    grid-template-columns: repeat(auto-fit,minmax(350px,1fr));
+    justify-content: center;
+}
+form.ContactUsFormData.ContactUsFormDataDefault #firstName, #lastName, #email, #category,#message {
+    border: 1px solid #000;
+    border-radius: 10px;
+    height: 50px;
+    outline: none;
+    padding: .1rem .5rem;
+    /* text-transform: uppercase; */
+    width: 90%;
+}
+form.ContactUsFormData.ContactUsFormDataDefault #category {
+    margin-bottom:20px;
+}
+form.ContactUsFormData.ContactUsFormDataDefault button {
+    background: #279eff;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    height: 40px;
+    justify-self: end;
+    margin-right: 2.5rem;
+    transition: all .5s;
+    width: 100px;
+}
+.ContactUsMainContainer.themeContactUsMainContainerDefault h1 {
+    color: #00a3ff;
+    font-size: 2.5rem;
+    margin: 1.5rem auto;
+    text-align: center;
+    font-weight: bold;
+}
+.ContactUsDataContainer.ContactUsDataContainerDefault h2 {
+    color: #01c3ff;
+    font-size: 2rem;
+    text-align: center;
+}
+.ContactUsDataContainer.ContactUsDataContainerDefault p {
+    font-size: 20px;
+    padding: 7px 0px;
+}
+.AboutUsImgContainer.AboutUsImgContainerDefault span {
+    color:#000;
+    font-size:1.5rem;
+    font-weight:bold;
+}
+.AboutUsImgContainer.AboutUsImgContainerDefault a {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 1rem;
+}
+/* Responsive for Contact Us Page */
+
+@media (max-width: 600px) {
+    .AboutUsImgContainerDefault img {
+        border-radius: 5px;
+        width: 195px;
+    }
+    .ContactUsMainContainer.themeContactUsMainContainerDefault h1 {
+        color: #00a3ff;
+        font-size: 1.5rem;
+        margin: 3.5rem auto;
+        text-align: center;
+        font-weight: bold;
+    }
+    .ContactUsContentDataContainer.ContactUsContentDataContainerDefault {
+        padding: 0rem 0;
+    
+    }
+    .ContactUsMapData.ContactUsMapDataDefault iframe {
+        height: 18rem;
+        width: 18rem;
+    }
+    .ContactUsContentContainer.ContactUsContentContainerDefault {
+        box-shadow: 0 0 10px rgba(0,0,0,.5);
+        display: flex;
+        flex-direction: column;
+        height: 26rem;
+        padding: 1.8rem;
+        width: 18rem;
+        text-align: left;
+    }
+}
+
+@media (max-width: 320px) {
+    form.ContactUsFormData.ContactUsFormDataDefault {
+        align-items: center;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: none;
+        justify-content: center;
+    }
+}
+@media (max-width:834px){
+    .ContactUsMapData.ContactUsMapDataDefault iframe {
+        height: 25rem;
+        width: 23rem;
+    }
+    .ContactUsContentContainer.ContactUsContentContainerDefault {
+        box-shadow: 0 0 10px rgba(0,0,0,.5);
+        display: flex;
+        flex-direction: column;
+        height: 25rem;
+        padding: 1.8rem;
+        width: 23rem;
+        text-align: left;
+    }
+}
+
+
+/* Links page css */
+
+.LinksDataContainer.LinksDataContainerDefault {
+    background-color: white;
+    box-shadow: 1px 1px 10px black;
+    padding: 2rem;
+}
+
+.LinksDataContainer.LinksDataContainerDefault strong {
+    color: #08a4e3;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.LinkPage_footer-content__EHAOJ ul li {
+    list-style-type: disc;
+    /* color: #555; */
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.themeFooterSMIconsDefault {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20rem;
+}
+.themeFooterSMIconsDefault a {
+    color: white;
+    font-size: 2rem;
+    margin-right:1.8rem;
+    margin-left: 1.8rem;
+    margin-bottom: 10px;
+}
+
+/* responsive */
+@media(max-width:430px) {
+    .LinkPage_footer-content__EHAOJ {
+        padding: 2rem;
+    }
+}
+
+@media(max-width: 320px) {
+    .LinksDataContainer.LinksDataContainerDefault {
+        background-color: white;
+        box-shadow: 1px 1px 10px black;
+        padding: 1rem;
+    }
+}
+
+@media(max-width: 360px) {
+    .LinksDataContainer.LinksDataContainerDefault {
+        background-color: white;
+        box-shadow: 1px 1px 10px black;
+        padding: 1rem;
+    }
+    .LinkPage_footer-content__EHAOJ p {
+        color: #333;
+        font-size: 13px;
+    }
+}
