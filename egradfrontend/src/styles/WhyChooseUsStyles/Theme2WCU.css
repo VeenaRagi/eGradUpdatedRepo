@@ -325,3 +325,8 @@ h2.orangeContant {
   flex-direction: column;
   gap: 2rem;
 }
+@media (max-width: 768px) {
+  .t2BuyCourseSpan {
+      font-size: 16px;
+  }
+}
