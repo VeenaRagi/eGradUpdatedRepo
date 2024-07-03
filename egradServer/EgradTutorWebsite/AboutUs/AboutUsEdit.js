@@ -36,9 +36,11 @@ router.post('/about_us', upload.single('About_Us_Image'), async (req, res) => {
   const About_Us_Image = req.file ? req.file.buffer : null;
 
   try {
-    // Log the data to verify
     console.log('Inserting data:', { Title, Description, About_Us_Image });
-    await db.query('INSERT INTO about_us (Title, Description, About_Us_Image) VALUES (?, ?, ?)', [Title, Description, About_Us_Image]);
+
+    const [result] = await db.query('INSERT INTO about_us (Title, Description, About_Us_Image) VALUES (?, ?, ?)', [Title, Description, About_Us_Image]);
+    console.log('Insert result:', result); // Log the result to check if insertion was successful
+
     res.status(201).json({ message: 'About Us data saved successfully' });
   } catch (error) {
     console.error('Error saving About Us data:', error.message);
@@ -46,6 +48,7 @@ router.post('/about_us', upload.single('About_Us_Image'), async (req, res) => {
     res.status(500).json({ error: 'Failed to save About Us data' });
   }
 });
+
 
 
   // router.put('/about_us/:about_us_id', async (req, res) => {
