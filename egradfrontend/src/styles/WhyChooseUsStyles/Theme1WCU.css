@@ -34,6 +34,26 @@
 }
 
 .t1HeadingInCp {
+    display: inline-block;
+    margin: 0;
+    font-size: 30px;
+     background-color: #2f8d46;
+    background-image: url(
+'https://images.pexels.com/photos/2943603/pexels-photo-2943603.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.t1BuyCourseSpan span{
+    font-size: 15px;
+    font-style: italic;
+}
+
+.t1HeadingInCp {
     margin: 0 auto;
 }
 
