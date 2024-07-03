@@ -1,3 +1,4 @@
+
 .t1CoursePageHeaderContainer .t1CPHeaderUl {
     display: flex;
     flex-direction: row;
@@ -206,5 +207,47 @@
         width: 100%;
         height: 50px;
         font-size: 12px;
+    }
+}
+
+
+
+@media screen and (max-width: 924px) {
+    .courseHMenu{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .t1CoursePageHeaderContainer .t1CPHeaderUl {
+        display: flex;
+        flex-direction: column;
+    
+    }
+  
+}
+
+@media (max-width: 568px) {
+    .CoursePage_header_Container.t1CoursePageHeaderContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .t1CoursePageHeaderContainer .hamburgerMenu.courseHMenu {
+color: black !important;
+width: 200px;
+    }
+    .t1CoursePageHeaderContainer .mobileMenuLink {
+        position: absolute;
+        display: flex;
+        top: 0%;
+        border-radius: 20px;
+        right: 3%;
+        color: black;
+        flex-direction: column;
+        padding: 3rem 3px 2rem 10px;
+        align-items: start;
+        border: 1px solid #1f4c60;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     }
 }
