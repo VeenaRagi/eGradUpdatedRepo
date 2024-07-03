@@ -158,7 +158,7 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode }) => {
                       className={`${themeDetails.themeLanding_branch_box_btns}`}
                     >
                       <ul>
-                        {branch.EntranceExams.slice(0, 4).map((exam) => (
+                        {branch.EntranceExams.slice(0, 6).map((exam) => (
                           <li
                             key={exam.EntranceExams_Id}
                             className={`${themeDetails.themeLanding_branch_box_li_buttons}`}
@@ -199,20 +199,7 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode }) => {
                         {branch.Branch_Name}
                       </Link>
                     </button>
-
-                    {/* Exam Image */}
-                    {/* {examImages?.map((image, index) => (
-                      <div key={index} className="image-item">
-                        {image.Exam_Image && (
-                          <img
-                            src={`data:image/jpeg;base64,${image.Exam_Image}`} // Adjust the MIME type if necessary
-                            alt={`Exam ${index + 1}`}
-                            style={{ width: "200px", height: "auto" }}
-                          />
-                        )}
-                      </div>
-                    ))} */}
-                    {/* Exam Image End */}
+                
 
                     <div
                       className={`Newlandingpage_exams_button_box ${themeDetails.themeExamButtonsBox}`}
@@ -237,7 +224,7 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode }) => {
                         className={`${themeDetails.themeLanding_branch_box_btns}`}
                       >
                         <ul>
-                          {branch.EntranceExams.slice(0, 4).map((exam) => (
+                          {branch.EntranceExams.slice(0, 6).map((exam) => (
                             <li
                               key={exam.EntranceExams_Id}
                               className={`${themeDetails.themeLanding_branch_box_li_buttons}`}

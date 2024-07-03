@@ -112,4 +112,32 @@ router.delete('/entrance_exam/:EntranceExams_Id', async (req, res) => {
 
 
 
+//   NEWLY ADDED EDIT AND ADD AND DELETE FUNCTIONALITIES APISFOR LANDING PAGE Exams data
+
+router.post('/addEntranceExam', async (req, res) => {
+    const { EntranceExams_name, Branch_Id } = req.body;
+  
+    if (!EntranceExams_name || !Branch_Id) {
+      console.error('Missing required fields');
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+  
+    try {
+      const query = 'INSERT INTO entrance_exams (EntranceExams_name, Branch_Id) VALUES (?, ?)';
+      const [result] = await db.query(query, [EntranceExams_name, Branch_Id]);
+  
+      console.log('Insert result:', result);
+      res.status(201).json({ message: 'Entrance exam data saved successfully' });
+    } catch (error) {
+      console.error('Error saving entrance exam data:', error.message);
+      console.error('Full error details:', error);
+      res.status(500).json({ error: 'Failed to save entrance exam data' });
+    }
+  });
+  
+  
+
 module.exports = router;
+
+
+
