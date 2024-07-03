@@ -36,8 +36,9 @@
 }
 
 .t1UgHeaderLi:hover {
-    background: linear-gradient(to right, #608166, var(--bs-white), #688f8157);
+background-color: rgb(84, 104, 84);
     border-radius: 10px;
+    border: 2.5px solid #00800045;
     transition: ease-in-out 1s;
 }
 
