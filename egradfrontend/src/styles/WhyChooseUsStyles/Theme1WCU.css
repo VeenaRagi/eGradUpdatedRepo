@@ -28,6 +28,7 @@
 .t1_COURSES {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
     margin: 0 auto;
 }
@@ -44,6 +45,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 15px;
 }
 
 
@@ -177,15 +179,3 @@ flex-wrap: wrap;
 }
 
 
-
-.t1TabContentSplittedText {
-    display: grid;
-    margin: 0;
-    padding: 1.5rem;
-    box-shadow: none;
-    border: 1px solid var(--pico-muted-border-color);
-    position: relative;
-    overflow: hidden;
-    background-color: #fff;
-    counter-increment: num;
-}
