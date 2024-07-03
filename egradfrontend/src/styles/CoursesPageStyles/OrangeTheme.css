@@ -44,9 +44,11 @@
     position: relative;
     display: flex;
     align-items: center;
+    /* color: white; */
     gap: 2rem;
     position: relative;
     box-shadow: none;
+    background: linear-gradient(160deg, #2e8c9275, #e8ebf4, #2e8c9273, #12455700);
 }
 .card_container .before_login_first_card.orangeImgDiv img{
     height: 148px;
@@ -223,16 +225,14 @@ h2#orange_examName{
         padding: 0;
     }
 }
-/* .before_start_now {
-    background-color: red;
-} */
 .before_start_now.t2BuyButtonInCP {
     width: 50%;
     background-color: #1f4c60;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     color: white;
     border-radius: 20px;
     text-align: center;
+    margin-top: 12px;
 }
 .before_start_now.t2BuyButtonInCP a{
 color: white;

@@ -55,9 +55,6 @@ const BHPHeading = () => {
   const themeDetails = JSONClasses[themeColor] || [];
   console.log(themeDetails, "mapppping from json....");
   // fetching for navitems
-
-
-
   return (
     <div
       className={`Ug_Home_Page_First_Container${themeDetails.themeUgHomePageFirstContainer}`}

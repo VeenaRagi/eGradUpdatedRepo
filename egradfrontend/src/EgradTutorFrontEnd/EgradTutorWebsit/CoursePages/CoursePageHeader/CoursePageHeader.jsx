@@ -9,9 +9,12 @@ import CoursePageHeaderEdit from "./CoursePageHeaderEdit.jsx";
 import '../../../../styles/CoursePage/CoursePageDefault.css'
 import '../../../../styles/CoursesPageStyles/themeWhite.css';
 import { RiLoginBoxLine } from "react-icons/ri";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const CoursePageHeader = ({ isEditMode }) => {
   const [image, setImage] = useState(null);
+  const [showLinks, setShowLinks] = useState(false);
+
   const [showHeaderMenuForm, setShowHeaderMenuForm] = useState(false);
   const [headers, setHeaders] = useState([]);
   const fetchImage = async () => {
@@ -60,7 +63,10 @@ const CoursePageHeader = ({ isEditMode }) => {
         ) : (
           <img src={defaultImage} alt="Default" />
         )}
-        <div className={`logoImgContainer ${themeDetails.logoC}`}></div>
+        <div 
+        className={`logoImgContainer ${themeDetails.logoC}`}
+        
+        ></div>
       </div>
       <div>
         {isEditMode && (
@@ -72,7 +78,8 @@ const CoursePageHeader = ({ isEditMode }) => {
           </div>
         )}
       </div>
-      <div className={`CoursePageItemsContainer ${themeDetails.themeCoursePageHeaderContainer}`}>
+      <div 
+      className={`${showLinks?"menu-link mobileMenuLink":"menu-link"} CoursePageItemsContainer ${themeDetails.themeCoursePageHeaderContainer} `}>
         <ul className={`courseHeaderUl ${themeDetails.themeCPHeaderUl} `}>
           {headers.map((headeritem) => (
             <li key={headeritem.HeaderItem_Id}>
@@ -81,7 +88,17 @@ const CoursePageHeader = ({ isEditMode }) => {
               </Link>
             </li>
           ))}
+
         </ul>
+      </div>
+      <div
+        className="hamburgerMenu courseHMenu"
+        onClick={() => {
+          setShowLinks(!showLinks);
+          console.log(showLinks, "this is from onclick of hMenu");
+        }}
+      >
+        <RxHamburgerMenu />
       </div>
     </div>
   );

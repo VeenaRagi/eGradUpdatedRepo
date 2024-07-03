@@ -267,7 +267,7 @@ li.t2LinkToSpecificExam {
     .mobileMenuLink {
         position: absolute;
         display: flex;
-        top: 6%;
+        top: 2%;
         border-radius: 20px;
         right: 9%;
         flex-direction: column;
@@ -284,6 +284,7 @@ li.t2LinkToSpecificExam {
         box-shadow: unset;
         font-size: 12px;
     }
+    
 }
 .Ug_examsPage_Main_Container.t2ExamPageHeaderMainContainer {
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
