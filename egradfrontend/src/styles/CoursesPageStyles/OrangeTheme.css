@@ -183,18 +183,19 @@ h2#orange_examName{
         gap: 10px;
     }
     .card_container .before_login_first_card.orangeImgDiv {
-       /* height: 210px; */
-       /* width: 442px; */
-       height: auto;
-       width: auto;
-         position: relative;
-         display: flex;
-         align-items: center;
-         gap: 2rem;
-         position: relative;
-         flex-direction: column;
-         box-shadow: none;
-       }
+        /* height: 210px; */
+        /* width: 442px; */
+        height: auto;
+        width: 90%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        position: relative;
+        flex-direction: column;
+        padding-top: 10px;
+        box-shadow: none;
+    }
        .card_container.orangeCard {
         display: flex;
         align-items: center;
@@ -232,7 +233,7 @@ h2#orange_examName{
     color: white;
     border-radius: 20px;
     text-align: center;
-    margin-top: 12px;
+    margin: 12px 57px;
 }
 .before_start_now.t2BuyButtonInCP a{
 color: white;
