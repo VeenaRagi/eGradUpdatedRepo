@@ -201,7 +201,7 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode }) => {
                     </button>
 
                     {/* Exam Image */}
-                    {examImages?.map((image, index) => (
+                    {/* {examImages?.map((image, index) => (
                       <div key={index} className="image-item">
                         {image.Exam_Image && (
                           <img
@@ -211,7 +211,7 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode }) => {
                           />
                         )}
                       </div>
-                    ))}
+                    ))} */}
                     {/* Exam Image End */}
 
                     <div
