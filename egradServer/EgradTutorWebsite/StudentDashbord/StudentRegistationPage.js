@@ -9,7 +9,8 @@ const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
-// Set up storage for multer
+
+//Set up storage for multer
 const storage = multer.diskStorage({
   destination: './uploads',
   filename: (req, file, cb) => {
@@ -100,7 +101,7 @@ router.post('/register', upload.fields([{ name: 'photo' }, { name: 'signature' }
       from: 'webdriveegate@gmail.com',
       to: data.emailId,
       subject: 'Your Credentials',
-      text: `Your login credentials:\n\nEmail: ${data.emailId}\nPassword: ${password}`
+      text: `Your login credentials:\n\nEmail: ${data.emailId}\nCode: ${password}`
     };
 
     await transporter.sendMail(credentialsMailOptions);
@@ -136,7 +137,37 @@ router.post('/check-user', async (req, res) => {
   }
 });
 
-// Change password route
+// Resend password endpoint
+router.post('/resend-password', async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const newPassword = generatePassword();
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update the user's password in the database
+    await updateUserPassword(userId, hashedPassword);
+
+    // Fetch the user's email
+    const user = await getUserById(userId);
+
+    // Send the new password via email
+    const credentialsMailOptions = {
+      from: 'webdriveegate@gmail.com',
+      to: user.email,
+      subject: 'Your New Code',
+      text: `Your new login Code is: ${newPassword}`
+    };
+
+    await transporter.sendMail(credentialsMailOptions);
+
+    res.send('New password sent to your registered email');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
+});
+
 router.post('/change-password', async (req, res) => {
   const { userId, oldPassword, newPassword, confirmPassword } = req.body;
 
@@ -163,11 +194,33 @@ router.post('/change-password', async (req, res) => {
       return res.status(400).send('Old password is incorrect');
     }
 
+    // Check the number of password change attempts
+    if (user.password_change_attempts >= 3) {
+      const newPassword = generatePassword();
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      // Update the user's password in the database
+      await updateUserPassword(userId, hashedPassword);
+      await resetPasswordChangeAttempts(userId);
+
+      const credentialsMailOptions = {
+        from: 'webdriveegate@gmail.com',
+        to: user.email,
+        subject: 'Your New Password',
+        text: `You have reached the maximum number of attempts. Your new login password is: ${newPassword}`
+      };
+
+      await transporter.sendMail(credentialsMailOptions);
+
+      return res.status(400).send('Maximum password change attempts reached. A new password has been sent to your registered email.');
+    }
+
     // Encrypt the new password
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     // Update the user's password in the database
     await updateUserPassword(userId, hashedPassword);
+    await incrementPasswordChangeAttempts(userId);
 
     res.send('Password updated successfully');
   } catch (error) {
@@ -175,6 +228,19 @@ router.post('/change-password', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
+// Function to increment password change attempts
+async function incrementPasswordChangeAttempts(userId) {
+  const sql = 'UPDATE log SET password_change_attempts = password_change_attempts + 1 WHERE user_Id = ?';
+  await db.query(sql, [userId]);
+}
+
+// Function to reset password change attempts
+async function resetPasswordChangeAttempts(userId) {
+  const sql = 'UPDATE log SET password_change_attempts = 0 WHERE user_Id = ?';
+  await db.query(sql, [userId]);
+}
+
 // Function to get user by ID
 async function getUserById(userId) {
   const sql = 'SELECT * FROM log WHERE user_Id = ?';
@@ -182,11 +248,104 @@ async function getUserById(userId) {
   console.log(`Query result for user ID ${userId}: ${JSON.stringify(rows)}`);
   return rows[0];
 }
-
 // Function to update user password
 async function updateUserPassword(userId, hashedPassword) {
   const sql = 'UPDATE log SET password = ? WHERE user_Id = ?';
   await db.query(sql, [hashedPassword, userId]);
 }
+
+
+
+
+// Function to get user by email
+async function getUserByEmail(email) {
+  const sql = 'SELECT * FROM log WHERE email = ?';
+  const [rows] = await db.query(sql, [email]);
+  return rows[0];
+}
+
+// Function to update user password
+async function updateUserPasswordByEmail(email, hashedPassword) {
+  const sql = 'UPDATE log SET password = ? WHERE email = ?';
+  await db.query(sql, [hashedPassword, email]);
+}
+
+
+// Send reset code
+router.post('/send-reset-code', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await getUserByEmail(email);
+
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    const code = Math.floor(1000 + Math.random() * 9000).toString();
+
+    // Send email with the reset code
+    const mailOptions = {
+      from: 'webdriveegate@gmail.com',
+      to: email,
+      subject: 'Password Reset Code',
+      text: `Your password reset code is: ${code}`
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    // Save the code in the user record
+    await db.query('UPDATE log SET reset_code = ? WHERE email = ?', [code, email]);
+
+    res.send('Reset code sent to your email');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
+});
+
+// Reset password
+// Reset password endpoint
+router.post('/reset-password', async (req, res) => {
+  const { email, code, newPassword } = req.body;
+
+  console.log('Reset password request:', { email, code, newPassword });
+
+  try {
+    const user = await getUserByEmail(email);
+
+    if (!user) {
+      console.log(`User not found for email: ${email}`);
+      return res.status(404).send('User not found');
+    }
+
+    console.log(`User found: ${JSON.stringify(user)}`);
+
+    // Log the values for comparison
+    console.log(`Comparing reset code for email: ${email}. Expected: ${user.reset_code}, Received: ${code}`);
+
+    if (user.reset_code?.toString().trim() !== code.trim()) {
+      console.log(`Invalid reset code for email: ${email}. Expected: ${user.reset_code}, Received: ${code}`);
+      return res.status(400).send('Invalid reset code');
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    await updateUserPasswordByEmail(email, hashedPassword);
+
+    // Clear the reset code
+    await db.query('UPDATE log SET reset_code = NULL WHERE email = ?', [email]);
+
+    console.log(`Password reset successfully for email: ${email}`);
+    res.send('Password reset successfully');
+  } catch (error) {
+    console.error('Error resetting password:', error);
+    res.status(500).send('Server error');
+  }
+});
+
+
+
+
 
 module.exports = router;
