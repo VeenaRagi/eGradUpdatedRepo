@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import BASE_URL from "../../../../apiConfig.js";
 import axios from "axios";
 import defaultImage from "../../../../assets/defaultImage.png";
+import defaultLogoImage from "../../../../assets/egradtutor_logo.png";
 import { ThemeContext } from "../../../../ThemesFolder/ThemeContext/Context.js";
 import LandingPageHeaderEdit from "./LandingPageHeaderEdit";
 import "../../../../styles/Default_landingPage_styles.css";
@@ -10,6 +11,8 @@ import "../../../../styles/Theme2_landingPage_styles.css";
 import "../../../../styles/LandingPage_main.css";
 import JSONClasses from "../../../../ThemesFolder/JSONForCSS/JSONClasses.js";
 import { Link } from "react-router-dom";
+import Maintenance1 from "../../../MaintenanceMode/Maintenance1.js";
+
 const LandingPageHeader = ({ isEditMode }) => {
   const [image, setImage] = useState(null);
   const [showImage, setShowImage] = useState(false);
@@ -90,16 +93,16 @@ const LandingPageHeader = ({ isEditMode }) => {
             className={`Newlandingpage_logosubcontainer ${themeDetails.themeSubContainer}`}
           >
             <div className={`logo_Img_container ${themeDetails.themeLogoImgC}`}>
-              {image ? (
-                <Link to="/">
-                <img
-                  src={image}
-                  className={`${themeDetails.themeLogoImg}`}
-                  alt="Current"
-                /></Link>
-              ) : (
-                <img src={defaultImage} alt="Default" />
-              )}
+            {image ? (
+  <Link to="/">
+    <img
+      src={image}
+      className={`${themeDetails.themeLogoImg}`}
+      alt="Current"
+    />
+  </Link>
+) : null}
+
               <div className={`logoImgContainer ${themeDetails.logoC}`}></div>
             </div>
           </div>
@@ -121,7 +124,7 @@ const LandingPageHeader = ({ isEditMode }) => {
             {welcomeimage ? (
               <img src={welcomeimage} alt="welcomeCurrent" />
             ) : (
-              <img src={defaultImage} alt="Default" />
+              <Maintenance1 />
             )}
           </div>
           <div
@@ -130,8 +133,8 @@ const LandingPageHeader = ({ isEditMode }) => {
             <div className={`${themeDetails.themeTextContainer}`}>
               {fetchError ? (
                 <div>
-                  <h1>Error fetching welcome data.</h1>
-                  <p>Please try again later.</p>
+                  {/* <h1>Error fetching welcome data.</h1>
+                  <p>Please try again later.</p> */}
                 </div>
               ) : welcomeDataList.length > 0 ? (
                 welcomeDataList.map((welcomeData) => (
@@ -142,8 +145,8 @@ const LandingPageHeader = ({ isEditMode }) => {
                 ))
               ) : (
                 <div>
-                  <h1>No welcome data available.</h1>
-                  <p>Please add welcome information.</p>
+                  {/* <h1>No welcome data available.</h1>
+                  <p>Please add welcome information.</p> */}
                 </div>
               )}
             </div>

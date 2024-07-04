@@ -4,6 +4,8 @@ import LandingPageExamdata from './LandingpageExamdata/LandingPageExamdata';
 import Footer from '../Footer/Footer';
 
 const WebSiteLandingPage = ({ isEditMode }) => {
+
+  
   return (
     <div>
       <LandingPageHeader isEditMode={isEditMode} />

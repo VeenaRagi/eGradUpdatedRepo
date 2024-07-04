@@ -22,7 +22,7 @@ import SuperAdminLogin from './Login/SuperAdminLogin';
 import UserDashboard from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UserDashboard ';
 import PrivateRoute from './Login/PrivateRoute';
 import ForgotPassword from './Login/ForgotPassword';
-
+import Maintenance1 from './EgradTutorFrontEnd/MaintenanceMode/Maintenance1.js';
 function App() {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -67,6 +67,8 @@ function App() {
               <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
               <Route path="/Registation" element={<StudentRegistrationPage />} />
               <Route path="/login/:userId" element={<PasswordChangeForm />} />
+              
+              <Route path = "/Maintenance1" element = {<Maintenance1 />} />
 
               <Route path="/user-dashboard/:userId" element={<PrivateRoute>
                 <UserDashboard />
