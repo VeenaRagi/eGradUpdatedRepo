@@ -10,7 +10,7 @@ import { Link as ScrollLink } from 'react-scroll';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMdArrowDropright } from "react-icons/io";
 
-const BHPNavBar = ({ isEditMode }) => {
+const BHPNavBar = ({ isEditMode,userRole }) => {
   const [navItems, setNavItems] = useState([]);
   const [marqueeItems, setMarqueeItems] = useState([]);
   const navigate = useNavigate();
@@ -99,11 +99,19 @@ const BHPNavBar = ({ isEditMode }) => {
         <div className={`ug_container ${themeDetails.themeUgHContainer}`}>
           <div className={`navItemsContainer ${themeDetails.themeUgNavContainer}`}>
             <ul className={`${themeDetails.themeUgHeaderUl}`}>
-              {navItems.map((navItem) => (
-                <li key={navItem.id} className={`${themeDetails.themeUgHeaderLi}`}>
-                  {renderNavItem(navItem)}
-                </li>
-              ))}
+            {navItems.length > 0 ? (
+        navItems.map((navItem) => (
+          <li key={navItem.id} className={`${themeDetails.themeUgHeaderLi}`}>
+            {renderNavItem(navItem)}
+          </li>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No navigation items available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No navigation items found. Please add the necessary items.</p>
+      ) : (
+        <p>No navigation items available. Please contact support if this issue persists.</p>
+      )}
             </ul>
           </div>
           {isEditMode && (
@@ -123,17 +131,28 @@ const BHPNavBar = ({ isEditMode }) => {
       </div>
       <div className={`marquee_data ${themeDetails.themeMarqData}`}>
         <Marquee behavior="scroll" direction="left" scrollamount="5" scrolldelay="10" loop="infinite" pauseOnHover>
-          {marqueeItems.map((item) => (
-            <>
-              {themeColor === 'Theme-2' ?
-                <>
-                  <IoMdArrowDropright style={{ fontSize: "30px", margin: 0 }} />
-                  <span style={{ color: 'red', fontWeight: 500 }} key={item.Marquee_Id}>{item.Marquee_data}</span>
-                </>
-                :
-                <span key={item.Marquee_Id}>{item.Marquee_data}</span>}
-            </>
-          ))}
+        {marqueeItems.length > 0 ? (
+        marqueeItems.map((item) => (
+          <React.Fragment key={item.Marquee_Id}>
+            {themeColor === 'Theme-2' ? (
+              <>
+                <IoMdArrowDropright style={{ fontSize: '30px', margin: 0 }} />
+                <span style={{ color: 'red', fontWeight: 500 }}>
+                  {item.Marquee_data}
+                </span>
+              </>
+            ) : (
+              <span>{item.Marquee_data}</span>
+            )}
+          </React.Fragment>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No marquee items available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No marquee items found. Please add the necessary items.</p>
+      ) : (
+        <p>No marquee items available. Please contact support if this issue persists.</p>
+      )}
         </Marquee>
 
       </div>
