@@ -35,10 +35,12 @@ const PoopularCourses = () => {
   useEffect(() => {
     fetchunPurchasedCourses();
   }, []);
+
   const themeColor = themeFromContext[0]?.current_theme;
   console.log(themeColor, "this is the theme json classesssssss")
   const themeDetails = JSONClasses[themeColor] || []
   console.log(themeDetails, "mapppping from json....")
+
   const coursesByPortalAndExam = unPurchasedCourses.reduce(
     (portals, course) => {
       const portal = course.portal || "Unknown Portal";
@@ -186,7 +188,7 @@ const PoopularCourses = () => {
 
                                 <div className={`before_start_now ${themeDetails.themeBuyButtonInCP}`}>
                                   <Link
-                                    to={`/coursedataSRP/${courseExamsDetails.courseCreationId}`}
+                                    to={`/StudentRegistrationPageBuynow/${courseExamsDetails.courseCreationId}`}
                                   >
                                     Buy Now
                                   </Link>
