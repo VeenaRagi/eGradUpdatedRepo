@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import StudentRegistrationFormFields from './StudentRegistationFormFileds';
 import './Style/Registrationform.css';
-
+import formFields from './formFields';
 const StudentRegistationPage = () => {
   const [formState, setFormState] = useState({
     emailExists: false,
@@ -116,81 +116,71 @@ const StudentRegistationPage = () => {
     setIsPopupVisible(false);
   };
 
-  const formFields = [
-    {
-      sectionTitle: "Personal Details",
-      fields: [
-        { label: "Candidate Name", name: "candidateName", type: "text", placeholder: "Please enter your full name" },
-        { label: "Date of Birth", name: "dateOfBirth", type: "date", placeholder: "dd-mm-yyyy" },
-        { label: "Gender", name: "Gender", type: "radio", options: [
-          { label: "Male", value: "male" },
-          { label: "Female", value: "female" },
-          { label: "Others", value: "others" }
-        ]},
-        { label: "Category", name: "Category", type: "radio", options: [
-          { label: "General", value: "general" },
-          { label: "ST", value: "st" },
-          { label: "SC", value: "sc" },
-          { label: "OBC", value: "obc" }
-        ]},
-        { label: "Email ID", name: "emailId", type: "email", placeholder: "Enter your email", onBlur: handleBlur },
-        { label: "Confirm Email ID", name: "confirmEmailId", type: "email", placeholder: "Re-enter your email" },
-        { label: "Contact No", name: "contactNo", type: "text", placeholder: "Enter your mobile number", onBlur: handleBlur },
-      ]
-    },
-    {
-      sectionTitle: "Father's/Guardian's Details",
-      fields: [
-        { label: "Father's Name", name: "fatherName", type: "text", placeholder: "Enter your father's full name" },
-        { label: "Occupation", name: "occupation", type: "text", placeholder: "Enter father's occupation" },
-        { label: "Mobile No", name: "mobileNo", type: "text", placeholder: "Enter your father's mobile number" },
-      ]
-    },
-    {
-      sectionTitle: "Education Details",
-      fields: [
-        { label: "Qualification", name: "qualification", type: "dropdown", options: [
-          { label: "Choose a Qualification", value: "" },
-          { label: "High School", value: "highSchool" },
-          { label: "Intermediate", value: "intermediate" },
-          { label: "Graduate", value: "graduate" },
-        ]},
-        { label: "Name of College (with city)", name: "NameOfCollege", type: "text", placeholder: "Enter your college name" },
-        { label: "Passing Year", name: "passingYear", type: "text", placeholder: "Enter your passing year" },
-        { label: "Marks in %", name: "marks", type: "text", placeholder: "Enter your marks" },
-      ]
-    },
-    {
-      sectionTitle: "Communication Address",
-      fields: [
-        { label: "Line 1", name: "line1", type: "text", placeholder: "Enter full address" },
-        { label: "Select a State", name: "state", type: "dropdown", options: [
-          { label: "Andhra Pradesh", value: "AP" },
-          { label: "Telangana", value: "TG" },
-          { label: "Karnataka", value: "KA" },
-          { label: "Tamil Nadu", value: "TN" },
-        ]},
-        { label: "Select a districts", name: "districts", type: "dropdown", options: [
-          { label: "Choose a districts", value: "" },
-          { label: "Andhra Pradesh", value: "AP" },
-        ]},
-        { label: "Pincode", name: "pincode", type: "text", placeholder: "Enter your pin code" },
-      ]
-    },
-    {
-      sectionTitle: "Upload Image/Documents",
-      fields: [
-        { label: "Upload Photo", name: "photo", type: "file" },
-        { label: "Upload Signature", name: "signature", type: "file" },
-        { label: "Proof", name: "Proof", type: "file" },
-      ]
-    },
-  ];
+
 
   return (
     <div className="container mt-4">
       <h1>Student Registration Page</h1>
-      <StudentRegistrationFormFields onSubmit={handleFormSubmit} fields={formFields} />
+      <form onSubmit={handleFormSubmit}>
+        {formFields.map((section, sectionIndex) => (
+          <div key={sectionIndex}>
+            <h3>{section.sectionTitle}</h3>
+            {section.fields.map((field, fieldIndex) => (
+              <div key={fieldIndex}>
+                <label>{field.label}</label>
+                {field.type === 'text' && (
+                  <input
+                    type="text"
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    onBlur={handleBlur}
+                  />
+                )}
+                {field.type === 'date' && (
+                  <input
+                    type="date"
+                    name={field.name}
+                    placeholder={field.placeholder}
+                  />
+                )}
+                {field.type === 'radio' && field.options && (
+                  <div>
+                    {field.options.map((option, optionIndex) => (
+                      <label key={optionIndex}>
+                        <input
+                          type="radio"
+                          name={field.name}
+                          value={option.value}
+                        />
+                        {option.label}
+                      </label>
+                    ))}
+                  </div>
+                )}
+                {field.type === 'email' && (
+                  <input
+                    type="email"
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    onBlur={handleBlur}
+                  />
+                )}
+                {field.type === 'dropdown' && field.options && (
+                  <select name={field.name}>
+                    {field.options.map((option, optionIndex) => (
+                      <option key={optionIndex} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
+        <button type="submit">Submit Without Course ID</button>
+      </form>
+      {/* <StudentRegistrationFormFields onSubmit={handleFormSubmit} fields={formFields} /> */}
 
       {isPopupVisible && (
         <div className="popup show">
