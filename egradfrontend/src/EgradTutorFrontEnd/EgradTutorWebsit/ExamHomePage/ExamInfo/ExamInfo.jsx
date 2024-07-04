@@ -93,6 +93,25 @@ const ExamInfo = ({ isEditMode }) => {
   console.log(themeDetails, "mapppping from json....");
 
 
+  const formatTextWithLineBreaks = (text) => {
+    return text.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br />
+      </React.Fragment>
+    ));
+  };
+
+
+  const formatTextForTable = (text) => {
+    const rows = text.split('\n').map(line => line.trim()).filter(line => line);
+    return rows.map((row, index) => {
+      const [date, exam] = row.split(' : ').map(part => part.trim());
+      return { date, exam, key: index };
+    });
+  };
+
+  const tableData = formatTextForTable(newInfo.Important_Dates);
 
   return (
     <div
@@ -191,7 +210,9 @@ const ExamInfo = ({ isEditMode }) => {
               </h3>
               <div></div>
               {visibleSection === "Conducting_Authority" && (
-                <p id="more_info">{newInfo.Conducting_Authority}</p>
+                <p id="more_info">                {formatTextWithLineBreaks(newInfo.Conducting_Authority)}
+</p>
+
               )}
             </div>
 
@@ -204,7 +225,9 @@ const ExamInfo = ({ isEditMode }) => {
               </h3>
 
               {visibleSection === "Exam_Pattern" && (
-                <p id="more_info">{newInfo.Exam_Pattern}</p>
+                <p id="more_info">                {formatTextWithLineBreaks(newInfo.Exam_Pattern)}
+</p>
+
               )}
             </div>
 
@@ -217,7 +240,8 @@ const ExamInfo = ({ isEditMode }) => {
               </h3>
 
               {visibleSection === "Eligibility" && (
-                <p id="more_info">{newInfo.Eligibility}</p>
+                <p id="more_info">                {formatTextWithLineBreaks(newInfo.Eligibility)}
+</p>
               )}
             </div>
 
@@ -227,7 +251,8 @@ const ExamInfo = ({ isEditMode }) => {
               </h3>
 
               {visibleSection === "Syllabus" && (
-                <p id="more_info">{newInfo.Syllabus}</p>
+                <p id="more_info">{formatTextWithLineBreaks(newInfo.Syllabus)}</p>
+                
               )}
             </div>
 
@@ -240,7 +265,27 @@ const ExamInfo = ({ isEditMode }) => {
               </h3>
 
               {visibleSection === "Important_Dates" && (
-                <p id="more_info">{newInfo.Important_Dates}</p>
+              //   <p id="more_info">
+              //   {formatTextWithLineBreaks(newInfo.Important_Dates)}
+              // </p>
+              
+              <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Exam</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tableData.map(row => (
+                  <tr key={row.key}>
+                    <td>{row.date}</td>
+                    <td>{row.exam}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
               )}
             </div>
           </div>

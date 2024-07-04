@@ -106,8 +106,7 @@ const ExamInfoEdit = ({ type }) => {
           <div className="about_egt_form">
             <div className="popup_div">
               <p>Information Brochure</p>
-              <input
-                type="text"
+              <textarea
                 value={newInfo.Info_broucher}
                 onChange={(e) => handleInputChange(e, "Info_broucher")}
                 placeholder="Enter Info Brochure"
@@ -123,15 +122,13 @@ const ExamInfoEdit = ({ type }) => {
             <div className="popup_div">
               {" "}
               <p>Conducting Authority</p>
-              <input
-                type="text"
+              <textarea
                 value={newInfo.Conducting_Authority}
                 onChange={(e) => handleInputChange(e, "Conducting_Authority")}
                 placeholder="Enter Conducting Authority"
               />
               <p>Syllabus</p>
-              <input
-                type="text"
+              <textarea
                 value={newInfo.Syllabus}
                 onChange={(e) => handleInputChange(e, "Syllabus")}
                 placeholder="Enter Syllabus"
@@ -166,15 +163,8 @@ const ExamInfoEdit = ({ type }) => {
 
             <button onClick={handleSubmit}>Submit</button>
           </div>
-
-          
         </div>
-
-
-
       )}
-      
-
     
     </div>
   )
