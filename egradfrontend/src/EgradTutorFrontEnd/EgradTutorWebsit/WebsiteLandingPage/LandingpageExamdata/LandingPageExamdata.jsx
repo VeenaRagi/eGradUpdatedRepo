@@ -252,13 +252,17 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode }) => {
               <button
                 onClick={() => setOpenUgExamImageUpload(!openUgExamImageUpload)}
               >
-                <MdFileUpload /> Image Uplaod
+             {openUgExamImageUpload ?   "Close Form" : "Exam/Image Uplaod" }
               </button>
 
               {openUgExamImageUpload && (
                 <LandingPageExamdataEdit type="UploadExamImage" />
               )}
+
+
             </div>
+
+          
           )}
         </div>
       )}

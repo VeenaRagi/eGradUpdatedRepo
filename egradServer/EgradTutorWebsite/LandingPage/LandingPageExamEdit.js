@@ -137,6 +137,58 @@ router.post('/addEntranceExam', async (req, res) => {
   
   
 
+  router.put('/updateEntranceExam', async (req, res) => {
+    const { EntranceExams_Id, EntranceExams_name, Branch_Id } = req.body;
+  
+    if (!EntranceExams_Id || !EntranceExams_name || !Branch_Id) {
+      console.error('Missing required fields');
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+  
+    try {
+      const query = 'UPDATE entrance_exams SET EntranceExams_name = ?, Branch_Id = ? WHERE EntranceExams_Id = ?';
+      const [result] = await db.query(query, [EntranceExams_name, Branch_Id, EntranceExams_Id]);
+  
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: 'Entrance exam not found' });
+      }
+  
+      console.log('Update result:', result);
+      res.status(200).json({ message: 'Entrance exam data updated successfully' });
+    } catch (error) {
+      console.error('Error updating entrance exam data:', error.message);
+      console.error('Full error details:', error);
+      res.status(500).json({ error: 'Failed to update entrance exam data' });
+    }
+  });
+
+
+  router.delete('/deleteEntranceExam/:id', async (req, res) => {
+    const EntranceExams_Id = req.params.id;
+  
+    if (!EntranceExams_Id) {
+      console.error('Missing EntranceExams_Id');
+      return res.status(400).json({ error: 'Missing EntranceExams_Id' });
+    }
+  
+    try {
+      const query = 'DELETE FROM entrance_exams WHERE EntranceExams_Id = ?';
+      const [result] = await db.query(query, [EntranceExams_Id]);
+  
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: 'Entrance exam not found' });
+      }
+  
+      console.log('Delete result:', result);
+      res.status(200).json({ message: 'Entrance exam deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting entrance exam data:', error.message);
+      console.error('Full error details:', error);
+      res.status(500).json({ error: 'Failed to delete entrance exam data' });
+    }
+  });
+  
+
 module.exports = router;
 
 
