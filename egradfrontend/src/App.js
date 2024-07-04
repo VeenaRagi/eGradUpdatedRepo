@@ -22,6 +22,7 @@ import SuperAdminLogin from './Login/SuperAdminLogin';
 import UserDashboard from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UserDashboard ';
 import PrivateRoute from './Login/PrivateRoute';
 import ForgotPassword from './Login/ForgotPassword';
+import StudentRegistrationPageBuynow from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/StudentRegistrationPageBuynow';
 
 function App() {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -57,15 +58,17 @@ function App() {
               <Route path="/BranchHomePage/:Branch_Id" element={<BranchHomePage isEditMode={isEditMode} />} />
               <Route path="/ExamHomePage/:EntranceExams_Id" element={<ExamHomePage isEditMode={isEditMode} />} />
               <Route path="/CoursePage/:Branch_Id/:Portale_Id" element={<CoursePage isEditMode={isEditMode} />} />
+              <Route path="/StudentRegistrationPageBuynow/:courseCreationId" element={<StudentRegistrationPageBuynow />} />
               <Route path="/AboutUs" element={<AboutUs isEditMode={isEditMode} />} />
               <Route path="/ContactUs" element={<ContactUs />} />
               <Route path="/Faq" element={<FAQ />} />
               <Route path="/linkpage/:Link_Id" element={<LinkPage />} />
               {/* New Login System */}
               <Route path="/UserLogin" element={<UserLogin />} />
-              <Route path="/forgot-password" element={<ForgotPassword/>}/>
+              <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
               <Route path="/Registation" element={<StudentRegistrationPage />} />
+
               <Route path="/login/:userId" element={<PasswordChangeForm />} />
 
               <Route path="/user-dashboard/:userId" element={<PrivateRoute>
