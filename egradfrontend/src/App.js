@@ -21,6 +21,7 @@ import PasswordChangeForm from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDas
 import SuperAdminLogin from './Login/SuperAdminLogin';
 import UserDashboard from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UserDashboard ';
 import PrivateRoute from './Login/PrivateRoute';
+import ForgotPassword from './Login/ForgotPassword';
 
 function App() {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -62,6 +63,7 @@ function App() {
               <Route path="/linkpage/:Link_Id" element={<LinkPage />} />
               {/* New Login System */}
               <Route path="/UserLogin" element={<UserLogin />} />
+              <Route path="/forgot-password" element={<ForgotPassword/>}/>
               <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
               <Route path="/Registation" element={<StudentRegistrationPage />} />
               <Route path="/login/:userId" element={<PasswordChangeForm />} />

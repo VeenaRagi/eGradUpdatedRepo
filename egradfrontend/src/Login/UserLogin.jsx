@@ -27,6 +27,10 @@ const UserLogin = () => {
     }
   };
 
+  const handleForgotPassword = () => {
+    navigate('/forgot-password');
+  };
+
   return (
     <div className="container mt-4">
       <h1>User Login</h1>
@@ -51,6 +55,7 @@ const UserLogin = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+      <button onClick={handleForgotPassword}>Forgot Password</button>
     </div>
   );
 };
