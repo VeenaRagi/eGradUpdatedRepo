@@ -54,6 +54,9 @@ app.use("/Webbanners", Webbanners);
 const ExampagePortals = require("./EgradTutorWebsite/ExamPage/ExampagePortals");
 app.use("/ExampagePortals", ExampagePortals);
 
+const ExamInfoEdit = require("./EgradTutorWebsite/ExamPage/ExamInfoEdit");
+app.use("/ExamInfoEdit", ExamInfoEdit);
+
 const ExamInfo = require("./EgradTutorWebsite/ExamPage/ExamInfo");
 app.use("/ExamInfo", ExamInfo);
 
