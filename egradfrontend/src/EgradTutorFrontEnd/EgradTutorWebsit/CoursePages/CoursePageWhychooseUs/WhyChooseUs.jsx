@@ -10,7 +10,7 @@ import { VscDebugBreakpointLog } from "react-icons/vsc";
 import { ThemeContext } from "../../../../ThemesFolder/ThemeContext/Context";
 import JSONClasses from "../../../../ThemesFolder/JSONForCSS/JSONClasses";
 
-const WhyChooseUs = ({ isEditMode }) => {
+const WhyChooseUs = ({ isEditMode, userRole}) => {
   const [whyChooseUsItems, setWhyChooseUsItems] = useState([]);
   const [showTabButtonForm, setShowTabButtonForm] = useState(false);
   const [selectedTabId, setSelectedTabId] = useState(null);
@@ -76,20 +76,28 @@ const WhyChooseUs = ({ isEditMode }) => {
             </div>
           )}
           <ul className={`tabButtonUl ${themeDetails.themeTabButtonUl}`}>
-            {courseTabButtonNames.flatMap(portal =>
-              portal.tabs.map(tab => (
-                <li key={tab.course_tab_title}>
-                  <div className={`${themeDetails.themeTabsChange}`}>
-                    <button
-                      onClick={() => handleTabCClick(tab)}
-                      className={tab.course_tab_title === selectedTabId ? 'selectedButton' : 'notSelectedButton'}
-                    >
-                      {tab.course_tab_title}
-                    </button>
-                  </div>
-                </li>
-              ))
-            )}
+           {courseTabButtonNames.length > 0 ? (
+        courseTabButtonNames.flatMap(portal =>
+          portal.tabs.map(tab => (
+            <li key={tab.course_tab_title}>
+              <div className={`${themeDetails.themeTabsChange}`}>
+                <button
+                  onClick={() => handleTabCClick(tab)}
+                  className={tab.course_tab_title === selectedTabId ? 'selectedButton' : 'notSelectedButton'}
+                >
+                  {tab.course_tab_title}
+                </button>
+              </div>
+            </li>
+          ))
+        )
+      ) : userRole === 'user' ? (
+        <p>No tabs are available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No tabs are available. Please add the necessary tabs.</p>
+      ) : (
+        <p>No tabs are available. Please contact support if this issue persists.</p>
+      )}
           </ul>
           {selectedTabContent && (
             <div className={`${themeDetails.themeSelectedTabContentDiv}`}>
