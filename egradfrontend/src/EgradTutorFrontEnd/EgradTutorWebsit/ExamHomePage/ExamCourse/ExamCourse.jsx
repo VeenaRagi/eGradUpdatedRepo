@@ -13,6 +13,7 @@ const ExamCourse = ({userRole}) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const themeFromContext = useContext(ThemeContext);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
