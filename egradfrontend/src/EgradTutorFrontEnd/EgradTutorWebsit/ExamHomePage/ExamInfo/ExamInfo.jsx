@@ -32,7 +32,7 @@ const ExamInfo = ({ isEditMode, userRole}) => {
     const fetchSpecificExamInformation = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/exam_info/${EntranceExams_Id}`
+        `${BASE_URL}/ExamInfo/exam_info/${EntranceExams_Id}`
         );
         console.log("Specific Exam Info:", response.data);
         if (response.data && response.data.length > 0) {
