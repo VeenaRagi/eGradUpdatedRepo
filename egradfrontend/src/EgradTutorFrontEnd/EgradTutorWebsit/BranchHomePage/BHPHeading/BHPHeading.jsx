@@ -9,7 +9,7 @@ import "../../../../styles/UGHomePage/ugHomePageTheme2.css";
 import { RxHamburgerMenu } from "react-icons/rx";
 import "../../../../styles/UGHomePage/UgHomePage_Default_Theme.css";
 
-const BHPHeading = () => {
+const BHPHeading = ( {userRole} ) => {
   const [image, setImage] = useState(null);
   const [showLinks, setShowLinks] = useState(false);
   const [portales, setPortales] = useState([]);
@@ -70,11 +70,15 @@ const BHPHeading = () => {
             <div
               className={`Ug_header_logoIMG ${themeDetails.themeUgHeaderLogoImg}`}
             >
-              {image ? (
-                <img src={image} alt="Current" />
-              ) : (
-                <p>No image available</p>
-              )}
+             {image ? (
+        <img src={image} alt="Current" />
+      ) : userRole === 'user' ? (
+        <p>Unable to load image at the moment. Please try again later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There is no data available. Please add the data.</p>
+      ) : (
+        <p>No image available. Please contact support if this issue persists.</p>
+      )}
             </div>
             <div
               className={`${
@@ -82,13 +86,21 @@ const BHPHeading = () => {
               } ${themeDetails.themeUgDivLinksOfHeader}`}
             >
             
-                {portales.map((portale) => (
-                  <li key={portale.Portale_Id}>
-                    <Link to={`/CoursePage/${Branch_Id}/${portale.Portale_Id}`}target="_blank">
-                      {portale.Portale_Name}
-                    </Link>
-                  </li>
-                ))}
+            {portales.length > 0 ? (
+        portales.map((portale) => (
+          <li key={portale.Portale_Id}>
+            <Link to={`/CoursePage/${Branch_Id}/${portale.Portale_Id}`} target="_blank">
+              {portale.Portale_Name}
+            </Link>
+          </li>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No portals available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No portals found. Please add the necessary portals.</p>
+      ) : (
+        <p>No portals available. Please contact support if this issue persists.</p>
+      )}
             </div>
             <div
               className="hamburgerMenu"
