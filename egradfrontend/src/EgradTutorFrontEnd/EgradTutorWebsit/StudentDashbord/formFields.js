@@ -2,71 +2,56 @@ const formFields = [
     {
       sectionTitle: "Personal Details",
       fields: [
-        { label: "Candidate Name", name: "candidateName", type: "text", placeholder: "Please enter your full name" },
-        { label: "Date of Birth", name: "dateOfBirth", type: "date", placeholder: "dd-mm-yyyy" },
-        { label: "Gender", name: "Gender", type: "radio", options: [
-          { label: "Male", value: "male" },
-          { label: "Female", value: "female" },
-          { label: "Others", value: "others" }
-        ]},
-        { label: "Category", name: "Category", type: "radio", options: [
-          { label: "General", value: "general" },
-          { label: "ST", value: "st" },
-          { label: "SC", value: "sc" },
-          { label: "OBC", value: "obc" }
-        ]},
-        { label: "Email ID", name: "emailId", type: "email", placeholder: "Enter your email"},
-        { label: "Confirm Email ID", name: "confirmEmailId", type: "email", placeholder: "Re-enter your email" },
-        { label: "Contact No", name: "contactNo", type: "text", placeholder: "Enter your mobile number"},
+        { name: "candidateName", label: "Candidate Name", type: "text", placeholder: "Enter Candidate Name" },
+        { name: "dateOfBirth", label: "Date of Birth", type: "date" },
+        {
+          name: "Gender", label: "Gender", type: "select", options: [
+            { value: "Male", label: "Male" },
+            { value: "Female", label: "Female" },
+            { value: "Other", label: "Other" }
+          ]
+        },
+        { name: "Category", label: "Category", type: "text", placeholder: "Enter Category" },
+        { name: "emailId", label: "Email ID", type: "email", placeholder: "Enter Email ID" },
+        { name: "confirmEmailId", label: "Confirm Email ID", type: "email", placeholder: "Confirm Email ID" },
+        { name: "contactNo", label: "Contact Number", type: "text", placeholder: "Enter Contact Number" }
       ]
     },
     {
-      sectionTitle: "Father's/Guardian's Details",
+      sectionTitle: "Parental Details",
       fields: [
-        { label: "Father's Name", name: "fatherName", type: "text", placeholder: "Enter your father's full name" },
-        { label: "Occupation", name: "occupation", type: "text", placeholder: "Enter father's occupation" },
-        { label: "Mobile No", name: "mobileNo", type: "text", placeholder: "Enter your father's mobile number" },
+        { name: "fatherName", label: "Father's Name", type: "text", placeholder: "Enter Father's Name" },
+        { name: "occupation", label: "Occupation", type: "text", placeholder: "Enter Occupation" },
+        { name: "mobileNo", label: "Mobile Number", type: "text", placeholder: "Enter Mobile Number" }
       ]
     },
     {
-      sectionTitle: "Education Details",
+      sectionTitle: "Address",
       fields: [
-        { label: "Qualification", name: "qualification", type: "dropdown", options: [
-          { label: "Choose a Qualification", value: "" },
-          { label: "High School", value: "highSchool" },
-          { label: "Intermediate", value: "intermediate" },
-          { label: "Graduate", value: "graduate" },
-        ]},
-        { label: "Name of College (with city)", name: "NameOfCollege", type: "text", placeholder: "Enter your college name" },
-        { label: "Passing Year", name: "passingYear", type: "text", placeholder: "Enter your passing year" },
-        { label: "Marks in %", name: "marks", type: "text", placeholder: "Enter your marks" },
+        { name: "line1", label: "Line 1", type: "text", placeholder: "Enter Address Line 1" },
+        { name: "state", label: "State", type: "text", placeholder: "Enter State" },
+        { name: "districts", label: "Districts", type: "text", placeholder: "Enter Districts" },
+        { name: "pincode", label: "Pincode", type: "text", placeholder: "Enter Pincode" }
       ]
     },
     {
-      sectionTitle: "Communication Address",
+      sectionTitle: "Educational Details",
       fields: [
-        { label: "Line 1", name: "line1", type: "text", placeholder: "Enter full address" },
-        { label: "Select a State", name: "state", type: "dropdown", options: [
-          { label: "Andhra Pradesh", value: "AP" },
-          { label: "Telangana", value: "TG" },
-          { label: "Karnataka", value: "KA" },
-          { label: "Tamil Nadu", value: "TN" },
-        ]},
-        { label: "Select a districts", name: "districts", type: "dropdown", options: [
-          { label: "Choose a districts", value: "" },
-          { label: "Andhra Pradesh", value: "AP" },
-        ]},
-        { label: "Pincode", name: "pincode", type: "text", placeholder: "Enter your pin code" },
+        { name: "qualification", label: "Qualification", type: "text", placeholder: "Enter Qualification" },
+        { name: "NameOfCollege", label: "Name of College", type: "text", placeholder: "Enter Name of College" },
+        { name: "passingYear", label: "Passing Year", type: "text", placeholder: "Enter Passing Year" },
+        { name: "marks", label: "Marks", type: "text", placeholder: "Enter Marks" }
       ]
     },
     {
-      sectionTitle: "Upload Image/Documents",
+      sectionTitle: "Documents",
       fields: [
-        { label: "Upload Photo", name: "photo", type: "file" },
-        { label: "Upload Signature", name: "signature", type: "file" },
-        { label: "Proof", name: "Proof", type: "file" },
+        { name: "photo", label: "Upload Photo", type: "file" },
+        { name: "signature", label: "Upload Signature", type: "file" },
+        { name: "Proof", label: "Upload Proof of Address", type: "file" }
       ]
-    },
+    }
   ];
-
+  
   export default formFields;
+  

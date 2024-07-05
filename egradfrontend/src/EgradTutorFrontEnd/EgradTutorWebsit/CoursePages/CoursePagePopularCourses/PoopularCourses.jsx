@@ -6,7 +6,7 @@ import '../../../../styles/CoursesPageStyles/CoursePage.css'
 import { ThemeContext } from "../../../../ThemesFolder/ThemeContext/Context";
 import JSONClasses from "../../../../ThemesFolder/JSONForCSS/JSONClasses";
 import img from '../../../../styles/About_us_Image.jpeg'
-// theme-2 
+// theme-2
 import '../../../../styles/CoursesPageStyles/OrangeTheme.css'
 // theme white is for default
 import '../../../../styles/CoursesPageStyles/themeWhite.css'
@@ -15,7 +15,7 @@ import '../../../../styles/CoursesPageStyles/Home.css'
 // theme-1 (green,yellow )
 import '../../../../styles/CoursesPageStyles/Theme-green.css';
 import '../../../../styles/CoursesPageStyles/CoursePage.css'
-
+ 
 const PoopularCourses = ({userRole}) => {
   const { Portale_Id } = useParams();
   const [unPurchasedCourses, setUnPurchasedCourses] = useState([]);
@@ -35,12 +35,12 @@ const PoopularCourses = ({userRole}) => {
   useEffect(() => {
     fetchunPurchasedCourses();
   }, []);
-
+ 
   const themeColor = themeFromContext[0]?.current_theme;
   console.log(themeColor, "this is the theme json classesssssss")
   const themeDetails = JSONClasses[themeColor] || []
   console.log(themeDetails, "mapppping from json....")
-
+ 
   const coursesByPortalAndExam = unPurchasedCourses.reduce(
     (portals, course) => {
       const portal = course.portal || "Unknown Portal";
@@ -57,7 +57,7 @@ const PoopularCourses = ({userRole}) => {
     },
     {}
   );
-
+ 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, "0");
@@ -65,7 +65,7 @@ const PoopularCourses = ({userRole}) => {
     const year = date.getFullYear();
     return `${day}-${month}-${year}`;
   };
-
+ 
   return (
     <div className={`${themeDetails.themePopularCourses_container}`}>
       <div className={`${themeDetails.themePopularCourses_Subcontainer}`}>
@@ -205,5 +205,5 @@ const PoopularCourses = ({userRole}) => {
     </div>
   );
 };
-
+ 
 export default PoopularCourses;

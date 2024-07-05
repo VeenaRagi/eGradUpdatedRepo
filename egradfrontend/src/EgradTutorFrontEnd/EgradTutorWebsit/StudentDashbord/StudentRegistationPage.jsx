@@ -1,99 +1,66 @@
-import React, { useState } from 'react';
-import StudentRegistrationFormFields from './StudentRegistationFormFileds';
-import './Style/Registrationform.css';
-import formFields from './formFields';
-const StudentRegistationPage = () => {
+
+import React, { useEffect, useState } from "react";
+import formFields from "./formFields";
+import { useParams } from "react-router-dom";
+import BASE_URL from "../../../apiConfig";
+
+const StudentRegistrationForm = () => {
+  const { courseCreationId } = useParams(); // Get courseCreationId from URL
+  const [unPurchasedCourses, setUnPurchasedCourses] = useState([]);
+  const [formData, setFormData] = useState({});
+  const [files, setFiles] = useState({});
+  const [courseId, setCourseId] = useState("");
   const [formState, setFormState] = useState({
-    emailExists: false,
-    contactExists: false,
     emailChecked: false,
+    emailExists: false,
     contactChecked: false,
-    showModal: false,
+    contactExists: false,
   });
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [userId, setUserId] = useState(null); // New state to store user ID
+  const [userId, setUserId] = useState(null);
 
-  const checkUserExistence = async (field, value) => {
-    try {
-      const response = await fetch('http://localhost:5001/StudentRegistationPage/check-user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ [field]: value }),
-      });
-      const result = await response.json();
-      return result.exists;
-    } catch (error) {
-      console.error('Error:', error);
-      return false;
+  useEffect(() => {
+    const fetchUnPurchasedCourses = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/PoopularCourses/unPurchasedCoursesBuyNow/${courseCreationId}`);
+        const data = await response.json();
+        setUnPurchasedCourses(data);
+        if (data.length > 0) {
+          setCourseId(data[0].courseCreationId); // Set courseId from fetched data
+        }
+      } catch (error) {
+        console.error("Error fetching unpurchased courses:", error);
+      }
+    };
+
+    if (courseCreationId) {
+      fetchUnPurchasedCourses();
     }
+  }, [courseCreationId]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleBlur = async (e) => {
-    const { name, value } = e.target;
-
-    if (name === 'emailId' || name === 'contactNo') {
-      const exists = await checkUserExistence(name, value);
-      if (name === 'emailId') {
-        setFormState((prevState) => ({
-          ...prevState,
-          emailExists: exists,
-          emailChecked: true,
-        }));
-        if (exists) {
-          alert('Email ID already exists. Please log in.');
-        }
-      } else if (name === 'contactNo') {
-        setFormState((prevState) => ({
-          ...prevState,
-          contactExists: exists,
-          contactChecked: true,
-        }));
-        if (exists) {
-          alert('Contact number already exists. Please log in.');
-        }
-      }
-    }
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFiles({ ...files, [name]: files[0] });
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const requiredFields = [
-      'candidateName', 'dateOfBirth', 'Gender', 'Category', 'emailId', 'confirmEmailId', 'contactNo',
-      'fatherName', 'occupation', 'mobileNo', 'line1', 'state', 'districts', 'pincode',
-      'qualification', 'NameOfCollege', 'passingYear', 'marks', 'photo', 'signature','Proof'
-    ];
+    const formDataToSend = new FormData();
+    formDataToSend.append('courseCreationId', courseCreationId);
 
-    for (let field of requiredFields) {
-      if (!formData.get(field)) {
-        alert(`Please fill the ${field.replace(/([A-Z])/g, ' $1').toLowerCase()} field`);
-        return;
-      }
-    }
-
-    const emailId = formData.get('emailId');
-    const confirmEmailId = formData.get('confirmEmailId');
-
-    if (emailId.toLowerCase() !== confirmEmailId.toLowerCase()) {
-      alert('Email and Confirm Email fields do not match');
-      return;
-    }
-
-    if (formState.emailChecked && formState.emailExists) {
-      alert('Email ID already exists. Please log in.');
-      return;
-    }
-    if (formState.contactChecked && formState.contactExists) {
-      alert('Contact number already exists. Please log in.');
-      return;
+    for (let field in formData) {
+      formDataToSend.append(field, formData[field]);
     }
 
     try {
       const response = await fetch('http://localhost:5001/StudentRegistationPage/register', {
         method: 'POST',
-        body: formData,
+        body: formDataToSend,
       });
 
       if (response.status === 409) {
@@ -101,106 +68,103 @@ const StudentRegistationPage = () => {
       } else if (!response.ok) {
         throw new Error('Network response was not ok');
       } else {
-        const result = await response.json(); // Parse JSON response
-        setUserId(result.userId); // Store user ID in state
+        const result = await response.json();
+        setUserId(result.userId);
         alert(result.message);
-        setIsPopupVisible(true); // Show popup on successful submission
+        setIsPopupVisible(true);
       }
     } catch (error) {
       console.error('Error:', error);
       alert('Error saving data');
     }
   };
+  const coursesByPortalAndExam = unPurchasedCourses.reduce((portals, course) => {
+    const portal = course.portal || "Unknown Portal";
+    const examName = course.examName || "Unknown Exam";
+    if (!portals[portal]) portals[portal] = {};
+    if (!portals[portal][examName]) portals[portal][examName] = [];
+    portals[portal][examName].push(course);
+    return portals;
+  }, {});
 
-  const handleClosePopup = () => {
-    setIsPopupVisible(false);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
   };
-
-
-
   return (
-    <div className="container mt-4">
-      <h1>Student Registration Page</h1>
-      <form onSubmit={handleFormSubmit}>
-        {formFields.map((section, sectionIndex) => (
-          <div key={sectionIndex}>
-            <h3>{section.sectionTitle}</h3>
-            {section.fields.map((field, fieldIndex) => (
-              <div key={fieldIndex}>
-                <label>{field.label}</label>
-                {field.type === 'text' && (
-                  <input
-                    type="text"
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    onBlur={handleBlur}
-                  />
-                )}
-                {field.type === 'date' && (
-                  <input
-                    type="date"
-                    name={field.name}
-                    placeholder={field.placeholder}
-                  />
-                )}
-                {field.type === 'radio' && field.options && (
+    <div>
+      {courseCreationId && unPurchasedCourses.length > 0 && (
+        <div>
+          <h2>Course Details</h2>
+          {Object.entries(coursesByPortalAndExam).map(([portal, exams]) => (
+            <div key={portal}>
+              {Object.entries(exams).map(([examName, courses]) => (
+                <div key={examName}>
+                  <h2>{examName}</h2>
                   <div>
-                    {field.options.map((option, optionIndex) => (
-                      <label key={optionIndex}>
-                        <input
-                          type="radio"
-                          name={field.name}
-                          value={option.value}
-                        />
-                        {option.label}
-                      </label>
+                    {courses.map((courseExamsDetails) => (
+                      <div key={courseExamsDetails.courseCreationId}>
+                        <div className="purpleCardHeading">{courseExamsDetails.courseName}</div>
+                        <p>
+                          <span className="durationBeforeHover"> Duration: </span>
+                          {formatDate(courseExamsDetails.courseStartDate)}
+                          <small style={{ textTransform: "capitalize", padding: "0 1px" }}> to </small>
+                          {formatDate(courseExamsDetails.courseEndDate)}
+                        </p>
+                        <p>Subject: {courseExamsDetails.subjectNames}</p>
+                        <p>Number of Test/Videos available: {courseExamsDetails.count}</p>
+                      </div>
                     ))}
                   </div>
-                )}
-                {field.type === 'email' && (
-                  <input
-                    type="email"
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    onBlur={handleBlur}
-                  />
-                )}
-                {field.type === 'dropdown' && field.options && (
-                  <select name={field.name}>
-                    {field.options.map((option, optionIndex) => (
-                      <option key={optionIndex} value={option.value}>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
+       <form onSubmit={handleFormSubmit}>
+        {formFields.map((section, index) => (
+          <div key={index}>
+            <h3>{section.sectionTitle}</h3>
+            {section.fields.map((field) => (
+              <div key={field.name}>
+                <label htmlFor={field.name}>{field.label}</label>
+                {field.type === "select" ? (
+                  <select name={field.name} onChange={handleChange}>
+                    {field.options.map((option) => (
+                      <option key={option.value} value={option.value}>
                         {option.label}
                       </option>
                     ))}
                   </select>
+                ) : (
+                  <input
+                    type={field.type}
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    onChange={handleChange}
+                  />
                 )}
               </div>
             ))}
           </div>
         ))}
-        <button type="submit">Submit Without Course ID</button>
+        <button type="submit">
+          {courseCreationId ? "Submit and Buy Now" : "Register"}
+        </button>
       </form>
-      {/* <StudentRegistrationFormFields onSubmit={handleFormSubmit} fields={formFields} /> */}
-
       {isPopupVisible && (
-        <div className="popup show">
-          <div className="popup-content">
-            <div className="popup-header">
-              <h2>Registration Successful</h2>
-              <span className="popup-close" onClick={handleClosePopup}>&times;</span>
-            </div>
-            <div className="popup-body">
-              <p>You have successfully registered!</p>
-              <p>Plase reset your password with code what you got in registerd mail id </p>
-            </div>
-            <div className="popup-footer">
-              <button className="popup-button" onClick={() => window.location.href = `/login/${userId}`}>Login</button>
-            </div>
-          </div>
+        <div className="popup">
+          <h2>Registration Successful!</h2>
+          <button onClick={() => window.location.href = "/buy-courses"}>Buy Courses</button>
+          <button onClick={() => window.location.href = "/login"}>Login</button>
         </div>
       )}
     </div>
   );
 };
 
-export default StudentRegistationPage;
+export default StudentRegistrationForm;
