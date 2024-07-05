@@ -69,7 +69,8 @@ function App() {
               <Route path="/UserLogin" element={<UserLogin />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
-              <Route path="/Registation" element={<StudentRegistrationPage />} />
+
+              <Route path="/StudentRegistrationForm/:courseCreationId" element={<StudentRegistrationPage />} />
 
               <Route path="/login/:userId" element={<PasswordChangeForm />} />
               
