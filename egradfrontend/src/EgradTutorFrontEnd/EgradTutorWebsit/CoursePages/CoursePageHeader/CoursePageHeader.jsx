@@ -115,5 +115,4 @@ const CoursePageHeader = ({ isEditMode, userRole}) => {
     </div>
   );
 };
-
 export default CoursePageHeader;
