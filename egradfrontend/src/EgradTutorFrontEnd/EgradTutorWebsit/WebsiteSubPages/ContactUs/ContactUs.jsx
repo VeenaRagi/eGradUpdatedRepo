@@ -17,7 +17,7 @@ import '../../../../styles/ContactUs/Theme1ContactUs.css'
 import { FaAddressCard } from "react-icons/fa";
 import { BsArrowUpRightCircleFill } from "react-icons/bs";
 
-const ContactUs = () => {
+const ContactUs = ({ userRole }) => {
   const [categories, setCategories] = useState([]);
   const themeFromContext = useContext(ThemeContext);
 
@@ -52,7 +52,7 @@ const ContactUs = () => {
         // Handle error state
       }
     };
-
+ 
     fetchData();
   }, []);
 
@@ -202,18 +202,27 @@ const ContactUs = () => {
 
               <div className={` ${themeDetails.themeContactUsFormAndAdressContainer}`}>
                 <div className={`ContactUsContentContainer ${themeDetails.themeContactUsContentContainer}`}>
-                  {landingFooterData.map(item => (
-                    <div key={item.Content_id} className={`ContactUsDataContainer ${themeDetails.themeContactUsDataContainer}`}>
-                      {item.Content_id === 1 ? (
-                        <h2>ADDRESS
-                          <span><FaAddressCard /></span>
-                        </h2>
-                      ) : (
-                        <p>
-                          <span>  <BsArrowUpRightCircleFill /></span>{item.content_name}</p>
-                      )}
-                    </div>
-                  ))}
+                {landingFooterData.length > 0 ? (
+        landingFooterData.map(item => (
+          <div key={item.Content_id} className={`ContactUsDataContainer ${themeDetails.themeContactUsDataContainer}`}>
+            {item.Content_id === 1 ? (
+              <h2>ADDRESS
+                <span><FaAddressCard /></span>
+              </h2>
+            ) : (
+              <p>
+                <span><BsArrowUpRightCircleFill /></span>{item.content_name}
+              </p>
+            )}
+          </div>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No contact information is available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No contact information found. Please add or update the contact details.</p>
+      ) : (
+        <p>No contact information available. Please contact support if this issue persists.</p>
+      )}
                 </div>
 
                 <div className={`ContactUsFormContainer ${themeDetails.themeContactUsFormContainer}`}>
@@ -254,11 +263,15 @@ const ContactUs = () => {
 
 
           <div className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`} >
-            {image ? (
-              <img src={image} alt="Current" />
-            ) : (
-              <img src={defaultImage} alt="Default" />
-            )}
+          {image ? (
+        <img src={image} alt="Current" />
+      ) : userRole === 'user' ? (
+        <p>Unable to load image at the moment. Please try again later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No image is available. Please upload the necessary image.</p>
+      ) : (
+        <p>Unable to load image. Please contact support if this issue persists.</p>
+      )}
 
             <span>
               <Link to={`/`}><IoHome />Home</Link>
@@ -268,23 +281,44 @@ const ContactUs = () => {
           <div className={`ContactUsContentDataContainer ${themeDetails.ContactUsContentDataContainer}`}>
 
 
-            <div className={`ContactUsMapContainer ${themeDetails.ContactUsMapContainer}`}>{Contact_Map_Data.map((Contact_data, index) => (
-              <div className={`ContactUsMapData ${themeDetails.ContactUsMapData}`} key={index}>
-                <iframe src={Contact_data.map} frameBorder="0"></iframe>
-              </div>
-            ))}
-            </div>
+          <div className={`ContactUsMapContainer ${themeDetails.ContactUsMapContainer}`}>
+      {Contact_Map_Data.length > 0 ? (
+        Contact_Map_Data.map((Contact_data, index) => (
+          <div className={`ContactUsMapData ${themeDetails.ContactUsMapData}`} key={index}>
+            <iframe
+              src={Contact_data.map}
+              frameBorder="0"
+              title={`Map ${index}`} // Adding a title for accessibility
+            ></iframe>
+          </div>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No maps are available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There are no maps available. Please add the necessary map data.</p>
+      ) : (
+        <p>No maps are available. Please contact support if this issue persists.</p>
+      )}
+    </div>
 
             <div className={`ContactUsContentContainer ${themeDetails.ContactUsContentContainer}`}>
-              {landingFooterData.map(item => (
-                <div key={item.Content_id} className={`ContactUsDataContainer ${themeDetails.ContactUsDataContainer}`}>
-                  {item.Content_id === 1 ? (
-                    <h2>ADDRESS</h2>
-                  ) : (
-                    <p>{item.content_name}</p>
-                  )}
-                </div>
-              ))}
+            {landingFooterData.length > 0 ? (
+        landingFooterData.map(item => (
+          <div key={item.Content_id} className={`ContactUsDataContainer ${themeDetails.ContactUsDataContainer}`}>
+            {item.Content_id === 1 ? (
+              <h2>ADDRESS</h2>
+            ) : (
+              <p>{item.content_name}</p>
+            )}
+          </div>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No content available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>Content is missing. Please update the details.</p>
+      ) : (
+        <p>No content available. Please contact support if this issue persists.</p>
+      )}
             </div>
 
 
