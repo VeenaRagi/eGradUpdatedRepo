@@ -141,17 +141,18 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
               <Maintenance1 />
             )} */}
 
-            {welcomeimage ? (
-              <img src={welcomeimage} alt="welcomeCurrent" />
-            ) : (
-              userRole === 'user' ? (
-                <p>Unable to load image at the moment. Please try again later.</p>
-              ) : userRole === 'admin' ? (
-                <p>There is no data available. Please add the data.</p>
-              ) : (
-                <Maintenance1 />
-              )
-            )}
+{welcomeimage ? (
+  <img src={welcomeimage} alt="welcomeCurrent" />
+) : (
+  userRole === 'user' ? (
+    <p>Unable to load image at the moment. Please try again later.</p>
+  ) : userRole === 'admin' ? (
+    <p>There is no data available. Please add the data.</p>
+  ) : (
+    <p>Unable to load image. Please contact support.</p> // Default message for any other user roles
+  )
+)}
+
           </div>
           <div
             className={`landing_heading_div_container ${themeDetails.themeCapTextContainer}`}
