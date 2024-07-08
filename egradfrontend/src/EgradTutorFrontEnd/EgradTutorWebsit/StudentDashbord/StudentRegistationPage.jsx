@@ -4,6 +4,7 @@ import formFields from "./formFields";
 import { useParams } from "react-router-dom";
 import BASE_URL from "../../../apiConfig";
 
+
 const StudentRegistrationForm = () => {
   const { courseCreationId } = useParams(); // Get courseCreationId from URL
   const [unPurchasedCourses, setUnPurchasedCourses] = useState([]);
