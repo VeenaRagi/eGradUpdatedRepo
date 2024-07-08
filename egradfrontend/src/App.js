@@ -25,7 +25,9 @@ import ForgotPassword from './Login/ForgotPassword';
 import Maintenance1 from './EgradTutorFrontEnd/MaintenanceMode/Maintenance1.js';
 import StudentRegistrationPageBuynow from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/StudentRegistrationPageBuynow';
 import { TIAuthProvider } from './TechInfoContext/AuthContext.js';
-
+import axios from './api/axios.js';
+import BASE_URL from './apiConfig.js';
+import NotFound from './NotFound.jsx';
 function App() {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -40,10 +42,6 @@ function App() {
   const toggleEditMode = () => {
     setIsEditMode(!isEditMode);
   };
-
-
-
-
   const [serverError, setServerError] = useState(false);
 
   useEffect(() => {
@@ -74,8 +72,7 @@ function App() {
 
         {serverError ? (
           <div>
-            <NotFound />
-
+            <NotFound/>
           </div>
         ) : (
           <div>
@@ -85,13 +82,8 @@ function App() {
                 <Route path="/" element={<WebSiteLandingPage isEditMode={isEditMode} />} />
               </Routes>
             </Router>
-
-
           </div>
         )}
-
-
-
         <Provider store={store}>
           <Router>
             <Routes>
@@ -112,11 +104,8 @@ function App() {
               <Route path="/UserLogin" element={<UserLogin />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
-
               <Route path="/StudentRegistrationForm/:courseCreationId" element={<StudentRegistrationPage />} />
-
               <Route path="/login/:userId" element={<PasswordChangeForm />} />
-              
               <Route path = "/Maintenance1" element = {<Maintenance1 />} />
               <Route path="/user-dashboard/:userId" element={<PrivateRoute>
                 <UserDashboard />
