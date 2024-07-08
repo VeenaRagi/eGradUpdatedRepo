@@ -1,0 +1,29 @@
+/* NotFound.css */
+
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Adjust height as needed */
+    text-align: center;
+  }
+  
+  .not-found-heading {
+    font-size: 2rem;
+    color: #333; /* Adjust color */
+    margin-bottom: 1rem;
+  }
+  
+  .not-found-paragraph {
+    font-size: 1rem;
+    color: #666; /* Adjust color */
+  }
+  
+  /* Styling for the image */
+  .not-found-container img {
+    width: 300px; /* Adjust width as needed */
+    height: auto;
+    margin-bottom: 1rem; /* Adjust margin */
+  }
+  

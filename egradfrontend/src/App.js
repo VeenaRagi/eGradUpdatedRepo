@@ -41,6 +41,28 @@ function App() {
     setIsEditMode(!isEditMode);
   };
 
+
+
+
+  const [serverError, setServerError] = useState(false);
+
+  useEffect(() => {
+    // Function to check server status
+    const checkServerStatus = async () => {
+      try {
+        // Example: Make a request to an endpoint on your server
+        const response = await axios.get(`${BASE_URL}/api/server/status`);
+        // If response is successful, server is running
+        setServerError(false);
+      } catch (error) {
+        // If request fails, server is not running or there's an error
+        setServerError(true);
+      }
+    };
+
+    checkServerStatus();
+  }, []);
+
   return (
     <ThemeProvider>
       <div>
@@ -49,6 +71,27 @@ function App() {
             {isEditMode ? 'Disable Edit' : 'Enable Edit'}
           </button>
         )}
+
+        {serverError ? (
+          <div>
+            <NotFound />
+
+          </div>
+        ) : (
+          <div>
+
+            <Router>
+              <Routes>
+                <Route path="/" element={<WebSiteLandingPage isEditMode={isEditMode} />} />
+              </Routes>
+            </Router>
+
+
+          </div>
+        )}
+
+
+
         <Provider store={store}>
           <Router>
             <Routes>
@@ -56,7 +99,7 @@ function App() {
               <Route path="/adminlogin" element={<AdminLogin />} />
               <Route path="/Register" element={<Register />} />
               <Route path="/UgadminHome" element={<UgadminHome />} />
-              <Route path="/" element={<WebSiteLandingPage isEditMode={isEditMode} />} />
+              {/* <Route path="/" element={<WebSiteLandingPage isEditMode={isEditMode} />} /> */}
               <Route path="/BranchHomePage/:Branch_Id" element={<BranchHomePage isEditMode={isEditMode} />} />
               <Route path="/ExamHomePage/:EntranceExams_Id" element={<ExamHomePage isEditMode={isEditMode} />} />
               <Route path="/CoursePage/:Branch_Id/:Portale_Id" element={<CoursePage isEditMode={isEditMode} />} />
@@ -69,7 +112,8 @@ function App() {
               <Route path="/UserLogin" element={<UserLogin />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
-              <Route path="/Registation" element={<StudentRegistrationPage />} />
+
+              <Route path="/StudentRegistrationForm/:courseCreationId" element={<StudentRegistrationPage />} />
 
               <Route path="/login/:userId" element={<PasswordChangeForm />} />
               

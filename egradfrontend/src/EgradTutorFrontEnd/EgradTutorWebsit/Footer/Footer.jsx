@@ -12,9 +12,7 @@ import { FaFacebook } from "react-icons/fa";
 import { GrInstagram } from "react-icons/gr";
 import { SiYoutube } from "react-icons/si";
 import { ImLinkedin } from "react-icons/im";
-const Footer = ({
-  isEditMode
-}) => {
+const Footer = ({isEditMode , userRole }) => {
   const [dataOne, setDataOne] = useState([]);
   const [dataTwo, setDataTwo] = useState([]);
   const [dataThree, setDataThree] = useState([]);
@@ -74,9 +72,7 @@ const Footer = ({
     fetchFooterLinks();
   }, []);
 
-  // useEffect(() => {
-  //   fetchFooterLinkData();
-  // }, []);
+  
   const fetchFooterLinks = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/Footer/footerLinks`);
@@ -86,14 +82,6 @@ const Footer = ({
     }
   };
 
-  // const fetchFooterLinkData = async (Link_Id) => {
-  //   try {
-  //     const response = await axios.get(`${BASE_URL}/Footer/footerLinks/${Link_Id}`);
-  //     setFooterLinkData(response.data);
-  //   } catch (error) {
-  //     console.error("Error fetching footer links:", error);
-  //   }
-  // };
 
   useEffect(() => {
     const fetchFooterCopyWriteData = async () => {
@@ -160,22 +148,33 @@ const Footer = ({
                       </div>
                     )}
                   </div>
-                  {dataOne.map((item, index) =>
-                    index === 0 ? (
-                      <div key={item.Content_id} className={`Footer_FirstContent ${themeDetails.themeFooterFirstContent}`}>
-                        <h2 id="Footer_Heading">
-                          {item.content}
-                        </h2>
-                      </div>
-                    ) : (
-                      <p
-                        className="new_landingfooter_conatinerfristpart_item"
-                        key={item.Content_id}
-                      >
-                        {item.content}
-                      </p>
-                    )
-                  )}
+                  {dataOne.length > 0 ? (
+        dataOne.map((item, index) =>
+          index === 0 ? (
+            <div
+              key={item.Content_id}
+              className={`Footer_FirstContent ${themeDetails.themeFooterFirstContent}`}
+            >
+              <h2 id="Footer_Heading">
+                {item.content}
+              </h2>
+            </div>
+          ) : (
+            <p
+              className="new_landingfooter_conatinerfristpart_item"
+              key={item.Content_id}
+            >
+              {item.content}
+            </p>
+          )
+        )
+      ) : userRole === 'user' ? (
+        <p>No content is available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There is no content available. Please update the content.</p>
+      ) : (
+        <p>No content is available. Please contact support if this issue persists.</p>
+      )}
                 </div>
                 <div className={`Footer_Links_Content ${themeDetails.themeFooterLinksContent}`}>
                   {isEditMode && (
@@ -209,26 +208,34 @@ const Footer = ({
                     </div>
                   )}
                   <ul>
-                    {footerLink.map((item) => (
-                      <li key={item.Link_Id}>
-                        {item.footer_document_data ? (
-                          <Link
-                            to={{
-                              pathname: `/linkpage/${item.Link_Id}`,
-                              state: {
-                                footerDocumentData: item.footer_document_data,
-                              },
-                            }}
-                          >
-                            {item.Link_Item}
-                          </Link>
-                        ) : (
-                          <Link to={item.Link_Routing_Data}>
-                            {item.Link_Item}
-                          </Link>
-                        )}
-                      </li>
-                    ))}
+                  {footerLink.length > 0 ? (
+        footerLink.map((item) => (
+          <li key={item.Link_Id}>
+            {item.footer_document_data ? (
+              <Link
+                to={{
+                  pathname: `/linkpage/${item.Link_Id}`,
+                  state: {
+                    footerDocumentData: item.footer_document_data,
+                  },
+                }}
+              >
+                {item.Link_Item}
+              </Link>
+            ) : (
+              <Link to={item.Link_Routing_Data}>
+                {item.Link_Item}
+              </Link>
+            )}
+          </li>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No links are available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There are no links available. Please add the necessary links.</p>
+      ) : (
+        <p>No links are available. Please contact support if this issue persists.</p>
+      )}
                   </ul>
                 </div>
               </div>
@@ -266,22 +273,33 @@ const Footer = ({
                     )}
                   </div>
                 )}
-                {dataTwo.map((item, index) =>
-                  index === 0 ? (
-                    <div key={item.Content_id} className={`Footer_ContactData ${themeDetails.themeFooterContactData}`}>
-                      <h2 className="new_landingfooter_conatinersecondpart_item">
-                        {item.content_name}
-                      </h2>
-                    </div>
-                  ) : (
-                    <p
-                      className="new_landingfooter_conatinersecondpart_item"
-                      key={item.Content_id}
-                    >
-                      {item.content_name}
-                    </p>
-                  )
-                )}
+                 {dataTwo.length > 0 ? (
+        dataTwo.map((item, index) =>
+          index === 0 ? (
+            <div
+              key={item.Content_id}
+              className={`Footer_ContactData ${themeDetails.themeFooterContactData}`}
+            >
+              <h2 className="new_landingfooter_conatinersecondpart_item">
+                {item.content_name}
+              </h2>
+            </div>
+          ) : (
+            <p
+              className="new_landingfooter_conatinersecondpart_item"
+              key={item.Content_id}
+            >
+              {item.content_name}
+            </p>
+          )
+        )
+      ) : userRole === 'user' ? (
+        <p>No contact information is available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>Contact information is currently missing. Please add the necessary details.</p>
+      ) : (
+        <p>No contact information is available. Please contact support if this issue persists.</p>
+      )}
               </div>
               <div className={`${themeDetails.themeFooterSMIcons}`}>
              <Link to='/'> <FaFacebook /></Link>
@@ -310,9 +328,17 @@ const Footer = ({
                   )}
                 </div>
               )}
-              {dataThree.map((item) => (
-                <li key={item.Content_id}>{item.content_name}</li>
-              ))}
+            {dataThree.length > 0 ? (
+        dataThree.map((item) => (
+          <li key={item.Content_id}>{item.content_name}</li>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No content available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No content available. Please add the required content.</p>
+      ) : (
+        <p>No content available. Please contact support if this issue persists.</p>
+      )}
             </div>
           </div>
         </div>
@@ -354,22 +380,33 @@ const Footer = ({
                   )}
 
 
-                  {dataOne.map((item, index) =>
-                    index === 0 ? (
-                      <div key={item.Content_id} className={`Footer_FirstContent ${themeDetails.themeFooterFirstContent}`}>
-                        <h2 id="Footer_Heading">
-                          {item.content}
-                        </h2>
-                      </div>
-                    ) : (
-                      <p
-                        className="new_landingfooter_conatinerfristpart_item"
-                        key={item.Content_id}
-                      >
-                        {item.content}
-                      </p>
-                    )
-                  )}
+{dataOne.length > 0 ? (
+        dataOne.map((item, index) =>
+          index === 0 ? (
+            <div
+              key={item.Content_id}
+              className={`Footer_FirstContent ${themeDetails.themeFooterFirstContent}`}
+            >
+              <h2 id="Footer_Heading">
+                {item.content}
+              </h2>
+            </div>
+          ) : (
+            <p
+              className="new_landingfooter_conatinerfristpart_item"
+              key={item.Content_id}
+            >
+              {item.content}
+            </p>
+          )
+        )
+      ) : userRole === 'user' ? (
+        <p>No content available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There is no data available. Please add the content.</p>
+      ) : (
+        <p>No content available. Please contact support if this issue persists.</p>
+      )}
                 </div>
                 <div className={`Footer_Links_Content ${themeDetails.themeFooterLinksContent}`}>
                   {isEditMode && (
@@ -405,32 +442,34 @@ const Footer = ({
                   )}
 
                   <ul>
-                    {/* {footerLink.map((item) => (
-
-                      <li key={item.Link_Id}>
-                        <Link to={item.Link_Routing_Data}>{item.Link_Item}</Link>
-                      </li>
-                    ))} */}
-                    {footerLink.map((item) => (
-                      <li key={item.Link_Id}>
-                        {item.footer_document_data ? (
-                          <Link
-                            to={{
-                              pathname: `/linkpage/${item.Link_Id}`,
-                              state: {
-                                footerDocumentData: item.footer_document_data,
-                              },
-                            }}
-                          >
-                            {item.Link_Item}
-                          </Link>
-                        ) : (
-                          <Link to={item.Link_Routing_Data}>
-                            {item.Link_Item}
-                          </Link>
-                        )}
-                      </li>
-                    ))}
+                  {footerLink.length > 0 ? (
+        footerLink.map((item) => (
+          <li key={item.Link_Id}>
+            {item.footer_document_data ? (
+              <Link
+                to={{
+                  pathname: `/linkpage/${item.Link_Id}`,
+                  state: {
+                    footerDocumentData: item.footer_document_data,
+                  },
+                }}
+              >
+                {item.Link_Item}
+              </Link>
+            ) : (
+              <Link to={item.Link_Routing_Data}>
+                {item.Link_Item}
+              </Link>
+            )}
+          </li>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No links are available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There are no links available. Please add the necessary links.</p>
+      ) : (
+        <p>No links are available. Please contact support if this issue persists.</p>
+      )}
                   </ul>
                 </div>
               </div>
@@ -468,22 +507,33 @@ const Footer = ({
                     )}
                   </div>
                 )}
-                {dataTwo.map((item, index) =>
-                  index === 0 ? (
-                    <div key={item.Content_id} className={`Footer_ContactData ${themeDetails.themeFooterContactData}`}>
-                      <h2 className="new_landingfooter_conatinersecondpart_item">
-                        {item.content_name}
-                      </h2>
-                    </div>
-                  ) : (
-                    <p
-                      className="new_landingfooter_conatinersecondpart_item"
-                      key={item.Content_id}
-                    >
-                      {item.content_name}
-                    </p>
-                  )
-                )}
+               {dataTwo.length > 0 ? (
+        dataTwo.map((item, index) =>
+          index === 0 ? (
+            <div
+              key={item.Content_id}
+              className={`Footer_ContactData ${themeDetails.themeFooterContactData}`}
+            >
+              <h2 className="new_landingfooter_conatinersecondpart_item">
+                {item.content_name}
+              </h2>
+            </div>
+          ) : (
+            <p
+              className="new_landingfooter_conatinersecondpart_item"
+              key={item.Content_id}
+            >
+              {item.content_name}
+            </p>
+          )
+        )
+      ) : userRole === 'user' ? (
+        <p>No contact information available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No contact information is available. Please update the details.</p>
+      ) : (
+        <p>No contact information available. Please contact support if this issue persists.</p>
+      )}
               </div>
            
 
@@ -518,9 +568,17 @@ const Footer = ({
                 </div>
               )}
 
-              {dataThree.map((item) => (
-                <li key={item.Content_id}>{item.content_name}</li>
-              ))}
+{dataThree.length > 0 ? (
+        dataThree.map((item) => (
+          <li key={item.Content_id}>{item.content_name}</li>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No items available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No items found. Please add the required content.</p>
+      ) : (
+        <p>No items available. Please contact support if this issue persists.</p>
+      )}
             </div>
 
 
@@ -568,22 +626,33 @@ const Footer = ({
                     </div>
                   )}
 
-                  {dataOne.map((item, index) =>
-                    index === 0 ? (
-                      <div key={item.Content_id} className={`Footer_FirstContent ${themeDetails.themeFooterFirstContent}`}>
-                        <h2 id="Footer_Heading">
-                          {item.content}
-                        </h2>
-                      </div>
-                    ) : (
-                      <p
-                        className="new_landingfooter_conatinerfristpart_item"
-                        key={item.Content_id}
-                      >
-                        {item.content}
-                      </p>
-                    )
-                  )}
+{dataOne.length > 0 ? (
+        dataOne.map((item, index) =>
+          index === 0 ? (
+            <div
+              key={item.Content_id}
+              className={`Footer_FirstContent ${themeDetails.themeFooterFirstContent}`}
+            >
+              <h2 id="Footer_Heading">
+                {item.content}
+              </h2>
+            </div>
+          ) : (
+            <p
+              className="new_landingfooter_conatinerfristpart_item"
+              key={item.Content_id}
+            >
+              {item.content}
+            </p>
+          )
+        )
+      ) : userRole === 'user' ? (
+        <p>No content available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There is no content available. Please add the necessary content.</p>
+      ) : (
+        <p>No content available. Please contact support if this issue persists.</p>
+      )}
                 </div>
               </div>
 
@@ -623,26 +692,34 @@ const Footer = ({
                       </div>
                     )}
                     <ul>
-                      {footerLink.map((item) => (
-                        <li key={item.Link_Id}>
-                          {item.footer_document_data ? (
-                            <Link
-                              to={{
-                                pathname: `/linkpage/${item.Link_Id}`,
-                                state: {
-                                  footerDocumentData: item.footer_document_data,
-                                },
-                              }}
-                            >
-                              {item.Link_Item}
-                            </Link>
-                          ) : (
-                            <Link to={item.Link_Routing_Data}>
-                              {item.Link_Item}
-                            </Link>
-                          )}
-                        </li>
-                      ))}
+                    {footerLink.length > 0 ? (
+        footerLink.map((item) => (
+          <li key={item.Link_Id}>
+            {item.footer_document_data ? (
+              <Link
+                to={{
+                  pathname: `/linkpage/${item.Link_Id}`,
+                  state: {
+                    footerDocumentData: item.footer_document_data,
+                  },
+                }}
+              >
+                {item.Link_Item}
+              </Link>
+            ) : (
+              <Link to={item.Link_Routing_Data}>
+                {item.Link_Item}
+              </Link>
+            )}
+          </li>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No links are available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There are no links available. Please add the necessary links.</p>
+      ) : (
+        <p>No links are available. Please contact support if this issue persists.</p>
+      )}
                     </ul>
                   </div>
                 </div>
@@ -685,22 +762,33 @@ const Footer = ({
                       )}
                     </div>
                   )}
-                  {dataTwo.map((item, index) =>
-                    index === 0 ? (
-                      <div key={item.Content_id} className={`Footer_ContactData ${themeDetails.themeFooterContactData}`}>
-                        <h2 className="new_landingfooter_conatinersecondpart_item">
-                          {item.content_name}
-                        </h2>
-                      </div>
-                    ) : (
-                      <p
-                        className="new_landingfooter_conatinersecondpart_item"
-                        key={item.Content_id}
-                      >
-                        {item.content_name}
-                      </p>
-                    )
-                  )}
+                 {dataTwo.length > 0 ? (
+        dataTwo.map((item, index) =>
+          index === 0 ? (
+            <div
+              key={item.Content_id}
+              className={`Footer_ContactData ${themeDetails.themeFooterContactData}`}
+            >
+              <h2 className="new_landingfooter_conatinersecondpart_item">
+                {item.content_name}
+              </h2>
+            </div>
+          ) : (
+            <p
+              className="new_landingfooter_conatinersecondpart_item"
+              key={item.Content_id}
+            >
+              {item.content_name}
+            </p>
+          )
+        )
+      ) : userRole === 'user' ? (
+        <p>No contact information available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>Contact information is missing. Please update the details.</p>
+      ) : (
+        <p>No contact information available. Please contact support if this issue persists.</p>
+      )}
                 </div>
 
               </div>
@@ -728,9 +816,17 @@ const Footer = ({
                       )}
                     </div>
                   )}
-                  {dataThree.map((item) => (
-                    <li key={item.Content_id}>{item.content_name}</li>
-                  ))}
+                  {dataThree.length > 0 ? (
+        dataThree.map((item) => (
+          <li key={item.Content_id}>{item.content_name}</li>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No items available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There are no items available. Please add new content.</p>
+      ) : (
+        <p>No items available. Please contact support if this issue persists.</p>
+      )}
                 </p>
               </div>
             </div>

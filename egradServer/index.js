@@ -12,6 +12,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
+// Endpoint to check server status
+app.get('/api/server/status', (req, res) => {
+  res.send({ status: 'Server is running' });
+});
+
 const Logo = require("./EgradTutorWebsite/Logo");
 app.use("/Logo", Logo);
 

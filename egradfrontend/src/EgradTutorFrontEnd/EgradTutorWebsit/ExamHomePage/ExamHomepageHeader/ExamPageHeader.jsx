@@ -9,7 +9,7 @@ import { IoHome } from "react-icons/io5";
 import { useParams, Link } from 'react-router-dom'
 import '../../../../styles/ExamPage/Theme2ExamPage.css'
 import '../../../../styles/ExamPage/DefaultThemeExamPage.css'
-const ExamPageHeader = () => {
+const ExamPageHeader = ( {userRole}) => {
   const { EntranceExams_Id } = useParams();
   const [entranceExam, setEntranceExam] = useState([]);
   const [image, setImage] = useState(null);
@@ -57,29 +57,39 @@ const ExamPageHeader = () => {
       <div className={`Ug_examsPage_Container ${themeDetails.themeExamPageHeaderContainer}`}>
       {themeColor==='Theme-2' ? 
        <>
-       {image ? (
-    <Link to="/" className='t2LinkToLandingPage' >
-    <img
-      src={image}
-      className={`${themeDetails.themeLogoImg}`}
-      alt="Current"
-    /></Link>
-       ) : (
-         <img src={defaultImage} alt="Default" />
-       )}
+         {image ? (
+        <Link to="/" className='t2LinkToLandingPage'>
+          <img
+            src={image}
+            className={`${themeDetails.themeLogoImg}`}
+            alt="Current"
+          />
+        </Link>
+      ) : userRole === 'user' ? (
+        <p>Unable to load the image at the moment. Please try again later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No image available. Please upload an image to be displayed.</p>
+      ) : (
+        <p>Image could not be loaded. Please contact support if this issue persists.</p>
+      )}
        </>
       :
       <>
-        {image ? (
-     <Link to="/" >
-     <img
-       src={image}
-       className={`${themeDetails.themeLogoImg}`}
-       alt="Current"
-     /></Link>
-        ) : (
-          <img src={defaultImage} alt="Default" />
-        )}
+      {image ? (
+        <Link to="/">
+          <img
+            src={image}
+            className={`${themeDetails.themeLogoImg}`}
+            alt="Current"
+          />
+        </Link>
+      ) : userRole === 'user' ? (
+        <p>Unable to load image at the moment. Please try again later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No image available. Please upload an image.</p>
+      ) : (
+        <p>No image available. Please contact support if this issue persists.</p>
+      )}
         </>
         }
         {entranceExam.length > 0 &&
@@ -91,12 +101,22 @@ const ExamPageHeader = () => {
         
       </div>
     <div className={`total_exam_page ${themeDetails.themeTotalExamContainer}`}>
-      {entranceExam.length > 0 &&
+    {entranceExam.length > 0 ? (
         entranceExam.map((exam) => (
-          <div key={exam.EntranceExams_Id} className={`exampage_heading JEEHeading ${themeDetails.themeExamPageHeaderHeading}`}>
+          <div
+            key={exam.EntranceExams_Id}
+            className={`exampage_heading JEEHeading ${themeDetails.themeExamPageHeaderHeading}`}
+          >
             <h1>{exam.EntranceExams_name} EXAM</h1>
           </div>
-        ))}
+        ))
+      ) : userRole === 'user' ? (
+        <p>No entrance exam information available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No entrance exams found. Please add the necessary exam details.</p>
+      ) : (
+        <p>No entrance exam information available. Please contact support if this issue persists.</p>
+      )}
     </div>
     </div>
   )

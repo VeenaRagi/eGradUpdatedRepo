@@ -10,19 +10,35 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 
-//Set up storage for multer
+
+// Ensure the upload directory exists
+if (!fs.existsSync('./uploads')) {
+  fs.mkdirSync('./uploads');
+}
+
 const storage = multer.diskStorage({
   destination: './uploads',
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`);
   }
 });
-const upload = multer({ storage });
 
-// Ensure the upload directory exists
-if (!fs.existsSync('./uploads')) {
-  fs.mkdirSync('./uploads');
-}
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1024 * 1024 * 5 }, // 5MB file size limit
+  fileFilter: (req, file, cb) => {
+    // Check the file type
+    if (
+      file.mimetype === 'image/jpeg' ||
+      file.mimetype === 'image/png' ||
+      file.mimetype === 'application/pdf'
+    ) {
+      cb(null, true);
+    } else {
+      cb(new Error('Unsupported file type'), false);
+    }
+  }
+});
 
 // Nodemailer setup
 const transporter = nodemailer.createTransport({
@@ -65,20 +81,32 @@ const checkUserExistence = async (req, res, next) => {
 };
 
 // Register route
-router.post('/register', upload.fields([{ name: 'photo' }, { name: 'signature' }, { name: 'Proof' }]), checkUserExistence, async (req, res) => {
+
+router.post('/register', upload.fields([
+  { name: 'photo', maxCount: 1 },
+  { name: 'signature', maxCount: 1 },
+  { name: 'Proof', maxCount: 1 }
+]), checkUserExistence, async (req, res) => {
   try {
     const data = req.body;
     const files = req.files;
-    const photo = files.photo ? files.photo[0].filename : null;
-    const signature = files.signature ? files.signature[0].filename : null;
-    const proof = files.Proof ? files.Proof[0].filename : null;
 
-    const sql = `INSERT INTO otsstudentregistation (candidateName, dateOfBirth, Gender, Category, emailId, confirmEmailId, contactNo, fatherName, occupation, mobileNo, line1, state, districts, pincode, edStatusId, NameOfCollege, passingYear, marks, UplodadPhto, Signature, Proof) 
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    // Validate files
+    if (!files.photo || !files.signature || !files.Proof) {
+      return res.status(400).send('Missing required files');
+    }
+
+    const photo = files.photo[0].filename;
+    const signature = files.signature[0].filename;
+    const proof = files.Proof[0].filename;
+    const courseCreationId = data.courseCreationId;
+
+    const sql = `INSERT INTO otsstudentregistation (candidateName, dateOfBirth, Gender, Category, emailId, confirmEmailId, contactNo, fatherName, occupation, mobileNo, line1, state, districts, pincode, edStatusId, NameOfCollege, passingYear, marks, UploadedPhoto, Signature, Proof, courseCreationId) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     const values = [
       data.candidateName, data.dateOfBirth, data.Gender, data.Category, data.emailId, data.confirmEmailId, data.contactNo,
       data.fatherName, data.occupation, data.mobileNo, data.line1, data.state, data.districts, data.pincode,
-      data.qualification, data.NameOfCollege, data.passingYear, data.marks, photo, signature, proof
+      data.qualification, data.NameOfCollege, data.passingYear, data.marks, photo, signature, proof, courseCreationId
     ];
 
     const [result] = await db.query(sql, values);
@@ -118,6 +146,8 @@ router.post('/register', upload.fields([{ name: 'photo' }, { name: 'signature' }
     res.status(500).send('Error saving student registration data');
   }
 });
+
+
 
 // Check user route
 router.post('/check-user', async (req, res) => {

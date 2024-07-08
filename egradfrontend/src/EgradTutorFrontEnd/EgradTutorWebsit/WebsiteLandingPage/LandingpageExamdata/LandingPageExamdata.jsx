@@ -13,7 +13,7 @@ import { MdFileUpload } from "react-icons/md";
 import { LiaEditSolid } from "react-icons/lia";
 import { IoMdAddCircleOutline } from "react-icons/io";
 
-const LandingPageExamdata = ({ enableEditFromP, isEditMode }) => {
+const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
   const [image, setImage] = useState(null);
   const [branches, setBranches] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -77,7 +77,6 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode }) => {
       setLoading(false);
     } catch (error) {
       console.error("Error fetching branches:", error);
-      setError("Error fetching branches");
       setLoading(false);
     }
   };
@@ -111,8 +110,19 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode }) => {
   }
 
   if (branches.length === 0) {
-    return <div>No data available. Please add data.</div>;
+    return (
+      <div>
+        {userRole === 'user' ? (
+          <p>No data available at the moment. Please check back later.</p>
+        ) : userRole === 'admin' ? (
+          <p>No data available. Please add the necessary data.</p>
+        ) : (
+          <p>No data available. Please contact support if this issue persists.</p>
+        )}
+      </div>
+    );
   }
+
 
   return (
     <>

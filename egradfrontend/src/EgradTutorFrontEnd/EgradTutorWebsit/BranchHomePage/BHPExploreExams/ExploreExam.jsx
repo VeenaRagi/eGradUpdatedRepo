@@ -8,7 +8,7 @@ import JSONClasses from "../../../../ThemesFolder/JSONForCSS/JSONClasses";
 import "../BranchHomeStyles/BranchHomePages.css";
 import "../BranchHomeStyles/Theme2BranchHomePage.css";
 import { BiSolidRightArrow } from "react-icons/bi";
-const ExploreExam = ({ isEditMode }) => {
+const ExploreExam = ({ isEditMode,userRole }) => {
   const { Branch_Id } = useParams();
   const [fetchedImage, setFetchedImage] = useState(null);
   const [portalesData, setPortalesData] = useState([]);
@@ -79,46 +79,47 @@ const ExploreExam = ({ isEditMode }) => {
               className={`NewExploreExams_ExamCard_MainContainer ${themeDetails.themeNewExploreExams_ExamCard_MainContainer}`}
             >
               <div className={`${themeDetails.themeEEContainerForCards}`}>
-                <div
-                  className={`NewExploreExams_ExamCard_Container ${themeDetails.themeNewExploreExams_ExamCard_Container}`}
-                >
-                  {branch &&
-                    branch.EntranceExams.map((exam, index) => (
-                      <div
-                        className={`NewExploreExams_ExamName_Container ${themeDetails.themeNewExploreExams_ExamName_Container}`}
-                      >
-                        <div
-                          className={`NewExploreExams_EachCard_Container ${themeDetails.themeNewExploreExams_EachCard_Container}`}
-                        >
-                          <ul key={index}>
-                            <li
-                              className={`${themeDetails.themeLinkToSpecificExam}`}
-                            >
-                              <Link
-                                to={`/ExamHomePage/${exam.EntranceExams_Id}`}
-                              >
-                                {exam.EntranceExams_name}
-                              </Link>
-                            </li>
-                            <div
-                              className={`NewExploreExams_PortalNames_Container ${themeDetails.themeNewExploreExams_PortalNames_Container}`}
-                            >
-                              {exam.Portale_Names &&
-                                exam.Portale_Names.map((portaleName, index) => (
-                                  <li key={index}>
-                                    <Link
-                                      to={`/CoursePage/${Branch_Id}/${exam.Portale_Id}`}
-                                    >
-                                      {portaleName}
-                                    </Link>
-                                  </li>
-                                ))}
-                            </div>
-                          </ul>
-                        </div>
-                      </div>
-                    ))}
+
+              <div className={`NewExploreExams_ExamCard_Container ${themeDetails.themeNewExploreExams_ExamCard_Container}`}>
+      {branch && branch.EntranceExams && branch.EntranceExams.length > 0 ? (
+        branch.EntranceExams.map((exam, index) => (
+          <div
+            key={index}
+            className={`NewExploreExams_ExamName_Container ${themeDetails.themeNewExploreExams_ExamName_Container}`}
+          >
+            <div className={`NewExploreExams_EachCard_Container ${themeDetails.themeNewExploreExams_EachCard_Container}`}>
+              <ul>
+                <li className={`${themeDetails.themeLinkToSpecificExam}`}>
+                  <Link to={`/ExamHomePage/${exam.EntranceExams_Id}`}>
+                    {exam.EntranceExams_name}
+                  </Link>
+                </li>
+                <div className={`NewExploreExams_PortalNames_Container ${themeDetails.themeNewExploreExams_PortalNames_Container}`}>
+                  {exam.Portale_Names && exam.Portale_Names.length > 0 ? (
+                    exam.Portale_Names.map((portaleName, index) => (
+                      <li key={index}>
+                        <Link to={`/CoursePage/${branch.Branch_Id}/${exam.Portale_Id}`}>
+                          {portaleName}
+                        </Link>
+                      </li>
+                    ))
+                  ) : (
+                    userRole === 'admin' && <p>No portal names available. Please add the necessary portal names.</p>
+                  )}
                 </div>
+              </ul>
+            </div>
+          </div>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No exams available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No exams found. Please add the necessary exams.</p>
+      ) : (
+        <p>No exams available. Please contact support if this issue persists.</p>
+      )}
+    </div>
+
               </div>
             </div>
           </div>
@@ -143,80 +144,69 @@ const ExploreExam = ({ isEditMode }) => {
               className={`NewExploreExams_ExamCard_MainContainer ${themeDetails.themeNewExploreExams_ExamCard_MainContainer}`}
             >
               {/* <div className={`${themeDetails.themeEEContainerForCards}`}> */}
-              <div
-                className={`NewExploreExams_ExamCard_Container ${themeDetails.themeNewExploreExams_ExamCard_Container}`}
-              >
-                {branch &&
-                  branch.EntranceExams.map((exam, index) => (
-                    <div
-                      className={`NewExploreExams_ExamName_Container ${themeDetails.themeNewExploreExams_ExamName_Container}`}
-                    >
-                      <div
-                        className={`NewExploreExams_EachCard_Container ${themeDetails.themeNewExploreExams_EachCard_Container}`}
-                      >
-                        <ul key={index}>
-                          <li
-                            className={`${themeDetails.themeLinkToSpecificExam}`}
-                          >
-                            <Link to={`/ExamHomePage/${exam.EntranceExams_Id}`}>
-                              {exam.EntranceExams_name}
-                            </Link>
-                          </li>
-                          {themeColor === "Theme-1" ? (
-                            <>
-                              <div
-                                className={`${themeDetails.themeExploreImgContainer}`}
-                              >
-                                <img src={fetchedImage} />
-                              </div>
-                              <div
-                                className={`NewExploreExams_PortalNames_Container ${themeDetails.themeNewExploreExams_PortalNames_Container}`}
-                              >
-                                {exam.Portale_Names &&
-                                  exam.Portale_Names.map(
-                                    (portaleName, index) => (
-                                      <li key={index}>
-                                        <Link
-                                          to={`/CoursePage/${Branch_Id}/${exam.Portale_Id}`}
-                                        >
-                                           <BiSolidRightArrow/>
-                                          {portaleName}
-                                        </Link>
-                                      </li>
-                                    )
-                                  )}
-                              </div>
-                            </>
-                          ) : (
-                            <div
-                              className={`NewExploreExams_PortalNames_Container ${themeDetails.themeNewExploreExams_PortalNames_Container}`}
-                            >
-                              {exam.Portale_Names &&
-                                exam.Portale_Names.map((portaleName, index) => (
-                                  <li key={index}>
-                                    <Link
-                                      to={`/CoursePage/${Branch_Id}/${exam.Portale_Id}`}
-                                    >
-                                     
-                                      {portaleName}
-                                    </Link>
-                                  </li>
-                                ))}
-                            </div>
-                          )}
-                        </ul>
-                      </div>
+              <div className={`NewExploreExams_ExamCard_Container ${themeDetails.themeNewExploreExams_ExamCard_Container}`}>
+      {branch && branch.EntranceExams.length > 0 ? (
+        branch.EntranceExams.map((exam, index) => (
+          <div key={index} className={`NewExploreExams_ExamName_Container ${themeDetails.themeNewExploreExams_ExamName_Container}`}>
+            <div className={`NewExploreExams_EachCard_Container ${themeDetails.themeNewExploreExams_EachCard_Container}`}>
+              <ul>
+                <li className={`${themeDetails.themeLinkToSpecificExam}`}>
+                  <Link to={`/ExamHomePage/${exam.EntranceExams_Id}`}>
+                    {exam.EntranceExams_name}
+                  </Link>
+                </li>
+                {themeColor === "Theme-1" ? (
+                  <>
+                    <div className={`${themeDetails.themeExploreImgContainer}`}>
+                      <img src={fetchedImage} alt="Exam" />
                     </div>
-                  ))}
-                {/* </div> */}
-              </div>
+                    <div className={`NewExploreExams_PortalNames_Container ${themeDetails.themeNewExploreExams_PortalNames_Container}`}>
+                      {exam.Portale_Names && exam.Portale_Names.map((portaleName, index) => (
+                        <li key={index}>
+                          <Link to={`/CoursePage/${Branch_Id}/${exam.Portale_Id}`}>
+                            <BiSolidRightArrow />
+                            {portaleName}
+                          </Link>
+                        </li>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div className={`NewExploreExams_PortalNames_Container ${themeDetails.themeNewExploreExams_PortalNames_Container}`}>
+                    {exam.Portale_Names && exam.Portale_Names.map((portaleName, index) => (
+                      <li key={index}>
+                        <Link to={`/CoursePage/${Branch_Id}/${exam.Portale_Id}`}>
+                          {portaleName}
+                        </Link>
+                      </li>
+                    ))}
+                  </div>
+                )}
+              </ul>
+            </div>
+          </div>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No exams available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No exams available. Please add the necessary exams.</p>
+      ) : (
+        <p>No exams available. Please contact support if this issue persists.</p>
+      )}
+    </div>
 
               <div
                 className={`NewExploreExams_Image ${themeDetails.themeNewExploreExams_Image}`}
               >
-                {fetchedImage && (
-                  <img src={fetchedImage} alt="Fetched from database" />
-                )}
+               {fetchedImage ? (
+        <img src={fetchedImage} alt="Fetched from database" />
+      ) : userRole === 'user' ? (
+        <p>Unable to load image at the moment. Please try again later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There is no data available. Please add the data.</p>
+      ) : (
+        <p>Unable to load image. Please contact support if this issue persists.</p>
+      )}
               </div>
             </div>
           </div>
