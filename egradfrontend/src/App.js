@@ -23,8 +23,8 @@ import UserDashboard from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord
 import PrivateRoute from './Login/PrivateRoute';
 import ForgotPassword from './Login/ForgotPassword';
 import Maintenance1 from './EgradTutorFrontEnd/MaintenanceMode/Maintenance1.js';
-
 import StudentRegistrationPageBuynow from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/StudentRegistrationPageBuynow';
+import { TIAuthProvider } from './TechInfoContext/AuthContext.js';
 
 function App() {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -74,7 +74,6 @@ function App() {
               <Route path="/login/:userId" element={<PasswordChangeForm />} />
               
               <Route path = "/Maintenance1" element = {<Maintenance1 />} />
-
               <Route path="/user-dashboard/:userId" element={<PrivateRoute>
                 <UserDashboard />
               </PrivateRoute>} />
