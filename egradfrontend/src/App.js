@@ -63,66 +63,46 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div>
-        {isAdmin && (
-          <button onClick={toggleEditMode}>
-            {isEditMode ? 'Disable Edit' : 'Enable Edit'}
-          </button>
-        )}
+      <Provider store={store}>
+        <div>
+          {isAdmin && (
+            <button onClick={toggleEditMode}>
+              {isEditMode ? 'Disable Edit' : 'Enable Edit'}
+            </button>
+          )}
 
-        {serverError ? (
-          <div>
+          {serverError ? (
             <NotFound />
-          </div>
-        ) : (
-          <div>
-
+          ) : (
             <Router>
               <Routes>
+                <Route path="/adminlogin" element={<AdminLogin />} />
+                <Route path="/Register" element={<Register />} />
+                <Route path="/UgadminHome" element={<UgadminHome />} />
                 <Route path="/" element={<WebSiteLandingPage isEditMode={isEditMode} />} />
                 <Route path="/BranchHomePage/:Branch_Id" element={<BranchHomePage isEditMode={isEditMode} />} />
                 <Route path="/ExamHomePage/:EntranceExams_Id" element={<ExamHomePage isEditMode={isEditMode} />} />
                 <Route path="/CoursePage/:Branch_Id/:Portale_Id" element={<CoursePage isEditMode={isEditMode} />} />
-
+                <Route path="/RegistrationForm/:courseCreationId" element={<RegistrationForm />} />
                 <Route path="/AboutUs" element={<AboutUs isEditMode={isEditMode} />} />
                 <Route path="/ContactUs" element={<ContactUs />} />
                 <Route path="/Faq" element={<FAQ />} />
                 <Route path="/linkpage/:Link_Id" element={<LinkPage />} />
+                <Route path="/UserLogin" element={<UserLogin />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
+                <Route path="/login/:userId" element={<PasswordChangeForm />} />
+                <Route path="/Maintenance1" element={<Maintenance1 />} />
+                <Route path="/user-dashboard/:userId" element={
+                  <PrivateRoute>
+                    <UserDashboard />
+                  </PrivateRoute>
+                } />
               </Routes>
-
             </Router>
-          </div>
-        )}
-        <Provider store={store}>
-          <Router>
-            <Routes>
-              {/* <Route path="/userloginn" element={<Login />} /> */}
-              <Route path="/adminlogin" element={<AdminLogin />} />
-              <Route path="/Register" element={<Register />} />
-              <Route path="/UgadminHome" element={<UgadminHome />} />
-              {/* <Route path="/" element={<WebSiteLandingPage isEditMode={isEditMode} />} /> */}
-              {/* <Route path="/BranchHomePage/:Branch_Id" element={<BranchHomePage isEditMode={isEditMode} />} /> */}
-              {/* <Route path="/ExamHomePage/:EntranceExams_Id" element={<ExamHomePage isEditMode={isEditMode} />} /> */}
-              {/* <Route path="/CoursePage/:Branch_Id/:Portale_Id" element={<CoursePage isEditMode={isEditMode} />} /> */}
-              <Route path="/RegistrationForm/:courseCreationId" element={<RegistrationForm />} />
-              {/* <Route path="/AboutUs" element={<AboutUs isEditMode={isEditMode} />} />
-              <Route path="/ContactUs" element={<ContactUs />} />
-              <Route path="/Faq" element={<FAQ />} />
-              <Route path="/linkpage/:Link_Id" element={<LinkPage />} /> */}
-              {/* New Login System */}
-              <Route path="/UserLogin" element={<UserLogin />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
-
-              <Route path="/login/:userId" element={<PasswordChangeForm />} />
-              <Route path="/Maintenance1" element={<Maintenance1 />} />
-              <Route path="/user-dashboard/:userId" element={<PrivateRoute>
-                <UserDashboard />
-              </PrivateRoute>} />
-            </Routes>
-          </Router>
-        </Provider>
-      </div>
+          )}
+        </div>
+      </Provider>
     </ThemeProvider>
   );
 }
