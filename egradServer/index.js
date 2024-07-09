@@ -109,7 +109,8 @@ app.use("/Login", Login);
 const LandingPageExamEdit = require("./EgradTutorWebsite/LandingPage/LandingPageExamEdit");
 app.use("/LandingPageExamEdit", LandingPageExamEdit);
 
-
+const PayU = require("./PaymentGatway/PayU");
+app.use("/PayU", PayU);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
