@@ -141,55 +141,6 @@ const RegistrationForm = () => {
     }
   };
   
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const errors = validateForm(formData);
-  //   if (Object.keys(errors).length > 0) {
-  //     setFormErrors(errors);
-  //     return;
-  //   }
-
-  //   setFormErrors({});
-
-  //   const formDataObj = new FormData();
-  //   for (let key in formData) {
-  //     formDataObj.append(key, formData[key]);
-  //   }
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:5001/StudentRegistationPage/register",
-  //       formDataObj,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       }
-  //     );
-  //     alert(response.data.message);
-  //     if (response.data.success) {
-  //       const user_Id = response.data.user_Id;
-  
-  //       // Fetch the user data from the log table using the user ID
-  //       const userResponse = await axios.get(
-  //         `http://localhost:5001/StudentRegistationPage/getUserById/${user_Id}`
-  //       );
-  //       if (userResponse.data) {
-  //         // Navigate based on submit type
-  //         if (submitType === "register") {
-  //           navigate(`/PasswordChangeForm/${user_Id}`);
-  //         } else if (submitType === "buyNow") {
-  //           navigate("/PaymentPage");
-  //         }
-  //       }
-  //     } else {
-  //       alert(response.data.message);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     alert("Registration failed");
-  //   }
-  // };
-
   const validateForm = (formData) => {
     let errors = {};
 
@@ -236,13 +187,7 @@ const RegistrationForm = () => {
             <strong>Course Name:</strong> {courseDetails.courseName}
           </p>
           <p>
-            <strong>Course Start Date:</strong> {courseDetails.courseStartDate}
-          </p>
-          <p>
-            <strong>Course End Date:</strong> {courseDetails.courseEndDate}
-          </p>
-          <p>
-            <strong>Total Price:</strong> {courseDetails.totalPrice}
+            <strong>Course Dureation:</strong> {courseDetails.courseStartDate} to {courseDetails.courseEndDate}
           </p>
           <p>
             <strong>Available count</strong> {courseDetails.count}
