@@ -34,7 +34,7 @@ const RegistrationForm = () => {
   const [courseDetails, setCourseDetails] = useState(null);
   const [formErrors, setFormErrors] = useState({});
   const [emailExists, setEmailExists] = useState(false);
-
+  const [submitType, setSubmitType] = useState("");
   useEffect(() => {
     if (courseCreationId) {
       axios
@@ -80,21 +80,25 @@ const RegistrationForm = () => {
       console.error("Error checking email:", error);
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Form submitted with data:', formData);
+  
     const errors = validateForm(formData);
     if (Object.keys(errors).length > 0) {
+      console.log('Form validation errors:', errors);
       setFormErrors(errors);
       return;
     }
-
+  
     setFormErrors({});
-
+    console.log('Form data is valid');
+  
     const formDataObj = new FormData();
     for (let key in formData) {
       formDataObj.append(key, formData[key]);
     }
+  
     try {
       const response = await axios.post(
         "http://localhost:5001/StudentRegistationPage/register",
@@ -105,13 +109,86 @@ const RegistrationForm = () => {
           },
         }
       );
+  
+      console.log('Server response:', response.data);
       alert(response.data.message);
-      navigate("/PasswordChangeForm");
+  
+      if (response.data.success) {
+        const user_Id = response.data.user_Id;
+        console.log('Registration successful, user ID:', user_Id);
+  
+        // Fetch the user data from the log table using the user ID
+        const userResponse = await axios.get(
+          `http://localhost:5001/StudentRegistationPage/getUserById/${user_Id}`
+        );
+  
+        console.log('User data response:', userResponse.data);
+        if (userResponse.data) {
+          // Navigate based on submit type
+          if (submitType === "register") {
+            navigate(`/PasswordChangeForm/${user_Id}`);
+          } else if (submitType === "buyNow") {
+            navigate("/PaymentPage");
+          }
+        }
+      } else {
+        console.log('Registration failed:', response.data.message);
+        alert(response.data.message);
+      }
     } catch (error) {
-      console.error(error);
+      console.error('Registration failed:', error);
       alert("Registration failed");
     }
   };
+  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const errors = validateForm(formData);
+  //   if (Object.keys(errors).length > 0) {
+  //     setFormErrors(errors);
+  //     return;
+  //   }
+
+  //   setFormErrors({});
+
+  //   const formDataObj = new FormData();
+  //   for (let key in formData) {
+  //     formDataObj.append(key, formData[key]);
+  //   }
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:5001/StudentRegistationPage/register",
+  //       formDataObj,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+  //     alert(response.data.message);
+  //     if (response.data.success) {
+  //       const user_Id = response.data.user_Id;
+  
+  //       // Fetch the user data from the log table using the user ID
+  //       const userResponse = await axios.get(
+  //         `http://localhost:5001/StudentRegistationPage/getUserById/${user_Id}`
+  //       );
+  //       if (userResponse.data) {
+  //         // Navigate based on submit type
+  //         if (submitType === "register") {
+  //           navigate(`/PasswordChangeForm/${user_Id}`);
+  //         } else if (submitType === "buyNow") {
+  //           navigate("/PaymentPage");
+  //         }
+  //       }
+  //     } else {
+  //       alert(response.data.message);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert("Registration failed");
+  //   }
+  // };
 
   const validateForm = (formData) => {
     let errors = {};
@@ -130,7 +207,10 @@ const RegistrationForm = () => {
     if (!/^\d+$/.test(formData.mobileNo)) {
       errors["mobileNo"] = "Mobile No should contain only numbers";
     }
-    if (formData.marks !== "" && (isNaN(formData.marks) || formData.marks < 0 || formData.marks > 100)) {
+    if (
+      formData.marks !== "" &&
+      (isNaN(formData.marks) || formData.marks < 0 || formData.marks > 100)
+    ) {
       errors["marks"] = "Marks should be a number between 0 and 100";
     }
 
@@ -470,9 +550,7 @@ const RegistrationForm = () => {
             required
           />
           {formErrors["NameOfCollege"] && (
-            <span style={{ color: "red" }}>
-              {formErrors["NameOfCollege"]}
-            </span>
+            <span style={{ color: "red" }}>{formErrors["NameOfCollege"]}</span>
           )}
         </div>
 
@@ -492,13 +570,13 @@ const RegistrationForm = () => {
         </div>
 
         <div>
-          <label>Marks:</label>
+          <label>Marks(%):</label>
           <input
             type="text"
             name="marks"
             value={formData.marks}
             onChange={handleChange}
-            placeholder="Marks"
+            placeholder="Marks (%)"
             required
           />
           {formErrors["marks"] && (
@@ -529,7 +607,25 @@ const RegistrationForm = () => {
           <input type="file" name="Proof" onChange={handleChange} />
         </div>
 
-        <button type="submit">Register</button>
+        <div>
+          {courseDetails ? (
+            <button
+              type="submit"
+              onClick={() => setSubmitType("buyNow")}
+              disabled={emailExists}
+            >
+              Pay Now
+            </button>
+          ) : (
+            <button
+              type="submit"
+              onClick={() => setSubmitType("register")}
+              disabled={emailExists}
+            >
+              Register
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );

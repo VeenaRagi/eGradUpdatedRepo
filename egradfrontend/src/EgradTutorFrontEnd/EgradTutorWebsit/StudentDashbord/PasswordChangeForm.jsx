@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const PasswordChangeForm = () => {
-  const { userId } = useParams();
+  const { user_Id } = useParams();
   const navigate = useNavigate();
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -10,8 +10,8 @@ const PasswordChangeForm = () => {
   const [attempts, setAttempts] = useState(0);
 
   useEffect(() => {
-    console.log(`Received userId: ${userId}`);
-  }, [userId]);
+    console.log(`Received user_Id: ${user_Id}`);
+  }, [user_Id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ const PasswordChangeForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userId, oldPassword, newPassword, confirmPassword }),
+        body: JSON.stringify({ user_Id, oldPassword, newPassword, confirmPassword }),
       });
 
       if (response.ok) {
@@ -49,7 +49,7 @@ const PasswordChangeForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userId }),
+        body: JSON.stringify({ user_Id }),
       });
 
       if (response.ok) {

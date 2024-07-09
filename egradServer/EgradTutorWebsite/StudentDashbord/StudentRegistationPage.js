@@ -198,7 +198,8 @@ router.post('/register', upload.fields([{ name: 'UplodadPhto' }, { name: 'Signat
       result.insertId
     ];
 
-    await db.execute(logSql, logValues);
+    const [logResult] = await db.execute(logSql, logValues);
+    const user_Id = logResult.insertId;
 
     // Send email with the generated password
     const mailOptions = {
@@ -210,7 +211,25 @@ router.post('/register', upload.fields([{ name: 'UplodadPhto' }, { name: 'Signat
 
     await transporter.sendMail(mailOptions);
 
-    res.json({ success: true, message: 'Registration successful and email sent!' });
+    res.json({ success: true, message: 'Registration successful and email sent!', user_Id });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Database error' });
+  }
+});
+
+router.get('/getUserById/:user_Id', async (req, res) => {
+  const user_Id = req.params.user_Id;
+  console.log('Received request to get user by ID:', user_Id);
+  try {
+    const sql = `SELECT * FROM log WHERE user_Id = ?`;
+    const [rows] = await db.execute(sql, [user_Id]);
+
+    if (rows.length > 0) {
+      res.json(rows[0]);
+    } else {
+      res.status(404).json({ success: false, message: 'User not found' });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Database error' });
@@ -239,17 +258,17 @@ router.post('/checkEmail', async (req, res) => {
 });
 // Resend password endpoint
 router.post('/resend-password', async (req, res) => {
-  const { userId } = req.body;
+  const { user_Id } = req.body;
 
   try {
     const newPassword = generatePassword();
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     // Update the user's password in the database
-    await updateUserPassword(userId, hashedPassword);
+    await updateUserPassword(user_Id, hashedPassword);
 
     // Fetch the user's email
-    const user = await getUserById(userId);
+    const user = await getUserById(user_Id);
 
     // Send the new password via email
     const credentialsMailOptions = {
@@ -269,7 +288,7 @@ router.post('/resend-password', async (req, res) => {
 });
 
 router.post('/change-password', async (req, res) => {
-  const { userId, oldPassword, newPassword, confirmPassword } = req.body;
+  const { user_Id, oldPassword, newPassword, confirmPassword } = req.body;
 
   if (newPassword !== confirmPassword) {
     return res.status(400).send('New password and confirm password do not match');
@@ -277,10 +296,10 @@ router.post('/change-password', async (req, res) => {
 
   try {
     // Fetch the user from the database
-    const user = await getUserById(userId);
+    const user = await getUserById(user_Id);
 
     if (!user) {
-      console.log(`User not found: ${userId}`);
+      console.log(`User not found: ${user_Id}`);
       return res.status(404).send('User not found');
     }
 
@@ -290,7 +309,7 @@ router.post('/change-password', async (req, res) => {
     const isMatch = await bcrypt.compare(oldPassword, user.password);
 
     if (!isMatch) {
-      console.log(`Old password incorrect for user: ${userId}`);
+      console.log(`Old password incorrect for user: ${user_Id}`);
       return res.status(400).send('Old password is incorrect');
     }
 
@@ -300,8 +319,8 @@ router.post('/change-password', async (req, res) => {
       const hashedPassword = await bcrypt.hash(newPassword, 10);
 
       // Update the user's password in the database
-      await updateUserPassword(userId, hashedPassword);
-      await resetPasswordChangeAttempts(userId);
+      await updateUserPassword(user_Id, hashedPassword);
+      await resetPasswordChangeAttempts(user_Id);
 
       const credentialsMailOptions = {
         from: 'webdriveegate@gmail.com',
@@ -319,8 +338,8 @@ router.post('/change-password', async (req, res) => {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     // Update the user's password in the database
-    await updateUserPassword(userId, hashedPassword);
-    await incrementPasswordChangeAttempts(userId);
+    await updateUserPassword(user_Id, hashedPassword);
+    await incrementPasswordChangeAttempts(user_Id);
 
     res.send('Password updated successfully');
   } catch (error) {
@@ -330,28 +349,28 @@ router.post('/change-password', async (req, res) => {
 });
 
 // Function to increment password change attempts
-async function incrementPasswordChangeAttempts(userId) {
+async function incrementPasswordChangeAttempts(user_Id) {
   const sql = 'UPDATE log SET password_change_attempts = password_change_attempts + 1 WHERE user_Id = ?';
-  await db.query(sql, [userId]);
+  await db.query(sql, [user_Id]);
 }
 
 // Function to reset password change attempts
-async function resetPasswordChangeAttempts(userId) {
+async function resetPasswordChangeAttempts(user_Id) {
   const sql = 'UPDATE log SET password_change_attempts = 0 WHERE user_Id = ?';
-  await db.query(sql, [userId]);
+  await db.query(sql, [user_Id]);
 }
 
 // Function to get user by ID
-async function getUserById(userId) {
+async function getUserById(user_Id) {
   const sql = 'SELECT * FROM log WHERE user_Id = ?';
-  const [rows] = await db.query(sql, [userId]);
-  console.log(`Query result for user ID ${userId}: ${JSON.stringify(rows)}`);
+  const [rows] = await db.query(sql, [user_Id]);
+  console.log(`Query result for user ID ${user_Id}: ${JSON.stringify(rows)}`);
   return rows[0];
 }
 // Function to update user password
-async function updateUserPassword(userId, hashedPassword) {
+async function updateUserPassword(user_Id, hashedPassword) {
   const sql = 'UPDATE log SET password = ? WHERE user_Id = ?';
-  await db.query(sql, [hashedPassword, userId]);
+  await db.query(sql, [hashedPassword, user_Id]);
 }
 
 
