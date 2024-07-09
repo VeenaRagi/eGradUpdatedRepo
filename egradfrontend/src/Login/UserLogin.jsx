@@ -45,18 +45,21 @@ const UserLogin = () => {
       if (role === 'User') {
         console.log("User role detected:", user_Id, role, accessToken);
   
-        const newAuthState = {
-          ...tiAuth,
-          user: user_Id,
-          token: accessToken
-        };
+       
         console.log("encrypting data using cru[t",user_Id,secretKey,)
 
         const encryptedUserId=encryptUserId(user_Id)
         console.log("encrypting data using cru[t",user_Id,secretKey,"and after encryption",encryptedUserId)
+        const newAuthState = {
+          ...tiAuth,
+          user: encryptedUserId,
+          token: accessToken
+        };
         console.log("New Auth State:", newAuthState);
         settiAuth(newAuthState);
+
         localStorage.setItem("tiAuth", JSON.stringify(newAuthState));
+
         console.log("Stored in localStorage and useContext:", tiAuth);
         const encodedUserId = encodeURIComponent((encryptedUserId));
         navigate(`/testingUrl/${encodedUserId}`);
