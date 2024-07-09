@@ -10,8 +10,8 @@ export const loginUser = (email, password) => async (dispatch) => {
       type: USER_LOGIN_SUCCESS,
       payload: { token, user_Id, role },
     });
-
-    return { user_Id, role }; // Return user_Id and role for further navigation
+    console.log(user_Id,role,token)
+    return { user_Id, role,token }; // Return user_Id and role for further navigation
   } catch (error) {
     console.error('Error during login:', error);
     throw new Error('Invalid email or password');

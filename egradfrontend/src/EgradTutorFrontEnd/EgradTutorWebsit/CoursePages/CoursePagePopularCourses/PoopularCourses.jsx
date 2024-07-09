@@ -171,7 +171,7 @@ const PoopularCourses = ({userRole}) => {
                             </p>
                             <div className={`before_start_now ${themeDetails.themeBuyButtonInCP}`}>
                               <Link
-                                to={`/StudentRegistrationPageBuynow/${courseExamsDetails.courseCreationId}`}
+                                to={`/RegistrationForm/${courseExamsDetails.courseCreationId}`}
                               >
                                 Buy Now
                               </Link>

@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require("../../DataBase/db2"); // Make sure db2 is your MySQL connection pool
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
+// const fs = require('fs');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
@@ -11,34 +11,52 @@ require('dotenv').config();
 
 
 
-// Ensure the upload directory exists
-if (!fs.existsSync('./uploads')) {
-  fs.mkdirSync('./uploads');
-}
-
+// Set up multer for file uploads
 const storage = multer.diskStorage({
-  destination: './uploads',
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+  destination: function (req, file, cb) {
+      cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+      cb(null, Date.now() + path.extname(file.originalname)); // Append the file extension
   }
 });
 
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 1024 * 1024 * 5 }, // 5MB file size limit
-  fileFilter: (req, file, cb) => {
-    // Check the file type
-    if (
-      file.mimetype === 'image/jpeg' ||
-      file.mimetype === 'image/png' ||
-      file.mimetype === 'application/pdf'
-    ) {
-      cb(null, true);
-    } else {
-      cb(new Error('Unsupported file type'), false);
-    }
-  }
-});
+const upload = multer({ storage: storage });
+
+// Ensure the uploads directory exists
+const fs = require('fs');
+const uploadDir = 'uploads/';
+if (!fs.existsSync(uploadDir)){
+  fs.mkdirSync(uploadDir);
+}
+// // Ensure the upload directory exists
+// if (!fs.existsSync('./uploads')) {
+//   fs.mkdirSync('./uploads');
+// }
+
+// const storage = multer.diskStorage({
+//   destination: './uploads',
+//   filename: (req, file, cb) => {
+//     cb(null, `${Date.now()}-${file.originalname}`);
+//   }
+// });
+
+// const upload = multer({
+//   storage: storage,
+//   limits: { fileSize: 1024 * 1024 * 5 }, // 5MB file size limit
+//   fileFilter: (req, file, cb) => {
+//     // Check the file type
+//     if (
+//       file.mimetype === 'image/jpeg' ||
+//       file.mimetype === 'image/png' ||
+//       file.mimetype === 'application/pdf'
+//     ) {
+//       cb(null, true);
+//     } else {
+//       cb(new Error('Unsupported file type'), false);
+//     }
+//   }
+// });
 
 // Nodemailer setup
 const transporter = nodemailer.createTransport({
@@ -82,91 +100,143 @@ const checkUserExistence = async (req, res, next) => {
 
 // Register route
 
-router.post('/register', upload.fields([
-  { name: 'photo', maxCount: 1 },
-  { name: 'signature', maxCount: 1 },
-  { name: 'Proof', maxCount: 1 }
-]), checkUserExistence, async (req, res) => {
+// router.post('/register', upload.fields([{ name: 'UplodadPhto' }, { name: 'Signature' }, { name: 'Proof' }]), async (req, res) => {
+//   const studentData = req.body;
+//   const files = req.files;
+
+//   try {
+//     const sql = `
+//       INSERT INTO otsstudentregistation 
+//       (candidateName, dateOfBirth, Gender, Category, emailId, confirmEmailId, contactNo, fatherName, occupation, mobileNo, line1, state, districts, pincode, qualifications, NameOfCollege, passingYear, marks, UplodadPhto, Signature, Proof, courseCreationId) 
+//       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+
+//     const values = [
+//       studentData.candidateName,
+//       studentData.dateOfBirth,
+//       studentData.Gender,
+//       studentData.Category,
+//       studentData.emailId,
+//       studentData.confirmEmailId,
+//       studentData.contactNo,
+//       studentData.fatherName,
+//       studentData.occupation,
+//       studentData.mobileNo,
+//       studentData.line1,
+//       studentData.state,
+//       studentData.districts,
+//       studentData.pincode,
+//       studentData.qualifications,
+//       studentData.NameOfCollege,
+//       studentData.passingYear,
+//       studentData.marks,
+//       files.UplodadPhto ? files.UplodadPhto[0].filename : null,
+//       files.Signature ? files.Signature[0].filename : null,
+//       files.Proof ? files.Proof[0].filename : null,
+//       studentData.courseCreationId || null,
+//     ];
+
+//     const [result] = await db.execute(sql, values);
+//     res.json({ success: true, message: 'Registration successful!' });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ success: false, message: 'Database error' });
+//   }
+// });
+
+router.post('/register', upload.fields([{ name: 'UplodadPhto' }, { name: 'Signature' }, { name: 'Proof' }]), async (req, res) => {
+  const studentData = req.body;
+  const files = req.files;
+
   try {
-    const data = req.body;
-    const files = req.files;
+    // SQL query to insert student registration data
+    const sql = `
+      INSERT INTO otsstudentregistation 
+      (candidateName, dateOfBirth, Gender, Category, emailId, confirmEmailId, contactNo, fatherName, occupation, mobileNo, line1, state, districts, pincode, qualifications, NameOfCollege, passingYear, marks, UplodadPhto, Signature, Proof, courseCreationId) 
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
 
-    // Validate files
-    if (!files.photo || !files.signature || !files.Proof) {
-      return res.status(400).send('Missing required files');
-    }
-
-    const photo = files.photo[0].filename;
-    const signature = files.signature[0].filename;
-    const proof = files.Proof[0].filename;
-    const courseCreationId = data.courseCreationId;
-
-    const sql = `INSERT INTO otsstudentregistation (candidateName, dateOfBirth, Gender, Category, emailId, confirmEmailId, contactNo, fatherName, occupation, mobileNo, line1, state, districts, pincode, edStatusId, NameOfCollege, passingYear, marks, UploadedPhoto, Signature, Proof, courseCreationId) 
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     const values = [
-      data.candidateName, data.dateOfBirth, data.Gender, data.Category, data.emailId, data.confirmEmailId, data.contactNo,
-      data.fatherName, data.occupation, data.mobileNo, data.line1, data.state, data.districts, data.pincode,
-      data.qualification, data.NameOfCollege, data.passingYear, data.marks, photo, signature, proof, courseCreationId
+      studentData.candidateName,
+      studentData.dateOfBirth,
+      studentData.Gender,
+      studentData.Category,
+      studentData.emailId,
+      studentData.confirmEmailId,
+      studentData.contactNo,
+      studentData.fatherName,
+      studentData.occupation,
+      studentData.mobileNo,
+      studentData.line1,
+      studentData.state,
+      studentData.districts,
+      studentData.pincode,
+      studentData.qualifications,
+      studentData.NameOfCollege,
+      studentData.passingYear,
+      studentData.marks,
+      files.UplodadPhto ? files.UplodadPhto[0].filename : null,
+      files.Signature ? files.Signature[0].filename : null,
+      files.Proof ? files.Proof[0].filename : null,
+      studentData.courseCreationId || null,
     ];
 
-    const [result] = await db.query(sql, values);
-    const studentRegistrationId = result.insertId;
+    const [result] = await db.execute(sql, values);
 
-    // Send email with form data
+    // Generate random password
+    const autoGeneratedPassword = generatePassword();
+    const hashedPassword = await bcrypt.hash(autoGeneratedPassword, 10);
+
+    // Save candidate details in the log table
+    const logSql = `
+      INSERT INTO log (username, email, password, role, studentregistationId) 
+      VALUES (?, ?, ?, ?, ?)`;
+
+    const logValues = [
+      studentData.candidateName,
+      studentData.emailId,
+      hashedPassword,
+      'User',
+      result.insertId
+    ];
+
+    await db.execute(logSql, logValues);
+
+    // Send email with the generated password
     const mailOptions = {
       from: 'webdriveegate@gmail.com',
-      to: data.emailId,
-      subject: 'Registration Confirmation',
-      text: `Thank you for registering. Here are your details:\n\n${JSON.stringify(data, null, 2)}`
+      to: studentData.emailId,
+      subject: 'Registration Successful',
+      text: `Dear ${studentData.candidateName},\n\nYour registration is successful. Here is your auto-generated password: ${autoGeneratedPassword}\n\nPlease change your password after logging in for the first time.\n\nBest regards,\nYour Team`
     };
 
     await transporter.sendMail(mailOptions);
 
-    // Generate credentials and send email
-    const password = generatePassword();
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const credentialsMailOptions = {
-      from: 'webdriveegate@gmail.com',
-      to: data.emailId,
-      subject: 'Your Credentials',
-      text: `Your login credentials:\n\nEmail: ${data.emailId}\nCode: ${password}`
-    };
-
-    await transporter.sendMail(credentialsMailOptions);
-
-    // Save credentials in log table
-    const logSql = `INSERT INTO log (username, email, password, role, studentregistationId) VALUES (?, ?, ?, ?, ?)`;
-    const logValues = [data.candidateName, data.emailId, hashedPassword, 'User', studentRegistrationId];
-    const [logResult] = await db.query(logSql, logValues);
-    const userId = logResult.insertId;
-
-    res.status(200).json({ message: 'Student registration data saved and emails sent', userId });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error saving student registration data');
+    res.json({ success: true, message: 'Registration successful and email sent!' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Database error' });
   }
 });
-
-
 
 // Check user route
-router.post('/check-user', async (req, res) => {
+router.post('/checkEmail', async (req, res) => {
+  const { email } = req.body;
+
   try {
-    const { emailId, contactNo } = req.body;
+    const [rows] = await db.execute(
+      'SELECT COUNT(*) as count FROM otsstudentregistation WHERE emailId = ?',
+      [email]
+    );
 
-    const checkSql = 'SELECT * FROM otsstudentregistation WHERE emailId = ? OR contactNo = ?';
-    const [existingUsers] = await db.query(checkSql, [emailId, contactNo]);
-
-    if (existingUsers.length > 0) {
-      return res.status(200).json({ exists: true });
+    if (rows[0].count > 0) {
+      res.json({ exists: true });
+    } else {
+      res.json({ exists: false });
     }
-    res.status(200).json({ exists: false });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error checking user data');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error checking email' });
   }
 });
-
 // Resend password endpoint
 router.post('/resend-password', async (req, res) => {
   const { userId } = req.body;

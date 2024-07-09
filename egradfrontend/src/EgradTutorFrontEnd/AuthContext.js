@@ -9,16 +9,16 @@ export const AuthProvider = ({ children }) => {
 
   const login = (token, user_Id, role) => {
     setAuthState({ token, user_Id, role });
-    localStorage.setItem('token', token);
-    localStorage.setItem('user_Id', user_Id);
-    localStorage.setItem('role', role);
+    // localStorage.setItem('token', token);
+    // localStorage.setItem('user_Id', user_Id);
+    // localStorage.setItem('role', role);
   };
 
   const logout = () => {
     setAuthState({ token: null, user_Id: null, role: null });
-    localStorage.removeItem('token');
-    localStorage.removeItem('user_Id');
-    localStorage.removeItem('role');
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('user_Id');
+    // localStorage.removeItem('role');
   };
 
   return (
