@@ -4,47 +4,27 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from '../assets/actions/authActions';
 import { AuthContext } from '../EgradTutorFrontEnd/AuthContext';
 import axios from '../api/axios';
+import CryptoJS from 'crypto-js';
 import { useTIAuth } from '../TechInfoContext/AuthContext';
 // const LOGIN_URL ='/UserLogin'
-import CryptoJS from 'crypto-js';
+// import CryptoJS from 'crypto-js';
+// import { decryptData, encryptData } from './CryptoUtils/CryptoUtils';
 const UserLogin = () => {
   const[tiAuth,settiAuth]=useTIAuth()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
   useEffect(() => {
     console.log("Current tiAuth state:", tiAuth);
   }, [tiAuth]);
+  const encryptUserId = (userId) => {
+  const secretKey=process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
+    return CryptoJS.AES.encrypt(userId.toString(), secretKey).toString();
+  };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const { user_Id, role } = await dispatch(loginUser(email, password));
-  //     if (role === 'User') {
-  //       navigate(`/user-dashboard/${user_Id}`);
-  //     } else if (role === 'Admin' || role === 'SuperAdmin') {
-  //       alert('You don\'t have access to this page');
-  //       const response=await axios.post(LOGIN_URL,
-  //         JSON.stringify({email,password},
-  //           {
-  //             headers:{}
-  //           }
-  //         )
-  //       )
-
-
-  //     } else {
-  //       alert('Unauthorized');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error during login:', error);
-  //     alert('Invalid email or password');
-  //   }
-  // };
+  const secretKey=process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
+  console.log(secretKey,"from front end env ")
   
-
   const handleReactLoginSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -54,21 +34,35 @@ const UserLogin = () => {
           headers: { 'Content-Type': 'application/json' },
         }
       );
-      console.log(response.data,"this is response. dataaaaaaaaaaaaaaaaa")
-      const { user_Id, role,accesToken } = response.data;
+  
+      console.log("Response Data:", response.data);
+  
+      const { user_Id, role, accessToken } = response.data;
+      console.log("Extracted Data:", { user_Id, role, accessToken });
+      if (!user_Id) {
+        throw new Error('User ID is missing');
+      }
       if (role === 'User') {
-        console.log(user_Id,role,accesToken)
+        console.log("User role detected:", user_Id, role, accessToken);
+  
+       
+        console.log("encrypting data using cru[t",user_Id,secretKey,)
 
+        const encryptedUserId=encryptUserId(user_Id)
+        console.log("encrypting data using cru[t",user_Id,secretKey,"and after encryption",encryptedUserId)
         const newAuthState = {
           ...tiAuth,
-          user: user_Id,
-          token: accesToken
+          user: encryptedUserId,
+          token: accessToken
         };
-        console.log(newAuthState,"1111111111")
+        console.log("New Auth State:", newAuthState);
         settiAuth(newAuthState);
-        localStorage.setItem("tiAuth",JSON.stringify(newAuthState))
-        console.log("set to the use context to user id when user is logged in using the authcontext",tiAuth)
-        navigate(`/user-dashboard/${user_Id}`);
+
+        localStorage.setItem("tiAuth", JSON.stringify(newAuthState));
+
+        console.log("Stored in localStorage and useContext:", tiAuth);
+        const encodedUserId = encodeURIComponent((encryptedUserId));
+        navigate(`/testingUrl/${encodedUserId}`);
       } else if (role === 'Admin' || role === 'SuperAdmin') {
         alert('You don\'t have access to this page');
       } else {
@@ -79,6 +73,7 @@ const UserLogin = () => {
       alert('Invalid email or password');
     }
   };
+  
 
   const handleForgotPassword = () => {
     navigate('/forgot-password');
