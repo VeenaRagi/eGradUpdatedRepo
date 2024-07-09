@@ -787,7 +787,7 @@ const ExamPageBanner = ({isEditMode}) => {
           {/* ----OnClick_EditIconOf_Specific_banner_opens_popup_editMode_section_end-----*/}
 
           {/* ---------alert_messages_popup_start--------- */}
-          {message && (
+          {isEditMode && message && (
             <div className="banner_popup">
               <div
                 className={`banner_popup_message ${message.startsWith("Error") ? "error" : "success"
