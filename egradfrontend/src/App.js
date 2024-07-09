@@ -111,7 +111,7 @@ function App() {
                 <Route path="/UserLogin" element={<UserLogin />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
-                <Route path="/login/:userId" element={<PasswordChangeForm />} />
+                <Route path="/PasswordChangeForm/:user_Id" element={<PasswordChangeForm />} />
                 <Route path="/Maintenance1" element={<Maintenance1 />} />
                 <Route
                   path="/user-dashboard/:userId"
