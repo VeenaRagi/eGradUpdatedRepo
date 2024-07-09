@@ -29,6 +29,7 @@ import BASE_URL from "./apiConfig.js";
 import NotFound from "./NotFound.jsx";
 import RegistrationForm from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/RegistrationForm.jsx";
 import SDAfterLogin from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/SDAfterLogin.jsx";
+import Payu from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/Payu.jsx";
 
 function App() {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -112,6 +113,7 @@ function App() {
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
                 <Route path="/PasswordChangeForm/:user_Id" element={<PasswordChangeForm />} />
+                <Route path="/PayU/:courseCreationId" element={<Payu/>}/>
                 <Route path="/Maintenance1" element={<Maintenance1 />} />
                 <Route
                   path="/user-dashboard/:userId"

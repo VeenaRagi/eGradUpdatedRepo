@@ -35,6 +35,7 @@ const RegistrationForm = () => {
   const [formErrors, setFormErrors] = useState({});
   const [emailExists, setEmailExists] = useState(false);
   const [submitType, setSubmitType] = useState("");
+  
   useEffect(() => {
     if (courseCreationId) {
       axios
@@ -128,7 +129,7 @@ const RegistrationForm = () => {
           if (submitType === "register") {
             navigate(`/PasswordChangeForm/${user_Id}`);
           } else if (submitType === "buyNow") {
-            navigate("/PaymentPage");
+            navigate(`/PayU/${courseCreationId}`);
           }
         }
       } else {
