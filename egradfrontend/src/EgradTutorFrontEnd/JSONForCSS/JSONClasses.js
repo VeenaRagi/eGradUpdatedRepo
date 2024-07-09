@@ -143,6 +143,7 @@ const JSONClasses = {
     themeFooterContactData:"t1FooterContactData",
     themeFooterCopywriteContentContainer:"t1FooterCopywriteContentContainer",
     themeContactFooterContentContainer:"t1ContactFooterContentContainer",
+    themeCUForm:"t1CUForm",
   },
   "Theme-2": {
     id: "themeTwoId",
