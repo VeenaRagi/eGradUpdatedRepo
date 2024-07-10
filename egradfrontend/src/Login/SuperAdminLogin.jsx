@@ -15,7 +15,7 @@ const SuperAdminLogin = () => {
       localStorage.setItem('token', token);
       if (role === 'superadmin') {
         navigate('/superadmin-dashboard');
-      }else if (role === 'User') {
+      } else if (role === 'User') {
         console.log('User access is not allowed on this page');
         alert('You dont have access to this page');
       } else if (role === 'Admin') {
@@ -30,29 +30,43 @@ const SuperAdminLogin = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h1>Super Admin Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="">
+      <div className='userLoginPagePC'>
+        <div className='userLoginSubContainer'>
+          <div className='formAndHeaddingContainer'>
+            <div className='loginPageHeadingContainer'>
+              <h1>Super Admin Login</h1>
+            </div>
+            <form onSubmit={handleSubmit} className='userLoginForm' >
+              <div className='formGroup'>
+                <label>Email Id:</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                   placeholder='Enter your Email Id here'
+                />
+              </div>
+              <div className='formGroup'>
+                <label>Password</label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  placeholder='Enter your Password here'
+
+                />
+              </div>
+              <div className='formGroup'>
+              <button type="submit">Login</button>
+              </div>
+            </form>
+          </div>
+
         </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+      </div>
     </div>
   );
 };
