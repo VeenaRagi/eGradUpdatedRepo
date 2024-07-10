@@ -52,9 +52,19 @@ textarea#message.ContactUsForMessage.undefined{
     margin-top: 20px;
 }
 
+textarea#message {
+    height: 46px;
+    margin-top: 28px;
+}
 .t1ContactUsFormData button{
     background-color: #b8e2c4;
     color: black;
+}
+
+.t1ContactUsFormData input{
+    width: 350px;
+    height: 50px;
+    border-radius: 8px;
 }
 
 .t1ContactUsFormData button:hover{
