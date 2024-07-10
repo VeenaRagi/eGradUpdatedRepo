@@ -79,9 +79,30 @@ function App() {
           ) : (
             <Router>
               <Routes>
+
+                <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
                 <Route path="/adminlogin" element={<AdminLogin />} />
-                <Route path="/Register" element={<Register />} />
-                <Route path="/UgadminHome" element={<UgadminHome />} />
+                <Route path="/UserLogin" element={<UserLogin />} />
+                <Route
+                  path="/RegistrationForm/:courseCreationId"
+                  element={<RegistrationForm />}
+                />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+
+                <Route path="/PasswordChangeForm/:user_Id" element={<PasswordChangeForm />} />
+
+
+                <Route path="/PayU/:courseCreationId" element={<Payu />} />
+                
+                <Route
+                  path="/user-dashboard/:userId"
+                  element={
+                    <PrivateRoute>
+                      <UserDashboard />
+                    </PrivateRoute>
+                  }
+                />
+
                 <Route
                   path="/"
                   element={<WebSiteLandingPage isEditMode={isEditMode} />}
@@ -98,10 +119,7 @@ function App() {
                   path="/CoursePage/:Branch_Id/:Portale_Id"
                   element={<CoursePage isEditMode={isEditMode} />}
                 />
-                <Route
-                  path="/RegistrationForm/:courseCreationId"
-                  element={<RegistrationForm />}
-                />
+
                 <Route
                   path="/AboutUs"
                   element={<AboutUs isEditMode={isEditMode} />}
@@ -109,20 +127,10 @@ function App() {
                 <Route path="/ContactUs" element={<ContactUs />} />
                 <Route path="/Faq" element={<FAQ />} />
                 <Route path="/linkpage/:Link_Id" element={<LinkPage />} />
-                <Route path="/UserLogin" element={<UserLogin />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
-                <Route path="/PasswordChangeForm/:user_Id" element={<PasswordChangeForm />} />
-                <Route path="/PayU/:courseCreationId" element={<Payu/>}/>
+
+
                 <Route path="/Maintenance1" element={<Maintenance1 />} />
-                <Route
-                  path="/user-dashboard/:userId"
-                  element={
-                    <PrivateRoute>
-                      <UserDashboard />
-                    </PrivateRoute>
-                  }
-                />
+             
 
                 <Route element={<PrivateRoute />}>
                   <Route
