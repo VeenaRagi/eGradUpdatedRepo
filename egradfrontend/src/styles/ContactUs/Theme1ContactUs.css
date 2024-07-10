@@ -29,12 +29,25 @@
     margin: 10px;
 }
 
-input[type="text"], input[type="date"], input[type="email"], input[type="number"], select, textarea {
+/* input[type="text"], input[type="date"], input[type="email"], input[type="number"], select, textarea {
+    margin-top: 5px;
+    width: 349px;
+    height: 51px;
+    border-radius: 8px;
+} */
+.t1CUForm input[type="text"],.t1CUForm  input[type="date"],.t1CUForm  input[type="email"],.t1CUForm  input[type="number"], .t1CUForm select,.t1CUForm  textarea {
     margin-top: 5px;
     width: 349px;
     height: 51px;
     border-radius: 8px;
 }
+ 
+.t1ContactUsFormData input{
+    width: 350px;
+    height: 50px;
+    border-radius: 8px;
+}
+ 
 textarea#message.ContactUsForMessage.undefined{
     margin-top: 20px;
 }

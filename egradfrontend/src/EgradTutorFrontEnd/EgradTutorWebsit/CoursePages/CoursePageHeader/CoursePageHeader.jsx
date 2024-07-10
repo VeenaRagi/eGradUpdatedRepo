@@ -10,6 +10,7 @@ import '../../../../styles/CoursePage/CoursePageDefault.css'
 import '../../../../styles/CoursesPageStyles/themeWhite.css';
 import { RiLoginBoxLine } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
+import '../../../../styles/WhyChooseUsStyles/Theme2WCU.css'
 
 const CoursePageHeader = ({ isEditMode, userRole}) => {
   const [image, setImage] = useState(null);
