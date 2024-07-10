@@ -466,12 +466,16 @@ router.post("/success", async (req, res) => {
                   <h1>Payment Successful</h1>
                   <b>Your course will be activated within the next 48 hours.</b>
                   <p>If you have any questions or need assistance, our dedicated support team is here to help. Don't hesitate to reach out to us at <a href="mailto:egradtutor@gmail.com">egradtutor@gmail.com</a>. We're always happy to assist you!</p>
-                  <button id="redirectButton">Login</button>
+                   <button id="redirectButton">Continue</button>
               </div>
  
               <script>
                   document.getElementById('redirectButton').addEventListener('click', function() {
-                      window.location.href = 'http://localhost:3000/Student_dashboard';
+                      if (${firstTimeLogin}) {
+                          window.location.href = 'http://localhost:3000/PasswordChangeForm/${userId}';
+                      } else {
+                          window.location.href = 'http://localhost:3000/Student_dashboard';
+                      }
                   });
               </script>
           </body>
