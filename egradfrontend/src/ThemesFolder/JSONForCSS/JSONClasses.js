@@ -14,6 +14,7 @@ const JSONClasses = {
     themeCapTextContainer: "defaultCapTextContainer",
     themeTextContainer: "Egate_landiing_ojnkl",
     themeBranchesContainer: "Egate_eLanding_Container_Egate_landing",
+    // ok
     themeBranchesSubContainer: "EGATE_eCordsLanding",
     themeLanding_branch_box_btns: "Pg_buttonn_Default_Cards",
     themeBranchBoxEntranceExam: "themeBranchBoxEntranceExam_Default",
@@ -21,6 +22,7 @@ const JSONClasses = {
     themeExamImageBox: "ug_pg_boxes",
     themeExamButtonsBox: "Exams_container",
     themeUgAndPgButtons: "ugAndPgButtonsDefault",
+    // ok
     ThemeExamADD_EDIT_Buttons: "ThemeExamADD_EDIT_ButtonsDefault",
 
     // UG_HOME_PAGE_HEADER_CLASSESS
@@ -66,6 +68,7 @@ const JSONClasses = {
     themeAboutusmaindivinfo: "info_out",
     themeAboutusinfobox: "info-box",
     themeAboutusprofileimg: "profile-img",
+    // ok
     // Div structure fromate for footer section //
     ThemeFooterMainContainer: "ThemeFooterMainContainerDefault",
     ThemeFooterSubContainer: "ThemeFooterSubContainerDefault",
@@ -81,6 +84,14 @@ const JSONClasses = {
     ThemeFooterSubContainerCopywriteData:
       "ThemeFooterSubContainerCopywriteDataDefault",
     ThemeFooterHorizantalLine: "ThemeFooterHorizantalLineDefault",
+    // ok
+
+    // from frontend json classes file
+    themeExtraPCForFeatures: "DefaultthemeExtraPCForFeatures",
+    themeFeaturesHeading: "DeaultthemeFeaturesHeading",
+    themeArrowWithFeatures: "DefaultthemeArrowWithFeatures",
+    themeFeatures: "DefaultthemeFeatures",
+
     // our courses container
     themeOurCoursesContainer: "defaltOurCoursesContainer",
     themeCoursesHeadding: "defaultCoursesHeadding",
@@ -135,7 +146,11 @@ const JSONClasses = {
 
     themeFooterCopywriteContent: "themeFooterCopywriteContentDefault",
     themeFooterSMIcons: "themeFooterSMIconsDefault",
-
+    // missing from anther json file
+themeMainFooterContainer:"t1MainFooterContainer",
+    themeInnerMainFooterContainer:"t1InnerMainFooterContainer",
+    themeInnerMainFooterContentContainer:"t1InnerMainFooterContentContainer",
+    themeInnerMainFooterContentColumnContainer:"t1InnerMainFooterContentColumnContainer",
     // our courses
     themeExtraPCForFeatures: "DefaultthemeExtraPCForFeatures",
     themeFeaturesHeading: "DeaultthemeFeaturesHeading",
@@ -272,6 +287,7 @@ const JSONClasses = {
     themeAboutusinfobox: "t1info-box",
     themeAboutusprofileimg: "t1profile-img",
     themeUgAndPgButtons: "t1UgAndPgButtons",
+    // ok
 
     // footer classes added by shiva
     ThemeFooterMainContainer: "t1FooterMainContainer",
@@ -515,6 +531,8 @@ const JSONClasses = {
     themeUgHeaderLogoImg: "t2UgHeaderLogoImg",
     themeUgHeaderUl: "t2UgHeaderUl",
     themeMarqData: "t2MarqData",
+    // ok
+    
     themeUgDivLinksOfHeader: "t2UgDivLinksOfHeader",
     themeUgHeader: "themeUgHeader",
     themeUgNavContainer: "themeUgNavContainer",

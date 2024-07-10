@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import BASE_URL from "../../../../apiConfig.js";
 import axios from "axios";
 import defaultImage from "../../../../assets/defaultImage.png";
+import defaultLogoImage from "../../../../assets/egradtutor_logo.png";
 import { ThemeContext } from "../../../../ThemesFolder/ThemeContext/Context.js";
 import LandingPageHeaderEdit from "./LandingPageHeaderEdit";
 import "../../../../styles/Default_landingPage_styles.css";
@@ -10,7 +11,8 @@ import "../../../../styles/Theme2_landingPage_styles.css";
 import "../../../../styles/LandingPage_main.css";
 import JSONClasses from "../../../../ThemesFolder/JSONForCSS/JSONClasses.js";
 import { Link } from "react-router-dom";
-const LandingPageHeader = ({ isEditMode }) => {
+
+const LandingPageHeader = ({ isEditMode, userRole }) => {
   const [image, setImage] = useState(null);
   const [showImage, setShowImage] = useState(false);
   const [welcomeimage, setWelcomeImage] = useState(null);
@@ -19,6 +21,7 @@ const LandingPageHeader = ({ isEditMode }) => {
   const [fetchError, setFetchError] = useState(false);
 
   const themeFromContext = useContext(ThemeContext);
+  const [error, setError] = useState(false);
 
   const fetchImage = async () => {
     try {
@@ -30,6 +33,7 @@ const LandingPageHeader = ({ isEditMode }) => {
       setImage(imageUrl);
     } catch (error) {
       console.error("Error fetching image:", error);
+      setError(true); // Set error state to true on failure
     }
   };
 
@@ -90,16 +94,28 @@ const LandingPageHeader = ({ isEditMode }) => {
             className={`Newlandingpage_logosubcontainer ${themeDetails.themeSubContainer}`}
           >
             <div className={`logo_Img_container ${themeDetails.themeLogoImgC}`}>
-              {image ? (
-                <Link to="/">
-                <img
-                  src={image}
-                  className={`${themeDetails.themeLogoImg}`}
-                  alt="Current"
-                /></Link>
+              {error ? (
+                userRole === "user" ? (
+                  <p>
+                    Unable to load image at the moment. Please try again later.
+                  </p>
+                ) : userRole === "admin" ? (
+                  <p>There is no data available. Please add the data.</p>
+                ) : (
+                  <p>Unable to load image at the moment.</p>
+                )
               ) : (
-                <img src={defaultImage} alt="Default" />
+                image && (
+                  <Link to="/">
+                    <img
+                      src={image}
+                      className={`${themeDetails.themeLogoImg}`}
+                      alt="Current"
+                    />
+                  </Link>
+                )
               )}
+
               <div className={`logoImgContainer ${themeDetails.logoC}`}></div>
             </div>
           </div>
@@ -118,22 +134,27 @@ const LandingPageHeader = ({ isEditMode }) => {
           className={`landing_content_div_container ${themeDetails.themeLandingParentContainer}`}
         >
           <div className={`landing_img_div ${themeDetails.themeLCapImgDiv}`}>
-            {welcomeimage ? (
+            {/* {welcomeimage ? (
               <img src={welcomeimage} alt="welcomeCurrent" />
             ) : (
-              <img src={defaultImage} alt="Default" />
+              <Maintenance1 />
+            )} */}
+
+            {welcomeimage ? (
+              <img src={welcomeimage} alt="welcomeCurrent" />
+            ) : userRole === "user" ? (
+              <p>Unable to load image at the moment. Please try again later.</p>
+            ) : userRole === "admin" ? (
+              <p>There is no data available. Please add the data.</p>
+            ) : (
+              <p>Unable to load image. Please contact support.</p> // Default message for any other user roles
             )}
           </div>
           <div
             className={`landing_heading_div_container ${themeDetails.themeCapTextContainer}`}
           >
             <div className={`${themeDetails.themeTextContainer}`}>
-              {fetchError ? (
-                <div>
-                  <h1>Error fetching welcome data.</h1>
-                  <p>Please try again later.</p>
-                </div>
-              ) : welcomeDataList.length > 0 ? (
+              {welcomeDataList.length > 0 ? (
                 welcomeDataList.map((welcomeData) => (
                   <div key={welcomeData.welcome_id}>
                     <h1>{welcomeData.welcome_text}</h1>
@@ -142,8 +163,16 @@ const LandingPageHeader = ({ isEditMode }) => {
                 ))
               ) : (
                 <div>
-                  <h1>No welcome data available.</h1>
-                  <p>Please add welcome information.</p>
+                  {userRole === "user" ? (
+                    <p>
+                      Unable to load the data at the moment. Please try again
+                      later.
+                    </p>
+                  ) : userRole === "admin" ? (
+                    <p>No data found. Please add the data to the system.</p>
+                  ) : (
+                    <p>There is no data available. Please add the data.</p>
+                  )}
                 </div>
               )}
             </div>

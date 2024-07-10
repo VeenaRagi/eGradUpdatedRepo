@@ -12,6 +12,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
+// Endpoint to check server status
+app.get('/api/server/status', (req, res) => {
+  res.send({ status: 'Server is running' });
+});
+
 const Logo = require("./EgradTutorWebsite/Logo");
 app.use("/Logo", Logo);
 
@@ -54,6 +59,9 @@ app.use("/Webbanners", Webbanners);
 const ExampagePortals = require("./EgradTutorWebsite/ExamPage/ExampagePortals");
 app.use("/ExampagePortals", ExampagePortals);
 
+const ExamInfoEdit = require("./EgradTutorWebsite/ExamPage/ExamInfoEdit");
+app.use("/ExamInfoEdit", ExamInfoEdit);
+
 const ExamInfo = require("./EgradTutorWebsite/ExamPage/ExamInfo");
 app.use("/ExamInfo", ExamInfo);
 
@@ -95,6 +103,14 @@ app.use('/courseTab',courseTab);
 
 const Login = require("./EgradTutorWebsite/LoginSystem/Login");
 app.use("/Login", Login);
+
+
+
+const LandingPageExamEdit = require("./EgradTutorWebsite/LandingPage/LandingPageExamEdit");
+app.use("/LandingPageExamEdit", LandingPageExamEdit);
+
+const PayU = require("./PaymentGatway/PayU");
+app.use("/PayU", PayU);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

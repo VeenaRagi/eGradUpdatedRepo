@@ -4,12 +4,21 @@ const db = require("../../DataBase/db2");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+const CryptoJS = require('crypto-js');
+const cors=require('cors');
+const { encryptData, decryptData } = require("../../CryptoUtils/Utils");
+router.use(cors());
+router.use(cors({
+  origin: 'http://localhost:3000', // Update to your client URL
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+  allowedHeaders: 'Content-Type,Authorization'
+}));
+const secretKey=process.env.LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
+router.use(express.json());
+router.options('*', cors()); // Enable preflight requests
 
-// Login route
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    // console.log('Login request received:', { email, password });
-  
     try {
       // Fetch user from the database by email
       const sql = 'SELECT user_Id,email,password,role FROM log WHERE email = ?';
@@ -27,19 +36,47 @@ router.post('/login', async (req, res) => {
       const isMatch = await bcrypt.compare(password, user.password);
   
       if (!isMatch) {
-        // console.log('Password mismatch for user:', user);
         return res.status(400).json({ message: 'Invalid email or password' });
       }
-  
       // Generate JWT token
-      const token = jwt.sign({ user_Id: user.user_Id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    //   console.log('Token generated for user:', user);
-  
-      res.json({user_Id:user.user_Id, token, role: user.role });
+      const accessToken = jwt.sign({ user_Id: user.user_Id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      console.log('Token generated for user:', user);
+      const refreshToken = jwt.sign({ user_Id: user.user_Id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '7d' });
+      console.log("refreshToken:",refreshToken,"accessToken: ",accessToken )
+      const encryptedUserId=encryptData(user.user_Id.toString())
+      console.log("sending detail are",encryptedUserId,refreshToken,accessToken)
+      res.json({user_Id: encryptedUserId,refreshToken, accessToken, role: user.role });
     } catch (error) {
       console.error('Error during login:', error);
       res.status(500).json({ message: 'Server error' });
     }
   });
 
+
+  router.get('/userDecryptedId', async (req, res) => {
+    const { encryptedUserId } = req.query;
+    console.log(encryptedUserId,"this is the encrypted user id from the frontend")
+    try {
+        // Decrypt user ID
+        const userId = decryptData(encryptedUserId);
+
+        if (!userId) {
+            return res.status(400).json({ message: 'Invalid or missing user ID' });
+        }
+
+        // Retrieve user details from the database
+        // const sql = 'SELECT * FROM users WHERE user_Id = ?';
+        // const [users] = await db.query(sql, [userId]);
+
+        // if (users.length === 0) {
+            // return res.status(404).json({ message: 'User not found' });
+        // }
+
+        // const user = users[0];
+        res.json({ userId });
+    } catch (error) {
+        console.error('Error retrieving user details:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 module.exports = router;

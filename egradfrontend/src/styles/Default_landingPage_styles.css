@@ -70,7 +70,7 @@
     width: 385px !important;
     box-shadow: 0 0 10px #00222c !important;
     padding: 2rem !important;
-    height: 400px;
+    height: auto;
 }
 .EGATE_eCordsLanding{
     margin: 25px !important;

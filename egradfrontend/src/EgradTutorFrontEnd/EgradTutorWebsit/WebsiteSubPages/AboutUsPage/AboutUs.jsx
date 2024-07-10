@@ -14,7 +14,7 @@ import '../../../../styles/AboutUs/Theme2AboutUs.css';
 import { IoHome } from "react-icons/io5";
 import Our_Vision_Img from '../../../../styles/Our_Mission_img.a4171ae2dd49cdc24875.png'
 import aboutUsAP from '../../../../styles/AboutUSPic-removebg-preview.png'
-const AboutUs = ({ isEditMode }) => {
+const AboutUs = ({ isEditMode,userRole }) => {
   const [aboutUsData, setAboutUsData] = useState([]);
   const [aboutEgradData, setAboutEgradData] = useState([]);
   const [image, setImage] = useState(null);
@@ -102,7 +102,7 @@ const AboutUs = ({ isEditMode }) => {
                   <h1>About Us</h1>
                 </div>
                 <div className={`${themeDetails.themeAUCapImgDiv}`}>
-                  <img src={aboutUsAP} alt="error while getting about us cap img" />
+                {welcomeimage && <img src={welcomeimage} alt="Welcome" />}
                 </div>
                 <div className={`AboutUs1stContentContainer ${themeDetails.themeAUContentContainer}`} >
                   {isEditMode && (
@@ -113,11 +113,22 @@ const AboutUs = ({ isEditMode }) => {
                       {showAboutEgradForm && <AboutUsEdit type="aboutEgrad" />}
                     </div>
                   )}
-                  {aboutEgradData.map((aboutEgrad) => (
-                    <div key={aboutEgrad.about_egt_id} className={`AboutUsImgDataContentContainer ${themeDetails.themeAUImgDataContentContainer}`} >
-                      <p>{aboutEgrad.about_egt}</p>
-                    </div>
-                  ))}
+                {aboutEgradData.length > 0 ? (
+        aboutEgradData.map((aboutEgrad) => (
+          <div
+            key={aboutEgrad.about_egt_id}
+            className={`AboutUsImgDataContentContainer ${themeDetails.themeAUImgDataContentContainer}`}
+          >
+            <p>{aboutEgrad.about_egt}</p>
+          </div>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No information available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No information found. Please update the details as necessary.</p>
+      ) : (
+        <p>No information available. Please contact support if this issue persists.</p>
+      )}
                 </div>
               </div>
             </div>
@@ -133,18 +144,29 @@ const AboutUs = ({ isEditMode }) => {
                   </div>
                 )}
                 {/* our vision and our mission mapping goes here */}
-                {aboutUsData.map((aboutUs) => (
-                  <div key={aboutUs.about_us_id} className={`AboutUsImgVisionDataContentContainer ${themeDetails.themeAUVMPC}`} >
-                    <div className={`${themeDetails.themeVMContainer}`}>
-                      <span className={`${themeDetails.themeSpanLines}`}></span>
-                      <h2>{aboutUs.Title}</h2>
-                      <span className={`${themeDetails.themeSpanLines}`}></span>
-                    </div>
-                    <div className={`${themeDetails.themeVMText}`}>
-                    <p>{aboutUs.Description}</p>
-                    </div>
-                  </div>
-                ))}
+                {aboutUsData.length > 0 ? (
+        aboutUsData.map((aboutUs) => (
+          <div
+            key={aboutUs.about_us_id}
+            className={`AboutUsImgVisionDataContentContainer ${themeDetails.themeAUVMPC}`}
+          >
+            <div className={`${themeDetails.themeVMContainer}`}>
+              <span className={`${themeDetails.themeSpanLines}`}></span>
+              <h2>{aboutUs.Title}</h2>
+              <span className={`${themeDetails.themeSpanLines}`}></span>
+            </div>
+            <div className={`${themeDetails.themeVMText}`}>
+              <p>{aboutUs.Description}</p>
+            </div>
+          </div>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No information available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No data available. Please add the necessary information.</p>
+      ) : (
+        <p>No information available. Please contact support if this issue persists.</p>
+      )}
               </div>
             </div>
           </div>
@@ -168,16 +190,27 @@ const AboutUs = ({ isEditMode }) => {
                       {showAboutEgradForm && <AboutUsEdit type="aboutEgrad" />}
                     </div>
                   )}
-                  {aboutEgradData.map((aboutEgrad) => (
-                    <div key={aboutEgrad.about_egt_id} className={`AboutUsImgDataContentContainer ${themeDetails.AboutUsImgDataContentContainer}`} >
-                      <p>{aboutEgrad.about_egt}</p>
-                    </div>
-                  ))}
+               {aboutEgradData.length > 0 ? (
+        aboutEgradData.map((aboutEgrad) => (
+          <div
+            key={aboutEgrad.about_egt_id}
+            className={`AboutUsImgDataContentContainer ${themeDetails.AboutUsImgDataContentContainer}`}
+          >
+            <p>{aboutEgrad.about_egt}</p>
+          </div>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No information available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No data found. Please add or update the content.</p>
+      ) : (
+        <p>No information available. Please contact support if this issue persists.</p>
+      )}
                 </div>
               </div>
               <div className={`${themeDetails.themeAboutusFlexDiv}`}>
                 <div className={`${themeDetails.themeAboutusFlexDivForImg}`}>
-                  <img src={capImg} alt="error while getting about us cap img" />
+                {welcomeimage && <img src={welcomeimage} alt="Welcome" />}
                 </div>
               </div>
             </div>
@@ -193,18 +226,31 @@ const AboutUs = ({ isEditMode }) => {
                 </div>
               )}
 
-              {aboutUsData.map((aboutUs) => (
-                <div key={aboutUs.about_us_id} className={`AboutUsImgVisionDataContentContainer ${themeDetails.AboutUsImgDataContentContainer}`} >
-                  <div className={`v-m-ission_imgs  ${themeDetails.VMissionImgs}`}>
-                    <img src={Our_Vision_Img} />
-                  </div>
-                  <div className={`v-m-ission_imgs  ${themeDetails.VMissionContainer}`}>
-                    <h2>{aboutUs.Title}</h2>
-                    <p>{aboutUs.Description}</p>
-                  </div>
-
-                </div>
-              ))}
+{aboutUsData.length > 0 ? (
+        aboutUsData.map((aboutUs) => (
+          <div
+            key={aboutUs.about_us_id}
+            className={`AboutUsImgVisionDataContentContainer ${themeDetails.AboutUsImgDataContentContainer}`}
+          >
+            <div className={`v-m-ission_imgs ${themeDetails.VMissionImgs}`}>
+              <img
+                src={aboutUs.About_Us_Image}
+                alt="About Us"
+              />
+            </div>
+            <div className={`v-m-ission_imgs ${themeDetails.VMissionContainer}`}>
+              <h2>{aboutUs.Title}</h2>
+              <p>{aboutUs.Description}</p>
+            </div>
+          </div>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No information available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No information available. Please add the relevant details.</p>
+      ) : (
+        <p>No information available. Please contact support if this issue persists.</p>
+      )}
             </div>
           </div>
         </div>
@@ -224,15 +270,20 @@ const AboutUs = ({ isEditMode }) => {
 
 
           <div className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`}>
-            {image ? (
-              <Link to="/">
-                <img
-                  src={image}
-                  alt="Current"
-                /></Link>
-            ) : (
-              <img src={defaultImage} alt="Default" />
-            )}
+          {image ? (
+        <Link to="/">
+          <img
+            src={image}
+            alt="Current"
+          />
+        </Link>
+      ) : userRole === 'user' ? (
+        <p>Unable to load the image at the moment. Please try again later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No image available. Please upload the necessary image.</p>
+      ) : (
+        <p>Unable to load the image. Please contact support if this issue persists.</p>
+      )}
 
 <span>
 <Link to={`/`}><IoHome />Home</Link>
@@ -254,14 +305,23 @@ const AboutUs = ({ isEditMode }) => {
                   </div>
                 )}
 
-                {aboutEgradData.map((aboutEgrad) => (
-                  <div key={aboutEgrad.about_egt_id} className={`AboutUsImgDataContentContainer ${themeDetails.AboutUsImgDataContentContainer}`} >
-
-                    {welcomeimage && <img src={welcomeimage} alt="Welcome" />}
-
-                    <p>{aboutEgrad.about_egt}</p>
-                  </div>
-                ))}
+{aboutEgradData.length > 0 ? (
+        aboutEgradData.map((aboutEgrad) => (
+          <div
+            key={aboutEgrad.about_egt_id}
+            className={`AboutUsImgDataContentContainer ${themeDetails.AboutUsImgDataContentContainer}`}
+          >
+            {welcomeimage && <img src={welcomeimage} alt="Welcome" />}
+            <p>{aboutEgrad.about_egt}</p>
+          </div>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No information is available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No information available. Please add the necessary details.</p>
+      ) : (
+        <p>No information available. Please contact support if this issue persists.</p>
+      )}
               </div>
 
 
@@ -275,18 +335,27 @@ const AboutUs = ({ isEditMode }) => {
                   </div>
                 )}
 
-{aboutUsData.map((aboutUs) => (
-                   <div key={aboutUs.about_us_id} className={`AboutUsImgVisionDataContentContainer ${themeDetails.AboutUsImgDataContentContainer}`} >
-                    {/* <img src={Our_Vision_Img} alt="" /> */}
-                    <img
+{aboutUsData.length > 0 ? (
+        aboutUsData.map((aboutUs) => (
+          <div
+            key={aboutUs.about_us_id}
+            className={`AboutUsImgVisionDataContentContainer ${themeDetails.AboutUsImgDataContentContainer}`}
+          >
+            <img
               src={aboutUs.About_Us_Image}
               alt="About Us"
             />
-                    <h2>{aboutUs.Title}</h2>
-          <p>{aboutUs.Description}</p>
-                 
-                  </div>
-                ))}
+            <h2>{aboutUs.Title}</h2>
+            <p>{aboutUs.Description}</p>
+          </div>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No information available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No data found. Please add the necessary information.</p>
+      ) : (
+        <p>No information available. Please contact support if this issue persists.</p>
+      )}
               </div>
 
             </div>

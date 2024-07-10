@@ -10,8 +10,9 @@ import '../../../../styles/CoursePage/CoursePageDefault.css'
 import '../../../../styles/CoursesPageStyles/themeWhite.css';
 import { RiLoginBoxLine } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
+import '../../../../styles/WhyChooseUsStyles/Theme2WCU.css'
 
-const CoursePageHeader = ({ isEditMode }) => {
+const CoursePageHeader = ({ isEditMode, userRole}) => {
   const [image, setImage] = useState(null);
   const [showLinks, setShowLinks] = useState(false);
 
@@ -52,17 +53,21 @@ const CoursePageHeader = ({ isEditMode }) => {
   return (
     <div className={`CoursePage_header_Container ${themeDetails.CoursePageHeaderContainer}`}>
       <div className={`logo_Img_container ${themeDetails.themeLogoImgC}`}>
-        {image ? (
-          <Link to="/">
-            <img
-              src={image}
-              className={`${themeDetails.themeLogoImg}`}
-              alt="Current"
-            />
-          </Link>
-        ) : (
-          <img src={defaultImage} alt="Default" />
-        )}
+       {image ? (
+        <Link to="/">
+          <img
+            src={image}
+            className={`${themeDetails.themeLogoImg}`}
+            alt="Current"
+          />
+        </Link>
+      ) : userRole === 'user' ? (
+        <p>Unable to load image at the moment. Please try again later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There is no data available. Please add the data.</p>
+      ) : (
+        <p>No image available. Please contact support if this issue persists.</p>
+      )}
         <div 
         className={`logoImgContainer ${themeDetails.logoC}`}
         
@@ -81,13 +86,21 @@ const CoursePageHeader = ({ isEditMode }) => {
       <div 
       className={`${showLinks?"menu-link mobileMenuLink":"menu-link"} CoursePageItemsContainer ${themeDetails.themeCoursePageHeaderContainer} `}>
         <ul className={`courseHeaderUl ${themeDetails.themeCPHeaderUl} `}>
-          {headers.map((headeritem) => (
-            <li key={headeritem.HeaderItem_Id}>
-              <Link to={headeritem.HeaderItemLink}>
-                {headeritem.HeaderItemName}{" "}
-              </Link>
-            </li>
-          ))}
+        {headers.length > 0 ? (
+        headers.map((headeritem) => (
+          <li key={headeritem.HeaderItem_Id}>
+            <Link to={headeritem.HeaderItemLink}>
+              {headeritem.HeaderItemName}
+            </Link>
+          </li>
+        ))
+      ) : userRole === 'user' ? (
+        <p>No items available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No items available. Please add the required items.</p>
+      ) : (
+        <p>No items available. Please contact support if this issue persists.</p>
+      )}
 
         </ul>
       </div>
@@ -103,5 +116,4 @@ const CoursePageHeader = ({ isEditMode }) => {
     </div>
   );
 };
-
 export default CoursePageHeader;

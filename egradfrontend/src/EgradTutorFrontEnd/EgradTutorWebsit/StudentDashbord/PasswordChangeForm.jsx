@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const PasswordChangeForm = () => {
-  const { userId } = useParams();
+  const { user_Id } = useParams();
+  const navigate = useNavigate();
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [attempts, setAttempts] = useState(0);
 
   useEffect(() => {
-    console.log(`Received userId: ${userId}`);
-  }, [userId]);
+    console.log(`Received user_Id: ${user_Id}`);
+  }, [user_Id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,18 +22,46 @@ const PasswordChangeForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userId, oldPassword, newPassword, confirmPassword }),
+        body: JSON.stringify({ user_Id, oldPassword, newPassword, confirmPassword }),
       });
 
       if (response.ok) {
         alert('Password updated successfully');
+        navigate('/UserLogin');
+      } else {
+        const errorMessage = await response.text();
+        alert(errorMessage);
+        setAttempts(attempts + 1);
+        if (attempts >= 2) {
+          await handleResendPassword();
+        }
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error updating password');
+    }
+  };
+
+  const handleResendPassword = async () => {
+    try {
+      const response = await fetch('http://localhost:5001/StudentRegistationPage/resend-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user_Id }),
+      });
+
+      if (response.ok) {
+        alert('New code sent to your registered email');
+        setAttempts(0);
       } else {
         const errorMessage = await response.text();
         alert(errorMessage);
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Error updating password');
+      alert('Error resending password');
     }
   };
 
@@ -40,7 +70,7 @@ const PasswordChangeForm = () => {
       <h1>Change Password</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Old Password</label>
+          <label>Code</label>
           <input
             type="password"
             value={oldPassword}
@@ -68,6 +98,9 @@ const PasswordChangeForm = () => {
         </div>
         <button type="submit">Submit</button>
       </form>
+      {attempts >= 3 && (
+        <button onClick={handleResendPassword}>Resend Password</button>
+      )}
     </div>
   );
 };

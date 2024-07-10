@@ -11,7 +11,7 @@ import { ThemeContext } from '../../../ThemesFolder/ThemeContext/Context';
 import '../../../styles/UGHomePage/UgHomePage_Default_Theme.css';
 import '../../../styles/Theme1LinksPage.css';
 
-const LinkPage = () => {
+const LinkPage = ({userRole}) => {
   const { Link_Id } = useParams();
   const { EntranceExams_Id } = useParams();
   const [footerDocumentData, setFooterDocumentData] = useState('');
@@ -71,16 +71,17 @@ const LinkPage = () => {
       <div className={`LinksPagesMainContainer ${themeDetails.LinksPagesMainContainer}`}>
         <div className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`} >
           <>
-            {image ? (
-              <Link to="/" >
-                <img
-                  src={image}
-
-                  alt="Current"
-                /></Link>
-            ) : (
-              <img src={defaultImage} alt="Default" />
-            )}
+          {image ? (
+        <Link to="/">
+          <img src={image} alt="Current" />
+        </Link>
+      ) : userRole === 'user' ? (
+        <p>Unable to load image at the moment. Please try again later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There is no data available. Please add the necessary image data.</p>
+      ) : (
+        <p>No image available. Please contact support if this issue persists.</p>
+      )}
           </>
 
 
@@ -106,16 +107,17 @@ const LinkPage = () => {
           <div className={`LinksPagesMainContainer ${themeDetails.LinksPagesMainContainer}`}>
             <div className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`} >
               <>
-                {image ? (
-                  <Link to="/" >
-                    <img
-                      src={image}
-
-                      alt="Current"
-                    /></Link>
-                ) : (
-                  <img src={defaultImage} alt="Default" />
-                )}
+              {image ? (
+        <Link to="/">
+          <img src={image} alt="Current" />
+        </Link>
+      ) : userRole === 'user' ? (
+        <p>Unable to load image at the moment. Please try again later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There is no data available. Please add the necessary image data.</p>
+      ) : (
+        <p>No image available. Please contact support if this issue persists.</p>
+      )}
               </>
 
 
@@ -144,16 +146,17 @@ const LinkPage = () => {
           <div className={`LinksPagesMainContainer ${themeDetails.LinksPagesMainContainer}`}>
             <div className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`} >
               <>
-                {image ? (
-                  <Link to="/" >
-                    <img
-                      src={image}
-
-                      alt="Current"
-                    /></Link>
-                ) : (
-                  <img src={defaultImage} alt="Default" />
-                )}
+              {image ? (
+        <Link to="/">
+          <img src={image} alt="Current" />
+        </Link>
+      ) : userRole === 'user' ? (
+        <p>Unable to load image at the moment. Please try again later.</p>
+      ) : userRole === 'admin' ? (
+        <p>There is no data available. Please add the necessary image data.</p>
+      ) : (
+        <p>No image available. Please contact support if this issue persists.</p>
+      )}
               </>
 
 

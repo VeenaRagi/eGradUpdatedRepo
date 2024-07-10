@@ -13,7 +13,7 @@ import "../../../../styles/ExamPage/DefaultThemeExamPage.css";
 import { LuInfo } from "react-icons/lu";
 import { GoGlobe } from "react-icons/go";
 
-const ExamInfo = ({ isEditMode }) => {
+const ExamInfo = ({ isEditMode, userRole}) => {
   const { EntranceExams_Id } = useParams();
   const [isEditing, setIsEditing] = useState(false);
   const [newInfo, setNewInfo] = useState({
@@ -32,7 +32,7 @@ const ExamInfo = ({ isEditMode }) => {
     const fetchSpecificExamInformation = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/ExamInfo/exam_info/${EntranceExams_Id}`
+        `${BASE_URL}/ExamInfo/exam_info/${EntranceExams_Id}`
         );
         console.log("Specific Exam Info:", response.data);
         if (response.data && response.data.length > 0) {
@@ -93,6 +93,25 @@ const ExamInfo = ({ isEditMode }) => {
   console.log(themeDetails, "mapppping from json....");
 
 
+  const formatTextWithLineBreaks = (text) => {
+    return text.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br />
+      </React.Fragment>
+    ));
+  };
+
+
+  const formatTextForTable = (text) => {
+    const rows = text.split('\n').map(line => line.trim()).filter(line => line);
+    return rows.map((row, index) => {
+      const [date, exam] = row.split(' : ').map(part => part.trim());
+      return { date, exam, key: index };
+    });
+  };
+
+  const tableData = formatTextForTable(newInfo.Important_Dates);
 
   return (
     <div
@@ -190,9 +209,19 @@ const ExamInfo = ({ isEditMode }) => {
                 <span>{getIcon("Conducting_Authority")}</span>
               </h3>
               <div></div>
-              {visibleSection === "Conducting_Authority" && (
-                <p id="more_info">{newInfo.Conducting_Authority}</p>
-              )}
+              {visibleSection === "Conducting_Authority" ? (
+        newInfo.Conducting_Authority ? (
+          <p id="more_info">
+            {formatTextWithLineBreaks(newInfo.Conducting_Authority)}
+          </p>
+        ) : userRole === 'user' ? (
+          <p id="more_info">Information about the conducting authority is currently unavailable. Please check back later.</p>
+        ) : userRole === 'admin' ? (
+          <p id="more_info">There is no data available for the conducting authority. Please update or add the necessary information.</p>
+        ) : (
+          <p id="more_info">Information about the conducting authority is not available at this time. Please contact support if you need assistance.</p>
+        )
+      ) : null}
             </div>
 
             <div className={`toggles ${themeDetails.themeToggles}`}>
@@ -203,9 +232,17 @@ const ExamInfo = ({ isEditMode }) => {
                 Exam Pattern <span>{getIcon("Exam_Pattern")}</span>
               </h3>
 
-              {visibleSection === "Exam_Pattern" && (
-                <p id="more_info">{newInfo.Exam_Pattern}</p>
-              )}
+              {visibleSection === "Exam_Pattern" ? (
+        newInfo.Exam_Pattern ? (
+          <p id="more_info">{formatTextWithLineBreaks(newInfo.Exam_Pattern)}</p>
+        ) : userRole === 'user' ? (
+          <p id="more_info">No exam pattern information is available at the moment. Please check back later.</p>
+        ) : userRole === 'admin' ? (
+          <p id="more_info">Exam pattern information is missing. Please update the content.</p>
+        ) : (
+          <p id="more_info">No exam pattern information is available. Please contact support if this issue persists.</p>
+        )
+      ) : null}
             </div>
 
             <div className={`toggles ${themeDetails.themeToggles}`}>
@@ -216,9 +253,19 @@ const ExamInfo = ({ isEditMode }) => {
                 Eligibility <span>{getIcon("Eligibility")}</span>
               </h3>
 
-              {visibleSection === "Eligibility" && (
-                <p id="more_info">{newInfo.Eligibility}</p>
-              )}
+              {visibleSection === "Eligibility" ? (
+        newInfo.Eligibility ? (
+          <p id="more_info">
+            {formatTextWithLineBreaks(newInfo.Eligibility)}
+          </p>
+        ) : userRole === 'user' ? (
+          <p id="more_info">Eligibility information is currently unavailable. Please check back later.</p>
+        ) : userRole === 'admin' ? (
+          <p id="more_info">Eligibility information is missing. Please update the content.</p>
+        ) : (
+          <p id="more_info">Eligibility information is not available. Please contact support if this issue persists.</p>
+        )
+      ) : null}
             </div>
 
             <div className={`toggles ${themeDetails.themeToggles}`}>
@@ -227,7 +274,8 @@ const ExamInfo = ({ isEditMode }) => {
               </h3>
 
               {visibleSection === "Syllabus" && (
-                <p id="more_info">{newInfo.Syllabus}</p>
+                <p id="more_info">{formatTextWithLineBreaks(newInfo.Syllabus)}</p>
+                
               )}
             </div>
 
@@ -239,9 +287,32 @@ const ExamInfo = ({ isEditMode }) => {
                 Important Dates <span>{getIcon("Important_Dates")}</span>
               </h3>
 
-              {visibleSection === "Important_Dates" && (
-                <p id="more_info">{newInfo.Important_Dates}</p>
-              )}
+              {visibleSection === "Important_Dates" ? (
+        tableData.length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Exam</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableData.map(row => (
+                <tr key={row.key}>
+                  <td>{row.date}</td>
+                  <td>{row.exam}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : userRole === 'user' ? (
+          <p>No important dates are available at the moment. Please check back later.</p>
+        ) : userRole === 'admin' ? (
+          <p>No important dates found. Please add the necessary information.</p>
+        ) : (
+          <p>No important dates available. Please contact support if this issue persists.</p>
+        )
+      ) : null}
             </div>
           </div>
         </div>

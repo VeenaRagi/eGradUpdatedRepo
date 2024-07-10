@@ -7,12 +7,13 @@ import { ThemeContext } from "../../../../ThemesFolder/ThemeContext/Context.js";
 import { FaArrowRight } from "react-icons/fa6";
 import '../../../../styles/UGHomePage/ugHomePageTheme1.css'
 import girl_img from'../../../../styles/Girl.png'
-const ExamCourse = () => {
+const ExamCourse = ({userRole}) => {
   const { EntranceExams_Id,Branch_Id } = useParams();
   const [portaldata, setPortalData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const themeFromContext = useContext(ThemeContext);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,7 +22,6 @@ const ExamCourse = () => {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
-        setError('Error fetching data');
         setLoading(false);
       }
     };
@@ -45,25 +45,30 @@ const ExamCourse = () => {
       <div className={`exam_courses_sub_container ${themeDetails.themeExamCoursesSubContainer}`}>
       {/* <h1 className={`exam_courses_name_heading ${themeDetails.themeExamCoursesNameHeading}`}></h1> */}
       <ul>
-        {portaldata.map(item => (
-          <div className={`portal_names ${themeDetails.themePortalNames}`}>
-           
-            <li key={item.Portale_Id}>
-              <h2 alt="image">{item.Portale_Name}</h2>
-              {themeColor==="Theme-1" ?
-              <hr/>:null
-            }
-              {/* <img src={girl_img }/> */}
+      {portaldata.length > 0 ? (
+        portaldata.map(item => (
+          <div key={item.Portale_Id} className={`portal_names ${themeDetails.themePortalNames}`}>
+            <li>
+              <h2>{item.Portale_Name}</h2>
+              {themeColor === "Theme-1" ? <hr /> : null}
               <div className={` ${themeDetails.themeExamPortalImgDivInCard}`}>
-              <img src={girl_img } alt='img not uploaded'/>
+                <img src={girl_img} alt="Portal" />
               </div>
               <div className={`exam_portal_btn ${themeDetails.themeExamPortalBtn}`}>
-              <Link to={`/CoursePage/${item.Branch_Id}/${item.Portale_Id}`} target="_blank">{item.button}Explore<FaArrowRight /></Link>
+                <Link to={`/CoursePage/${item.Branch_Id}/${item.Portale_Id}`} target="_blank">
+                  {item.button} Explore <FaArrowRight />
+                </Link>
               </div>
-           
             </li>
           </div>
-        ))}
+        ))
+      ) : userRole === 'user' ? (
+        <p>No portal data available at the moment. Please check back later.</p>
+      ) : userRole === 'admin' ? (
+        <p>No portal data available. Please add the required portal information.</p>
+      ) : (
+        <p>No portal data available. Please contact support if this issue persists.</p>
+      )}
       </ul>
       </div>
     </div>

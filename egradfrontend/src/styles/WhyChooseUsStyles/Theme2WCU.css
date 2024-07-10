@@ -249,6 +249,17 @@ h2.orangeContant {
   font-size: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+  @media (max-width: 922px) {
+    .CoursePage_header_Container.undefined {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+    .menu-link.mobileMenuLink.CoursePageItemsContainer.t2CoursePageHeaderContainer {
+      top: 2%;
+  }
+  }
+
 @media (max-width: 768px) {
   .t2CPHeaderUl li a {
     color: white;
@@ -261,7 +272,6 @@ h2.orangeContant {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* gap: 14rem; */
 }
 .menu-link.mobileMenuLink.CoursePageItemsContainer.t2CoursePageHeaderContainer {
   width: 210px;
@@ -295,6 +305,11 @@ h2.orangeContant {
   /* height: 350px; */
   transition: transform 0.3s ease-in-out;
 }
+@media (max-width: 425px) {
+  .menu-link.mobileMenuLink.CoursePageItemsContainer.t2CoursePageHeaderContainer {
+    width: 146px;
+}
+}
 
 .hamburgerMenu.courseHMenu {
   display: flex;
@@ -303,6 +318,12 @@ h2.orangeContant {
   left: -14%;
   /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
 }
+/* @media (max-width: 924px) {
+  .CoursePage_header_Container.undefined {
+    display: flex;
+    justify-content: space-around;
+}
+} */
 
 }
 @media (max-width: 568px) {

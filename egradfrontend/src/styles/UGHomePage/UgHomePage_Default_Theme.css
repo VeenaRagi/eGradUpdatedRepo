@@ -193,7 +193,7 @@ h2#EXPLORE_Exam_Heading {
     text-align: center;
     text-transform: capitalize;
     width: 256px;
-    height: 249px;
+    height: 280px;
 }
 .NewExploreExams_EachCard_Container.NewExploreExams_EachCard_ContainerDefault ul li.defaultLinkToSpecificExam{
     background: #3ad4ba;
@@ -320,7 +320,7 @@ h3.undefined {
     text-decoration: none;
     width: 179px;
     font-size: 13px;
-    height: 42px;
+    height: 50px;
 }
  
 ul.defaultCoursesUl li:hover {
@@ -578,7 +578,7 @@ ul.defaultCoursesUl li:hover {
         text-decoration: none;
         width: 155px;
         font-size: 13px;
-        height: 40px;
+        height: 50px;
     }
     .Footer_Sub_Container.themeFooterSubContainerDefault {
         padding: 2rem 3rem 0;
