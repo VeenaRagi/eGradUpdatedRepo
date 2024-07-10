@@ -9,6 +9,8 @@ import { useTIAuth } from '../TechInfoContext/AuthContext';
 // const LOGIN_URL ='/UserLogin'
 // import CryptoJS from 'crypto-js';
 // import { decryptData, encryptData } from './CryptoUtils/CryptoUtils';
+
+
 const UserLogin = () => {
   const[tiAuth,settiAuth]=useTIAuth()
   const [email, setEmail] = useState('');
@@ -60,7 +62,7 @@ const UserLogin = () => {
 
         console.log("Stored in localStorage and useContext:", tiAuth);
         const encodedUserId = encodeURIComponent((user_Id));
-        navigate(`/testingUrl/${encodedUserId}`);
+        navigate(`/Student_dashboard/${encodedUserId}`);
       } else if (role === 'Admin' || role === 'SuperAdmin') {
         alert('You don\'t have access to this page');
       } else {
