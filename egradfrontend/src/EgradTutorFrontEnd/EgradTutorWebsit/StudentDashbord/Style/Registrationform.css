@@ -116,3 +116,295 @@ input[type="email"] {
 .popup.show {
   display: block;
 }
+/* css for registration form of course page */
+.registrationFormParentDiv{
+  width: 95%;
+  margin: auto;
+  padding: 1rem 0 ;
+}
+.registrationForm {
+  /* width: 90%; */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: space-evenly;
+  gap: 1rem;
+  width: 100%;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 700px));
+}
+.registrationForm >div {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr; */
+  /* border: 1px solid red; */
+  /* row-gap: 2rem; */
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.registrationForm div input {
+  /* Add your styles here */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  /* width: 100%;  */
+  /* Make input fields take full width of the parent container */
+  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+.radioGroup {
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+}
+.radioGroup div{
+  display: flex;
+	align-items: center;
+	/* margin-bottom: 20px; */
+}
+
+.radioGroup div input[type="radio"] {
+  margin: 10px;
+}
+.registrationFromSubContainer {
+  width: 80%;
+  margin: auto;
+  border: 1px solid green;
+}
+.radioGroup2 >div {
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 20px; */
+  width: 100%;
+}
+@media (max-width:768px){
+  /* .registrationForm >div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1px solid red;
+    row-gap: 2rem;
+    padding: 1rem;
+  } */
+
+}
+
+
+
+.fieldsToBeGrid >div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 1rem;
+}
+.qualificationRBDiv{
+  display: flex;
+
+}
+.qualificationRBDiv div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+.fieldsToBeGrid h1, .fieldsToBeGrid2 h1{
+  align-items: center;
+  text-align: start;
+  padding-left: 1rem;
+  background-color: #30a9cb;
+  color: white;
+  font-size: 26px;
+}
+.fieldsToBeGrid {
+  padding: 1rem;
+  /* border: 1px solid black; */
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.uploadPicDiv{
+  width: 150px;
+  height: 150px;
+}
+.uploadPicDiv img{
+  width: 100%;
+}
+.fieldsToBeGrid >div >label{
+font-weight: 600;
+font-size: 18px;
+text-transform: uppercase;
+/* color: #0056b3; */
+}
+.mandatoryIndicator{
+  color: red;
+  font-weight: 600;
+  font-size: 18px;
+}
+.registerOrCousesButtonDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.registerOrCousesButtonDiv button{
+  background-color: #30a9cb;
+  color: white;
+}
+@media (max-width:425px){
+  .fieldsToBeGrid >div {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    padding: 1rem;
+  }
+  .radioGroup2 >div {
+    display: flex;
+    align-items: center;
+    /* margin-bottom: 20px; */
+    width: 100%;
+    flex-wrap: wrap;
+}
+.fieldsToBeGrid {
+  padding: 0;
+  /* border: 1px solid black; */
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+}
+.fieldsToBeFlex>div {
+  align-items: center;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  display: grid;
+  justify-items: center;
+}
+.fieldsToBeFlex label{
+  font-weight: 600;
+font-size: 18px;
+text-transform: uppercase;
+}
+@media (max-width:375px){
+
+  .registrationForm {
+    margin: 0 auto;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 1rem;
+    width: 100%;
+    display: grid;
+    padding: 0 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 800px));
+  }
+}
+@media (max-width:441px){
+  .fieldsToBeFlex>div {
+    align-items: center;
+    /* padding: 1rem; */
+    /* display: flex; */
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    gap: 20px;
+    padding: 8px;
+    margin: 0;
+    width: inherit;
+    display: grid;
+    align-items: center;
+}
+  
+}
+
+@media (max-width:350px){
+  .registrationForm {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 1rem;
+    width: 100%;
+    display: grid;
+    padding: 0;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 800px));
+  }
+}
+
+@media (max-width:854px){
+.fieldsToBeGrid >div {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  padding: 1rem;
+}
+}
+/* .fieldsToBeGrid >div {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+} */
+@media (min-width: 2314px) and (max-width: 2560px) {
+  .registrationForm {
+    /* width: 90%; */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: space-evenly;
+    gap: 1rem;
+    width: 100%;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(300px, 700px));
+  }
+}
+.fieldsToBeFlex {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.fieldsToBeGrid2 {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /* border: 1px solid black; */
+  padding: 1rem;
+}
+@media (max-width:816px){
+  .fieldsToBeFlex {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width:425px){
+  .fieldsToBeGrid h1, .fieldsToBeGrid2 h1{
+    align-items: center;
+    text-align: start;
+    padding-left: 1rem;
+    background-color: #30a9cb;
+    color: white;
+    font-size: 23px;
+  }
+  .fieldsToBeGrid >div >label{
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    /* color: #0056b3; */
+    }
+    .fieldsToBeFlex label{
+      font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    }
+}
+.fieldsToBeFlex input{
+  width: 90%;
+}
