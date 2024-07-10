@@ -470,14 +470,10 @@ router.post("/success", async (req, res) => {
               </div>
  
               <script>
-                  document.getElementById('redirectButton').addEventListener('click', function() {
-                      if (${firstTimeLogin}) {
-                          window.location.href = 'http://localhost:3000/PasswordChangeForm/${userId}';
-                      } else {
-                          window.location.href = 'http://localhost:3000/Student_dashboard';
-                      }
-                  });
-              </script>
+              document.getElementById('redirectButton').addEventListener('click', function() {
+                  window.location.href = 'http://localhost:3000/Student_dashboard/:userIdTesting';
+              });
+          </script>
           </body>
           </html>
         `;

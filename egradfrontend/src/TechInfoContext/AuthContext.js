@@ -4,8 +4,9 @@ const TIAuthContext = createContext();
 
 const TIAuthProvider = ({ children }) => {
   const [tiAuth, settiAuth] = useState({
-    user: "veena",
+    user: "",
     token: "",
+    isLoggedIn: false,
   });
   useEffect(()=>{
     const data=localStorage.getItem('tiAuth')
