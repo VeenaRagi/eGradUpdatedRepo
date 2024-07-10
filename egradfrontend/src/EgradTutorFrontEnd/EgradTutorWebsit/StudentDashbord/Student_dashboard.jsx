@@ -68,6 +68,9 @@ const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
       {userIdTesting} <br />
       {decryptedUserIdState} <br />
       <button onClick={handleLogOut}>Log out</button>
+      <div>
+        
+      </div>
     </div>
   );
 };

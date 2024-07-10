@@ -11,7 +11,6 @@ import "../../../../styles/Theme2_landingPage_styles.css";
 import "../../../../styles/LandingPage_main.css";
 import JSONClasses from "../../../../ThemesFolder/JSONForCSS/JSONClasses.js";
 import { Link } from "react-router-dom";
-import Maintenance1 from "../../../MaintenanceMode/Maintenance1.js";
 
 const LandingPageHeader = ({ isEditMode, userRole }) => {
   const [image, setImage] = useState(null);
@@ -27,13 +26,13 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
   const fetchImage = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/Logo/image`, {
-        responseType: 'arraybuffer',
+        responseType: "arraybuffer",
       });
-      const imageBlob = new Blob([response.data], { type: 'image/png' });
+      const imageBlob = new Blob([response.data], { type: "image/png" });
       const imageUrl = URL.createObjectURL(imageBlob);
       setImage(imageUrl);
     } catch (error) {
-      console.error('Error fetching image:', error);
+      console.error("Error fetching image:", error);
       setError(true); // Set error state to true on failure
     }
   };
@@ -95,12 +94,12 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
             className={`Newlandingpage_logosubcontainer ${themeDetails.themeSubContainer}`}
           >
             <div className={`logo_Img_container ${themeDetails.themeLogoImgC}`}>
-
-
               {error ? (
-                userRole === 'user' ? (
-                  <p>Unable to load image at the moment. Please try again later.</p>
-                ) : userRole === 'admin' ? (
+                userRole === "user" ? (
+                  <p>
+                    Unable to load image at the moment. Please try again later.
+                  </p>
+                ) : userRole === "admin" ? (
                   <p>There is no data available. Please add the data.</p>
                 ) : (
                   <p>Unable to load image at the moment.</p>
@@ -141,18 +140,15 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
               <Maintenance1 />
             )} */}
 
-{welcomeimage ? (
-  <img src={welcomeimage} alt="welcomeCurrent" />
-) : (
-  userRole === 'user' ? (
-    <p>Unable to load image at the moment. Please try again later.</p>
-  ) : userRole === 'admin' ? (
-    <p>There is no data available. Please add the data.</p>
-  ) : (
-    <p>Unable to load image. Please contact support.</p> // Default message for any other user roles
-  )
-)}
-
+            {welcomeimage ? (
+              <img src={welcomeimage} alt="welcomeCurrent" />
+            ) : userRole === "user" ? (
+              <p>Unable to load image at the moment. Please try again later.</p>
+            ) : userRole === "admin" ? (
+              <p>There is no data available. Please add the data.</p>
+            ) : (
+              <p>Unable to load image. Please contact support.</p> // Default message for any other user roles
+            )}
           </div>
           <div
             className={`landing_heading_div_container ${themeDetails.themeCapTextContainer}`}
@@ -167,9 +163,12 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
                 ))
               ) : (
                 <div>
-                  {userRole === 'user' ? (
-                    <p>Unable to load the data at the moment. Please try again later.</p>
-                  ) : userRole === 'admin' ? (
+                  {userRole === "user" ? (
+                    <p>
+                      Unable to load the data at the moment. Please try again
+                      later.
+                    </p>
+                  ) : userRole === "admin" ? (
                     <p>No data found. Please add the data to the system.</p>
                   ) : (
                     <p>There is no data available. Please add the data.</p>

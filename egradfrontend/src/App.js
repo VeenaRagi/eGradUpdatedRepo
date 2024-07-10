@@ -18,17 +18,14 @@ import CoursePage from "./EgradTutorFrontEnd/EgradTutorWebsit/CoursePages/Course
 import UserLogin from "./Login/UserLogin";
 import PasswordChangeForm from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PasswordChangeForm";
 import SuperAdminLogin from "./Login/SuperAdminLogin";
-import UserDashboard from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UserDashboard ";
 import PrivateRoute from "./Login/PrivateRoute";
 import ForgotPassword from "./Login/ForgotPassword";
-import Maintenance1 from "./EgradTutorFrontEnd/MaintenanceMode/Maintenance1.js";
 
-import { TIAuthProvider } from "./TechInfoContext/AuthContext.js";
 import axios from "./api/axios.js";
 import BASE_URL from "./apiConfig.js";
 import NotFound from "./NotFound.jsx";
 import RegistrationForm from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/RegistrationForm.jsx";
-import SDAfterLogin from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/SDAfterLogin.jsx";
+import Student_dashboard from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/Student_dashboard.jsx";
 import Payu from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/Payu.jsx";
 
 function App() {
@@ -79,7 +76,6 @@ function App() {
           ) : (
             <Router>
               <Routes>
-
                 <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
                 <Route path="/adminlogin" element={<AdminLogin />} />
                 <Route path="/UserLogin" element={<UserLogin />} />
@@ -88,20 +84,12 @@ function App() {
                   element={<RegistrationForm />}
                 />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
-
-                <Route path="/PasswordChangeForm/:user_Id" element={<PasswordChangeForm />} />
-
-
-                <Route path="/PayU/:courseCreationId" element={<Payu />} />
-                
                 <Route
-                  path="/user-dashboard/:userId"
-                  element={
-                    <PrivateRoute>
-                      <UserDashboard />
-                    </PrivateRoute>
-                  }
+                  path="/PasswordChangeForm/:user_Id"
+                  element={<PasswordChangeForm />}
                 />
+                <Route path="/PayU/:courseCreationId" element={<Payu />} />
+
 
                 <Route
                   path="/"
@@ -119,7 +107,6 @@ function App() {
                   path="/CoursePage/:Branch_Id/:Portale_Id"
                   element={<CoursePage isEditMode={isEditMode} />}
                 />
-
                 <Route
                   path="/AboutUs"
                   element={<AboutUs isEditMode={isEditMode} />}
@@ -128,20 +115,15 @@ function App() {
                 <Route path="/Faq" element={<FAQ />} />
                 <Route path="/linkpage/:Link_Id" element={<LinkPage />} />
 
-
-                <Route path="/Maintenance1" element={<Maintenance1 />} />
-             
-
+{/* --------------------Student_dashboard_INTERFACE_ROUTES_START-------------------- */}
                 <Route element={<PrivateRoute />}>
                   <Route
-                    path="/user-dashboard/:user_Id"
-                    element={<UserDashboard />}
-                  />
-                  <Route
-                    path="/testingUrl/:userIdTesting"
-                    element={<SDAfterLogin />}
+                    path="/Student_dashboard/:userIdTesting"
+                    element={<Student_dashboard />}
                   />
                 </Route>
+{/* --------------------Student_dashboard_INTERFACE_ROUTES_END-------------------- */}
+
               </Routes>
             </Router>
           )}
