@@ -5,7 +5,7 @@ const mysql = require("mysql");
     host: "localhost",
     user: "root",
     password: "",
-    database: "dynamic_website_db",
+    database: "admin_project",
   }); 
   
 db1.connect((err) => {
