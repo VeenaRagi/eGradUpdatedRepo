@@ -42,8 +42,8 @@ router.get('/branches', async (req, res) => {
   router.get('/getExamImages', async (req, res) => {
     try {
       // Query database to fetch all exam images
-      const [rows] = await db.query('SELECT * FROM ug_exams_images LIMIT 1');
-  
+      const [rows] = await db.query('SELECT * FROM ug_exams_images');
+ 
       // Check if rows are present
       if (rows.length > 0) {
         const images = rows.map(row => {
@@ -56,7 +56,7 @@ router.get('/branches', async (req, res) => {
           }
           return image;
         });
-  
+ 
         res.json({ examImages: images });
       } else {
         res.status(404).json({ message: 'No images found' });
@@ -66,8 +66,6 @@ router.get('/branches', async (req, res) => {
       res.status(500).json({ error: true, message: 'Failed to fetch exam images' });
     }
   });
-
-
   
 
 module.exports = router;
