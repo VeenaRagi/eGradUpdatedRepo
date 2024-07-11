@@ -9,7 +9,7 @@ import StudentDashbord_MyResults from "./StudentDashbord_MyResults";
 import StudentDashbord_Bookmarks from "./StudentDashbord_Bookmarks";
 import StudentDashbord_Settings from "./StudentDashbord_Settings";
 
-const Student_dashboard_Container = ({ usersData }) => {
+const Student_dashboard_Container = ({ usersData,decryptedUserIdState }) => {
   const [activeComponent, setActiveComponent] = useState("home");
 
   const handleMenuClick = (component) => {
@@ -82,7 +82,7 @@ const Student_dashboard_Container = ({ usersData }) => {
           <Student_dashboard_Home usersData={usersData} />
         )}
         {activeComponent === "myCourses" && (
-          <StudentDashbord_MyCourses usersData={usersData} />
+          <StudentDashbord_MyCourses usersData={usersData} decryptedUserIdState={decryptedUserIdState} />
         )}
         {activeComponent === "buyCourses" && (
           <StudentDashbord_BuyCourses usersData={usersData} />

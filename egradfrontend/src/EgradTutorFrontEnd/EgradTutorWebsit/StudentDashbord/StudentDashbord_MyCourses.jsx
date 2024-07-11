@@ -8,7 +8,7 @@ import ReactPlayer from "react-player";
 import { FaBookOpenReader } from "react-icons/fa6";
 import "./Style/StudentDashbord_MyCourses.css";
 
-const StudentDashbord_MyCourses = ({ usersData }) => {
+const StudentDashbord_MyCourses = ({ usersData,decryptedUserIdState }) => {
   const [testDetails, setTestDetails] = useState([]);
   const [selectedTypeOfTest, setSelectedTypeOfTest] = useState("");
   const [testPageHeading, setTestPageHeading] = useState([]);
@@ -23,11 +23,15 @@ const StudentDashbord_MyCourses = ({ usersData }) => {
   const [completePackage, setCompletePackage] = useState([]);
   const { Portale_Id } = useParams();
   const [selectedPortal, setSelectedPortal] = useState("");
-  const user_Id =
-    usersData.users && usersData.users.length > 0
-      ? usersData.users.map((user) => user.username)
-      : null;
 
+  const userData =
+    usersData.users && usersData.users.length > 0
+      ? usersData.users.map((user) => user.user_Id)
+      : null;
+  const user_Id = decryptedUserIdState;
+
+      console.log("hiiiiiiii");
+      console.log(user_Id)
   // ************** FOR ONLINE VIDEO CLASS RIGHT CLICK DISABLE FUNCTIONALITY ********************//
   const [isFullscreen, setIsFullscreen] = useState(false);
   const playerRef = useRef(null);
@@ -153,7 +157,7 @@ const StudentDashbord_MyCourses = ({ usersData }) => {
       console.error("Error fetching test details:", error);
     }
   };
-
+console.log(testDetails)
   const firstTestCreationTableId =
     testDetails.length > 0 ? testDetails[0].testCreationTableId : null;
 

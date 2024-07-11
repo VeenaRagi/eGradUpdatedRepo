@@ -154,6 +154,27 @@ const ughomepage_banner_login =require("./OTS_Quiz_Admin/ughomepage_banner_login
 
 app.use("/ughomepage_banner_login" , ughomepage_banner_login)
 
+//================OTS_QUIZAPP_IMPORTS_START=================
+const ExamPage = require("./eGradTutorStudentDashboard/ExamPage");
+const Exam_Course_Page = require("./eGradTutorStudentDashboard/Exam_Course_Page");
+const CoursePage = require("./eGradTutorStudentDashboard/CoursePage");
+const TestPage = require("./eGradTutorStudentDashboard/TestPage");
+const InstructionPage = require("./eGradTutorStudentDashboard/InstructionPage");
+const QuizPage = require("./eGradTutorStudentDashboard/QuizPage");
+const TestResultPage = require("./eGradTutorStudentDashboard/TestResultPage");
+//================OTS_QUIZAPP_IMPORTS_END==================
+ 
+//================OTS_QUIZAPP_ROUTES_START==================
+app.use("/ExamPage", ExamPage);
+app.use("/Exam_Course_Page", Exam_Course_Page);
+app.use("/CoursePage", CoursePage);
+app.use("/TestPage", TestPage);
+app.use("/InstructionPage", InstructionPage);
+app.use("/QuizPage", QuizPage);
+app.use("/TestResultPage", TestResultPage);
+//================OTS_QUIZAPP_ROUTES_END===============
+
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
