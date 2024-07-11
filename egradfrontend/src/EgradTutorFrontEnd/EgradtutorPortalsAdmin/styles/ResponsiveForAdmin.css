@@ -81,3 +81,15 @@
     flex-direction: column;
   }
 }
+@media (max-width: 425px) {
+  .textColor {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+}
+@media (max-width: 425px) {
+  .textColor {
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+}

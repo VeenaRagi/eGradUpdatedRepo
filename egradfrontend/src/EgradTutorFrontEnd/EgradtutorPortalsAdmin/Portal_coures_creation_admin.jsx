@@ -1439,7 +1439,7 @@ const handleSearchInputChange = (event) => {
           />
         </div>
         <h3 className="list_-otsTitels">created COURSES list</h3>
-        <div>
+        <div style={{overflowX:"scroll"}}>
           {/* <table className="couresCreation_-table"> */}
           <table className="otc_-table otsAdminTable_Container">
 

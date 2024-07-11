@@ -9,6 +9,7 @@ import "../../../../styles/Theme2_landingPage_styles.css";
 import "../../../../styles/Theme1_landingPage_styles.css";
 import "../../../../styles/Default_landingPage_styles.css";
 import { FcGraduationCap } from "react-icons/fc";
+import ugImg from'../../../../styles/Girl.png'
 import { MdFileUpload } from "react-icons/md";
 import { LiaEditSolid } from "react-icons/lia";
 import { IoMdAddCircleOutline } from "react-icons/io";
@@ -218,17 +219,21 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
                         className={`NewlandingPage_exams_image ${themeDetails.themeExamImageBox}`}
                       >
                         {themeColor === "Theme-2" &&
-                          examImages?.map((image, index) => (
-                            <div key={index} className="image-item">
-                              {image.Exam_Image && (
-                                <img
-                                  src={`data:image/jpeg;base64,${image.Exam_Image}`} // Adjust the MIME type if necessary
-                                  alt={`Exam ${index + 1}`}
-                                  style={{ width: "200px", height: "auto" }}
-                                />
-                              )}
-                            </div>
-                          ))}
+                          // examImages?.map((image, index) => (
+                          //   <div key={index} className="image-item">
+                          //     {image.Exam_Image && (
+                          //       <img
+                          //         // src={`data:image/jpeg;base64,${image.Exam_Image}`} 
+                          //         src={ugImg}
+                          //         alt={`Exam ${index + 1}`}
+                          //         style={{ width: "200px", height: "auto" }}
+                          //       />
+                          //     )}
+                          //   </div>
+                          // )
+                          // )
+                         <img src={ugImg}/>
+                          }
                       </div>
                       <div
                         className={`${themeDetails.themeLanding_branch_box_btns}`}

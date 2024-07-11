@@ -168,10 +168,10 @@ const DocumentUpload_admin = () => {
       className=" create_exam_container otsMainPages"
       style={{ height: "100vh" }}
     >
-      <div className="" style={{ margin: "10px 0" }}>
+      <div className="" >
         <h2 className="textColor">Document Upload Form </h2>
       </div>
-      <form>
+      <form style={{overflowX:"scroll"}}>
         <div className="uploadedDocument_container examSubjects_-contant">
           <div className="uploadedDocumentFilds">
             <label htmlFor="testSelect">Select Test:</label>
@@ -262,7 +262,7 @@ const DocumentUpload_admin = () => {
               />
             </div>
             <h3 className="list_-otsTitels">uploaded documents list</h3>
-
+              <div style={{overflowX:"scroll"}}>
             <table className="otc_-table">
               <thead className="otsGEt_-contantHead otc_-table_-header">
                 <tr>
@@ -321,6 +321,7 @@ const DocumentUpload_admin = () => {
                 )}
               </tbody>
             </table>
+            </div>
             <div style={{ textAlign: "center", marginTop: "1rem" }}>
               {Array.from({ length: totalPages }, (_, index) => (
                 <button

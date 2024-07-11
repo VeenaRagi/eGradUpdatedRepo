@@ -149,7 +149,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
         // `${BASE_URL}/TestPage/feachingOveralltest/${courseCreationId}`
         `${BASE_URL}/TestPage/feachingOveralltest/${courseCreationId}/${decryptedUserIdState}`
       );
-
+      console.log(courseCreationId,"This is ccid 111111111111111111111111",decryptedUserIdState,"decrypted")
       setTestDetails(response.data);
       setShowQuizCourses(false);
       setShowtestContainer1(true);

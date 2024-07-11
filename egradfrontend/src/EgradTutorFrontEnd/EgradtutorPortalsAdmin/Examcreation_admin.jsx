@@ -318,7 +318,7 @@ function Examcreation_admin() {
           />
         </div>
         {/* Table of exams */}
-        <div className="examCreation_-createdData">
+        <div className="examCreation_-createdData" style={{overflowX:"scroll"}}>
           <h3 className="list_-otsTitels">created exams list</h3>
           <div>
             <table className="otc_-table otsAdminTable_Container">

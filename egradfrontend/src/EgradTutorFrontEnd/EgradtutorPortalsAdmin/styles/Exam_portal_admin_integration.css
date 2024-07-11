@@ -51,8 +51,9 @@
 .quz_menu2 {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;
   /* display: none; */
+  margin-top: 9px;
 }
 
 .rotate_right {
@@ -1032,4 +1033,13 @@ padding-top: 2rem;
 .testCreation_list {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 425px) {
+  .quz_menu2 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    /* display: none; */
+    margin-top: 5px;
+}
 }

@@ -293,3 +293,19 @@ border: none !important;
   flex-direction: column;
   text-align: center;
 }
+@media (max-width: 768px){
+  /* .otc_-table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    overflow-x: scroll;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+} */
+.otsAdminTable_Container tbody tr td {
+  border: 1px solid #b0c5d3;
+  border-top: none;
+  border-bottom: none;
+  font-size: 10px;
+}
+}
