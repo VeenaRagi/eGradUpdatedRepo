@@ -64,7 +64,8 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Invalid or missing user ID' });
         }
         // Retrieve user details from the database
-        const sql = 'SELECT * FROM otsstudentregistation WHERE user_Id = ?';
+        // const sql = 'SELECT * FROM otsstudentregistation WHERE studentregistationId = ?';
+        const sql =`SELECT * FROM otsstudentregistation ots RIGHT JOIN log ON ots.studentregistationId=log.studentregistationId where user_Id=?`
         const [users] = await db.query(sql, [userId]);
         if (users.length === 0) {
             return res.status(404).json({ message: 'User not found' });

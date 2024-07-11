@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-
 // const API_BASE_URL = "http://localhost:5001";
 import BASE_URL from '../../apiConfig'
+import AdminHeader from "./AdminHeader";
 const GettinggInstructions = () => {
   const [points, setPoints] = useState([]);
   const { instructionId } = useParams();
@@ -51,12 +51,14 @@ const GettinggInstructions = () => {
   };
 
   return (
+    <>
+    <AdminHeader/>
   <div className="istPointContainer">
        
     <div className=" Instruction_points otsMainPages ">
     <button
             type="button"
-            onClick={() => navigate("/UgadminHome")}
+            onClick={() => navigate("/Adminpage")}
             className="ots_-createBtn b_to_H"
           >
             Back to Home
@@ -108,6 +110,7 @@ const GettinggInstructions = () => {
  
     </div>
   </div>
+  </>
   );
 };
 

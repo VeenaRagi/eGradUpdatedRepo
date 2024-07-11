@@ -15,7 +15,8 @@ const TIAuthProvider = ({ children }) => {
         settiAuth({
             ...tiAuth,
             user:parseData.user,
-            token:parseData.token
+            token:parseData.token,
+            role:parseData.role,
         })
         
     }

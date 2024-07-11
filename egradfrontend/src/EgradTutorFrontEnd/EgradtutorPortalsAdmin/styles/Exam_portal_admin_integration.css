@@ -159,7 +159,7 @@
   font-size: 1rem;
   margin: 0;
   text-align: left;
-  
+  font-size: 14px;
 }
 .left-nav-bar ul li a i {
   color: #00aff0;
@@ -1004,4 +1004,17 @@ fieldset > legend {
   right: 10px;
   font-size: 20px;
   cursor: pointer;
+}
+.courseOtsPqbOvl_Btns ul{
+display: flex;
+gap: 2rem;
+padding-top: 2rem;
+}
+.courseOtsPqbOvl_Btns ul li button {
+  background-color: #06131f;
+  color: white;
+}
+.testCreation_list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
