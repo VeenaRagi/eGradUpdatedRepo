@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../assets/actions/authActions';
 import { AuthContext } from '../EgradTutorFrontEnd/AuthContext';
-import axios from '../api/axios';
+// import axios from '../api/axios';
 import CryptoJS from 'crypto-js';
 import { useTIAuth } from '../TechInfoContext/AuthContext';
 import '../styles/UserLoginPage/userLoginPageCss.css'
+import axios from 'axios';
 // const LOGIN_URL ='/UserLogin'
 // import CryptoJS from 'crypto-js';
 // import { decryptData, encryptData } from './CryptoUtils/CryptoUtils';

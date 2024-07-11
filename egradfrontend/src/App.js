@@ -96,6 +96,8 @@ function App() {
                   element={<WebSiteLandingPage isEditMode={isEditMode} />}
                 />
                 <Route
+
+                
                   path="/BranchHomePage/:Branch_Id"
                   element={<BranchHomePage isEditMode={isEditMode} />}
                 />

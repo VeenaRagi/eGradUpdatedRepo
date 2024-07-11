@@ -69,6 +69,7 @@
 }
 p.courseNameInCard.orangeCourseNameInCard {
     text-align: center;
+    text-transform: uppercase;
 }
 .Price_Discount {
     display: flex;
