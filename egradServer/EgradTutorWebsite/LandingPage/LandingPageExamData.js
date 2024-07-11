@@ -42,7 +42,7 @@ router.get('/branches', async (req, res) => {
   router.get('/getExamImages', async (req, res) => {
     try {
       // Query database to fetch all exam images
-      const [rows] = await db.query('SELECT * FROM ug_exams_images');
+      const [rows] = await db.query('SELECT * FROM ug_exams_images LIMIT 1');
   
       // Check if rows are present
       if (rows.length > 0) {
@@ -67,5 +67,7 @@ router.get('/branches', async (req, res) => {
     }
   });
 
+
+  
 
 module.exports = router;
