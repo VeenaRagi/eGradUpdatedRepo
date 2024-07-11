@@ -17,7 +17,7 @@
   background: #fff;
   width: 100%;
   /* padding-top: 4rem ; */
-  height:  88vh;
+  height:  100%;
 }
 
 /* -------------------------------------- menu btn .js ---------------------- */
@@ -38,6 +38,21 @@
   background: #000000;
   gap: 0.5rem;
   transition: 0.5s ease-in-out;
+}
+.quz_menu2 .lines {
+  display: block;
+  width: 30px;
+  height: 3px;
+  background: white;
+  gap: 0.5rem;
+  transition: 0.5s ease-in-out;
+  margin-left: 10px;
+}
+.quz_menu2 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  /* display: none; */
 }
 
 .rotate_right {
@@ -94,7 +109,7 @@
 
 .left-nav-bar {
   width: 240px;
-  height: auto;
+  height: 100%;
   background: #fff;
   /* border-right: 1px solid rgba(0, 0, 0, 0.288);
          border-bottom: 1px solid rgba(0, 0, 0, 0.288); */
@@ -114,7 +129,7 @@
   /* justify-content: center; */
   align-items: center;
   /* border-right: 1px solid rgba(0, 0, 0, 0.288); */
-  height: 88vh;
+  height: 100%;
   /* box-shadow: inset 0px 0px 9px; */
   box-shadow: 4px 0px 24px rgba(0, 0, 0, 0.5);
   margin: 0;
