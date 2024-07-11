@@ -69,11 +69,11 @@ function App() {
   return (
     <ThemeProvider>
       <div>
-        {isAdmin && (
+        {/* {isAdmin && ( */}
           <button onClick={toggleEditMode}>
             {isEditMode ? "Disable Edit" : "Enable Edit"}
           </button>
-        )}
+        {/* // )} */}
 
         {serverError ? (
           <NotFound />
