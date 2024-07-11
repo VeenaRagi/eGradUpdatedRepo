@@ -51,7 +51,8 @@ const UserLogin = () => {
         const newAuthState = {
           ...tiAuth,
           user: user_Id,
-          token: accessToken
+          token: accessToken,
+          role:role
         };
         console.log("New Auth State:", newAuthState);
         settiAuth(newAuthState);

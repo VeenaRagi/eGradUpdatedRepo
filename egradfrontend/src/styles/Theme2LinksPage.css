@@ -1,0 +1,33 @@
+.AboutUsImgContainer.t2AboutUsImgContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1 3rem;
+}
+.AboutUsImgContainer.t2AboutUsImgContainer img {
+    width:300px;
+}
+.AboutUsImgContainer.t2AboutUsImgContainer {
+    padding: 2rem 7rem; /* 2rem for top and bottom, 4rem for left and right */
+}
+.AboutUsImgContainer.t2AboutUsImgContainer span a {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 20px;
+    color: white;
+}
+.AboutUsImgContainer.t2AboutUsImgContainer svg {
+    font-size: 20px;
+    color: white;
+}
+.AboutUsImgContainer.t2AboutUsImgContainer span {
+    background: linear-gradient(326deg, #0a9396, #005f73, #003d4e);
+    padding: 6px;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+.LinksDataContainer.t2LinksDataContainer strong {
+    color: #003d4e;
+    font-weight: bold;
+}

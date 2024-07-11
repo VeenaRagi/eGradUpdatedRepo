@@ -1440,8 +1440,12 @@ const handleSearchInputChange = (event) => {
         </div>
         <h3 className="list_-otsTitels">created COURSES list</h3>
         <div>
-          <table className="couresCreation_-table">
-            <thead className="otsGEt_-contantHead couresotc_-table">
+          {/* <table className="couresCreation_-table"> */}
+          <table className="otc_-table otsAdminTable_Container">
+
+            {/* <thead className="otsGEt_-contantHead couresotc_-table"> */}
+            <thead className="otsGEt_-contantHead otc_-table_-header">
+
               <tr>
                 <th style={{ textAlign: "center" }}>S.no</th>
                 <th style={{ textAlign: "center" }}>Portal</th>
@@ -1458,7 +1462,7 @@ const handleSearchInputChange = (event) => {
                 <th style={{ textAlign: "center" }}>Action</th>
               </tr>
             </thead>
-            <tbody className="couresotc_-table_-tBody">
+            <tbody className="otc_-table_-tBody">
               {currentItems.length === 0 ? (
                 <tr>
                   <td colSpan="6">No Create found.</td>

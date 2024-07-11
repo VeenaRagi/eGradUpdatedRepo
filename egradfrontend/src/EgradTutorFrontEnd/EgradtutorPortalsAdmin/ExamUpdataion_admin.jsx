@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import BASE_URL from "../../apiConfig";
-
+import AdminHeader from "./AdminHeader";
 const ExamUpdataion_admin = () => {
   const { examId } = useParams();
   const navigate = useNavigate();
@@ -132,6 +132,8 @@ const ExamUpdataion_admin = () => {
   };
 
   return (
+    <>
+    <AdminHeader/>
     <div className="examUpdate_-container ">
       
       <form
@@ -206,7 +208,7 @@ const ExamUpdataion_admin = () => {
         <div cclassName="create_exam_header">
           <button
             type="button"
-            onClick={() => navigate("/UgadminHome")}
+            onClick={() => navigate("/Adminpage")}
             className="ots_-createBtn"
             style={{ background: "#ff8080", color: "#fff", margin: "0 9px" }}
           >
@@ -218,6 +220,7 @@ const ExamUpdataion_admin = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 
