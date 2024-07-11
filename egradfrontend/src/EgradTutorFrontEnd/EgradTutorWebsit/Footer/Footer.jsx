@@ -8,6 +8,7 @@ import JSONClasses from "../../../ThemesFolder/JSONForCSS/JSONClasses";
 import { ThemeContext } from "../../../ThemesFolder/ThemeContext/Context";
 import "../../../styles/Default_landingPage_styles.css";
 import '../../../styles/Theme2_landingPage_styles.css'
+import '../../../styles/Theme1_landingPage_styles.css'
 import { FaFacebook } from "react-icons/fa";
 import { GrInstagram } from "react-icons/gr";
 import { SiYoutube } from "react-icons/si";
