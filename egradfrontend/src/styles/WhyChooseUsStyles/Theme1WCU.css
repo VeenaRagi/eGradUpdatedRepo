@@ -1,7 +1,14 @@
 
+.t1CoursePageHeaderContainer .t1CoursePageHeaderContainer {
+    background-color:#bae2c6 ;
+}
+
+
 .t1CoursePageHeaderContainer .t1CPHeaderUl {
     display: flex;
     flex-direction: row;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .t1CPHeaderUl {

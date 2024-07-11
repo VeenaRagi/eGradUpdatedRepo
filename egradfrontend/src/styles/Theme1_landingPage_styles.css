@@ -536,10 +536,10 @@ img.t1LogoImg {
         height: auto;
     }
 
-    .t1Landing_branch_box_btns ul {
+    /* .t1Landing_branch_box_btns ul {
         height: 200px;
         width: 105px;
-    }
+    } */
 
     .landing_img_div.t1LCapImgDiv img {
         width: 100%;

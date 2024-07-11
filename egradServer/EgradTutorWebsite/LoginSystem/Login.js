@@ -106,14 +106,14 @@ router.post('/adminlogin', async (req, res) => {
     }
 
     // Generate JWT token
-    const accessToken = jwt.sign({ user_Id: user.user_Id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    const refreshToken = jwt.sign({ user_Id: user.user_Id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    const accessToken = jwt.sign({  role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const refreshToken = jwt.sign({ role: user.role }, process.env.JWT_SECRET, { expiresIn: '7d' });
     console.log("AccessToken:", accessToken, "RefreshToken:", refreshToken);
 
     const encryptedUserId = encryptData(user.user_Id.toString());
     console.log("Sending details are:", { encryptedUserId, refreshToken, accessToken });
 
-    res.json({ user_Id: encryptedUserId, refreshToken, accessToken, role: user.role });
+    res.json({refreshToken, accessToken, role: user.role });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Server error' });

@@ -32,6 +32,7 @@ import ExamUpdataion_admin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/Exa
 import UpdatingConrseInAdmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/UpdatingCourseInAdmin.jsx"
 import GettingInstructions from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/GettinggInstructions.jsx"
 import {UpdateInstruction} from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/UpdateInstruction.jsx"
+import TestUpdateadmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/TestUpdateadmin.jsx";
 function App() {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -68,11 +69,11 @@ function App() {
   return (
     <ThemeProvider>
       <div>
-        {isAdmin && (
+        {/* {isAdmin && ( */}
           <button onClick={toggleEditMode}>
             {isEditMode ? "Disable Edit" : "Enable Edit"}
           </button>
-        )}
+        {/* // )} */}
 
         {serverError ? (
           <NotFound />
@@ -136,6 +137,10 @@ function App() {
               <Route path="/Instruction/editIns/:instructionId/" element={<GettingInstructions />} />
 
               <Route path="/InstructionPage/editIns/:instructionId/:id" element={<UpdateInstruction />} />
+              <Route
+            path="/TestUpdateadmin/:testCreationTableId"
+            element={<TestUpdateadmin />} 
+          />
             </Routes>
           </Router>
         )}
