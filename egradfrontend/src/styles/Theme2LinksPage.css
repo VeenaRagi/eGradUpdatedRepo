@@ -8,7 +8,7 @@
     width:300px;
 }
 .AboutUsImgContainer.t2AboutUsImgContainer {
-    padding: 2rem 7rem; /* 2rem for top and bottom, 4rem for left and right */
+    padding: 0rem 6rem;
 }
 .AboutUsImgContainer.t2AboutUsImgContainer span a {
     display: flex;

@@ -11,6 +11,7 @@ import { ThemeContext } from '../../../ThemesFolder/ThemeContext/Context';
 import '../../../styles/UGHomePage/UgHomePage_Default_Theme.css';
 import '../../../styles/Theme1LinksPage.css';
 import '../../../styles/Theme2LinksPage.css';
+import Footer from './Footer';
 
 const LinkPage = ({userRole}) => {
   const { Link_Id } = useParams();
@@ -67,120 +68,127 @@ const LinkPage = ({userRole}) => {
 
 
   return (
+
+    <div>
+<>
+
+<div className={`LinksPagesMainContainer ${themeDetails.LinksPagesMainContainer}`}>
+  <div className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`} >
     <>
-
-      <div className={`LinksPagesMainContainer ${themeDetails.LinksPagesMainContainer}`}>
-        <div className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`} >
-          <>
-          {image ? (
-        <Link to="/">
-          <img src={image} alt="Current" />
-        </Link>
-      ) : userRole === 'user' ? (
-        <p>Unable to load image at the moment. Please try again later.</p>
-      ) : userRole === 'admin' ? (
-        <p>There is no data available. Please add the necessary image data.</p>
-      ) : (
-        <p>No image available. Please contact support if this issue persists.</p>
-      )}
-          </>
-
-
-          <span >
-            <Link to={`/`}><IoHome />Home</Link>
-          </span>
-        </div>
-        {/* <h2>Link Page Content</h2> */}
-        {error && <div>Error: {error}</div>}
-        <div className={styles['footer-content']}>
-          {/* Render footerDocumentData */}
-          {footerDocumentData ? (
-            <div dangerouslySetInnerHTML={{ __html: footerDocumentData }} className={`LinksDataContainer ${themeDetails.LinksDataContainer}`} />
-          ) : (
-            <p>No footer document data found.</p>
-          )}
-        </div>
-
-      </div>
-
-      {themeColor === "theme-1" &&
-        <>
-          <div className={`LinksPagesMainContainer ${themeDetails.LinksPagesMainContainer}`}>
-            <div className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`} >
-              <>
-              {image ? (
-        <Link to="/">
-          <img src={image} alt="Current" />
-        </Link>
-      ) : userRole === 'user' ? (
-        <p>Unable to load image at the moment. Please try again later.</p>
-      ) : userRole === 'admin' ? (
-        <p>There is no data available. Please add the necessary image data.</p>
-      ) : (
-        <p>No image available. Please contact support if this issue persists.</p>
-      )}
-              </>
-
-
-              <span >
-                <Link to={`/`}><IoHome />Home</Link>
-              </span>
-            </div>
-            {/* <h2>Link Page Content</h2> */}
-            {error && <div>Error: {error}</div>}
-
-            <div className={styles['footer-content']}>
-              {/* Render footerDocumentData */}
-              {footerDocumentData ? (
-                <div dangerouslySetInnerHTML={{ __html: footerDocumentData }} className={`LinksDataContainer ${themeDetails.LinksDataContainer}`} />
-              ) : (
-                <p>No footer document data found.</p>
-              )}
-            </div>
-          </div>
-
-        </>
-      }
-
-      {themeColor === "theme-2" &&
-        <>
-          <div className={`LinksPagesMainContainer ${themeDetails.LinksPagesMainContainer}`}>
-            <div className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`} >
-              <>
-              {image ? (
-        <Link to="/">
-          <img src={image} alt="Current" />
-        </Link>
-      ) : userRole === 'user' ? (
-        <p>Unable to load image at the moment. Please try again later.</p>
-      ) : userRole === 'admin' ? (
-        <p>There is no data available. Please add the necessary image data.</p>
-      ) : (
-        <p>No image available. Please contact support if this issue persists.</p>
-      )}
-              </>
-
-
-              <span >
-                <Link to={`/`}><IoHome />Home</Link>
-              </span>
-            </div>
-            {/* <h2>Link Page Content</h2> */}
-            {error && <div>Error: {error}</div>}
-
-            <div className={styles['footer-content']}>
-              {/* Render footerDocumentData */}
-              {footerDocumentData ? (
-                <div dangerouslySetInnerHTML={{ __html: footerDocumentData }} className={`LinksDataContainer ${themeDetails.LinksDataContainer}`} />
-              ) : (
-                <p>No footer document data found.</p>
-              )}
-            </div>
-          </div>
-
-        </>
-      }
+    {image ? (
+  <Link to="/">
+    <img src={image} alt="Current" />
+  </Link>
+) : userRole === 'user' ? (
+  <p>Unable to load image at the moment. Please try again later.</p>
+) : userRole === 'admin' ? (
+  <p>There is no data available. Please add the necessary image data.</p>
+) : (
+  <p>No image available. Please contact support if this issue persists.</p>
+)}
     </>
+
+
+    <span >
+      <Link to={`/`}><IoHome />Home</Link>
+    </span>
+  </div>
+  {/* <h2>Link Page Content</h2> */}
+  {error && <div>Error: {error}</div>}
+  <div className={styles['footer-content']}>
+    {/* Render footerDocumentData */}
+    {footerDocumentData ? (
+      <div dangerouslySetInnerHTML={{ __html: footerDocumentData }} className={`LinksDataContainer ${themeDetails.LinksDataContainer}`} />
+    ) : (
+      <p>No footer document data found.</p>
+    )}
+  </div>
+
+</div>
+
+{themeColor === "theme-1" &&
+  <>
+    <div className={`LinksPagesMainContainer ${themeDetails.LinksPagesMainContainer}`}>
+      <div className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`} >
+        <>
+        {image ? (
+  <Link to="/">
+    <img src={image} alt="Current" />
+  </Link>
+) : userRole === 'user' ? (
+  <p>Unable to load image at the moment. Please try again later.</p>
+) : userRole === 'admin' ? (
+  <p>There is no data available. Please add the necessary image data.</p>
+) : (
+  <p>No image available. Please contact support if this issue persists.</p>
+)}
+        </>
+
+
+        <span >
+          <Link to={`/`}><IoHome />Home</Link>
+        </span>
+      </div>
+      {/* <h2>Link Page Content</h2> */}
+      {error && <div>Error: {error}</div>}
+
+      <div className={styles['footer-content']}>
+        {/* Render footerDocumentData */}
+        {footerDocumentData ? (
+          <div dangerouslySetInnerHTML={{ __html: footerDocumentData }} className={`LinksDataContainer ${themeDetails.LinksDataContainer}`} />
+        ) : (
+          <p>No footer document data found.</p>
+        )}
+      </div>
+    </div>
+
+  </>
+}
+
+{themeColor === "theme-2" &&
+  <>
+    <div className={`LinksPagesMainContainer ${themeDetails.LinksPagesMainContainer}`}>
+      <div className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`} >
+        <>
+        {image ? (
+  <Link to="/">
+    <img src={image} alt="Current" />
+  </Link>
+) : userRole === 'user' ? (
+  <p>Unable to load image at the moment. Please try again later.</p>
+) : userRole === 'admin' ? (
+  <p>There is no data available. Please add the necessary image data.</p>
+) : (
+  <p>No image available. Please contact support if this issue persists.</p>
+)}
+        </>
+
+
+        <span >
+          <Link to={`/`}><IoHome />Home</Link>
+        </span>
+      </div>
+      {/* <h2>Link Page Content</h2> */}
+      {error && <div>Error: {error}</div>}
+
+      <div className={styles['footer-content']}>
+        {/* Render footerDocumentData */}
+        {footerDocumentData ? (
+          <div dangerouslySetInnerHTML={{ __html: footerDocumentData }} className={`LinksDataContainer ${themeDetails.LinksDataContainer}`} />
+        ) : (
+          <p>No footer document data found.</p>
+        )}
+      </div>
+    </div>
+  </>
+}
+</>
+
+<Footer />
+
+    </div>
+    
+    
   );
 };
 
