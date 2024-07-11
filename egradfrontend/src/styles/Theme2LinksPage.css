@@ -31,3 +31,24 @@
     color: #003d4e;
     font-weight: bold;
 }
+
+
+
+@media (max-width:768px) {
+
+    .t2LinksDataContainer {
+        width: 100%;
+    }
+
+    .t2AboutUsImgContainer img {
+        border-radius: 5px;
+        width: 200px;
+    }
+
+    .t2AboutUsImgContainer span {
+        margin-top: 0px;
+        /* width: 10px; */
+    }
+    
+
+}
