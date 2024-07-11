@@ -1,21 +1,45 @@
-import React from 'react'
 
-const StudentDashbord_Settings = ({usersData}) => {
+import React, { useEffect, useState, useRef } from "react";
+import { Link, useParams, Navigate, useNavigate } from "react-router-dom";
+import axios from "axios";
+import BASE_URL from '../../../apiConfig'
+import Student_profileUpdateForm from "./Student_profileUpdateForm";
+
+
+const StudentDashbord_Settings = ({ usersData }) => {
+  const user_Id =
+    usersData.users && usersData.users.length > 0
+      ? usersData.users.map((user) => user.username)
+      : null;
   return (
-    <div>
-      StudentDashbord_Settings
-      {usersData.users && usersData.users.length > 0 && (
-          <div>
-           
-            <ul>
-              {usersData.users.map((user) => (
-                <li key={user.user_Id}>Username:{user.username}</li>
-              ))}
-            </ul>
+    <div className="StudentDashbordsettings_conatiner">
+      <div className="StudentDashbordsettings_subconatiner">
+        <div className="StudentDashbordsettings_profile_conatiner">
+          <div className="StudentDashbordsettings_profile_box">
+            {usersData.users && usersData.users.length > 0 && (
+              <div>
+                {usersData.users.map((user) => (
+                  <div>
+                    <div className="pro_img">
+                      Profile Image
+                      <img src={user.imageData} alt={`Image ${user.user_Id}`} />
+                    </div>
+                    <div className="StudentDashbordsettings_profile_box_info">
+                      <p>User ID:{user.username}</p>
+                      <p>Email ID:{user.email}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        )}
+        </div>
+        <div className="Student_profileUpdate_editconatiner">
+          <Student_profileUpdateForm />
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default StudentDashbord_Settings
+export default StudentDashbord_Settings;
