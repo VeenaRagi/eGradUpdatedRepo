@@ -131,7 +131,34 @@ const ContactUs = ({ userRole }) => {
     <>
       {themeColor === 'Theme-2' &&
         <div className={`ContactUsMainContainer ${themeDetails.themeContactUsMainContainer}`}>
-          <ExamPageHeader />
+          <div
+            className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`}
+          >
+            {image ? (
+              <Link to="/">
+                <img src={image} alt="Current" />
+              </Link>
+            ) : userRole === "user" ? (
+              <p>
+                Unable to load the image at the moment. Please try again later.
+              </p>
+            ) : userRole === "admin" ? (
+              <p>No image available. Please upload the necessary image.</p>
+            ) : (
+              <p>
+                Unable to load the image. Please contact support if this issue
+                persists.
+              </p>
+            )}
+
+            <span>
+              <Link to={`/`}>
+                <IoHome />
+                Home
+              </Link>
+            </span>
+            
+          </div>
           <div className={`ContactUsContentDataContainer ${themeDetails.themeCUParentContainer}`}>
             <div className="t2FormAndContactContainer">
               <div className={`${themeDetails.themeFormNdCardPC}`}>
