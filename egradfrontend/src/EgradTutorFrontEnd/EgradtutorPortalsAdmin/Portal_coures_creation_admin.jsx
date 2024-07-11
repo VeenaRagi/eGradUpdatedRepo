@@ -700,7 +700,7 @@ const handleSearchInputChange = (event) => {
   return (
     <div className="create_exam_container otsMainPages">
       <h3 className="textColor">COURSE CREATION PAGE</h3>
-      <div className="create_exam_header">
+      <div className="create_exam_header" style={{overflowX:"scroll"}}>
         <button className="otc_-addExam" onClick={handleShowPortalButtons}>
           <i className="fa-solid fa-plus"></i> Add Course
         </button>

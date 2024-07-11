@@ -1021,10 +1021,11 @@ fieldset > legend {
   font-size: 20px;
   cursor: pointer;
 }
-.courseOtsPqbOvl_Btns ul{
-display: flex;
-gap: 2rem;
-padding-top: 2rem;
+.courseOtsPqbOvl_Btns ul {
+  display: flex;
+  gap: 2rem;
+  padding-top: 2rem;
+  overflow-x: scroll;
 }
 .courseOtsPqbOvl_Btns ul li button {
   background-color: #06131f;

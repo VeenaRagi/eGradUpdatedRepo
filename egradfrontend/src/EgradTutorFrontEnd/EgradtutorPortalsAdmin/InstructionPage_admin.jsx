@@ -104,7 +104,7 @@ const InstructionPage_admin = () => {
       >
         <h3 className="textColor">Instruction Page </h3>
         {formOpen ? (
-          <form>
+          <form style={{overflowX:"scroll"}}>
             <div>
               {/* <button
                 className="ots_btnClose"
