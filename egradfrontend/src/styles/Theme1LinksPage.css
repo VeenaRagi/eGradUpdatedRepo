@@ -99,12 +99,12 @@ margin: 0 auto;
 .t1FaqDataContainer{
 width: 80%;
 margin: 0 auto;
+padding: 25px;
 }
 
-.t1FaqData{
-
+.t1FaqData {
+    padding: 20px;
 }
-
 .t1FaqData h3{
 color:black;
 }
@@ -118,3 +118,25 @@ margin-left: 60px;
 
 
 
+@media (max-width:768px){
+    .t1FaqSubContainer h1{
+        font-size:17px ;
+    }
+
+    .t1FaqData h3{
+        color:black;
+        font-size: 20px;
+        }
+
+        .t1FaqData p {
+            color: rgb(54 52 53);
+            margin-left: 10px;
+        }
+
+        .t1FaqDataContainer {
+            width: 100%;
+            margin: 0 auto;
+            padding: 25px;
+        }
+        
+}
