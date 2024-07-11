@@ -471,19 +471,120 @@ h2#white_examName {
   li.whyChooseUsLi {
     background-color: #52a8bd;
 }
- 
-
-
-
 
 
 /* NEW CSS */
 
+
+
+.CoursePage_header_Container.CoursePageHeaderContainerDefault {
+    padding: 3rem 7rem;
+}
+
 ul.courseHeaderUl.undefined {
     display: flex;
-    gap: 4rem;
+    gap: 3rem;
 }
 .menu-link.CoursePageItemsContainer.undefined {
-    background-color: transparent;
+    background-color:transparent;
 }
+ul.courseHeaderUl.undefined a {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+h2.whiteContant {
+    color: #108dc1;
+    text-align: center;
+    font-size: 25px;
+    background: #e6ebed;
+    box-shadow: 5px 5px 5px 0px rgba(16, 141, 193, 0.3); /* #108dc1 color with 30% opacity */
+}
+.themeBuyCourseSpanDefault {
+    text-align: center;
+    padding: 20px;
+    
+}
+.themeBuyCourseSpanDefault span {
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+  
+}
+.themeTabsChangeDefault {
+    text-align: center;
+}
+.themeTabsChangeDefault button {
+    background-color: #00aff0;
+}
+.themeTabDetailsSubDivDefault {
+    text-align: center;
+    background: #f3ecec;
+    width: 500px;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 5px 0px rgba(16, 141, 193, 0.3); /* #108dc1 color with 30% opacity */
+}
+.themeTabImageDivDefault img {
+    width: 200px;
+}
+@media (max-width: 431px) {
+    .logo_Img_container.themeLogoImgCDefault img.defaultLogoImg {
+        width: 156px; /* Width for small screens */
+    }
+    ul.courseHeaderUl.undefined {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .themeTabDetailsSubDivDefault {
+        width: 351px;
+    }
+    img {
+        width: 140px;
+    }
+    .defaultTabContentSplittedText p {
+        font-weight: bold;
+        color: black;
+        font-size: 13px;
+    }
+    .CoursePage_header_Container.CoursePageHeaderContainerDefault {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+    .themeTabDetailsSubDivDefault {
+        /* text-align: center; */
+        background: #f3ecec;
+        width: 320px;
+        margin: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 5px 5px 5px 0px rgba(16, 141, 193, 0.3);
+    }
+}
+
+@media(max-width:900px) {
+    ul.courseHeaderUl.undefined {
+        display: flex;
+        gap: 4rem;
+        flex-direction: column;
+    }
+    ul.courseHeaderUl.undefined a {
+        color: #040404;
+        font-size: 25px;
+        font-weight: 600;
+    }
+}
+
+@media(max-width:1280px) {
+    ul.courseHeaderUl.undefined {
+        display: flex;
+        gap: 2rem;
+    }
+}
+
 

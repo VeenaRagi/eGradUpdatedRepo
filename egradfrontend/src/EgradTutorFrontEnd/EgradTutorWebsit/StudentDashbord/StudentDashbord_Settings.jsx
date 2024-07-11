@@ -4,7 +4,10 @@ import { Link, useParams, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import BASE_URL from '../../../apiConfig'
 import Student_profileUpdateForm from "./Student_profileUpdateForm";
-// import  '../../../../../egradServer/uploads/studentinfoimeages'
+
+import './Style/StudentDashbord_Settings.css'
+
+
 
 const StudentDashbord_Settings = ({ usersData }) => {
   const imageUrl = 'http://localhost:5000/uploads/studentinfoimages';
@@ -12,6 +15,7 @@ const StudentDashbord_Settings = ({ usersData }) => {
     usersData.users && usersData.users.length > 0
       ? usersData.users.map((user) => user.username)
       : null;
+
   return (
     <div className="StudentDashbordsettings_conatiner">
       <div className="StudentDashbordsettings_subconatiner">

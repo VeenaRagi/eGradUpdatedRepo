@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import './Style/Registrationform.css'
-import uploadPicImg from './Style/NoImages.jpg'
+import uploadPicImg from './Images/NoImages.jpg'
 const RegistrationForm = () => {
   const { courseCreationId } = useParams();
   const navigate = useNavigate();

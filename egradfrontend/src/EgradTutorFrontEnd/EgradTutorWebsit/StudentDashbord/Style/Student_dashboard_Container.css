@@ -67,3 +67,80 @@
   color: #ffffff; /* Set your text color here */
   border-radius: 0 100px 100px 0; /* Rounded shape with arrow-like effect */
 }
+
+.ugquiz_StudentDashbordconatiner_right_Std_MB_Course {
+  background: #dbd6d6;
+  display: flex;
+  /* width: 92%; */
+  margin: 0 auto;
+  width: 100%;
+  /* justify-content: center; */
+  /* align-items: center; */
+  display: grid;
+  background: #d7e6eb50;
+ 
+  /* justify-content: center; */
+  /* align-items: center; */
+  & .before_login_courses_btn_continer {
+    background: transparent;
+    padding: 0rem 0;
+  }
+  & .beforelogin_Quiz_cards_cantainer_contain {
+    width: 100%;
+    margin: 3rem auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .ugquiz_StudentDashbordconatiner {
+    position: relative;
+    display: flex;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .ugquiz_StudentDashbordconatiner_handleToggleLeftMenu {
+    display: inline;
+    position: fixed;
+    top: 4rem;
+    left: 1rem;
+    z-index: 10002;
+    font-size: 1.5rem;
+
+    height: 100px;
+  }
+  .ugquiz_StudentDashbordconatiner_left {
+    display: none;
+  }
+
+  .ugquiz_StudentDashbordconatiner_left_mobile {
+    display: block;
+    position: fixed;
+
+    top: 4rem;
+    z-index: 1001;
+    /* background: #00b7ff; */
+    height: 93vh;
+    width: 243px;
+  }
+
+  .ugquiz_StudentDashbordconatiner_left_mobile
+    .ugquiz_StudentDashbordconatiner_left_menu {
+    padding: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    gap: 1rem;
+    background: hsla(152, 52%, 33%, 0.103);
+  }
+
+  .ugquiz_StudentDashbordconatiner_left
+    .ugquiz_StudentDashbordconatiner_left_menu
+    .activeButton,
+  .ugquiz_StudentDashbordconatiner_left_mobile .activeButton {
+    position: relative;
+    background: var(--bs-success); /* Set your active color here */
+    color: #ffffff; /* Set your text color here */
+    border-radius: 0 100px 100px 0; /* Rounded shape with arrow-like effect */
+  }
+}

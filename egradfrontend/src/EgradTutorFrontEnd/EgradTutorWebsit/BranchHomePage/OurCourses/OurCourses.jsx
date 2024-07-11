@@ -158,9 +158,9 @@ const OueCourses = ({ isEditMode, userRole}) => {
       </div> :
         <div className={`${themeDetails.themeCoursesHeadding}`}>
           {themeColor === 'Theme-2' ?
-            <h2 id="Our_Courses_heading" className="ribbon-2">OurCourses</h2>
+            <h2 id="Our_Courses_heading" className="ribbon-2">OUR COURSES</h2>
             :
-            <h2 id="Our_Courses_heading">OurCourses</h2>
+            <h2 id="Our_Courses_heading">OUR COURSES</h2>
           }
           <div className={`${themeDetails.themeCoursesSubContainer}`}>
             {/* <h3 >Course Features:</h3> */}

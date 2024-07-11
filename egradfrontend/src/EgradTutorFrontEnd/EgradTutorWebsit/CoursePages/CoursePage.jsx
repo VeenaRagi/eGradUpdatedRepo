@@ -9,7 +9,7 @@ const CoursePage = ({isEditMode} ) => {
   return (
     <div>
       <CoursePageHeader isEditMode={isEditMode} />
-      <CoursePageBanners isEditMode={isEditMode}/>
+      {/* <CoursePageBanners isEditMode={isEditMode}/> */}
       <PoopularCourses />
       <WhyChooseUs isEditMode={isEditMode}/>
       <Footer/>
