@@ -201,85 +201,7 @@ export const Users = () => {
     setShowUserCourse(true);
   };
 
-  // const handleChangeactivcourse =
-  //   (userId, studentregistationId, courseCreationId, userEmail) =>
-  //   async (e) => {
-  //     try {
-  //       const selectedValue = e.target.value;
-
-  //       if (selectedValue === "Activate") {
-  //         const response = await axios.put(
-  //           `http://localhost:5001/Exam_Course_Page/updatePaymentStatusactive/${userId}/${studentregistationId}/${courseCreationId}`,
-  //           { email: userEmail } // Include the email address in the request body
-  //         );
-  //         console.log(response.data);
-  //       }
-
-  //       if (selectedValue === "Inactive") {
-  //         const response = await axios.put(
-  //           `http://localhost:5001/Exam_Course_Page/updatePaymentStatusinactive/${userId}/${studentregistationId}/${courseCreationId}`,
-  //           { email: userEmail } // Include the email address in the request body
-  //         );
-  //         console.log(response.data);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error updating payment status:", error);
-  //     }
-  //   };
-// const handleChangeactivcourse =
-//   (
-//     userId,
-//     studentRegistrationId,
-//     courseCreationId,
-//     userEmail,
-//     payment_status
-//   ) =>
-//   async (selectedValue) => {
-//     console.log(
-//       userId,
-//       studentRegistrationId,
-//       courseCreationId,
-//       userEmail,
-//       payment_status
-//     );
-
-//     try {
-//       if (selectedValue === "Activate") {
-//         const response = await axios.put(
-//           `http://localhost:5001/Exam_Course_Page/updatePaymentStatusactive/${userId}/${studentRegistrationId}/${courseCreationId}`,
-//           { email: userEmail }
-//         );
-//         console.log(response.data);
-//       }
-
-//       if (payment_status === 1) {
-//         const response = await axios.put(
-//           `http://localhost:5001/Exam_Course_Page/updatePaymentStatusinactive/${userId}/${studentRegistrationId}/${courseCreationId}`,
-//           { email: userEmail }
-//         );
-//         console.log(response.data);
-//       }
-//     } catch (error) {
-//       console.error("Error updating payment status:", error);
-//     }
-//   };
-// const handleChangeactivcourse =
-//   (userId, studentRegistrationId, courseCreationId, userEmail, paymentStatus) =>
-//    () => {
-//     console.log(
-      // userId,
-      // studentRegistrationId,
-      // courseCreationId,
-      // userEmail,
-      // paymentStatus
-//     );
-
-//     try {
-//       // Your API request logic here
-//     } catch (error) {
-//       console.error("Error updating payment status:", error);
-//     }
-//   };
+ 
 
 const handleChangeactivcourse = async (
   userId,
@@ -342,10 +264,7 @@ const handleChangeactivcourse = async (
     setCurrentPage(pageNumber);
   };
   const totalPages = Math.ceil(usercourseData.length / itemsPerPage);
-  // const handleSearchInputChange = (event) => {
-  //   setSearchQuery(event.target.value);
-  //   setCurrentPage(1); // Reset current page to 1 when search query changes
-  // };
+
 
   return (
     <div className="act_infocontainer">
@@ -411,9 +330,7 @@ const handleChangeactivcourse = async (
 
                     <button type="submit">Register</button>
                   </form>
-                  {/* <p>
-                  Already have an account? <Link to="/uglogin">Login here</Link>
-                </p> */}
+                
                 </div>
               </div>
             </div>
@@ -526,87 +443,7 @@ const handleChangeactivcourse = async (
                           <td style={{ padding: 10 }}>{item.courseName}</td>
                           <td style={{ padding: 10 }}>{item.Portal}</td>
                           <td style={{ padding: 10 }}>{item.payu_status}</td>
-                          {/* <td style={{ padding: 10 }}>
-                            {" "}
-                            <select
-                              name=""
-                              id=""
-                              onChange={(e) =>
-                                handleChangeactivcourse(
-                                  item.user_id,
-                                  item.studentregistationId,
-                                  item.courseCreationId
-                                )(e)
-                              }
-                            >
-                              <option value="">Select</option>
-                              <option value="Activate">Activate</option>
-                              <option value="Inactive">Inactive</option>
-                            </select>
-                            <select
-                              name=""
-                              id=""
-                              onChange={(e) =>
-                                handleChangeactivcourse(
-                                  item.user_id,
-                                  item.studentregistationId,
-                                  item.courseCreationId
-                                )(e)
-                              }
-                            >
-                              <option value="" disabled={!item.payment_status}>
-                                {item.payment_status
-                                  ? "Select"
-                                  : "Payment pending"}
-                              </option>
-                              <option
-                                value="Activate"
-                                selected={item.payment_status === 1}
-                              >
-                                Inactive
-                              </option>
-                              <option
-                                value="Inactive"
-                                selected={item.payment_status === 0}
-                              >
-                                Activate
-                              </option>
-                            </select>
-                            if(item.payment_status === 1) {
-                              <div>
-                                active 
-                              </div>
-                            }
-                            else{
-                              <div>Inactive</div>
-                            }
-                          </td> */}
-                          {/* <td
-                            style={{
-                              padding: 10,
-                              display: "flex",
-                              flexWrap: "wrap",
-                              alignItems: "center",
-                              gap: "0.5rem",
-                            }}
-                          >
                         
-                            <select
-                              name=""
-                              id=""
-                              onChange={(e) =>
-                                handleChangeactivcourse(
-                                  item.user_id,
-                                  item.studentregistationId,
-                                  item.courseCreationId
-                                )(e)
-                              }
-                            >
-                              <option value="">Select</option>
-                              <option value="Activate">Activate</option>
-                              <option value="Inactive">Inactive</option>
-                            </select>
-                          </td> */}
 
                           <td
                             style={{
@@ -614,46 +451,7 @@ const handleChangeactivcourse = async (
                             }}
                           >
                             {" "}
-                            {/* {item.payment_status === 1 ? (
-                              <div>
-                                {" "}
-                                <button
-                                  style={{
-                                    background: "rgb(33 175 52)",
-                                    margin: "0.2rem",
-                                    fontSize: 14,
-                                    width: 150,
-                                    padding: "0px 8px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    color: "#fff",
-                                    fontWeight: "900",
-                                  }}
-                                >
-                                  Active{" "}
-                                </button>
-                              </div>
-                            ) : (
-                              <div>
-                                <button
-                                  style={{
-                                    background: "rgb(220, 53, 69)",
-                                    margin: "0.2rem",
-                                    fontSize: 14,
-                                    width: 150,
-                                    padding: "0px 8px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    color: "#fff",
-                                    fontWeight: "900",
-                                  }}
-                                >
-                                  Inactive
-                                </button>
-                              </div>
-                            )} */}
+                            
                             {item.payment_status === 1 ? (
                               <div>
                                 <button
@@ -669,15 +467,7 @@ const handleChangeactivcourse = async (
                                     color: "#fff",
                                     fontWeight: "900",
                                   }}
-                                  // onClick={(e) => {
-                                  //   handleChangeactivcourse(
-                                  //     item.user_id,
-                                  // item.studentregistationId,
-                                  // item.courseCreationId,
-                                  // item.userEmail,
-                                  // item.payment_status
-                                  //   );
-                                  // }}
+                                  
                                   onClick={() =>
                                     handleChangeactivcourse(
                                       item.user_id,
@@ -779,25 +569,14 @@ export const Users_info = () => {
 
   return (
     <>
-      {/* <img
-        src={`http://localhost:5001/uploads/${question.documen_name}/${option.optionImgName}`}
-        alt={`Option ${option.option_id}`}
-      /> */}
+    
       <div className="profilepic">
         <p>User ID: {userData.user_Id}</p>
         <h2>Username: {userData.username}</h2>
         <p>Email: {userData.email}</p>
-        {/* <img
-          src={`http://localhost:5001/profilesimages/${profileImage_1704542933934.jpg}`}
-          alt={`Option ${option.option_id}`}
-        /> */}
+      
         <img src={userData.imageData} alt={`Image ${userData.user_Id}`} />
-        {/* <img
-          key={userData.user_Id}
-          src={userData.profile_image}
-          alt={`Image ${userData.user_Id}`}
-        /> */}
-        {/* <img src={userData.profile_image} alt="Profile" /> */}
+  
       </div>
     </>
   );
