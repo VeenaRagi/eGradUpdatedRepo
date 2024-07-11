@@ -14,7 +14,7 @@ const AdminLogin = () => {
       const { token, role } = response.data;
       localStorage.setItem('token', token);
       if (role === 'admin') {
-        navigate('/admin-dashboard');
+        navigate('/Adminpage');
       } else if (role === 'User') {
         console.log('User access is not allowed on this page');
         alert('You dont have access to this page');
