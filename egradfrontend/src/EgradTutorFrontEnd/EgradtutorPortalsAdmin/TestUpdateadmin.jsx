@@ -578,7 +578,7 @@ const TestUpdateadmin = () => {
               <div className="create_exam_header">
                 <button
                   type="button"
-                  onClick={() => navigate("/UgadminHome")}
+                  onClick={() => navigate("/Adminpage")}
                   className="ots_-createBtn"
                 >
                   Cancel
