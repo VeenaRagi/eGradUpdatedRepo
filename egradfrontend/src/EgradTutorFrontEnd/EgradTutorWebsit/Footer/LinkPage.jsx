@@ -10,6 +10,7 @@ import JSONClasses from '../../../ThemesFolder/JSONForCSS/JSONClasses';
 import { ThemeContext } from '../../../ThemesFolder/ThemeContext/Context';
 import '../../../styles/UGHomePage/UgHomePage_Default_Theme.css';
 import '../../../styles/Theme1LinksPage.css';
+import '../../../styles/Theme2LinksPage.css';
 
 const LinkPage = ({userRole}) => {
   const { Link_Id } = useParams();

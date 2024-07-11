@@ -112,6 +112,48 @@ app.use("/LandingPageExamEdit", LandingPageExamEdit);
 const PayU = require("./PaymentGatway/PayU");
 app.use("/PayU", PayU);
 
+
+
+
+const Dashboard = require("./OTS_Quiz_Admin/Dashbord");
+app.use("/Dashboard", Dashboard);
+
+const ExamCreation = require("./OTS_Quiz_Admin/ExamCreation");
+app.use("/ExamCreation", ExamCreation);
+
+const CoureseCreation = require("./OTS_Quiz_Admin/CoureseCreation");
+app.use("/CoureseCreation", CoureseCreation);
+
+const InstructionCreation = require('./OTS_Quiz_Admin/InstructionCreation')
+app.use("/InstructionCreation", InstructionCreation);
+
+
+const TestCreation = require('./OTS_Quiz_Admin/TestCreation')
+app.use("/TestCreation", TestCreation);
+
+const DocumentUpload =require('./OTS_Quiz_Admin/DocumentUpload')
+app.use("/DocumentUpload", DocumentUpload);
+
+const ImageUpload =require('./OTS_Quiz_Admin/ImageUpload')
+app.use("/ImageUpload", ImageUpload);
+
+const TestActivationPage =require('./OTS_Quiz_Admin/TestActivationPage')
+app.use("/TestActivationPage", TestActivationPage);
+
+const DoubtSection =require('./StudentDashbord/DoubtSection')
+app.use("/DoubtSection",DoubtSection)
+
+
+const Portal_coures_creation_admin=require('./OTS_Quiz_Admin/Portal_coures_creation_admin')
+app.use('/Portal_coures_creation_admin',Portal_coures_creation_admin)
+
+const OtsvidesUploads =require('./OTS_Quiz_Admin/OtsvidesUploads')
+app.use("/OtsvidesUploads",OtsvidesUploads)
+
+const ughomepage_banner_login =require("./OTS_Quiz_Admin/ughomepage_banner_login")
+
+app.use("/ughomepage_banner_login" , ughomepage_banner_login)
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

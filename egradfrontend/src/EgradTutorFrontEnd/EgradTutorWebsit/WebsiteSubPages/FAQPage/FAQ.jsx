@@ -13,7 +13,7 @@ import "../../../../styles/Faqs/Default_FAQS.css";
 import "../../../../styles/Theme1LinksPage.css";
 import Footer from "../../Footer/Footer";
 import { IoMdAdd } from "react-icons/io";
-
+import ExamPageHeader from "../../ExamHomePage/ExamHomepageHeader/ExamPageHeader";
 const FAQ = ({ userRole }) => {
   const [faqs, setFaqs] = useState([]);
   const [answers, setAnswers] = useState([]);
@@ -70,8 +70,11 @@ const FAQ = ({ userRole }) => {
   const items = document.querySelectorAll(".accordion button");
 
   return (
+    <>
+{/* ExamPageHeader */}
+    <ExamPageHeader/>
     <div className={`FaqMainContainer ${themeDetails.FaqMainContainer}`}>
-      <div
+      {/* <div
         className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`}
       >
         {image ? (
@@ -97,7 +100,8 @@ const FAQ = ({ userRole }) => {
             Home
           </Link>
         </span>
-      </div>
+      </div> */}
+      
       <div className={`FaqSubContainer ${themeDetails.FaqSubContainer}`}>
         <h1>FREQUENTLY ASKED QUESTIONS</h1>
         <button onClick={() => setShowFaqForm(!showFaqForm)}>
@@ -142,6 +146,7 @@ const FAQ = ({ userRole }) => {
 
       <Footer />
     </div>
+    </>
   );
 };
 

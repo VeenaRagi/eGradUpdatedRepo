@@ -168,7 +168,7 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
                       className={`${themeDetails.themeLanding_branch_box_btns}`}
                     >
                       <ul>
-                        {branch.EntranceExams.slice(0, 6).map((exam) => (
+                        {branch.EntranceExams.slice(0, 4).map((exam) => (
                           <li
                             key={exam.EntranceExams_Id}
                             className={`${themeDetails.themeLanding_branch_box_li_buttons}`}
@@ -234,7 +234,7 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
                         className={`${themeDetails.themeLanding_branch_box_btns}`}
                       >
                         <ul>
-                          {branch.EntranceExams.slice(0, 6).map((exam) => (
+                          {branch.EntranceExams.slice(0, 4).map((exam) => (
                             <li
                               key={exam.EntranceExams_Id}
                               className={`${themeDetails.themeLanding_branch_box_li_buttons}`}

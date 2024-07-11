@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import BASE_URL from "../../src/apiConfig";
+import BASE_URL from "../../apiConfig";
 import { useLocation } from "react-router-dom";
 import "./styles/ResponsiveForAdmin.css";
 const UpdatingCourseInAdmin = () => {
@@ -1274,7 +1274,7 @@ const UpdatingCourseInAdmin = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/UgadminHome")}
+              onClick={() => navigate("/Adminpage")}
               className="ots_btnClose"
             >
               Close
