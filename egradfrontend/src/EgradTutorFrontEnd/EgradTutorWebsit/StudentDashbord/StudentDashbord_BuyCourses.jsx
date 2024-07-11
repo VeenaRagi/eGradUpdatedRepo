@@ -3,6 +3,7 @@ import { Link, useParams, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import BASE_URL from "../../../apiConfig";
 import { PiHandTapBold, PiHandTapThin } from "react-icons/pi";
+import "./Style/StudentDashbord_BuyCourses.css";
 
 const StudentDashbord_BuyCourses = ({ usersData }) => {
   const user_Id =

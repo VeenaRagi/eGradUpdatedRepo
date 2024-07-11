@@ -5,6 +5,10 @@
     overflow-y: scroll;
   }
 
+  .dashboard_body_container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit browsers */
+  }
+  
   .dashboard_welcome_section {
     margin: 1rem;
     background-color: #ffffff;

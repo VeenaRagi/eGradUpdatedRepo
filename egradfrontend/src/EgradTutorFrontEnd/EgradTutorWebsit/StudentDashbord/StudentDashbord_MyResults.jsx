@@ -1,57 +1,19 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useParams, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
-import BASE_URL from '../../../apiConfig'
+import BASE_URL from "../../../apiConfig";
 import { FaBookOpenReader } from "react-icons/fa6";
+import "./Style/StudentDashbord_MyResults.css";
 
-const StudentDashbord_MyResults = ({usersData}) => {
-
-  const user_Id = usersData.users && usersData.users.length > 0 ? (
-    usersData.users.map((user) => user.username)
-  ) : null;
+const StudentDashbord_MyResults = ({ usersData }) => {
+  const user_Id =
+    usersData.users && usersData.users.length > 0
+      ? usersData.users.map((user) => user.username)
+      : null;
 
   const [testDetails, setTestDetails] = useState([]);
   const [selectedTypeOfTest, setSelectedTypeOfTest] = useState("");
   const [filteredTestData, setFilteredTestData] = useState([]);
-
- 
-  // const [userData, setUserData] = useState({});
-  // useEffect(() => {
-  //   const checkLoggedIn = () => {
-  //     const loggedIn = localStorage.getItem("isLoggedIn");
-  //     if (loggedIn === "true") {
-  //       setIsLoggedIn(true);
-  //       fetchUserData();
-  //     }
-  //   };
-  //   checkLoggedIn();
-  // }, []);
-  // const fetchUserData = async () => {
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     const response = await fetch(`${BASE_URL}/ughomepage_banner_login/user`, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-
-  //     if (!response.ok) {
-  //       localStorage.removeItem("isLoggedIn");
-  //       localStorage.removeItem("token");
-  //       setIsLoggedIn(false);
-  //       Navigate("/uglogin");
-  //       return;
-  //     }
-
-  //     if (response.ok) {
-  //       const userData = await response.json();
-  //       setUserData(userData);
-  //       // ... process userData
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching user data:", error);
-  //   }
-  // };
 
   useEffect(() => {
     const fetchTestDetails = async () => {
@@ -158,7 +120,7 @@ const StudentDashbord_MyResults = ({usersData}) => {
     //   StudentDashbord_MyResults
     //   {/* {usersData.users && usersData.users.length > 0 && (
     //       <div>
-           
+
     //         <ul>
     //           {usersData.users.map((user) => (
     //             <li key={user.user_Id}>Username:{user.username}</li>
@@ -269,7 +231,7 @@ const StudentDashbord_MyResults = ({usersData}) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default StudentDashbord_MyResults
+export default StudentDashbord_MyResults;
