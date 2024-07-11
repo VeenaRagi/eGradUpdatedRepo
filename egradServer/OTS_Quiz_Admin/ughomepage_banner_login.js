@@ -603,7 +603,7 @@ router.post(
     try {
       const { username, email, phoneNumber, address } = req.body;
       const generatedPassword = generateRandomPassword();
-      const defaultRole = "viewer";
+      const defaultRole = "User";
       let fileContent = null;
 
       // Check if an image was uploaded
@@ -717,7 +717,7 @@ router.post(
     try {
       const { username, email, phoneNumber, address } = req.body;
       const generatedPassword = generateRandomPassword();
-      const defaultRole = "viewer";
+      const defaultRole = "User";
       let fileContent = null;
 
       // Check if an image was uploaded
@@ -1432,7 +1432,7 @@ router.post("/OTS_reset_password/:id/:token", (req, res) => {
 });
 
 router.get("/act_info", (req, res) => {
-  const query = "SELECT * FROM log WHERE role = 'viewer' ";
+  const query = "SELECT * FROM log WHERE role = 'User' ";
 
   db1.query(query, (error, results) => {
     if (error) {

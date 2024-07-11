@@ -106,7 +106,7 @@ const Student_dashboard = () => {
               settiAuth={settiAuth}
             />
           </div>
-          <Student_dashboard_Container usersData={usersData} />
+          <Student_dashboard_Container usersData={usersData} decryptedUserIdState={decryptedUserIdState} />
         </div>
       ) : (
         <UserLogin />

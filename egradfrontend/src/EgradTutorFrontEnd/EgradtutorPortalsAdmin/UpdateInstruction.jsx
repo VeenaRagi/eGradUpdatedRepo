@@ -58,7 +58,7 @@ export const UpdateInstruction = () => {
       <div>
         <button
           type="button"
-          onClick={() => navigate("/UgadminHome")}
+          onClick={() => navigate("/Adminpage")}
           className="ots_-createBtn"
         >
           Go back
