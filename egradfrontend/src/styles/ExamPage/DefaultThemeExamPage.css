@@ -269,6 +269,7 @@ p#more_info {
 
 .Footer_Contact_Us_Content.themeFooterContactUsContentDefault p {
     color: white;
+    line-height:2.3rem;
 }
 /* media queries for exam page */
 

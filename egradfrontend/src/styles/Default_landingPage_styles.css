@@ -202,12 +202,14 @@ color: white;
         text-shadow: 2px 9px 8px #000;
     } 
 
-    .Footer_eGRADTtutor__Content.themeFootereGRADTtutoContentDefault p{
-        line-height: 1.5rem;
+    .Footer_eGRADTtutor__Content.themeFootereGRADTtutoContentDefault p {
+        line-height: 2.3rem;
         text-align: justify;
-        color:white !important;
-}
-
+        color: white !important;
+    }
+    .NewExploreExams_Image.themeNewExploreExams_ImageDefault img {
+        width:110%;
+    }
 
 .Footer_Links_Content.themeFooterLinksContentDefault ul {
     display: flex;
