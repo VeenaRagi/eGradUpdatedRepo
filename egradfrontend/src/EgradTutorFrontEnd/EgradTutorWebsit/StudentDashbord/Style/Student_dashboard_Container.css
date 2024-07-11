@@ -1,0 +1,69 @@
+.ugquiz_StudentDashbordconatiner {
+    position: relative;
+    /* display: grid; */
+    display: flex;
+    width: 100%;
+    min-height: 93vh;
+  }
+
+.ugquiz_StudentDashbordconatiner_handleToggleLeftMenu {
+    display: none;
+  }
+
+  .ugquiz_StudentDashbordconatiner_left
+  .ugquiz_StudentDashbordconatiner_left_menu,
+.ugquiz_StudentDashbordconatiner_left_mobile {
+  padding: 0rem 0rem;
+  width: 100%;
+  width: 280px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* justify-content: center; */
+  align-items: center;
+  background: hsla(152, 52%, 33%, 0.103);
+  /* height: 85vh; */
+}
+
+.ugquiz_StudentDashbordconatiner_left
+  .ugquiz_StudentDashbordconatiner_left_menu
+  button,
+.ugquiz_StudentDashbordconatiner_left_mobile button {
+  width: 90%;
+  height: 50px;
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fdfeff;
+  color: var(--bs-success);
+  font-size: 1.2rem;
+  border-radius: 0;
+  &:hover {
+    background: var(--bs-success);
+    color: #fff;
+  }
+  span{
+    margin-right: 1rem;
+  }
+}
+.ugquiz_StudentDashbordconatiner_left
+  .ugquiz_StudentDashbordconatiner_left_menu
+  .activeButton,
+.ugquiz_StudentDashbordconatiner_left_mobile .activeButton {
+  position: relative;
+  background: var(--bs-success); /* Set your active color here */
+  color: #ffffff; /* Set your text color here */
+  border-radius: 0 100px 100px 0; /* Rounded shape with arrow-like effect */
+}
+
+.ugquiz_StudentDashbordconatiner_left
+  .ugquiz_StudentDashbordconatiner_left_menu
+  .activeButton,
+.ugquiz_StudentDashbordconatiner_left_mobile .activeButton {
+  position: relative;
+  background: var(--bs-success); /* Set your active color here */
+  color: #ffffff; /* Set your text color here */
+  border-radius: 0 100px 100px 0; /* Rounded shape with arrow-like effect */
+}

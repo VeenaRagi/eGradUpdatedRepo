@@ -2,7 +2,7 @@ import { MdAlternateEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa";
 import React, { useState, useEffect } from "react";
 import { Link, Navigate,useParams } from "react-router-dom";
-import "./Login.css";
+import "./styles/Login.css";
 import BASE_URL from "../apiConfig";
 import defaultImage from '../assets/defaultImage.png'; 
 import axios from "axios";

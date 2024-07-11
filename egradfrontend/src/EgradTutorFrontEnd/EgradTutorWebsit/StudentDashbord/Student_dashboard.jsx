@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useTIAuth } from "../../../TechInfoContext/AuthContext";
-import axios from "../../../api/axios";
+import axios from "axios";
 import StudentDashbord_Header from "./StudentDashbord_Header";
 import Student_dashboard_Container from "./Student_dashboard_Container";
-import PasswordChangeForm from "./PasswordChangeForm";
+import PasswordChangeForm from "../../../Login/PasswordChangeForm"
 
 const Student_dashboard = () => {
   // -----------------PARAMS_DECLARATION_START---------------
@@ -16,7 +16,7 @@ const Student_dashboard = () => {
   const [decryptedUserIdState, setDecryptedUserIdState] = useState("");
   const [tiAuth, settiAuth] = useTIAuth();
   const [usersData, setUsersData] = useState("");
-
+  const [scrollPosition, setScrollPosition] = useState(0);
   const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
   // -----------------CONST_VARIABLES_DECLARATION_END---------------
 
@@ -42,9 +42,9 @@ const Student_dashboard = () => {
         settiAuth({
           ...tiAuth,
           user: "",
-    token: "",
+          token: "",
           isLoggedIn: true,
-          userData: response.data // assuming response.data contains all necessary user data
+          userData: response.data, // assuming response.data contains all necessary user data
         });
       } catch (error) {
         console.error("Error fetching decrypted user ID:", error);
@@ -72,23 +72,41 @@ const Student_dashboard = () => {
   };
   //----------------LOGIN_FUNCTIONALITY_END------------------
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div>
       {/* SDAfterLogin <br />
       {userIdTesting} <br />
       {decryptedUserIdState} <br /> */}
-     
-      {tiAuth.isLoggedIn === true ?(
-         <div>
-         <StudentDashbord_Header usersData={usersData} tiAuth={tiAuth} />
-         <Student_dashboard_Container usersData={usersData} />
-         <button onClick={handleLogOut}>Log out</button>
-       </div>
+
+      {tiAuth.isLoggedIn === true ? (
+        <div>
+          <div
+            id="quizhome"
+            // style={{
+            //   // backgroundColor: scrollPosition > 10 ? "white" : "",
+            //   transition: "background-color 0.3s ease-in-out",
+            // }}
+          >
+            <StudentDashbord_Header usersData={usersData} tiAuth={tiAuth} />
+          </div>
+          <Student_dashboard_Container usersData={usersData} />
+          <button onClick={handleLogOut}>Log out</button>
+        </div>
       ) : (
-        // <button>Login</button>
-        <PasswordChangeForm/>
+        <PasswordChangeForm />
       )}
-      
     </div>
   );
 };
