@@ -4,9 +4,10 @@ import { Link, useParams, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import BASE_URL from '../../../apiConfig'
 import Student_profileUpdateForm from "./Student_profileUpdateForm";
-
+// import  '../../../../../egradServer/uploads/studentinfoimeages'
 
 const StudentDashbord_Settings = ({ usersData }) => {
+  const imageUrl = 'http://localhost:5000/uploads/studentinfoimages';
   const user_Id =
     usersData.users && usersData.users.length > 0
       ? usersData.users.map((user) => user.username)
@@ -22,7 +23,8 @@ const StudentDashbord_Settings = ({ usersData }) => {
                   <div>
                     <div className="pro_img">
                       Profile Image
-                      <img src={user.imageData} alt={`Image ${user.user_Id}`} />
+                      {/* <img src={user.imageData} alt={`Image ${user.user_Id}`} /> */}
+                      <img src={`http://localhost:5001/uploads/studentinfoimeages/${user.UplodadPhto}`} alt={`no static img ${user.UplodadPhto} `} />
                     </div>
                     <div className="StudentDashbordsettings_profile_box_info">
                       <p>User ID:{user.username}</p>

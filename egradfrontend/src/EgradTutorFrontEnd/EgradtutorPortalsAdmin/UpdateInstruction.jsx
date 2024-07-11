@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./styles/otcCss.css";
-import BASE_URL from "../../src/apiConfig";
+import BASE_URL from "../../apiConfig";
 
 export const UpdateInstruction = () => {
   const [points, setPoints] = useState([]);
