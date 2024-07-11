@@ -474,21 +474,23 @@ h2#white_examName {
 
 
 /* NEW CSS */
-.CoursePage_header_Container.CoursePageHeaderContainerDefault {
-    padding: 1 7rem; /* 0 padding for top and bottom, 7rem padding for left and right */
-}
 
+
+
+.CoursePage_header_Container.CoursePageHeaderContainerDefault {
+    padding: 3rem 7rem;
+}
 
 ul.courseHeaderUl.undefined {
     display: flex;
-    gap: 4rem;
+    gap: 3rem;
 }
 .menu-link.CoursePageItemsContainer.undefined {
     background-color:transparent;
 }
 ul.courseHeaderUl.undefined a {
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
 }
 h2.whiteContant {
