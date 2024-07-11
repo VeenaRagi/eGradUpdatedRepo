@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MdMenu } from "react-icons/md";
-import './Style/Student_dashboard_Container.css'
+import "./Style/Student_dashboard_Container.css";
 
 import Student_dashboard_Home from "./Student_dashboard_Home";
 import StudentDashbord_MyCourses from "./StudentDashbord_MyCourses";
@@ -16,76 +16,68 @@ const Student_dashboard_Container = ({ usersData }) => {
     setActiveComponent(component);
   };
 
-
   const [showLeftMenu, setShowLeftMenu] = useState(false);
   const handleToggleLeftMenu = () => {
     setShowLeftMenu(!showLeftMenu);
   };
   return (
     <div>
-      {/* {usersData.users && usersData.users.length > 0 && (
-          <div>
-            <p>
-              <strong>Username:</strong>
-            </p>
-            <ul>
-              {usersData.users.map((user) => (
-                <li key={user.user_Id}>{user.username}</li>
-              ))}
-            </ul>
-          </div>
-        )} */}
       <div
         className="ugquiz_StudentDashbordconatiner_handleToggleLeftMenu"
         onClick={handleToggleLeftMenu}
       >
         <MdMenu />
       </div>
-      <div
-        className={`${
-          showLeftMenu
-            ? "ugquiz_StudentDashbordconatiner_left_mobile"
-            : "ugquiz_StudentDashbordconatiner_left"
-        }`}
-      >
-        <div className="ugquiz_StudentDashbordconatiner_left_menu">
-          <button
-            className={activeComponent ? "activeButton" : ""}
-            onClick={() => handleMenuClick("home")}
-          >
-            Dashboard
-          </button>
-          <button
-            className={activeComponent ? "activeButton" : ""}
-            onClick={() => handleMenuClick("myCourses")}
-          >
-            My Courses
-          </button>
-          <button   className={activeComponent ? "activeButton" : ""} onClick={() => handleMenuClick("buyCourses")}>
-            Buy Courses
-          </button>
-          <button
-            className={activeComponent ? "activeButton" : ""}
-            onClick={() => handleMenuClick("myResults")}
-          >
-            My Results
-          </button>
-          <button
-            className={activeComponent ? "activeButton" : ""}
-            onClick={() => handleMenuClick("bookmarks")}
-          >
-            Bookmarks
-          </button>
-          <button
-            className={activeComponent ? "activeButton" : ""}
-            onClick={() => handleMenuClick("settings")}
-          >
-            Settings
-          </button>
+      <div className="ugquiz_StudentDashbordconatiner">
+        <div
+          className={`${
+            showLeftMenu
+              ? "ugquiz_StudentDashbordconatiner_left_mobile"
+              : "ugquiz_StudentDashbordconatiner_left"
+          }`}
+        >
+          <div className="ugquiz_StudentDashbordconatiner_left_menu">
+            <button
+              className={activeComponent ? "activeButton" : ""}
+              onClick={() => handleMenuClick("home")}
+            >
+              Dashboard
+            </button>
+            <button
+              className={activeComponent ? "activeButton" : ""}
+              onClick={() => handleMenuClick("myCourses")}
+            >
+              My Courses
+            </button>
+            <button
+              className={activeComponent ? "activeButton" : ""}
+              onClick={() => handleMenuClick("buyCourses")}
+            >
+              Buy Courses
+            </button>
+            <button
+              className={activeComponent ? "activeButton" : ""}
+              onClick={() => handleMenuClick("myResults")}
+            >
+              My Results
+            </button>
+            <button
+              className={activeComponent ? "activeButton" : ""}
+              onClick={() => handleMenuClick("bookmarks")}
+            >
+              Bookmarks
+            </button>
+            <button
+              className={activeComponent ? "activeButton" : ""}
+              onClick={() => handleMenuClick("settings")}
+            >
+              Settings
+            </button>
+          </div>
         </div>
       </div>
 
-      <div>
+      <div className="ugquiz_StudentDashbordconatiner_right_Std_MB_Course">
         {activeComponent === "home" && (
           <Student_dashboard_Home usersData={usersData} />
         )}

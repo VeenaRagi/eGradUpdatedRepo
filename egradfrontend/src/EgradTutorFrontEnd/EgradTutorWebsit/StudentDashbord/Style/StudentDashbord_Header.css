@@ -1,0 +1,107 @@
+.Quiz_main_page_header {
+    width: 100%;
+    display: flex;
+    padding: 0.5rem 0;
+    /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.411); */
+  }
+
+  .Quiz_main_page_navbar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    color: #fff;
+  }
+
+  .Quiz_main_page_navbar .Quizzlogo img {
+    width: 180px;
+  }
+
+  .quiz_app_quiz_menu_login_btn_contaioner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dashbordheder_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    gap: 1rem;
+    .Quiz__home {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+  }
+
+  
+.Quiz__home {
+    font-size: 1.5rem;
+    color: #1a374d;
+    text-decoration: none;
+    position: relative;
+   
+    &:hover {
+      color: #000000e3;
+    }
+  }
+   
+  .Quiz__home::after {
+    content: "";
+    width: 0%;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #1a374d; /* Optional: Change the color of the line */
+    transition: width 0.3s; /* Optional: Add a smooth transition effect */
+  }
+   
+  .Quiz__home:hover::after {
+    width: 100%;
+  }
+
+  #dropdownmenu_foradim_page_btn {
+    position: relative;
+    font-size: 1rem;
+    z-index: 1000;
+    text-transform: uppercase;
+    background: none;
+    &:hover .dropdownmenu_foradim_page {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      top: -0.5rem;
+      left: -3rem;
+      /* width: 160%; */
+      text-align: left;
+      background: rgb(255, 255, 255); /* width: 100%;? */
+      padding: 1.45rem;
+      padding-top: 5rem;
+      z-index: -1;
+      border-radius: 18px;
+    }
+  }
+  #dropdownmenu_foradim_page_btn img {
+    padding: 0.5rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #0089ff;
+  }
+
+  .dropdownmenu_foradim_page {
+    display: none;
+  }
+  .dropdownmenu_foradim_page a {
+    color: #000000;
+  }
+  .dropdownmenu_foradim_page a:hover {
+    color: blue;
+    text-decoration: underline;
+  }

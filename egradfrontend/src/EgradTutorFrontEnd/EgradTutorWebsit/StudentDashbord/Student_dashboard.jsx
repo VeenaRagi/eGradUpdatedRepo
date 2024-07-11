@@ -4,7 +4,8 @@ import { useTIAuth } from "../../../TechInfoContext/AuthContext";
 import axios from "axios";
 import StudentDashbord_Header from "./StudentDashbord_Header";
 import Student_dashboard_Container from "./Student_dashboard_Container";
-import PasswordChangeForm from "../../../Login/PasswordChangeForm"
+import PasswordChangeForm from "../../../Login/PasswordChangeForm";
+import UserLogin from "../../../Login/UserLogin";
 
 const Student_dashboard = () => {
   // -----------------PARAMS_DECLARATION_START---------------
@@ -85,7 +86,7 @@ const Student_dashboard = () => {
   }, []);
 
   return (
-    <div>
+    <>
       {/* SDAfterLogin <br />
       {userIdTesting} <br />
       {decryptedUserIdState} <br /> */}
@@ -94,20 +95,23 @@ const Student_dashboard = () => {
         <div>
           <div
             id="quizhome"
-            // style={{
-            //   // backgroundColor: scrollPosition > 10 ? "white" : "",
-            //   transition: "background-color 0.3s ease-in-out",
-            // }}
+            style={{
+              backgroundColor: scrollPosition > 10 ? "white" : "",
+              transition: "background-color 0.3s ease-in-out",
+            }}
           >
-            <StudentDashbord_Header usersData={usersData} tiAuth={tiAuth} />
+            <StudentDashbord_Header
+              usersData={usersData}
+              tiAuth={tiAuth}
+              settiAuth={settiAuth}
+            />
           </div>
           <Student_dashboard_Container usersData={usersData} />
-          <button onClick={handleLogOut}>Log out</button>
         </div>
       ) : (
-        <PasswordChangeForm />
+        <UserLogin />
       )}
-    </div>
+    </>
   );
 };
 

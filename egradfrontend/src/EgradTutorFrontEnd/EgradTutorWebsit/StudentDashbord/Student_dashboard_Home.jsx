@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import welcome_greeting_img from "./Images/welcome_greeting_img.png";
 import './Style/Student_dashboard_Home.css'
+import axios from "axios";
+import BASE_URL from '../../../apiConfig'
+
 
 const Student_dashboard_Home = ({ usersData }) => {
+  const user_Id = usersData.users && usersData.users.length > 0 ? (
+    usersData.users.map((user) => user.username)
+  ) : null;
   const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
@@ -22,6 +28,21 @@ const Student_dashboard_Home = ({ usersData }) => {
     setGreeting(newGreeting);
   }, []);
 
+  const [attemptedTestCount, setAttemptedTestCount] = useState([]);
+  useEffect(() => {
+    const fetchAttemptedTestCount = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/Myresult/attempted_test_count/${user_Id}`
+        );
+        setAttemptedTestCount(response.data);
+      } catch (error) {
+        console.error("Error fetching attempted test count:", error);
+      }
+    };
+
+    fetchAttemptedTestCount();
+  }, [user_Id]);
   return (
     <div className="dashboard_body_container">
       <div className="dashboard_welcome_section">
@@ -47,7 +68,7 @@ const Student_dashboard_Home = ({ usersData }) => {
       </div>
       <div>
         <div className="testcounts_student_dashbard">
-          {/* {attemptedTestCount
+          {attemptedTestCount
           .filter((item) => item.Portale_Id === 1 || item.Portale_Id === 2)
           .map(
             (item, index) =>
@@ -79,7 +100,7 @@ const Student_dashboard_Home = ({ usersData }) => {
                   </ul>
                 </div>
               )
-          )} */}
+          )}
         </div>
       </div>
     </div>

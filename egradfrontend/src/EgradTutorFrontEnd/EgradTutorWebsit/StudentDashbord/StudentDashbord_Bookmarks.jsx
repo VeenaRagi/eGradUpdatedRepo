@@ -1,57 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useParams, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
-import BASE_URL from '../../../apiConfig'
+import BASE_URL from "../../../apiConfig";
 import { MdDeleteForever } from "react-icons/md";
+import "./Style/StudentDashbord_Bookmarks.css";
 
-const StudentDashbord_Bookmarks = ({usersData}) => {
-  const user_Id = usersData.users && usersData.users.length > 0 ? (
-    usersData.users.map((user) => user.username)
-  ) : null;
+const StudentDashbord_Bookmarks = ({ usersData }) => {
+  const user_Id =
+    usersData.users && usersData.users.length > 0
+      ? usersData.users.map((user) => user.username)
+      : null;
   const { testCreationTableId, question_id } = useParams();
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [userData, setUserData] = useState({});
-  // useEffect(() => {
-  //   const checkLoggedIn = () => {
-  //     const loggedIn = localStorage.getItem("isLoggedIn");
-  //     if (loggedIn === "true") {
-  //       setIsLoggedIn(true);
-  //       fetchUserData();
-  //     }
-  //   };
-  //   checkLoggedIn();
-  // }, []);
-
-  // const fetchUserData = async () => {
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     const response = await fetch(`${BASE_URL}/ughomepage_banner_login/user`, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-
-  //     if (!response.ok) {
-  //       // Token is expired or invalid, redirect to login page
-  //       localStorage.removeItem("isLoggedIn");
-  //       localStorage.removeItem("token");
-  //       setIsLoggedIn(false);
-  //       Navigate("/uglogin"); // Assuming you have the 'navigate' function available
-  //       return;
-  //     }
-
-  //     if (response.ok) {
-  //       // Token is valid, continue processing user data
-  //       const userData = await response.json();
-  //       setUserData(userData);
-  //       // ... process userData
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching user data:", error);
-  //   }
-  // };
-
-
 
   const [Questionbookmark, setQuestionbookmark] = useState([]);
   useEffect(() => {
@@ -115,110 +74,95 @@ const StudentDashbord_Bookmarks = ({usersData}) => {
     );
   }
 
-
-
   return (
-    // <div>
-    //   StudentDashbord_Bookmarks
-    //   {usersData.users && usersData.users.length > 0 && (
-    //       <div>
-           
-    //         <ul>
-    //           {usersData.users.map((user) => (
-    //             <li key={user.user_Id}>Username:{user.username}</li>
-    //           ))}
-    //         </ul>
-    //       </div>
-    //     )}
-    // </div>
     <div className="Questionbookmark_container">
-    <ul className="Questionbookmark_contant">
-      {Questionbookmark.map((question, index) => {
-        const questionId = question.question_id;
-        const isAnswerVisible = showAnswers[questionId];
+      <ul className="Questionbookmark_contant">
+        {Questionbookmark.map((question, index) => {
+          const questionId = question.question_id;
+          const isAnswerVisible = showAnswers[questionId];
 
-        const showTestName = question.TestName !== previousTestName;
+          const showTestName = question.TestName !== previousTestName;
 
-        previousTestName = question.TestName;
+          previousTestName = question.TestName;
 
-        return (
-          <li key={questionId} className="QuestionbookmarkDAta">
-            {showTestName && (
-              <p className="qbmTitle ">Test Name: {question.TestName} </p>
-            )}
-            <p className="qbm_QuestionImage">Question:{index + 1} </p>
-            {question.paragraph.paragraphImg && (
-              <div>
-                <p className="qbm_QuestionImage">Paragraph:</p>
-                <img
-                  className="qbm_Image"
-                  src={`${BASE_URL}/uploads/${question.documen_name}/${question.paragraph.paragraphImg}`}
-                  alt="Paragraph Image"
-                />
-              </div>
-            )}
-
-            <div className="eGRADTutorWatermark">
-              <div>
-                <img
-                  className="qbm_Image"
-                  src={`${BASE_URL}/uploads/${question.documen_name}/${question.questionImgName}`}
-                  alt=""
-                />
-              </div>
-
-              <ul className="dbq_options">
-                {question.options.map((option, index) => (
-                  <li key={option.option_id}>
-                    <span>{String.fromCharCode(97 + index)}:</span>{" "}
-                    <img
-                      src={`${BASE_URL}/uploads/${question.documen_name}/${option.optionImgName}`}
-                      alt=""
-                    />
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {isAnswerVisible && (
-              <div className="eGRADTutorWatermark">
-                <div className="bdqSolution">
-                  <p className="qbm_QuestionImage">Solution: </p>
+          return (
+            <li key={questionId} className="QuestionbookmarkDAta">
+              {showTestName && (
+                <p className="qbmTitle ">Test Name: {question.TestName} </p>
+              )}
+              <p className="qbm_QuestionImage">Question:{index + 1} </p>
+              {question.paragraph.paragraphImg && (
+                <div>
+                  <p className="qbm_QuestionImage">Paragraph:</p>
                   <img
                     className="qbm_Image"
-                    src={`${BASE_URL}/uploads/${question.documen_name}/${question.solution.solutionImgName}`}
+                    src={`${BASE_URL}/uploads/${question.documen_name}/${question.paragraph.paragraphImg}`}
+                    alt="Paragraph Image"
+                  />
+                </div>
+              )}
+
+              <div className="eGRADTutorWatermark">
+                <div>
+                  <img
+                    className="qbm_Image"
+                    src={`${BASE_URL}/uploads/${question.documen_name}/${question.questionImgName}`}
                     alt=""
                   />
                 </div>
+
+                <ul className="dbq_options">
+                  {question.options.map((option, index) => (
+                    <li key={option.option_id}>
+                      <span>{String.fromCharCode(97 + index)}:</span>{" "}
+                      <img
+                        src={`${BASE_URL}/uploads/${question.documen_name}/${option.optionImgName}`}
+                        alt=""
+                      />
+                    </li>
+                  ))}
+                </ul>
               </div>
-            )}
 
-            <div className="toggleAnswerMdDeleteForever">
-              <button
-                onClick={() => toggleAnswer(questionId)}
-                className="dbq_Answer_sh"
-              >
-                {isAnswerVisible ? "Hide Answer" : "Show Answer"}
-              </button>
+              {isAnswerVisible && (
+                <div className="eGRADTutorWatermark">
+                  <div className="bdqSolution">
+                    <p className="qbm_QuestionImage">Solution: </p>
+                    <img
+                      className="qbm_Image"
+                      src={`${BASE_URL}/uploads/${question.documen_name}/${question.solution.solutionImgName}`}
+                      alt=""
+                    />
+                  </div>
+                </div>
+              )}
 
-              <button
-                onClick={() =>
-                  deleteBookmarkQuestion(
-                    question.testCreationTableId.user_Id,
-                    question.testCreationTableId.testCreationTableId,
-                    question.question_id
-                  )
-                }
-              >
-                <MdDeleteForever />
-              </button>
-            </div>
-          </li>
-        );
-      })}
-    </ul>
-  </div>
-  )
-}
+              <div className="toggleAnswerMdDeleteForever">
+                <button
+                  onClick={() => toggleAnswer(questionId)}
+                  className="dbq_Answer_sh"
+                >
+                  {isAnswerVisible ? "Hide Answer" : "Show Answer"}
+                </button>
 
-export default StudentDashbord_Bookmarks
+                <button
+                  onClick={() =>
+                    deleteBookmarkQuestion(
+                      question.testCreationTableId.user_Id,
+                      question.testCreationTableId.testCreationTableId,
+                      question.question_id
+                    )
+                  }
+                >
+                  <MdDeleteForever />
+                </button>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+
+export default StudentDashbord_Bookmarks;

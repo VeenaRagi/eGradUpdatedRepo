@@ -1,0 +1,153 @@
+.QuizBUy_courses {
+  width: 100%;
+}
+
+.QuizBUy_coursesinstudentdB {
+  height: 90vh;
+  /* background: #000; */
+  overflow-y: scroll;
+}
+.QuizBUy_coursesinstudentdB::-webkit-scrollbar {
+  background: none; /* Change the background color as needed */
+}
+
+.QuizBUy_coursesheaderwithfilteringcontainer div:nth-child(2) {
+  width: 250px;
+  margin: 0.5rem auto;
+  margin-right: 0.5rem;
+  select {
+    width: 100%;
+  }
+}
+.QuizBUy_coursescontainerwithfilteringcontainer {
+  width: 100%;
+  min-height: 100vh;
+
+  /* background: #7e1717; */
+  .subheadingbuycourse {
+    width: 200px;
+
+    text-align: left;
+    font-size: 1.4rem;
+    margin: 0.5rem;
+    /* background: #28a745; */
+    /* background: #6c757d33; */
+    color: #000000;
+    /* border: 1px solid #000; */
+    border-radius: 10px;
+    padding: 0.5rem;
+    text-align: center;
+    margin: 0 auto;
+  }
+}
+.portal_group_h2 {
+  width: 100%;
+  text-align: center;
+  font-size: 1.8rem;
+  background: #3b88b3;
+  color: #fff;
+}
+
+.exam_group {
+  margin-bottom: 20px; /* Adjust margin between exam groups */
+}
+
+.courses_boxcontainer {
+  box-shadow: 0 0 10px #efefef;
+  margin: 0.5rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 320px));
+  padding: 0.5rem 1rem;
+  gap: 1rem;
+}
+.QuizBUy_coursescontainerwithfilteringcoursebox_info {
+  width: 100%;
+  /* background: #7e5252; */
+  p {
+    margin: 0;
+    padding: 0 0.5rem;
+    font-size: 1rem;
+    text-align: left;
+  }
+  p:nth-child(1) {
+    font-size: 1rem;
+    font-weight: 900;
+    margin: 0.2rem 0;
+  }
+  .QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoeprice {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    /* padding: 0.5rem; */
+    background: #fff;
+    border: 1px solid #efefef;
+    label {
+      color: #0a0a0a;
+      width: 100%;
+      padding: 0.5rem;
+      position: relative;
+
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      font-size: 1rem;
+      align-items: center;
+      span:nth-child(1) {
+        color: red;
+        position: relative;
+        /* width: 100%; */
+        font-size: 0.8rem;
+      }
+
+      span:nth-child(1)::after {
+        content: "";
+        width: 40px;
+        height: 1px;
+        position: absolute;
+        background: #000;
+        top: 42%;
+        left: -22px;
+        transform: translate(50%, 50%);
+      }
+      span:nth-child(2) {
+        background: #dc3545;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: -17.9rem;
+        font-weight: 900;
+        font-size: 1.5rem;
+        right: -6.5rem;
+      }
+      span:nth-child(3) {
+        font-size: 1.8rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    a {
+      background: #00bf8e;
+      color: #fff;
+      width: 150px;
+      font-weight: 700;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.1rem;
+    }
+  }
+  .QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoepricemycourses {
+    a {
+      width: 100%;
+    }
+  }
+}
