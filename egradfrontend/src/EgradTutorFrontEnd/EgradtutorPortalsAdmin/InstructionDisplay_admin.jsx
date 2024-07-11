@@ -65,10 +65,10 @@ const InstructionDisplay_admin = () => {
     }
   };
 
-const handleSearchInputChange = (event) => {
-  setSearchQuery(event.target.value);
-  setCurrentPage(1); // Reset current page to 1 when search query changes
-};
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+    setCurrentPage(1); // Reset current page to 1 when search query changes
+  };
   const filteredInstruction = instruction.filter(
     (instruction) =>
       instruction.instructionHeading &&
@@ -76,20 +76,20 @@ const handleSearchInputChange = (event) => {
         .toLowerCase()
         .includes(searchQuery.toLowerCase())
   );
-   const [currentPage, setCurrentPage] = useState(1);
-   const itemsPerPage = 10;
-const filteredData = filteredInstruction.filter((data) =>
-  data.examName.toLowerCase().includes(searchQuery.toLowerCase())
-);
-   const indexOfLastItem = currentPage * itemsPerPage;
-   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-   const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const filteredData = filteredInstruction.filter((data) =>
+    data.examName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
-   const handlePageChange = (pageNumber) => {
-     setCurrentPage(pageNumber);
-   };
-   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-;
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  ;
   return (
     <div className="Instruction_containerTable">
       <div className="create_exam_header_SearchBar">
@@ -104,75 +104,75 @@ const filteredData = filteredInstruction.filter((data) =>
         />
       </div>
       <h3 className="list_-otsTitels">Uploaded Instruction documents</h3>
-
-      <table className="otc_-table">
-        <thead className="otsGEt_-contantHead otc_-table_-header">
-          <tr>
-            <th style={{ textAlign: "center" }}>S.no</th>
-            <th style={{ textAlign: "center" }}>EXAM NAME</th>
-            <th style={{ textAlign: "center" }}>Instructions Heading</th>
-
-            <th style={{ textAlign: "center" }}>Document Name</th>
-
-            <th style={{ textAlign: "center" }}>ACTIONS</th>
-          </tr>
-        </thead>
-        <tbody className="otc_-table_-tBody" style={{ textAlign: "center" }}>
-          {currentItems.length === 0 ? (
+      <div style={{overflowX:"scroll"}}> 
+        <table className="otc_-table">
+          <thead className="otsGEt_-contantHead otc_-table_-header">
             <tr>
-              <td colSpan="6">No Instruction found.</td>
+              <th style={{ textAlign: "center" }}>S.no</th>
+              <th style={{ textAlign: "center" }}>EXAM NAME</th>
+              <th style={{ textAlign: "center" }}>Instructions Heading</th>
+
+              <th style={{ textAlign: "center" }}>Document Name</th>
+
+              <th style={{ textAlign: "center" }}>ACTIONS</th>
             </tr>
-          ) : (
-            currentItems.map((ite, inde) => (
-              <tr key={inde} className={inde % 2 === 0 ? "color1" : "color2"}>
-                <td style={{ textAlign: "center" }}>{ite.instructionId}</td>
-                <td style={{ padding: 10 }}>{ite.examName}</td>
-                <td style={{ padding: 10 }}>{ite.instructionHeading}</td>
-                <td style={{ padding: 10 }}>{ite.documentName}</td>
-
-                <td>
-                  <div className="tooltip-container  EditDelete_-btns">
-                    <Link
-                      to={`/Instruction/editIns/${ite.instructionId}`}
-                      // title="Open Instruction Points"
-                      className="my-anchor-element1 Ots_-edit"
-                      data-tooltip-variant="info"
-                      data-tooltip-delay-show={1000}
-                      style={{
-                        background: "#00aff0",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        color: "#fff",
-                      }}
-                    >
-                      Open
-                    </Link>
-                    <Tooltip anchorSelect=".my-anchor-element1" place="top">
-                      Open Instruction Points
-                    </Tooltip>
-
-                    <button
-                      className="Ots_-delete my-anchor-element"
-                      data-tooltip-variant="warning"
-                      data-tooltip-delay-show={1000}
-                      onClick={() => handleDelete(ite.instructionId)}
-                      style={{ background: "rgb(220 53 69)" }}
-                    >
-                      <i
-                        class="fa-regular fa-trash-can"
-                        style={{ color: "#fff" }}
-                      ></i>
-                    </button>
-                    <Tooltip anchorSelect=".my-anchor-element" place="top">
-                      Delete
-                    </Tooltip>
-                  </div>
-                </td>
+          </thead>
+          <tbody className="otc_-table_-tBody" style={{ textAlign: "center" }}>
+            {currentItems.length === 0 ? (
+              <tr>
+                <td colSpan="6">No Instruction found.</td>
               </tr>
-            ))
-          )}
-          {/* {instruction.map((ite, inde) => (
+            ) : (
+              currentItems.map((ite, inde) => (
+                <tr key={inde} className={inde % 2 === 0 ? "color1" : "color2"}>
+                  <td style={{ textAlign: "center" }}>{ite.instructionId}</td>
+                  <td style={{ padding: 10 }}>{ite.examName}</td>
+                  <td style={{ padding: 10 }}>{ite.instructionHeading}</td>
+                  <td style={{ padding: 10 }}>{ite.documentName}</td>
+
+                  <td>
+                    <div className="tooltip-container  EditDelete_-btns">
+                      <Link
+                        to={`/Instruction/editIns/${ite.instructionId}`}
+                        // title="Open Instruction Points"
+                        className="my-anchor-element1 Ots_-edit"
+                        data-tooltip-variant="info"
+                        data-tooltip-delay-show={1000}
+                        style={{
+                          background: "#00aff0",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          color: "#fff",
+                        }}
+                      >
+                        Open
+                      </Link>
+                      <Tooltip anchorSelect=".my-anchor-element1" place="top">
+                        Open Instruction Points
+                      </Tooltip>
+
+                      <button
+                        className="Ots_-delete my-anchor-element"
+                        data-tooltip-variant="warning"
+                        data-tooltip-delay-show={1000}
+                        onClick={() => handleDelete(ite.instructionId)}
+                        style={{ background: "rgb(220 53 69)" }}
+                      >
+                        <i
+                          class="fa-regular fa-trash-can"
+                          style={{ color: "#fff" }}
+                        ></i>
+                      </button>
+                      <Tooltip anchorSelect=".my-anchor-element" place="top">
+                        Delete
+                      </Tooltip>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
+            {/* {instruction.map((ite, inde) => (
             <tr
             
               key={inde}
@@ -215,8 +215,9 @@ const filteredData = filteredInstruction.filter((data) =>
 
             </tr>
           ))} */}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
       <div style={{ textAlign: "center", marginTop: "1rem" }}>
         {Array.from({ length: totalPages }, (_, index) => (
           <button key={index + 1} onClick={() => handlePageChange(index + 1)}>

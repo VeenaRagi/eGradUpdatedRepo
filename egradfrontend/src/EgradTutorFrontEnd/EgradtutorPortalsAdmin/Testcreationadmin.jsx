@@ -735,7 +735,7 @@ const handleSearchInputChange = (event) => {
                       <span>Question Limit:</span>
                     </label>
 
-                    <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
+                    <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant" style={{overflowX:"scroll"}}>
                       <table style={{ textAlign: "justify" }}>
                         <thead>
                           <tr>
@@ -872,7 +872,7 @@ const handleSearchInputChange = (event) => {
         />
       </div>
       <h3 className="list_-otsTitels">Created test Details</h3>
-      <div className="testCreation_-GettingDAta_-container">
+      <div className="testCreation_-GettingDAta_-container" style={{overflowX:"scroll"}}>
         <table className="otc_-table" style={{ textAlign: "center" }}>
           <thead className="otsGEt_-contantHead otc_-table_-header">
             <tr>
