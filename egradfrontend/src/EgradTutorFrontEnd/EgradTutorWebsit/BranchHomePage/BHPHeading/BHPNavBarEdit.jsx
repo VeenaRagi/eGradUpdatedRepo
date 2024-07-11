@@ -72,22 +72,24 @@ const BHPNavBarEdit = ({ type }) => {
   }, []);
 
   const handleDelete = (id) => {
-    fetch(`${BASE_URL}/Main_Header/homepageNavItems/${id}`, {
+    fetch(`${BASE_URL}/BHPNavBarEdit/homepageNavItems/${id}`, {
       method: 'DELETE'
     })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Success:', data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Success:', data);
+      alert("Navbar Item deleted successfully!"); // Move alert here
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   };
+  
 
   const handleInputChange = (e) => {
     setNavItem(e.target.value);
@@ -103,15 +105,27 @@ const BHPNavBarEdit = ({ type }) => {
         Item_Order: editItemOrder,
         navItemlink: editnavItemlink
       });
-      setNavItems(navItems.map(item => item.Nav_id === id ? { ...item, Nav_Item: editNavItemText, Item_Order: editItemOrder, navItemlink: editnavItemlink } : item,));
+      
+      // Update the state with the new item values
+      setNavItems(navItems.map(item => 
+        item.Nav_id === id 
+          ? { ...item, Nav_Item: editNavItemText, Item_Order: editItemOrder, navItemlink: editnavItemlink } 
+          : item
+      ));
+      
+      // Clear the editing state
       setEditingItemId(null);
       setEditNavItemText('');
       setEditItemOrder('');
       setEditnavItemlink('');
+      
+      // Display the alert
+      alert("Navbar item updated successfully!");
     } catch (error) {
       console.error('Error updating item:', error);
     }
   };
+  
 
   const handleSaveNavItem = async () => {
     try {
@@ -121,8 +135,11 @@ const BHPNavBarEdit = ({ type }) => {
         navItemlink: navItemlink
       });
       console.log('Server Response:', response.data);
+      
       if (response.data.status === 'Success') {
         console.log('Item saved successfully');
+        alert("Navbar item added successfully!"); // Display alert here
+  
         // Optionally close the form or reset form fields
         setNavItem('');
         setItemOrder('');
@@ -134,6 +151,7 @@ const BHPNavBarEdit = ({ type }) => {
       console.error('Error saving item:', error);
     }
   };
+  
   const [openNavItemsPopup, setOpenNavItemsPopup] = useState(false);
   const togglePopup = (type) => {
     if (type === 'navItemsPopup') {

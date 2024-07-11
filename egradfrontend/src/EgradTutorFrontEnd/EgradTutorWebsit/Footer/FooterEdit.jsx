@@ -98,6 +98,7 @@ const FooterEdit = ({ type }) => {
             setDataOne((prevData) =>
                 prevData.filter((dataItem) => dataItem.Content_id !== content_id)
             );
+               alert("Item deleted successfully!");
         } catch (error) {
             console.error("Error deleting data:", error);
         }
@@ -128,6 +129,7 @@ const FooterEdit = ({ type }) => {
                         : item
                 )
             );
+            alert("Item updated successfully!");
  
             setEditedItemIdOne(null);
         } catch (error) {
@@ -172,7 +174,7 @@ const FooterEdit = ({ type }) => {
  
             // Show success message
             setShowSuccessMessage(true);
- 
+            alert("Footer link submitted successfully!");
             // Reset form state or do any additional actions
         } catch (error) {
             console.error("Error submitting data:", error);
@@ -240,10 +242,15 @@ const FooterEdit = ({ type }) => {
             setSelectedFile(null);
             setDocumentName("");
             setCurrentDocumentName(''); // Clear current document name display if needed
+
+            alert("Footer link submitted successfully!");
         } catch (error) {
             console.error("Error updating data:", error);
         }
     };
+
+
+
     const handleEditFooterItemClick = (
         Link_Id,
         Link_Item,
@@ -266,6 +273,7 @@ const FooterEdit = ({ type }) => {
                 `${BASE_URL}/FooterEdit/footerLinksDeleteData/${Link_Id}`
             );
             console.log("Response:", response.data);
+            alert("Footer data Delete successfully!");
         } catch (error) {
             console.error("Error deleting data:", error);
         }
@@ -303,6 +311,8 @@ const FooterEdit = ({ type }) => {
             setDataTwo((prevData) =>
                 prevData.filter((dataItem) => dataItem.content_id !== content_id)
             );
+            alert("Footer data Delete successfully!");
+
         } catch (error) {
             console.error("Error deleting data:", error);
         }
@@ -330,6 +340,8 @@ const FooterEdit = ({ type }) => {
                         : item
                 )
             );
+            alert("Footer data update successfully!");
+
         } catch (error) {
             console.error("Error updating data:", error);
         }
