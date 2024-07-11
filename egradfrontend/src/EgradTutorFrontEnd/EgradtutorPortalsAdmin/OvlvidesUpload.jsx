@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import BASE_URL from "../apiConfig";
+import BASE_URL from "../../apiConfig"
 import ReactPaginate from "react-paginate";
 import { FaSearch } from "react-icons/fa";
 import { useParams } from 'react-router-dom';

@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 import "./styles/Leftnav.css";
 import Exam_portal_admin_Dashboard from "./Exam_portal_admin_Dashboard.jsx";
 import Examcreation_admin from "./Examcreation_admin";
-import Coursecreation_admin from "./Coursecreation_admin";
+// import Coursecreation_admin from "./Coursecreation_admin";
 import InstructionPage_admin from "./InstructionPage_admin";
 import Testcreationadmin from "./Testcreationadmin";
 import DocumentUpload_admin from "./DocumentUpload_admin";
 
-import Account_info from "../login/Account_info.js";
+import Account_info from "./Account_info.js";
 
 import { FaLock, FaUserAlt, FaImage } from "react-icons/fa";
 import Image_Upload_for_Ac_ADMIN from "./Image_Upload_for_Ac_ADMIN";

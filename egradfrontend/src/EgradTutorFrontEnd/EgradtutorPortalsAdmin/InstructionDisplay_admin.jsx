@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import ReactTooltip, { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import BASE_URL from "../../src/apiConfig";
+import BASE_URL from "../../apiConfig"
 import { FaSearch } from "react-icons/fa";
 
 const InstructionDisplay_admin = () => {
