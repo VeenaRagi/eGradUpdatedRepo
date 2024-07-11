@@ -1,13 +1,14 @@
-.t1LinksPagesMainContainer{
+.t1LinksPagesMainContainer {
     /* background-color: red; */
 }
-.t1AboutUsImgContainer{
+
+.t1AboutUsImgContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 80%;
     margin: 0 auto;
-    
+
 }
 
 .t1AboutUsImgContainer img {
@@ -15,11 +16,12 @@
     width: 330px;
 }
 
-.t1LinksDataContainer{
-width: 80%;
-margin: 0 auto;
+.t1LinksDataContainer {
+    width: 80%;
+    margin: 0 auto;
 }
-.t1AboutUsImgContainer span{
+
+.t1AboutUsImgContainer span {
     margin-top: 25px;
 }
 
@@ -45,98 +47,99 @@ margin: 0 auto;
 }
 
 .t1LinksDataContainer p strong {
-    font-size: 22px;
+    font-size: 15px;
     color: #12a4df;
     margin-left: -20px;
     font-weight: bold;
 }
- 
- 
 
-.t1LinksDataContainer p{
+
+.t1LinksDataContainer p {
     color: black;
     padding: 10px;
     margin-left: 30px;
 }
 
 .LinksDataContainer.t1LinksDataContainer {
-  background-color: white;
-  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
-  padding:2rem;
+    background-color: white;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    padding: 2rem;
 }
 
 
 /* FAqs css part */
-.t1FaqMainContainer{
-/* background-color: green; */
+.t1FaqMainContainer {
+    /* background-color: green; */
 }
 
-.t1AboutUsImgContainer{
+.t1AboutUsImgContainer {}
 
+.t1FaqSubContainer {
+    /* background-color: green; */
 }
 
-.t1FaqSubContainer{
-/* background-color: green; */
-}
-
-.t1FaqSubContainer h1{
+.t1FaqSubContainer h1 {
     text-align: center;
     font-size: 35px;
     padding-top: 50px;
 }
 
 .t1FaqSubContainer h1 {
-    background: linear-gradient(
-      to right, 
-      hsl(98, 38%, 50%), 
-      hsl(204 100% 59%)
-    );
+    background: linear-gradient(to right,
+            hsl(98, 38%, 50%),
+            hsl(204 100% 59%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-align: center;
-  }
+}
 
-.t1FaqDataContainer{
-width: 80%;
-margin: 0 auto;
-padding: 25px;
+.t1FaqDataContainer {
+    width: 80%;
+    margin: 0 auto;
+    padding: 25px;
 }
 
 .t1FaqData {
     padding: 20px;
 }
-.t1FaqData h3{
-color:black;
+
+.t1FaqData h3 {
+    color: black;
+    font-size: 20px;
 }
 
 
 
-.t1FaqData p{
-color: rgb(54 52 53);
-margin-left: 60px;
+.t1FaqData p {
+    color: rgb(54 52 53);
+    margin-left: 60px;
 }
 
 
 
-@media (max-width:768px){
-    .t1FaqSubContainer h1{
-        font-size:17px ;
+@media (max-width:768px) {
+    .t1FaqSubContainer h1 {
+        font-size: 17px;
     }
 
-    .t1FaqData h3{
-        color:black;
+    .t1FaqData h3 {
+        color: black;
         font-size: 20px;
-        }
+    }
 
-        .t1FaqData p {
-            color: rgb(54 52 53);
-            margin-left: 10px;
-        }
+    .t1FaqData p {
+        color: rgb(54 52 53);
+        margin-left: 10px;
+    }
 
-        .t1FaqDataContainer {
-            width: 100%;
-            margin: 0 auto;
-            padding: 25px;
-        }
-        
+    .t1FaqDataContainer {
+        width: 100%;
+        margin: 0 auto;
+        padding: 25px;
+    }
+
+    .t1LinksDataContainer {
+        width: 100%;
+    }
+
 }
