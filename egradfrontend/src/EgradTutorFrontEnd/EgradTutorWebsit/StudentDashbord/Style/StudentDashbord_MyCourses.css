@@ -492,3 +492,282 @@
   cursor: pointer;
   font-weight: 500;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal {
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; */
+  background-color: rgb(131 127 127 / 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#uploadInputFile_ovl_upload_file {
+  font-size: 12px;
+}
+.ovlcontent {
+  /* background-color: rgb(131 127 127 / 50%); */
+  padding: 20px;
+  border-radius: 5px;
+  align-items: center;
+}
+
+/* Styles for custom controls */
+.custom-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Styles for custom control buttons */
+.custom-controls button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.custom-controls button:hover {
+  background-color: #0056b3;
+}
+
+
+
+.OVL_Heading {
+  color: #000000a4;
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.OVL_subheading {
+  width: 100%;
+  font-size: 1.5rem;
+  height: 5vh;
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 1rem auto !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.OVL_course_card {
+  height: -moz-fit-content;
+  height: fit-content;
+  text-align: center;
+  width: 100%;
+  height: 300px;
+  /* background: #fff; */
+  text-align: justify;
+  transition: 0.5s all;
+  border-radius: 5px;
+}
+
+.OVL_course_card img {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  margin: 0 auto;
+  border-bottom: 3px solid #000000a6;
+}
+
+.OVL_continer {
+  width: 100%;
+  text-align: center;
+  padding: 0rem 1rem;
+  overflow-y: scroll;
+  height: 92vh;
+}
+.OVL_continer::-webkit-scrollbar {
+  display: none;
+}
+.OVL_continer_data {
+  text-align: left;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ 
+  p{
+    text-align: left;
+    margin: 0;padding: 0;
+    /* color: red; */
+    font-weight: normal;
+    text-align: left;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+  }
+}
+.OVL_courseName {
+  margin: 1rem;
+  font-size: 18px;
+}
+.OVL_start_button a {
+  background: #198754;
+  border-radius: 10px;
+  width: 100%;
+  height: 40px;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+.OVL_container{
+  width: 100%;
+  background: rgb(0 153 255 / 4%);
+  padding: 2rem;
+  min-height: 88vh;
+  overflow-y: scroll;
+}
+.OVL_PageHeading {
+  margin: 0.5rem 0;
+  font-size: large;
+}
+.OVL_cards{
+  display: grid;
+  /* gap: 2rem; */
+}
+
+.OVL_card_data{
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(192, 197, 197);
+ padding: 5px;
+ margin: 5px 0;
+
+}
+.OVL_text{
+  margin: 7px;
+}
+
+.OVL_Video_close{
+  /* width: 90px; */
+  border-radius: 26px;
+  position: absolute;
+  right: 304px;
+  top: 67px;
+}
+.OVL_Video_close i{ 
+  font-size: 20px;
+  text-align: center;
+
+}
+
+.OVL_Video{
+  /* position: fixed; */
+  right: 715px;
+}
+/* 
+.ovl_upload_file{
+  padding-top: 35px;
+} */
+
+.vlTable{
+  text-align: center;
+  padding: 2rem 0px 0rem 0;
+  text-transform: uppercase;
+}
+
+.modal_Contant {
+  position: absolute;
+  background: #edf7ff;
+  height: 100%;
+  width: 85%;
+  top: 15px;
+  box-shadow: 0px 0px 18px -11px black;
+  padding-top: 8rem;
+}
+
+.modalContent {
+  background: white;
+  padding: 15px 27px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 77%;
+  gap: 1rem;
+}
+
+.DriveLink {
+  display: flex;
+  flex-direction: column;
+}
+
+.DriveLinkBtns {
+  display: flex;
+  gap: 10px;
+} 
+
+
+.paginationBttns {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin-top: 1rem;
+  background: #ffffff;
+}
+
+.paginationBttns li{
+  margin: 0 1rem;
+}
+.paginationBttns li:hover{
+text-decoration: underline;
+}
+.previousBttn,
+.nextBttn {
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  /* border: 1px solid #ccc; */
+  color:#020202;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.previousBttn:hover,
+.nextBttn:hover {
+  background-color: #020202;
+}
+
+.paginationActive {
+  background-color: #042d4b;
+  color: #ffffff;
+  border-radius: 10px;
+  gap:5px;
+  display:flex;
+  border-radius: 5px 0%;
+}
+.paginationActive a {
+  margin: 0 5px; /* Adjust the margin as needed */
+}
+.paginationDisabled {
+  color: #030303;
+  cursor: not-allowed;
+  
+}

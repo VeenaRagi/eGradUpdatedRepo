@@ -8,7 +8,7 @@ import ReactPlayer from "react-player";
 import { FaBookOpenReader } from "react-icons/fa6";
 import "./Style/StudentDashbord_MyCourses.css";
 
-const StudentDashbord_MyCourses = ({ usersData,decryptedUserIdState }) => {
+const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   const [testDetails, setTestDetails] = useState([]);
   const [selectedTypeOfTest, setSelectedTypeOfTest] = useState("");
   const [testPageHeading, setTestPageHeading] = useState([]);
@@ -30,8 +30,8 @@ const StudentDashbord_MyCourses = ({ usersData,decryptedUserIdState }) => {
       : null;
   const user_Id = decryptedUserIdState;
 
-      console.log("hiiiiiiii");
-      console.log(user_Id)
+  console.log("hiiiiiiii");
+  console.log(user_Id);
   // ************** FOR ONLINE VIDEO CLASS RIGHT CLICK DISABLE FUNCTIONALITY ********************//
   const [isFullscreen, setIsFullscreen] = useState(false);
   const playerRef = useRef(null);
@@ -142,12 +142,12 @@ const StudentDashbord_MyCourses = ({ usersData,decryptedUserIdState }) => {
     }
   }, [testDetails, selectedTypeOfTest]);
 
-  const handletestClick = async (courseCreationId, user_Id) => {
-    console.log("handletestClick:", courseCreationId, user_Id);
+  const handletestClick = async (courseCreationId, decryptedUserIdState) => {
+    console.log("handletestClick:", courseCreationId, decryptedUserIdState);
     try {
       const response = await axios.get(
         // `${BASE_URL}/TestPage/feachingOveralltest/${courseCreationId}`
-        `${BASE_URL}/TestPage/feachingOveralltest/${courseCreationId}/${user_Id}`
+        `${BASE_URL}/TestPage/feachingOveralltest/${courseCreationId}/${decryptedUserIdState}`
       );
 
       setTestDetails(response.data);
@@ -157,7 +157,9 @@ const StudentDashbord_MyCourses = ({ usersData,decryptedUserIdState }) => {
       console.error("Error fetching test details:", error);
     }
   };
-console.log(testDetails)
+  console.log("helloooooooooooooooooo")
+  console.log(testDetails);
+  console.log("decryptedUserIdState:",decryptedUserIdState)
   const firstTestCreationTableId =
     testDetails.length > 0 ? testDetails[0].testCreationTableId : null;
 
@@ -522,7 +524,7 @@ console.log(testDetails)
   const [isLoading, setIsLoading] = useState(true);
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState("");
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -570,6 +572,7 @@ console.log(testDetails)
   };
 
   const handleViewVideo = async (OVL_Linke_Id) => {
+    console.log("helloooooooo");
     try {
       const video = videos.find((video) => video.OVL_Linke_Id === OVL_Linke_Id);
       if (!video) {

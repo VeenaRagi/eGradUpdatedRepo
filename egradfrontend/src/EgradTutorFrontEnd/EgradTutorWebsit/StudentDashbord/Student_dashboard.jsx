@@ -100,13 +100,16 @@ const Student_dashboard = () => {
               transition: "background-color 0.3s ease-in-out",
             }}
           >
-            <StudentDashbord_Header
+            {/* <StudentDashbord_Header
               usersData={usersData}
               tiAuth={tiAuth}
               settiAuth={settiAuth}
-            />
+            /> */}
           </div>
-          <Student_dashboard_Container usersData={usersData} decryptedUserIdState={decryptedUserIdState} />
+          <Student_dashboard_Container
+            usersData={usersData}
+            decryptedUserIdState={decryptedUserIdState}
+          />
         </div>
       ) : (
         <UserLogin />
