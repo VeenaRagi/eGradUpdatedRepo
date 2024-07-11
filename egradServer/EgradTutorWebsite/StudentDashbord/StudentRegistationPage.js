@@ -14,7 +14,7 @@ require('dotenv').config();
 // Set up multer for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-      cb(null, 'uploads/');
+      cb(null, 'uploads/studentinfoimeages/');
   },
   filename: function (req, file, cb) {
       cb(null, Date.now() + path.extname(file.originalname)); // Append the file extension
@@ -25,7 +25,7 @@ const upload = multer({ storage: storage });
 
 // Ensure the uploads directory exists
 const fs = require('fs');
-const uploadDir = 'uploads/';
+const uploadDir = 'uploads/studentinfoimeages/';
 if (!fs.existsSync(uploadDir)){
   fs.mkdirSync(uploadDir);
 }
@@ -107,7 +107,7 @@ router.post('/register', upload.fields([{ name: 'UplodadPhto' }, { name: 'Signat
     // SQL query to insert student registration data
     const sql = `
       INSERT INTO otsstudentregistation 
-      (candidateName, dateOfBirth, GenderId, CategoryId, emailId, confirmEmailId, contactNo, fatherName, occupation, mobileNo, line1, state_id, districts_id, pincode, edStatusId, NameOfCollege, passingYear, marks, UplodadPhto, Signature, Proof, courseCreationId) 
+      (candidateName, dateOfBirth, Gender, Category, emailId, confirmEmailId, contactNo, fatherName, occupation, mobileNo, line1, state, districts, pincode, qualifications, NameOfCollege, passingYear, marks, UplodadPhto, Signature, Proof, courseCreationId) 
       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
 
     const values = [
