@@ -36,7 +36,7 @@ const RegistrationForm = () => {
   const [formErrors, setFormErrors] = useState({});
   const [emailExists, setEmailExists] = useState(false);
   const [submitType, setSubmitType] = useState("");
-  
+
   useEffect(() => {
     if (courseCreationId) {
       axios
@@ -182,19 +182,35 @@ const RegistrationForm = () => {
 
   return (
     <div className="registrationFormParentDiv">
-      <h2 style={{textAlign:"center",textTransform:"uppercase"}}>Student Registration Page</h2>
+      <h2 style={{ textAlign: "center", textTransform: "uppercase" }}>Student Registration Page</h2>
+
       {courseDetails && (
-        <div>
-          <h3>Course Details</h3>
-          <p>
-            <strong>Course Name:</strong> {courseDetails.courseName}
-          </p>
-          <p>
-            <strong>Course Dureation:</strong> {courseDetails.courseStartDate} to {courseDetails.courseEndDate}
-          </p>
-          <p>
-            <strong>Available count</strong> {courseDetails.count}
-          </p>
+        <div className="courseDetailsPC">
+          <div className="courseDetailsSubContainer">
+            <div className="courseDetailsh2Div">
+              <h2 style={{textTransform:"uppercase"}}>Course Details</h2>
+            </div>
+            <div className="courseDetailsDiv" >
+              <div>
+                <strong>Course Name:</strong>
+                <p>
+                  {courseDetails.courseName}
+                </p>
+              </div>
+              <div>
+                <strong>Course Duration:</strong>
+                <p>
+                  {courseDetails.courseStartDate} to {courseDetails.courseEndDate}
+                </p>
+              </div>
+              <div>
+                <strong>Available count:</strong>
+                <p>
+                  {courseDetails.count}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       )}
       {emailExists && (
@@ -211,7 +227,7 @@ const RegistrationForm = () => {
             <h1>PersonalDetails</h1>
             <div>
               <label>Candidate Name:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -229,7 +245,7 @@ const RegistrationForm = () => {
 
             <div>
               <label>Date of Birth:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -359,7 +375,7 @@ const RegistrationForm = () => {
 
             <div>
               <label>Email ID:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -377,7 +393,7 @@ const RegistrationForm = () => {
 
             <div>
               <label>Confirm Email ID:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -396,7 +412,7 @@ const RegistrationForm = () => {
 
             <div>
               <label>Contact No:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -416,7 +432,7 @@ const RegistrationForm = () => {
             <h1>Father's/ Guardian's Details</h1>
             <div>
               <label>Father Name:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -434,7 +450,7 @@ const RegistrationForm = () => {
 
             <div>
               <label>Occupation:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -452,7 +468,7 @@ const RegistrationForm = () => {
 
             <div>
               <label>Mobile No:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -473,7 +489,7 @@ const RegistrationForm = () => {
 
             <div>
               <label>Line1:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -491,7 +507,7 @@ const RegistrationForm = () => {
 
             <div>
               <label>State:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -509,7 +525,7 @@ const RegistrationForm = () => {
 
             <div>
               <label>Districts:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -527,7 +543,7 @@ const RegistrationForm = () => {
 
             <div>
               <label>Pincode:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -591,7 +607,7 @@ const RegistrationForm = () => {
 
             <div>
               <label>Name of College:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -609,7 +625,7 @@ const RegistrationForm = () => {
 
             <div>
               <label>Passing Year:
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -627,7 +643,7 @@ const RegistrationForm = () => {
 
             <div>
               <label>Marks(%):
-              <span className="mandatoryIndicator">*</span>
+                <span className="mandatoryIndicator">*</span>
 
               </label>
               <input
@@ -645,13 +661,13 @@ const RegistrationForm = () => {
           </div>
           <div className="fieldsToBeGrid2">
             <h1>Upload Image/Documents</h1>
-          <div className="fieldsToBeFlex" >
-            <div>
-              <label>Upload Photo:
-              <span className="mandatoryIndicator">*</span>
+            <div className="fieldsToBeFlex" >
+              <div>
+                <label>Upload Photo:
+                  <span className="mandatoryIndicator">*</span>
 
-              </label>
-              {/* <div> */}
+                </label>
+                {/* <div> */}
                 <div className="uploadPicDiv">
                   <img src={uploadPicImg} alt="no img" />
                 </div>
@@ -664,34 +680,34 @@ const RegistrationForm = () => {
                 {formErrors["UplodadPhto"] && (
                   <span style={{ color: "red" }}>{formErrors["UplodadPhto"]}</span>
                 )}
-              {/* </div> */}
-            </div>
+                {/* </div> */}
+              </div>
 
-            <div>
-              <label>Signature:
-                <span className="mandatoryIndicator">*</span>
-              </label>
-              {/* <div> */}
+              <div>
+                <label>Signature:
+                  <span className="mandatoryIndicator">*</span>
+                </label>
+                {/* <div> */}
                 <div className="uploadPicDiv">
                   <img src={uploadPicImg} alt="no img" />
                 </div>
                 <input type="file" name="Signature" onChange={handleChange} />
               </div>
-            {/* </div> */}
+              {/* </div> */}
 
-            <div>
-              <label>Proof:
-              <span className="mandatoryIndicator">*</span>
+              <div>
+                <label>Proof:
+                  <span className="mandatoryIndicator">*</span>
 
-              </label>
-              {/* <div> */}
-              <div className="uploadPicDiv">
+                </label>
+                {/* <div> */}
+                <div className="uploadPicDiv">
                   <img src={uploadPicImg} alt="no img" />
                 </div>
-              <input type="file" name="Proof" onChange={handleChange} />
+                <input type="file" name="Proof" onChange={handleChange} />
               </div>
-            {/* </div> */}
-          </div>
+              {/* </div> */}
+            </div>
           </div>
           <div className="registerOrCousesButtonDiv">
             {courseDetails ? (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-
+import './Style/ChangePasswordCss.css'
 const PasswordChangeForm = () => {
   const { user_Id } = useParams();
   const navigate = useNavigate();
@@ -66,38 +66,45 @@ const PasswordChangeForm = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h1>Change Password</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="userLoginPagePC ">
+      <div className="userLoginSubContainer">
+
         <div>
-          <label>Code</label>
-          <input
-            type="password"
-            value={oldPassword}
-            onChange={(e) => setOldPassword(e.target.value)}
-            required
-          />
+          <h1>Change Password</h1>
         </div>
-        <div>
-          <label>New Password</label>
-          <input
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Confirm New Password</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <div className='passwordChangeFormGroup'>
+            <label>Code</label>
+            <input
+              type="password"
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className='passwordChangeFormGroup'>
+            <label>New Password</label>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className='passwordChangeFormGroup'>
+            <label>Confirm New Password</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className='passwordChangeFormGroup'>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
       {attempts >= 3 && (
         <button onClick={handleResendPassword}>Resend Password</button>
       )}
