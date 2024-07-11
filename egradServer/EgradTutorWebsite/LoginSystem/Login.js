@@ -77,4 +77,46 @@ router.post('/login', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+
+
+router.post('/adminlogin', async (req, res) => {
+  const { email, password } = req.body;
+  console.log('Login attempt with email:', email);
+  try {
+    // Fetch user from the database by email
+    const sql = 'SELECT user_Id, email, password, role FROM log WHERE email = ?';
+    const [users] = await db.query(sql, [email]);
+
+    if (users.length === 0) {
+      console.log('No user found with email:', email);
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    const user = users[0];
+    console.log('User found:', user);
+
+    // Compare the provided password with the hashed password in the database
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      console.log('Password mismatch for email:', email);
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    // Generate JWT token
+    const accessToken = jwt.sign({ user_Id: user.user_Id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const refreshToken = jwt.sign({ user_Id: user.user_Id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    console.log("AccessToken:", accessToken, "RefreshToken:", refreshToken);
+
+    const encryptedUserId = encryptData(user.user_Id.toString());
+    console.log("Sending details are:", { encryptedUserId, refreshToken, accessToken });
+
+    res.json({ user_Id: encryptedUserId, refreshToken, accessToken, role: user.role });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;
