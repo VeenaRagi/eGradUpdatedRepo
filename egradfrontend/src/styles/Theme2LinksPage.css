@@ -90,6 +90,13 @@
     .LinkPage_footer-content__mgztB {
         padding: 2rem;
     }
+
+    .FaqSubContainer.t2FaqSubContainer {
+        height: auto;
+    }
+    .FaqDataContainer.t2FaqDataContainer {
+        padding: 1rem 2rem;
+    }
 }
 
 @media (max-width:768px) {
