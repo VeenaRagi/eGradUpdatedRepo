@@ -8,7 +8,7 @@
     width:300px;
 }
 .AboutUsImgContainer.t2AboutUsImgContainer {
-    padding: 2rem 7rem; /* 2rem for top and bottom, 4rem for left and right */
+    padding: 0rem 6rem;
 }
 .AboutUsImgContainer.t2AboutUsImgContainer span a {
     display: flex;
@@ -30,4 +30,25 @@
 .LinksDataContainer.t2LinksDataContainer strong {
     color: #003d4e;
     font-weight: bold;
+}
+
+
+
+@media (max-width:768px) {
+
+    .t2LinksDataContainer {
+        width: 100%;
+    }
+
+    .t2AboutUsImgContainer img {
+        border-radius: 5px;
+        width: 200px;
+    }
+
+    .t2AboutUsImgContainer span {
+        margin-top: 0px;
+        /* width: 10px; */
+    }
+    
+
 }

@@ -28,6 +28,14 @@
   width: 100%;
   border-radius: 2rem;
 }
+.create_exam_header_SearchBar .AdminSearchBar:focus-visible {
+  /* box-shadow: none;
+  background: none;
+  width: 100%;
+  border-radius: 2rem; */
+  /* border: none; */
+  outline: none;
+}
 
 .create_exam_content {
   /* margin: 3rem; */

@@ -48,7 +48,7 @@ const AdminHeader = ({userRole}) => {
   
   return (
     <div>
-        <div className={`Ug_examsPage_Main_Container ${themeDetails.themeExamPageHeaderMainContainer}`}>
+        <div  className={`Ug_examsPage_Main_Container ${themeDetails.themeExamPageHeaderMainContainer}`}>
       <div className={`Ug_examsPage_Container ${themeDetails.themeExamPageHeaderContainer}`}>
       {themeColor==='Theme-2' ? 
        <>

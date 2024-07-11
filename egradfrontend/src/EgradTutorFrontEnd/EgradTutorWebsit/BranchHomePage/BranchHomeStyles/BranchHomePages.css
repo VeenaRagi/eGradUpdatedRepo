@@ -279,7 +279,7 @@ justify-content: space-around;
     }
   }
 .t1NewExploreExams_PortalNames_Container{
-    /* padding: 15px; */
+    padding: 5px;
     display: flex;
     justify-content: start;
     flex-direction: column;

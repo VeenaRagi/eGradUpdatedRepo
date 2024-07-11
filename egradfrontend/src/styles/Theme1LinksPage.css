@@ -142,4 +142,15 @@
         width: 100%;
     }
 
+    .t1AboutUsImgContainer img {
+        border-radius: 5px;
+        width: 200px;
+    }
+
+    .t1AboutUsImgContainer span {
+        margin-top: 0px;
+        /* width: 10px; */
+    }
+    
+
 }
