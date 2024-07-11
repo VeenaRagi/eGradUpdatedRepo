@@ -1,0 +1,68 @@
+.LeftnavPngsImgs {
+  background: white;
+  border-radius: 50%;
+  /* padding: 6px; */
+}
+.LeftnavLinks {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+  /* color: black; */
+}
+/* table ,tr, th,td {
+  border: 2px solid #000;
+} */
+table {
+  border-collapse: collapse;
+}
+tr td {
+  /* text-align: center; */
+  /* border: 1px solid; */
+  border: none;
+}
+tr th {
+  /* text-align: center; */
+  border: none;
+
+  /* border: 1px solid; */
+}
+
+.admin_S_R_INfo {
+  position: relative;
+  background: #cfecf55b;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  margin: 0 auto;
+}
+
+.admin_S_R_INfo > div {
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.admin_S_R_INfo::-webkit-scrollbar {
+  display: none;
+}
+.doubtsectionnodatapater {
+  width: 100%;
+  .doubtsectionnodata {
+    width: 100%;
+    height: 70vh;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      font-size: 1.5rem;
+      font-weight: 500;
+      /* padding: 1.5rem;border-radius: 5px;
+        font-size: 1.5rem;font-weight: 500;
+        box-shadow: 0 0 10px #00000081; */
+    }
+  }
+}

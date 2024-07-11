@@ -1,0 +1,354 @@
+.examcreation_from {
+  background: #0000009e;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.create_exam_header_SearchBar {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  margin-top: 1rem;
+  box-shadow: none;
+  background: none;
+  box-shadow: 1px 2px 5px 0px #97d1ff;
+  border-radius: 23px;
+  background: white;
+}
+
+.create_exam_header_SearchBar .Adminsearchbaricon {
+  margin: 1rem 0 1rem 1rem;
+}
+
+.create_exam_header_SearchBar .AdminSearchBar {
+  box-shadow: none;
+  background: none;
+  width: 100%;
+  border-radius: 2rem;
+}
+
+.create_exam_content {
+  /* margin: 3rem; */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.examForm_Contant-container {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* added this line */
+  gap: 1rem;
+  position: fixed; /* changed to fixed for centering */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centering trick */
+  max-width: 100%;
+  width: 420px;
+  height: auto;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 3rem 0.5rem;
+  box-shadow: 0px 0px 40px 0px;
+
+  button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1rem;
+    background: none;
+    color: #042f4d;
+    box-shadow: 0;
+    padding: 5px;
+    & i {
+      font-size: 30px;
+    }
+  }
+  .ots_-createBtn {
+    position: relative;
+    background: #042f4f;
+    /* color: #000000; */
+    color: white;
+    button {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+      font-size: 1rem;
+      /* background: #000; */
+      color: #ffffff;
+      box-shadow: 0;
+    }
+  }
+}
+
+.examContainer {
+  /* background: #c9d4dd; */
+  padding: 1rem;
+  border-radius: 10px;
+  position: relative;
+}
+
+.Exams_contant {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+  gap: 1rem;
+  justify-content: space-between;
+  background: #ffffff;
+}
+
+.examSubject_conten {
+  display: flex;
+}
+
+.formdiv_contaniner input {
+  width: 270px;
+  padding: 6px;
+  border: none;
+  box-shadow: 1px 4px 11px 0px #1a374d;
+}
+
+.formdiv_contaniner_ch input {
+  width: 22px;
+  padding: 6px;
+  border: none;
+  /* box-shadow: 1px 4px 11px 0px #1A374D; */
+  height: 21px;
+}
+
+.exam_SubjectCOnatiner {
+  padding: 1rem;
+  background: #ffffff;
+}
+.formdiv_contaniner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.examSubject_conten {
+  /* display: flex; */
+  /* gap: 1rem; */
+  /* flex-direction: column; */
+  /* justify-content: space-between; */
+  /* flex-wrap: wrap; */
+  /* align-items: center; */
+  display: grid;
+  /* grid-template-columns: repeat(2,1fr); */
+}
+.examSubject_conten li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* btns */
+/* .create_exam_header button {
+    background:rgb(26 55 77);
+    border: 0;
+    padding: 0 0.5rem;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 700;
+    padding: 10px;
+    text-transform: uppercase;
+} */
+
+.UPDATE_-COURSE {
+  background: rgb(20, 62, 126);
+  border: 0;
+  padding: 0 0.5rem;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px;
+}
+
+/* .examBtn {
+    margin-top: 1rem;
+    margin-left: 88rem;
+} */
+
+#examCLose {
+  position: absolute;
+  top: -24px;
+  right: 12px;
+  background: #373f68;
+  padding: 7px;
+  color: #fff;
+  border-radius: 16px;
+}
+
+/* table section */
+
+.Create_exam_page {
+  /* background: #c9d4dd; */
+  padding: 1rem;
+}
+
+/* exam update section */
+
+/* .examUpdate_-container */
+.examUpdate_-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  background: redwi;
+  background: #edf7ff;
+  width: 100vw;
+  height: 100vh;
+  height: auto;
+}
+
+.examUpdate_-container form {
+  /* background: #ffffff; */
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+}
+
+.examUpdate_-contant {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 10px;
+}
+.examSubjects_-contant {
+  background: #ffffff;
+  margin: 7px 1rem;
+  padding: 6px;
+  width: 100%;
+  margin: 0 auto;
+}
+.examSubjects_-contant_exc {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fill,minmax(150px,380px)); */
+}
+
+.exam_cardinadmin {
+  border: 2px solid;
+  width: 25rem;
+  border-radius: 5px;
+}
+.exam_cardinadmin p {
+  text-align: center;
+}
+.exam_cardinadmin_createdData {
+  display: flex;
+  gap: 10px;
+  /* flex-direction: column; */
+}
+.exam_dates {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media (max-width: 600px) {
+  .examcreation_from {
+    background: #0000009e;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100000000;
+  }
+  .examForm_Contant-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%; /* Adjusted for mobile */
+    width: 90%; /* Adjusted for mobile */
+    /* height: 90vh; */
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 2rem 0.5rem;
+    box-shadow: 0px 0px 40px 0px;
+    overflow-y: scroll;
+  }
+  .formdiv_contaniner {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: flex-start;
+    align-items: start;
+    gap: 5px;
+    label {
+      font-size: 13px;
+      width: 100%;
+    }
+    input {
+      width: 100%;
+      padding: 4px;
+      font-size: 13px;
+      border: none;
+      box-shadow: 1px 4px 11px 0px #1a374d;
+    }
+  }
+  .formdiv_contaniner_ch {
+    .examSubject_conten {
+      label {
+        font-size: 12px;
+      }
+    }
+  }
+  .formdiv_contaniner_ch input {
+    width: 15px;
+    padding: 6px;
+    border: none;
+    /* box-shadow: 1px 4px 11px 0px #1A374D; */
+    height: 15px;
+  }
+  .examUpdate_-container form {
+    /* background: #ffffff; */
+    padding: 4rem;
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #000;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .examUpdate_-contant {
+      label {
+        font-size: 13px;
+        width: 100%;
+      }
+    }
+    div {
+      width: 100%;
+    }
+  }
+
+  .examUpdate_-contant {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  input[type="time"] {
+    width: 100%;
+    padding: 6px;
+    border: none;
+    box-shadow: 1px 4px 11px 0px #1a374d;
+  }
+}
