@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import BASE_URL from "../../src/apiConfig";
+import BASE_URL from "../../apiConfig";
 
 const ExamUpdataion_admin = () => {
   const { examId } = useParams();

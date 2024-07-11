@@ -28,6 +28,10 @@ import Student_dashboard from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDash
 import Payu from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/Payu.jsx";
 import Document_ImageInfo from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/Document_ImageInfo.jsx";
 import Exam_portal_admin_integration from "../src/EgradTutorFrontEnd/EgradtutorPortalsAdmin/Exam_portal_admin_integration.jsx";
+import ExamUpdataion_admin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/ExamUpdataion_admin.jsx";
+import UpdatingConrseInAdmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/UpdatingCourseInAdmin.jsx"
+import GettingInstructions from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/GettinggInstructions.jsx"
+import {UpdateInstruction} from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/UpdateInstruction.jsx"
 function App() {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -123,9 +127,15 @@ function App() {
               {/* --------------------Student_dashboard_INTERFACE_ROUTES_END-------------------- */}
 
               {/*--------------------- EgradtutorPortalsAdmin ------------- */}
-              <Route path="/getSubjectData/:testCreationTableId/:subjectId/:sectionId" element={<Document_ImageInfo/>}/>
-             
-             <Route path="/Adminpage" element={<Exam_portal_admin_integration/>}/>
+              <Route path="/getSubjectData/:testCreationTableId/:subjectId/:sectionId" element={<Document_ImageInfo />} />
+
+              <Route path="/Adminpage" element={<Exam_portal_admin_integration />} />
+              <Route path="/ExamUpdataion_admin/:examId" element={<ExamUpdataion_admin />} />
+              <Route path="/UpdatingCourseInAdmin/:courseCreationId/:portalId" element={<UpdatingConrseInAdmin />} />
+
+              <Route path="/Instruction/editIns/:instructionId/" element={<GettingInstructions />} />
+
+              <Route path="/InstructionPage/editIns/:instructionId/:id" element={<UpdateInstruction />} />
             </Routes>
           </Router>
         )}

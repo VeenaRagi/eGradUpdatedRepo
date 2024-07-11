@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // const API_BASE_URL = "http://localhost:5001";
-import BASE_URL from '../../src/apiConfig'
+import BASE_URL from '../../apiConfig'
 const GettinggInstructions = () => {
   const [points, setPoints] = useState([]);
   const { instructionId } = useParams();
