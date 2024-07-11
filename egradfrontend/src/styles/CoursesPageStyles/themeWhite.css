@@ -474,7 +474,9 @@ h2#white_examName {
 
 
 /* NEW CSS */
-
+.themeTabsSubContainerDefault {
+    padding: 0 6rem;
+}
 
 
 .CoursePage_header_Container.CoursePageHeaderContainerDefault {
