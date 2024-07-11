@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useTIAuth } from "../../../TechInfoContext/AuthContext";
-import axios from "../../../api/axios";
+import axios from "axios";
 import StudentDashbord_Header from "./StudentDashbord_Header";
-import Student_dashboard_Home from "./Student_dashboard_Home";
-import StudentDashbord_MyCourses from "./StudentDashbord_MyCourses";
-import StudentDashbord_BuyCourses from "./StudentDashbord_BuyCourses";
-import StudentDashbord_MyResults from "./StudentDashbord_MyResults";
-import StudentDashbord_Bookmarks from "./StudentDashbord_Bookmarks";
-import StudentDashbord_Settings from "./StudentDashbord_Settings";
+import Student_dashboard_Container from "./Student_dashboard_Container";
+import PasswordChangeForm from "../../../Login/PasswordChangeForm"
 
 const Student_dashboard = () => {
   // -----------------PARAMS_DECLARATION_START---------------
@@ -19,6 +15,8 @@ const Student_dashboard = () => {
   const navigate = useNavigate();
   const [decryptedUserIdState, setDecryptedUserIdState] = useState("");
   const [tiAuth, settiAuth] = useTIAuth();
+  const [usersData, setUsersData] = useState("");
+  const [scrollPosition, setScrollPosition] = useState(0);
   const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
   // -----------------CONST_VARIABLES_DECLARATION_END---------------
 
@@ -33,8 +31,21 @@ const Student_dashboard = () => {
             params: { encryptedUserId },
           }
         );
+        console.log(
+          encryptedUserId,
+          "this is the user id sending throug params receibing through req.query  "
+        );
         console.log(response.data, "Response from backend");
-        setDecryptedUserIdState(response.data.userId); // Update state with decrypted user ID
+        setDecryptedUserIdState(response.data.userId);
+        setUsersData(response.data);
+        console.log(usersData); // Update state with decrypted user ID
+        settiAuth({
+          ...tiAuth,
+          user: "",
+          token: "",
+          isLoggedIn: true,
+          userData: response.data, // assuming response.data contains all necessary user data
+        });
       } catch (error) {
         console.error("Error fetching decrypted user ID:", error);
       }
@@ -47,37 +58,55 @@ const Student_dashboard = () => {
 
   console.log(userIdTesting, "3222222222222222222222");
   console.log(secretKey, "secret key while decoding");
-
+  console.log("hiiiiiiiiiiiiiii");
+  console.log(usersData);
   const handleLogOut = () => {
     settiAuth({
       ...tiAuth,
       user: null,
       token: "",
+      isLoggedIn: false,
     });
     localStorage.removeItem("tiAuth");
     navigate("/userlogin");
   };
   //----------------LOGIN_FUNCTIONALITY_END------------------
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div>
-      SDAfterLogin <br />
+      {/* SDAfterLogin <br />
       {userIdTesting} <br />
-      {decryptedUserIdState} <br />
-      <button onClick={handleLogOut}>Log out</button>
-      <div>
+      {decryptedUserIdState} <br /> */}
+
+      {tiAuth.isLoggedIn === true ? (
         <div>
-          <StudentDashbord_Header />
+          <div
+            id="quizhome"
+            // style={{
+            //   // backgroundColor: scrollPosition > 10 ? "white" : "",
+            //   transition: "background-color 0.3s ease-in-out",
+            // }}
+          >
+            <StudentDashbord_Header usersData={usersData} tiAuth={tiAuth} />
+          </div>
+          <Student_dashboard_Container usersData={usersData} />
+          <button onClick={handleLogOut}>Log out</button>
         </div>
-        <div>
-          <Student_dashboard_Home />
-          <StudentDashbord_MyCourses />
-          <StudentDashbord_BuyCourses />
-          <StudentDashbord_MyResults />
-          <StudentDashbord_Bookmarks />
-          <StudentDashbord_Settings />
-        </div>
-      </div>
+      ) : (
+        <PasswordChangeForm />
+      )}
     </div>
   );
 };

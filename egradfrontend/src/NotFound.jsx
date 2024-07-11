@@ -1,6 +1,6 @@
 import React from "react";
 import "./ErrorPage.css"; // Corrected import statement for CSS file
-import NotFoundImage from "./NotFound.png"; // Import the image file
+import NotFoundImage from "./assets/NotFound.png"; // Import the image file
 
 const NotFound = () => {
   return (

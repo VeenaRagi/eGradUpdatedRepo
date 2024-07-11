@@ -59,21 +59,19 @@ router.post('/login', async (req, res) => {
     try {
         // Decrypt user ID
         const userId = decryptData(encryptedUserId);
-
+      console.log(userId,"this is the decrypted user id")
         if (!userId) {
             return res.status(400).json({ message: 'Invalid or missing user ID' });
         }
-
         // Retrieve user details from the database
-        // const sql = 'SELECT * FROM users WHERE user_Id = ?';
-        // const [users] = await db.query(sql, [userId]);
-
-        // if (users.length === 0) {
-            // return res.status(404).json({ message: 'User not found' });
-        // }
-
+        const sql = 'SELECT * FROM log WHERE user_Id = ?';
+        const [users] = await db.query(sql, [userId]);
+        if (users.length === 0) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        console.log(users)
         // const user = users[0];
-        res.json({ userId });
+        res.json({ userId, users });
     } catch (error) {
         console.error('Error retrieving user details:', error);
         res.status(500).json({ message: 'Server error' });

@@ -1,0 +1,6 @@
+#quizhome{
+    position: sticky;
+    top:0rem;
+    z-index: 10000;
+     background: hsla(152, 52%, 33%, 0.103);
+  }

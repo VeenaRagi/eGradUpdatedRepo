@@ -1,9 +1,19 @@
 import React from 'react'
 
-const StudentDashbord_MyResults = () => {
+const StudentDashbord_MyResults = ({usersData}) => {
   return (
     <div>
-      
+      StudentDashbord_MyResults
+      {usersData.users && usersData.users.length > 0 && (
+          <div>
+           
+            <ul>
+              {usersData.users.map((user) => (
+                <li key={user.user_Id}>Username:{user.username}</li>
+              ))}
+            </ul>
+          </div>
+        )}
     </div>
   )
 }

@@ -1,16 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../assets/actions/authActions';
-import { AuthContext } from '../EgradTutorFrontEnd/AuthContext';
-// import axios from '../api/axios';
+
+
+import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import { useTIAuth } from '../TechInfoContext/AuthContext';
 import '../styles/UserLoginPage/userLoginPageCss.css'
-import axios from 'axios';
-// const LOGIN_URL ='/UserLogin'
-// import CryptoJS from 'crypto-js';
-// import { decryptData, encryptData } from './CryptoUtils/CryptoUtils';
+
 
 
 const UserLogin = () => {
@@ -65,6 +61,24 @@ const UserLogin = () => {
         console.log("Stored in localStorage and useContext:", tiAuth);
         const encodedUserId = encodeURIComponent((user_Id));
         navigate(`/Student_dashboard/${encodedUserId}`);
+
+            // Get the current time
+      const currentTime = new Date();
+      const currentHour = currentTime.getHours();
+      
+          // Determine the greeting based on the current hour
+      let greeting = "";
+      if (currentHour < 12) {
+        greeting = "Good Morning,";
+      } else if (currentHour < 18) {
+        greeting = "Good Afternoon,";
+      } else {
+        greeting = "Good Evening,";
+      }
+
+      // Set the greeting message in localStorage
+      localStorage.setItem("greeting", greeting);
+
       } else if (role === 'Admin' || role === 'SuperAdmin') {
         alert('You don\'t have access to this page');
       } else {
