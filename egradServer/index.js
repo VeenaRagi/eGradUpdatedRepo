@@ -162,6 +162,8 @@ const TestPage = require("./eGradTutorStudentDashboard/TestPage");
 const InstructionPage = require("./eGradTutorStudentDashboard/InstructionPage");
 const QuizPage = require("./eGradTutorStudentDashboard/QuizPage");
 const TestResultPage = require("./eGradTutorStudentDashboard/TestResultPage");
+const Myresult =require("./eGradTutorStudentDashboard/Myresult")
+
 //================OTS_QUIZAPP_IMPORTS_END==================
  
 //================OTS_QUIZAPP_ROUTES_START==================
@@ -172,6 +174,7 @@ app.use("/TestPage", TestPage);
 app.use("/InstructionPage", InstructionPage);
 app.use("/QuizPage", QuizPage);
 app.use("/TestResultPage", TestResultPage);
+app.use("/Myresult",Myresult);
 //================OTS_QUIZAPP_ROUTES_END===============
 
 
