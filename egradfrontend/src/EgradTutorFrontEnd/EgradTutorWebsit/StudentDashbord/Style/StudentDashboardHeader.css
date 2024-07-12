@@ -43,5 +43,5 @@ padding: 4rem;
 }
 
 .SDHeaderImgContainer:hover .toBeDisplayedWhenHovered {
-    display: block;
+    display: block; 
 }
