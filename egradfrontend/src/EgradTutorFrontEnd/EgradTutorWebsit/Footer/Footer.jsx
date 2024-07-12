@@ -13,6 +13,9 @@ import { FaFacebook } from "react-icons/fa";
 import { GrInstagram } from "react-icons/gr";
 import { SiYoutube } from "react-icons/si";
 import { ImLinkedin } from "react-icons/im";
+import '../../../styles/Default_landingPage_styles.css'
+
+
 const Footer = ({isEditMode , userRole }) => {
   const [dataOne, setDataOne] = useState([]);
   const [dataTwo, setDataTwo] = useState([]);
@@ -350,7 +353,8 @@ const Footer = ({isEditMode , userRole }) => {
             <div className={`Footer_Content_Main_Container ${themeDetails.themeFooterContentMainContainer}`}>
               <div className={`Footer_FirstContent__Container ${themeDetails.themeFooterFirstContentContainer}`}>
                 <div className={`Footer_eGRADTtutor__Content ${themeDetails.themeFootereGRADTtutoContent}`}>
-                  {isEditMode && (
+<div className="Editable_buttons_footer">
+{isEditMode && (
                     <div>
                       <button
                         onClick={() =>
@@ -379,6 +383,9 @@ const Footer = ({isEditMode , userRole }) => {
                       {FirstPopupVisible && <FooterEdit type="eGRADTutor" />}
                     </div>
                   )}
+</div>
+                  
+                
 
 
 {dataOne.length > 0 ? (
@@ -410,6 +417,8 @@ const Footer = ({isEditMode , userRole }) => {
       )}
                 </div>
                 <div className={`Footer_Links_Content ${themeDetails.themeFooterLinksContent}`}>
+
+                  <div className="Editable_buttons_footer">
                   {isEditMode && (
                     <div>
                       <button
@@ -441,6 +450,8 @@ const Footer = ({isEditMode , userRole }) => {
                       )}
                     </div>
                   )}
+                  </div>
+                
 
                   <ul>
                   {footerLink.length > 0 ? (
@@ -475,6 +486,8 @@ const Footer = ({isEditMode , userRole }) => {
                 </div>
               </div>
               <div className={`Footer_Contact_Us_Content ${themeDetails.themeFooterContactUsContent}`}>
+
+                <div className="Editable_buttons_footer">
                 {isEditMode && (
                   <div>
                     <button
@@ -508,6 +521,8 @@ const Footer = ({isEditMode , userRole }) => {
                     )}
                   </div>
                 )}
+                </div>
+              
                {dataTwo.length > 0 ? (
         dataTwo.map((item, index) =>
           index === 0 ? (
