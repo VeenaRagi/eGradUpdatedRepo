@@ -8,7 +8,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
-
+// router.use(express.static('uploads'))
 
 
 // Set up multer for file uploads

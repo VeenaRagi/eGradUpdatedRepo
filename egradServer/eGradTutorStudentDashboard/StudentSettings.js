@@ -4,6 +4,9 @@ const db = require("../DataBase/db2");
 const nodemailer = require("nodemailer");
 // const nodemailer = require('nodemailer');
 const bcrypt = require("bcrypt");
+router.use(express.static('uploads'))
+
+
 const expiryTimeForOTP=new Date(Date.now()+10*60*1000)
 const generateOtp = () => {
   return Math.floor(100000 + Math.random() * 900000); // Generates a 6-digit OTP
@@ -117,5 +120,25 @@ router.post("/verifyOTP", async (req, res) => {
 });
 
 // -----------------------------
+
+
+
+// =============================================
+router.get('/fetchStudentDetails/:decryptedUserIdState',async(req,res)=>{
+  try {
+    const {decryptedUserIdState}=req.params
+    console.log(decryptedUserIdState,"this is the id")
+    const sql=`SELECT * FROM otsstudentregistation ots RIGHT JOIN log ON ots.studentregistationId=log.studentregistationId where user_Id=?`;
+    const [rows]=await db.query(sql,decryptedUserIdState)
+    console.log(rows[0].UplodadPhto,"rows")
+    res.send(rows)
+  } catch (error) {
+    console.log(error,"tjis is the error");
+  }
+
+  
+})
+// =============================================
+
 
 module.exports = router;
