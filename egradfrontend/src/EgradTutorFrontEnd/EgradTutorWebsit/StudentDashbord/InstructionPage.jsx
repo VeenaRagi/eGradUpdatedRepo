@@ -8,7 +8,7 @@ import { Navbar, Intro_content } from "./Data/Introduction_Page_Data";
 import { AiOutlineArrowRight } from "react-icons/ai";
 // import "./styles/Instructions.scss";
 
-const Introduction_page = () => {
+const InstructionPage = () => {
   const { param1, param2, param3 } = useParams();
   const navigate = useNavigate();
   const [decryptedParam1, setDecryptedParam1] = useState("");
@@ -290,4 +290,4 @@ const Introduction_page = () => {
   );
 };
 
-export default Introduction_page;
+export default InstructionPage;

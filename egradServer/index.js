@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path');
 const app = express();
 const port = 5001;
 app.use(bodyParser.json({ limit: "10mb" }));
@@ -11,7 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-
+// app.use(express.static('uploads'))
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Endpoint to check server status
 app.get('/api/server/status', (req, res) => {
   res.send({ status: 'Server is running' });
@@ -178,12 +180,20 @@ app.use("/Myresult",Myresult);
 app.use('/studentSettings',studentSettings)
 //================OTS_QUIZAPP_ROUTES_END===============
 
+
+const EncrypDecryp = require("./UrlConversion/EncrypDecryp");
+// require('dotenv').config();
+
+// app.use(bodyParser.json());
+app.use('/EncrypDecryp', EncrypDecryp);
+
 // ---------------student setting api routs------------
 
 
 
 
 // ----------------------------------------------------
+
 
 
 app.listen(port, () => {

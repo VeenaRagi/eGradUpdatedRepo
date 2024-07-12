@@ -3,6 +3,8 @@ import BASE_URL from "../../../../apiConfig";
 import axios from "axios";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
+import '../../../../styles/Default_landingPage_styles.css';
+import '../../../../styles/UGHomePage/UgHomePage_Default_Theme.css';
 const AboutUsEdit = ({ type }) => {
   const [showAboutUsForm, setShowAboutUsForm] = useState(false);
   const [showAboutEgtForm, setShowAboutEgtForm] = useState(false);
@@ -193,7 +195,7 @@ const handleEditAboutegrad = (about_egt_id) => {
      
  
 {type === "aboutUs" && (
-        <div className="about_egt_popup">
+                 <div className="UploadPopups_Container">
           <div className="about_egt_form">
             <form onSubmit={(e) => handleSubmit(e, "aboutUs")} encType="multipart/form-data">
               <label htmlFor="aboutUsTitle">Title:</label>
@@ -223,6 +225,7 @@ const handleEditAboutegrad = (about_egt_id) => {
           </div>
           {aboutUsData.map((aboutUs) => (
   <div key={aboutUs.about_us_id}>
+    <div className="new_landingfooter_conatinerfristpopupbtncontiner">
     <h2>{aboutUs.Title}</h2>
     <p>{aboutUs.Description}</p>
     {aboutUs.About_Us_Image && (
@@ -232,16 +235,17 @@ const handleEditAboutegrad = (about_egt_id) => {
         style={{ width: '100px', height: 'auto' }}
       />
     )}
-    <div>
+    </div>
+  <div className="new_landingfooter_conatinerfristpopupbtncontiner">
       <button
         onClick={() => handleEditAboutUs(aboutUs)}
-        className="popup_edit_btn"
+        className = "Edit_button" 
       >
         <BiSolidEditAlt />
       </button>
       <button
         onClick={() => handleDeleteAboutUs(aboutUs.about_us_id)}
-        className="popup_delete_btn"
+       className = "Delete_button"
       >
         <MdDelete />
       </button>
@@ -256,7 +260,8 @@ const handleEditAboutegrad = (about_egt_id) => {
    
  
 {type === "aboutEgrad" && (
-  <div className="about_egt_popup">
+                 <div className="UploadPopups_Container">
+
     <div className="about_egt_form">
       <form onSubmit={handleSubmitAboutEgrad}>
         <label htmlFor="aboutegradtutor">About eGRAD Tutor</label>
@@ -269,25 +274,29 @@ const handleEditAboutegrad = (about_egt_id) => {
           cols={20}
         />
         <button type="submit">
-          {editingId ? "Update" : "Save About eGRAD Tutor"}
+          {editingId ? "Update" : "Save"}
         </button>
       </form>
     </div>
     {aboutEgradData.map((aboutEgrad) => (
   <div key={aboutEgrad.about_egt_id}>
+    <div className="new_landingfooter_conatinerfristpopupbtncontiner">
+
     <p>{aboutEgrad.about_egt}</p>
-    <button
+    </div>
+    <div className="new_landingfooter_conatinerfristpopupbtncontiner">
+    <button className = "Edit_button" 
       onClick={() => handleEditAboutegrad(aboutEgrad.about_egt_id)}
-      className="popup_edit_btn"
     >
       <BiSolidEditAlt />
     </button>
     <button
       onClick={() => handleDeleteAboutegrad(aboutEgrad.about_egt_id)}
-      className="popup_delete_btn"
+      className = "Delete_button"
     >
       <MdDelete />
     </button>
+    </div>
   </div>
 ))}
  

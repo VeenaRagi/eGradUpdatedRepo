@@ -1,0 +1,10 @@
+.SDHParentContainer{
+    border: 1px solid black;
+    /* width:250px ; */
+    height: 100px;
+}
+.SDHSubContainer{
+    width: 80%;
+    margin: auto;
+    border: 1px solid red;
+}
