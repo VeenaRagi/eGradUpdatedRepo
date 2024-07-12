@@ -31,6 +31,7 @@ const upload = multer({ storage: storage });
 //   }
 // });
 
+// POST Route - Create new record
 router.post('/about_us', upload.single('About_Us_Image'), async (req, res) => {
   const { Title, Description } = req.body;
   const About_Us_Image = req.file ? req.file.buffer : null;
@@ -39,15 +40,32 @@ router.post('/about_us', upload.single('About_Us_Image'), async (req, res) => {
     console.log('Inserting data:', { Title, Description, About_Us_Image });
 
     const [result] = await db.query('INSERT INTO about_us (Title, Description, About_Us_Image) VALUES (?, ?, ?)', [Title, Description, About_Us_Image]);
-    console.log('Insert result:', result); // Log the result to check if insertion was successful
+    console.log('Insert result:', result);
 
     res.status(201).json({ message: 'About Us data saved successfully' });
   } catch (error) {
     console.error('Error saving About Us data:', error.message);
-    console.error('Error details:', error);
     res.status(500).json({ error: 'Failed to save About Us data' });
   }
 });
+
+// PUT Route - Update existing record
+router.put('/about_us/:about_us_id', upload.single('About_Us_Image'), async (req, res) => {
+  const { about_us_id } = req.params;
+  const { Title, Description } = req.body;
+  const About_Us_Image = req.file ? req.file.buffer : null;
+
+  try {
+    console.log('Updating data for ID:', about_us_id);
+    await db.query('UPDATE about_us SET Title = ?, Description = ?, About_Us_Image = ? WHERE about_us_id = ?', [Title, Description, About_Us_Image, about_us_id]);
+
+    res.status(200).json({ message: 'About Us data updated successfully' });
+  } catch (error) {
+    console.error('Error updating About Us data:', error.message);
+    res.status(500).json({ error: 'Failed to update About Us data' });
+  }
+});
+
 
 
 
@@ -136,10 +154,10 @@ router.post('/about_us', upload.single('About_Us_Image'), async (req, res) => {
     }
   });
   
-
   router.put('/about_egt/:about_egt_id', async (req, res) => {
     const { about_egt_id } = req.params;
     const { aboutegrad } = req.body;
+  
     try {
       await db.query('UPDATE about_egt SET about_egt = ? WHERE about_egt_id = ?', [aboutegrad, about_egt_id]);
       res.status(200).json({ message: 'Record updated successfully' });
@@ -148,5 +166,7 @@ router.post('/about_us', upload.single('About_Us_Image'), async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+  
+  
 
 module.exports = router;

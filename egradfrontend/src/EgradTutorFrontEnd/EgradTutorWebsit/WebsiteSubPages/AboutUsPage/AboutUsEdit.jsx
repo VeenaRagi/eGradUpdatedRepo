@@ -13,41 +13,37 @@ const AboutUsEdit = ({ type }) => {
   const [aboutEgradData, setAboutEgradData] = useState([]);
   const [aboutUsData, setAboutUsData] = useState([]);
   const [aboutUsImage, setAboutUsImage] = useState(null);
+const [editingId, setEditingId] = useState("");
 
-  // const handleSubmit = async (e, type) => {
-  //   e.preventDefault();
-  
-  //   let formData = new FormData();
-  //   formData.append('Title', aboutUsTitle);
-  //   formData.append('Description', aboutUsDescription);
-  
-  //   if (aboutUsImage) {
-  //     formData.append('About_Us_Image', aboutUsImage); // Ensure this is a File object
-  //   }
-  
-  //   console.log('FormData contents:');
-  //   for (let [key, value] of formData.entries()) {
-  //     console.log(`${key}:`, value);
-  //   }
-  
-  //   let url = editAboutUsId
-  //     ? `${BASE_URL}/AboutUsEdit/about_us/${editAboutUsId}`
-  //     : `${BASE_URL}/AboutUsEdit/about_us`;
-  
-  //   try {
-  //     const response = await axios.post(url, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
-  //     console.log("Response data:", response.data);
-  //     alert("About Us data saved successfully!");
-  //     setAboutUsTitle("");
-  //     setAboutUsDescription("");
-  //     setAboutUsImage(null);
-  //     setShowAboutUsForm(false);
-  //   } catch (error) {
-  //     console.error("Error saving About Us data:", error.message);
-  //     console.error("Error details:", error.response?.data || error);
-  //   }
-  // };
-  
+
+const handleSubmitAboutEgrad = async (e) => {
+  e.preventDefault();
+
+  try {
+    if (editingId) {
+      console.log('Updating record with ID:', editingId);
+      await axios.put(`${BASE_URL}/AboutUsEdit/about_egt/${editingId}`, { aboutegrad });
+
+      setAboutEgradData(prevData =>
+        prevData.map(item =>
+          item.about_egt_id === editingId ? { ...item, about_egt: aboutegrad } : item
+        )
+      );
+      setEditingId(null); // Clear the editing ID after update
+    } else {
+      const response = await axios.post(`${BASE_URL}/AboutUsEdit/about_egt`, { aboutegrad });
+      setAboutEgradData(prevData => [
+        ...prevData,
+        { about_egt_id: response.data.insertId, about_egt: aboutegrad }
+      ]);
+    }
+
+    setAboutegrad(""); // Clear the input field
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+};
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -64,12 +60,26 @@ const AboutUsEdit = ({ type }) => {
       console.log(`${key}:`, value);
     }
   
-    const url = `${BASE_URL}/AboutUsEdit/about_us/${editAboutUsId}`;
-  
     try {
-      const response = await axios.put(url, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+      let url;
+      let method;
+      
+      if (editAboutUsId) {
+        // Updating existing record
+        url = `${BASE_URL}/AboutUsEdit/about_us/${editAboutUsId}`;
+        method = 'put';
+      } else {
+        // Creating new record
+        url = `${BASE_URL}/AboutUsEdit/about_us`;
+        method = 'post';
+      }
+  
+      const response = await axios({ url, method, data: formData, headers: { 'Content-Type': 'multipart/form-data' } });
       console.log("Response data:", response.data);
-      alert("About Us data updated successfully!");
+  
+      alert(editAboutUsId ? "About Us data updated successfully!" : "About Us data saved successfully!");
+  
+      // Reset form fields
       setAboutUsTitle("");
       setAboutUsDescription("");
       setAboutUsImage(null);
@@ -78,23 +88,28 @@ const AboutUsEdit = ({ type }) => {
       // Fetch updated data to reflect changes
       fetchAboutUsData();
     } catch (error) {
-      console.error("Error updating About Us data:", error.message);
+      console.error("Error handling About Us data:", error.message);
       console.error("Error details:", error.response?.data || error);
     }
   };
-  
-  
   
   const handleImageUpload = (file) => {
     setAboutUsImage(file); // Store the File object
   };
 
 
-  const handleEditAboutegrad = (aboutEgrad) => {
-    setEditAboutUsId(aboutEgrad.about_egt_id);
-    setAboutegrad(aboutEgrad.about_egt);
+const handleEditAboutegrad = (about_egt_id) => {
+  console.log('Editing ID:', about_egt_id); // Verify if ID is logged correctly
+  const aboutEgradToEdit = aboutEgradData.find(item => item.about_egt_id === about_egt_id);
+  if (aboutEgradToEdit) {
+    setEditingId(aboutEgradToEdit.about_egt_id);
+    setAboutegrad(aboutEgradToEdit.about_egt);
     setShowAboutEgtForm(true);
-  };
+  } else {
+    console.error('No item found for ID:', about_egt_id);
+  }
+};
+
 
   const handleEditAboutUs = (aboutUs) => {
     setEditAboutUsId(aboutUs.about_us_id);
@@ -238,42 +253,49 @@ const AboutUsEdit = ({ type }) => {
         </div>
       )}
 
-      {type === "aboutEgrad" && (
-        <div className="about_egt_popup">
-          <div className="about_egt_form">
-            <form onSubmit={(e) => handleSubmit(e, "aboutegrad")}>
-              <label htmlFor="aboutegradtutor">About eGRAD Tutor</label>
-              <textarea
-                id="aboutegradtutor"
-                value={aboutegrad}
-                onChange={(e) => setAboutegrad(e.target.value)}
-                placeholder="About eGRAD Tutor"
-                rows={10}
-                cols={20}
-              />
-              <button type="submit">Save About eGRAD Tutor</button>
-            </form>
-          </div>
-          {aboutEgradData.map((aboutEgrad) => (
-            <div key={aboutEgrad.about_egt_id}>
-              <p>{aboutEgrad.about_egt}</p>
+   
 
-              <button
-                onClick={() => handleEditAboutegrad(aboutEgrad)}
-                className="popup_edit_btn"
-              >
-                <BiSolidEditAlt />
-              </button>
-              <button
-                onClick={() => handleDeleteAboutegrad(aboutEgrad.about_egt_id)}
-                className="popup_delete_btn"
-              >
-                <MdDelete />
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
+{type === "aboutEgrad" && (
+  <div className="about_egt_popup">
+    <div className="about_egt_form">
+      <form onSubmit={handleSubmitAboutEgrad}>
+        <label htmlFor="aboutegradtutor">About eGRAD Tutor</label>
+        <textarea
+          id="aboutegradtutor"
+          value={aboutegrad}
+          onChange={(e) => setAboutegrad(e.target.value)}
+          placeholder="About eGRAD Tutor"
+          rows={10}
+          cols={20}
+        />
+        <button type="submit">
+          {editingId ? "Update" : "Save About eGRAD Tutor"}
+        </button>
+      </form>
+    </div>
+    {aboutEgradData.map((aboutEgrad) => (
+  <div key={aboutEgrad.about_egt_id}>
+    <p>{aboutEgrad.about_egt}</p>
+    <button
+      onClick={() => handleEditAboutegrad(aboutEgrad.about_egt_id)}
+      className="popup_edit_btn"
+    >
+      <BiSolidEditAlt />
+    </button>
+    <button
+      onClick={() => handleDeleteAboutegrad(aboutEgrad.about_egt_id)}
+      className="popup_delete_btn"
+    >
+      <MdDelete /> 
+    </button>
+  </div>
+))}
+
+
+  </div>
+)}
+
+
     </div>
   );
 };

@@ -235,9 +235,9 @@ const LandingPageExamdataEdit = ({ type }) => {
 
 
   return (
-    <div>
+    <div className="overlay">
       {type === "UploadExamImage" &&
-        <div>
+        <div  className="UploadPopups_Container">
           <div>
             <h2>Upload Exam Image</h2>
             <form onSubmit={handleSubmitExamImage}>
