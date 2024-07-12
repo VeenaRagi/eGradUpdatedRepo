@@ -31,8 +31,11 @@ import Exam_portal_admin_integration from "../src/EgradTutorFrontEnd/EgradtutorP
 import ExamUpdataion_admin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/ExamUpdataion_admin.jsx";
 import UpdatingConrseInAdmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/UpdatingCourseInAdmin.jsx"
 import GettingInstructions from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/GettinggInstructions.jsx"
-import {UpdateInstruction} from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/UpdateInstruction.jsx"
+import { UpdateInstruction } from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/UpdateInstruction.jsx"
 import TestUpdateadmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/TestUpdateadmin.jsx";
+import InstructionPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/Introduction_page.jsx'
+
+
 function App() {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -70,9 +73,9 @@ function App() {
     <ThemeProvider>
       <div>
         {/* {isAdmin && ( */}
-          <button onClick={toggleEditMode}>
-            {isEditMode ? "Disable Edit" : "Enable Edit"}
-          </button>
+        <button onClick={toggleEditMode}>
+          {isEditMode ? "Disable Edit" : "Enable Edit"}
+        </button>
         {/* // )} */}
 
         {serverError ? (
@@ -138,8 +141,13 @@ function App() {
 
               <Route path="/InstructionPage/editIns/:instructionId/:id" element={<UpdateInstruction />} />
               <Route
-            path="/TestUpdateadmin/:testCreationTableId"
-            element={<TestUpdateadmin />} 
+                path="/TestUpdateadmin/:testCreationTableId"
+                element={<TestUpdateadmin />}
+              />
+
+<Route
+            path="/Instructions/:param1/:param2/:param3"
+          element={<InstructionPage/>}
           />
             </Routes>
           </Router>
