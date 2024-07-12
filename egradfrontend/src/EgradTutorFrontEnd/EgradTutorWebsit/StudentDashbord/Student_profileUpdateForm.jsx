@@ -2,9 +2,7 @@ import React from 'react'
 
 const Student_profileUpdateForm = () => {
   return (
-    <div>
-      
-    </div>
+    <div>Student_profileUpdateForm</div>
   )
 }
 

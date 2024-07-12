@@ -1,51 +1,9 @@
+import React from 'react'
 
-import React, { useEffect, useState, useRef } from "react";
-import { Link, useParams, Navigate, useNavigate } from "react-router-dom";
-import axios from "axios";
-import BASE_URL from '../../../apiConfig'
-import Student_profileUpdateForm from "./Student_profileUpdateForm";
-
-import './Style/StudentDashbord_Settings.css'
-
-
-
-const StudentDashbord_Settings = ({ usersData }) => {
-  const imageUrl = 'http://localhost:5000/uploads/studentinfoimages';
-  const user_Id =
-    usersData.users && usersData.users.length > 0
-      ? usersData.users.map((user) => user.username)
-      : null;
-
+const StudentDashbord_Settings = () => {
   return (
-    <div className="StudentDashbordsettings_conatiner">
-      <div className="StudentDashbordsettings_subconatiner">
-        <div className="StudentDashbordsettings_profile_conatiner">
-          <div className="StudentDashbordsettings_profile_box">
-            {usersData.users && usersData.users.length > 0 && (
-              <div>
-                {usersData.users.map((user) => (
-                  <div>
-                    <div className="pro_img">
-                      Profile Image
-                      {/* <img src={user.imageData} alt={`Image ${user.user_Id}`} /> */}
-                      <img src={`http://localhost:5001/uploads/studentinfoimeages/${user.UplodadPhto}`} alt={`no static img ${user.UplodadPhto} `} />
-                    </div>
-                    <div className="StudentDashbordsettings_profile_box_info">
-                      <p>User ID:{user.username}</p>
-                      <p>Email ID:{user.email}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-        <div className="Student_profileUpdate_editconatiner">
-          <Student_profileUpdateForm />
-        </div>
-      </div>
-    </div>
-  );
-};
+    <div>StudentDashbord_Settings</div>
+  )
+}
 
-export default StudentDashbord_Settings;
+export default StudentDashbord_Settings

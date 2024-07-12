@@ -53,8 +53,8 @@ router.post('/login', async (req, res) => {
   });
 
 
-  router.get('/userDecryptedId', async (req, res) => {
-    const { encryptedUserId } = req.query;
+  router.get('/userDecryptedId/:encryptedUserId', async (req, res) => {
+    const { encryptedUserId } = req.params;
     console.log(encryptedUserId,"this is the encrypted user id from the frontend")
     try {
         // Decrypt user ID
