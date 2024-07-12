@@ -520,6 +520,17 @@ img.t1LogoImg {
 
 }
 
+@media (min-width:767px) and (max-width:800px){
+.t1FooterSMIcons {
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    left: 436px;
+    gap: 15px;
+}
+
+}
+
 @media (min-width:800px) and (max-width:900px){
     .theme1UGEntranceExamsContainer .t1BranchBox .t1ExamButtonsBox .t1Landing_branch_box_btns {
         display: flex;

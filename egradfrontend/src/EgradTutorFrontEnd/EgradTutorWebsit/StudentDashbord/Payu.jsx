@@ -6,29 +6,8 @@ import { useParams } from 'react-router-dom';
 // const PAYU_BASE_URL = 'https://pmny.in/6rKJacqZnitG';
 const Payu =() =>{
     const { courseCreationId } = useParams();
-
     const [courseData, setCourseData] = useState([]);
-  // const [courseCreationId] = useParams();
-  useEffect(() => {
-    fetchcourse();
-  }, [courseCreationId]);
-
-  const fetchcourse = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:5001/PoopularCourses/unPurchasedCoursesBuyNow/${courseCreationId}`
-      );
-      const data = await response.json();
-      setCourseData(data);
-      console.log(data);
-    } catch (error) {
-      console.error("Error fetching course data:", error);
-    }
-  };
-
-  console.log(courseCreationId);
-
-      const [form, setForm] = useState({
+   const [form, setForm] = useState({
         name: "",
         email: "",
         number: "",
@@ -39,6 +18,24 @@ const Payu =() =>{
     const [toggle, setToggle] = useState(true);
     const [hash, setHash] = useState(null);
     const [transactionId, setTransactionId] = useState(null);
+    useEffect(() => {
+      fetchcourse();
+    }, [courseCreationId]);
+  
+    const fetchcourse = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5001/PoopularCourses/unPurchasedCoursesBuyNow/${courseCreationId}`
+        );
+        const data = await response.json();
+        setCourseData(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching course data:", error);
+      }
+    };
+  
+    console.log(courseCreationId);
     const handleChange = (e) => {
             if (e.target.name === 'amount') {
               setForm({ ...form, [e.target.name]: parseFloat(e.target.value) });

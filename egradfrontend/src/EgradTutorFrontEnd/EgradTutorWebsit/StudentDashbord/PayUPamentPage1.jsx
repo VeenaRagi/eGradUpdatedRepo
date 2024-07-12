@@ -2,16 +2,8 @@ import React,{ useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const PayUPamentPage1 = ({ setToggle, form, hash, transactionId }) => {
-  // useEffect(() => {
-  //   // You can perform additional logic here if needed
-
-  //   // Redirect to the success page
-  //   window.location.href = 'https://www.egradtutor.in/success'; // Update with your actual success page URL
-  // }, []);
  const { courseCreationId } = useParams();
-
  const [courseData, setCourseData] = useState([]);
- // const [courseCreationId] = useParams();
  useEffect(() => {
    fetchcourse();
  }, [courseCreationId]);
@@ -49,22 +41,12 @@ const PayUPamentPage1 = ({ setToggle, form, hash, transactionId }) => {
           <p>
            Candidate Name: <span>{form?.name}</span>{" "}
           </p>
-
-          {/* <span>Date of Birth: {form?.date}</span><br/> */}
           <p>
             Contact Number: <span>{form?.number}</span>{" "}
           </p>
-
-          {/* <span>Mother's Name:{form?.mothername}</span><br/> */}
-          {/* <span>Father's Name:{form?.fathername}</span><br/> */}
-          {/* <span> Parents Contact No:{form?.contactno}</span><br/> */}
-          {/* <span>Postal Address:{form?.address}</span><br/> */}
           <p>
             Email ID: <span>{form?.email}</span>
           </p>
-
-          {/* <span>College of Study:{form?.college} </span><br/> */}
-          {/* <span>Pay Amount: {form?.amount}</span> */}
         </div>
         <form action="https://secure.payu.in/_payment" method="POST">
           <input type="hidden" name="key" value="2RJzQH" />
