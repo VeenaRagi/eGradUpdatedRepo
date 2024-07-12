@@ -380,7 +380,7 @@ themeMainFooterContainer:"t1MainFooterContainer",
     // extra class for theme1
 
     // exam info for exam page
-
+    themeFooterSMIcons:"t1FooterSMIcons",
     theme1welcomecontainer: "theme1welcomecontainer",
     theme1UGEntranceExamsContainer: "theme1UGEntranceExamsContainer",
     themeInBranchBox: "themeInBranchBox",

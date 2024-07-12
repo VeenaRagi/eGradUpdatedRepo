@@ -73,10 +73,12 @@ img.t1LogoImg {
 .landing_img_div.t1LCapImgDiv img {
     background: #fff;
     box-shadow: 0px 1px 9px 0px #328990e6;
-    max-width: 270px;
+    max-width: 350px;
     margin-right: 2rem;
     max-height: 310px;
 }
+
+
 .t1CapTextContainer {
     display: flex;
     flex-direction: column;
@@ -347,6 +349,19 @@ img.t1LogoImg {
     background-color:  rgb(18 70 89);
 }
 
+.t1FooterSMIcons {
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    position: absolute;
+    left: 1000px;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.t1FooterSMIcons svg {
+    color: #2cb956;
+}
 
 
 @media (max-width:768px) {
@@ -375,6 +390,21 @@ img.t1LogoImg {
         height: auto;
         background: linear-gradient(353deg, #eeeff8 0, #fcefca08 0, #fcefca05 19%, #52be8082);
     }
+
+    
+.t1FooterSMIcons {
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    position: absolute;
+    left: 300px;
+    /* justify-content: flex-end;  */
+    gap: 5px;
+}
+
+.t1FooterSMIcons svg {
+    color: #2cb956;
+}
 }
 
 @media (max-width:468px) {
@@ -513,11 +543,41 @@ img.t1LogoImg {
         padding: 10px;
         margin: 0 auto;
     }
+      
+.t1FooterSMIcons {
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    position: absolute;
+    left: 600px;
+    /* justify-content: flex-end;  */
+    gap: 15px;
+}
+
+.t1FooterSMIcons svg {
+    color: #2cb956;
+}
     
 
 }
 
+
 @media (min-width:900px) and (max-width:1440px) {
+
+      
+.t1FooterSMIcons {
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    position: absolute;
+    left: 1000px;
+    /* justify-content: flex-end;  */
+    gap: 15px;
+}
+
+.t1FooterSMIcons svg {
+    color: #2cb956;
+}
     .theme1UGEntranceExamsContainer .t1BranchBox .t1ExamButtonsBox .t1Landing_branch_box_btns {
         display: flex;
         margin-left: 100px;

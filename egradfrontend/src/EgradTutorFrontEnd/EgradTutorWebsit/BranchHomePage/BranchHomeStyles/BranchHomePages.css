@@ -3,13 +3,13 @@
     padding: 10px 0;
     text-align: center;
     font-size: 24px;
+    background-color: #e6f7f0b8;
     font-family: Arial, sans-serif;
 }
 
 .t1UgHContainer {
     margin: 0 auto;
-    padding: 0 20px;
-
+    padding: 0px 100px;
 }
 
 .t1UgHeaderUl {
@@ -29,13 +29,14 @@
     transform: all 0.3s ease;
     width: 150px;
     padding: 0.6em -1em;
-    background: #faf6f6;
+    background: #d1f1e5ad;
     border: 0.5px solid #00800045;
     cursor: pointer;
+    border-radius: 20px;
 }
 
 .t1UgHeaderLi:hover {
-background-color: rgb(84, 104, 84);
+    background-color: rgb(145 203 157);
     border-radius: 10px;
     border: 2.5px solid #00800045;
     transition: ease-in-out 1s;
@@ -386,7 +387,7 @@ height: 100%;
     margin: 3rem auto;
     display: inline-flex;
     justify-content: center;
-    -webkit-box-reflect: below -20px linear-gradient(transparent, #211e1e2e);
+    /* -webkit-box-reflect: below -20px linear-gradient(transparent, #211e1e2e); */
 }
 .bounce span {
     display: inline-flex;
@@ -497,11 +498,11 @@ color: blue;
 
     .t1FeaturesHeading {
         display: flex;
-        height: 60px;
+        /* height: 60px; */
+        gap: 10px;
         align-items: center;
         justify-content: start;
     }
-
     .t1FeaturesHeading svg path{
 margin-left: 20px;
 background-color: red;
