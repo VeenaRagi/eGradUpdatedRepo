@@ -430,7 +430,7 @@ a {
 
 /* Full-page overlay to cover the background when the card is open */
 .overlay {
-    /* position: fixed; */
+    position: fixed;
     /* Cover the entire viewport */
     top: 0;
     left: 0;
