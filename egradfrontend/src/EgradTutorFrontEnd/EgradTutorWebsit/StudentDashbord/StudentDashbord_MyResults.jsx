@@ -3,55 +3,16 @@ import { Link, Navigate } from "react-router-dom";
 import BASE_URL from "../../../apiConfig";
 import axios from "axios";
 import { FaBookOpenReader } from "react-icons/fa6";
-export const StudentDashbordmyresult = () => {
+export const StudentDashbordmyresult = ({ usersData,decryptedUserIdState }) => {
   const [testDetails, setTestDetails] = useState([]);
   const [selectedTypeOfTest, setSelectedTypeOfTest] = useState("");
   const [filteredTestData, setFilteredTestData] = useState([]);
-  // const { user_Id } = useParams();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({});
-  useEffect(() => {
-    const checkLoggedIn = () => {
-      const loggedIn = localStorage.getItem("isLoggedIn");
-      if (loggedIn === "true") {
-        setIsLoggedIn(true);
-        fetchUserData();
-      }
-    };
-    checkLoggedIn();
-  }, []);
-  const fetchUserData = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(`${BASE_URL}/ughomepage_banner_login/user`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("token");
-        setIsLoggedIn(false);
-        Navigate("/uglogin");
-        return;
-      }
-
-      if (response.ok) {
-        const userData = await response.json();
-        setUserData(userData);
-        // ... process userData
-      }
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
-  const user_Id = userData.id;
+  const [testPageHeading, setTestPageHeading] = useState([]);
   useEffect(() => {
     const fetchTestDetails = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/TestPage/feachingAttempted_TestDetails/${user_Id}`
+          `${BASE_URL}/TestPage/feachingAttempted_TestDetails/${decryptedUserIdState}`
         );
         setTestDetails(response.data);
       } catch (error) {
@@ -60,7 +21,7 @@ export const StudentDashbordmyresult = () => {
     };
 
     fetchTestDetails();
-  }, [user_Id]);
+  }, [decryptedUserIdState]);
   function getBackgroundColor(type, test) {
     switch (type) {
       case "Chapter Wise Test":
@@ -81,9 +42,9 @@ export const StudentDashbordmyresult = () => {
         return "#f5f5f5"; // light gray
     }
   }
-  const openPopup = (user_Id, testCreationTableId, courseCreationId) => {
+  const openPopup = (decryptedUserIdState, testCreationTableId, courseCreationId) => {
     const newWinRef = window.open(
-      `/Instructions/${user_Id}/${testCreationTableId}/${courseCreationId}`,
+      `/Instructions/${decryptedUserIdState}/${testCreationTableId}/${courseCreationId}`,
       "_blank",
       "width=1000,height=1000"
     );
@@ -112,7 +73,7 @@ export const StudentDashbordmyresult = () => {
   };
   const firstTestCreationTableId =
     testDetails.length > 0 ? testDetails[0].testCreationTableId : null;
-  const [testPageHeading, setTestPageHeading] = useState([]);
+ 
   useEffect(() => {
     const fetchTestDetails = async () => {
       try {
@@ -202,7 +163,7 @@ export const StudentDashbordmyresult = () => {
                         {test.test_status === "Completed" ? (
                           <Link
                             className="Result_Analysis"
-                            to={`/UserReport/${userData.id}/${test.testCreationTableId}/${test.courseCreationId}`}
+                            to={`/UserReport/${decryptedUserIdState}/${test.testCreationTableId}/${test.courseCreationId}`}
                             style={{
                               backgroundColor: "green",
                               color: "white",
@@ -221,7 +182,7 @@ export const StudentDashbordmyresult = () => {
                             to="#"
                             onClick={() =>
                               openPopup(
-                                test.user_Id,
+                                test.decryptedUserIdState,
                                 test.testCreationTableId,
                                 test.courseCreationId
                               )
@@ -244,7 +205,6 @@ export const StudentDashbordmyresult = () => {
                   </div>
                 )}
               </div>
-              {/* Render test cards */}
             </div>
           )}
         </div>

@@ -51,7 +51,6 @@ const Student_dashboard_Home = ({ usersData }) => {
   return (
     <div className="dashboard_body_container">
       <div className="dashboard_welcome_section">
-        <h2>This is the role of the person who logged in={roleOfLoggedIn}</h2>
         {usersData.users && usersData.users.length > 0 && (
           <ul>
             {usersData.users.map((user) => (
