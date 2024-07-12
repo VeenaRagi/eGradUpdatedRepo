@@ -554,10 +554,9 @@ button:hover {
 
 .new_landingfooter_conatinerfristpopupbtncontiner {
     margin-left: auto;
-    /* Push buttons to the right */
     display: flex;
     gap: 10px;
-    /* Space between buttons */
+    align-items: center;
 }
 
 .new_landingfooter_conatinerfristpopupsubpart {
