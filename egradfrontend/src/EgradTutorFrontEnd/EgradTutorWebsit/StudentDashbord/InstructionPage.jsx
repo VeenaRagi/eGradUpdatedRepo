@@ -178,7 +178,7 @@ const InstructionPage = () => {
 
     return (
       <>
-       
+       <p>{decryptedParam2}</p>
         {Intro_content.map((Intro_content, index) => (
           <div key={index} className="Q_container">
             <h2>{Intro_content.Intro_content_text_center}</h2>

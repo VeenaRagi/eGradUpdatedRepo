@@ -63,7 +63,7 @@
 
 
 
-@media (max-width:850px) {
+@media (max-width:900px) {
     .dashboard_welcome_section {
         flex-direction: column;
         width: 90%;
@@ -77,17 +77,25 @@
     }
 
     .dashboard_greeting_container {
-        font-size: 25px;
+        font-size: 20px;
     }
 
     .greeting_sub_text {
-        font-size: 17px;
+        font-size: 15px;
         padding-left: 20px;
     }
     .dashboard_welcome_img_section{
         align-items: center;
         justify-content: center;
         margin: 0 auto;
+    }
+}
+
+@media (min-width:900px) {
+    .dashboard_welcome_img_section {
+        width: 400px;
+        height: auto;
+        border-radius: 150px;
     }
 }
 

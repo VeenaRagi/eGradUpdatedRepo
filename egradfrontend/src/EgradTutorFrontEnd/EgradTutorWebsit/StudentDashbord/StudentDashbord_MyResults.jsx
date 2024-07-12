@@ -3,7 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import BASE_URL from "../../../apiConfig";
 import axios from "axios";
 import { FaBookOpenReader } from "react-icons/fa6";
-export const StudentDashbordmyresult = ({ usersData,decryptedUserIdState }) => {
+export const StudentDashbord_MyResults = ({ usersData,decryptedUserIdState }) => {
   const [testDetails, setTestDetails] = useState([]);
   const [selectedTypeOfTest, setSelectedTypeOfTest] = useState("");
   const [filteredTestData, setFilteredTestData] = useState([]);
@@ -213,4 +213,4 @@ export const StudentDashbordmyresult = ({ usersData,decryptedUserIdState }) => {
   );
 };
 
-export default StudentDashbordmyresult
+export default StudentDashbord_MyResults

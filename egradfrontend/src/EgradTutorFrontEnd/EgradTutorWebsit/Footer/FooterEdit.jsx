@@ -462,7 +462,6 @@ const FooterEdit = ({ type }) => {
         </div>
         )}
 
-
             {type === "eGRADTutor" && (
                  <div className="UploadPopups_Container">
                     {dataOne.map((item) => (
