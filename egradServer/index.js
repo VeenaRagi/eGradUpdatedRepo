@@ -140,7 +140,7 @@ app.use("/ImageUpload", ImageUpload);
 const TestActivationPage =require('./OTS_Quiz_Admin/TestActivationPage')
 app.use("/TestActivationPage", TestActivationPage);
 
-const DoubtSection =require('./StudentDashbord/DoubtSection')
+const DoubtSection =require('./eGradTutorStudentDashboard/DoubtSection')
 app.use("/DoubtSection",DoubtSection)
 
 
