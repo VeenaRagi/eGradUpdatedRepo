@@ -20,14 +20,14 @@ const Student_dashboard_Container = ({ usersData,decryptedUserIdState }) => {
   const handleToggleLeftMenu = () => {
     setShowLeftMenu(!showLeftMenu);
   };
-  
+
   return (
-    <div>
+    <div className="ug_quiz_dashBoard_Main_container">
       <div
         className="ugquiz_StudentDashbordconatiner_handleToggleLeftMenu"
         onClick={handleToggleLeftMenu}
       >
-        <MdMenu />
+        <MdMenu className="hamburgMenu" />
       </div>
       <div className="ugquiz_StudentDashbordconatiner">
         <div
@@ -104,3 +104,5 @@ const Student_dashboard_Container = ({ usersData,decryptedUserIdState }) => {
 };
 
 export default Student_dashboard_Container;
+
+

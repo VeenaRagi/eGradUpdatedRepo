@@ -252,7 +252,7 @@ LEFT JOIN test_creation_table AS tct ON cct.courseCreationId = tct.courseCreatio
 LEFT JOIN topics t ON t.courseCreationId = cct.courseCreationId
 LEFT JOIN ovl_links AS ovl ON cct.courseCreationId = ovl.courseCreationId
 WHERE 
-    sbc.user_Id = 2
+    sbc.user_Id = ?
     AND sbc.payment_status = 1 
 GROUP BY
     cct.courseCreationId;

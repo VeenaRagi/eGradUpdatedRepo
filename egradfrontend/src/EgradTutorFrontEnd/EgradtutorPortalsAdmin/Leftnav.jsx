@@ -22,7 +22,7 @@ import TestActivation_admin from "./TestActivation_admin";
 import StudentDoubtSection from "./StudentDoubtSection.jsx";
 import Portal_coures_creation_admin from "./Portal_coures_creation_admin.jsx";
 import OvlvidesUpload from "./OvlvidesUpload.jsx";
-
+import Testcreationadminforms from "./Testcreationadminforms.jsx";
 const STORAGE_KEY = "left_nav_state_admin";
 
 const Leftnav = () => {
@@ -249,7 +249,7 @@ const Leftnav = () => {
       {showCoursecreation_admin ? <Portal_coures_creation_admin /> : null}
       {showInstructionPage_admin ? <InstructionPage_admin /> : null}
 
-      {showTestcreationadmin ? <Testcreationadmin /> : null}
+      {showTestcreationadmin ? <Testcreationadminforms /> : null}
 
       {showDocumentUpload_admin ? <DocumentUpload_admin /> : null}
 
