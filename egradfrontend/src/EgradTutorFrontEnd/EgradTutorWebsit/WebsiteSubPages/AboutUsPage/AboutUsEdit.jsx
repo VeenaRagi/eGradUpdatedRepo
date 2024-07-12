@@ -14,16 +14,16 @@ const AboutUsEdit = ({ type }) => {
   const [aboutUsData, setAboutUsData] = useState([]);
   const [aboutUsImage, setAboutUsImage] = useState(null);
 const [editingId, setEditingId] = useState("");
-
-
+ 
+ 
 const handleSubmitAboutEgrad = async (e) => {
   e.preventDefault();
-
+ 
   try {
     if (editingId) {
       console.log('Updating record with ID:', editingId);
       await axios.put(`${BASE_URL}/AboutUsEdit/about_egt/${editingId}`, { aboutegrad });
-
+ 
       setAboutEgradData(prevData =>
         prevData.map(item =>
           item.about_egt_id === editingId ? { ...item, about_egt: aboutegrad } : item
@@ -37,33 +37,33 @@ const handleSubmitAboutEgrad = async (e) => {
         { about_egt_id: response.data.insertId, about_egt: aboutegrad }
       ]);
     }
-
+ 
     setAboutegrad(""); // Clear the input field
   } catch (error) {
     console.error('Error submitting form:', error);
   }
 };
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+ 
     let formData = new FormData();
     formData.append('Title', aboutUsTitle);
     formData.append('Description', aboutUsDescription);
-  
+ 
     if (aboutUsImage) {
       formData.append('About_Us_Image', aboutUsImage); // Ensure this is a File object
     }
-  
+ 
     console.log('FormData contents:');
     for (let [key, value] of formData.entries()) {
       console.log(`${key}:`, value);
     }
-  
+ 
     try {
       let url;
       let method;
-      
+     
       if (editAboutUsId) {
         // Updating existing record
         url = `${BASE_URL}/AboutUsEdit/about_us/${editAboutUsId}`;
@@ -73,18 +73,18 @@ const handleSubmitAboutEgrad = async (e) => {
         url = `${BASE_URL}/AboutUsEdit/about_us`;
         method = 'post';
       }
-  
+ 
       const response = await axios({ url, method, data: formData, headers: { 'Content-Type': 'multipart/form-data' } });
       console.log("Response data:", response.data);
-  
+ 
       alert(editAboutUsId ? "About Us data updated successfully!" : "About Us data saved successfully!");
-  
+ 
       // Reset form fields
       setAboutUsTitle("");
       setAboutUsDescription("");
       setAboutUsImage(null);
       setShowAboutUsForm(false);
-  
+ 
       // Fetch updated data to reflect changes
       fetchAboutUsData();
     } catch (error) {
@@ -92,12 +92,12 @@ const handleSubmitAboutEgrad = async (e) => {
       console.error("Error details:", error.response?.data || error);
     }
   };
-  
+ 
   const handleImageUpload = (file) => {
     setAboutUsImage(file); // Store the File object
   };
-
-
+ 
+ 
 const handleEditAboutegrad = (about_egt_id) => {
   console.log('Editing ID:', about_egt_id); // Verify if ID is logged correctly
   const aboutEgradToEdit = aboutEgradData.find(item => item.about_egt_id === about_egt_id);
@@ -109,14 +109,14 @@ const handleEditAboutegrad = (about_egt_id) => {
     console.error('No item found for ID:', about_egt_id);
   }
 };
-
-
+ 
+ 
   const handleEditAboutUs = (aboutUs) => {
     setEditAboutUsId(aboutUs.about_us_id);
     setAboutUsTitle(aboutUs.Title);
     setAboutUsDescription(aboutUs.Description);
     setAboutUsImage(null); // Reset the image state first
-  
+ 
     if (aboutUs.About_Us_Image) {
       // Convert base64 to blob
       const byteString = atob(aboutUs.About_Us_Image.split(',')[1]);
@@ -130,10 +130,10 @@ const handleEditAboutegrad = (about_egt_id) => {
       const file = new File([blob], "image.jpg", { type: mimeString });
       setAboutUsImage(file);
     }
-  
+ 
     setShowAboutUsForm(true);
   };
-  
+ 
   const handleDeleteAboutegrad = async (about_egt_id) => {
     try {
       await axios.delete(`${BASE_URL}/AboutUsEdit/about_egt`);
@@ -143,7 +143,7 @@ const handleEditAboutegrad = (about_egt_id) => {
       console.error("Error deleting About eGRAD Tutor data:", error);
     }
   };
-
+ 
   const handleDeleteAboutUs = async (about_us_id) => {
     try {
       await axios.delete(`${BASE_URL}/AboutUsEdit/about_us/${about_us_id}`);
@@ -165,7 +165,7 @@ const handleEditAboutegrad = (about_egt_id) => {
       console.error("Error fetching About eGRAD Tutor data:", error);
     }
   };
-
+ 
   const fetchAboutUsData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/AboutUs/about_us`);
@@ -174,12 +174,12 @@ const handleEditAboutegrad = (about_egt_id) => {
       console.error("Error fetching About Us data:", error);
     }
   };
-
+ 
   useEffect(() => {
     fetchAboutUsData();
     fetchAboutEgradData();
   }, []);
-
+ 
   useEffect(() => {
     if (type === "aboutUs") {
       fetchAboutUsData();
@@ -187,11 +187,11 @@ const handleEditAboutegrad = (about_egt_id) => {
       fetchAboutEgradData();
     }
   }, [type]);
-
+ 
   return (
     <div>
      
-
+ 
 {type === "aboutUs" && (
         <div className="about_egt_popup">
           <div className="about_egt_form">
@@ -248,13 +248,13 @@ const handleEditAboutegrad = (about_egt_id) => {
     </div>
   </div>
 ))}
-
-
+ 
+ 
         </div>
       )}
-
+ 
    
-
+ 
 {type === "aboutEgrad" && (
   <div className="about_egt_popup">
     <div className="about_egt_form">
@@ -286,18 +286,18 @@ const handleEditAboutegrad = (about_egt_id) => {
       onClick={() => handleDeleteAboutegrad(aboutEgrad.about_egt_id)}
       className="popup_delete_btn"
     >
-      <MdDelete /> 
+      <MdDelete />
     </button>
   </div>
 ))}
-
-
+ 
+ 
   </div>
 )}
-
-
+ 
+ 
     </div>
   );
 };
-
+ 
 export default AboutUsEdit;
