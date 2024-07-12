@@ -2,7 +2,34 @@ import React, { useEffect, useState } from 'react'
 import BASE_URL from '../../../apiConfig';
 import axios from 'axios';
 const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
+  // const imageUrl = {`http://localhost:5000/uploads/${1720682758460.png}`}
   // form states
+  const img="1710997778188.png"
+  const[studentImg,setStudentImg]=useState("")
+  // useEffect(()=>{
+  //   const fetchUserDetailsForImage=async()=>{
+  //     const response=await axios.get(`${BASE_URL}/studentSettings/fetchStudentDetails/${decryptedUserIdState}`);
+  //     console.log(response.data[0].UplodadPhto);
+  //     setStudentImg(response.data[0].UplodadPhto);
+  //     console.log(studentImg,"this si ssssssssssssssssssssssss")
+  //   }
+  //   fetchUserDetailsForImage();
+  // })
+  // useEffect(() => {
+  //   const fetchUserDetailsForImage = async () => {
+  //     try {
+  //       const response = await axios.get(`${BASE_URL}/studentSettings/fetchStudentDetails/${decryptedUserIdState}`);
+  //       console.log(response.data[0].UplodadPhto);
+  //       setStudentImg(response.data[0].UplodadPhto);
+  //     } catch (error) {
+  //       console.error("Error fetching user details:", error);
+  //     }
+  //   };
+  
+  //   fetchUserDetailsForImage();
+  // }, []); 
+  
+
   const [otp, setOtp] = useState(false);
   const[newPassword,setNewPassword]=useState("");
     const[confirmNewPassword,setConfirmNewPassword]=useState("");
@@ -71,9 +98,11 @@ const handleClose=()=>{
               <p> {user.username}</p>
               <div style={{ height: "250px", width: "250px" }}>
                 <img style={{ width: "100%" }} src={`${BASE_URL}/uploads/studentinfoimeages/${user.UplodadPhto}`} alt={`no img${user.UplodadPhto}`} />
+                {/* <img src="http://localhost:3000/uploads/your-image.jpg" alt="" /> */}
               </div>
             </>
           ))}
+          {/* <img src={`${BASE_URL}/uploads/studentinfoimeages/${img}`} alt="nnnnnnnn" /> */}
         </ul>
       )}
       {showChangePasswordForm ?(
