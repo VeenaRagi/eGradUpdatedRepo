@@ -6,7 +6,7 @@ import BASE_URL from "../../../apiConfig";
 import { MdDelete } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import { RiDeleteBin6Line } from "react-icons/ri";
- 
+import '../../../styles/Default_landingPage_styles.css' 
 const FooterEdit = ({ type }) => {
       const[contactUsContent, setContactUsContent] = useState('');
     const [egardTutorItem, setEgardTutorItem] = useState('');
@@ -423,12 +423,10 @@ const FooterEdit = ({ type }) => {
         fetchFooterCopyWriteData();
     }, []);
     return (
-        <div>
-
-
-
+        <div className="overlay">
 
          {type === "Add eGRADTutor" && (
+             <div className="UploadPopups_Container">
           <form onSubmit={handleSubmiteGRADTutorContent}>
           <label>
             Content:
@@ -436,40 +434,45 @@ const FooterEdit = ({ type }) => {
               value={egardTutorItem}
               onChange={(e) => setEgardTutorItem(e.target.value)}
               required
+              placeholder="Enter the content"
             />
           </label>
           <br />
           <button type="submit">Submit</button>
         </form>
+        </div>
         )}
 
 
 {type === "Add ContactUs" && (
+     <div className="UploadPopups_Container">
           <form onSubmit={handleSubmitContactUsContent}>
           <label>
             Content:
             <textarea
               value={contactUsContent}
               onChange={(e) => setContactUsContent(e.target.value)}
+                   placeholder="Enter the content"
               required
             />
           </label>
           <br />
           <button type="submit">Submit</button>
         </form>
+        </div>
         )}
 
 
             {type === "eGRADTutor" && (
-                <div className="new_landingfooter_conatinerfristpopup">
+                 <div className="UploadPopups_Container">
                     {dataOne.map((item) => (
                         <li key={item.content_id}>
                             {item.content}
                             <div className="new_landingfooter_conatinerfristpopupbtncontiner">
-                                <button onClick={() => handleEditClickPopupOne(item.content_id, item.content)}>
+                                <button className = "Edit_button" onClick={() => handleEditClickPopupOne(item.content_id, item.content)}>
                                     <CiEdit />
                                 </button>
-                                <button onClick={() => handleDeleteItemOne(item.content_id)}>
+                                <button  className = "Delete_button" onClick={() => handleDeleteItemOne(item.content_id)}>
                                     <MdDelete />
                                 </button>
                             </div>
@@ -496,7 +499,7 @@ const FooterEdit = ({ type }) => {
                 </div>
             )}
             {type === "Add_Footer_Links" && (
-                <div className="new_landingfooter_conatinersecondpopup">
+                 <div className="UploadPopups_Container">
                     <h3>Add Footer Links</h3>
                     <form onSubmit={handleSubmitFooterLinks}>
                         <li>
@@ -534,8 +537,8 @@ const FooterEdit = ({ type }) => {
                 <div className="success-message">Data uploaded successfully!</div>
             )}
             {type === "Update_Footer_Links" && (
-                <div className="new_landingfooter_conatinersecondpopup_links">
-                    <ul>
+               <div className="UploadPopups_Container">
+                    
                         {footerLinkData.map((item) => (
                             <li key={item.Link_Id}>
                                 {editFooterItemId === item.Link_Id ? (
@@ -575,10 +578,10 @@ const FooterEdit = ({ type }) => {
                                             {item.Link_Item}
                                         </Link>
                                         <div className="new_landingfooter_conatinersecondpopup_linksbtncontiner">
-                                            <button onClick={() => handleEditFooterItemClick(item.Link_Id, item.Link_Item, item.Link_Routing_Data, item.document_name)}>
+                                            <button className = "Edit_button" onClick={() => handleEditFooterItemClick(item.Link_Id, item.Link_Item, item.Link_Routing_Data, item.document_name)}>
                                                 <CiEdit />
                                             </button>
-                                            <button onClick={() => handleDeleteFooterItem(item.Link_Id)}>
+                                            <button className="Delete_button" onClick={() => handleDeleteFooterItem(item.Link_Id)}>
                                                 <RiDeleteBin6Line />
                                             </button>
                                         </div>
@@ -586,23 +589,22 @@ const FooterEdit = ({ type }) => {
                                 )}
                             </li>
                         ))}
-                    </ul>
                 </div>
             )}
             {type === "ContactUs" && (
-                <div className="new_landingfooter_conatinerthridpopup">
+               <div className="UploadPopups_Container">
                     {dataTwo.map((item) => (
                         <li key={item.Content_id} className="black-text">
                             {item.content_name}{" "}
                             <div className="new_landingfooter_conatinerthridpopupbtncontiner">
-                                <button>
+                                <button className = "Edit_button">
                                     <CiEdit
                                         onClick={() =>
                                             handleEditClickPopup(item.Content_id)
                                         }
                                     />{" "}
                                 </button>
-                                <button>
+                                <button  className = "Delete_button">
                                     <MdDelete
                                         onClick={() => handleDeleteItemTwo(item.Content_id)}
                                     />
@@ -612,7 +614,7 @@ const FooterEdit = ({ type }) => {
                     ))}
  
                     {editItemId && editedItem && (
-                        <div className="new_landingfooter_conatinerthridpopupsub">
+                         <div className="UploadPopups_Container">
                             <h3>Edit</h3>
                             <li>
                                 <input
@@ -643,19 +645,19 @@ const FooterEdit = ({ type }) => {
             )}
  
             {type === "CopyWriteTable" && (
-                <div className="new_landingfooter_copyrightpopup">
+               <div className="UploadPopups_Container">
                     {dataThree.map((item) => (
                         <li key={item.content_id} className="black-text">
                             {item.content_name}{" "}
                             <div className="new_landingfooter_copyrightpopupbtncontainer">
-                                <button>
+                                <button className = "Edit_button">
                                     <CiEdit
                                         onClick={() =>
                                             handleEditClickPopupThree(item.content_id, item.content_name)
                                         }
                                     />
                                 </button>
-                                <button>
+                                <button  className = "Delete_button">
                                     {" "}
                                     <MdDelete
                                         onClick={() => handleDeleteItemThree(item.content_id)}
@@ -665,7 +667,7 @@ const FooterEdit = ({ type }) => {
                         </li>
                     ))}
                     {isPopupOpen && (
-                        <div className="new_landingfooter_copyrightpopupsub">
+                        <div className="UploadPopups_Container">
                             <input
                                 type="text"
                                 value={editedValue}

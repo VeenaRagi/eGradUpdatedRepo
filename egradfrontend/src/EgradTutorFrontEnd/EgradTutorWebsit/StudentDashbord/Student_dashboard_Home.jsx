@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import BASE_URL from '../../../apiConfig';
 import axios from 'axios';
-import welcome_greeting_img from './Images/welcome_greeting_img.png'
+import '../../EgradTutorWebsit/StudentDashbord/Style/Student_dashboard.css'
+import welcome_greeting_img from '../../../styles/Girl.png'
+// import welcome_greeting_img from './Images/welcome_greeting_img.png'
+// import welcome_greeting_img from './Images/welcome_greeting_img.png'
 const Student_dashboard_Home = ({ usersData }) => {
   const [roleOfLoggedIn, setRoleOfLoggedIn] = useState("");
   // const roleOfTheUser=usersData.users&&usersData.length>0?(
@@ -68,7 +71,7 @@ const Student_dashboard_Home = ({ usersData }) => {
           </ul>
         )}
         <div className="dashboard_welcome_img_section">
-          <img src={welcome_greeting_img} />
+          <img className='dashboard_img' src={welcome_greeting_img} />
         </div>
       </div>
       <div>

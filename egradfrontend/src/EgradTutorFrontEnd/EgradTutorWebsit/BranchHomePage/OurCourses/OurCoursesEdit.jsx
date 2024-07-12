@@ -113,6 +113,7 @@ const OurCoursesEdit = ({ type }) => {
   return (
     <div>  
  {type === "AddFeatures" && (
+       <div className="UploadPopups_Container">
 <form onSubmit={handleFeatureSubmit}>
 <label>Select Portal:</label>
 <select
@@ -142,6 +143,7 @@ const OurCoursesEdit = ({ type }) => {
 <input type="file" onChange={handleImageChange} />
 <button type="submit">Submit</button>
 </form>
+</div>
  )}
      
   </div>

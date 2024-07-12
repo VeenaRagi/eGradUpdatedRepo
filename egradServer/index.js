@@ -163,7 +163,7 @@ const InstructionPage = require("./eGradTutorStudentDashboard/InstructionPage");
 const QuizPage = require("./eGradTutorStudentDashboard/QuizPage");
 const TestResultPage = require("./eGradTutorStudentDashboard/TestResultPage");
 const Myresult =require("./eGradTutorStudentDashboard/Myresult")
-
+const studentSettings=require('./eGradTutorStudentDashboard/StudentSettings')
 //================OTS_QUIZAPP_IMPORTS_END==================
  
 //================OTS_QUIZAPP_ROUTES_START==================
@@ -175,13 +175,23 @@ app.use("/InstructionPage", InstructionPage);
 app.use("/QuizPage", QuizPage);
 app.use("/TestResultPage", TestResultPage);
 app.use("/Myresult",Myresult);
+app.use('/studentSettings',studentSettings)
 //================OTS_QUIZAPP_ROUTES_END===============
+
 
 const EncrypDecryp = require("./UrlConversion/EncrypDecryp");
 // require('dotenv').config();
 
 // app.use(bodyParser.json());
 app.use('/EncrypDecryp', EncrypDecryp);
+
+// ---------------student setting api routs------------
+
+
+
+
+// ----------------------------------------------------
+
 
 
 app.listen(port, () => {
