@@ -101,9 +101,7 @@ router.post("/success", async (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error("Error sending email:", error);
-        res.status(500).send({
-          error: "Internal Server Error",
-        });
+        return res.status(500).send({ error: "Internal Server Error" });
       } else {
         console.log("Email sent:", info.response);
         const successHtml = `
@@ -122,19 +120,19 @@ router.post("/success", async (req, res) => {
                       height: 100vh;
                       margin: 0;
                   }
- 
+
                   .content {
                       text-align: center;
                   }
- 
+
                   h1 {
                       color: #333;
                   }
- 
+
                   p {
                       color: #666;
                   }
- 
+
                   button {
                       padding: 10px 20px;
                       background-color: #007bff;
@@ -144,7 +142,7 @@ router.post("/success", async (req, res) => {
                       border-radius: 5px;
                       margin-top: 20px;
                   }
- 
+
                   button:hover {
                       background-color: #0056b3;
                   }
@@ -158,7 +156,7 @@ router.post("/success", async (req, res) => {
                   <p>If you have any questions or need assistance, our dedicated support team is here to help. Don't hesitate to reach out to us at <a href="mailto:egradtutor@gmail.com">egradtutor@gmail.com</a>. We're always happy to assist you!</p>
                    <button id="redirectButton">Continue</button>
               </div>
- 
+
               <script>
               document.getElementById('redirectButton').addEventListener('click', function() {
                   window.location.href = 'http://localhost:3000/Student_dashboard/:decryptedUserIdState';
@@ -171,11 +169,10 @@ router.post("/success", async (req, res) => {
       }
     });
 
-    // Define courseCreationId here
     const getUserIdQuery = `
-    SELECT l.user_id, l.studentregistationId,sbc.courseCreationId
-    FROM log l
-    left join student_buy_courses AS sbc ON l.studentregistationId=sbc.studentregistationId
+      SELECT l.user_id, l.studentregistationId, sbc.courseCreationId
+      FROM log l
+      LEFT JOIN student_buy_courses AS sbc ON l.studentregistationId = sbc.studentregistationId
       WHERE l.email = ?
     `;
     const [userData] = await db.query(getUserIdQuery, [userEmail]);
@@ -184,56 +181,42 @@ router.post("/success", async (req, res) => {
       console.log("User not found");
       return res.status(404).send({ error: "User not found" });
     }
-    const courseCreationId = userData[0].courseCreationId;
+
     const userId = userData[0].user_id;
     const studentRegistrationId = userData[0].studentregistationId;
+    const courseCreationId = userData[0].courseCreationId;
 
     console.log(userId, studentRegistrationId, courseCreationId);
 
-    // Update payment status if payment is successful
-    const updatePaymentStatusQuery = `
-  UPDATE student_buy_courses
-  SET payu_status = "paid"
-  WHERE user_id = ? AND courseCreationId = ? AND studentregistationId = ?
-`;
-    const updatePaymentStatusValues = [
-      userId,
-      courseCreationId,
-      studentRegistrationId,
-    ];
+    const insertOrUpdatePaymentStatusQuery = `
+      INSERT INTO student_buy_courses (user_id, courseCreationId, studentregistationId, payu_status)
+      VALUES (?, ?, ?, 'paid')
+      ON DUPLICATE KEY UPDATE payu_status = 'paid';
+    `;
+    const insertOrUpdatePaymentStatusValues = [userId, courseCreationId, studentRegistrationId];
 
-    try {
-      await db.query(updatePaymentStatusQuery, updatePaymentStatusValues);
-      console.log(
-        "Payment status updated successfully:",
-        updatePaymentStatusValues
-      );
-    } catch (error) {
-      console.error("Error updating payment status:", error);
-      return res.status(500).send({ error: "Internal Server Error" });
-    }
+    await db.query(insertOrUpdatePaymentStatusQuery, insertOrUpdatePaymentStatusValues);
+    console.log("Payment status updated successfully:", insertOrUpdatePaymentStatusValues);
 
     // Check if payment status was updated successfully
     const checkUpdateQuery = `
-  SELECT *
-  FROM student_buy_courses
-  WHERE user_id = ? AND courseCreationId = ? AND studentregistationId = ? AND payu_status = "paid"
-`;
-
-    const [updatedData] = await db.query(
-      checkUpdateQuery,
-      updatePaymentStatusValues
-    );
+      SELECT *
+      FROM student_buy_courses
+      WHERE user_id = ? AND courseCreationId = ? AND studentregistationId = ? AND payu_status = 'paid'
+    `;
+    const [updatedData] = await db.query(checkUpdateQuery, insertOrUpdatePaymentStatusValues);
 
     if (!updatedData || updatedData.length === 0) {
       console.log("Payment status not updated");
       return res.status(500).send({ error: "Payment status not updated" });
     }
+
   } catch (error) {
     console.error("Error updating payment status:", error);
     return res.status(500).send({ error: "Internal Server Error" });
   }
 });
+
 
 router.post("/failure", async (req, res) => {
   try {
