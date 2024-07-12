@@ -205,7 +205,7 @@ const BHPNavBarEdit = ({ type }) => {
     <div className="ug_header">
 
       {type === "Add NavItems" && (
-        <div className="editCard">
+         <div className="UploadPopups_Container">
           <div className="editCardBody">
             <input
               type="text"
@@ -263,10 +263,11 @@ const BHPNavBarEdit = ({ type }) => {
                     {navItem.Nav_Item}
                   </li>
                 )}
-                <span className="deleteIcon" onClick={() => handleDelete(navItem.Nav_id)}>
+                <div className="new_landingfooter_conatinerfristpopupbtncontiner">
+                <button  className = "Delete_button" onClick={() => handleDelete(navItem.Nav_id)}>
                   <RiDeleteBin6Line />
-                </span>
-                <span
+                </button>
+                <button className = "Edit_button"
                   style={{ color: 'black' }}
                   onClick={() => {
                     setEditingItemId(navItem.Nav_id);
@@ -276,7 +277,10 @@ const BHPNavBarEdit = ({ type }) => {
                   }}
                 >
                   <CiEdit />
-                </span>
+                </button>
+                </div>
+               
+
               </div>
             ))}
           </ul>
@@ -287,7 +291,7 @@ const BHPNavBarEdit = ({ type }) => {
 
       {type === "Update_Marquee_tag" && (
 
-        <div>
+<div className="UploadPopups_Container">
          <select
         value={selectedBranch}
         onChange={(e) => setSelectedBranch(e.target.value)}
