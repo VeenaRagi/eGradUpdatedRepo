@@ -25,7 +25,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 2rem;
+    padding: 0 2rem;
 }
 .SDHContentContainer:hover .SDHContentContainer{
 padding: 4rem;
@@ -40,8 +40,21 @@ padding: 4rem;
 .toBeDisplayedWhenHovered {
     display: none; 
     /* position: absolute; */
+    height: inherit;
+    width: 400px;
+    border: 1px solid black;
 }
+/* .toBeDisplayedWhenHovered>div {
+    display: flex;
+} */
 
-.SDHeaderImgContainer:hover .toBeDisplayedWhenHovered {
-    display: block; 
+.SDHeaderImgContainer:hover .toBeDisplayedWhenHovered{
+    display: flex; 
+}
+.SDHeaderLogoContainer{
+    height: inherit;
+    width: 200px;
+}
+.SDHeaderLogoContainer img{
+    width: 100%;
 }
