@@ -1,3 +1,16 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
 const express = require("express");
 const router = express.Router();
 const db1 = require("../DataBase/db1");
@@ -1530,3 +1543,4 @@ router.post("/studentexelsheet", uploadexcel.single("file"), (req, res) => {
 // <img src="cid:profileImage" alt="Profile Image" style="width: 150px; height: 150px; border-radius: 50%; margin: 0.5rem auto; display: block;">
 // <table style="margin: 0.5rem auto; border: 1px solid rgba(0, 0, 0, 0.5);  width: 100%;">
 module.exports = router;
+

@@ -260,7 +260,7 @@ router.put(
       subjects,
       topicName,
     } = req.body;
-    const cardImg = req.file ? req.file.buffer : null;
+    const cardImg=req.file?req.file.buffer:null;
     const courseCreationIdToPost = req.params.courseCreationId;
     const portalId = req.params.portalId;
     console.log(portalId, "portal id from params at backend ");
@@ -320,11 +320,11 @@ router.put(
       paymentlink,
       portalId,
       subjects,
-      topicName,
+      topicName, 
       courseCreationIdToPost
     );
-    if (cardImg) {
-      console.log("try block with the image ");
+    if(cardImg){
+      console.log("try block with the image ")
       try {
         await db.query(
           `UPDATE course_creation_table 
@@ -378,8 +378,9 @@ router.put(
       } catch (error) {
         res.status(500).json({ error: "Internal Server Error." });
       }
-    } else {
-      console.log("else block withoutt the image ");
+    }
+    else{
+      console.log("else block withoutt the image ")
       try {
         await db.query(
           `UPDATE course_creation_table 
@@ -432,6 +433,7 @@ router.put(
         res.status(500).json({ error: "Internal Server Error." });
       }
     }
+   
 
     // insert into topics table
   }
@@ -1081,12 +1083,12 @@ router.get("/course-type-of-test/:courseCreationId", async (req, res) => {
 //      courseStartDate = ?,
 //      courseEndDate = ?,
 //      cost = ?,
-//      Discount = ?,
+//      Discount = ?,       
 //      totalPrice = ?,
 //      paymentlink = ?,
 //      cardImage = ?
 //    WHERE courseCreationId = ?;
-
+   
 //      `;
 //        try {
 //          await db.query(updateQuery, [
@@ -1102,19 +1104,19 @@ router.get("/course-type-of-test/:courseCreationId", async (req, res) => {
 //            cardImg,
 //            courseCreationId,
 //          ]);
-
+   
 //          const insertTestOfTestQuery =
 //            "INSERT INTO course_typeoftests (courseCreationId, typeOfTestId) VALUES (?, ?)";
 //          for (const typeOfTestId of selectedTypeOfTests) {
 //            await db.query(insertTestOfTestQuery, [courseCreationId, typeOfTestId]);
 //          }
-
+   
 //          const insertSubjectsQuery =
 //            "INSERT INTO course_subjects (courseCreationId, subjectId) VALUES (?, ?)";
 //          for (const subjectId of selectedSubjects) {
 //            await db.query(insertSubjectsQuery, [courseCreationId, subjectId]);
 //          }
-
+   
 //          const insertQuestionTypesQuery =
 //            "INSERT INTO course_type_of_question (courseCreationId, quesionTypeId) VALUES (?, ?)";
 //          for (const quesionTypeId of selectedQuestionTypes) {
@@ -1123,7 +1125,7 @@ router.get("/course-type-of-test/:courseCreationId", async (req, res) => {
 //              quesionTypeId,
 //            ]);
 //          }
-
+   
 //          res.json({ message: "Course updated successfully" });
 //        } catch (error) {
 //          console.error(error);
@@ -1140,7 +1142,7 @@ router.get("/course-type-of-test/:courseCreationId", async (req, res) => {
 //         courseStartDate = ?,
 //         courseEndDate = ?,
 //         cost = ?,
-//         Discount = ?,
+//         Discount = ?,       
 //         totalPrice = ?,
 //         paymentlink = ?,
 //       WHERE courseCreationId = ?`;
@@ -1151,13 +1153,13 @@ router.get("/course-type-of-test/:courseCreationId", async (req, res) => {
 //          for (const typeOfTestId of selectedTypeOfTests) {
 //            await db.query(insertTestOfTestQuery, [courseCreationId, typeOfTestId]);
 //          }
-
+   
 //          const insertSubjectsQuery =
 //            "INSERT INTO course_subjects (courseCreationId, subjectId) VALUES (?, ?)";
 //          for (const subjectId of selectedSubjects) {
 //            await db.query(insertSubjectsQuery, [courseCreationId, subjectId]);
 //          }
-
+   
 //          const insertQuestionTypesQuery =
 //            "INSERT INTO course_type_of_question (courseCreationId, quesionTypeId) VALUES (?, ?)";
 //          for (const quesionTypeId of selectedQuestionTypes) {
@@ -1166,15 +1168,18 @@ router.get("/course-type-of-test/:courseCreationId", async (req, res) => {
 //              quesionTypeId,
 //            ]);
 //          }
-
+   
 //          res.json({ message: "Course updated successfully" });
 
-//       } catch (error) {
 
+//       } catch (error) {
+        
 //       }
 
 //     }
 
+
+   
 //   }
 // );
 
@@ -1340,6 +1345,10 @@ router.put(
     }
   }
 );
+
+
+
+
 
 router.put(
   "/update-course-form1/:courseCreationId/:portalId",
