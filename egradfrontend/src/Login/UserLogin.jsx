@@ -1,14 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
-
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import { useTIAuth } from '../TechInfoContext/AuthContext';
 import '../styles/UserLoginPage/userLoginPageCss.css'
-
-
-
 const UserLogin = () => {
   const [tiAuth, settiAuth] = useTIAuth()
   const [email, setEmail] = useState('');

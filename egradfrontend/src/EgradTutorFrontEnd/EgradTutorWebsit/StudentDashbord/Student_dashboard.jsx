@@ -27,10 +27,10 @@ const Student_dashboard = () => {
       const encryptedUserId = userIdTesting;
       try {
         const response = await axios.get(
-          "http://localhost:5001/Login/userDecryptedId",
-          {
-            params: { encryptedUserId },
-          }
+          `http://localhost:5001/Login/userDecryptedId/${encryptedUserId}`,
+          // {
+          //   params: { encryptedUserId },
+          // }
         );
         console.log(
           encryptedUserId,
