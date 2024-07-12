@@ -430,13 +430,13 @@ a {
 
 /* Full-page overlay to cover the background when the card is open */
 .overlay {
-    /* position: fixed; */
+    position: fixed;
     /* Cover the entire viewport */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    /* background-color: rgba(0, 0, 0, 0.5); */
     /* Semi-transparent black background */
     display: flex;
     align-items: center;
