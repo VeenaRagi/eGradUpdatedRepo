@@ -6,6 +6,8 @@ import BASE_URL from "../../apiConfig"
 import ReactPaginate from "react-paginate";
 import { FaSearch } from "react-icons/fa";
 import { useParams } from 'react-router-dom';
+import '../../EgradTutorFrontEnd/EgradtutorPortalsAdmin/styles/Ovlvidesupload.css'
+
 function OvlvidesUpload() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [courses, setCourses] = useState([]);
@@ -323,7 +325,6 @@ function OvlvidesUpload() {
       </div>
       {isModalOpen && (
         <div className="modal_Contant">
-          <h3>Update Video Link</h3>
           <div className="modalContent">
             <div className="DriveLink">
               <label>Lecture Name:</label>

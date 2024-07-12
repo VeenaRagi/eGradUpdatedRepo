@@ -36,7 +36,7 @@ function Document_ImageInfo() {
       {/* Map over questions and render them */}
       <button
         type="button"
-        onClick={() => navigate("/Adminpage")}
+        onClick={() => navigate("/UgadminHome")}
         className="ots_-createBtn"
       >
         <i class="fa-solid fa-xmark"></i>
