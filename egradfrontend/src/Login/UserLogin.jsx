@@ -32,7 +32,7 @@ const UserLogin = () => {
 
       console.log("Response Data:", response.data);
 
-      const { user_Id, role, accessToken } = response.data;
+      const { user_Id, role, accessToken,decryptedId } = response.data;
       console.log("Extracted Data:", { user_Id, role, accessToken });
       if (!user_Id) {
         throw new Error('User ID is missing');
@@ -48,6 +48,7 @@ const UserLogin = () => {
           user: user_Id,
           token: accessToken,
           role:role,
+          userDecryptedId:decryptedId,
         };
         console.log("New Auth State:", newAuthState);
         settiAuth(newAuthState);
