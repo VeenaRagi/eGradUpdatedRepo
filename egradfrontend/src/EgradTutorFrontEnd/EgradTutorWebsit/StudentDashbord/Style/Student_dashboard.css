@@ -92,10 +92,11 @@
 }
 
 @media (min-width:900px) {
-.dashboard_welcome_img_section{
-    width: 400px;
-    height: 200px;
-}
+    .dashboard_welcome_img_section {
+        width: 400px;
+        height: auto;
+        border-radius: 150px;
+    }
 }
 
 
