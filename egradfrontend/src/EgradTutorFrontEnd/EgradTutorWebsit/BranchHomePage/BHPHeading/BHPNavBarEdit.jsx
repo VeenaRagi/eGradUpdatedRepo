@@ -281,9 +281,6 @@ const BHPNavBarEdit = ({ type }) => {
             ))}
           </ul>
         </div>
-
-
-
       )}
 
 
