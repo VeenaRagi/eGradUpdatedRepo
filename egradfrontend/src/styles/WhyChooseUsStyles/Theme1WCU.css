@@ -20,30 +20,63 @@
     padding: 15px;
     color: rgb(247, 239, 239);
     display: flex;
-    border: 1px solid #689851;
+    /* border: 1px solid #689851; */
     padding: 10px;
     margin: 10px 10px 10px 10px;
     border-radius: 10px;
     justify-content: space-around;
-}
-.t1CPHeaderUl li{
-    background-color: rgb(175, 197, 175);
 }
 
 
 .t1CPHeaderUl li a {
     color: rgb(10, 10, 10);
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
-.t1CPHeaderUl li a:hover {
-    color: rgb(250, 246, 246);
-}
 
-.t1CPHeaderUl li:hover{
-    box-shadow: rgb(185 226 198 / 1%) 59px 54px 55px, rgb(185 226 198) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 2px 3px, rgba(0, 0, 0, 0.09) 0px -3px 5px;    
-}
+
+@keyframes underlineFromRight {
+    0% {
+      background-size: 0 1px;
+      color: initial;
+    }
+    50% {
+      color: rgb(4, 48, 26); /* First mixed color */
+    }
+    100% {
+      background-size: 100% 1px;
+      color: rgb(4, 48, 26); /* Final color */
+    }
+  }
+  
+  .t1CPHeaderUl li a {
+    position: relative;
+    color: initial;
+    text-decoration: none;
+  }
+  
+  .t1CPHeaderUl li a::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, rgb(4, 48, 26));
+    background-size: 0 1px;
+    background-repeat: no-repeat;
+    transition: background-size 0.5s ease-in-out;
+  }
+  
+  .t1CPHeaderUl li a:hover::before {
+    background-size: 100% 1px;
+  }
+  
+  .t1CPHeaderUl li a:hover {
+    animation: underlineFromRight 0.5s forwards;
+  }
+  
 
 .t1_COURSES {
     display: flex;
@@ -59,7 +92,7 @@
     margin: 0;
     font-size: 30px;
     background-color: #2f8d46;
-    background-image: url('https://images.pexels.com/photos/2943603/pexels-photo-2943603.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    /* background-image: url('https://images.pexels.com/photos/2943603/pexels-photo-2943603.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

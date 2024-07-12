@@ -595,8 +595,10 @@ const Footer = ({isEditMode , userRole }) => {
               <path class="footer-wave-path" d="M851.8,100c125,0,288.3-45,348.2-64V0H0v44c3.7-1,7.3-1.9,11-2.9C80.7,22,151.7,10.8,223.5,6.3C276.7,2.9,330,4,383,9.8 c52.2,5.7,103.3,16.2,153.4,32.8C623.9,71.3,726.8,100,851.8,100z"></path>
             </svg>
             <div className={`footer-content ${themeDetails.themeInnerMainFooterContentContainer}`}>
+              
               <div className={`footer-content-column ${themeDetails.themeInnerMainFooterContentColumnContainer}`}>
                 <div className={`Footer_eGRADTtutor__Content ${themeDetails.themeFootereGRADTtutoContent}`}>
+                  
                   {isEditMode && (
                     <div>
                       <button
@@ -613,6 +615,7 @@ const Footer = ({isEditMode , userRole }) => {
                       )}
                     </div>
                   )}
+                  
 
                   {isEditMode && (
                     <div>
@@ -626,6 +629,8 @@ const Footer = ({isEditMode , userRole }) => {
                       {FirstPopupVisible && <FooterEdit type="eGRADTutor" />}
                     </div>
                   )}
+
+                  
 
 {dataOne.length > 0 ? (
         dataOne.map((item, index) =>
@@ -654,12 +659,20 @@ const Footer = ({isEditMode , userRole }) => {
       ) : (
         <p>No content available. Please contact support if this issue persists.</p>
       )}
+        
                 </div>
+                <div className={`${themeDetails.themeFooterSMIcons}`}>
+             <Link to='/'> <FaFacebook /></Link>
+             <Link> <GrInstagram /></Link>
+             <Link><SiYoutube /></Link>
+             <Link><ImLinkedin /></Link>
+              </div>
               </div>
 
             </div>
             <div className={`contact-content ${themeDetails.themeContactFooterContentContainer}`}>
               <div className={`footer-content-column ${themeDetails.themeFooterContentColumn}`}>
+                
                 <div className={`Footer_FirstContent__Container ${themeDetails.themeFooterFirstContentContainer}`}>
                   <div className={`Footer_Links_Content ${themeDetails.themeFooterLinksContent}`}>
                     {isEditMode && (
@@ -722,6 +735,7 @@ const Footer = ({isEditMode , userRole }) => {
         <p>No links are available. Please contact support if this issue persists.</p>
       )}
                     </ul>
+                    
                   </div>
                 </div>
               </div>
@@ -794,42 +808,6 @@ const Footer = ({isEditMode , userRole }) => {
 
               </div>
 
-            </div>
-            <div className={`footer-copyright ${themeDetails.themeFooterCopyrightData}`}>
-              <div className={`footer-copyright-wrapper ${themeDetails.themeFooterCopyrightWrapperData}`}>
-                <p className={`footer-copyright-text ${themeDetails.themeFooterCopyrightTextData}`}>
-                  {isEditMode && (
-                    <div>
-                      <button
-                        onClick={() =>
-                          setIsCopyRightSectionVisible(
-                            !isCopyRightSectionVisible
-                          )
-                        }
-                        className="editbtn"
-                      >
-                        {isCopyRightSectionVisible
-                          ? "Hide copywrite form"
-                          : "Edit copywrite"}
-                      </button>
-                      {isCopyRightSectionVisible && (
-                        <FooterEdit type="CopyWriteTable" />
-                      )}
-                    </div>
-                  )}
-                  {dataThree.length > 0 ? (
-        dataThree.map((item) => (
-          <li key={item.Content_id}>{item.content_name}</li>
-        ))
-      ) : userRole === 'user' ? (
-        <p>No items available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>There are no items available. Please add new content.</p>
-      ) : (
-        <p>No items available. Please contact support if this issue persists.</p>
-      )}
-                </p>
-              </div>
             </div>
           </footer>
         </div>

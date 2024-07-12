@@ -8,7 +8,7 @@ import JSONClasses from '../../../../ThemesFolder/JSONForCSS/JSONClasses';
 import { FaArrowRight } from "react-icons/fa6";
 import { TiTick } from "react-icons/ti";
 import '../BranchHomeStyles/BranchHomePages.css'
-import { FaArrowRightFromBracket } from "react-icons/fa6";
+import { IoMdArrowRoundForward } from "react-icons/io";
 import { TiPin } from "react-icons/ti";
 const OueCourses = ({ isEditMode, userRole}) => {
   const { Branch_Id } = useParams();
@@ -116,7 +116,7 @@ const OueCourses = ({ isEditMode, userRole}) => {
             <div className={`${themeDetails.themeExtraPCForFeaturess}`}>
               <div className={`${themeDetails.themeFeaturesContainers}`}>
                 <h3 className={`${themeDetails.themeFeaturesHeadings}`}>
-                  <FaArrowRightFromBracket />
+                <IoMdArrowRoundForward />
                   Features
                 </h3>
                 {feature.Features.map((featureItem, featureIndex) => (
