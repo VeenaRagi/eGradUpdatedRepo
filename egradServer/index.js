@@ -178,12 +178,20 @@ app.use("/Myresult",Myresult);
 app.use('/studentSettings',studentSettings)
 //================OTS_QUIZAPP_ROUTES_END===============
 
+
+const EncrypDecryp = require("./UrlConversion/EncrypDecryp");
+// require('dotenv').config();
+
+// app.use(bodyParser.json());
+app.use('/EncrypDecryp', EncrypDecryp);
+
 // ---------------student setting api routs------------
 
 
 
 
 // ----------------------------------------------------
+
 
 
 app.listen(port, () => {

@@ -33,8 +33,8 @@ import UpdatingConrseInAdmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/U
 import GettingInstructions from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/GettinggInstructions.jsx"
 import { UpdateInstruction } from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/UpdateInstruction.jsx"
 import TestUpdateadmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/TestUpdateadmin.jsx";
-import InstructionPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/Introduction_page.jsx'
-
+import InstructionPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/InstructionPage.jsx'
+import General_Intructions_Page from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/General_intructions_page_container.jsx'
 
 function App() {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -145,10 +145,17 @@ function App() {
                 element={<TestUpdateadmin />}
               />
 
+
               <Route
                 path="/Instructions/:param1/:param2/:param3"
                 element={<InstructionPage />}
               />
+
+             <Route
+            path="/General_intructions_page/:param1/:param2/:param3"
+            element={<General_Intructions_Page/>} 
+          />
+
             </Routes>
           </Router>
         )}
