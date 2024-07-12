@@ -5,6 +5,15 @@
   width: 100%;
 }
 
+.ugquiz_StudentDashbordconatiner_right_Std_MB_Course {
+  height: 90vh;
+  /* background: #000; */
+  overflow-y: scroll;
+}
+.ugquiz_StudentDashbordconatiner_right_Std_MB_Course::-webkit-scrollbar {
+  background: none; /* Change the background color as needed */
+}
+
 .ugquiz_StudentDashbordconatiner {
   /* position: relative; */
   display: flex;
@@ -13,6 +22,8 @@
 
 .ugquiz_StudentDashbordconatiner_handleToggleLeftMenu {
   display: none;
+  position: fixed;
+    z-index: 1000;
 }
 
 .ugquiz_StudentDashbordconatiner_left .ugquiz_StudentDashbordconatiner_left_menu,
@@ -59,7 +70,6 @@
   display: flex;
   margin: 0 auto;
   width: 100%;
-  display: grid;
   background: #d7e6eb50;
 
   & .before_login_courses_btn_continer {
@@ -86,7 +96,7 @@
     position: fixed;
     /* top: 4rem; */
     /* left: 1rem; */
-    /* z-index: 10002; */
+    /* z-index: 1000; */
     /* font-size: 1.5rem; */
     height: 100px;
   }
@@ -98,6 +108,7 @@
   .ugquiz_StudentDashbordconatiner_left_mobile {
     display: block;
     position: fixed;
+    z-index: 1000;
     top: 4rem;
     height: 93vh;
     width: 170px;
@@ -126,10 +137,13 @@
   .hamburgMenu{
     font-size: 50px;
     color: rgb(19, 18, 18);
-  }
+   }
+
 
   .hamburgMenu:hover{
     font-size: 50px;
     color: rgb(2, 79, 245);
   }
+
+  
 }
