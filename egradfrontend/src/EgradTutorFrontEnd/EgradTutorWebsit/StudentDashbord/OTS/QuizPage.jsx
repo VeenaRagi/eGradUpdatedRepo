@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ButtonsFunctionality from "./ButtonsFunctionality";
-import Tooltip from "@mui/material/Tooltip";
-// import "./styles/Paper.css";
-import logo from "../egate logo 1.png";
+// import Tooltip from "@mui/material/Tooltip";
+// import { Tooltip } from '@mui/material';
+
+import "../Style/Paper.css";
+// import logo from "../egate logo 1.png";
 import { MdOutlineTimer } from "react-icons/md";
 import { useRef } from "react";
 import { BiMenuAltLeft } from "react-icons/bi";
-import BASE_URL from "../../../apiConfig";
-import { decryptData, encryptData } from "./utils/crypto";
-// import "./styles/Watermark.css";
+import BASE_URL from "../../../../apiConfig";
+import { decryptData, encryptData } from "../utils/crypto";
+import "../Style/Watermark.css";
 const QuizPage = () => {
   const navigate = useNavigate();
 
@@ -2832,12 +2834,14 @@ const QuizPage = () => {
     // <div className="QuestionPaper_-container"  ref={quizRef}
     // onClick={enterFullscreen}  style={{ backgroundColor: 'white', }}>
     // <div className="QuestionPaper_-container"  >
+    
     <div
       className="QuestionPaper_-container"
       ref={quizRef}
       onClick={enterFullscreen}
       style={{ backgroundColor: "white" }}
     >
+           <p>{decryptedParam2}</p>
       {/* {showMalPractisePopup && (
         <div className="popup">
           <div className="popup-content">
@@ -2881,7 +2885,7 @@ const QuizPage = () => {
       )}
       <div className="quiz_exam_interface_header quiz_exam_interface_header_q_if_H">
         <div className="quiz_exam_interface_header_LOGO ">
-          <img src={logo} alt="" />
+          {/* <img src={logo} alt="" /> */}
         </div>
         <p className="testname_heading_quizPage" key={testName.decryptedParam1}>
           {testName}
@@ -3742,36 +3746,36 @@ const QuizPage = () => {
                     </div>
                     <div className="quiz_btns_contaioner">
                       <div>
-                        <Tooltip
+                        {/* <Tooltip
                           title="Click here to Save & Mark for Review"
                           arrow
-                        >
+                        > */}
                           <button
                             className="Quiz_Save_MarkforReview"
                             onClick={markForReview}
                           >
                             Save & Mark for Review
                           </button>
-                        </Tooltip>
-                        <Tooltip title="Click here to Clear Response" arrow>
+                        {/* </Tooltip> */}
+                        {/* <Tooltip title="Click here to Clear Response" arrow> */}
                           <button
                             className="Quiz_clearResponse"
                             onClick={clearResponse}
                           >
                             Clear Response
                           </button>
-                        </Tooltip>
-                        <Tooltip title="Click here to Save & Next" arrow>
+                        {/* </Tooltip> */}
+                        {/* <Tooltip title="Click here to Save & Next" arrow> */}
                           <button
                             className="quizsave_next"
                             onClick={handleSaveNextQuestion}
                           >
                             Save & Next
                           </button>
-                        </Tooltip>
+                        {/* </Tooltip> */}
                       </div>
                       <div className="quiz_Next_back">
-                        <Tooltip title="Click here to go Back" arrow>
+                        {/* <Tooltip title="Click here to go Back" arrow> */}
                           <button
                             className="previous-btn"
                             onClick={handlePreviousClick}
@@ -3779,12 +3783,12 @@ const QuizPage = () => {
                           >
                             <i className="fa-solid fa-angles-left"></i> Back
                           </button>
-                        </Tooltip>
-                        <Tooltip title="Click here to go Next" arrow>
+                        {/* </Tooltip> */}
+                        {/* <Tooltip title="Click here to go Next" arrow> */}
                           <button onClick={handleNextQuestion}>Next</button>
-                        </Tooltip>
+                        {/* </Tooltip> */}
 
-                        <Tooltip title="Click here to Submit" arrow>
+                        {/* <Tooltip title="Click here to Submit" arrow> */}
                           <button
                             style={{ background: "#f0a607da" }}
                             onClick={handleSubmit}
@@ -3792,7 +3796,7 @@ const QuizPage = () => {
                           >
                             Submit
                           </button>
-                        </Tooltip>
+                        {/* </Tooltip> */}
                       </div>
                     </div>
                   </>
@@ -3886,7 +3890,7 @@ const QuizPage = () => {
 
                 <div className="Exam_summary_btns">
                   {showButtonNo === false ? (
-                    <Tooltip title="Yes" arrow>
+                    // <Tooltip title="Yes" arrow>
                       <>
                         <Link
                           className="es_btn"
@@ -3897,9 +3901,9 @@ const QuizPage = () => {
                           Okay
                         </Link>
                       </>
-                    </Tooltip>
+                    // {/* </Tooltip> */}
                   ) : (
-                    <Tooltip title="Yes" arrow>
+                    // <Tooltip title="Yes" arrow>
                       <>
                         <Link
                           className="es_btn"
@@ -3910,14 +3914,14 @@ const QuizPage = () => {
                           Yes
                         </Link>
                       </>
-                    </Tooltip>
+                    // {/* </Tooltip> */}
                   )}
                   {showButtonNo && (
-                    <Tooltip title="No" arrow>
+                    // <Tooltip title="No" arrow>
                       <button className="es_btn" onClick={handleNo}>
                         NO
                       </button>
-                    </Tooltip>
+                    // {/* </Tooltip> */}
                   )}
                 </div>
               </div>
