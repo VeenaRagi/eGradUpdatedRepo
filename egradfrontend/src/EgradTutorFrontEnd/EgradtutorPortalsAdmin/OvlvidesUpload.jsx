@@ -326,16 +326,6 @@ function OvlvidesUpload() {
           <h3>Update Video Link</h3>
           <div className="modalContent">
             <div className="DriveLink">
-              <label>Drive Link:</label>
-              <input
-                type="text"
-                value={updateData.Drive_Link}
-                onChange={(e) =>
-                  setUpdateData({ ...updateData, Drive_Link: e.target.value })
-                }
-              />
-            </div>
-            <div className="DriveLink">
               <label>Lecture Name:</label>
               <input
                 type="text"

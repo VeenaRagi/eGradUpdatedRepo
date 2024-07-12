@@ -136,7 +136,80 @@ router.get('/videos/:courseCreationId', async (req, res) => {
     }
 });
 
+router.delete(
+    "/videslink_delete/:OVL_Linke_Id",
+    async (req, res) => {
+        const OVL_Linke_Id = req.params.OVL_Linke_Id;
 
+        try {
+            await db.query(
+                `DELETE ol.* FROM ovl_links AS ol WHERE OVL_Linke_Id = ?`,
+                [OVL_Linke_Id]
+            );
+
+            res.json({
+                message: `course with ID ${OVL_Linke_Id} deleted from the database`,
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
+);
+
+router.delete("/videslink_delete", async (req, res) => {
+    const { ids } = req.body;
+
+    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+        return res.status(400).json({ error: "Invalid or empty IDs array provided" });
+    }
+
+    try {
+        // Construct a parameterized SQL query with placeholders
+        const placeholders = ids.map(() => "?").join(", ");
+        const query = `DELETE FROM ovl_links WHERE OVL_Linke_Id IN (${placeholders})`;
+
+        // Execute the query with the actual values of IDs
+        await db.query(query, ids);
+
+        res.json({
+            message: "Selected video links deleted from the database",
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+
+
+router.put("/videslink_update/:OVL_Linke_Id", async (req, res) => {
+    const { OVL_Linke_Id } = req.params;
+    const { Drive_Link, Lectures_name, Lecture_order } = req.body;
+  
+    if (!Drive_Link || !Lectures_name || Lecture_order === undefined) {
+      return res.status(400).json({ error: "Drive_Link, Lectures_name, and Lecture_order are required." });
+    }
+  
+    try {
+      const updateQuery = `
+        UPDATE ovl_links 
+        SET Drive_Link = ?, Lectures_name = ?, Lecture_order = ?
+        WHERE OVL_Linke_Id = ?
+      `;
+      const [result] = await db.execute(updateQuery, [Drive_Link, Lectures_name, Lecture_order, OVL_Linke_Id]);
+  
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: "Video link not found." });
+      }
+      
+      return res.status(200).json({ message: "Video link updated successfully." });
+    } catch (error) {
+      console.error("Error updating video link:", error);
+      return res.status(500).json({ error: "Failed to update video link." });
+    }
+  });
+  
 module.exports = router;
 
 
