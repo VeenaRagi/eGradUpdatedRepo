@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import BASE_URL from "../../apiConfig";
 import { FaSearch } from "react-icons/fa";
+import ReactPaginate from "react-paginate";
 function Portal_coures_creation_admin() {
   const [courseData, setCourseData] = useState([]);
   const [portals, setPortals] = useState([]);
@@ -21,12 +22,15 @@ function Portal_coures_creation_admin() {
   const [selectedtypeofQuestion, setSelectedtypeofQuestion] = useState([]);
   const [showPortalButtons, setShowPortalButtons] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const usersPerPage = 10; 
   //-------------------------------buttons code-------------------------
   useEffect(() => {
     axios
       .get(`${BASE_URL}/Portal_coures_creation_admin/Portal_feaching`)
       .then((response) => {
-        // console.log("Fetched portals:", response.data);
+        console.log("Fetched portals:", response.data);
         setPortals(response.data);
       })
       .catch((error) => {
@@ -35,12 +39,13 @@ function Portal_coures_creation_admin() {
   }, []);
 
   const handlePortalButtonClick = (portalId) => {
-    // console.log("Portal button clicked, ID:", portalId);
+    console.log("Portal button clicked, ID:", portalId);
     setPortaleId(portalId); // Set the portal ID
     const formMapping = {
       1: "form1",
       2: "form2",
       3: "form3",
+      4: "form4",
     };
     const formToShow = formMapping[portalId];
     setActiveForm(formToShow);
@@ -48,15 +53,15 @@ function Portal_coures_creation_admin() {
   };
 
   const handleShowPortalButtons = () => {
-    // console.log("Show All button clicked");
+    console.log("Show All button clicked");
     setShowPortalButtons((prevState) => !prevState); // Toggle portal button visibility
     if (showPortalButtons) {
       setActiveForm(null); // Reset active form when hiding
     }
   };
   const handleCloseForm = () => {
-    // console.log("Closing form"); 
-    setActiveForm(null); 
+    console.log("Closing form"); // Log when closing a form
+    setActiveForm(null); // Reset active form
     setShowPortalButtons(true);
     // setPortaleId(null);
   };
@@ -73,15 +78,15 @@ function Portal_coures_creation_admin() {
 
   const handleexams = async (event) => {
     const selectedExamId = event.target.value;
-    // console.log("Selected Exam ID:", selectedExamId);
+    console.log("Selected Exam ID:", selectedExamId);
     setSelectedexams(selectedExamId);
-    // console.log("Selected Exam ID (after setting):", selectedexams);
+    console.log("Selected Exam ID (after setting):", selectedexams);
     try {
       const response = await fetch(
         `${BASE_URL}/CoureseCreation/courese-exam-subjects/${selectedExamId}/subjects`
       );
       const data = await response.json();
-      // console.log("Subjects Data:", data); // Log the fetched data
+      console.log("Subjects Data:", data); // Log the fetched data
       setSubjectsData(data); // Update subjectsData state
       setSelectedSubjects([]); // Reset selected subjects
     } catch (error) {
@@ -163,7 +168,7 @@ function Portal_coures_creation_admin() {
         ? [...prevSelectedTest, typeOfTestId]
         : prevSelectedTest.filter((id) => id !== typeOfTestId);
 
-      // console.log("Selected Type of Test:", updatedSelectedTest);
+      console.log("Selected Type of Test:", updatedSelectedTest);
       return updatedSelectedTest;
     });
   };
@@ -176,15 +181,19 @@ function Portal_coures_creation_admin() {
         ? [...prevSelectedQuestions, questionTypeId]
         : prevSelectedQuestions.filter((id) => id !== questionTypeId);
 
-      // console.log("Selected Type of Questions:", updatedSelectedQuestions);
+      console.log("Selected Type of Questions:", updatedSelectedQuestions);
       return updatedSelectedQuestions;
     });
   };
 
-const handleSearchInputChange = (event) => {
-  setSearchQuery(event.target.value);
-  setCurrentPage(1); // Reset current page to 1 when search query changes
-};
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+  const filteredCourse = courseData.filter(
+    (courseData) =>
+      courseData.courseName &&
+      courseData.courseName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -201,7 +210,7 @@ const handleSearchInputChange = (event) => {
     try {
       const response = await fetch(
         `${BASE_URL}/CoureseCreation/course_creation_table`
-      );
+      ); // api for getting the data to display on the table
       const result = await response.json();
       const coursesWithArrays = result.map((course) => ({
         ...course,
@@ -239,19 +248,19 @@ const handleSearchInputChange = (event) => {
         }
 
         const result = await response.json();
-        // console.log(result.message);
+        console.log(result.message);
         const updatedCourseData = courseData.filter(
           (course) => course.courseCreationId !== courseCreationId
         );
-        // console.log("Before:", courseData);
-        // console.log("After:", updatedCourseData);
+        console.log("Before:", courseData);
+        console.log("After:", updatedCourseData);
         setCourseData(updatedCourseData);
       } catch (error) {
         console.error("Error deleting course:", error);
       }
     } else {
       // The user canceled the deletion
-      // console.log("Deletion canceled.");
+      console.log("Deletion canceled.");
     }
   };
   //---------------------------------------end-------------------------------
@@ -351,7 +360,7 @@ const handleSearchInputChange = (event) => {
       JSON.stringify(selectedtypeofQuestion)
     );
 
-    // console.log(formDataObj);
+    console.log(formDataObj);
     try {
       const response = await fetch(
         `${BASE_URL}/CoureseCreation/course-creation`,
@@ -380,17 +389,18 @@ const handleSearchInputChange = (event) => {
           }
         );
         const subjectsResult = await subjectsResponse.json();
-        // console.log("Subjects Result:", subjectsResult);
-        // console.log(result);
+        console.log("Subjects Result:", subjectsResult);
+        console.log(result);
         if (result.success) {
-          // console.log("Course created successfully");
+          console.log("Course created successfully");
         } else {
-          // console.log("Failed to create course:", result.error);
+          console.log("Failed to create course:", result.error);
         }
       } else {
-        // console.log("Failed to create course. Unexpected response:", result);
+        console.log("Failed to create course. Unexpected response:", result);
       }
       fetchCourseData();
+      handleCloseForm();
     } catch (error) {
       console.error("Error submitting course data:", error);
       // Handle error or show an error message to the user
@@ -494,7 +504,7 @@ const handleSearchInputChange = (event) => {
       JSON.stringify(selectedtypeofQuestion)
     );
 
-    // console.log(formDataObj);
+    console.log(formDataObj);
     try {
       const response = await fetch(
         `${BASE_URL}/CoureseCreation/course-creation`,
@@ -523,17 +533,18 @@ const handleSearchInputChange = (event) => {
           }
         );
         const subjectsResult = await subjectsResponse.json();
-        // console.log("Subjects Result:", subjectsResult);
-        // console.log(result);
+        console.log("Subjects Result:", subjectsResult);
+        console.log(result);
         if (result.success) {
-          // console.log("Course created successfully");
+          console.log("Course created successfully");
         } else {
-          // console.log("Failed to create course:", result.error);
+          console.log("Failed to create course:", result.error);
         }
       } else {
-        // console.log("Failed to create course. Unexpected response:", result);
+        console.log("Failed to create course. Unexpected response:", result);
       }
       fetchCourseData();
+      handleCloseForm();
     } catch (error) {
       console.error("Error submitting course data:", error);
       // Handle error or show an error message to the user
@@ -636,7 +647,7 @@ const handleSearchInputChange = (event) => {
     formDataObj.append("cardImage", courseImage);
     formDataObj.append("subjects", JSON.stringify(selectedSubjects));
 
-    // console.log(formDataObj);
+    console.log(formDataObj);
     try {
       const response = await fetch(
         `${BASE_URL}/CoureseCreation/course-creation`,
@@ -664,44 +675,178 @@ const handleSearchInputChange = (event) => {
         );
 
         const subjectsResult = await subjectsResponse.json();
-        // console.log("Subjects Result:", subjectsResult);
-        // console.log(result);
+        console.log("Subjects Result:", subjectsResult);
+        console.log(result);
         if (result.success) {
-          // console.log("Course created successfully");
+          console.log("Course created successfully");
         } else {
-          // console.log("Failed to create course:", result.error);
+          console.log("Failed to create course:", result.error);
         }
       } else {
-        // console.log("Failed to create course. Unexpected response:", result);
+        console.log("Failed to create course. Unexpected response:", result);
       }
 
       fetchCourseData();
+      handleCloseForm();
     } catch (error) {
       console.error("Error submitting course data:", error);
       // Handle error or show an error message to the user
     }
   };
-     const [currentPage, setCurrentPage] = useState(1);
-     const itemsPerPage = 10;
-     const filteredData = courseData.filter((data) =>
-       data.courseName.toLowerCase().includes(searchQuery.toLowerCase())
-     );
-
-     const indexOfLastItem = currentPage * itemsPerPage;
-     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-     const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
-
-     const handlePageChange = (pageNumber) => {
-       setCurrentPage(pageNumber);
-     };
-     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
   //-----------------------------------ONLINE VIDEO LECTURE COURSE CREATION FORM---------------------------------------END---------------------------------------------//
+
+  //-------------------------------------------COMPLETE PACKAGE--------------------------------
+
+  // const handleSubjectChangecp = (e) => {
+  //   setSelectedSubject(e.target.value); // Correctly update the state
+  // };
+
+  const handleSubjectChangecp = (event, subjectId) => {
+    const { checked } = event.target;
+
+    setSelectedSubject((prevSelectedSubjects) => {
+      if (checked) {
+        // Add the subjectId to the array if it's not already present
+        return [...new Set([...prevSelectedSubjects, subjectId])];
+      } else {
+        // Remove the subjectId from the array
+        return prevSelectedSubjects.filter((id) => id !== subjectId);
+      }
+    });
+  };
+
+  const [cpformData, setCpFormData] = useState({
+    courseName: "",
+    courseYear: "",
+    examId: "",
+    courseStartDate: "",
+    courseEndDate: "",
+    cost: "",
+    discount: "",
+    discountAmount: "",
+    totalPrice: "",
+    paymentlink: "",
+    cardImage: "",
+  });
+  const cpresetFormFields = () => {
+    setCpFormData({
+      courseName: "",
+      courseYear: "",
+      examId: "",
+      courseStartDate: "",
+      courseEndDate: "",
+      cost: "",
+      discount: "",
+      discountAmount: "",
+      totalPrice: "",
+      paymentlink: "",
+      cardImage: "",
+    });
+    setSelectedSubjects([]);
+  };
+
+  const handleChangecp = (e) => {
+    const { name, value } = e.target;
+    if (name === "cost" || name === "discount") {
+      const cost = name === "cost" ? parseFloat(value) : cpformData.cost;
+      const discount =
+        name === "discount" ? parseFloat(value) : cpformData.discount;
+      const discountAmount =
+        !isNaN(cost) && !isNaN(discount) ? (cost * discount) / 100 : "";
+      const totalPrice =
+        !isNaN(cost) && !isNaN(discountAmount) ? cost - discountAmount : "";
+      setCpFormData({
+        ...cpformData,
+
+        examId: selectedexams,
+        subjects: selectedSubject,
+        courseStartDate: startDate,
+        courseEndDate: endDate,
+        cost: cost,
+        discount: discount,
+        discountAmount: discountAmount,
+        totalPrice: totalPrice,
+      });
+    } else if (name === "courseStartDate" || name === "courseEndDate") {
+      setCpFormData({ ...cpformData, [name]: value });
+    } else {
+      setCpFormData({ ...cpformData, [name]: value });
+    }
+  };
+
+  const handleSubmitCP = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+
+    // Ensure `selectedSubjects` has at least one valid subject ID
+    if (!selectedSubject || selectedSubject.length === 0) {
+      console.error("No subject selected.");
+      return;
+    }
+
+    // Prepare form data
+    const formData = new FormData();
+    formData.append("courseName", cpformData.courseName);
+    formData.append("courseYear", cpformData.courseYear);
+    formData.append("examId", cpformData.examId);
+    formData.append("courseStartDate", cpformData.courseStartDate);
+    formData.append("courseEndDate", cpformData.courseEndDate);
+    formData.append("cost", cpformData.cost);
+    formData.append("discount", cpformData.discount);
+    formData.append("totalPrice", cpformData.totalPrice);
+    formData.append("paymentlink", cpformData.paymentlink);
+    formData.append("cardImage", courseImage); // Binary image data
+    formData.append("Portale_Id", portaleId);
+
+    // Append a single subject ID or all selected subject IDs
+    formData.append("subjects", JSON.stringify(selectedSubject)); // Convert to JSON
+
+    if (cpformData.topicName) {
+      formData.append("topicName", cpformData.topicName);
+    }
+
+    try {
+      const response = await fetch(
+        `${BASE_URL}/CoureseCreation/courseCreation_Complete_package`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Course created successfully:", result);
+        fetchCourseData(); // Fetch updated data or redirect, as needed
+        cpresetFormFields(); // Reset the form fields
+      } else {
+        console.error("Failed to create course:", await response.text());
+      }
+      fetchCourseData();
+      handleCloseForm();
+    } catch (error) {
+      console.error("Error submitting course data:", error);
+    }
+  };
+
+  //----------------------------------------END-----------------------------------
+
+  const pageCount = Math.ceil(filteredCourse.length / usersPerPage);
+  const pagesVisited = pageNumber * usersPerPage;
+  const displayData = filteredCourse.slice(pagesVisited, pagesVisited + usersPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
   return (
     <div className="create_exam_container otsMainPages">
       <h3 className="textColor">COURSE CREATION PAGE</h3>
-      <div className="create_exam_header" style={{overflowX:"scroll"}}>
-        <button className="otc_-addExam" onClick={handleShowPortalButtons}>
+      <div className="create_exam_header">
+        <button
+          className="otc_-addExam"
+          onClick={handleShowPortalButtons}
+          disabled={activeForm !== null}
+        >
           <i className="fa-solid fa-plus"></i> Add Course
         </button>
       </div>
@@ -733,25 +878,22 @@ const handleSearchInputChange = (event) => {
       {/* ots */}
       {activeForm === "form1" && (
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
-          <form
-            onSubmit={handleSubmitots}
-            className="ots_-Form ots_-Formcourse"
-          >
+          <form onSubmit={handleSubmitots} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
               ONLINE TEST SERIES COURSE CREATION FORM
             </h2>
-            <div className="otsCloseBtn_Mar otsCloseBtn_Marcourse">
+            <div className="otsCloseBtn_Mar">
               <button
                 type="button"
-                className="ots_btnClose  ots_btnClosecourse"
+                className="ots_btnClose"
                 onClick={handleCloseForm}
               >
-                Close <i className="fa-regular fa-circle-xmark "></i>
+                Close
               </button>
             </div>
-            <div className="coures-contant_-flexCOntantc_form">
-              <div className="coures-contant_-flexCOntantc examSubjects_-contant  ">
-                <div className="testCreation_-list testCreation_-listcrf">
+            <div>
+              <div className="coures-contant_-flexCOntantc examSubjects_-contant">
+                <div className="testCreation_-list">
                   <label htmlFor="courseName">Course Name:</label>
                   <input
                     type="text"
@@ -761,7 +903,7 @@ const handleSearchInputChange = (event) => {
                     onChange={handleChangeots}
                   />
                 </div>
-                <div className="testCreation_-list testCreation_-listcrf">
+                <div className="testCreation_-list">
                   <label htmlFor="year">Select Year:</label>
                   <select
                     id="year"
@@ -775,12 +917,12 @@ const handleSearchInputChange = (event) => {
                 </div>
               </div>
               <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-                <div className="testCreation_list testCreation_listcheck ">
+                <div className="testCreation_list">
                   <label>Type of test:</label>
-                  <div className="coures_-typeOfTest testCreation_listcheck testCreation_listchecktyg-1">
+                  <div className="coures_-typeOfTest">
                     {typeOfTest.map((typeofTest) => (
                       <div
-                        className="course_checkbox_continer course_frominput_container_media testCreation_listchecktyg-1"
+                        className="course_checkbox_continer course_frominput_container_media"
                         key={typeofTest.typeOfTestId}
                       >
                         <label htmlFor={`question-${typeofTest.typeOfTestId}`}>
@@ -805,7 +947,7 @@ const handleSearchInputChange = (event) => {
                 </div>{" "}
               </div>
               <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-                <div className="testCreation_-list testCreation_-listcrf">
+                <div className="testCreation_-list">
                   <label htmlFor="exams">Select Exam:</label>
                   <select
                     id="exams"
@@ -821,12 +963,12 @@ const handleSearchInputChange = (event) => {
                   </select>
                 </div>
 
-                <div className="testCreation_-list  testCreation_listcheckty">
+                <div className="testCreation_-list">
                   <label>Select Subjects:</label>
-                  <div className="coures_-Subjects ">
+                  <div className="coures_-Subjects">
                     {subjectsData.map((subject) => (
                       <div
-                        className="course_frominput_container testCreation_listchecktyg-1"
+                        className="course_frominput_container "
                         id="course_frominput_container_media"
                         key={subject.subjectId}
                       >
@@ -849,14 +991,13 @@ const handleSearchInputChange = (event) => {
                   </div>
                 </div>
               </div>
-              <div className="coures-contant_-flexCOntantc examSubjects_-contant ">
-                <div className="testCreation_-list  testCreation_listcheckty">
+              <div className="coures-contant_-flexCOntantc examSubjects_-contant">
+                <div className="testCreation_list">
                   <label>Type of Questions:</label>
-                  <div className="course_checkbox_continer_content testCreation_listchecktyf-1">
+                  <div className="course_checkbox_continer_content">
                     {typeofQuestion.map((type) => (
                       <div
-                        className="course_checkbox_continer course_frominput_container_media 
-                       testCreation_listchecktyg-1"
+                        className="course_checkbox_continer course_frominput_container_media"
                         key={type.quesionTypeId}
                       >
                         <i class="fa-solid fa-caret-right"></i>
@@ -883,7 +1024,7 @@ const handleSearchInputChange = (event) => {
               </div>
 
               <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-                <div className="testCreation_-list testCreation_-listcrf">
+                <div className="testCreation_-list">
                   <label htmlFor="courseStartDate">Course Start Date:</label>
                   <input
                     type="date"
@@ -895,7 +1036,7 @@ const handleSearchInputChange = (event) => {
                   />
                 </div>
 
-                <div className="testCreation_-list testCreation_-listcrf">
+                <div className="testCreation_-list">
                   <label htmlFor="courseEndDate">Course End Date:</label>
                   <input
                     type="date"
@@ -909,7 +1050,7 @@ const handleSearchInputChange = (event) => {
               </div>
 
               <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-                <div className="testCreation_-list testCreation_-listcrf">
+                <div className="testCreation_-list">
                   <label htmlFor="cost">Cost:</label>
                   <input
                     type="number"
@@ -919,7 +1060,7 @@ const handleSearchInputChange = (event) => {
                     onChange={handleChangeots}
                   />
                 </div>
-                <div className="testCreation_-list testCreation_-listcrf">
+                <div className="testCreation_-list">
                   <label htmlFor="discount">Discount (%):</label>
                   <input
                     type="number"
@@ -931,8 +1072,8 @@ const handleSearchInputChange = (event) => {
                 </div>
               </div>
 
-              <div className="coures-contant_-flexCOntantc examSubjects_-contant ">
-                <div className="testCreation_-list testCreation_-listcrf">
+              <div className="coures-contant_-flexCOntantc examSubjects_-contant">
+                <div className="testCreation_-list">
                   <label htmlFor="discountAmount">Discount Amount:</label>
                   <input
                     type="number"
@@ -942,7 +1083,7 @@ const handleSearchInputChange = (event) => {
                     readOnly
                   />
                 </div>
-                <div className="testCreation_-list testCreation_-listcrf">
+                <div className="testCreation_-list">
                   <label htmlFor="totalPrice">Total Price:</label>
                   <input
                     type="number"
@@ -954,7 +1095,7 @@ const handleSearchInputChange = (event) => {
                 </div>
               </div>
               <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-                <div className="testCreation_-list testCreation_-listcrf">
+                <div className="testCreation_-list">
                   <label htmlFor="paymentlink">Payment link:</label>
                   <input
                     type="text"
@@ -964,7 +1105,7 @@ const handleSearchInputChange = (event) => {
                     onChange={handleChangeots}
                   />
                 </div>
-                <div className="formdiv_contaniner testCreation_-listcrf">
+                <div className="formdiv_contaniner">
                   <label>Upload Course Image: </label>
                   <input
                     type="file"
@@ -1426,6 +1567,210 @@ const handleSearchInputChange = (event) => {
           </form>
         </div>
       )}
+      {activeForm === "form4" && (
+        <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
+          <form onSubmit={handleSubmitCP} className="ots_-Form">
+            <h2 className="ots_courseTitle_text">
+              COMPLETE PACKAGE COURSE CREATION FORM
+            </h2>
+            <div className="otsCloseBtn_Mar">
+              <button
+                type="button"
+                className="ots_btnClose"
+                onClick={handleCloseForm}
+              >
+                Close
+              </button>
+            </div>
+            <div>
+              <div className="coures-contant_-flexCOntantc examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label htmlFor="courseName">Course Name:</label>
+                  <input
+                    type="text"
+                    id="courseName"
+                    name="courseName"
+                    value={cpformData.courseName}
+                    onChange={handleChangecp}
+                  />
+                </div>
+                <div className="testCreation_-list">
+                  <label htmlFor="year">Select Year:</label>
+                  <select
+                    id="year"
+                    name="courseYear"
+                    value={cpformData.courseYear}
+                    onChange={handleChangecp}
+                  >
+                    <option value="">Select Year</option>
+                    {generateYearOptions()}
+                  </select>
+                </div>
+              </div>
+              <div className="coures-contant_-flexCOntantc examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label htmlFor="exams">Select Exam:</label>
+                  <select
+                    id="exams"
+                    value={selectedexams}
+                    onChange={handleexams}
+                  >
+                    <option value="">Select exams</option>
+                    {exams.map((exams) => (
+                      <option key={exams.examId} value={exams.examId}>
+                        {exams.examName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="testCreation_-list">
+                  <label>Select Subjects:</label>
+                  <div className="coures_-Subjects">
+                    {subjectsData.map((subject) => (
+                      <div
+                        className="course_frominput_container"
+                        id="course_frominput_container_media"
+                        key={subject.subjectId}
+                      >
+                        <label htmlFor={`subject-${subject.subjectId}`}>
+                          {subject.subjectName}
+                        </label>
+                        <input
+                          className="inputLable"
+                          type="radio" // Change from "checkbox" to "radio"
+                          id={`subject-${subject.subjectId}`}
+                          name="subject" // Ensure all radio buttons share the same name
+                          value={subject.subjectId}
+                          checked={selectedSubject.includes(subject.subjectId)}
+                          onChange={(e) =>
+                            handleSubjectChangecp(e, subject.subjectId)
+                          }
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="coures-contant_-flexCOntantc examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label htmlFor="topicName">Topic Name:</label>
+                  <input
+                    type="text"
+                    id="topicName"
+                    name="topicName"
+                    value={cpformData.topicName}
+                    onChange={handleChangecp}
+                  />
+                </div>
+                <div className="testCreation_-list">
+                  <label htmlFor="courseStartDate">Course Start Date:</label>
+                  <input
+                    type="date"
+                    id="courseStartDate"
+                    name="courseStartDate"
+                    value={startDate}
+                    onChange={handleStartDateChange}
+                    min={new Date().toISOString().split("T")[0]}
+                  />
+                </div>
+              </div>
+
+              <div className="coures-contant_-flexCOntantc examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label htmlFor="courseEndDate">Course End Date:</label>
+                  <input
+                    type="date"
+                    id="courseEndDate"
+                    name="courseEndDate"
+                    value={endDate}
+                    onChange={handleEndDateChange}
+                    min={new Date().toISOString().split("T")[0]}
+                  />
+                </div>
+                <div className="testCreation_-list">
+                  <label htmlFor="cost">Cost:</label>
+                  <input
+                    type="number"
+                    id="cost"
+                    name="cost"
+                    value={cpformData.cost}
+                    onChange={handleChangecp}
+                  />
+                </div>
+              </div>
+
+              <div className="coures-contant_-flexCOntantc examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label htmlFor="discount">Discount (%):</label>
+                  <input
+                    type="number"
+                    id="discount"
+                    name="discount"
+                    value={cpformData.discount}
+                    onChange={handleChangecp}
+                  />
+                </div>
+                <div className="testCreation_-list">
+                  <label htmlFor="discountAmount">Discount Amount:</label>
+                  <input
+                    type="number"
+                    id="discountAmount"
+                    name="discountAmount"
+                    value={cpformData.discountAmount}
+                    readOnly
+                  />
+                </div>
+              </div>
+
+              <div className="coures-contant_-flexCOntantc examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label htmlFor="totalPrice">Total Price:</label>
+                  <input
+                    type="number"
+                    id="totalPrice"
+                    name="totalPrice"
+                    value={cpformData.totalPrice}
+                    readOnly
+                  />
+                </div>
+
+                <div className="testCreation_-list">
+                  <label htmlFor="paymentlink">Payment link:</label>
+                  <input
+                    type="text"
+                    id="paymentlink"
+                    name="paymentlink"
+                    value={cpformData.paymentlink}
+                    onChange={handleChangecp}
+                  />
+                </div>
+              </div>
+
+              <div className="coures-contant_-flexCOntantc examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label>Upload Course Image: </label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    name="cardImage"
+                    onChange={handleCourseImageChange}
+                    id="uploadInputFile_ovl_upload_file"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="ccform_btnbs">
+              <button className="ots_-createBtn" type="submit">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
       <div className="" style={{ marginTop: "4rem" }}>
         <div className="create_exam_header_SearchBar">
           {/* Search bar */}
@@ -1439,117 +1784,108 @@ const handleSearchInputChange = (event) => {
           />
         </div>
         <h3 className="list_-otsTitels">created COURSES list</h3>
-        <div style={{overflowX:"scroll"}}>
-          {/* <table className="couresCreation_-table"> */}
-          <table className="otc_-table otsAdminTable_Container">
-
-            {/* <thead className="otsGEt_-contantHead couresotc_-table"> */}
-            <thead className="otsGEt_-contantHead otc_-table_-header">
-
+        <table className="couresCreation_-table">
+          <thead className="otsGEt_-contantHead couresotc_-table">
+            <tr>
+              <th>S.no</th>
+              <th>Portal</th>
+              <th> Exam</th>
+              <th>Course</th>
+              <th>Subjects</th>
+              {/* <th>Type of Test</th> */}
+              {/* <th>Type of Questions</th> */}
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Cost</th>
+              <th>Discount</th>
+              <th>Total Price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody className="couresotc_-table_-tBody">
+            {displayData.length === 0 ? (
               <tr>
-                <th style={{ textAlign: "center" }}>S.no</th>
-                <th style={{ textAlign: "center" }}>Portal</th>
-                <th style={{ textAlign: "center" }}> Exam</th>
-                <th style={{ textAlign: "center" }}>Course</th>
-                <th style={{ textAlign: "center" }}>Subjects</th>
-                {/* <th>Type of Test</th> */}
-                {/* <th>Type of Questions</th> */}
-                <th style={{ textAlign: "center" }}>Start Date</th>
-                <th style={{ textAlign: "center" }}>End Date</th>
-                <th style={{ textAlign: "center" }}>Cost</th>
-                <th style={{ textAlign: "center" }}>Discount</th>
-                <th style={{ textAlign: "center" }}>Total Price</th>
-                <th style={{ textAlign: "center" }}>Action</th>
+                <td colSpan="6">No Create found.</td>
               </tr>
-            </thead>
-            <tbody className="otc_-table_-tBody">
-              {currentItems.length === 0 ? (
-                <tr>
-                  <td colSpan="6">No Create found.</td>
-                </tr>
-              ) : (
-                currentItems.map((course, index) => (
-                  <tr
-                    key={course.courseCreationId}
-                    className={index % 2 === 0 ? "color1" : "color2"}
-                  >
-                    <td style={{ textAlign: "center" }}>{index + 1}</td>
-                    <td style={{ padding: 10 }}>{course.Portale_Name}</td>
-                    <td style={{ padding: 10 }}>{course.examName}</td>
-                    <td style={{ padding: 10 }}>{course.courseName}</td>
-                    <td style={{ padding: 10 }}>
-                      {Array.isArray(course.subjects) &&
-                      course.subjects.length > 0
-                        ? course.subjects.join(", ")
+            ) : (
+              displayData.map((course, index) => (
+                <tr
+                  key={course.courseCreationId}
+                  className={
+                    course.courseCreationId % 2 === 0 ? "color1" : "color2"
+                  }
+                >
+                  <td>{index + 1 + pageNumber * usersPerPage}</td>
+                  <td>{course.Portale_Name}</td>
+                  <td>{course.examName}</td>
+                  <td>{course.courseName}</td>
+                  <td>
+                    {Array.isArray(course.subjects) &&
+                    course.subjects.length > 0
+                      ? course.subjects.join(", ")
+                      : "N/A"}
+                  </td>
+                  {/* <td>
+                      {Array.isArray(course.typeOfTestName) &&
+                      course.typeOfTestName.length > 0
+                        ? course.typeOfTestName.join(", ")
                         : "N/A"}
-                    </td>
-                 
-                    <td style={{ textAlign: "center" }}>
-                      {formatDate(course.courseStartDate)}
-                    </td>
-                    <td style={{ textAlign: "center" }}>
-                      {formatDate(course.courseEndDate)}
-                    </td>
-                    <td style={{ textAlign: "center" }}>
-                      <i
-                        class="fa-solid fa-indian-rupee-sign"
-                        id="rupee-sign"
-                      ></i>
-                      {course.cost}
-                    </td>
-                    <td style={{ textAlign: "center" }}>{course.Discount}%</td>
-                    <td style={{ textAlign: "center" }}>
-                      <i
-                        class="fa-solid fa-indian-rupee-sign"
-                        id="rupee-sign"
-                      ></i>
-                      {course.totalPrice}
-                    </td>
-                    <td>
-                      <div className="EditDelete_-btns">
-                        <Link
-                          className="Ots_-edit"
-                          style={{
-                            background: "#00aff0",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                          to={`/UpdatingCourseInAdmin/${course.courseCreationId}/${course.Portale_Id}`}
-                        >
-                          <i
-                            className="fa-solid fa-pencil"
-                            style={{ color: "#fff" }}
-                          ></i>
-                        </Link>
-                        <button
-                          className="Ots_-delete"
-                          onClick={() => handleDelete(course.courseCreationId)}
-                          style={{ background: "rgb(220 53 69)" }}
-                        >
-                          <i
-                            className="fa-regular fa-trash-can"
-                            style={{ color: "#fff" }}
-                          ></i>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-          <div style={{ textAlign: "center", marginTop: "1rem" }}>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index + 1}
-                onClick={() => handlePageChange(index + 1)}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
-        </div>
+                    </td> */}
+                  {/* <td>
+                      {Array.isArray(course.typeofQuestion) &&
+                      course.typeofQuestion.length > 0
+                        ? course.typeofQuestion.join(", ")
+                        : "N/A"}
+                    </td> */}
+                  <td>{formatDate(course.courseStartDate)}</td>
+                  <td>{formatDate(course.courseEndDate)}</td>
+                  <td>
+                    <i
+                      class="fa-solid fa-indian-rupee-sign"
+                      id="rupee-sign"
+                    ></i>
+                    {course.cost}
+                  </td>
+                  <td>{course.Discount}%</td>
+                  <td>
+                    <i
+                      class="fa-solid fa-indian-rupee-sign"
+                      id="rupee-sign"
+                    ></i>
+                    {course.totalPrice}
+                  </td>
+                  <td>
+                    <div className="EditDelete_-btns">
+                      <Link
+                        className="Ots_-edit"
+                        to={`/UpdatingCourseInAdmin/${course.courseCreationId}/${course.Portale_Id}`}
+                      >
+                        <i className="fa-solid fa-pencil"></i>
+                      </Link>
+                      <button
+                        className="Ots_-delete"
+                        onClick={() => handleDelete(course.courseCreationId)}
+                      >
+                        <i className="fa-regular fa-trash-can"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+        <ReactPaginate
+  previousLabel={<i className="fa-solid fa-angles-left"></i>}
+  nextLabel={<i className="fa-solid fa-angles-right"></i>}
+  pageCount={pageCount}
+  onPageChange={changePage}
+  containerClassName={"paginationBttns"}
+  previousLinkClassName={"previousBttn"}
+  nextLinkClassName={"nextBttn"}
+  disabledClassName={"paginationDisabled"}
+  activeClassName={"paginationActive"}
+/>
       </div>
     </div>
   );

@@ -69,17 +69,19 @@ const InstructionDisplay_admin = () => {
     setSearchQuery(event.target.value);
     setCurrentPage(1); // Reset current page to 1 when search query changes
   };
-  const filteredInstruction = instruction.filter(
-    (instruction) =>
-      instruction.instructionHeading &&
-      instruction.instructionHeading
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase())
-  );
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const filteredInstruction = instruction
+    ? instruction.filter(
+        (instruction) =>
+          instruction.instructionHeading &&
+          instruction.instructionHeading.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
+
   const filteredData = filteredInstruction.filter((data) =>
-    data.examName.toLowerCase().includes(searchQuery.toLowerCase())
+    data.examName ? data.examName.toLowerCase().includes(searchQuery.toLowerCase()) : false
   );
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
