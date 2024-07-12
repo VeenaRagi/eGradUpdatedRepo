@@ -145,10 +145,10 @@ function App() {
                 element={<TestUpdateadmin />}
               />
 
-<Route
-            path="/Instructions/:param1/:param2/:param3"
-          element={<InstructionPage/>}
-          />
+              <Route
+                path="/Instructions/:param1/:param2/:param3"
+                element={<InstructionPage />}
+              />
             </Routes>
           </Router>
         )}
