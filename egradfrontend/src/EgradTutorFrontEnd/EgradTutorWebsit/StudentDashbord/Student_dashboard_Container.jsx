@@ -80,22 +80,23 @@ const Student_dashboard_Container = ({ usersData,decryptedUserIdState }) => {
 
       <div className="ugquiz_StudentDashbordconatiner_right_Std_MB_Course">
         {activeComponent === "home" && (
-          <Student_dashboard_Home usersData={usersData} />
+          <Student_dashboard_Home usersData={usersData} 
+          decryptedUserIdState={decryptedUserIdState}/>
         )}
         {activeComponent === "myCourses" && (
           <StudentDashbord_MyCourses usersData={usersData} decryptedUserIdState={decryptedUserIdState} />
         )}
         {activeComponent === "buyCourses" && (
-          <StudentDashbord_BuyCourses usersData={usersData} />
+          <StudentDashbord_BuyCourses usersData={usersData} decryptedUserIdState={decryptedUserIdState}/>
         )}
         {activeComponent === "myResults" && (
-          <StudentDashbord_MyResults usersData={usersData} />
+          <StudentDashbord_MyResults usersData={usersData} decryptedUserIdState={decryptedUserIdState}/>
         )}
         {activeComponent === "bookmarks" && (
-          <StudentDashbord_Bookmarks usersData={usersData} />
+          <StudentDashbord_Bookmarks usersData={usersData} decryptedUserIdState={decryptedUserIdState}/>
         )}
         {activeComponent === "settings" && (
-          <StudentDashbord_Settings usersData={usersData} />
+          <StudentDashbord_Settings usersData={usersData} decryptedUserIdState={decryptedUserIdState}/>
         )}
       </div>
     </div>
