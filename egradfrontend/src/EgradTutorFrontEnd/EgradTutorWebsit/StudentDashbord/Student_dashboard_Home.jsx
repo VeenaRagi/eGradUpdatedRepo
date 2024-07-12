@@ -6,15 +6,23 @@ import BASE_URL from '../../../apiConfig'
 
 
 const Student_dashboard_Home = ({ usersData }) => {
+  const [roleOfLoggedIn, setRoleOfLoggedIn] = useState("");
+  // const roleOfTheUser=usersData.users&&usersData.length>0?(
+
+  // ):null;
+  // console.log(usersData.users[0].role, "this is the user data from the props in the student dashboard home.jsx")
+  // setRoleOfLoggedIn(usersData.users[0].role);
+
   const user_Id = usersData.users && usersData.users.length > 0 ? (
     usersData.users.map((user) => user.username)
+
   ) : null;
   const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
     // Get current hour
     const currentHour = new Date().getHours();
-
+    // setRoleOfLoggedIn(usersData.users[0].role);
     // Determine greeting based on time
     let newGreeting;
     if (currentHour < 12) {
@@ -46,6 +54,7 @@ const Student_dashboard_Home = ({ usersData }) => {
   return (
     <div className="dashboard_body_container">
       <div className="dashboard_welcome_section">
+        <h2>This is the role of the person who logged in={roleOfLoggedIn}</h2>
         {usersData.users && usersData.users.length > 0 && (
           <ul>
             {usersData.users.map((user) => (
@@ -69,38 +78,38 @@ const Student_dashboard_Home = ({ usersData }) => {
       <div>
         <div className="testcounts_student_dashbard">
           {attemptedTestCount
-          .filter((item) => item.Portale_Id === 1 || item.Portale_Id === 2)
-          .map(
-            (item, index) =>
-              (item.test_count !== 0 ||
-                (item.Portale_Id !== 2 &&
-                  (item.attempted_test_count !== 0 ||
-                    item.unattempted_test_count !== 0))) && (
-                <div key={index}>
-                  <h3>{item.Portale_Name}</h3>
-                  <ul>
-                    {item.test_count !== 0 && (
-                      <li className="total_count_container">
-                        Total Tests: {item.test_count}
-                      </li>
-                    )}
-                    {item.Portale_Id !== 2 &&
-                      item.attempted_test_count !== 0 && (
+            .filter((item) => item.Portale_Id === 1 || item.Portale_Id === 2)
+            .map(
+              (item, index) =>
+                (item.test_count !== 0 ||
+                  (item.Portale_Id !== 2 &&
+                    (item.attempted_test_count !== 0 ||
+                      item.unattempted_test_count !== 0))) && (
+                  <div key={index}>
+                    <h3>{item.Portale_Name}</h3>
+                    <ul>
+                      {item.test_count !== 0 && (
                         <li className="total_count_container">
-                          Total Attempted Tests: {item.attempted_test_count}
+                          Total Tests: {item.test_count}
                         </li>
                       )}
-                    {item.Portale_Id !== 2 &&
-                      item.unattempted_test_count !== 0 && (
-                        <li className="total_count_container">
-                          Total Unattempted Tests:{" "}
-                          {item.unattempted_test_count}
-                        </li>
-                      )}
-                  </ul>
-                </div>
-              )
-          )}
+                      {item.Portale_Id !== 2 &&
+                        item.attempted_test_count !== 0 && (
+                          <li className="total_count_container">
+                            Total Attempted Tests: {item.attempted_test_count}
+                          </li>
+                        )}
+                      {item.Portale_Id !== 2 &&
+                        item.unattempted_test_count !== 0 && (
+                          <li className="total_count_container">
+                            Total Unattempted Tests:{" "}
+                            {item.unattempted_test_count}
+                          </li>
+                        )}
+                    </ul>
+                  </div>
+                )
+            )}
         </div>
       </div>
     </div>

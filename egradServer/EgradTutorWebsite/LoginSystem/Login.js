@@ -55,10 +55,12 @@ router.post('/login', async (req, res) => {
 
   router.get('/userDecryptedId/:encryptedUserId', async (req, res) => {
     const { encryptedUserId } = req.params;
+    const decodedUserId = decodeURIComponent(encryptedUserId);
+    console.log(decodedUserId,"this is the decoded user id");
     console.log(encryptedUserId,"this is the encrypted user id from the frontend")
     try {
         // Decrypt user ID
-        const userId = decryptData(encryptedUserId);
+        const userId = decryptData(decodedUserId);
       console.log(userId,"this is the decrypted user id")
         if (!userId) {
             return res.status(400).json({ message: 'Invalid or missing user ID' });
@@ -71,8 +73,10 @@ router.post('/login', async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
         console.log(users)
-        // const user = users[0];
-        res.json({ userId, users });
+        console.log(users[0].role)
+        const user = users[0];
+        const userRole=users[0].role
+        res.json({ userId, users,role:userRole,decryptedTosendFrontEnd:users[0].user_Id });
     } catch (error) {
         console.error('Error retrieving user details:', error);
         res.status(500).json({ message: 'Server error' });

@@ -17,6 +17,8 @@ const TIAuthProvider = ({ children }) => {
             user:parseData.user,
             token:parseData.token,
             role:parseData.role,
+            // userDecryptedId:parseData.user_Id
+            userDecryptedId:parseData.decryptedTosendFrontEnd
         })
         
     }

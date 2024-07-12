@@ -25,9 +25,10 @@ const Student_dashboard = () => {
   useEffect(() => {
     const fetchUserDecryptedId = async () => {
       const encryptedUserId = userIdTesting;
+      const encodedUserId = encodeURIComponent(encryptedUserId);
       try {
         const response = await axios.get(
-          `http://localhost:5001/Login/userDecryptedId/${encryptedUserId}`,
+          `http://localhost:5001/Login/userDecryptedId/${encodedUserId}`,
           // {
           //   params: { encryptedUserId },
           // }
@@ -66,6 +67,7 @@ const Student_dashboard = () => {
       ...tiAuth,
       user: null,
       token: "",
+      userDecryptedId:"",
       isLoggedIn: false,
     });
     localStorage.removeItem("tiAuth");
@@ -109,6 +111,7 @@ const Student_dashboard = () => {
           <Student_dashboard_Container
             usersData={usersData}
             decryptedUserIdState={decryptedUserIdState}
+
           />
         </div>
       ) : (
