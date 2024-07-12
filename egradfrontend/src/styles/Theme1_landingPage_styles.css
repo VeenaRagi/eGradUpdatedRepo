@@ -878,6 +878,7 @@ color: rgb(25 73 135);;
 .t1ContactFooterContentContainer {
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
 .t1FooterCopyrightData {
@@ -991,7 +992,7 @@ background-repeat: no-repeat;
     .t1InnerMainFooterContentContainer {
         margin-right: auto;
         max-width: 1230px;
-        padding: 05px 5px 15px;
+        /* padding: 25px 15px 115px; */
         position: relative;
     }
 
@@ -1008,6 +1009,11 @@ background-repeat: no-repeat;
         position: relative;
         top: -10px;
         width: 100%;
+    }
+
+    .t1ContactFooterContentContainer{
+        display: flex;
+        flex-direction: row;
     }
 
 }
