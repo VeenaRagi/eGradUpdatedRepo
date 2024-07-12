@@ -749,6 +749,21 @@ router.delete("/DocumentDelete/:document_Id", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+
+router.delete("/DocumentDelete", async (req, res) => {
+  try {
+    await db.query(
+      "DELETE questions, ots_document, options , solution,answer,marks,qtype  FROM ots_document LEFT JOIN questions ON questions.document_Id = ots_document.document_Id LEFT JOIN options ON options.question_id = questions.question_id LEFT JOIN solution ON solution.question_id = questions.question_id LEFT JOIN answer ON answer.question_id = questions.question_id LEFT JOIN marks ON marks.question_id = questions.question_id  LEFT JOIN qtype ON qtype.question_id = questions.question_id"
+    );
+    res.json({
+      message: `course with ID ${document_Id} deleted from the database`,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 //  end for document section code ------------------------------------------/
 
 module.exports = router;
