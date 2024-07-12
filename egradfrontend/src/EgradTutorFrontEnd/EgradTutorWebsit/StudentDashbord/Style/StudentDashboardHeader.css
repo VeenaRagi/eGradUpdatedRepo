@@ -3,8 +3,58 @@
     /* width:250px ; */
     height: 100px;
 }
-.SDHSubContainer{
+.SDHSubContainer {
     width: 80%;
+    height: 100%;
     margin: auto;
     border: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.SDHeaderImgContainer {
+    /* height: 100px; */
+    width: 76px;
+    border-radius: 50%;
+    border: 1px solid black;
+    position: relative;
+}
+.SDHContentContainer {
+    /* height: 150px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 2rem;
+}
+.SDHContentContainer:hover .SDHContentContainer{
+padding: 4rem;
+}
+/* .toBeDisplayedWhenHovered{
+    display: none;
+}
+.SDHeaderImgContainer:hover .toBeDisplayedWhenHovered{
+        display: flex;
+    
+} */
+.toBeDisplayedWhenHovered {
+    display: none; 
+    /* position: absolute; */
+    height: inherit;
+    width: 400px;
+    border: 1px solid black;
+}
+/* .toBeDisplayedWhenHovered>div {
+    display: flex;
+} */
+
+.SDHeaderImgContainer:hover .toBeDisplayedWhenHovered{
+    display: flex; 
+}
+.SDHeaderLogoContainer{
+    height: inherit;
+    width: 200px;
+}
+.SDHeaderLogoContainer img{
+    width: 100%;
 }

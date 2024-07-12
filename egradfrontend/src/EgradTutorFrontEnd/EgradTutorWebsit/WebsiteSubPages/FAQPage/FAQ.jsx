@@ -15,7 +15,7 @@ import '../../../../styles/Theme2LinksPage.css';
 import Footer from "../../Footer/Footer";
 import { IoMdAdd } from "react-icons/io";
 import ExamPageHeader from "../../ExamHomePage/ExamHomepageHeader/ExamPageHeader";
-const FAQ = ({ userRole }) => {
+const FAQ = ({isEditMode, userRole }) => {
   const [faqs, setFaqs] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [image, setImage] = useState(null);
