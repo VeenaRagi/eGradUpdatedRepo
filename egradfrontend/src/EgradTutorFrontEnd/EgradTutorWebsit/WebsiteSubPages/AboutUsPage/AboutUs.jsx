@@ -448,6 +448,9 @@ const AboutUs = ({ isEditMode, userRole }) => {
                     {showAboutEgradForm && <AboutUsEdit type="aboutEgrad" />}
                   </div>
                 )}
+                <div className={`AboutUsImgDataContentContainer ${themeDetails.AboutUsImgDataContentContainer}`}>
+                {welcomeimage && <img src={welcomeimage} alt="Welcome" />}
+                </div>
 
                 {aboutEgradData.length > 0 ? (
                   aboutEgradData.map((aboutEgrad) => (
@@ -455,7 +458,6 @@ const AboutUs = ({ isEditMode, userRole }) => {
                       key={aboutEgrad.about_egt_id}
                       className={`AboutUsImgDataContentContainer ${themeDetails.AboutUsImgDataContentContainer}`}
                     >
-                      {welcomeimage && <img src={welcomeimage} alt="Welcome" />}
                       <p>{aboutEgrad.about_egt}</p>
                     </div>
                   ))

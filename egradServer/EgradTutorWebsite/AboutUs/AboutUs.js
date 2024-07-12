@@ -56,7 +56,7 @@ router.get('/about_us', async (req, res) => {
 
   router.get('/about_egt', async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT about_egt FROM about_egt');
+        const [rows] = await db.query('SELECT * FROM about_egt');
         res.json(rows);
     } catch (error) {
         console.error(error);
