@@ -1018,3 +1018,41 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
         font-size: 13px;
     }
 }
+
+
+/* ug home page popups realted styles */
+
+.Portal_Names {
+    align-items:start; /* Center items vertically */
+    gap: 10px; /* Space between input and label */
+    margin-bottom: 8px; /* Space below each item */
+  }
+  
+  .Portal_Names label {
+   
+    font-size: 16px; /* Adjust font size as needed */
+   
+  }
+  .about_egt_form form {
+    display: flex;
+    flex-direction: column;
+  }
+  .about_egt_form form textarea {
+    height:100px;
+  }
+  .about_egt_form form button {
+    width:150px;
+    margin-top: 10px;
+  }
+  .new_landingfooter_conatinerfristpopupbtncontiner h2 {
+font-size: 10px;
+  }
+  .new_landingfooter_conatinerfristpopupbtncontiner p{
+    font-size: 10px;
+
+  }
+  .new_landingfooter_conatinerfristpopupbtncontiner img {
+    font-size: 10px;
+
+  }
+  

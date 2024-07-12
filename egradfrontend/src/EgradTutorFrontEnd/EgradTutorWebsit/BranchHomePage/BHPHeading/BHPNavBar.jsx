@@ -114,6 +114,8 @@ const BHPNavBar = ({ isEditMode,userRole }) => {
       )}
             </ul>
           </div>
+         
+
           {isEditMode && (
             <div>
               <button onClick={() => setShowAddNavItems(!showAddNavItems)}>
@@ -123,8 +125,6 @@ const BHPNavBar = ({ isEditMode,userRole }) => {
               
             </div>
           )}
-
-
 
 
         </div>

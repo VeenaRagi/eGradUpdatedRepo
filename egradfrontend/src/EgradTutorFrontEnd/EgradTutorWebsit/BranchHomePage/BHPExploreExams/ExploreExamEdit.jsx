@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import BASE_URL from "../../../../apiConfig";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import '../../../../styles/Default_landingPage_styles.css'
+import '../../../../styles/UGHomePage/UgHomePage_Default_Theme.css'
 
 const ExploreExamEdit = ({ type }) => {
   const { Branch_Id } = useParams();
@@ -96,7 +98,7 @@ const ExploreExamEdit = ({ type }) => {
   return (
     <div>
         {type === "ExploreExam" && (
-          <div>
+        <div className="UploadPopups_Container">
           <h2>Portales</h2>
           <ul>
             {branch && (
@@ -125,7 +127,7 @@ const ExploreExamEdit = ({ type }) => {
                   <div>
                     <label>Choose Portales:</label>
                     {portalesData.map((portale) => (
-                      <div key={portale.Portale_Id}>
+                      <div className="Portal_Names" key={portale.Portale_Id}>
                         <input
                           type="checkbox"
                           id={`portal-${portale.Portale_Id}`}

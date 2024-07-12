@@ -464,11 +464,10 @@ a {
     text-align: center;
 }
 
-.UploadPopups_Container input,
-.UploadPopups_Container textarea {
-    width: 100%;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
+.UploadPopups_Container input, .UploadPopups_Container textarea {
+    /* width: 100%; */
+    /* padding: 0.5rem; */
+    /* margin: 0.5rem 2rem; */
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
@@ -555,10 +554,9 @@ button:hover {
 
 .new_landingfooter_conatinerfristpopupbtncontiner {
     margin-left: auto;
-    /* Push buttons to the right */
     display: flex;
     gap: 10px;
-    /* Space between buttons */
+    align-items: center;
 }
 
 .new_landingfooter_conatinerfristpopupsubpart {
