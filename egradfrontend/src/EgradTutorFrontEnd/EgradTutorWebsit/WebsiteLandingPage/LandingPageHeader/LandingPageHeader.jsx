@@ -79,14 +79,7 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
   return (
     <div className="Newlandingpage">
       <div>
-        {isEditMode && (
-          <div>
-            <button onClick={() => setShowImage(!showImage)}>
-              {showImage ? "Close" : "Add Logo"}
-            </button>
-            {showImage && <LandingPageHeaderEdit type="addLogo" />}
-          </div>
-        )}
+       
         <div
           className={`Newlandingpage_logocontainer ${themeDetails.themeHeaderColor}`}
         >
@@ -118,18 +111,18 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
 
               <div className={`logoImgContainer ${themeDetails.logoC}`}></div>
             </div>
+            {isEditMode && (
+          <div>
+            <button className="button" onClick={() => setShowImage(!showImage)}>
+              {showImage ? "Close" : "Add Logo"}
+            </button>
+            {showImage && <LandingPageHeaderEdit type="addLogo" />}
+          </div>
+        )}
           </div>
         </div>
       </div>
       <div>
-        {isEditMode && (
-          <div>
-            <button onClick={() => setShowWelcomeForm(!showwelcomeForm)}>
-              {showwelcomeForm ? "Close" : "Add Welcome info"}
-            </button>
-            {showwelcomeForm && <LandingPageHeaderEdit type="WelcomeForm" />}
-          </div>
-        )}
         <div
           className={`landing_content_div_container ${themeDetails.themeLandingParentContainer}`}
         >
@@ -176,6 +169,14 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
                 </div>
               )}
             </div>
+            {isEditMode && (
+          <div>
+            <button onClick={() => setShowWelcomeForm(!showwelcomeForm)}>
+              {showwelcomeForm ? "Close" : "Add Welcome info"}
+            </button>
+            {showwelcomeForm && <LandingPageHeaderEdit type="WelcomeForm" />}
+          </div>
+        )}
           </div>
         </div>
       </div>
