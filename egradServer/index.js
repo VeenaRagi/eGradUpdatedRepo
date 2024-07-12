@@ -177,6 +177,12 @@ app.use("/TestResultPage", TestResultPage);
 app.use("/Myresult",Myresult);
 //================OTS_QUIZAPP_ROUTES_END===============
 
+const EncrypDecryp = require("./UrlConversion/EncrypDecryp");
+// require('dotenv').config();
+
+// app.use(bodyParser.json());
+app.use('/EncrypDecryp', EncrypDecryp);
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

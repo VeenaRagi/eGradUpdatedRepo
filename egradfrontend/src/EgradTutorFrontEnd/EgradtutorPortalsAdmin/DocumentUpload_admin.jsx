@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import BASE_URL from "../../apiConfig";
 import { FaSearch } from "react-icons/fa";
+import ReactPaginate from "react-paginate";
+import axios from "axios";
 const DocumentUpload_admin = () => {
   const [tests, setTests] = useState([]);
   const [subjects, setSubjects] = useState([]);
@@ -13,66 +15,6 @@ const DocumentUpload_admin = () => {
   const [selectedSection, setSelectedSection] = useState("");
   const [file, setFile] = useState(null);
   const { testCreationTableId, sectionId } = useParams();
-  const [data, setData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [documentData, setDocumentData] = useState([]);
-  const filteredDocument = data.filter(
-    (data) =>
-      data.documen_name &&
-      data.documen_name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-  const filteredData = filteredDocument.filter((data) =>
-    data.TestName.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-  const handleSearchInputChange = (event) => {
-    setSearchQuery(event.target.value);
-    setCurrentPage(1); // Reset current page to 1 when search query changes
-  };
-  const handleDelete = async (document_Id) => {
-    // Display a confirmation dialog before deleting
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this document ?"
-    );
-
-    if (confirmDelete) {
-      try {
-        const response = await fetch(
-          `${BASE_URL}/DocumentUpload/DocumentDelete/${document_Id}`,
-          {
-            method: "DELETE",
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const result = await response.json();
-        console.log(result.message);
-        const updatedDocumentData = documentData.filter(
-          (item) => item.document_Id !== document_Id
-        );
-        console.log("Before:", documentData);
-        console.log("After:", updatedDocumentData);
-        setDocumentData(updatedDocumentData);
-        fetchData();
-      } catch (error) {
-        console.error("Error deleting document:", error);
-      }
-    } else {
-      // The user canceled the deletion
-      console.log("Deletion canceled.");
-    }
-  };
 
   useEffect(() => {
     // Fetch tests data
@@ -122,19 +64,6 @@ const DocumentUpload_admin = () => {
     setSelectedSection(event.target.value);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`${BASE_URL}/DocumentUpload/documentName`);
-      const jsonData = await response.json();
-      setData(jsonData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
   const handleUpload = (e) => {
     e.preventDefault();
     // if (validateForm()) {
@@ -153,7 +82,8 @@ const DocumentUpload_admin = () => {
       .then((result) => {
         console.log(result);
         alert("Successfully uploaded Document");
-        fetchData();
+        // window.location.reload();
+        // fetchData();
       })
       .catch((error) => {
         console.error(error);
@@ -163,15 +93,13 @@ const DocumentUpload_admin = () => {
     //   }
   };
 
+
   return (
-    <div
-      className=" create_exam_container otsMainPages"
-      style={{ height: "100vh" }}
-    >
-      <div className="" >
+    <div className=" create_exam_container otsMainPages" >
+      <div className="" style={{margin:'10px 0'}}>
         <h2 className="textColor">Document Upload Form </h2>
       </div>
-      <form style={{overflowX:"scroll"}}>
+      <form>
         <div className="uploadedDocument_container examSubjects_-contant">
           <div className="uploadedDocumentFilds">
             <label htmlFor="testSelect">Select Test:</label>
@@ -190,6 +118,7 @@ const DocumentUpload_admin = () => {
                 </option>
               ))}
             </select>
+          
           </div>
 
           <div className="uploadedDocumentFilds">
@@ -206,6 +135,7 @@ const DocumentUpload_admin = () => {
                 </option>
               ))}
             </select>
+    
           </div>
 
           <div className="uploadedDocumentFilds">
@@ -222,16 +152,13 @@ const DocumentUpload_admin = () => {
                 </option>
               ))}
             </select>
+         
           </div>
 
           <div className="uploadedDocumentFilds">
             <label htmlFor="">Upload file</label>
-            <input
-              type="file"
-              accept=".docx"
-              onChange={handleFileChange}
-              id="uploadInputFile_ovl_upload_file"
-            />
+            <input type="file" accept=".docx" onChange={handleFileChange} id="uploadInputFile_ovl_upload_file" />
+         
           </div>
         </div>
 
@@ -244,99 +171,237 @@ const DocumentUpload_admin = () => {
       </form>
 
       {/* document info section */}
-      {/* <UploadedDoc /> */}
-
-      <div className="documentInfo_container">
-        <div className="otsTitels" style={{ padding: "0" }}></div>
-        <div className="documentInfo_contant">
-          <div>
-            <div className="create_exam_header_SearchBar">
-              {/* Search bar */}
-              <FaSearch className="Adminsearchbaricon" />
-              <input
-                className="AdminSearchBar"
-                type="text"
-                placeholder="Search By Document Name"
-                value={searchQuery}
-                onChange={handleSearchInputChange}
-              />
-            </div>
-            <h3 className="list_-otsTitels">uploaded documents list</h3>
-              <div style={{overflowX:"scroll"}}>
-            <table className="otc_-table">
-              <thead className="otsGEt_-contantHead otc_-table_-header">
-                <tr>
-                  <td style={{ textAlign: "center" }}>S.no</td>
-                  <td style={{ textAlign: "center" }}>Test name</td>
-                  <td style={{ textAlign: "center" }}>document name</td>
-                  <td style={{ textAlign: "center" }}>
-                    Open document / delete
-                  </td>
-                </tr>
-              </thead>
-              <tbody className="otc_-table_-tBody">
-                {currentItems.length === 0 ? (
-                  <tr>
-                    <td colSpan="6">No Document found.</td>
-                  </tr>
-                ) : (
-                  currentItems.map((item, index) => (
-                    <tr
-                      key={item.document_Id}
-                      className={index % 2 === 0 ? "evenRow" : "oddRow"}
-                    >
-                      <td style={{ textAlign: "center" }}>{index + 1}</td>
-                      <td style={{ padding: 10 }}> {item.TestName}</td>
-                      <td style={{ padding: 10 }}>{item.documen_name}</td>
-                      <td>
-                        <div className="EditDelete_-btns">
-                          <Link
-                            className="Ots_-edit "
-                            to={`/getSubjectData/${item.testCreationTableId}/${item.subjectId}/${item.sectionId}`}
-                            style={{
-                              background: "#00aff0",
-                              color: "#fff",
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          >
-                            Open Document
-                          </Link>
-
-                          <button
-                            className="Ots_-delete"
-                            onClick={() => handleDelete(item.document_Id)}
-                            style={{ background: "rgb(220 53 69)" }}
-                          >
-                            <i
-                              className="fa-regular fa-trash-can"
-                              style={{ color: "#fff" }}
-                            ></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-            </div>
-            <div style={{ textAlign: "center", marginTop: "1rem" }}>
-              {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                  key={index + 1}
-                  onClick={() => handlePageChange(index + 1)}
-                >
-                  {index + 1}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      <UploadedDoc />
     </div>
   );
 };
 
 export default DocumentUpload_admin;
+
+export const UploadedDoc = () => {
+  const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [pageNumber, setPageNumber] = useState(0);
+  const [selectAll, setSelectAll] = useState(false);
+  const [selectedIds, setSelectedIds] = useState([]);
+  const usersPerPage = 10; 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/DocumentUpload/documentName`);
+      const jsonData = await response.json();
+      setData(jsonData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const [documentData, setDocumentData] = useState([]);
+  const handleDelete = async (document_Id) => {
+    // Display a confirmation dialog before deleting
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this document ?"
+    );
+
+    if (confirmDelete) {
+      try {
+        const response = await fetch(
+          `${BASE_URL}/DocumentUpload/DocumentDelete/${document_Id}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log(result.message);
+        const updatedDocumentData = documentData.filter(
+          (item) => item.document_Id !== document_Id
+        );
+        console.log("Before:", documentData);
+        console.log("After:", updatedDocumentData);
+        setDocumentData(updatedDocumentData);
+        fetchData();
+      } catch (error) {
+        console.error("Error deleting document:", error);
+      }
+    } else {
+      // The user canceled the deletion
+      console.log("Deletion canceled.");
+    }
+  };
+
+
+  const handleDeleteSelected = async () => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete all selected Documents links?"
+    );
+
+    if (!isConfirmed) {
+      return;
+    }
+
+    try {
+      await axios.delete(`${BASE_URL}/DocumentUpload/DocumentDelete`, {
+        data: { ids: selectedIds },
+      });
+      fetchData();
+      setSelectedIds([]);
+      setSelectAll(false);
+    } catch (error) {
+      console.error("Error deleting selected video links:", error);
+      alert("Failed to delete selected video links.");
+    }
+  };
+
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+  const filteredDocument = data.filter(
+    (data) =>
+      data.documen_name &&
+      data.documen_name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const pageCount = Math.ceil(filteredDocument.length / usersPerPage);
+  const pagesVisited = pageNumber * usersPerPage;
+  const displayData = filteredDocument.slice(pagesVisited, pagesVisited + usersPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
+  const toggleSelectAll = () => {
+    if (!selectAll) {
+      const ids = filteredDocument.map((data) => data.document_Id);
+      setSelectedIds(ids);
+    } else {
+      setSelectedIds([]);
+    }
+    setSelectAll(!selectAll);
+  };
+  
+
+  const handleSingleCheckboxChange = (id) => {
+    const selectedIndex = selectedIds.indexOf(id);
+    let newSelectedIds = [...selectedIds];
+  
+    if (selectedIndex === -1) {
+      newSelectedIds.push(id);
+    } else {
+      newSelectedIds.splice(selectedIndex, 1);
+    }
+  
+    setSelectedIds(newSelectedIds);
+  };
+  
+
+  return (
+    <div className="documentInfo_container">
+      <div className="otsTitels" style={{ padding: "0" }}></div>
+      <div className="documentInfo_contant">
+        <div>
+          <div className="create_exam_header_SearchBar">
+            {/* Search bar */}
+            <FaSearch className="Adminsearchbaricon" />
+            <input
+              className="AdminSearchBar"
+              type="text"
+              placeholder="Search By Document Name"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+            />
+          </div>
+          <h3 className="list_-otsTitels">uploaded documents list</h3>
+
+          <table className="otc_-table">
+            <thead className="otsGEt_-contantHead otc_-table_-header">
+              <tr>
+              <th>
+                <input
+                  type="checkbox"
+                  checked={selectAll}
+                  onChange={toggleSelectAll}
+                />
+              </th>
+                <th>S.no</th>
+                <th>Test name</th>
+                <th>document name</th>
+                <th style={{ textAlign: "center" }}>Open document / delete</th>
+              </tr>
+            </thead>
+            <tbody className="otc_-table_-tBody">
+              {displayData.length === 0 ? (
+                <tr>
+                  <td colSpan="6">No Document found.</td>
+                </tr>
+              ) : (
+                displayData.map((item,index) => (
+                  <tr
+                    key={item.document_Id}
+                    className={
+                      item.document_Id % 2 === 0 ? "evenRow" : "oddRow"
+                    }
+                  >
+                      <td>
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.includes(item.document_Id)}
+                    onChange={() =>
+                      handleSingleCheckboxChange(item.document_Id)
+                    }
+                  />
+                </td>
+                   <td>{index + 1 + pageNumber * usersPerPage}</td>
+                    <td> {item.TestName}</td>
+                    <td>{item.documen_name}</td>
+                    <td>
+                      <div className="EditDelete_-btns">
+                        <Link
+                          className="Ots_-edit "
+                          to={`/getSubjectData/${item.testCreationTableId}/${item.subjectId}/${item.sectionId}`}
+                        >
+                          Open Document
+                        </Link>
+
+                        <button
+                          className="Ots_-delete"
+                          onClick={() => handleDelete(item.document_Id)}
+                        >
+                          <i className="fa-regular fa-trash-can"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+          {selectedIds.length > 0 && (
+          <div>
+            <button onClick={handleDeleteSelected}>Delete Selected</button>
+          </div>
+        )}
+          <ReactPaginate
+  previousLabel={<i className="fa-solid fa-angles-left"></i>}
+  nextLabel={<i className="fa-solid fa-angles-right"></i>}
+  pageCount={pageCount}
+  onPageChange={changePage}
+  containerClassName={"paginationBttns"}
+  previousLinkClassName={"previousBttn"}
+  nextLinkClassName={"nextBttn"}
+  disabledClassName={"paginationDisabled"}
+  activeClassName={"paginationActive"}
+/>
+
+        </div>
+      </div>
+    </div>
+  );
+};
