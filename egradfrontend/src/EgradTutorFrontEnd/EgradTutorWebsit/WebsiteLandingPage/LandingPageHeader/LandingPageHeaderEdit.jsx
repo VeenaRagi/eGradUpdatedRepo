@@ -83,7 +83,7 @@ const LandingPageHeaderEdit = ({ type }) => {
   };
 
   return (
-    <div className="overlay">
+    <div className="Blur_Effect_Mode">
       {type === "addLogo" && (
         <div className="UploadPopups_Container">
           <h2>Upload Image</h2>

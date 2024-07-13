@@ -32,7 +32,7 @@ const UserLogin = () => {
 
       console.log("Response Data:", response.data);
 
-      const { user_Id, role, accessToken,decryptedId } = response.data;
+      const { user_Id, role, accessToken, decryptedId } = response.data;
       console.log("Extracted Data:", { user_Id, role, accessToken });
       if (!user_Id) {
         throw new Error('User ID is missing');
@@ -47,8 +47,9 @@ const UserLogin = () => {
           ...tiAuth,
           user: user_Id,
           token: accessToken,
-          role:role,
-          userDecryptedId:decryptedId,
+          role: role,
+          userDecryptedId: decryptedId,
+          isLoggedIn: true
         };
         console.log("New Auth State:", newAuthState);
         settiAuth(newAuthState);
@@ -59,22 +60,22 @@ const UserLogin = () => {
         const encodedUserId = encodeURIComponent((user_Id));
         navigate(`/Student_dashboard/${encodedUserId}`);
 
-            // Get the current time
-      const currentTime = new Date();
-      const currentHour = currentTime.getHours();
-      
-          // Determine the greeting based on the current hour
-      let greeting = "";
-      if (currentHour < 12) {
-        greeting = "Good Morning,";
-      } else if (currentHour < 18) {
-        greeting = "Good Afternoon,";
-      } else {
-        greeting = "Good Evening,";
-      }
+        // Get the current time
+        const currentTime = new Date();
+        const currentHour = currentTime.getHours();
 
-      // Set the greeting message in localStorage
-      localStorage.setItem("greeting", greeting);
+        // Determine the greeting based on the current hour
+        let greeting = "";
+        if (currentHour < 12) {
+          greeting = "Good Morning,";
+        } else if (currentHour < 18) {
+          greeting = "Good Afternoon,";
+        } else {
+          greeting = "Good Evening,";
+        }
+
+        // Set the greeting message in localStorage
+        localStorage.setItem("greeting", greeting);
 
       } else if (role === 'Admin' || role === 'SuperAdmin') {
         alert('You don\'t have access to this page');

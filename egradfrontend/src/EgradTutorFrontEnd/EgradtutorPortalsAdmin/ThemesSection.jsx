@@ -5,6 +5,7 @@ import imgBlue from './styles/ThemesScreenShots/bluePreview.png'
 import imgGreen from './styles/ThemesScreenShots/greenPreview.png'
 import './styles/Themes.css'
 import { IoMdClose } from "react-icons/io";
+import AdminHeader from './AdminHeader';
 const ThemesSection = () => {
     const [fetchedClasses, setFetchedClasses] = useState([]);
     const [activeDiv, setActiveDiv] = useState(null);
@@ -141,6 +142,7 @@ const ThemesSection = () => {
         //     </div>
         // </>
         <>
+        <AdminHeader/>
             <div className="create_exam_container otsMainPages">
                 <div>
                     <h3 className="textColor">Themes Section</h3>

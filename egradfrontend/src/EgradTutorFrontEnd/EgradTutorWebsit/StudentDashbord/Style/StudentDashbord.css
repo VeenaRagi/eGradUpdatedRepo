@@ -171,8 +171,8 @@
     font-size: 14px;
     span {
       color: #1f2641;
-      font-size: 2rem;
-      font-weight: 900;
+      /* font-size: 2rem;
+      font-weight: 900; */
     }
     a {
       background: #000000;
@@ -447,7 +447,8 @@
 
 .Go_back_from_test_section {
   width: 100px;
-  margin: 0 auto;
+  height: 40px;
+  /* margin: 0 auto; */
   margin-right: 1rem;
   /* padding: 10px 20px; */
   display: flex;
@@ -619,6 +620,7 @@
   font-size: 30px;
   font-weight: 700;
   color: #003515;
+  text-align: start;
 }
 
 .student_image {
@@ -1045,4 +1047,22 @@
     display: grid;
     place-items: center;
   }
+}
+
+
+.testpage_menu_reset_btn {
+  display: flex;
+  justify-content: end;
+  padding-right: 20px;
+}
+
+.testpage_menu_reset_btn button{
+  background-color: rgb(163, 151, 151);
+  color: white;
+  height: 45px;
+}
+
+.testpage_menu_reset_btn button:hover{
+  background-color: rgb(73, 70, 70);
+  color: white;
 }

@@ -1,18 +1,31 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { useTIAuth } from '../TechInfoContext/AuthContext';
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [tiAuth, settiAuth] = useTIAuth()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5001/Login/adminlogin', { email, password });
-      const { token, role } = response.data;
-      localStorage.setItem('token', token);
+      const response = await axios.post('http://localhost:5001/Login/login', { email, password });
+      console.log("Response Data:", response.data);
+      // const { accessToken, role } = response.data;
+      const { user_Id, role, accessToken,decryptedId } = response.data;
+      const newAuthState = {
+        ...tiAuth,
+        user: user_Id,
+        token: accessToken,
+        role:role,
+        userDecryptedId:decryptedId,
+        isLoggedIn:true
+      };
+      // localStorage.setItem('token', accessToken);
+      settiAuth(newAuthState);
+      localStorage.setItem("tiAuth", JSON.stringify(newAuthState));
       if (role === 'admin') {
         navigate('/Adminpage');
       } else if (role === 'User') {

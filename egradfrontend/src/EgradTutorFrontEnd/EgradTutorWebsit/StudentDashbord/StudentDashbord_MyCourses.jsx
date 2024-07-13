@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import BASE_URL from "../../../apiConfig";
-import "./Style/StudentDashbord_MyCourses.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { encryptData } from "./utils/crypto";
@@ -406,14 +405,13 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     if (Portale_Id === 1 && testAttemptStatus === "Attempted") {
       return (
         <span
-          className=""
-          style={{
-            backgroundColor: "#9800ff",
-            color: "white",
-            padding: "5.9px",
-            textDecoration: "none",
-            fontSize: "22px",
-          }}
+          className="span_style_attempt_status"
+          // style={{
+          //   backgroundColor: "red",
+          //   color: "white",
+          //   padding: "2.9px",
+          //   textDecoration: "none",
+          // }}
         >
           Attempted
         </span>
@@ -422,7 +420,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
 
     return (
       <Link
-        className="test_start_button"
+         className="span_style_start_button"
         to="#"
         onClick={() => {
           openPopup(testCreationTableId, user_Id, Portale_Id);

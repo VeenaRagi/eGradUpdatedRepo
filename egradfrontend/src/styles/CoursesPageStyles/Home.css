@@ -740,8 +740,8 @@
  
 /* Add some padding inside the card container */
 .container {
-  /* margin: 30px; */
-  /* display: flex; */
+  margin: 30px;
+  display: flex;
   padding: 2px 16px;
 }
 .card_container {
@@ -1431,7 +1431,7 @@ i#footerIcons:hover {
       a {
         background: #00bf8e;
         color: #fff;
-        width: 150px;
+        width: 170px;
         font-weight: 700;
         padding: 0.5rem;
         display: flex;
