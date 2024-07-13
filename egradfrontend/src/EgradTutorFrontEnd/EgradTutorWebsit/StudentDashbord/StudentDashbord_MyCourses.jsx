@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import BASE_URL from "../../../apiConfig";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import { encryptData } from "./utils/crypto";
 import "./Style/StudentDashbord_MyCourses.css";
 import { FaBookOpenReader } from "react-icons/fa6";
@@ -18,14 +19,14 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   const [selectedPortal, setSelectedPortal] = useState("");
   const [selectedTypeOfTest, setSelectedTypeOfTest] = useState("");
   const [filteredTestData, setFilteredTestData] = useState([]);
-
+  const { courseCreationId } = useParams();
   const user_Id = decryptedUserIdState;
   // Fetch test details based on courseCreationId and decryptedUserIdState
   useEffect(() => {
     const fetchTestDetails = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/TestPage/feachingOveralltest/1/${user_Id}`
+          `${BASE_URL}/TestPage/feachingOveralltest/${courseCreationId}/${user_Id}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -118,7 +119,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
       console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
       console.log(data);
       setShowQuizCourses(false);
-      // setShowtestContainer2(true);
+      setShowtestContainer2(true);
     } catch (error) {
       console.error("Error fetching test details:", error);
     } finally {
@@ -371,7 +372,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     setShowQuizCourses(true);
     // setShowtestContainer(false);
     setShowtestContainer1(false);
-    // setShowtestContainer2(false);
+    setShowtestContainer2(false);
     // setShowCompletePackageContainer(false);
   };
 
@@ -542,6 +543,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleViewVideo = async (OVL_Linke_Id) => {
+    console.log("helloooooooo")
     try {
       const video = videos.find((video) => video.OVL_Linke_Id === OVL_Linke_Id);
       if (!video) {
@@ -558,6 +560,17 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     setSelectedVideo(null);
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    if (selectedTypeOfTest === "") {
+      setFilteredTestData(testDetails);
+    } else {
+      const filteredData = testDetails.filter(
+        (test) => test.typeOfTestName === selectedTypeOfTest
+      );
+      setFilteredTestData(filteredData);
+    }
+  }, [testDetails, selectedTypeOfTest]);
 
   return (
     <div>
@@ -778,7 +791,8 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
                       <div className="test_cards">
                         {filteredTestData.map((test, index) => (
                           <>
-                            <ul className="testcard_inline">
+                          <div className="test_card">
+                            <ul className="testcard_inline" >
                               <li>
                                 <span>
                                   {" "}
@@ -799,6 +813,8 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
                               </li>
                               <li>{renderTestAction(test)}</li>
                             </ul>
+                          </div>
+                            
                           </>
                         ))}
                       </div>
