@@ -595,3 +595,11 @@ button:hover {
 .UploadPopups_Container li {
     color: black;
 }
+.UploadPopups_Container img {
+    width:200px;
+}
+.chooseUs_image_Container {
+    display: flex;
+    gap:2rem;
+    align-items: center;
+}

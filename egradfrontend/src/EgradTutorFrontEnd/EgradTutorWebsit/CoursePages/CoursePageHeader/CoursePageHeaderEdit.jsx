@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BASE_URL from "../../../../apiConfig";
+import { CiEdit } from "react-icons/ci";
+import { RiDeleteBin6Line } from "react-icons/ri";
 const CoursePageHeaderEdit = ({type}) => {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -102,7 +104,7 @@ const CoursePageHeaderEdit = ({type}) => {
   return (
     <div>
     {type === "HeaderMenu" && (
-      <div>
+     <div className="UploadPopups_Container">
         <form onSubmit={handleSubmit}>
           <div>
             <label>
@@ -149,8 +151,8 @@ const CoursePageHeaderEdit = ({type}) => {
             {headers.map((headeritem) => (
               <li key={headeritem.HeaderItem_Id}>
                 {headeritem.HeaderItemName} - {headeritem.HeaderItemLink} - {headeritem.HeaderItemOrder}
-                <button onClick={() => handleEdit(headeritem)}>Update</button>
-                <button onClick={() => handleDelete(headeritem.HeaderItem_Id)}>Delete</button>
+                <button className = "Edit_button" onClick={() => handleEdit(headeritem)}><CiEdit /></button>
+                <button className = "Delete_button"onClick={() => handleDelete(headeritem.HeaderItem_Id)}><RiDeleteBin6Line /></button>
               </li>
             ))}
           </ul>
