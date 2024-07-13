@@ -81,7 +81,7 @@ const WhyChooseUs = ({ isEditMode, userRole}) => {
           portal.tabs.map(tab => (
             <li key={tab.course_tab_title}>
               <div className={`${themeDetails.themeTabsChange}`}>
-                <button
+                <button 
                   onClick={() => handleTabCClick(tab)}
                   className={tab.course_tab_title === selectedTabId ? 'selectedButton' : 'notSelectedButton'}
                 >

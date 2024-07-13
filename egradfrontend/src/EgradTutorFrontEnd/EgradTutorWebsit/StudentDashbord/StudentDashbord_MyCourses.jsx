@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import BASE_URL from "../../../apiConfig";
-import "./Style/StudentDashbord_MyCourses.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { encryptData } from "./utils/crypto";
@@ -399,13 +398,14 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     if (Portale_Id === 1 && testAttemptStatus === "Attempted") {
       return (
         <span
-          className=""
+          className="span_style_attempt_status"
           style={{
-            backgroundColor: "#9800ff",
+            backgroundColor: "red",
             color: "white",
-            padding: "5.9px",
+            padding: "2.9px",
             textDecoration: "none",
-            fontSize: "22px",
+            fontSize: "10px",
+            marginBottom:"10px",
           }}
         >
           Attempted

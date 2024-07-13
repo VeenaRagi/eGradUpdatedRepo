@@ -401,3 +401,11 @@ li {
     place-items: center;
   }
 }
+
+
+.span_style_attempt_status{
+  background-color: rgb(187, 109, 109);
+  font-size: 25px !important;
+  width: 100px;
+  color: white;
+}
