@@ -14,16 +14,13 @@
     justify-content: space-between;
 }
 .SDHeaderImgContainer {
-    /* height: 100px; */
     width: 76px;
     border-radius: 50%;
-    /* border: 1px solid black; */
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     position: relative;
 }
 .SDHContentContainer {
-    /* height: 150px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,28 +30,14 @@
 .SDHContentContainer:hover .SDHContentContainer{
 padding: 4rem;
 }
-/* .toBeDisplayedWhenHovered{
-    display: none;
-}
-.SDHeaderImgContainer:hover .toBeDisplayedWhenHovered{
-        display: flex;
-    
-} */
+
 .toBeDisplayedWhenHovered {
     display: none; 
-    /* position: absolute; */
     height: inherit;
     width: 400px;
-    /* border: 1px solid black; */
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-/* .toBeDisplayedWhenHovered>div {
-    display: flex;
-} */
 
-.SDHeaderImgContainer:hover .toBeDisplayedWhenHovered{
-    display: flex; 
-}
 .SDHeaderLogoContainer{
     height: inherit;
     width: 200px;
@@ -62,6 +45,52 @@ padding: 4rem;
 .SDHeaderLogoContainer img{
     width: 100%;
 }
-.SDHeaderLogoContainer:hover .toBeDisplayedWhenHovered{
-    display: flex;
+
+
+
+
+
+
+
+
+
+
+
+
+
+.SDHeaderImgContainer {
+    position: relative;
+  }
+    .toBeDisplayedWhenHovered {
+    display: none; 
+    position: absolute;
+    top: 100%; 
+    left: 50%; 
+    transform: translateX(-50%);
+    background-color: white; 
+    border: 1px solid #ccc;
+    padding: 10px; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    z-index: 10;
+  }
+  
+  .SDHeaderImgContainer:hover .toBeDisplayedWhenHovered {
+    display: block;
+  }
+  
+  .sub-links-userrr{
+    color: rgb(6, 7, 6);
+    font-size: 20px;
+  }
+  
+  .sub-links-userrr:hover{
+    color: green;
+    font-weight: 500;
+  }
+
+  .SDHeaderImgContainer:hover .toBeDisplayedWhenHovered {
+    display: block;
+    width: 200px;
+    border-radius: 25px;
+    padding: 20px;
 }
