@@ -740,8 +740,8 @@
  
 /* Add some padding inside the card container */
 .container {
-  /* margin: 30px; */
-  /* display: flex; */
+  margin: 30px;
+  display: flex;
   padding: 2px 16px;
 }
 .card_container {
