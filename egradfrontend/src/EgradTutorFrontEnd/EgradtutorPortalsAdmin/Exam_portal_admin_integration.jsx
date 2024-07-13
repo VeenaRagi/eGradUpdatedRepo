@@ -7,7 +7,7 @@ const Exam_portal_admin_integration = () => {
   return (
     <div>
       <AdminHeader/>
-
+      
       <div className="Exam_portal_admin_integration_container">
         <Leftnav />
       </div>

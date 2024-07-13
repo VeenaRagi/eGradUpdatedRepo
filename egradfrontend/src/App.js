@@ -35,6 +35,9 @@ import QuizPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/OTS/
 import StudentDashbord_MyResults from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/StudentDashbord_MyResults.jsx'
 import TestResultsPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/TestResultsPage.jsx'
 import {UserReport} from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UserReport.jsx'
+import ThemesSection from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/ThemesSection.jsx";
+import Leftnav from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/Leftnav.jsx";
+import AdminProfile from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/AdminProfile.jsx";
 
 function App() {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -155,6 +158,9 @@ function App() {
          path="/UserReport/:id/:testCreationTableId/:courseCreationId"
            element={<UserReport />} 
           />
+          <Route path="/ThemesAdmin" element={<ThemesSection/>}/>
+          <Route path="/leftNav" element={<Exam_portal_admin_integration/>}/>
+          <Route path="/adminProfile" element={<AdminProfile/>}/>
             </Routes>
           </Router>
         )}
