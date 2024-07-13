@@ -115,7 +115,8 @@ const PayU = require("./PaymentGatway/PayU");
 app.use("/PayU", PayU);
 
 
-
+const StudentDataforBuyCourses = require("./eGradTutorStudentDashboard/StudentDataforBuyCourses");
+app.use("/StudentDataforBuyCourses", StudentDataforBuyCourses);
 
 const Dashboard = require("./OTS_Quiz_Admin/Dashbord");
 app.use("/Dashboard", Dashboard);

@@ -787,7 +787,7 @@ input[type="button"][value="."] {
   /* align-items: center; */
 }
 
-.popup {
+.MalPracticePopup {
   position: fixed;
   top: 0;
   left: 0;
@@ -800,11 +800,12 @@ input[type="button"][value="."] {
   z-index: 999; /* Ensure the popup is displayed on top of other content */
 }
 
-.popup-content {
+.malpractice_popup_content {
   background-color: white;
   padding: 20px;
   border-radius: 5px;
   z-index: 1000; /* Ensure the popup content is displayed on top of the overlay */
+  width: 25rem;
 }
 
 .close {

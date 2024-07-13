@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Modal from "react-modal";
 // import { nav } from "../Exam_Portal_QuizApp/Data/Data";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useParams,useNavigate } from "react-router-dom";
 import "./Style/StudentDashbord.css";
-
 import "./Style/StudentDashbordmyresult.css";
 import { TbArrowBarToUp } from "react-icons/tb";
 import axios from "axios";
@@ -15,6 +14,8 @@ import { GrAttachment } from "react-icons/gr";
 import TrophyImage from "./Images/TrophyImage.png";
 import { IoMdClose } from "react-icons/io";
 import BASE_URL from "../../../apiConfig";
+
+
 
 export const UserReport = ({decryptedUserIdState}) => {
   const [isVisible, setVisible] = useState(false);
@@ -1256,17 +1257,17 @@ export const UserReport = ({decryptedUserIdState}) => {
   //   }
   // };
 
-  const handleContextMenu = (e) => {
-    e.preventDefault();
-  };
+  // const handleContextMenu = (e) => {
+  //   e.preventDefault();
+  // };
 
-  useEffect(() => {
-    document.addEventListener("contextmenu", handleContextMenu);
+  // useEffect(() => {
+  //   document.addEventListener("contextmenu", handleContextMenu);
 
-    return () => {
-      document.removeEventListener("contextmenu", handleContextMenu);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("contextmenu", handleContextMenu);
+  //   };
+  // }, []);
 
   const handleKeyDown = (event) => {
     if (event.target.tagName.toLowerCase() !== "input") {
@@ -1330,6 +1331,37 @@ export const UserReport = ({decryptedUserIdState}) => {
     background: `conic-gradient(#f0f0f0 ${rotation}deg, #fff 0deg)`,
     transition: "background 0.005s linear", // Smooth transition for the background
   };
+  const navigate = useNavigate();
+ const [userIdLink,setUserIdLink]= useState("")
+
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const checkLoggedIn = () => {
+      const isLoggedInObjFromLS = localStorage.getItem("tiAuth");
+      console.log(isLoggedInObjFromLS);
+      if (isLoggedInObjFromLS) {
+        try {
+          const tiAuth = JSON.parse(isLoggedInObjFromLS);
+          console.log("veenaaaaaaaaaaaa")
+          console.log(tiAuth.user,"this is the status")
+          const role=tiAuth.user
+          setUserIdLink(role)
+          // setIsLoggedInFromLS(tiAuth.isLoggedIn);
+          // console.log(tiAuth,"this is ssssssssssss")
+          // console.log(isLoggedInFromLS, "wwwwwwwwwwwwwwwwwwwwwww");
+          if (role === "User") {
+            setIsAdmin(true);
+
+          }
+        } catch (error) {
+          console.log(error, "parsing the tiauth for back button");
+        }
+      }
+    };
+    checkLoggedIn();
+  }, []);
+  
 
   return (
     <div className="resultContainerSection">
@@ -1340,7 +1372,7 @@ export const UserReport = ({decryptedUserIdState}) => {
             <span>
               {" "}
               <div className="Go_back_from_test_section">
-                <Link to="/student_dashboard" style={{ color: "black" }}>
+                <Link to={`/Student_dashboard/${userIdLink}`} style={{ color: "black" }}>
                   Go Back
                 </Link>
               </div>

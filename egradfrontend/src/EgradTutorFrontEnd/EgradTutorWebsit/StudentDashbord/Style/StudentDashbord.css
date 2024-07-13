@@ -149,6 +149,7 @@
 
 -----------------------in mycourses section testcrads --------------- */
 
+
 .testcard_inline {
   width: 100%;
   display: flex;
@@ -204,6 +205,7 @@
   right: 0;
   bottom: 0;
 }
+
 
 .ChallengeOverlay {
   position: fixed;

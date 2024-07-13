@@ -115,13 +115,344 @@ const QuizPage = () => {
     };
   }, []); // Empty dependency array ensures the effect runs only once
 
- 
+  // useEffect(() => {
+  //   const enterFullscreen = () => {
+  //     try {
+  //       const element = document.documentElement;
+  //       if (element.requestFullscreen) {
+  //         element.requestFullscreen();
+  //       } else if (element.webkitRequestFullscreen) {
+  //         element.webkitRequestFullscreen();
+  //       } else if (element.msRequestFullscreen) {
+  //         element.msRequestFullscreen();
+  //       }
+  //     } catch (error) {
+  //       console.error('Failed to enter fullscreen:', error.message);
+  //       // Handle error (e.g., inform the user, provide alternative option)
+  //     }
+  //   };
+
+  //   const handleVisibilityChange = () => {
+  //     if (document.hidden) {
+  //       console.log("Page is now hidden");
+  //       alert("Malpractice attempted");
+  //       window.close();
+  //     } else {
+  //       console.log("Page is now visible");
+  //     }
+  //   };
+
+  //   // Add event listeners on component mount
+  //   document.addEventListener('visibilitychange', handleVisibilityChange);
+
+  //   // Attempt to enter fullscreen on component mount
+  //   enterFullscreen();
+
+  //   // Clean up by removing event listeners on component unmount
+  //   return () => {
+  //     document.removeEventListener('visibilitychange', handleVisibilityChange);
+  //   };
+  // }, []);
+
+  // const quizRef = useRef(null);
+
+  //   // Function to attempt entering fullscreen
+  //   const enterFullscreen = () => {
+  //       const element = quizRef.current;
+  //       if (element.requestFullscreen) {
+  //           element.requestFullscreen();
+  //       } else if (element.mozRequestFullScreen) { // Firefox
+  //           element.mozRequestFullScreen();
+  //       } else if (element.webkitRequestFullscreen) { // Chrome, Safari & Opera
+  //           element.webkitRequestFullscreen();
+  //       } else if (element.msRequestFullscreen) { // IE/Edge
+  //           element.msRequestFullscreen();
+  //       }
+  //   };
+
+  //   // Handle visibility change
+  //   const handleVisibilityChange = () => {
+  //       if (document.hidden) {
+  //           console.log("Page is now hidden");
+  //           alert("malpractice attempted");
+  //           window.close();
+  //       } else {
+  //           console.log("Page is now visible");
+  //       }
+  //   };
+
+  //   useEffect(() => {
+  //       // Check if Page Visibility API is supported
+  //       if ('hidden' in document) {
+  //           document.addEventListener('visibilitychange', handleVisibilityChange);
+  //       } else {
+  //           console.log("Page Visibility API is not supported");
+  //       }
+
+  //       // Cleanup event listener on component unmount
+  //       return () => {
+  //           document.removeEventListener('visibilitychange', handleVisibilityChange);
+  //       };
+  //   }, []);
+
+  // const quizRef = useRef(null);
+
+  // // Function to attempt entering fullscreen
+  // const enterFullscreen = () => {
+  //     const element = quizRef.current;
+  //     if (element.requestFullscreen) {
+  //         element.requestFullscreen();
+  //     } else if (element.mozRequestFullScreen) { // Firefox
+  //         element.mozRequestFullScreen();
+  //     } else if (element.webkitRequestFullscreen) { // Chrome, Safari & Opera
+  //         element.webkitRequestFullscreen();
+  //     } else if (element.msRequestFullscreen) { // IE/Edge
+  //         element.msRequestFullscreen();
+  //     }
+  // };
+
+  // // Handle visibility change
+  // const handleVisibilityChange = () => {
+  //     if (document.hidden) {
+  //         console.log("Page is now hidden");
+  //         alert("You have attempted malpractice.");
+  //         navigate('/');
+  //     } else {
+  //         console.log("Page is now visible");
+  //     }
+  // };
+
+  // // Handle window close event
+  // const handleWindowClose = () => {
+  //     alert("You have attempted malpractice.");
+  //     navigate('/');
+  // };
+
+  // useEffect(() => {
+  //     // Check if Page Visibility API is supported
+  //     if ('hidden' in document) {
+  //         document.addEventListener('visibilitychange', handleVisibilityChange);
+  //     } else {
+  //         console.log("Page Visibility API is not supported");
+  //     }
+
+  //     // Handle window close event
+  //     window.addEventListener('beforeunload', handleWindowClose);
+
+  //     // Cleanup event listeners on component unmount
+  //     return () => {
+  //         document.removeEventListener('visibilitychange', handleVisibilityChange);
+  //         window.removeEventListener('beforeunload', handleWindowClose);
+  //     };
+  // }, [navigate]);
+
+  const [showMalPractisePopup, setShowMalPractisePopup] = useState(false);
+  const [showButtonNo, setShowButtonNo] = useState(false);
+
+  const quizRef = useRef(null);
+
+  const enterFullscreen = () => {
+    const element = quizRef.current;
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    }
+  };
+
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+      console.log("Page is now hidden");
+      setShowMalPractisePopup(true);
+    } else {
+      console.log("Page is now visible");
+    }
+  };
 
 
-  //MAINNNNNNNNNNNNN
+  const handleBlur = () => {
+    console.log("Window is not focused");
+    setShowMalPractisePopup(true);
+  };
+
+  const handleFocus = () => {
+    console.log("Window is focused");
+  };
+
+
+  // useEffect(() => {
+  //   if ("hidden" in document) {
+  //     document.addEventListener("visibilitychange", handleVisibilityChange);
+  //   } else {
+  //     console.log("Page Visibility API is not supported");
+  //   }
+
+  //   return () => {
+  //     document.removeEventListener("visibilitychange", handleVisibilityChange);
+  //   };
+  // }, []);
+
+  const handleBeforeUnload = (event) => {
+    const confirmationMessage = "Are you sure you want to leave this page?";
+    event.returnValue = confirmationMessage; // For most browsers
+    setShowMalPractisePopup(true);
+    // setAttemptedToClose(true);
+    return confirmationMessage; // For some older browsers
+  };
+  const [isShiftPressed, setIsShiftPressed] = useState(false);
+  const [isMetaPressed, setIsMetaPressed] = useState(false);
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Shift") {
+      event.preventDefault();
+      setIsShiftPressed(true);
+    }
+    if (event.key === "Meta" || event.key === "Win") {
+      event.preventDefault();
+      setIsMetaPressed(true);
+    }
+    if (event.key === "s" && isShiftPressed && isMetaPressed) {
+      event.preventDefault();
+      window.history.back();
+      window.close();
+    }
+
+    if (isShiftPressed && isMetaPressed) {
+      event.preventDefault();
+      setShowMalPractisePopup(true);
+    }
+  };
+
+  const handleKeyUp = (event) => {
+    if (event.key === "Shift") {
+      event.preventDefault();
+      setIsShiftPressed(false);
+    }
+    if (event.key === "Meta" || event.key === "Win") {
+      event.preventDefault();
+      setIsMetaPressed(false);
+    }
+  };
+
+  useEffect(() => {
+    if ("hidden" in document) {
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+
+      window.addEventListener("focus", handleFocus);
+      window.addEventListener("blur", handleBlur);
+
+
+      document.addEventListener("keydown", handleKeyDown);
+      document.addEventListener("keyup", handleKeyUp);
+    } else {
+      console.log("Page Visibility API is not supported");
+    }
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+
+      window.removeEventListener("focus", handleFocus);
+      window.removeEventListener("blur", handleBlur);
+
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [isShiftPressed, isMetaPressed]);
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  });
+
+  const handleMalPractiseSubmit = async () => {
+    console.log("Handling malpractice submit");
+    try {
+      // window.alert(
+      //   "Your Test has been Submitted!! Click Ok to See Result.",
+      //   calculateResult()
+      // );
+      setShowButtonNo(false);
+      setShowExamSumary(true);
+      setShowMalPractisePopup(false);
+      calculateResult();
+      const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
+      const counts = calculateQuestionCounts();
+      setAnsweredCount(counts.answered);
+      setNotAnsweredCount(counts.notAnswered);
+      setMarkedForReviewCount(counts.markedForReview);
+      setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
+      setVisitedCount(counts.VisitedCount);
+
+      // Assuming you have these variables in your component's state
+      const currentQuestion = questionData.questions[currentQuestionIndex];
+      const questionId = currentQuestion.question_id;
+
+      // Format time
+      const formattedTime = WformatTime(wtimer);
+      const response = await fetch(`${BASE_URL}/QuizPage/saveExamSummary`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: decryptedParam2,
+          totalUnattempted: notAnsweredCount,
+          totalAnswered: answeredCount,
+          NotVisitedb: NotVisitedb,
+          testCreationTableId: decryptedParam1,
+        }),
+      });
+      const result = await response.json();
+      console.log("Exam summary saved:", result);
+      try {
+        // Make a POST request to your server to submit time left
+        const response = await fetch(`${BASE_URL}/QuizPage/submitTimeLeft`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            userId: decryptedParam2,
+            testCreationTableId: decryptedParam1,
+            timeLeft: formattedTime,
+          }),
+        });
+
+        const result = await response.json();
+
+        console.log("Time left submission result:", result);
+      } catch (error) {
+        console.error("Error submitting time left:", error);
+      } finally {
+        // Ensure that the questionId is correctly obtained
+        if (questionId) {
+          // Clear local storage data for the current question
+          try {
+            console.log(
+              "Removing from local storage for questionId:",
+              questionId
+            );
+            localStorage.removeItem(`calculatorValue_${questionId}`);
+            console.log("Item removed successfully.");
+          } catch (error) {
+            console.error("Error removing item from local storage:", error);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
+    }
+  };
+
   // const [showMalPractisePopup, setShowMalPractisePopup] = useState(false);
-  // const [showButtonNo, setShowButtonNo] = useState(false);
-
   // const quizRef = useRef(null);
 
   // const enterFullscreen = () => {
@@ -146,102 +477,293 @@ const QuizPage = () => {
   //   }
   // };
 
-
-  // const handleBlur = () => {
-  //   console.log("Window is not focused");
-  //   setShowMalPractisePopup(true);
-  // };
-
-  // const handleFocus = () => {
-  //   console.log("Window is focused");
-  // };
-
-
-  // const handleBeforeUnload = (event) => {
-  //   const confirmationMessage = "Are you sure you want to leave this page?";
-  //   event.returnValue = confirmationMessage; // For most browsers
-  //   setShowMalPractisePopup(true);
-  //   // setAttemptedToClose(true);
-  //   return confirmationMessage; // For some older browsers
-  // };
-  // const [isShiftPressed, setIsShiftPressed] = useState(false);
-  // const [isMetaPressed, setIsMetaPressed] = useState(false);
-
-  // const handleKeyDown = (event) => {
-  //   if (event.key === "Shift") {
-  //     event.preventDefault();
-  //     setIsShiftPressed(true);
-  //   }
-  //   if (event.key === "Meta" || event.key === "Win") {
-  //     event.preventDefault();
-  //     setIsMetaPressed(true);
-  //   }
-  //   if (event.key === "s" && isShiftPressed && isMetaPressed) {
-  //     event.preventDefault();
-  //     window.history.back();
-  //     window.close();
-  //   }
-
-  //   if (isShiftPressed && isMetaPressed) {
-  //     event.preventDefault();
-  //     setShowMalPractisePopup(true);
-  //   }
-  // };
-
-  // const handleKeyUp = (event) => {
-  //   if (event.key === "Shift") {
-  //     event.preventDefault();
-  //     setIsShiftPressed(false);
-  //   }
-  //   if (event.key === "Meta" || event.key === "Win") {
-  //     event.preventDefault();
-  //     setIsMetaPressed(false);
-  //   }
-  // };
-
   // useEffect(() => {
   //   if ("hidden" in document) {
   //     document.addEventListener("visibilitychange", handleVisibilityChange);
-
-  //     window.addEventListener("focus", handleFocus);
-  //     window.addEventListener("blur", handleBlur);
-
-
-  //     document.addEventListener("keydown", handleKeyDown);
-  //     document.addEventListener("keyup", handleKeyUp);
   //   } else {
   //     console.log("Page Visibility API is not supported");
   //   }
 
   //   return () => {
   //     document.removeEventListener("visibilitychange", handleVisibilityChange);
-
-  //     window.removeEventListener("focus", handleFocus);
-  //     window.removeEventListener("blur", handleBlur);
-
-  //     document.removeEventListener("keydown", handleKeyDown);
-  //     document.removeEventListener("keyup", handleKeyUp);
   //   };
-  // }, [isShiftPressed, isMetaPressed]);
-
-  // useEffect(() => {
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // });
+  // }, []);
 
   // const handleMalPractiseSubmit = async () => {
   //   console.log("Handling malpractice submit");
+
+  //   try {
+  //     // Perform necessary operations
+  //     await calculateResult(); // Assuming this is an async function
+  //     const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
+  //     const counts = calculateQuestionCounts();
+  //     setAnsweredCount(counts.answered);
+  //     setNotAnsweredCount(counts.notAnswered);
+  //     setMarkedForReviewCount(counts.markedForReview);
+  //     setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
+  //     setVisitedCount(counts.VisitedCount);
+
+  //     const currentQuestion = questionData.questions[currentQuestionIndex];
+  //     const questionId = currentQuestion.question_id;
+
+  //     const formattedTime = WformatTime(wtimer);
+  //     const response = await fetch(`${BASE_URL}/QuizPage/saveExamSummary`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         userId: decryptedParam2,
+  //         totalUnattempted: notAnsweredCount,
+  //         totalAnswered: answeredCount,
+  //         NotVisitedb: NotVisitedb,
+  //         testCreationTableId: decryptedParam1,
+  //       }),
+  //     });
+  //     const result = await response.json();
+  //     console.log("Exam summary saved:", result);
+
+  //     const timeResponse = await fetch(`${BASE_URL}/QuizPage/submitTimeLeft`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         userId: decryptedParam2,
+  //         testCreationTableId: decryptedParam1,
+  //         timeLeft: formattedTime,
+  //       }),
+  //     });
+  //     const timeResult = await timeResponse.json();
+  //     console.log("Time left submission result:", timeResult);
+
+  //     if (questionId) {
+  //       localStorage.removeItem(`calculatorValue_${questionId}`);
+  //       console.log("Item removed successfully.");
+  //     }
+
+  //     const userId = decryptedParam2;
+  //     const courseCreationId = testDetails?.[0]?.courseCreationId;
+
+  //     const postData = {
+  //       userId: decryptedParam2,
+  //       courseCreationId: courseCreationId,
+  //       testCreationTableId: decryptedParam1,
+  //       test_status: "Completed",
+  //     };
+
+  //     const statusResponse = await fetch(
+  //       `${BASE_URL}/QuizPage/insertTestAttemptStatus`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(postData),
+  //       }
+  //     );
+
+  //     if (!statusResponse.ok) {
+  //       throw new Error("Failed to insert test attempt status");
+  //     }
+
+  //     console.log("Test attempt status inserted successfully");
+  //   } catch (error) {
+  //     console.error("Error in handleSubmit:", error);
+  //   }
+
+  //   console.log("Navigating to /student_dashboard");
+  //   // navigate('/student_dashboard');
+  // };
+
+  // const [showMalPractisePopup, setShowMalPractisePopup] = useState(false);
+  // const quizRef = useRef(null);
+
+  // const enterFullscreen = () => {
+  //   const element = quizRef.current;
+  //   if (element.requestFullscreen) {
+  //     element.requestFullscreen();
+  //   } else if (element.mozRequestFullScreen) {
+  //     element.mozRequestFullScreen();
+  //   } else if (element.webkitRequestFullscreen) {
+  //     element.webkitRequestFullscreen();
+  //   } else if (element.msRequestFullscreen) {
+  //     element.msRequestFullscreen();
+  //   }
+  // };
+
+  // const handleVisibilityChange = () => {
+  //   if (document.hidden) {
+  //     console.log("Page is now hidden");
+  //     setShowMalPractisePopup(true);
+  //   } else {
+  //     console.log("Page is now visible");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if ("hidden" in document) {
+  //     document.addEventListener("visibilitychange", handleVisibilityChange);
+  //   } else {
+  //     console.log("Page Visibility API is not supported");
+  //   }
+
+  //   return () => {
+  //     document.removeEventListener("visibilitychange", handleVisibilityChange);
+  //   };
+  // }, []);
+
+  // const handleMalPractiseSubmit = async () => {
+  //   try {
+  //     // Perform necessary operations
+  //     await calculateResult();
+  //     const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
+  //     const counts = calculateQuestionCounts();
+  //     setAnsweredCount(counts.answered);
+  //     setNotAnsweredCount(counts.notAnswered);
+  //     setMarkedForReviewCount(counts.markedForReview);
+  //     setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
+  //     setVisitedCount(counts.VisitedCount);
+
+  //     const currentQuestion = questionData.questions[currentQuestionIndex];
+  //     const questionId = currentQuestion.question_id;
+
+  //     const formattedTime = WformatTime(wtimer);
+  //     const response = await fetch(`${BASE_URL}/QuizPage/saveExamSummary`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         userId: decryptedParam2,
+  //         totalUnattempted: notAnsweredCount,
+  //         totalAnswered: answeredCount,
+  //         NotVisitedb: NotVisitedb,
+  //         testCreationTableId: decryptedParam1,
+  //       }),
+  //     });
+  //     const result = await response.json();
+  //     console.log("Exam summary saved:", result);
+
+  //     const timeResponse = await fetch(`${BASE_URL}/QuizPage/submitTimeLeft`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         userId: decryptedParam2,
+  //         testCreationTableId: decryptedParam1,
+  //         timeLeft: formattedTime,
+  //       }),
+  //     });
+  //     const timeResult = await timeResponse.json();
+  //     console.log("Time left submission result:", timeResult);
+
+  //     if (questionId) {
+  //       localStorage.removeItem(`calculatorValue_${questionId}`);
+  //       console.log("Item removed successfully.");
+  //     }
+
+  //     const userId = userData.id;
+  //     const courseCreationId = testDetails?.[0]?.courseCreationId;
+
+  //     const postData = {
+  //       userId: decryptedParam2,
+  //       courseCreationId: courseCreationId,
+  //       testCreationTableId: decryptedParam1,
+  //       test_status: "Completed",
+  //     };
+
+  //     const statusResponse = await fetch(
+  //       `${BASE_URL}/QuizPage/insertTestAttemptStatus`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(postData),
+  //       }
+  //     );
+
+  //     if (!statusResponse.ok) {
+  //       throw new Error("Failed to insert test attempt status");
+  //     }
+
+  //     console.log("Test attempt status inserted successfully");
+  //   } catch (error) {
+  //     console.error("Error in handleSubmit:", error);
+  //   }
+
+  //   navigate('/student_dashboard');
+  // };
+
+  // const [showMalPractisePopup, setShowMalPractisePopup] = useState(false);
+
+  // const quizRef = useRef(null);
+
+  // // Function to attempt entering fullscreen
+  // const enterFullscreen = () => {
+  //   const element = quizRef.current;
+  //   if (element.requestFullscreen) {
+  //     element.requestFullscreen();
+  //   } else if (element.mozRequestFullScreen) {
+  //     // Firefox
+  //     element.mozRequestFullScreen();
+  //   } else if (element.webkitRequestFullscreen) {
+  //     // Chrome, Safari & Opera
+  //     element.webkitRequestFullscreen();
+  //   } else if (element.msRequestFullscreen) {
+  //     // IE/Edge
+  //     element.msRequestFullscreen();
+  //   }
+  // };
+
+  // // Handle visibility change
+  // const handleVisibilityChange = () => {
+  //   if (document.hidden) {
+  //     console.log("Page is now hidden");
+  //     // alert("You have attempted malpractice.");
+  //     setShowMalPractisePopup(true);
+  //     window.close(); // Close the window or handle as needed
+  //   } else {
+  //     console.log("Page is now visible");
+  //   }
+  // };
+
+  // // Handle window close event
+  // const handleWindowClose = (event) => {
+  //   event.preventDefault();
+  //   alert("You have attempted malpractice.");
+  //   // Optionally, perform other actions like navigating away from the page
+  //   window.location.href = "http://localhost:3000/student_dashboard";
+  // };
+
+  // useEffect(() => {
+  //   // Check if Page Visibility API is supported
+  //   if ("hidden" in document) {
+  //     document.addEventListener("visibilitychange", handleVisibilityChange);
+  //   } else {
+  //     console.log("Page Visibility API is not supported");
+  //   }
+
+  //   // Listen for window close event
+  //   window.addEventListener("beforeunload", handleWindowClose);
+
+  //   // Cleanup event listeners on component unmount
+  //   return () => {
+  //     document.removeEventListener("visibilitychange", handleVisibilityChange);
+  //     window.removeEventListener("beforeunload", handleWindowClose);
+  //   };
+  // }, []);
+
+  // const handleMalPractiseSubmit = async () => {
+  //   navigate("/student_dashboard");
   //   try {
   //     // window.alert(
   //     //   "Your Test has been Submitted!! Click Ok to See Result.",
   //     //   calculateResult()
   //     // );
-  //     setShowButtonNo(false);
-  //     setShowExamSumary(true);
-  //     setShowMalPractisePopup(false);
+  //     // setShowExamSumary(true);
   //     calculateResult();
   //     const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
   //     const counts = calculateQuestionCounts();
@@ -311,9 +833,111 @@ const QuizPage = () => {
   //   } catch (error) {
   //     console.error("Error in handleSubmit:", error);
   //   }
+
+  //   try {
+  //     const userId = userData.id;
+  //     const courseCreationId = testDetails?.[0]?.courseCreationId;
+
+  //     // Prepare data for the POST request
+  //     const postData = {
+  //       userId: decryptedParam2,
+  //       courseCreationId: courseCreationId,
+  //       testCreationTableId: decryptedParam1,
+  //       test_status: "Completed",
+  //     };
+
+  //     // Make the POST request
+  //     const response = await fetch(
+  //       `${BASE_URL}/QuizPage/insertTestAttemptStatus`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(postData),
+  //       }
+  //     );
+
+  //     if (!response.ok) {
+  //       throw new Error("Failed to insert test attempt status");
+  //     }
+
+  //     console.log("Test attempt status inserted successfully");
+
+  //     // Optionally fetch question count if needed
+  //     // await fetchQuestionCount();
+
+  //     // Navigate to the test results page or another page as needed
+  //     // navigate(`/Submit_Page`);
+  //   } catch (error) {
+  //     console.error("Error:", error.message);
+  //   }
   // };
 
-  
+  // // Handle visibility change
+  // const handleVisibilityChange = () => {
+  //   if (document.visibilityState === 'hidden')  {
+  //     console.log("Page is now hidden");
+  //     setShowMalPractisePopup(true); // Show custom popup on page hide
+  //   } else {
+  //     console.log("Page is now visible");
+  //     setShowMalPractisePopup(false); // Hide custom popup on page show
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   // Listen for visibility change
+  //   document.addEventListener('visibilitychange', handleVisibilityChange);
+
+  //   // Listen for window close event
+  //   window.addEventListener('beforeunload', handleWindowClose);
+
+  //   // Cleanup event listeners on component unmount
+  //   return () => {
+  //     document.removeEventListener('visibilitychange', handleVisibilityChange);
+  //     window.removeEventListener('beforeunload', handleWindowClose);
+  //   };
+  // }, []);
+  // // Handle window close event
+  // // const handleWindowClose = (event) => {
+  // //   const confirmationMessage = 'Are you sure you want to leave? Your progress may not be saved.';
+  // //   event.preventDefault();
+  // //   event.returnValue = confirmationMessage;
+  // //   return confirmationMessage;
+  // // };
+
+  // // Handle popup confirmation
+  // const handlePopupConfirm = () => {
+  //   setShowMalPractisePopup(false); // Close the popup
+  //   window.location.href = 'http://localhost:3000/student_dashboard'; // Redirect to student dashboard
+  // };
+
+  // // Handle window close event
+  // const handleWindowClose = (event) => {
+  //   event.preventDefault();
+  //   setShowMalPractisePopup(true); // Show custom popup on window close attempt
+  //   // Optionally, perform other actions like navigating away from the page
+  //   navigate = '/student_dashboard';
+  // };
+  // window.addEventListener('beforeunload', handleWindowClose);
+  // useEffect(() => {
+  //   // Listen for window close event
+  //   window.addEventListener('beforeunload', handleWindowClose);
+
+  //   // Check if Page Visibility API is supported
+  //   if ('hidden' in document) {
+  //     document.addEventListener('visibilitychange', handleVisibilityChange);
+  //   } else {
+  //     console.log("Page Visibility API is not supported");
+  //   }
+
+  //   // Cleanup event listeners on component unmount
+  //   return () => {
+  //     document.removeEventListener('visibilitychange', handleVisibilityChange);
+  //     window.removeEventListener('beforeunload', handleWindowClose);
+  //   };
+  // }, []);
+
   // --------------------------------------CONST VARIABLES DECLARATIONS--------------------------
   const [questionData, setQuestionData] = useState({ questions: [] });
   const [value, setValue] = useState("");
@@ -424,12 +1048,79 @@ const QuizPage = () => {
     setVisitedCount(Visited);
   };
 
+  // const updateCounters = () => {
+  //   let answered = 0;
+  //   let notAnswered = 0; // Set default value to 1
+  //   let marked = 0;
+  //   let markedForReview = 0;
+  //   let Visited = 0;
+
+  //   questionStatus.forEach((status) => {
+  //     if (status === "answered") {
+  //       answered++;
+  //     } else if (status === "notAnswered") {
+  //       notAnswered++;
+  //     } else if (status === "marked") {
+  //       marked++;
+  //     } else if (status === "Answered but marked for review") {
+  //       markedForReview++;
+  //     } else if (status === "notVisited") {
+  //       Visited++;
+  //     }
+  //   });
+
+  //   // Update notAnswered if there are actual notAnswered questions
+  //   if (notAnswered === 1 && answered !== 0) {
+  //     notAnswered = 0;
+  //   }
+
+  //   setAnsweredCount(answered);
+  //   setNotAnsweredCount(notAnswered);
+  //   setAnsweredmarkedForReviewCount(marked);
+  //   setMarkedForReviewCount(markedForReview);
+  //   setVisitedCount(Visited);
+  // };
+
+  // const updateCounters = () => {
+  //   let answered = 0;
+  //   let notAnswered = 1;
+  //   let marked = 0;
+  //   let markedForReview = 0;
+  //   let Visited = 0;
+
+  //   questionStatus.forEach((status) => {
+  //     if (status === "answered") {
+  //       answered++;
+  //     } else if (status === "notAnswered") {
+  //       notAnswered++;
+  //     } else if (status === "marked") {
+  //       marked++;
+  //     } else if (status === "Answered but marked for review") {
+  //       markedForReview++;
+  //     } else if (status === "notVisited") {
+  //       Visited++;
+  //     }
+  //   });
+
+  //   setAnsweredCount(answered);
+  //   setNotAnsweredCount(notAnswered);
+  //   setAnsweredmarkedForReviewCount(marked);
+  //   setMarkedForReviewCount(markedForReview);
+  //   setVisitedCount(Visited);
+  // };
 
   const [selectedAnswers, setSelectedAnswers] = useState(
     Array(questionData.length).fill("")
   );
 
+  // const handleQuestionSelect = (questionNumber) => {
+  //   const updatedQuestionStatus = [...questionStatus];
+  //   const updatedIndex = questionNumber - 1; // Calculate the updated index
 
+  //   setCurrentQuestionIndex(updatedIndex); // Update the current question index
+  //   updatedQuestionStatus[updatedIndex] = "notAnswered"; // Update the question status at the updated index
+  //   setActiveQuestion(updatedIndex); // Set the active question to the updated index
+  // };
   const handleQuestionSelect = async (questionNumber) => {
     try {
       const response = await fetch(
@@ -1070,7 +1761,160 @@ const QuizPage = () => {
     }
   };
 
+  //working with questiontype id
+  // const handleSaveNextQuestion = async () => {
+  //   try {
 
+  //     const updatedQuestionStatus = [...questionStatus];
+  //     const calculatorInputValue = value;
+
+  //     console.log("Current Question Index:", currentQuestionIndex);
+  //     console.log("Current Question:", currentQuestion);
+
+  //     const isCurrentQuestionAnswered =
+  //       selectedAnswersMap1[currentQuestion.question_id] !== undefined ||
+  //       (selectedAnswersMap2[currentQuestion.question_id] &&
+  //         selectedAnswersMap2[currentQuestion.question_id].length > 0) ||
+  //       calculatorInputValue !== "";
+
+  //     console.log("Is Current Question Answered:", isCurrentQuestionAnswered);
+
+  //     if (!isCurrentQuestionAnswered) {
+  //       window.alert("Please answer the question before proceeding.");
+  //     } else {
+  //       updatedQuestionStatus[currentQuestionIndex] = "answered";
+  //       setQuestionStatus(updatedQuestionStatus);
+
+  //       setCurrentQuestionIndex((prevIndex) =>
+  //         prevIndex < questionData.questions.length - 1
+  //           ? prevIndex + 1
+  //           : prevIndex
+  //       );
+
+  //       if (userData.id) {
+  //         const userId = userData.id;
+  //         const subjectId = currentQuestion.subjectId;
+  //         const sectionId = currentQuestion.sectionId;
+  //         const questionId = currentQuestion.question_id.toString();
+
+  //         const valueObject = {
+  //           testCreationTableId: testCreationTableId,
+  //           value: calculatorInputValue,
+  //           question_id: questionId,
+  //         };
+
+  //         // Store the calculator value in local storage
+  //         localStorage.setItem(
+  //           `calculatorValue_${questionId}`,
+  //           JSON.stringify(valueObject)
+  //         );
+
+  //         // Introduce a small delay before retrieving the stored value
+  //         // This ensures that the local storage has enough time to update
+  //         await new Promise((resolve) => setTimeout(resolve, 100));
+
+  //         // Retrieve the stored calculator value
+  //         const storedValue = localStorage.getItem(
+  //           `calculatorValue_${questionId}`
+  //         );
+  //         const storedCalculatorInputValue = storedValue
+  //           ? JSON.parse(storedValue).value
+  //           : null;
+  //           console.log("hiiiiiiiiiiiiii");
+  //           console.log("currentQuestionTypeId:",currentQuestionTypeId);
+
+  //         if (calculatorInputValue === storedCalculatorInputValue) {
+  //           const selectedOption1 =
+  //             selectedAnswersMap1[currentQuestion.question_id];
+
+  //           const selectedOption2 =
+  //             selectedAnswersMap2[currentQuestion.question_id];
+
+  //           const optionIndexes1 =
+  //             selectedOption1 !== undefined ? [selectedOption1] : [];
+  //           const optionIndexes2 =
+  //             selectedOption2 !== undefined ? selectedOption2 : [];
+
+  //           const hasAnswered = answeredQuestionsMap[questionId];
+
+  //           const responses = {
+  //             questionId: questionId,
+  //             hasAnswered: hasAnswered,
+  //             userId: userId,
+  //             testCreationTableId: testCreationTableId,
+  //             subjectId: subjectId,
+  //             sectionId: sectionId,
+  //             currentQuestionTypeId: currentQuestionTypeId,
+  //             [questionId]: {
+  //               optionIndexes1: optionIndexes1,
+  //               optionIndexes2: optionIndexes2,
+  //               optionIndexes1CharCodes: optionIndexes1.map((index) => String.fromCharCode("a".charCodeAt(0) + index)),
+  //               optionIndexes2CharCodes: optionIndexes2.map((index) => String.fromCharCode("a".charCodeAt(0) + index)),
+  //               calculatorInputValue: calculatorInputValue,
+  //             },
+  //           };
+
+  //           setAnsweredQuestionsMap((prevMap) => ({
+  //             ...prevMap,
+  //             [questionId]: true,
+  //           }));
+  //           // Check if the response is cleared for the current question
+
+  //           if (hasAnswered) {
+  //             // If the question has been answered before, update the existing response with a PUT request
+  //             console.log(
+  //               "Making API request to update the existing response..."
+  //             );
+
+  //             const updatedResponse = {
+  //               optionIndexes1: optionIndexes1.map((index) =>
+  //                 String.fromCharCode("a".charCodeAt(0) + index)
+  //               ),
+  //               optionIndexes2: optionIndexes2.map((index) =>
+  //                 String.fromCharCode("a".charCodeAt(0) + index)
+  //               ),
+  //               calculatorInputValue: calculatorInputValue,
+  //             };
+
+  //             await fetch(
+  //               `${BASE_URL}/QuizPage/updateResponse/${questionId}`,
+  //               {
+  //                 method: "PUT",
+  //                 headers: {
+  //                   "Content-Type": "application/json",
+  //                 },
+  //                 body: JSON.stringify({
+  //                   updatedResponse,
+  //                   userId,
+  //                   testCreationTableId,
+  //                   subjectId,
+  //                   sectionId,
+  //                 }),
+  //               }
+  //             );
+
+  //             console.log("Handling the response after updating...");
+  //           } else {
+  //             // If the question is being answered for the first time, save a new response with a POST request
+  //             console.log("Making API request to save a new response...");
+
+  //             await fetch(`${BASE_URL}/QuizPage/response`, {
+  //               method: "POST",
+  //               headers: {
+  //                 "Content-Type": "application/json",
+  //               },
+  //               body: JSON.stringify(responses),
+  //             });
+
+  //             console.log("Handling the response after saving...");
+  //           }
+  //         }
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Error handling next click:", error);
+  //   }
+  // };
 
   const handleNextQuestion = async () => {
     try {
@@ -1116,7 +1960,20 @@ const QuizPage = () => {
         }
       }
 
-  
+      // if (isCurrentQuestionAnswered) {
+      //   // If the current question is answered, update the status
+      //   const updatedQuestionStatus = [...questionStatus];
+      //   updatedQuestionStatus[currentQuestionIndex] = "notAnswered";
+      //   setQuestionStatus(updatedQuestionStatus);
+      //   console.log(currentQuestionIndex);
+      //   console.log(updatedQuestionStatus);
+
+      //   // You may also show a message or perform other actions to indicate that the question is not answered
+      //   console.log("Question not answered!");
+      // } else {
+      //   // Log a message indicating that the question is answered
+      //   console.log("Question answered!");
+      // }
 
       // Move to the next question index
       setCurrentQuestionIndex((prevIndex) =>
@@ -1374,12 +2231,255 @@ const QuizPage = () => {
     }
   };
 
+  //working with questiontype id
+  // const markForReview = async () => {
+  //   try {
+  //     setCurrentQuestionIndex((prevIndex) => {
+  //       if (prevIndex < questionData.questions.length - 1) {
+  //         return prevIndex + 1;
+  //       }
+  //       return prevIndex;
+  //     });
+
+  //     const calculatorInputValue = value;
+  //     const currentQuestion = questionData.questions[currentQuestionIndex];
+  //     const isCurrentQuestionAnswered =
+  //       selectedAnswersMap1[currentQuestion.question_id] !== undefined ||
+  //       (selectedAnswersMap2[currentQuestion.question_id] &&
+  //         selectedAnswersMap2[currentQuestion.question_id].length > 0) ||
+  //       calculatorInputValue !== "";
+
+  //       console.log("currentQuestionTypeId:",currentQuestionTypeId);
+
+  //     const updatedQuestionStatus = [...questionStatus];
+  //     if (isCurrentQuestionAnswered) {
+  //       // If the question is answered
+  //       updatedQuestionStatus[currentQuestionIndex] =
+  //         "Answered but marked for review";
+
+  //       if (userData.id) {
+  //         const userId = parseInt(userData.id); // Ensure userId is an integer
+  //         const subjectId = parseInt(currentQuestion.subjectId); // Ensure subjectId is an integer
+  //         const sectionId = parseInt(currentQuestion.sectionId); // Ensure sectionId is an integer
+  //         const questionId = currentQuestion.question_id.toString();
+  //         const quesionTypeId = parseInt(currentQuestion.quesionTypeId); // Ensure quesionTypeId is an integer
+
+  //         // Store the calculator value in local storage
+  //         localStorage.setItem(
+  //           `calculatorValue_${questionId}`,
+  //           JSON.stringify({ value: calculatorInputValue })
+  //         );
+
+  //         // Introduce a small delay before retrieving the stored value
+  //         // This ensures that the local storage has enough time to update
+  //         await new Promise((resolve) => setTimeout(resolve, 100));
+
+  //         // Retrieve the stored calculator value
+  //         const storedValue = localStorage.getItem(
+  //           `calculatorValue_${questionId}`
+  //         );
+  //         const storedCalculatorInputValue = storedValue
+  //           ? JSON.parse(storedValue).value
+  //           : null;
+
+  //         if (calculatorInputValue === storedCalculatorInputValue) {
+  //           const selectedOption1 =
+  //             selectedAnswersMap1[currentQuestion.question_id];
+  //           const selectedOption2 =
+  //             selectedAnswersMap2[currentQuestion.question_id];
+
+  //           const optionIndexes1 =
+  //             selectedOption1 !== undefined ? [selectedOption1] : [];
+  //           const optionIndexes2 =
+  //             selectedOption2 !== undefined ? selectedOption2 : [];
+
+  //           const hasAnswered = answeredQuestionsMap[questionId];
+
+  //           // Construct the responses object
+  //           const responses = {
+  //             questionId: questionId,
+  //             hasAnswered: hasAnswered,
+  //             userId: userId,
+  //             testCreationTableId: parseInt(testCreationTableId), // Ensure testCreationTableId is an integer
+  //             subjectId: subjectId,
+  //             sectionId: sectionId,
+  //             currentQuestionTypeId: currentQuestionTypeId,
+  //             [questionId]: {
+  //               optionIndexes1: optionIndexes1.map((index) => {
+  //                 const selectedOption =
+  //                   questionData.questions[currentQuestionIndex].options[index];
+  //                 return selectedOption.option_id;
+  //               }),
+  //               optionIndexes1CharCodes: optionIndexes1.map((index) => {
+  //                 return String.fromCharCode("a".charCodeAt(0) + index);
+  //               }),
+  //               optionIndexes2: optionIndexes2.map((index) => {
+  //                 const selectedOption =
+  //                   questionData.questions[currentQuestionIndex].options[index];
+  //                 return selectedOption.option_id;
+  //               }),
+  //               optionIndexes2CharCodes: optionIndexes2.map((index) => {
+  //                 return String.fromCharCode("a".charCodeAt(0) + index);
+  //               }),
+
+  //               calculatorInputValue: calculatorInputValue,
+  //             },
+  //           };
+
+  //           // Mark the question as answered
+  //           setAnsweredQuestionsMap((prevMap) => ({
+  //             ...prevMap,
+  //             [questionId]: true,
+  //           }));
+
+  //           // Check if the question has been answered before
+  //           if (hasAnswered) {
+  //             // If the question has been answered before, update the existing response with a PUT request
+  //             console.log(
+  //               "Making API request to update the existing response..."
+  //             );
+
+  //             const updatedResponse = {
+  //               optionIndexes1: optionIndexes1.map((index) =>
+  //                 String.fromCharCode("a".charCodeAt(0) + index)
+  //               ),
+  //               optionIndexes2: optionIndexes2.map((index) =>
+  //                 String.fromCharCode("a".charCodeAt(0) + index)
+  //               ),
+  //               calculatorInputValue: calculatorInputValue,
+  //             };
+
+  //             await fetch(
+  //               `${BASE_URL}/QuizPage/updateResponse/${questionId}`,
+  //               {
+  //                 method: "PUT",
+  //                 headers: {
+  //                   "Content-Type": "application/json",
+  //                 },
+  //                 body: JSON.stringify({
+  //                   updatedResponse,
+  //                   userId,
+  //                   testCreationTableId: parseInt(testCreationTableId), // Ensure testCreationTableId is an integer
+  //                   subjectId,
+  //                   sectionId,
+  //                   quesionTypeId,
+  //                 }),
+  //               }
+  //             );
+
+  //             console.log("Handling the response after updating...");
+  //           } else {
+  //             // If the question is being answered for the first time, save a new response with a POST request
+  //             console.log("Making API request to save a new response...");
+
+  //             await fetch(`${BASE_URL}/QuizPage/response`, {
+  //               method: "POST",
+  //               headers: {
+  //                 "Content-Type": "application/json",
+  //               },
+  //               body: JSON.stringify(responses),
+  //             });
+
+  //             console.log("Handling the response after saving...");
+  //           }
+  //         }
+  //       }
+  //     } else {
+  //       // If the question is not answered
+  //       updatedQuestionStatus[currentQuestionIndex] = "marked";
+  //     }
+
+  //     setQuestionStatus(updatedQuestionStatus);
+  //   } catch (error) {
+  //     console.error("Error handling mark for review:", error);
+  //   }
+  // };
+
+  // const handleSubmit = async () => {
+  //   try {
+  //     // window.alert(
+  //     //   "Your Test has been Submitted!! Click Ok to See Result.",
+  //     //   calculateResult()
+  //     // );
+  //     console.log("hiiiiiiii");
+  //     setShowExamSumary(true);
+  //     setShowButtonNo(true);
+  //     calculateResult();
+  //     const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
+  //     const counts = calculateQuestionCounts();
+  //     setAnsweredCount(counts.answered);
+  //     setNotAnsweredCount(counts.notAnswered);
+  //     setMarkedForReviewCount(counts.markedForReview);
+  //     setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
+  //     setVisitedCount(counts.VisitedCount);
+
+  //     // Assuming you have these variables in your component's state
+  //     const currentQuestion = questionData.questions[currentQuestionIndex];
+  //     const questionId = currentQuestion.question_id;
+
+  //     // Format time
+  //     const formattedTime = WformatTime(wtimer);
+  //     const response = await fetch(`${BASE_URL}/QuizPage/saveExamSummary`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         userId: decryptedParam2,
+  //         totalUnattempted: notAnsweredCount,
+  //         totalAnswered: answeredCount,
+  //         NotVisitedb: NotVisitedb,
+  //         testCreationTableId: decryptedParam1,
+  //       }),
+  //     });
+  //     const result = await response.json();
+  //     console.log("Exam summary saved:", result);
+  //     try {
+  //       // Make a POST request to your server to submit time left
+  //       const response = await fetch(`${BASE_URL}/QuizPage/submitTimeLeft`, {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+
+  //         body: JSON.stringify({
+  //           userId: decryptedParam2,
+  //           testCreationTableId: decryptedParam1,
+  //           timeLeft: formattedTime,
+  //         }),
+  //       });
+
+  //       const result = await response.json();
+
+  //       console.log("Time left submission result:", result);
+  //     } catch (error) {
+  //       console.error("Error submitting time left:", error);
+  //     } finally {
+  //       // Ensure that the questionId is correctly obtained
+  //       if (questionId) {
+  //         // Clear local storage data for the current question
+  //         try {
+  //           console.log(
+  //             "Removing from local storage for questionId:",
+  //             questionId
+  //           );
+  //           localStorage.removeItem(`calculatorValue_${questionId}`);
+  //           console.log("Item removed successfully.");
+  //         } catch (error) {
+  //           console.error("Error removing item from local storage:", error);
+  //         }
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Error in handleSubmit:", error);
+  //   }
+  // };
 
 
   const handleSubmit = async () => {
     try {
       setShowExamSumary(true);
-      // setShowButtonNo(true);
+      setShowButtonNo(true);
       calculateResult();
   
       const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
@@ -1753,9 +2853,9 @@ const QuizPage = () => {
     
     <div
       className="QuestionPaper_-container"
-      // ref={quizRef}
-      // onClick={enterFullscreen}
-      // style={{ backgroundColor: "white" }}
+      ref={quizRef}
+      onClick={enterFullscreen}
+      style={{ backgroundColor: "white" }}
     >
      
       {/* {showMalPractisePopup && (
@@ -1778,10 +2878,10 @@ const QuizPage = () => {
           </div>
         </div>
       )} */}
-{/* 
+
       {showMalPractisePopup && (
-        <div className="popup">
-          <div className="popup-content">
+        <div className="MalPracticePopup">
+          <div className="malpractice_popup_content">
             <h2>Malpractice Attempt</h2>
             <p>
               "As per our examination rules, your test has been automatically
@@ -1798,7 +2898,7 @@ const QuizPage = () => {
             </button>
           </div>
         </div>
-      )} */}
+      )}
       <div className="quiz_exam_interface_header quiz_exam_interface_header_q_if_H">
         <div className="quiz_exam_interface_header_LOGO ">
           {/* <img src={logo} alt="" /> */}
@@ -2761,7 +3861,7 @@ const QuizPage = () => {
             </div>
           </div>
         ) : (
-          <div className="quizPagewatermark">
+          <div className="examSummary_quizPagewatermark">
             <div className="result">
               <h3 id="result_header">Exam Summary</h3>
               <div className="result_page_links"></div>
@@ -2794,7 +3894,7 @@ const QuizPage = () => {
                 No changes will be allowed after submission.
               </h2>
             )} */}
-                {/* {showButtonNo === false ? (
+                {showButtonNo === false ? (
                   <h2 className="Exam_summary_question_tag">
                     Please press okay to view your result.
                   </h2>
@@ -2803,9 +3903,44 @@ const QuizPage = () => {
                     Are you sure you want to submit ? <br />
                     No changes will be allowed after submission.
                   </h2>
-                )} */}
+                )}
 
-              
+                <div className="Exam_summary_btns">
+                  {showButtonNo === false ? (
+                    // <Tooltip title="Yes" arrow>
+                      <>
+                        <Link
+                          className="es_btn"
+                          // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
+                          // to='/Submit_Page'
+                          onClick={handleYes}
+                        >
+                          Okay
+                        </Link>
+                      </>
+                    // {/* </Tooltip> */}
+                  ) : (
+                    // <Tooltip title="Yes" arrow>
+                      <>
+                        <Link
+                          className="es_btn"
+                          // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
+                          // to='/Submit_Page'
+                          onClick={handleYes}
+                        >
+                          Yes
+                        </Link>
+                      </>
+                    // {/* </Tooltip> */}
+                  )}
+                  {showButtonNo && (
+                    // <Tooltip title="No" arrow>
+                      <button className="es_btn" onClick={handleNo}>
+                        NO
+                      </button>
+                    // {/* </Tooltip> */}
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -2816,42 +3951,3 @@ const QuizPage = () => {
 };
 
 export default QuizPage;
-
-
-
-{/* <div className="Exam_summary_btns">
-{showButtonNo === false ? (
-  // <Tooltip title="Yes" arrow>
-    <>
-      <Link
-        className="es_btn"
-        // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
-        // to='/Submit_Page'
-        onClick={handleYes}
-      >
-        Okay
-      </Link>
-    </>
-  // {/* </Tooltip> */}
-// ) : (
-  // <Tooltip title="Yes" arrow>
-    // <>
-    //   <Link
-    //     className="es_btn"
-    //     // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
-    //     // to='/Submit_Page'
-    //     onClick={handleYes}
-    //   >
-    //     Yes
-    //   </Link>
-    // </>
-  // {/* </Tooltip> */}
-// )}
-// {showButtonNo && (
-//   // <Tooltip title="No" arrow>
-//     <button className="es_btn" onClick={handleNo}>
-//       NO
-//     </button>
-//   // {/* </Tooltip> */}
-// )}
-// </div> */}

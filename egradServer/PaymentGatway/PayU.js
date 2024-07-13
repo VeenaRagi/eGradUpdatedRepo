@@ -67,26 +67,25 @@ router.post("/hash", async (req, res) => {
   }
 });
 
-router.post("/success", async (req, res) => {
+router.post('/success', async (req, res) => {
   try {
-    const userEmail = req.body.email; // Assuming email is in req.body.email
-    const name = req.body.name;
+    const { email: userEmail, name } = req.body;
 
     // Create a Nodemailer transporter using your email service credentials
     const transporter = nodemailer.createTransport({
-      service: "gmail",
-      host: "smtp.gmail.com",
+      service: 'gmail',
+      host: 'smtp.gmail.com',
       auth: {
-        user: "egradtutorweb@gmail.com", // Your email address
-        pass: "zzwj ffce jrbn tlhs", // Your email password
+        user: process.env.EMAIL_USER, // Use environment variable for email
+        pass: process.env.EMAIL_PASS, // Use environment variable for password
       },
     });
 
     // Set up the email options
     const mailOptions = {
-      from: "egradtutorweb@gmail.com", // Sender email address
-      to: userEmail, // Receiver email address (user's email)
-      subject: "Payment Successful", // Subject of the email
+      from: 'egradtutorweb@gmail.com',
+      to: userEmail,
+      subject: 'Payment Successful',
       html: `
         <h1>Payment Successful</h1>
         <b>Your course will be activated within the next 48 hours.</b>
@@ -95,12 +94,13 @@ router.post("/success", async (req, res) => {
     };
 
     // Send the email
-    transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(mailOptions, async (error, info) => {
       if (error) {
-        console.error("Error sending email:", error);
-        return res.status(500).send({ error: "Internal Server Error" });
+        console.error('Error sending email:', error);
+        return res.status(500).send({ error: 'Internal Server Error' });
       } else {
-        console.log("Email sent:", info.response);
+        console.log('Email sent:', info.response);
+
         const successHtml = `
           <!DOCTYPE html>
           <html>
@@ -151,68 +151,87 @@ router.post("/success", async (req, res) => {
                   <h1>Payment Successful</h1>
                   <b>Your course will be activated within the next 48 hours.</b>
                   <p>If you have any questions or need assistance, our dedicated support team is here to help. Don't hesitate to reach out to us at <a href="mailto:egradtutor@gmail.com">egradtutor@gmail.com</a>. We're always happy to assist you!</p>
-                   <button id="redirectButton">Continue</button>
+                  <button id="redirectButton">Continue</button>
               </div>
 
               <script>
               document.getElementById('redirectButton').addEventListener('click', function() {
                   window.location.href = 'http://localhost:3000/Student_dashboard/:decryptedUserIdState';
               });
-          </script>
+              </script>
           </body>
           </html>
         `;
+
+        const getUserIdQuery = `
+          SELECT l.user_id, l.studentregistationId, sbc.courseCreationId
+          FROM log l
+          LEFT JOIN student_buy_courses AS sbc ON l.studentregistationId = sbc.studentregistationId
+          WHERE l.email = ?
+        `;
+        const [userData] = await db.query(getUserIdQuery, [userEmail]);
+
+        if (!userData || userData.length === 0) {
+          console.log('User not found');
+          return res.status(404).send({ error: 'User not found' });
+        }
+
+        const userId = userData[0].user_id;
+        const studentregistationId = userData[0].studentregistationId;
+        let courseCreationId = userData[0].courseCreationId;
+
+        console.log('User Data:', { userId, studentregistationId, courseCreationId });
+
+        if (courseCreationId === null) {
+          console.log('CourseCreationId is null. Cannot proceed.');
+          return res.status(400).send({ error: 'CourseCreationId is required.' });
+        }
+
+        const checkRecordQuery = `
+          SELECT *
+          FROM student_buy_courses
+          WHERE user_id = ? AND studentregistationId = ?
+        `;
+        const [existingRecord] = await db.query(checkRecordQuery, [userId, studentregistationId]);
+
+        if (existingRecord && existingRecord.length > 0) {
+          const updatePaymentStatusQuery = `
+            UPDATE student_buy_courses
+            SET courseCreationId = ?, payu_status = 'paid'
+            WHERE user_id = ? AND studentregistationId = ?
+          `;
+          await db.query(updatePaymentStatusQuery, [courseCreationId, userId, studentregistationId]);
+          console.log('Payment status updated successfully');
+        } else {
+          const insertPaymentStatusQuery = `
+            INSERT INTO student_buy_courses (user_id, courseCreationId, studentregistationId, payu_status)
+            VALUES (?, ?, ?, 'paid')
+          `;
+          await db.query(insertPaymentStatusQuery, [userId, courseCreationId, studentregistationId]);
+          console.log('Payment status inserted successfully');
+        }
+
+        const verifyUpdateQuery = `
+          SELECT *
+          FROM student_buy_courses
+          WHERE user_id = ? AND courseCreationId = ? AND studentregistationId = ? AND payu_status = 'paid'
+        `;
+        const [updatedData] = await db.query(verifyUpdateQuery, [userId, courseCreationId, studentregistationId]);
+
+        if (!updatedData || updatedData.length === 0) {
+          console.log('Payment status not updated');
+          return res.status(500).send({ error: 'Payment status not updated' });
+        }
+
         return res.status(200).send(successHtml);
       }
     });
-
-    const getUserIdQuery = `
-      SELECT l.user_id, l.studentregistationId, sbc.courseCreationId
-      FROM log l
-      LEFT JOIN student_buy_courses AS sbc ON l.studentregistationId = sbc.studentregistationId
-      WHERE l.email = ?
-    `;
-    const [userData] = await db.query(getUserIdQuery, [userEmail]);
-
-    if (!userData || userData.length === 0) {
-      console.log("User not found");
-      return res.status(404).send({ error: "User not found" });
-    }
-
-    const userId = userData[0].user_id;
-    const studentRegistrationId = userData[0].studentregistationId;
-    const courseCreationId = userData[0].courseCreationId;
-
-    console.log(userId, studentRegistrationId, courseCreationId);
-
-    const insertOrUpdatePaymentStatusQuery = `
-      INSERT INTO student_buy_courses (user_id, courseCreationId, studentregistationId, payu_status)
-      VALUES (?, ?, ?, 'paid')
-      ON DUPLICATE KEY UPDATE payu_status = 'paid';
-    `;
-    const insertOrUpdatePaymentStatusValues = [userId, courseCreationId, studentRegistrationId];
-
-    await db.query(insertOrUpdatePaymentStatusQuery, insertOrUpdatePaymentStatusValues);
-    console.log("Payment status updated successfully:", insertOrUpdatePaymentStatusValues);
-
-    // Check if payment status was updated successfully
-    const checkUpdateQuery = `
-      SELECT *
-      FROM student_buy_courses
-      WHERE user_id = ? AND courseCreationId = ? AND studentregistationId = ? AND payu_status = 'paid'
-    `;
-    const [updatedData] = await db.query(checkUpdateQuery, insertOrUpdatePaymentStatusValues);
-
-    if (!updatedData || updatedData.length === 0) {
-      console.log("Payment status not updated");
-      return res.status(500).send({ error: "Payment status not updated" });
-    }
-
   } catch (error) {
-    console.error("Error updating payment status:", error);
-    return res.status(500).send({ error: "Internal Server Error" });
+    console.error('Error updating payment status:', error);
+    return res.status(500).send({ error: 'Internal Server Error' });
   }
 });
+
 
 
 router.post("/failure", async (req, res) => {
