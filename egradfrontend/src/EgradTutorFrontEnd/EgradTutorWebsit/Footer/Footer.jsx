@@ -107,7 +107,13 @@ const Footer = ({ isEditMode, userRole }) => {
   const themeDetails = JSONClasses[themeColor] || []
   console.log(themeDetails, "mapppping from json....")
 
-
+// for refreshing page when admin selects a theme
+const refreshChannel = new BroadcastChannel("refresh_channel");
+refreshChannel.onmessage = function (event) {
+  if (event.data === "refresh_page") {
+    window.location.reload(); // Reload the page
+  }
+};
 
 
   return (
