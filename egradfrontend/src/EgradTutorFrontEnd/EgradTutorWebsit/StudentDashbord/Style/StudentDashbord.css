@@ -171,8 +171,8 @@
     font-size: 14px;
     span {
       color: #1f2641;
-      font-size: 2rem;
-      font-weight: 900;
+      /* font-size: 2rem;
+      font-weight: 900; */
     }
     a {
       background: #000000;

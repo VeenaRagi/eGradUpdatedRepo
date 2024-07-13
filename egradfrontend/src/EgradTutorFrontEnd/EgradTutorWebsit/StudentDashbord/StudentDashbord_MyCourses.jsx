@@ -404,8 +404,6 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
             color: "white",
             padding: "2.9px",
             textDecoration: "none",
-            fontSize: "10px",
-            marginBottom:"10px",
           }}
         >
           Attempted

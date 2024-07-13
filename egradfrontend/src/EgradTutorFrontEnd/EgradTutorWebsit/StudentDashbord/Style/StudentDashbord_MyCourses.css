@@ -220,7 +220,7 @@ li {
       a {
         background: #00bf8e;
         color: #fff;
-        width: 150px;
+        /* width: 150px; */
         font-weight: 700;
         padding: 0.5rem;
         display: flex;
@@ -402,10 +402,10 @@ li {
   }
 }
 
-
-.span_style_attempt_status{
+span.span_style_attempt_status{
   background-color: rgb(187, 109, 109);
   font-size: 25px !important;
   width: 100px;
   color: white;
+  margin-bottom: 20px;
 }
