@@ -4,10 +4,10 @@
 import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import {useNavigate, useParams } from "react-router-dom";
-// import "./styles/RightSidebar.css";
+import "../Style/RightSidebar.css"
 // import axios from "axios";
-import BASE_URL from "../../../apiConfig";
-import { decryptData, encryptData } from "./utils/crypto"; 
+import BASE_URL from "../../../../apiConfig";
+import { decryptData, encryptData } from "../utils/crypto"; 
 
 
 // This component manages the functionality of buttons in the right sidebar

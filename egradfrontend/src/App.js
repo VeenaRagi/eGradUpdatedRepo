@@ -35,6 +35,14 @@ import { UpdateInstruction } from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/U
 import TestUpdateadmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/TestUpdateadmin.jsx";
 import InstructionPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/InstructionPage.jsx'
 import General_Intructions_Page from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/General_intructions_page_container.jsx'
+import QuizPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/OTS/QuizPage.jsx'
+import StudentDashbord_MyResults from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/StudentDashbord_MyResults.jsx'
+import TestResultsPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/TestResultsPage.jsx'
+import {UserReport} from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UserReport.jsx'
+
+
+
+
 
 function App() {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -155,7 +163,22 @@ function App() {
             path="/General_intructions_page/:param1/:param2/:param3"
             element={<General_Intructions_Page/>} 
           />
-
+    <Route
+            path="/QuizPage/questionOptions/:param1/:param2"
+           element={<QuizPage seconds={20} />} 
+          />
+            <Route
+            path="/StudentDashbord_MyResults"
+           element={<StudentDashbord_MyResults />} 
+          />
+             <Route
+            path="/TestResultsPage/:param1/:param2"
+           element={<TestResultsPage />} 
+          />
+            <Route
+         path="/UserReport/:id/:testCreationTableId/:courseCreationId"
+           element={<UserReport />} 
+          />
             </Routes>
           </Router>
         )}

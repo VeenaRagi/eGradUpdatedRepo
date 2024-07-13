@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { decryptData, encryptData } from "./utils/crypto"; // Assuming these are your encryption utilities
 import BASE_URL from "../../../apiConfig";
-// import "./styles/Instructions.scss";
+// import "./Style/Instructions.scss"
 import { AiOutlineArrowRight } from "react-icons/ai";
 // import { Header } from "./Header";
 
-const General_intructions_page_container = ({ usersData, decryptedUserIdState }) => {
+const General_intructions_page_container = () => {
   const { param1, param2, param3 } = useParams();
   const navigate = useNavigate();
   const [decryptedParam1, setDecryptedParam1] = useState("");
@@ -15,7 +15,7 @@ const General_intructions_page_container = ({ usersData, decryptedUserIdState })
   const [instructionsData, setInstructionsData] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
   const [userData, setUserData] = useState({});
-  const user_Id = decryptedUserIdState;
+  // const user_Id = decryptedUserIdState;
 
   useEffect(() => {
     const token = sessionStorage.getItem("navigationToken");
@@ -150,6 +150,7 @@ const General_intructions_page_container = ({ usersData, decryptedUserIdState })
   return (
     <>
       {/* <Header /> */}
+      <p>{decryptedParam2}</p>
       <div className="Instructions_container">
         <h1>General Instructions</h1>
         <ul className="Instructions_points">
