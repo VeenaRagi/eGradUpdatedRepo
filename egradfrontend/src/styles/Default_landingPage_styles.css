@@ -429,33 +429,37 @@ a {
 /* Admin side Popups css */
 
 /* Full-page overlay to cover the background when the card is open */
-.overlay {
-    /* position: fixed; */
-    /* Cover the entire viewport */
+/* Overlay for blurred background */
+.Blur_Effect_Mode{
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* background-color: rgba(0, 0, 0, 0.5); */
-    /* Semi-transparent black background */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     display: flex;
     align-items: center;
-    /* Center content vertically */
     justify-content: center;
-    /* Center content horizontally */
-    z-index: 999;
-    /* Ensure it is above other content */
+    z-index: 999; /* Ensure it is above other content */
+    backdrop-filter: blur(5px); /* Adds blur effect */
 }
 
-/* The card container */
+/* Popup card styling */
 .UploadPopups_Container {
-    background-color: white;
-    box-shadow: 5px 5px 3px 3px #625d5d;
-    padding: 2rem;
-    /* max-width: 600px; */
-    margin: 0 auto;
-    z-index: 1000;
     position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000; /* Ensure it is above the overlay */
+}
+
+/* Toggle button styling */
+.toggle-button-container {
+    top: 18px;
+    position: relative;
+    z-index: 1013;
+    margin: 10px;
+    left: 272px;
 }
 
 .UploadPopups_Container h2 {
@@ -602,4 +606,23 @@ button:hover {
     display: flex;
     gap:2rem;
     align-items: center;
+}
+
+
+
+.Exams_Container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap onto the next line */
+    gap: 16px; /* Optional: Adds spacing between items */
+}
+
+.Exam_Item {
+    flex: 1 1 calc(50% - 16px); /* Flex item will take up 50% of the container width minus the gap */
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+    display: flex;
+    justify-content: space-between;
+}
+.Icons_container {
+    display: flex;
+    gap:2rem;
 }

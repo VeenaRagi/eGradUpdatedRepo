@@ -171,8 +171,8 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
             </div>
             {isEditMode && (
           <div>
-            <button onClick={() => setShowWelcomeForm(!showwelcomeForm)}>
-              {showwelcomeForm ? "Close" : "Add Welcome info"}
+            <button className="toggle-button-container" onClick={() => setShowWelcomeForm(!showwelcomeForm)}>
+              {showwelcomeForm ? "X" : "Add Welcome info"}
             </button>
             {showwelcomeForm && <LandingPageHeaderEdit type="WelcomeForm" />}
           </div>

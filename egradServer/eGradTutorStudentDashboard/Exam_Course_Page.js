@@ -560,13 +560,13 @@ router.get("/BuyCourses_OTS", async (req, res) => {
 
 //
 
-router.get("/getregisterid/:userId", async (req, res) => {
-  const { userId } = req.params;
+router.get("/getregisterid/:decryptedUserIdState", async (req, res) => {
+  const { decryptedUserIdState } = req.params;
 
-  console.log("userId:", userId); // Log the userId to the console
+  console.log("userId:", decryptedUserIdState); // Log the userId to the console
 
   try {
-    if (!userId) {
+    if (!decryptedUserIdState) {
       throw new Error("userId is required");
     }
 
@@ -580,7 +580,7 @@ router.get("/getregisterid/:userId", async (req, res) => {
           LEFT JOIN portales p ON
           p.Portale_Id = cc.Portale_Id
       WHERE l.user_id = ?`,
-      [userId]
+      [decryptedUserIdState]
     );
 
     const organizedData = {};
@@ -589,7 +589,7 @@ router.get("/getregisterid/:userId", async (req, res) => {
       const id =row.courseCreationId;
       if (!organizedData[id]) {
         organizedData[id] = {
-          user_id: row.user_Id,
+          user_id: row.decryptedUserIdState,
           payu_status: row.payu_status,
           studentregistationId: row.studentregistationId,
           courseName:  row.courseName,

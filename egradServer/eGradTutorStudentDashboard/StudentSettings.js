@@ -135,8 +135,6 @@ router.get('/fetchStudentDetails/:decryptedUserIdState',async(req,res)=>{
   } catch (error) {
     console.log(error,"tjis is the error");
   }
-
-  
 })
 // =============================================
 

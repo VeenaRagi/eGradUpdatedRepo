@@ -23,7 +23,7 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
   const themeDetails = JSONClasses[themeColor] || [];
   const [openAddExamForm, setOpenAddExamForm] = useState(false);
   const [examImages, setExamImages] = useState([]);
- 
+ const [openUgExamsUpload,setOpenUgExamsUpload] = useState(false);
   const OpenAddExamForm = (branchBranch_Id) => {
     console.log(branchBranch_Id);
     setOpenAddExamForm(branchBranch_Id); // Set the state to the branch's ID
@@ -404,6 +404,26 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
  
  
           )}
+
+
+{isEditMode && (
+            <div>
+              <button
+                onClick={() => setOpenUgExamsUpload(!openUgExamsUpload)}
+              >
+                {openUgExamsUpload ? "Close Form" : "Exams Uplaod"}
+              </button>
+ 
+              {openUgExamsUpload && (
+                <LandingPageExamdataEdit type="Upload/EditExams" />
+              )}
+ 
+ 
+            </div>
+ 
+ 
+          )}
+
         </div>
       )}
     </>

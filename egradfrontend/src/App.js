@@ -32,6 +32,7 @@ import TestUpdateadmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/TestUpd
 import InstructionPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/InstructionPage.jsx'
 import General_Intructions_Page from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/General_intructions_page_container.jsx'
 import QuizPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/OTS/QuizPage.jsx'
+import QuestionBankQuiz from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PQB/QuestionBankQuiz.jsx'
 import StudentDashbord_MyResults from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/StudentDashbord_MyResults.jsx'
 import TestResultsPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/TestResultsPage.jsx'
 import {UserReport} from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UserReport.jsx'
@@ -39,7 +40,7 @@ import ThemesSection from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/ThemesSec
 import Leftnav from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/Leftnav.jsx";
 import AdminProfile from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/AdminProfile.jsx";
 
-function App() {
+function App({decryptedUserIdState}) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -120,7 +121,7 @@ function App() {
               {/*--------------------- EgradtutorPortalsAdmin ------------- */}
               <Route path="/getSubjectData/:testCreationTableId/:subjectId/:sectionId" element={<Document_ImageInfo />} />
 
-              <Route path="/Adminpage" element={<Exam_portal_admin_integration />} />
+              <Route path="/Adminpage" element={<Exam_portal_admin_integration decryptedUserIdState={decryptedUserIdState}/>} />
               <Route path="/ExamUpdataion_admin/:examId" element={<ExamUpdataion_admin />} />
               <Route path="/UpdatingCourseInAdmin/:courseCreationId/:portalId" element={<UpdatingConrseInAdmin />} />
 
@@ -145,6 +146,10 @@ function App() {
     <Route
             path="/QuizPage/questionOptions/:param1/:param2"
            element={<QuizPage seconds={20} />} 
+          />
+              <Route
+            path="/QuestionBankQuiz/questionOptions/:param1/:param2"
+          element={<QuestionBankQuiz />} 
           />
             <Route
             path="/StudentDashbord_MyResults"

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { decryptData, encryptData } from "./utils/crypto"; // Assuming these are your encryption utilities
 import BASE_URL from "../../../apiConfig";
-// import "./Style/Instructions.scss"
+import "./Style/Instructions.scss"
 import { AiOutlineArrowRight } from "react-icons/ai";
 // import { Header } from "./Header";
 
@@ -150,7 +150,6 @@ const General_intructions_page_container = () => {
   return (
     <>
       {/* <Header /> */}
-      <p>{decryptedParam2}</p>
       <div className="Instructions_container">
         <h1>General Instructions</h1>
         <ul className="Instructions_points">
