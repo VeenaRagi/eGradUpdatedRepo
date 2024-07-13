@@ -126,7 +126,13 @@ const ContactUs = ({ userRole }) => {
   console.log(themeColor, "this is the theme json classesssssss")
   const themeDetails = JSONClasses[themeColor] || []
   console.log(themeDetails, "mapppping from json....")
-
+// for refreshing page when admin selects a theme
+const refreshChannel = new BroadcastChannel("refresh_channel");
+refreshChannel.onmessage = function (event) {
+  if (event.data === "refresh_page") {
+    window.location.reload(); // Reload the page
+  }
+};
   return (
     <>
       {themeColor === 'Theme-2' &&

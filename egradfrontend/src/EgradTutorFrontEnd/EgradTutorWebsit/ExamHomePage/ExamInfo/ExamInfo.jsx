@@ -83,7 +83,13 @@ const ExamInfo = ({ isEditMode, userRole}) => {
   const getIcon = (section) => {
     return visibleSection === section ? "-" : "+";
   };
-
+// for refreshing page when admin selects a theme
+const refreshChannel = new BroadcastChannel("refresh_channel");
+refreshChannel.onmessage = function (event) {
+  if (event.data === "refresh_page") {
+    window.location.reload(); // Reload the page
+  }
+};
 
   
   const themeFromContext = useContext(ThemeContext);

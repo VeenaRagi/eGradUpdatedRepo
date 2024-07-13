@@ -65,6 +65,13 @@ const PoopularCourses = ({userRole}) => {
     const year = date.getFullYear();
     return `${day}-${month}-${year}`;
   };
+  // for refreshing the page when admin clicked theme
+  const refreshChannel = new BroadcastChannel("refresh_channel");
+  refreshChannel.onmessage = function (event) {
+    if (event.data === "refresh_page") {
+      window.location.reload(); // Reload the page
+    }
+  };
  
   return (
     <div className={`${themeDetails.themePopularCourses_container}`}>
