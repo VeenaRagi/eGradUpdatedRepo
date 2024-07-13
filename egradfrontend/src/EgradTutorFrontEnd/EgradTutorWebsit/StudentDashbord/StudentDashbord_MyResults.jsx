@@ -3,6 +3,8 @@ import { Link, Navigate } from "react-router-dom";
 import BASE_URL from "../../../apiConfig";
 import axios from "axios";
 import { FaBookOpenReader } from "react-icons/fa6";
+import './Style/StudentDashbord_MyResults.css'
+
 export const StudentDashbord_MyResults = ({ usersData,decryptedUserIdState }) => {
   const [testDetails, setTestDetails] = useState([]);
   const [selectedTypeOfTest, setSelectedTypeOfTest] = useState("");
