@@ -1242,7 +1242,7 @@ i#footerIcons:hover {
   font-size: 20px;
   padding: 10px;
   color: red;
-  margin: 1rem auto !important;
+  margin-top: 350px;
   display: flex;
   justify-content: center;
   align-items: center;

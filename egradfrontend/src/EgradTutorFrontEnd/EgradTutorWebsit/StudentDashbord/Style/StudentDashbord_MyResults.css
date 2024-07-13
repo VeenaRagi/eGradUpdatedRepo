@@ -77,7 +77,8 @@
     justify-content: center;
     color: red;
     font-size: 20px;
+    margin-top: 350px;
     align-items: center;
     animation: flickerAnimation 2s infinite;
-  }
+}
   
