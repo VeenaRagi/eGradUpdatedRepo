@@ -820,7 +820,11 @@ const Footer = ({ isEditMode, userRole }) => {
                     <p>No contact information available. Please contact support if this issue persists.</p>
                   )}
                 </div>
-                {dataThree.length > 0 ? (
+              </div>
+
+            </div>
+            <div className="footer-last-heading">
+            {dataThree.length > 0 ? (
                   dataThree.map((item) => (
                     <li key={item.Content_id}>{item.content_name}</li>
                   ))
@@ -831,11 +835,7 @@ const Footer = ({ isEditMode, userRole }) => {
                 ) : (
                   <p>No content available. Please contact support if this issue persists.</p>
                 )}
-              </div>
-
             </div>
-
-
           </footer>
         </div>
       }
