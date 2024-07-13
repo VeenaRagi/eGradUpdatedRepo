@@ -455,11 +455,12 @@ a {
 
 /* Toggle button styling */
 .toggle-button-container {
-    top: 18px;
+    /* top: -127px; */
     position: relative;
     z-index: 1013;
-    margin: 10px;
-    left: 272px;
+    /* margin: 10px; */
+    left: 895px;
+    bottom: 300px;
 }
 
 .UploadPopups_Container h2 {
@@ -483,6 +484,7 @@ a {
 .UploadPopups_Container textarea {
     height: 50px;
     width: 50%;
+    margin: 10px;
 }
 
 /* Focus state for both input and textarea */
