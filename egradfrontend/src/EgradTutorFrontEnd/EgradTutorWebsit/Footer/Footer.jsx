@@ -16,7 +16,7 @@ import { ImLinkedin } from "react-icons/im";
 import '../../../styles/Default_landingPage_styles.css'
 
 
-const Footer = ({isEditMode , userRole }) => {
+const Footer = ({ isEditMode, userRole }) => {
   const [dataOne, setDataOne] = useState([]);
   const [dataTwo, setDataTwo] = useState([]);
   const [dataThree, setDataThree] = useState([]);
@@ -76,7 +76,7 @@ const Footer = ({isEditMode , userRole }) => {
     fetchFooterLinks();
   }, []);
 
-  
+
   const fetchFooterLinks = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/Footer/footerLinks`);
@@ -153,32 +153,32 @@ const Footer = ({isEditMode , userRole }) => {
                     )}
                   </div>
                   {dataOne.length > 0 ? (
-        dataOne.map((item, index) =>
-          index === 0 ? (
-            <div
-              key={item.Content_id}
-              className={`Footer_FirstContent ${themeDetails.themeFooterFirstContent}`}
-            >
-              <h2 id="Footer_Heading">
-                {item.content}
-              </h2>
-            </div>
-          ) : (
-            <p
-              className="new_landingfooter_conatinerfristpart_item"
-              key={item.Content_id}
-            >
-              {item.content}
-            </p>
-          )
-        )
-      ) : userRole === 'user' ? (
-        <p>No content is available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>There is no content available. Please update the content.</p>
-      ) : (
-        <p>No content is available. Please contact support if this issue persists.</p>
-      )}
+                    dataOne.map((item, index) =>
+                      index === 0 ? (
+                        <div
+                          key={item.Content_id}
+                          className={`Footer_FirstContent ${themeDetails.themeFooterFirstContent}`}
+                        >
+                          <h2 id="Footer_Heading">
+                            {item.content}
+                          </h2>
+                        </div>
+                      ) : (
+                        <p
+                          className="new_landingfooter_conatinerfristpart_item"
+                          key={item.Content_id}
+                        >
+                          {item.content}
+                        </p>
+                      )
+                    )
+                  ) : userRole === 'user' ? (
+                    <p>No content is available at the moment. Please check back later.</p>
+                  ) : userRole === 'admin' ? (
+                    <p>There is no content available. Please update the content.</p>
+                  ) : (
+                    <p>No content is available. Please contact support if this issue persists.</p>
+                  )}
                 </div>
                 <div className={`Footer_Links_Content ${themeDetails.themeFooterLinksContent}`}>
                   {isEditMode && (
@@ -212,34 +212,34 @@ const Footer = ({isEditMode , userRole }) => {
                     </div>
                   )}
                   <ul>
-                  {footerLink.length > 0 ? (
-        footerLink.map((item) => (
-          <li key={item.Link_Id}>
-            {item.footer_document_data ? (
-              <Link
-                to={{
-                  pathname: `/linkpage/${item.Link_Id}`,
-                  state: {
-                    footerDocumentData: item.footer_document_data,
-                  },
-                }}
-              >
-                {item.Link_Item}
-              </Link>
-            ) : (
-              <Link to={item.Link_Routing_Data}>
-                {item.Link_Item}
-              </Link>
-            )}
-          </li>
-        ))
-      ) : userRole === 'user' ? (
-        <p>No links are available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>There are no links available. Please add the necessary links.</p>
-      ) : (
-        <p>No links are available. Please contact support if this issue persists.</p>
-      )}
+                    {footerLink.length > 0 ? (
+                      footerLink.map((item) => (
+                        <li key={item.Link_Id}>
+                          {item.footer_document_data ? (
+                            <Link
+                              to={{
+                                pathname: `/linkpage/${item.Link_Id}`,
+                                state: {
+                                  footerDocumentData: item.footer_document_data,
+                                },
+                              }}
+                            >
+                              {item.Link_Item}
+                            </Link>
+                          ) : (
+                            <Link to={item.Link_Routing_Data}>
+                              {item.Link_Item}
+                            </Link>
+                          )}
+                        </li>
+                      ))
+                    ) : userRole === 'user' ? (
+                      <p>No links are available at the moment. Please check back later.</p>
+                    ) : userRole === 'admin' ? (
+                      <p>There are no links available. Please add the necessary links.</p>
+                    ) : (
+                      <p>No links are available. Please contact support if this issue persists.</p>
+                    )}
                   </ul>
                 </div>
               </div>
@@ -277,39 +277,39 @@ const Footer = ({isEditMode , userRole }) => {
                     )}
                   </div>
                 )}
-                 {dataTwo.length > 0 ? (
-        dataTwo.map((item, index) =>
-          index === 0 ? (
-            <div
-              key={item.Content_id}
-              className={`Footer_ContactData ${themeDetails.themeFooterContactData}`}
-            >
-              <h2 className="new_landingfooter_conatinersecondpart_item">
-                {item.content_name}
-              </h2>
-            </div>
-          ) : (
-            <p
-              className="new_landingfooter_conatinersecondpart_item"
-              key={item.Content_id}
-            >
-              {item.content_name}
-            </p>
-          )
-        )
-      ) : userRole === 'user' ? (
-        <p>No contact information is available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>Contact information is currently missing. Please add the necessary details.</p>
-      ) : (
-        <p>No contact information is available. Please contact support if this issue persists.</p>
-      )}
+                {dataTwo.length > 0 ? (
+                  dataTwo.map((item, index) =>
+                    index === 0 ? (
+                      <div
+                        key={item.Content_id}
+                        className={`Footer_ContactData ${themeDetails.themeFooterContactData}`}
+                      >
+                        <h2 className="new_landingfooter_conatinersecondpart_item">
+                          {item.content_name}
+                        </h2>
+                      </div>
+                    ) : (
+                      <p
+                        className="new_landingfooter_conatinersecondpart_item"
+                        key={item.Content_id}
+                      >
+                        {item.content_name}
+                      </p>
+                    )
+                  )
+                ) : userRole === 'user' ? (
+                  <p>No contact information is available at the moment. Please check back later.</p>
+                ) : userRole === 'admin' ? (
+                  <p>Contact information is currently missing. Please add the necessary details.</p>
+                ) : (
+                  <p>No contact information is available. Please contact support if this issue persists.</p>
+                )}
               </div>
               <div className={`${themeDetails.themeFooterSMIcons}`}>
-             <Link to='/'> <FaFacebook /></Link>
-             <Link> <GrInstagram /></Link>
-             <Link><SiYoutube /></Link>
-             <Link><ImLinkedin /></Link>
+                <Link to='/'> <FaFacebook /></Link>
+                <Link> <GrInstagram /></Link>
+                <Link><SiYoutube /></Link>
+                <Link><ImLinkedin /></Link>
               </div>
             </div>
 
@@ -332,17 +332,17 @@ const Footer = ({isEditMode , userRole }) => {
                   )}
                 </div>
               )}
-            {dataThree.length > 0 ? (
-        dataThree.map((item) => (
-          <li key={item.Content_id}>{item.content_name}</li>
-        ))
-      ) : userRole === 'user' ? (
-        <p>No content available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>No content available. Please add the required content.</p>
-      ) : (
-        <p>No content available. Please contact support if this issue persists.</p>
-      )}
+              {dataThree.length > 0 ? (
+                dataThree.map((item) => (
+                  <li key={item.Content_id}>{item.content_name}</li>
+                ))
+              ) : userRole === 'user' ? (
+                <p>No content available at the moment. Please check back later.</p>
+              ) : userRole === 'admin' ? (
+                <p>No content available. Please add the required content.</p>
+              ) : (
+                <p>No content available. Please contact support if this issue persists.</p>
+              )}
             </div>
           </div>
         </div>
@@ -353,216 +353,216 @@ const Footer = ({isEditMode , userRole }) => {
             <div className={`Footer_Content_Main_Container ${themeDetails.themeFooterContentMainContainer}`}>
               <div className={`Footer_FirstContent__Container ${themeDetails.themeFooterFirstContentContainer}`}>
                 <div className={`Footer_eGRADTtutor__Content ${themeDetails.themeFootereGRADTtutoContent}`}>
-<div className="Editable_buttons_footer">
-{isEditMode && (
-                    <div>
-                      <button
-                        onClick={() =>
-                          setAddeGRADTutorContent(!addeGRADTutorContent)
-                        }
-                      >
-                        {addeGRADTutorContent
-                          ? "Hide eGRADTtor Form"
-                          : "Add GRADTtorData"}
-                      </button>
-                      {addeGRADTutorContent && (
-                        <FooterEdit type="Add eGRADTutor" />
-                      )}
-                    </div>
+                  <div className="Editable_buttons_footer">
+                    {isEditMode && (
+                      <div>
+                        <button
+                          onClick={() =>
+                            setAddeGRADTutorContent(!addeGRADTutorContent)
+                          }
+                        >
+                          {addeGRADTutorContent
+                            ? "Hide eGRADTtor Form"
+                            : "Add GRADTtorData"}
+                        </button>
+                        {addeGRADTutorContent && (
+                          <FooterEdit type="Add eGRADTutor" />
+                        )}
+                      </div>
+                    )}
+
+                    {isEditMode && (
+                      <div>
+                        <button
+                          onClick={() => setFirstPopupVisible(!FirstPopupVisible)}
+                        >
+                          {FirstPopupVisible
+                            ? "Hide eGRADTtor Form"
+                            : "EditeGRADTtorData"}
+                        </button>
+                        {FirstPopupVisible && <FooterEdit type="eGRADTutor" />}
+                      </div>
+                    )}
+                  </div>
+
+
+
+
+                  {dataOne.length > 0 ? (
+                    dataOne.map((item, index) =>
+                      index === 0 ? (
+                        <div
+                          key={item.Content_id}
+                          className={`Footer_FirstContent ${themeDetails.themeFooterFirstContent}`}
+                        >
+                          <h2 id="Footer_Heading">
+                            {item.content}
+                          </h2>
+                        </div>
+                      ) : (
+                        <p
+                          className="new_landingfooter_conatinerfristpart_item"
+                          key={item.Content_id}
+                        >
+                          {item.content}
+                        </p>
+                      )
+                    )
+                  ) : userRole === 'user' ? (
+                    <p>No content available at the moment. Please check back later.</p>
+                  ) : userRole === 'admin' ? (
+                    <p>There is no data available. Please add the content.</p>
+                  ) : (
+                    <p>No content available. Please contact support if this issue persists.</p>
                   )}
-
-                  {isEditMode && (
-                    <div>
-                      <button
-                        onClick={() => setFirstPopupVisible(!FirstPopupVisible)}
-                      >
-                        {FirstPopupVisible
-                          ? "Hide eGRADTtor Form"
-                          : "EditeGRADTtorData"}
-                      </button>
-                      {FirstPopupVisible && <FooterEdit type="eGRADTutor" />}
-                    </div>
-                  )}
-</div>
-                  
-                
-
-
-{dataOne.length > 0 ? (
-        dataOne.map((item, index) =>
-          index === 0 ? (
-            <div
-              key={item.Content_id}
-              className={`Footer_FirstContent ${themeDetails.themeFooterFirstContent}`}
-            >
-              <h2 id="Footer_Heading">
-                {item.content}
-              </h2>
-            </div>
-          ) : (
-            <p
-              className="new_landingfooter_conatinerfristpart_item"
-              key={item.Content_id}
-            >
-              {item.content}
-            </p>
-          )
-        )
-      ) : userRole === 'user' ? (
-        <p>No content available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>There is no data available. Please add the content.</p>
-      ) : (
-        <p>No content available. Please contact support if this issue persists.</p>
-      )}
                 </div>
                 <div className={`Footer_Links_Content ${themeDetails.themeFooterLinksContent}`}>
 
                   <div className="Editable_buttons_footer">
-                  {isEditMode && (
-                    <div>
-                      <button
-                        onClick={() =>
-                          setShowFooterLinksData(!showFooterLinksData)
-                        }
-                      >
-                        {showFooterLinksData ? "Hide Add Link" : "Add Link"}
-                      </button>
-                      {showFooterLinksData && (
-                        <FooterEdit type="Add_Footer_Links" />
-                      )}
-                    </div>
-                  )}
+                    {isEditMode && (
+                      <div>
+                        <button
+                          onClick={() =>
+                            setShowFooterLinksData(!showFooterLinksData)
+                          }
+                        >
+                          {showFooterLinksData ? "Hide Add Link" : "Add Link"}
+                        </button>
+                        {showFooterLinksData && (
+                          <FooterEdit type="Add_Footer_Links" />
+                        )}
+                      </div>
+                    )}
 
-                  {isEditMode && (
-                    <div>
-                      <button
-                        onClick={() =>
-                          setShowPreviousLinksData(!showPreviousLinksData)
-                        }
-                      >
-                        {showPreviousLinksData
-                          ? "Hide Edit Links"
-                          : "Edit Links"}
-                      </button>
-                      {showPreviousLinksData && (
-                        <FooterEdit type="Update_Footer_Links" />
-                      )}
-                    </div>
-                  )}
+                    {isEditMode && (
+                      <div>
+                        <button
+                          onClick={() =>
+                            setShowPreviousLinksData(!showPreviousLinksData)
+                          }
+                        >
+                          {showPreviousLinksData
+                            ? "Hide Edit Links"
+                            : "Edit Links"}
+                        </button>
+                        {showPreviousLinksData && (
+                          <FooterEdit type="Update_Footer_Links" />
+                        )}
+                      </div>
+                    )}
                   </div>
-                
+
 
                   <ul>
-                  {footerLink.length > 0 ? (
-        footerLink.map((item) => (
-          <li key={item.Link_Id}>
-            {item.footer_document_data ? (
-              <Link
-                to={{
-                  pathname: `/linkpage/${item.Link_Id}`,
-                  state: {
-                    footerDocumentData: item.footer_document_data,
-                  },
-                }}
-              >
-                {item.Link_Item}
-              </Link>
-            ) : (
-              <Link to={item.Link_Routing_Data}>
-                {item.Link_Item}
-              </Link>
-            )}
-          </li>
-        ))
-      ) : userRole === 'user' ? (
-        <p>No links are available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>There are no links available. Please add the necessary links.</p>
-      ) : (
-        <p>No links are available. Please contact support if this issue persists.</p>
-      )}
+                    {footerLink.length > 0 ? (
+                      footerLink.map((item) => (
+                        <li key={item.Link_Id}>
+                          {item.footer_document_data ? (
+                            <Link
+                              to={{
+                                pathname: `/linkpage/${item.Link_Id}`,
+                                state: {
+                                  footerDocumentData: item.footer_document_data,
+                                },
+                              }}
+                            >
+                              {item.Link_Item}
+                            </Link>
+                          ) : (
+                            <Link to={item.Link_Routing_Data}>
+                              {item.Link_Item}
+                            </Link>
+                          )}
+                        </li>
+                      ))
+                    ) : userRole === 'user' ? (
+                      <p>No links are available at the moment. Please check back later.</p>
+                    ) : userRole === 'admin' ? (
+                      <p>There are no links available. Please add the necessary links.</p>
+                    ) : (
+                      <p>No links are available. Please contact support if this issue persists.</p>
+                    )}
                   </ul>
                 </div>
               </div>
               <div className={`Footer_Contact_Us_Content ${themeDetails.themeFooterContactUsContent}`}>
 
                 <div className="Editable_buttons_footer">
-                {isEditMode && (
-                  <div>
-                    <button
-                      onClick={() =>
-                        setAddContactUsContent(!addContactUsContent)
-                      }
-                      className="editbtn"
-                    >
-                      {addContactUsContent
-                        ? "Hide ContactUs"
-                        : "Add ContactUs Data"}
-                    </button>
-                    {addContactUsContent && <FooterEdit type="Add ContactUs" />}
-                  </div>
-                )}
+                  {isEditMode && (
+                    <div>
+                      <button
+                        onClick={() =>
+                          setAddContactUsContent(!addContactUsContent)
+                        }
+                        className="editbtn"
+                      >
+                        {addContactUsContent
+                          ? "Hide ContactUs"
+                          : "Add ContactUs Data"}
+                      </button>
+                      {addContactUsContent && <FooterEdit type="Add ContactUs" />}
+                    </div>
+                  )}
 
-                {isEditMode && (
-                  <div>
-                    <button
-                      onClick={() =>
-                        setIsContactUsSectionVisible(!isContactUsSectionVisible)
-                      }
-                      className="editbtn"
-                    >
-                      {isContactUsSectionVisible
-                        ? "Hide ContactUs"
-                        : "Edit ContactUs Data"}
-                    </button>
-                    {isContactUsSectionVisible && (
-                      <FooterEdit type="ContactUs" />
-                    )}
-                  </div>
-                )}
+                  {isEditMode && (
+                    <div>
+                      <button
+                        onClick={() =>
+                          setIsContactUsSectionVisible(!isContactUsSectionVisible)
+                        }
+                        className="editbtn"
+                      >
+                        {isContactUsSectionVisible
+                          ? "Hide ContactUs"
+                          : "Edit ContactUs Data"}
+                      </button>
+                      {isContactUsSectionVisible && (
+                        <FooterEdit type="ContactUs" />
+                      )}
+                    </div>
+                  )}
                 </div>
-              
-               {dataTwo.length > 0 ? (
-        dataTwo.map((item, index) =>
-          index === 0 ? (
-            <div
-              key={item.Content_id}
-              className={`Footer_ContactData ${themeDetails.themeFooterContactData}`}
-            >
-              <h2 className="new_landingfooter_conatinersecondpart_item">
-                {item.content_name}
-              </h2>
-            </div>
-          ) : (
-            <p
-              className="new_landingfooter_conatinersecondpart_item"
-              key={item.Content_id}
-            >
-              {item.content_name}
-            </p>
-          )
-        )
-      ) : userRole === 'user' ? (
-        <p>No contact information available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>No contact information is available. Please update the details.</p>
-      ) : (
-        <p>No contact information available. Please contact support if this issue persists.</p>
-      )}
+
+                {dataTwo.length > 0 ? (
+                  dataTwo.map((item, index) =>
+                    index === 0 ? (
+                      <div
+                        key={item.Content_id}
+                        className={`Footer_ContactData ${themeDetails.themeFooterContactData}`}
+                      >
+                        <h2 className="new_landingfooter_conatinersecondpart_item">
+                          {item.content_name}
+                        </h2>
+                      </div>
+                    ) : (
+                      <p
+                        className="new_landingfooter_conatinersecondpart_item"
+                        key={item.Content_id}
+                      >
+                        {item.content_name}
+                      </p>
+                    )
+                  )
+                ) : userRole === 'user' ? (
+                  <p>No contact information available at the moment. Please check back later.</p>
+                ) : userRole === 'admin' ? (
+                  <p>No contact information is available. Please update the details.</p>
+                ) : (
+                  <p>No contact information available. Please contact support if this issue persists.</p>
+                )}
               </div>
-           
+
 
 
             </div>
 
 
             <div className={`${themeDetails.themeFooterSMIcons}`}>
-             <Link to='/'> <FaFacebook /></Link>
-             <Link> <GrInstagram /></Link>
-             <Link><SiYoutube /></Link>
-             <Link><ImLinkedin /></Link>
-              </div>
+              <Link to='/'> <FaFacebook /></Link>
+              <Link> <GrInstagram /></Link>
+              <Link><SiYoutube /></Link>
+              <Link><ImLinkedin /></Link>
+            </div>
 
             <div className={`Footer_Copywrite_Content_Container ${themeDetails.themeFooterCopywriteContentContainer}`}>
 
@@ -584,17 +584,17 @@ const Footer = ({isEditMode , userRole }) => {
                 </div>
               )}
 
-{dataThree.length > 0 ? (
-        dataThree.map((item) => (
-          <li key={item.Content_id}>{item.content_name}</li>
-        ))
-      ) : userRole === 'user' ? (
-        <p>No items available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>No items found. Please add the required content.</p>
-      ) : (
-        <p>No items available. Please contact support if this issue persists.</p>
-      )}
+              {dataThree.length > 0 ? (
+                dataThree.map((item) => (
+                  <li key={item.Content_id}>{item.content_name}</li>
+                ))
+              ) : userRole === 'user' ? (
+                <p>No items available at the moment. Please check back later.</p>
+              ) : userRole === 'admin' ? (
+                <p>No items found. Please add the required content.</p>
+              ) : (
+                <p>No items available. Please contact support if this issue persists.</p>
+              )}
             </div>
 
 
@@ -610,10 +610,10 @@ const Footer = ({isEditMode , userRole }) => {
               <path class="footer-wave-path" d="M851.8,100c125,0,288.3-45,348.2-64V0H0v44c3.7-1,7.3-1.9,11-2.9C80.7,22,151.7,10.8,223.5,6.3C276.7,2.9,330,4,383,9.8 c52.2,5.7,103.3,16.2,153.4,32.8C623.9,71.3,726.8,100,851.8,100z"></path>
             </svg>
             <div className={`footer-content ${themeDetails.themeInnerMainFooterContentContainer}`}>
-              
+
               <div className={`footer-content-column ${themeDetails.themeInnerMainFooterContentColumnContainer}`}>
                 <div className={`Footer_eGRADTtutor__Content ${themeDetails.themeFootereGRADTtutoContent}`}>
-                  
+
                   {isEditMode && (
                     <div>
                       <button
@@ -630,7 +630,7 @@ const Footer = ({isEditMode , userRole }) => {
                       )}
                     </div>
                   )}
-                  
+
 
                   {isEditMode && (
                     <div>
@@ -645,49 +645,49 @@ const Footer = ({isEditMode , userRole }) => {
                     </div>
                   )}
 
-                  
 
-{dataOne.length > 0 ? (
-        dataOne.map((item, index) =>
-          index === 0 ? (
-            <div
-              key={item.Content_id}
-              className={`Footer_FirstContent ${themeDetails.themeFooterFirstContent}`}
-            >
-              <h2 id="Footer_Heading">
-                {item.content}
-              </h2>
-            </div>
-          ) : (
-            <p
-              className="new_landingfooter_conatinerfristpart_item"
-              key={item.Content_id}
-            >
-              {item.content}
-            </p>
-          )
-        )
-      ) : userRole === 'user' ? (
-        <p>No content available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>There is no content available. Please add the necessary content.</p>
-      ) : (
-        <p>No content available. Please contact support if this issue persists.</p>
-      )}
-        
+
+                  {dataOne.length > 0 ? (
+                    dataOne.map((item, index) =>
+                      index === 0 ? (
+                        <div
+                          key={item.Content_id}
+                          className={`Footer_FirstContent ${themeDetails.themeFooterFirstContent}`}
+                        >
+                          <h2 id="Footer_Heading">
+                            {item.content}
+                          </h2>
+                        </div>
+                      ) : (
+                        <p
+                          className="new_landingfooter_conatinerfristpart_item"
+                          key={item.Content_id}
+                        >
+                          {item.content}
+                        </p>
+                      )
+                    )
+                  ) : userRole === 'user' ? (
+                    <p>No content available at the moment. Please check back later.</p>
+                  ) : userRole === 'admin' ? (
+                    <p>There is no content available. Please add the necessary content.</p>
+                  ) : (
+                    <p>No content available. Please contact support if this issue persists.</p>
+                  )}
+
                 </div>
                 <div className={`${themeDetails.themeFooterSMIcons}`}>
-             <Link to='/'> <FaFacebook /></Link>
-             <Link> <GrInstagram /></Link>
-             <Link><SiYoutube /></Link>
-             <Link><ImLinkedin /></Link>
-              </div>
+                  <Link to='/'> <FaFacebook /></Link>
+                  <Link> <GrInstagram /></Link>
+                  <Link><SiYoutube /></Link>
+                  <Link><ImLinkedin /></Link>
+                </div>
               </div>
 
             </div>
             <div className={`contact-content ${themeDetails.themeContactFooterContentContainer}`}>
               <div className={`footer-content-column ${themeDetails.themeFooterContentColumn}`}>
-                
+
                 <div className={`Footer_FirstContent__Container ${themeDetails.themeFooterFirstContentContainer}`}>
                   <div className={`Footer_Links_Content ${themeDetails.themeFooterLinksContent}`}>
                     {isEditMode && (
@@ -721,36 +721,36 @@ const Footer = ({isEditMode , userRole }) => {
                       </div>
                     )}
                     <ul>
-                    {footerLink.length > 0 ? (
-        footerLink.map((item) => (
-          <li key={item.Link_Id}>
-            {item.footer_document_data ? (
-              <Link
-                to={{
-                  pathname: `/linkpage/${item.Link_Id}`,
-                  state: {
-                    footerDocumentData: item.footer_document_data,
-                  },
-                }}
-              >
-                {item.Link_Item}
-              </Link>
-            ) : (
-              <Link to={item.Link_Routing_Data}>
-                {item.Link_Item}
-              </Link>
-            )}
-          </li>
-        ))
-      ) : userRole === 'user' ? (
-        <p>No links are available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>There are no links available. Please add the necessary links.</p>
-      ) : (
-        <p>No links are available. Please contact support if this issue persists.</p>
-      )}
+                      {footerLink.length > 0 ? (
+                        footerLink.map((item) => (
+                          <li key={item.Link_Id}>
+                            {item.footer_document_data ? (
+                              <Link
+                                to={{
+                                  pathname: `/linkpage/${item.Link_Id}`,
+                                  state: {
+                                    footerDocumentData: item.footer_document_data,
+                                  },
+                                }}
+                              >
+                                {item.Link_Item}
+                              </Link>
+                            ) : (
+                              <Link to={item.Link_Routing_Data}>
+                                {item.Link_Item}
+                              </Link>
+                            )}
+                          </li>
+                        ))
+                      ) : userRole === 'user' ? (
+                        <p>No links are available at the moment. Please check back later.</p>
+                      ) : userRole === 'admin' ? (
+                        <p>There are no links available. Please add the necessary links.</p>
+                      ) : (
+                        <p>No links are available. Please contact support if this issue persists.</p>
+                      )}
                     </ul>
-                    
+
                   </div>
                 </div>
               </div>
@@ -792,38 +792,50 @@ const Footer = ({isEditMode , userRole }) => {
                       )}
                     </div>
                   )}
-                 {dataTwo.length > 0 ? (
-        dataTwo.map((item, index) =>
-          index === 0 ? (
-            <div
-              key={item.Content_id}
-              className={`Footer_ContactData ${themeDetails.themeFooterContactData}`}
-            >
-              <h2 className="new_landingfooter_conatinersecondpart_item">
-                {item.content_name}
-              </h2>
-            </div>
-          ) : (
-            <p
-              className="new_landingfooter_conatinersecondpart_item"
-              key={item.Content_id}
-            >
-              {item.content_name}
-            </p>
-          )
-        )
-      ) : userRole === 'user' ? (
-        <p>No contact information available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>Contact information is missing. Please update the details.</p>
-      ) : (
-        <p>No contact information available. Please contact support if this issue persists.</p>
-      )}
+                  {dataTwo.length > 0 ? (
+                    dataTwo.map((item, index) =>
+                      index === 0 ? (
+                        <div
+                          key={item.Content_id}
+                          className={`Footer_ContactData ${themeDetails.themeFooterContactData}`}
+                        >
+                          <h2 className="new_landingfooter_conatinersecondpart_item">
+                            {item.content_name}
+                          </h2>
+                        </div>
+                      ) : (
+                        <p
+                          className="new_landingfooter_conatinersecondpart_item"
+                          key={item.Content_id}
+                        >
+                          {item.content_name}
+                        </p>
+                      )
+                    )
+                  ) : userRole === 'user' ? (
+                    <p>No contact information available at the moment. Please check back later.</p>
+                  ) : userRole === 'admin' ? (
+                    <p>Contact information is missing. Please update the details.</p>
+                  ) : (
+                    <p>No contact information available. Please contact support if this issue persists.</p>
+                  )}
                 </div>
-
+                {dataThree.length > 0 ? (
+                  dataThree.map((item) => (
+                    <li key={item.Content_id}>{item.content_name}</li>
+                  ))
+                ) : userRole === 'user' ? (
+                  <p>No content available at the moment. Please check back later.</p>
+                ) : userRole === 'admin' ? (
+                  <p>No content available. Please add the required content.</p>
+                ) : (
+                  <p>No content available. Please contact support if this issue persists.</p>
+                )}
               </div>
 
             </div>
+
+
           </footer>
         </div>
       }
