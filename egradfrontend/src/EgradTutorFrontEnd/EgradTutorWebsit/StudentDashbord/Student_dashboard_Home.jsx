@@ -3,6 +3,7 @@ import BASE_URL from '../../../apiConfig';
 import axios from 'axios';
 import '../../EgradTutorWebsit/StudentDashbord/Style/Student_dashboard.css'
 import welcome_greeting_img from '../../../styles/Girl.png'
+import { useLocation, useNavigate } from 'react-router-dom';
 // import welcome_greeting_img from './Images/welcome_greeting_img.png'
 // import welcome_greeting_img from './Images/welcome_greeting_img.png'
 const Student_dashboard_Home = ({ usersData }) => {
@@ -12,13 +13,21 @@ const Student_dashboard_Home = ({ usersData }) => {
   // ):null;
   // console.log(usersData.users[0].role, "this is the user data from the props in the student dashboard home.jsx")
   // setRoleOfLoggedIn(usersData.users[0].role);
-
+  const [showLogOutContent, setShowLogOutContent] = useState(false)
   const user_Id = usersData.users && usersData.users.length > 0 ? (
     usersData.users.map((user) => user.username)
 
   ) : null;
   const [greeting, setGreeting] = useState("");
-
+  // useEffect(()=>{
+  //   const handlePopState=()=>{
+  //     setShowLogOutContent(true)
+  //   }
+  //   window.addEventListener("popstate",handlePopState);
+  //   return ()=>{
+  //     window.removeEventListener("popstate",handlePopState)
+  //   }
+  // },[])
   useEffect(() => {
     // Get current hour
     const currentHour = new Date().getHours();
@@ -36,21 +45,36 @@ const Student_dashboard_Home = ({ usersData }) => {
     setGreeting(newGreeting);
   }, []);
 
-  const [attemptedTestCount, setAttemptedTestCount] = useState([]);
-  useEffect(() => {
-    const fetchAttemptedTestCount = async () => {
-      try {
-        const response = await axios.get(
-          `${BASE_URL}/Myresult/attempted_test_count/${user_Id}`
-        );
-        setAttemptedTestCount(response.data);
-      } catch (error) {
-        console.error("Error fetching attempted test count:", error);
-      }
-    };
+  // const [attemptedTestCount, setAttemptedTestCount] = useState([]);
+  // useEffect(() => {
+  //   const fetchAttemptedTestCount = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${BASE_URL}/Myresult/attempted_test_count/${user_Id}`
+  //       );
+  //       setAttemptedTestCount(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching attempted test count:", error);
+  //     }
+  //   };
 
-    fetchAttemptedTestCount();
-  }, [user_Id]);
+  //   fetchAttemptedTestCount();
+  // }, [user_Id]);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+      const handlePopState = () => {
+          alert('You clicked the back arrow or navigated back!');
+      };
+
+      // Add popstate event listener
+      window.addEventListener('popstate', handlePopState);
+
+      return () => {
+          window.removeEventListener('popstate', handlePopState);
+      };
+  }, [location.key]);
   return (
     <div className="dashboard_body_container">
       <div className="dashboard_welcome_section">
@@ -76,7 +100,7 @@ const Student_dashboard_Home = ({ usersData }) => {
       </div>
       <div>
         <div className="testcounts_student_dashbard">
-          {attemptedTestCount
+          {/* {attemptedTestCount
             .filter((item) => item.Portale_Id === 1 || item.Portale_Id === 2)
             .map(
               (item, index) =>
@@ -108,9 +132,14 @@ const Student_dashboard_Home = ({ usersData }) => {
                     </ul>
                   </div>
                 )
-            )}
+            )} */}
         </div>
       </div>
+      {/* {showLogOutContent && (
+                <div className="back-button-content">
+                    <p>Content to display when back button is clicked</p>
+                </div>
+            )} */}
     </div>
   );
 };
