@@ -64,7 +64,7 @@ const WhyChooseUs = ({ isEditMode, userRole}) => {
   const themeDetails = JSONClasses[themeColor] || [];
 
   return (
-    <div className={`${themeDetails.themeTabsDivMainContainer}`} >
+    <div id="WhyChooseUs" className={`${themeDetails.themeTabsDivMainContainer}`} >
       <div className={`${themeDetails.themeTabsDiv}`}>
         <div className={`${themeDetails.themeTabsSubContainer}`}>
           {isEditMode && (

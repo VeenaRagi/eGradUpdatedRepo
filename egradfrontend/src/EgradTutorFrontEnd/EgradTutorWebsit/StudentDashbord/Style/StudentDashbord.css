@@ -150,6 +150,63 @@
 -----------------------in mycourses section testcrads --------------- */
 
 
+.testcard_inline {
+  width: 100%;
+  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(00px, 250px));
+  background-color: lightblue;
+  padding: 0;
+  margin: 0.5rem 0;
+
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-left: 0.5rem;
+  gap: 0.5rem;
+  li {
+    font-weight: 700;
+    font-size: 16px;
+    span {
+      color: #1f2641;
+   
+    }
+    a {
+      background: #000000;
+      justify-self: flex-end;
+      border-radius: 0;
+      padding: 4.9px;
+      font-weight: 700;
+      display: flex;
+    justify-content: center;align-items: center;
+    span{
+      color: #fff;
+    }
+    }
+    .Result_Analysis{
+        text-align: center;
+    }
+  }
+}
+.testcard_inline li {
+  grid-column: span 1; 
+  /* background-color: lightblue; */
+  /* padding: 10px; */
+}
+/* .testcard_inline li:nth-child(1) {
+  grid-column: span 1/2; 
+} */
+.testcard_inline li:nth-child(1) {
+  grid-column: span 2;
+}
+.testcard_inline li:nth-child(5) {
+  /* position: absolute; */
+  right: 0;
+  bottom: 0;
+}
+
+
 .ChallengeOverlay {
   position: fixed;
   top: 0;
@@ -998,13 +1055,15 @@
   padding-right: 20px;
 }
 
-.testpage_menu_reset_btn button{
+.testpage_menu_reset_btn button {
   background-color: rgb(163, 151, 151);
   color: white;
-  height: 45px;
+  height: 40px;
+  margin-top: 7px;
 }
 
 .testpage_menu_reset_btn button:hover{
   background-color: rgb(73, 70, 70);
   color: white;
 }
+

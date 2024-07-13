@@ -74,7 +74,7 @@ const PoopularCourses = ({userRole}) => {
   };
  
   return (
-    <div className={`${themeDetails.themePopularCourses_container}`}>
+    <div id="PoopularCourses" className={`${themeDetails.themePopularCourses_container}`}>
       <div className={`${themeDetails.themePopularCourses_Subcontainer}`}>
         <div className={`courseheader_continer ${themeDetails.themeCourseheader_continer }`}>
           <div
