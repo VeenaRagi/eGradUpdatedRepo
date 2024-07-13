@@ -431,15 +431,32 @@ a {
 /* Full-page overlay to cover the background when the card is open */
 
 
+
+
 /* The card container */
-.UploadPopups_Container {
+/* .UploadPopups_Container {
     background-color: white;
     box-shadow: 5px 5px 3px 3px #625d5d;
     padding: 2rem;
-    /* max-width: 600px; */
     margin: 0 auto;
     z-index: 1000;
     position: relative;
+} */
+
+.UploadPopups_Container{
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000; /* Ensure it is above the overlay */
+}
+
+.toggle-button-container {
+    position: relative;
+    z-index: 1020;
+    left: 250px;
+    top: 28px;
+    /* border-radius: 100%; */
 }
 
 .UploadPopups_Container h2 {
