@@ -430,14 +430,15 @@ a {
 
 /* Full-page overlay to cover the background when the card is open */
 .overlay {
-    /* position: fixed; */
+    position: fixed;
     /* Cover the entire viewport */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* background-color: rgba(0, 0, 0, 0.5); */
+    background-color: rgba(0, 0, 0, 0.5);
     /* Semi-transparent black background */
+    /* background-color: transparent; */
     display: flex;
     align-items: center;
     /* Center content vertically */
@@ -445,6 +446,7 @@ a {
     /* Center content horizontally */
     z-index: 999;
     /* Ensure it is above other content */
+    backdrop-filter: blur(5px); /* Adds the blur effect */
 }
 
 /* The card container */
@@ -602,4 +604,23 @@ button:hover {
     display: flex;
     gap:2rem;
     align-items: center;
+}
+
+
+
+.Exams_Container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap onto the next line */
+    gap: 16px; /* Optional: Adds spacing between items */
+}
+
+.Exam_Item {
+    flex: 1 1 calc(50% - 16px); /* Flex item will take up 50% of the container width minus the gap */
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+    display: flex;
+    justify-content: space-between;
+}
+.Icons_container {
+    display: flex;
+    gap:2rem;
 }
