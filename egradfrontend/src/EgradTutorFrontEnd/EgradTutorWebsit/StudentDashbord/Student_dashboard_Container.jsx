@@ -43,36 +43,44 @@ const Student_dashboard_Container = ({ usersData, decryptedUserIdState }) => {
                 className={activeComponent ? "activeButton" : ""}
                 onClick={() => handleMenuClick("home")}
               >
+                 <span class="material-symbols-outlined">dashboard</span>
                 Dashboard
               </button>
               <button
                 className={activeComponent ? "activeButton" : ""}
                 onClick={() => handleMenuClick("myCourses")}
               >
+                   <span class="material-symbols-outlined">box</span>
                 My Courses
               </button>
               <button
                 className={activeComponent ? "activeButton" : ""}
                 onClick={() => handleMenuClick("buyCourses")}
               >
+                   <span class="material-symbols-outlined">shopping_cart</span> 
                 Buy Courses
               </button>
               <button
                 className={activeComponent ? "activeButton" : ""}
                 onClick={() => handleMenuClick("myResults")}
               >
+                     <span class="material-symbols-outlined">grading</span>
                 My Results
               </button>
               <button
                 className={activeComponent ? "activeButton" : ""}
                 onClick={() => handleMenuClick("bookmarks")}
               >
+                  <span class="material-symbols-outlined">bookmark_added</span>
                 Bookmarks
               </button>
               <button
                 className={activeComponent ? "activeButton" : ""}
                 onClick={() => handleMenuClick("settings")}
               >
+                 <span class="material-symbols-outlined">
+                settings_account_box
+              </span>
                 Settings
               </button>
             </div>
