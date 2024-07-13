@@ -213,14 +213,17 @@ const RegistrationForm = () => {
           </div>
         </div>
       )}
-      {emailExists && (
-        <div>
-          <p style={{ color: "red" }}>
-            An account with this email already exists.
-          </p>
-          <button onClick={() => navigate("/UserLogin")}>Login</button>
-        </div>
-      )}
+  {emailExists && (
+  <div className="popup-overlay">
+    <div className="popup-content">
+      <button className="close-button" onClick={() => setEmailExists(false)}>X</button>
+      <p>An account with this email already exists.</p>
+      <button onClick={() => navigate("/UserLogin")}>Login</button>
+    </div>
+  </div>
+)}
+
+
       <form onSubmit={handleSubmit} className="registrationForm" encType="multipart/form-data">
         <div className="">
           <div className="fieldsToBeGrid">
