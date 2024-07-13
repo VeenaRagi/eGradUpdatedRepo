@@ -49,6 +49,7 @@ const UserLogin = () => {
           token: accessToken,
           role:role,
           userDecryptedId:decryptedId,
+          isLoggedIn:true
         };
         console.log("New Auth State:", newAuthState);
         settiAuth(newAuthState);

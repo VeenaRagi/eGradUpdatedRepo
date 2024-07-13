@@ -127,7 +127,7 @@ refreshChannel.onmessage = function (event) {
                   <div>
                     {isEditMode && (
                       <div>
-                        <button
+                        <button className="toggle-button-container"
                           onClick={() =>
                             setAddeGRADTutorContent(!addeGRADTutorContent)
                           }

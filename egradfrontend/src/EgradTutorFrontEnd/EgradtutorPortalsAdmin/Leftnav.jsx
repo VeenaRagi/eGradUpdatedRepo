@@ -23,10 +23,10 @@ import StudentDoubtSection from "./StudentDoubtSection.jsx";
 import Portal_coures_creation_admin from "./Portal_coures_creation_admin.jsx";
 import OvlvidesUpload from "./OvlvidesUpload.jsx";
 import Testcreationadminforms from "./Testcreationadminforms.jsx";
-import ThemesSection from "./ThemesSection.jsx";
+// import ThemesSection from "./ThemesSection.jsx";
 const STORAGE_KEY = "left_nav_state_admin";
 
-const Leftnav = () => {
+const Leftnav = ({decryptedUserIdState}) => {
   const [showMenu, setshowMenu] = useState(0);
 
   const [showdashboard, setShowdashboard] = useState(true);
@@ -42,7 +42,7 @@ const Leftnav = () => {
   const [showImage_Upload_for_Ac, setShowImage_Upload_for_Ac] = useState(false);
   const [showStudentDoubtSection, setshowStudentDoubtSection] = useState(false);
 // Themes section
-const[showThemesSectionn,setShowThemesSectionn]=useState(false)
+// const[showThemesSectionn,setShowThemesSectionn]=useState(false)
   useEffect(() => {
     const savedState = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (savedState) {
@@ -56,7 +56,7 @@ const[showThemesSectionn,setShowThemesSectionn]=useState(false)
       setShowregisteredstudent(savedState.showregisteredstudent);
       setShowImage_Upload_for_Ac(savedState.showImage_Upload_for_Ac);
       setshowStudentDoubtSection(savedState.showStudentDoubtSection);
-      setShowThemesSectionn(savedState.showThemesSectionn)
+      // setShowThemesSectionn(savedState.showThemesSectionn)
     } else {
       // Set the default values if no saved state is found
       localStorage.setItem(
@@ -72,7 +72,7 @@ const[showThemesSectionn,setShowThemesSectionn]=useState(false)
           showregisteredstudent: false,
           showImage_Upload_for_Ac: false,
           showStudentDoubtSection: false,
-          ShowThemesSectionn:false,
+          // ShowThemesSectionn:false,
 
         })
       );
@@ -90,7 +90,7 @@ const[showThemesSectionn,setShowThemesSectionn]=useState(false)
     setShowregisteredstudent(false);
     setShowImage_Upload_for_Ac(false);
     setshowStudentDoubtSection(false);
-   setShowThemesSectionn(false)
+  //  setShowThemesSectionn(false)
 
     setState(true); // Set the clicked section to true
     localStorage.setItem(
@@ -106,7 +106,7 @@ const[showThemesSectionn,setShowThemesSectionn]=useState(false)
         showregisteredstudent: setState === setShowregisteredstudent,
         showImage_Upload_for_Ac: setState === setShowImage_Upload_for_Ac,
         showStudentDoubtSection: setState === setshowStudentDoubtSection,
-        showThemesSectionn:setState===setShowThemesSectionn,
+        // showThemesSectionn:setState===setShowThemesSectionn,
       })
     );
   };
@@ -246,7 +246,7 @@ const[showThemesSectionn,setShowThemesSectionn]=useState(false)
                 </p>
               </Link>
             </li>
-            <li className={showThemesSectionn?"activeSD":""}>
+            {/* <li className={showThemesSectionn?"activeSD":""}>
               <Link
                 className="LeftnavLinks"
                 onClick={() => handleSectionClick(setShowThemesSectionn)}
@@ -256,7 +256,7 @@ const[showThemesSectionn,setShowThemesSectionn]=useState(false)
                  Themes Section
                 </p>
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
@@ -277,14 +277,14 @@ const[showThemesSectionn,setShowThemesSectionn]=useState(false)
 
       {showregisteredstudent ? (
         <div className="admin_S_R_INfo">
-          <Account_info />
+          <Account_info decryptedUserIdState={decryptedUserIdState} />
         </div>
       ) : null}
 
       {showImage_Upload_for_Ac ? <Image_Upload_for_Ac_ADMIN /> : null}
 
       {showStudentDoubtSection ? <StudentDoubtSection /> : null}
-      {showThemesSectionn ? <ThemesSection/> : null}
+      {/* {showThemesSectionn ? <ThemesSection/> : null} */}
 
     </>
   );
