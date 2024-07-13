@@ -45,10 +45,26 @@ function App({decryptedUserIdState}) {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    const userRole = localStorage.getItem("userRole");
-    if (userRole === "admin") {
-      setIsAdmin(true);
-    }
+    const checkLoggedIn = () => {
+      const isLoggedInObjFromLS = localStorage.getItem("tiAuth");
+      console.log(isLoggedInObjFromLS);
+      if (isLoggedInObjFromLS) {
+        try {
+          const tiAuth = JSON.parse(isLoggedInObjFromLS);
+          console.log(tiAuth.isLoggedIn,"this is the status")
+          const role=tiAuth.role
+          // setIsLoggedInFromLS(tiAuth.isLoggedIn);
+          // console.log(tiAuth,"this is ssssssssssss")
+          // console.log(isLoggedInFromLS, "wwwwwwwwwwwwwwwwwwwwwww");
+          if (role === "admin") {
+            setIsAdmin(true);
+          }
+        } catch (error) {
+          console.log(error, "parsing the tiauth for back button");
+        }
+      }
+    };
+    checkLoggedIn();
   }, []);
 
   const toggleEditMode = () => {
