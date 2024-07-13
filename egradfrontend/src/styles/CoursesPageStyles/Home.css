@@ -1228,18 +1228,25 @@ i#footerIcons:hover {
   text-decoration: none;
   border-radius: 3px;
 }
+
+
+@keyframes flickerAnimation {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+
  
 .subheading {
   width: 100%;
-  font-size: 1.5rem;
-  height: 5vh;
-  background-color: #ffffff;
+  font-size: 20px;
   padding: 10px;
+  color: red;
   margin: 1rem auto !important;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* text-align: left; */
+  animation: flickerAnimation 2s infinite;
 }
 .subheadingNote_dashboard_forPerformance {
   position: relative;

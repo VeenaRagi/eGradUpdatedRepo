@@ -93,7 +93,7 @@ li {
 .QuizBUy_coursesheaderwithfilteringcontainer div:nth-child(2) {
   width: 250px;
   margin: 0.5rem auto;
-  margin-right: 0.5rem;
+  margin-right: 1.5rem;
   select {
     width: 100%;
   }

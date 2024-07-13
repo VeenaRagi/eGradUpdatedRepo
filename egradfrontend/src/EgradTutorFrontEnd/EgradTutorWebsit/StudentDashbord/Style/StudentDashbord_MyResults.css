@@ -64,3 +64,20 @@
     right: 0;
     bottom: 0;
   }
+
+  @keyframes flickerAnimation {
+    0%   { opacity: 1; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  p.no_tests_message {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: red;
+    font-size: 20px;
+    align-items: center;
+    animation: flickerAnimation 2s infinite;
+  }
+  
