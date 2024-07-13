@@ -6,6 +6,8 @@ const mysql = require("mysql");
     user: "root",
     password: "",
     database: "admin_project",
+
+    
   }); 
   
 db1.connect((err) => {
