@@ -127,6 +127,25 @@ const QuestionBankQuiz = () => {
       console.error("Error deleting user data:", error);
     }
   }
+
+
+  const [image, setImage] = useState(null);
+  const fetchImage = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/Logo/image`, {
+        responseType: "arraybuffer",
+      });
+      const imageBlob = new Blob([response.data], { type: "image/png" });
+      const imageUrl = URL.createObjectURL(imageBlob);
+      setImage(imageUrl);
+    } catch (error) {
+      console.error("Error fetching image:", error);
+    }
+  };
+  useEffect(() => {
+    fetchImage();
+  }, []);
+  
   // const [testDetails, setTestDetails] = useState(null);
   useEffect(() => {
     const fetchTestDetails = async () => {
@@ -3009,6 +3028,7 @@ const QuestionBankQuiz = () => {
       <div className="quiz_exam_interface_header quiz_exam_interface_header_q_if_H">
         <div className="quiz_exam_interface_header_LOGO ">
           {/* <img src={logo} alt="" /> */}
+          <img src={image} alt="Current" />
         </div>
         <p
           className="testname_heading_quizPage"

@@ -189,11 +189,14 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
       const token = new Date().getTime().toString();
       sessionStorage.setItem("navigationToken", token);
 
+     
       const url = `/Instructions/${encodeURIComponent(
         encryptedParam1
       )}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(
         encryptedParam3
       )}`;
+
+
 
       const newWinRef = window.open(
         url,
@@ -201,10 +204,14 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
         `width=${screenWidth},height=${screenHeight},fullscreen=yes`
       );
 
-       // Wait for the new window to load and then post the message
-       newWinRef.onload = () => {
-        newWinRef.postMessage({ usersData }, '*');
-      };
+      if (newWinRef) {
+        newWinRef.onload = () => {
+          newWinRef.postMessage({ usersData }, '*');
+        };
+      } else {
+        console.error("Failed to open new window");
+      }
+  
 
       // if (newWinRef && !newWinRef.closed) {
       //   newWinRef.focus();
@@ -972,7 +979,16 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
           </div>
         </div>
       )}
-      {/* //main */}
+     
+    </div>
+  );
+};
+
+export default StudentDashbord_MyCourses;
+
+
+
+ {/* //main */}
       {/* {showCompletePackageContainer && (
           <div>
             <div className="card_container_dashbordflowtest">
@@ -1039,8 +1055,3 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
             </div>
           </div>
         )} */}
-    </div>
-  );
-};
-
-export default StudentDashbord_MyCourses;
