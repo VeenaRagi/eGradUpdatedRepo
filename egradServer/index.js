@@ -156,6 +156,10 @@ const ughomepage_banner_login =require("./OTS_Quiz_Admin/ughomepage_banner_login
 
 app.use("/ughomepage_banner_login" , ughomepage_banner_login)
 
+
+const AdminProfile=require("./OTS_Quiz_Admin/AdminProfile")
+app.use("/AdminProfile",AdminProfile)
+
 //================OTS_QUIZAPP_IMPORTS_START=================
 const ExamPage = require("./eGradTutorStudentDashboard/ExamPage");
 const Exam_Course_Page = require("./eGradTutorStudentDashboard/Exam_Course_Page");
