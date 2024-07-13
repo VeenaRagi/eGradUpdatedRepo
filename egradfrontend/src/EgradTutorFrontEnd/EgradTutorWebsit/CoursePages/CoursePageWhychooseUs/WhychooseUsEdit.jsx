@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import BASE_URL from "../../../../apiConfig";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import '../../../../styles/Default_landingPage_styles.css';
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { CiEdit } from "react-icons/ci";
 const WhychooseUsEdit = ({ type }) => {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -357,7 +360,7 @@ const handleDeleteTab=async(objPre)=>{
   return (
     <div>
       {type === "WhyChooseUs" && (
-        <div>
+     <div className="UploadPopups_Container">
           {" "}
           <form onSubmit={handleSubmit}>
             <div>
@@ -435,7 +438,7 @@ const handleDeleteTab=async(objPre)=>{
         </div>
       )}
       {type === 'tabButtonForm' && (
-        <div>
+     <div className="UploadPopups_Container">
           <form action="" onSubmit={handleTabDataSubmit}>
             <div>
               <label htmlFor="">Select a Portale: </label>
@@ -483,14 +486,13 @@ const handleDeleteTab=async(objPre)=>{
             <div>
               <div>
                 {tabEditDetails.map(objPre => (
-                  <div key={objPre.id} style={{ border: "1px solid black" }}>
-                    <button type="button" onClick={() => handlePreFillDropDown(objPre)}>Edit</button>
-                    <button type="button" onClick={()=>handleDeleteTab(objPre)}>Delete</button>
-                    <div style={{ width: "50%" }}>
+                  <div  className = "ploadPopups_Container" key={objPre.id}>
+                    <button className = "Edit_button" type="button" onClick={() => handlePreFillDropDown(objPre)}><CiEdit /></button>
+                    <button className = "Delete_button" type="button" onClick={()=>handleDeleteTab(objPre)}><RiDeleteBin6Line /></button>
+                    <div className="why-chooseUs_image_Container">
                       <img src={`data:image/png;base64,${objPre.course_tab_image}`} alt="nopeeeeee" />
-                    </div>
-                    <br />
                     <span>{objPre.course_tab_text}</span>
+                    </div>
                   </div>
                 ))}
               </div>
