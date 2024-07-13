@@ -28,10 +28,10 @@
 }
 .themeCourseAmountSpanDefault {
     border-bottom-left-radius: 10px;
-    background-color: #ebcece;
+    /* background-color: #ebcece; */
     padding: 8px;
     width: 160px;
-    color: #03a8eb;
+    /* color: #03a8eb; */
     border-top-right-radius: 10px;
     font-weight: bold;
 }
@@ -192,7 +192,7 @@ h2#white_examName {
     background: #fbfbfb;
     padding: 18px 8px;
     border-bottom: 1px solid;
-    color: var(--whiteThemeYellow) !important;
+    /* color: var(--whiteThemeYellow) !important; */
     font-family: var(--whiteTheme_font);
     font-size: 36px;
     text-align: left!important;
@@ -493,7 +493,8 @@ ul.courseHeaderUl.undefined {
 ul.courseHeaderUl.undefined a {
     color: white;
     font-size: 16px;
-    font-weight: 600;
+    text-transform: uppercase !important;
+  
 }
 h2.whiteContant {
     color: #108dc1;
@@ -583,10 +584,14 @@ h2.whiteContant {
 }
 
 @media(max-width:1280px) {
-    ul.courseHeaderUl.undefined {
-        display: flex;
-        gap: 2rem;
-    }
+  .navbar-inverse .navbar-nav>li>a {
+    color: white !important;
+    text-transform: uppercase !important;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: white !important;
+    text-transform: uppercase !important;
+}
 }
 
 
