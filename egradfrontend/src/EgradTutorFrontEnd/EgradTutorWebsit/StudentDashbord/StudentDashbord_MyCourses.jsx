@@ -399,12 +399,12 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
       return (
         <span
           className="span_style_attempt_status"
-          style={{
-            backgroundColor: "red",
-            color: "white",
-            padding: "2.9px",
-            textDecoration: "none",
-          }}
+          // style={{
+          //   backgroundColor: "red",
+          //   color: "white",
+          //   padding: "2.9px",
+          //   textDecoration: "none",
+          // }}
         >
           Attempted
         </span>
@@ -413,7 +413,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
 
     return (
       <Link
-        className="test_start_button"
+         className="span_style_start_button"
         to="#"
         onClick={() => {
           openPopup(testCreationTableId, user_Id, Portale_Id);
