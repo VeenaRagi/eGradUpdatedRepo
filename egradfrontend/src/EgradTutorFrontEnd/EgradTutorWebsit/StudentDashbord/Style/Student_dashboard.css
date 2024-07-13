@@ -36,7 +36,6 @@
 
 .greeting_sub_text {
     font-size: 20px;
-    padding-left: 20px;
     padding-top: 10px;
 }
 
@@ -82,7 +81,6 @@
 
     .greeting_sub_text {
         font-size: 15px;
-        padding-left: 20px;
     }
     .dashboard_welcome_img_section{
         align-items: center;
