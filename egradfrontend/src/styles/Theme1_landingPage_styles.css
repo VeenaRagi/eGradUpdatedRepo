@@ -397,8 +397,7 @@ img.t1LogoImg {
     flex-direction: column;
     font-size: 30px;
     position: absolute;
-    left: 300px;
-    /* justify-content: flex-end;  */
+    left: 330px;
     gap: 5px;
 }
 
@@ -785,7 +784,9 @@ margin-bottom: 0px;
     text-decoration: none;
 }
 
-
+.Footer_Contact_Us_Content.t1FooterContactUsContent {
+    text-align: start;
+}
 
 
 
@@ -891,6 +892,7 @@ margin-bottom: 0px;
 
 .t1FooterFirstContent #Footer_Heading {
     color:black;
+    text-align: start;
 }
 
 .t1FooterFirstContent p {
@@ -900,6 +902,9 @@ margin-bottom: 0px;
 
 .t1FootereGRADTtutoContent .new_landingfooter_conatinerfristpart_item {
     color: black;
+    width: 70%;
+    text-align: start;
+    padding-left: 20px;
 }
 
 .Footer_eGRADTtutor__Content.t1FootereGRADTtutoContent {
@@ -915,7 +920,7 @@ color: rgb(25 73 135);;
 .t1InnerMainFooterContentContainer {
     margin-right: auto;
     max-width: 1230px;
-    padding: 25px 15px 115px;
+    padding: 25px 15px 45px;
     position: relative;
 }
 
@@ -940,6 +945,7 @@ color: rgb(25 73 135);;
 
 .t1FooterContactData h2 {
     color: black;
+    text-align: start;
 }
 
 .t1FooterContactUsContent p.new_landingfooter_conatinersecondpart_item {
@@ -993,6 +999,7 @@ background-repeat: no-repeat;
 
 .t1FooterLinksContent ul {
     padding: 10px;
+    text-align: start;
 }
 
 @media (max-width:568px) {
@@ -1003,9 +1010,17 @@ background-repeat: no-repeat;
         margin-left: 20px;
     }
 
+    .t1FooterContentColumn ul li a {
+        color: black;
+        text-decoration: none;
+        padding: 0px;
+    }
+    
+
 
     .t1FooterContentColumn {
         margin-left: 10px;
+        text-align: start;
     }
 
     .t1FooterContactUsContent {
@@ -1085,6 +1100,7 @@ background-repeat: no-repeat;
         color:black;
         font-size: 40px;
         font-weight: bold;
+        text-align: start;
     }
 
     .footer-wave-svg {
