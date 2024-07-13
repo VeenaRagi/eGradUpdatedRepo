@@ -429,7 +429,8 @@ a {
 /* Admin side Popups css */
 
 /* Full-page overlay to cover the background when the card is open */
-.overlay {
+/* Overlay for blurred background */
+.Blur_Effect_Mode{
     position: fixed;
     top: 0;
     left: 0;
@@ -439,21 +440,12 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 999; /* Make sure it is above other content */
+    z-index: 999; /* Ensure it is above other content */
     backdrop-filter: blur(5px); /* Adds blur effect */
 }
 
-/* The card container */
-/* .UploadPopups_Container {
-    background-color: white;
-    box-shadow: 5px 5px 3px 3px #625d5d;
-    padding: 2rem;
-    margin: 0 auto;
-    z-index: 1000;
-    position: relative;
-} */
-
-.UploadPopups_Container{
+/* Popup card styling */
+.UploadPopups_Container {
     position: relative;
     background-color: white;
     padding: 20px;
@@ -461,12 +453,13 @@ a {
     z-index: 1000; /* Ensure it is above the overlay */
 }
 
+/* Toggle button styling */
 .toggle-button-container {
+    top: 18px;
     position: relative;
-    z-index: 1020;
-    left: 250px;
-    top: 28px;
-    /* border-radius: 100%; */
+    z-index: 1013;
+    margin: 10px;
+    left: 272px;
 }
 
 .UploadPopups_Container h2 {

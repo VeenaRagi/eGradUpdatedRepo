@@ -32,6 +32,7 @@ import TestUpdateadmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/TestUpd
 import InstructionPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/InstructionPage.jsx'
 import General_Intructions_Page from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/General_intructions_page_container.jsx'
 import QuizPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/OTS/QuizPage.jsx'
+import QuestionBankQuiz from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PQB/QuestionBankQuiz.jsx'
 import StudentDashbord_MyResults from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/StudentDashbord_MyResults.jsx'
 import TestResultsPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/TestResultsPage.jsx'
 import {UserReport} from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UserReport.jsx'
@@ -142,6 +143,10 @@ function App({decryptedUserIdState}) {
     <Route
             path="/QuizPage/questionOptions/:param1/:param2"
            element={<QuizPage seconds={20} />} 
+          />
+              <Route
+            path="/QuestionBankQuiz/questionOptions/:param1/:param2"
+          element={<QuestionBankQuiz />} 
           />
             <Route
             path="/StudentDashbord_MyResults"
