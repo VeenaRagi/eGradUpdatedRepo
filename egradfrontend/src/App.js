@@ -36,7 +36,7 @@ import StudentDashbord_MyResults from './EgradTutorFrontEnd/EgradTutorWebsit/Stu
 import TestResultsPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/TestResultsPage.jsx'
 import {UserReport} from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UserReport.jsx'
 
-function App() {
+function App({decryptedUserIdState}) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -117,7 +117,7 @@ function App() {
               {/*--------------------- EgradtutorPortalsAdmin ------------- */}
               <Route path="/getSubjectData/:testCreationTableId/:subjectId/:sectionId" element={<Document_ImageInfo />} />
 
-              <Route path="/Adminpage" element={<Exam_portal_admin_integration />} />
+              <Route path="/Adminpage" element={<Exam_portal_admin_integration decryptedUserIdState={decryptedUserIdState}/>} />
               <Route path="/ExamUpdataion_admin/:examId" element={<ExamUpdataion_admin />} />
               <Route path="/UpdatingCourseInAdmin/:courseCreationId/:portalId" element={<UpdatingConrseInAdmin />} />
 

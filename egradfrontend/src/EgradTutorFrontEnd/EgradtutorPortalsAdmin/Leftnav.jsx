@@ -26,7 +26,7 @@ import Testcreationadminforms from "./Testcreationadminforms.jsx";
 import ThemesSection from "./ThemesSection.jsx";
 const STORAGE_KEY = "left_nav_state_admin";
 
-const Leftnav = () => {
+const Leftnav = ({decryptedUserIdState}) => {
   const [showMenu, setshowMenu] = useState(0);
 
   const [showdashboard, setShowdashboard] = useState(true);
@@ -277,7 +277,7 @@ const[showThemesSectionn,setShowThemesSectionn]=useState(false)
 
       {showregisteredstudent ? (
         <div className="admin_S_R_INfo">
-          <Account_info />
+          <Account_info decryptedUserIdState={decryptedUserIdState} />
         </div>
       ) : null}
 
