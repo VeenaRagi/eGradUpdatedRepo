@@ -72,8 +72,8 @@ const AdminHeader = ({ userRole }) => {
               <p>No image available. Please contact support if this issue persists.</p>
             )}</div>
           <div className={` _fBetween adminHeaderNavLinks ${showLinks? "menu-link mobileMenuLink " : "menu-link "}`}>
-            <Link to='/ThemesAdmin'>Website Admin</Link>
-            <Link to='/leftNav'>Course Admin</Link>
+            <Link to='/WebsiteAdmin'>Website Admin</Link>
+            <Link to='/CourseAdmin'>Course Admin</Link>
             <Link to='/adminProfile'>Profile</Link>
             <Link to={`/`}><IoHome />Home</Link>
           </div>

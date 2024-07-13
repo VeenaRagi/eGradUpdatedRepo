@@ -9,7 +9,7 @@ const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [errorsOfForm, setErrorsOfForm] = useState("");
-  const [showChangePasswordForm, setShowPasswordForm] = useState(true)
+  const [showChangePasswordForm, setShowPasswordForm] = useState(false)
 
 // useEffect for getting the role
 useEffect(()=>{
@@ -26,7 +26,7 @@ useEffect(()=>{
         console.log(response.status, response.data)
         if (response.status === 200) {
           alert("OTP has been sent successfully")
-          // setOtp(true)
+          setOtp(true)
           setShowPasswordForm(true)
         }
         else {
@@ -84,30 +84,7 @@ useEffect(()=>{
           {/* <img src={`${BASE_URL}/uploads/studentinfoimeages/${img}`} alt="nnnnnnnn" /> */}
         </ul>
       )}
-      {/* {showChangePasswordForm ?(
-        <form action="" onSubmit={(e)=>handleChangePasswordSubmit(e)} >
-          <div>
-            <div>NOTE: OTP IS VALID FOR TEN MINUTES ONLY</div>
-            <label htmlFor="">Enter your Code (sent through Email):</label>
-            <input type="number" value={otp} onChange={(e)=>{setOtp(e.target.value)}}/>
-          </div>
-          <div>
-            <label htmlFor="">Enter new password</label>
-            <input type="password" value={newPassword} onChange={(e)=>setNewPassword(e.target.value)} />
-          </div>
-          <div>
-            <label htmlFor="">Confirm New Password</label>
-            <input type="password" value={confirmNewPassword} onChange={(e)=>setConfirmNewPassword(e.target.value)}/>
-          </div>
-          {errorsOfForm && (
-            <div style={{color:"red"}}>{errorsOfForm}</div>
-          )}
-          <button type='submit'>Change Password</button>
-          <button onClick={()=>handleClose()}>Close</button>
-        </form>
-      ):
-      <button onClick={() => handleChangePassword(decryptedUserIdState)}>Change Password ?</button>
-      } */}
+      
       {showChangePasswordForm ? (
         <div className="change-password-container">
           <form className="change-password-form" onSubmit={(e) => handleChangePasswordSubmit(e)}>

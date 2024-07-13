@@ -8,7 +8,7 @@ import { Navbar, Intro_content } from "./Data/Introduction_Page_Data";
 import { AiOutlineArrowRight } from "react-icons/ai";
 // import "./styles/Instructions.scss";
 
-const InstructionPage = ({ usersData }) => {
+const InstructionPage = () => {
   const { param1, param2, param3 } = useParams();
   const navigate = useNavigate();
   const [decryptedParam1, setDecryptedParam1] = useState("");
@@ -178,17 +178,7 @@ const InstructionPage = ({ usersData }) => {
 
     return (
       <>
-         {usersData.users && usersData.users.length > 0 && (
-          <ul>
-            {usersData.users.map((user) => (
-              <div className="greeting_section">
-                <h2 className="dashboard_greeting_container">
-                {user.username}
-                </h2>
-              </div>
-            ))}
-          </ul>
-        )}
+       
         {Intro_content.map((Intro_content, index) => (
           <div key={index} className="Q_container">
             <h2>{Intro_content.Intro_content_text_center}</h2>

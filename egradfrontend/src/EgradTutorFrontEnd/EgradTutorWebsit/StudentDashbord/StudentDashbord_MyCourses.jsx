@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import BASE_URL from "../../../apiConfig";
-import "./Style/StudentDashbord_MyCourses.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { encryptData } from "./utils/crypto";
@@ -189,11 +188,14 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
       const token = new Date().getTime().toString();
       sessionStorage.setItem("navigationToken", token);
 
+     
       const url = `/Instructions/${encodeURIComponent(
         encryptedParam1
       )}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(
         encryptedParam3
       )}`;
+
+
 
       const newWinRef = window.open(
         url,
@@ -201,10 +203,14 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
         `width=${screenWidth},height=${screenHeight},fullscreen=yes`
       );
 
-       // Wait for the new window to load and then post the message
-       newWinRef.onload = () => {
-        newWinRef.postMessage({ usersData }, '*');
-      };
+      if (newWinRef) {
+        newWinRef.onload = () => {
+          newWinRef.postMessage({ usersData }, '*');
+        };
+      } else {
+        console.error("Failed to open new window");
+      }
+  
 
       // if (newWinRef && !newWinRef.closed) {
       //   newWinRef.focus();
@@ -399,14 +405,13 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     if (Portale_Id === 1 && testAttemptStatus === "Attempted") {
       return (
         <span
-          className=""
-          style={{
-            backgroundColor: "#9800ff",
-            color: "white",
-            padding: "5.9px",
-            textDecoration: "none",
-            fontSize: "22px",
-          }}
+          className="span_style_attempt_status"
+          // style={{
+          //   backgroundColor: "red",
+          //   color: "white",
+          //   padding: "2.9px",
+          //   textDecoration: "none",
+          // }}
         >
           Attempted
         </span>
@@ -415,7 +420,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
 
     return (
       <Link
-        className="test_start_button"
+         className="span_style_start_button"
         to="#"
         onClick={() => {
           openPopup(testCreationTableId, user_Id, Portale_Id);
@@ -972,7 +977,16 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
           </div>
         </div>
       )}
-      {/* //main */}
+     
+    </div>
+  );
+};
+
+export default StudentDashbord_MyCourses;
+
+
+
+ {/* //main */}
       {/* {showCompletePackageContainer && (
           <div>
             <div className="card_container_dashbordflowtest">
@@ -1039,8 +1053,3 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
             </div>
           </div>
         )} */}
-    </div>
-  );
-};
-
-export default StudentDashbord_MyCourses;
