@@ -93,7 +93,7 @@
 
 @media (min-width:900px) {
     .dashboard_welcome_img_section {
-        width: 300px;
+        /* width: 300px; */
         height: auto;
         border-radius: 150px;
     }
