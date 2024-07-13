@@ -53,9 +53,9 @@ const CoursePageHeader = ({ isEditMode, userRole}) => {
   
 
 
-  const renderNavItem = (headeritem) => {
+  const renderNavItemInCoursePage = (headeritem) => {
     // Check if the link should scroll or redirect
-    const isInternalLink = headeritem.HeaderItemLink.startsWith('Poopular') || headeritem.HeaderItemLink.startsWith('WhyChooseUs');
+    const isInternalLink = headeritem.HeaderItemLink.startsWith('PoopularCourses') || headeritem.HeaderItemLink.startsWith('WhyChooseUs');
 
     if (isInternalLink) {
       // Internal link for scrolling
@@ -119,7 +119,7 @@ const CoursePageHeader = ({ isEditMode, userRole}) => {
         {headers.length > 0 ? (
      headers.map((headeritem) => (
       <li key={headeritem.HeaderItem_Id}>
-        {renderNavItem(headeritem)}
+        {renderNavItemInCoursePage(headeritem)}
       </li>
     ))
       ) : userRole === 'user' ? (
