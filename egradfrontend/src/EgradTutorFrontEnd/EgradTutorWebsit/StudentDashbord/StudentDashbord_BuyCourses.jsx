@@ -55,53 +55,41 @@ const StudentDashbord_BuyCourses = ({ usersData, decryptedUserIdState }) => {
     },
     {}
   );
-  function studentbuynowbtnuserboughtcoursecheck(courseCreationId, decryptedUserIdState) {
-    fetch(
-      `${BASE_URL}/StudentDataforBuyCourses/getotsregistrationdata/${courseCreationId}/${decryptedUserIdState}`
-    )
-      .then((response) => {
-        if (response.ok) {
-          // Handle successful response
-          return response.json();
-        } else {
-          // Handle errors
-          console.error("Failed to send IDs to backend");
-          return { message: "Failed to send IDs to backend" };
+  async function studentbuynowbtnuserboughtcoursecheck(courseCreationId, decryptedUserIdState) {
+    try {
+        // Fetch registration data
+        const response = await fetch(`${BASE_URL}/StudentDataforBuyCourses/getotsregistrationdata/${courseCreationId}/${decryptedUserIdState}`);
+        
+        if (!response.ok) {
+            console.error("Failed to send IDs to backend");
+            return;
         }
-      })
-      .then((data) => {
-        // Log the message received from the backend
+
+        const data = await response.json();
         console.log(data.message);
-  
-        // Check if data is found or not
+
         if (data.message === "Data found") {
-          fetch(
-            `${BASE_URL}/StudentDataforBuyCourses/insertthedatainstbtable/${courseCreationId}/${decryptedUserIdState}`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ courseCreationId, decryptedUserIdState }), // Assuming data contains the data you want to write
-            }
-          )
-            .then((response) => response.json())
-            .then((responseData) => {
-              console.log(courseCreationId, decryptedUserIdState);
-              console.log(responseData.message);
-              window.location.href = `/PayU/${courseCreationId}`;
-            })
-            .catch((error) => {
-              console.error("Error writing data:", error);
+            // Insert data into STB table
+            const insertResponse = await fetch(`${BASE_URL}/StudentDataforBuyCourses/insertthedatainstbtable/${courseCreationId}/${decryptedUserIdState}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ courseCreationId, decryptedUserIdState }), // Assuming data contains the data you want to write
             });
-        } else {
-          window.location.href = `/PayU/${courseCreationId}`;
+
+            const insertData = await insertResponse.json();
+            console.log(courseCreationId, decryptedUserIdState);
+            console.log(insertData.message);
         }
-      })
-      .catch((error) => {
+
+        // Redirect to PayU page
+        window.location.href = `/PayU/${courseCreationId}`;
+    } catch (error) {
         console.error("Error:", error);
-      });
-  }
+    }
+}
+
   
   function getPortalColorClass(portal) {
     if (selectedPortal === portal) {
