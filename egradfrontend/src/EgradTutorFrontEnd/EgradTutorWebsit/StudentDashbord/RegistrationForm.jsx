@@ -575,12 +575,12 @@ const RegistrationForm = () => {
                     <input
                       type="radio"
                       name="qualifications"
-                      value="High School"
+                      value="Appearing"
                       onChange={handleChange}
                       required
                     />{" "}
                     <label>
-                      High School
+                   Appearing XII
                     </label>
 
                   </div>
@@ -588,12 +588,12 @@ const RegistrationForm = () => {
                     <input
                       type="radio"
                       name="qualifications"
-                      value="Intermediate"
+                      value="Passsed"
                       onChange={handleChange}
                       required
                     />{" "}
                     <label>
-                      Intermediate
+                     Passsed XII
                     </label>
 
                   </div>
