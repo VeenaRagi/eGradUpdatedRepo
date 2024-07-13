@@ -112,6 +112,13 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.dashboard_settings button{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  align-items: center;
+}
 
 @media (max-width:768px){
   .users_profile_img{
