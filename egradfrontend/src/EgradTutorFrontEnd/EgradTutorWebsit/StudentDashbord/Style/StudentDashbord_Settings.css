@@ -7,8 +7,8 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #f9f9f9;
-  max-width: 500px;
-  margin: auto;
+  max-width: 430px;
+  margin: 50px auto;
 }
 
 /* Form styling */
@@ -97,6 +97,7 @@
   color: #337ab7;
   font-size: 40px;
   text-align: center;
+  font-weight: bold;
 }
 
 .users_user_img_container {
@@ -112,12 +113,25 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.dashboard_settings button{
+.dashboard_settings button {
   display: flex;
   justify-content: center;
   text-align: center;
-  margin: 0 auto;
+  background:  #007bff;
+    border: 1px solid  #007bff;
+    color: white;
+  margin: 100px auto;
   align-items: center;
+}
+
+.dashboard_settings button:hover {
+  background:  #02740c;
+  border: 1px solid  #007bff;
+}
+
+.users_user_profile_container{
+  height: 150px;
+  width: 150px;
 }
 
 @media (max-width:768px){
@@ -127,7 +141,7 @@
   }
 
   .users_user_name {
-    font-size: 34px;
+    font-size: 45px;
     text-align: center;
   }
 
@@ -135,3 +149,6 @@
     width: 100%;
   }
 }
+
+
+

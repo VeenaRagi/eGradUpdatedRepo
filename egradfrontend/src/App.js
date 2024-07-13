@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import WebSiteLandingPage from "./EgradTutorFrontEnd/EgradTutorWebsit/WebsiteLandingPage/WebSiteLandingPage";
 import BranchHomePage from "./EgradTutorFrontEnd/EgradTutorWebsit/BranchHomePage/BranchHomePage";
 import ExamHomePage from "./EgradTutorFrontEnd/EgradTutorWebsit/ExamHomePage/ExamHomePage";
@@ -17,10 +16,7 @@ import CoursePage from "./EgradTutorFrontEnd/EgradTutorWebsit/CoursePages/Course
 import UserLogin from "./Login/UserLogin";
 import PasswordChangeForm from "./Login/PasswordChangeForm.jsx";
 import SuperAdminLogin from "./Login/SuperAdminLogin";
-
 import ForgotPassword from "./Login/ForgotPassword";
-
-
 import BASE_URL from "./apiConfig.js";
 import NotFound from "./NotFound.jsx";
 import RegistrationForm from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/RegistrationForm.jsx";
@@ -40,10 +36,6 @@ import StudentDashbord_MyResults from './EgradTutorFrontEnd/EgradTutorWebsit/Stu
 import TestResultsPage from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/TestResultsPage.jsx'
 import {UserReport} from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UserReport.jsx'
 
-
-
-
-
 function App() {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -60,31 +52,15 @@ function App() {
   };
   const [serverError, setServerError] = useState(false);
 
-  // useEffect(() => {
-  //   // Function to check server status
-  //   const checkServerStatus = async () => {
-  //     try {
-  //       // Example: Make a request to an endpoint on your server
-  //       const response = await axios.get(`${BASE_URL}/api/server/status`);
-  //       // If response is successful, server is running
-  //       setServerError(false);
-  //     } catch (error) {
-  //       // If request fails, server is not running or there's an error
-  //       setServerError(true);
-  //     }
-  //   };
-
-  //   checkServerStatus();
-  // }, []);
-
+  
   return (
     <ThemeProvider>
       <div>
-        {/* {isAdmin && ( */}
+        {isAdmin && (
         <button onClick={toggleEditMode}>
           {isEditMode ? "Disable Edit" : "Enable Edit"}
         </button>
-        {/* // )} */}
+        )}
 
         {serverError ? (
           <NotFound />

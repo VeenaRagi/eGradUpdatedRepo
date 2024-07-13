@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 import { FaRegPenToSquare } from "react-icons/fa6";
-
+import '../../../../styles/ExamPage/DefaultThemeExamPage.css';
 
 const ExamInfoEdit = ({ type }) => {
 
@@ -112,8 +112,7 @@ const ExamInfoEdit = ({ type }) => {
                 placeholder="Enter Info Brochure"
               />
               <p>Official Webpage</p>
-              <input
-                type="text"
+              <textarea
                 value={newInfo.Official_Webpage}
                 onChange={(e) => handleInputChange(e, "Official_Webpage")}
                 placeholder="Enter Official Webpage"

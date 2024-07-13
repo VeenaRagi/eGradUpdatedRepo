@@ -355,4 +355,138 @@ p#more_info {
     };
 }
 
+/* popups styles for admin souds popups */
 
+.about_egt_popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9; /* Adjust background color as needed */
+  }
+  
+  .about_egt_form {
+    display: flex;
+    flex-direction: column;
+    width: 80%; /* Adjust width as needed */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .popup_div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .popup_div p {
+    width: 45%; /* Adjust width as needed */
+  }
+  
+  .popup_div textarea,
+  .popup_div input {
+    width: 45%; /* Adjust width as needed */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical; /* Allow vertical resizing of textareas */
+  }
+  
+  .about_egt_form p {
+    margin: 10px 0 5px;
+  }
+  
+  .about_egt_form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    height: 5rem;
+}
+  
+  .about_egt_form button {
+    align-self: flex-start;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .about_egt_form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .about_egt_popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Make it fixed so it overlays on the page */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* Ensure it appears above other elements */
+  }
+  
+  .about_egt_form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 50%; /* Adjust width as needed */
+    max-width: 600px;
+  }
+  
+  .popup_div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .popup_div p {
+    width: 45%; /* Adjust width as needed */
+  }
+  
+  .popup_div textarea,
+  .popup_div input {
+    width: 45%; /* Adjust width as needed */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical; /* Allow vertical resizing of textareas */
+  }
+  
+  .about_egt_form p {
+    margin: 10px 0 5px;
+  }
+  
+  .about_egt_form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical; /* Allow vertical resizing of textareas */
+    margin-bottom: 20px;
+  }
+  
+  .about_egt_form button {
+    align-self: flex-start;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  

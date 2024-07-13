@@ -452,7 +452,7 @@ a {
     background-color: white;
     box-shadow: 5px 5px 3px 3px #625d5d;
     padding: 2rem;
-    max-width: 600px;
+    /* max-width: 600px; */
     margin: 0 auto;
     z-index: 1000;
     position: relative;
@@ -474,6 +474,11 @@ a {
     box-sizing: border-box;
     outline: none;
     transition: border-color 0.3s ease;
+}
+
+.UploadPopups_Container textarea {
+    height: 50px;
+    width: 50%;
 }
 
 /* Focus state for both input and textarea */
@@ -589,4 +594,12 @@ button:hover {
 
 .UploadPopups_Container li {
     color: black;
+}
+.UploadPopups_Container img {
+    width:200px;
+}
+.chooseUs_image_Container {
+    display: flex;
+    gap:2rem;
+    align-items: center;
 }

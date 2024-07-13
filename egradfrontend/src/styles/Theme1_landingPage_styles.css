@@ -1054,6 +1054,20 @@ background-repeat: no-repeat;
     }
 }
 
+
+.footer-last-heading {
+    border: 1px solid rgb(243, 239, 239);
+    color: black;
+    padding: 10px; 
+    background-color: #e5f4e93b;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 5px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    /* margin: 20px 0;  */
+}
+
+
 @media (max-width:1224px) {
     .t1InnerMainFooterContainer {
         display: flex;
