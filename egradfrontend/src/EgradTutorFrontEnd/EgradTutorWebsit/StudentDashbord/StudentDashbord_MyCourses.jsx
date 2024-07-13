@@ -1,4 +1,4 @@
-import React, { useEffect,useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BASE_URL from "../../../apiConfig";
 import "./Style/StudentDashbord_MyCourses.css";
 import axios from "axios";
@@ -201,6 +201,11 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
         `width=${screenWidth},height=${screenHeight},fullscreen=yes`
       );
 
+       // Wait for the new window to load and then post the message
+       newWinRef.onload = () => {
+        newWinRef.postMessage({ usersData }, '*');
+      };
+
       // if (newWinRef && !newWinRef.closed) {
       //   newWinRef.focus();
       //   newWinRef.moveTo(0, 0);
@@ -356,8 +361,6 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   };
   // Render logic for displaying fetched data
 
-
-
   const handleTypeOfTestClickback = () => {
     setShowQuizCourses(true);
     // setShowtestContainer(false);
@@ -366,11 +369,16 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     // setShowCompletePackageContainer(false);
   };
 
-
-
   const renderTestAction = (test) => {
-    const { Portale_Id, test_status, testAttemptStatus, testCreationTableId, user_Id, courseCreationId } = test;
-  
+    const {
+      Portale_Id,
+      test_status,
+      testAttemptStatus,
+      testCreationTableId,
+      user_Id,
+      courseCreationId,
+    } = test;
+
     if (test_status === "Completed") {
       return (
         <Link
@@ -387,7 +395,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
         </Link>
       );
     }
-  
+
     if (Portale_Id === 1 && testAttemptStatus === "Attempted") {
       return (
         <span
@@ -404,7 +412,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
         </span>
       );
     }
-  
+
     return (
       <Link
         className="test_start_button"
@@ -447,7 +455,6 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
         return "#f5f5f5"; // light gray
     }
   }
-
 
   // ************** FOR ONLINE VIDEO CLASS RIGHT CLICK DISABLE FUNCTIONALITY ********************//
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -531,360 +538,431 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleViewVideo = async (OVL_Linke_Id) => {
     try {
-        const video = videos.find((video) => video.OVL_Linke_Id === OVL_Linke_Id);
-        if (!video) {
-            throw new Error("Video not found");
-        }
+      const video = videos.find((video) => video.OVL_Linke_Id === OVL_Linke_Id);
+      if (!video) {
+        throw new Error("Video not found");
+      }
 
-        setSelectedVideo(video.Drive_Link); // This should be a valid Base64 data URL
-        setIsModalOpen(true);
+      setSelectedVideo(video.Drive_Link); // This should be a valid Base64 data URL
+      setIsModalOpen(true);
     } catch (error) {
-        console.error("Error fetching video:", error);
+      console.error("Error fetching video:", error);
     }
-};
-const handleCloseModal = () => {
-  setSelectedVideo(null);
-  setIsModalOpen(false);
-};
-
+  };
+  const handleCloseModal = () => {
+    setSelectedVideo(null);
+    setIsModalOpen(false);
+  };
 
   return (
     <div>
-       {!showtestContainer1 &&
-          !showtestContainer2 &&
-          // !showCompletePackageContainer 
-          // &&
-          showQuizCourses && (
-            <>
-              <div className="QuizBUy_courses QuizBUy_coursesinstudentdB">
-                <div className="QuizBUy_coursessub_conatiner QuizBUy_coursessub_conatinerinstudentdB">
-                  <div className="QuizBUy_coursesheaderwithfilteringcontainer">
-                    <div className="QuizBUy_coursesheaderwithfilteringcontainerwithtagline">
-                      <h2>MY COURSES</h2>
-                      <span>(Your purchased courses.)</span>
-                    </div>
-                    <div>
-                      <select
-                        value={selectedPortal}
-                        onChange={(e) => setSelectedPortal(e.target.value)}
-                        style={{ margin: "5px" }}
-                      >
-                        <option value="">All Portals</option>
-                        {Array.from(
-                          new Set(
-                            activeCourses.map((course) => course.portalName)
-                          )
-                        ).map((portalName) => (
-                          <option key={portalName} value={portalName}>
-                            {portalName}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+      {!showtestContainer1 &&
+        !showtestContainer2 &&
+        // !showCompletePackageContainer
+        // &&
+        showQuizCourses && (
+          <>
+            <div className="QuizBUy_courses QuizBUy_coursesinstudentdB">
+              <div className="QuizBUy_coursessub_conatiner QuizBUy_coursessub_conatinerinstudentdB">
+                <div className="QuizBUy_coursesheaderwithfilteringcontainer">
+                  <div className="QuizBUy_coursesheaderwithfilteringcontainerwithtagline">
+                    <h2>MY COURSES</h2>
+                    <span>(Your purchased courses.)</span>
                   </div>
-                  <div className="QuizBUy_coursescontainerwithfilteringcontainer">
-                    {/* Render courses */}
-                    {filteredCourses.length === 0 ? (
-                      <div>
-                        <span>YOU HAVE NO ACTIVE COURSES</span>
-                      </div>
-                    ) : (
-                      Object.entries(
-                        filteredCourses.reduce(
-                          (coursesByPortalAndExam, course) => {
-                            const key = `${course.portalName}_${course.examName}`;
-                            if (!coursesByPortalAndExam[key]) {
-                              coursesByPortalAndExam[key] = {
-                                portalName: course.portalName,
-                                examName: course.examName,
-                                portalId: course.portal,
-                                courses: [],
-                              };
-                            }
-                            coursesByPortalAndExam[key].courses.push(course);
-                            return coursesByPortalAndExam;
-                          },
-                          {}
-                        )
-                      ).map(
-                        ([, { portalName, examName, portalId, courses }]) => (
-                          <div
-                            key={`${portalName}_${examName}`}
-                            className="portal_groupbuycourse"
-                          >
-                            <h2 className="portal_group_h2">{portalName}</h2>
-                            <h2 className="subheadingbuycourse">{examName}</h2>
-
-                            <div className="courses_boxcontainer">
-                              {courses.map((courseExamsDetails) => (
-                                <div
-                                  className="QuizBUy_coursescontainerwithfilteringcoursebox"
-                                  key={courseExamsDetails.courseCreationId}
-                                >
-                                  <img
-                                    src={courseExamsDetails.courseCardImage}
-                                    alt={courseExamsDetails.courseName}
-                                  />
-                                  <div className="QuizBUy_coursescontainerwithfilteringcoursebox_info">
-                                    <p>{courseExamsDetails.courseName}</p>
-                                    <p>
-                                      <b>Duration:</b>
-                                      {formatDate(
-                                        courseExamsDetails.courseStartDate
-                                      )}{" "}
-                                      to{" "}
-                                      {formatDate(
-                                        courseExamsDetails.courseEndDate
-                                      )}
-                                    </p>
-                                    <p>
-                                      {portalId === 1 || portalId === 2 ? (
-                                        <b>No. of Test</b>
-                                      ) : portalId === 3 ? (
-                                        <b>No. of Lectures</b>
-                                      ) : portalId === 4 ? (
-                                        <b>Topic Name</b>
-                                      ) : null}
-                                      :{" "}
-                                      {portalId === 1 || portalId === 2
-                                        ? courseExamsDetails.totalTests
-                                        : portalId === 3
-                                        ? courseExamsDetails.totalLectures
-                                        : portalId === 4
-                                        ? courseExamsDetails.topicName
-                                        : null}
-                                    </p>
-
-                                    <div className="QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoeprice QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoepricemycourses">
-                                      <Link
-                                        onClick={() => {
-                                          if (
-                                            portalId === 1 ||
-                                            portalId === 2
-                                          ) {
-                                            handletestClick(
-                                              courseExamsDetails.courseCreationId,
-                                              user_Id,
-                                              portalId
-                                            );
-                                          } else if (portalId === 3) {
-                                            handleVideosClick(
-                                              courseExamsDetails.courseCreationId
-                                            );
-                                          } 
-                                          // else if (portalId === 4) {
-                                          //   handleCompletePackage(
-                                          //     courseExamsDetails.courseCreationId,
-                                          //     user_Id,
-                                          //     portalId
-                                          //   );
-                                          // }
-                                        }}
-                                      >
-                                        {portalId === 1 || portalId === 2
-                                          ? "Go to Test"
-                                          : portalId === 3
-                                          ? "Start Lecture"
-                                          : portalId === 4
-                                          ? "Open Complete Package"
-                                          : null}
-                                      </Link>
-                                    </div>
-                                  </div>
-
-                                  <div className="before_start_now"></div>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )
-                      )
-                    )}
-                  </div>
-                </div>
-              </div>
-
-             
-            </>
-          )}
-        {showtestContainer1 && (
-          <div>
-            <div className="card_container_dashbordflowtest">
-              <div className="test_card_container">
-                <div
-                  className="Go_back_from_test_section"
-                  onClick={handleTypeOfTestClickback}
-                >
-                  Go Back
-                </div>
-
-                <div className="test_card_subcontainer">
-                  <div className="Types_of_Tests">
-                    {/* <h1>Filtered Test Details</h1> */}
-                    <ul>
-                      <div>
-                        <div className="testPageHeading">
-                          {/* {mappedData.map((test, index) => (
-                          <div key={index}>
-                            <h3>{test.typeOfTestName}</h3>
-                            <p>Course ID: {test.courseCreationId}</p>
-                            <p>Test ID: {test.testCreationTableId}</p>
-                            
-                            
-                          </div>
-                        ))}
-
-                        {testPageHeading && testPageHeading.length > 0 && (
-                       
-                         <div>
-                           <h1>{testPageHeading[0].Portale_Name}</h1>
-                                  <h2>{testPageHeading[0].courseName}</h2>
-                         </div>
-                        )} */}
-                          {testDetails
-                            .filter(
-                              (test, index, self) =>
-                                index ===
-                                self.findIndex(
-                                  (t) =>
-                                    t.Portale_Name === test.Portale_Name &&
-                                    t.courseName === test.courseName
-                                )
-                            )
-                            .map((test, index) => (
-                              <div key={index}>
-                                <h2 className="portal_group_h2">
-                                  {test.courseName}
-                                </h2>
-                              </div>
-                            ))}
-                        </div>
-                        <div className="testpage_menu_reset_btn">
-                          <select
-                            value={selectedTypeOfTest}
-                            onChange={(e) =>
-                              handleTypeOfTestClick(e.target.value)
-                            }
-                          >
-                            <option value="">Select Type of Test</option>
-                            {[
-                              ...new Set(
-                                testDetails.map((test) => test.typeOfTestName)
-                              ),
-                            ].map((type, index) => (
-                              <option key={index} value={type}>
-                                {type}
-                              </option>
-                            ))}
-                          </select>
-                          <button onClick={handleReset}>Reset</button>
-                        </div>
-                      </div>
-                    </ul>
-                  </div>
-
                   <div>
-                    {selectedTypeOfTest ? (
-                      <div className="by_selected_type">
-                        <div className="testPageHeading">
-                          <h4>{selectedTypeOfTest}</h4>
-                        </div>
+                    <select
+                      value={selectedPortal}
+                      onChange={(e) => setSelectedPortal(e.target.value)}
+                      style={{ margin: "5px" }}
+                    >
+                      <option value="">All Portals</option>
+                      {Array.from(
+                        new Set(
+                          activeCourses.map((course) => course.portalName)
+                        )
+                      ).map((portalName) => (
+                        <option key={portalName} value={portalName}>
+                          {portalName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="QuizBUy_coursescontainerwithfilteringcontainer">
+                  {/* Render courses */}
+                  {filteredCourses.length === 0 ? (
+                    <div>
+                      <span>YOU HAVE NO ACTIVE COURSES</span>
+                    </div>
+                  ) : (
+                    Object.entries(
+                      filteredCourses.reduce(
+                        (coursesByPortalAndExam, course) => {
+                          const key = `${course.portalName}_${course.examName}`;
+                          if (!coursesByPortalAndExam[key]) {
+                            coursesByPortalAndExam[key] = {
+                              portalName: course.portalName,
+                              examName: course.examName,
+                              portalId: course.portal,
+                              courses: [],
+                            };
+                          }
+                          coursesByPortalAndExam[key].courses.push(course);
+                          return coursesByPortalAndExam;
+                        },
+                        {}
+                      )
+                    ).map(([, { portalName, examName, portalId, courses }]) => (
+                      <div
+                        key={`${portalName}_${examName}`}
+                        className="portal_groupbuycourse"
+                      >
+                        <h2 className="portal_group_h2">{portalName}</h2>
+                        <h2 className="subheadingbuycourse">{examName}</h2>
 
-                        <div className="test_cards">
-                          {filteredTestData.map((test, index) => (
-                            <>
-                              <ul
-                                className="testcard_inline"
-                              >
-                                <li>
-                                  <span>
-                                    {" "}
-                                    <FaBookOpenReader />{" "}
-                                  </span>
-                                  {test.TestName}
-                                </li>
-                                <li> Total Marks: {test.totalMarks} Marks</li>
-                                <li>Test Duration: {test.Duration} Minutes</li>
-                                <li>
-                                  {" "}
-                                  {test.test_status === "Completed" && (
-                                    <ul>
-                                      {" "}
-                                      <li>{formatDate(test.test_end_time)} </li>
-                                    </ul>
-                                  )}
-                                </li>
-                                <li>{renderTestAction(test)}</li>
-                            
-                              </ul>
-                            </>
+                        <div className="courses_boxcontainer">
+                          {courses.map((courseExamsDetails) => (
+                            <div
+                              className="QuizBUy_coursescontainerwithfilteringcoursebox"
+                              key={courseExamsDetails.courseCreationId}
+                            >
+                              <img
+                                src={courseExamsDetails.courseCardImage}
+                                alt={courseExamsDetails.courseName}
+                              />
+                              <div className="QuizBUy_coursescontainerwithfilteringcoursebox_info">
+                                <p>{courseExamsDetails.courseName}</p>
+                                <p>
+                                  <b>Duration:</b>
+                                  {formatDate(
+                                    courseExamsDetails.courseStartDate
+                                  )}{" "}
+                                  to{" "}
+                                  {formatDate(courseExamsDetails.courseEndDate)}
+                                </p>
+                                <p>
+                                  {portalId === 1 || portalId === 2 ? (
+                                    <b>No. of Test</b>
+                                  ) : portalId === 3 ? (
+                                    <b>No. of Lectures</b>
+                                  ) : portalId === 4 ? (
+                                    <b>Topic Name</b>
+                                  ) : null}
+                                  :{" "}
+                                  {portalId === 1 || portalId === 2
+                                    ? courseExamsDetails.totalTests
+                                    : portalId === 3
+                                    ? courseExamsDetails.totalLectures
+                                    : portalId === 4
+                                    ? courseExamsDetails.topicName
+                                    : null}
+                                </p>
+
+                                <div className="QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoeprice QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoepricemycourses">
+                                  <Link
+                                    onClick={() => {
+                                      if (portalId === 1 || portalId === 2) {
+                                        handletestClick(
+                                          courseExamsDetails.courseCreationId,
+                                          user_Id,
+                                          portalId
+                                        );
+                                      } else if (portalId === 3) {
+                                        handleVideosClick(
+                                          courseExamsDetails.courseCreationId
+                                        );
+                                      }
+                                      // else if (portalId === 4) {
+                                      //   handleCompletePackage(
+                                      //     courseExamsDetails.courseCreationId,
+                                      //     user_Id,
+                                      //     portalId
+                                      //   );
+                                      // }
+                                    }}
+                                  >
+                                    {portalId === 1 || portalId === 2
+                                      ? "Go to Test"
+                                      : portalId === 3
+                                      ? "Start Lecture"
+                                      : portalId === 4
+                                      ? "Open Complete Package"
+                                      : null}
+                                  </Link>
+                                </div>
+                              </div>
+
+                              <div className="before_start_now"></div>
+                            </div>
                           ))}
                         </div>
                       </div>
-                    ) : (
-                      <div className="by_default">
-                        {/* Map over unique typeOfTestName values */}
-                        {[
-                          ...new Set(
-                            testDetails.map((test) => test.typeOfTestName)
-                          ),
-                        ].map((type, index) => (
-                          <div className="default_test_cards" key={index}>
-                            <div className="testPageHeading">
-                              {/* <h1>{type.portalName}</h1>
-                            <h2>{type.courseName}</h2> */}
-                              <h3>{type}</h3>
-                            </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      {showtestContainer1 && (
+        <div>
+          <div className="card_container_dashbordflowtest">
+            <div className="test_card_container">
+              <div
+                className="Go_back_from_test_section"
+                onClick={handleTypeOfTestClickback}
+              >
+                Go Back
+              </div>
 
-                            <div className="test_cards">
-                              {/* Filter testDetails for the current typeOfTestName */}
-                              {testDetails
-                                .filter((test) => test.typeOfTestName === type)
-                                .map((test, testIndex) => (
-                                  <div key={testIndex} className="test_card">
-                                    {/* <h1>{test.Portale_Name}</h1>
-                                  <h2>{test.courseName}</h2> */}
-                                    <ul
-                                      // className="testcard_inline"
-                                      className="testcard_inline"
-                                      style={{
-                                        backgroundColor:
-                                          getBackgroundColor(type),
-                                      }}
-                                    >
-                                      <li>
-                                        <span>
-                                          {" "}
-                                          <FaBookOpenReader />{" "}
-                                        </span>
-
-                                        {test.TestName}
-                                      </li>
-                                      <li>
-                                        {" "}
-                                        Total Marks: {test.totalMarks} Marks
-                                      </li>
-                                      <li>
-                                        Test Duration: {test.Duration} Minutes
-                                      </li>
-                                      <li>
-                                        {" "}
-                                        {test.test_status === "Completed" && (
-                                          <ul>
-                                            {" "}
-                                            <li>
-                                              {formatDate(test.test_end_time)}{" "}
-                                            </li>
-                                          </ul>
-                                        )}
-                                      </li>
-                                      <li>{renderTestAction(test)}</li>
-                                    </ul>
-                                  </div>
-                                ))}
+              <div className="test_card_subcontainer">
+                <div className="Types_of_Tests">
+                  {/* <h1>Filtered Test Details</h1> */}
+                  <ul>
+                    <div>
+                      <div className="testPageHeading">
+                        {testDetails
+                          .filter(
+                            (test, index, self) =>
+                              index ===
+                              self.findIndex(
+                                (t) =>
+                                  t.Portale_Name === test.Portale_Name &&
+                                  t.courseName === test.courseName
+                              )
+                          )
+                          .map((test, index) => (
+                            <div key={index}>
+                              <h2 className="portal_group_h2">
+                                {test.courseName}
+                              </h2>
                             </div>
-                          </div>
+                          ))}
+                      </div>
+                      <div className="testpage_menu_reset_btn">
+                        <select
+                          value={selectedTypeOfTest}
+                          onChange={(e) =>
+                            handleTypeOfTestClick(e.target.value)
+                          }
+                        >
+                          <option value="">Select Type of Test</option>
+                          {[
+                            ...new Set(
+                              testDetails.map((test) => test.typeOfTestName)
+                            ),
+                          ].map((type, index) => (
+                            <option key={index} value={type}>
+                              {type}
+                            </option>
+                          ))}
+                        </select>
+                        <button onClick={handleReset}>Reset</button>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+
+                <div>
+                  {selectedTypeOfTest ? (
+                    <div className="by_selected_type">
+                      <div className="testPageHeading">
+                        <h4>{selectedTypeOfTest}</h4>
+                      </div>
+
+                      <div className="test_cards">
+                        {filteredTestData.map((test, index) => (
+                          <>
+                            <ul className="testcard_inline">
+                              <li>
+                                <span>
+                                  {" "}
+                                  <FaBookOpenReader />{" "}
+                                </span>
+                                {test.TestName}
+                              </li>
+                              <li> Total Marks: {test.totalMarks} Marks</li>
+                              <li>Test Duration: {test.Duration} Minutes</li>
+                              <li>
+                                {" "}
+                                {test.test_status === "Completed" && (
+                                  <ul>
+                                    {" "}
+                                    <li>{formatDate(test.test_end_time)} </li>
+                                  </ul>
+                                )}
+                              </li>
+                              <li>{renderTestAction(test)}</li>
+                            </ul>
+                          </>
                         ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="by_default">
+                      {/* Map over unique typeOfTestName values */}
+                      {[
+                        ...new Set(
+                          testDetails.map((test) => test.typeOfTestName)
+                        ),
+                      ].map((type, index) => (
+                        <div className="default_test_cards" key={index}>
+                          <div className="testPageHeading">
+                            {/* <h1>{type.portalName}</h1>
+                            <h2>{type.courseName}</h2> */}
+                            <h3>{type}</h3>
+                          </div>
+
+                          <div className="test_cards">
+                            {/* Filter testDetails for the current typeOfTestName */}
+                            {testDetails
+                              .filter((test) => test.typeOfTestName === type)
+                              .map((test, testIndex) => (
+                                <div key={testIndex} className="test_card">
+                                  {/* <h1>{test.Portale_Name}</h1>
+                                  <h2>{test.courseName}</h2> */}
+                                  <ul
+                                    // className="testcard_inline"
+                                    className="testcard_inline"
+                                    style={{
+                                      backgroundColor: getBackgroundColor(type),
+                                    }}
+                                  >
+                                    <li>
+                                      <span>
+                                        {" "}
+                                        <FaBookOpenReader />{" "}
+                                      </span>
+
+                                      {test.TestName}
+                                    </li>
+                                    <li>
+                                      {" "}
+                                      Total Marks: {test.totalMarks} Marks
+                                    </li>
+                                    <li>
+                                      Test Duration: {test.Duration} Minutes
+                                    </li>
+                                    <li>
+                                      {" "}
+                                      {test.test_status === "Completed" && (
+                                        <ul>
+                                          {" "}
+                                          <li>
+                                            {formatDate(test.test_end_time)}{" "}
+                                          </li>
+                                        </ul>
+                                      )}
+                                    </li>
+                                    <li>{renderTestAction(test)}</li>
+                                  </ul>
+                                </div>
+                              ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {showtestContainer2 && (
+        <div>
+          <div className="card_container_dashbordflowtest">
+            <div className="test_card_container">
+              <div
+                className="Go_back_from_test_section"
+                onClick={handleTypeOfTestClickback}
+              >
+                Go Back
+              </div>
+
+              <div className="test_cards">
+                <div>
+                  <h2>OVL 2</h2>
+                  <div>
+                    {videos.length > 0 && (
+                      <h2 className="OVL_PageHeading">
+                        {videos[0].OVL_Course_Name}
+                      </h2>
+                    )}
+                    <div className="OVL_cards">
+                      {videos.map((video) => (
+                        <div className="OVL_card_data" key={video.OVL_Linke_Id}>
+                          <h2 className="OVL_text">{video.Lectures_name}</h2>
+                          <button
+                            className="view-video-button"
+                            onClick={() => handleViewVideo(video.OVL_Linke_Id)}
+                          >
+                            <i className="fa-solid fa-play"></i>
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                    {isModalOpen && (
+                      <div className="modal">
+                        <div className="ovlcontent">
+                          <button
+                            className="OVL_Video_close"
+                            onClick={handleCloseModal}
+                          >
+                            <i className="fa-solid fa-xmark"></i>
+                          </button>
+                          <div
+                            className={`video-container ${
+                              isFullscreen ? "disable-right-click" : ""
+                            }`}
+                          >
+                            <ReactPlayer
+                              className="OVL_Video"
+                              ref={playerRef}
+                              url={selectedVideo}
+                              loop={true}
+                              playing={playing}
+                              muted={true}
+                              width="1000px"
+                              height="500px"
+                              controls={true}
+                              onProgress={handleProgress}
+                              onDuration={handleDuration}
+                              config={{
+                                youtube: {
+                                  playerVars: {
+                                    autoplay: 1,
+                                    modestbranding: 1,
+                                    rel: 0,
+                                    showinfo: 0,
+                                  },
+                                },
+                                vimeo: {
+                                  playerOptions: {
+                                    controls: true,
+                                    autoplay: 1,
+                                  },
+                                },
+                                file: {
+                                  attributes: {
+                                    controlsList: "nodownload",
+                                  },
+                                },
+                              }}
+                              onError={(e) => console.error("Video Error:", e)}
+                            />
+                            <Control
+                              onPlayPause={handlePlayPause}
+                              playing={playing}
+                              onRewind={handleRewind}
+                              onFastForward={handleFastForward}
+                              played={played}
+                              onSeek={handleSeekChange}
+                              onSeekMouseDown={handleSeekMouseDown}
+                              onSeekMouseUp={handleSeekMouseUp}
+                            />
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -892,124 +970,10 @@ const handleCloseModal = () => {
               </div>
             </div>
           </div>
-        )}
-        {showtestContainer2 && (
-          <div>
-            <div className="card_container_dashbordflowtest">
-              <div className="test_card_container">
-                <div
-                  className="Go_back_from_test_section"
-                  onClick={handleTypeOfTestClickback}
-                >
-                  Go Back
-                </div>
-
-                <div className="test_cards">
-              
-                  <div>
-                    <h2>OVL 2</h2>
-                    <div
-                    >
-                      {videos.length > 0 && (
-                        <h2 className="OVL_PageHeading">
-                          {videos[0].OVL_Course_Name}
-                        </h2>
-                      )}
-                      <div className="OVL_cards">
-                        {videos.map((video) => (
-                          <div
-                            className="OVL_card_data"
-                            key={video.OVL_Linke_Id}
-                          >
-                            <h2 className="OVL_text">{video.Lectures_name}</h2>
-                            <button
-                              className="view-video-button"
-                              onClick={() =>
-                                handleViewVideo(video.OVL_Linke_Id)
-                              }
-                            >
-                              <i className="fa-solid fa-play"></i>
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                      {isModalOpen && (
-                        <div className="modal">
-                          <div className="ovlcontent">
-                            <button
-                              className="OVL_Video_close"
-                              onClick={handleCloseModal}
-                            >
-                              <i className="fa-solid fa-xmark"></i>
-                            </button>
-                            <div
-                              className={`video-container ${
-                                isFullscreen ? "disable-right-click" : ""
-                              }`}
-                            >
-                              <ReactPlayer
-                                className="OVL_Video"
-                                ref={playerRef}
-                                url={selectedVideo}
-                                loop={true}
-                                playing={playing}
-                                muted={true}
-                                width="1000px"
-                                height="500px"
-                                controls={true}
-                                onProgress={handleProgress}
-                                onDuration={handleDuration}
-                                config={{
-                                  youtube: {
-                                    playerVars: {
-                                      autoplay: 1,
-                                      modestbranding: 1,
-                                      rel: 0,
-                                      showinfo: 0,
-                                    },
-                                  },
-                                  vimeo: {
-                                    playerOptions: {
-                                      controls: true,
-                                      autoplay: 1,
-                                    },
-                                  },
-                                  file: {
-                                    attributes: {
-                                      controlsList: "nodownload",
-                                    },
-                                  },
-                                }}
-                                onError={(e) =>
-                                  console.error("Video Error:", e)
-                                }
-                              />
-                              <Control
-                                onPlayPause={handlePlayPause}
-                                playing={playing}
-                                onRewind={handleRewind}
-                                onFastForward={handleFastForward}
-                                played={played}
-                                onSeek={handleSeekChange}
-                                onSeekMouseDown={handleSeekMouseDown}
-                                onSeekMouseUp={handleSeekMouseUp}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  {/* )} */}
-                </div>
-                {/* ))}
-        </div> */}
-              </div>
-            </div>
-          </div>
-        )}
-        {/* //main */}
-        {/* {showCompletePackageContainer && (
+        </div>
+      )}
+      {/* //main */}
+      {/* {showCompletePackageContainer && (
           <div>
             <div className="card_container_dashbordflowtest">
               <div className="test_card_container">
