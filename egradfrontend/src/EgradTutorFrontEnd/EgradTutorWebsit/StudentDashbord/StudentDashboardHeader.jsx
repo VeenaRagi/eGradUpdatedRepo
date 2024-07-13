@@ -4,6 +4,8 @@ import BASE_URL from '../../../apiConfig';
 import logo from '../../../styles/MicrosoftTeams-image (7).png';
 
 const StudentDashboardHeader = ({ usersData = {}, decryptedUserIdState }) => {
+  const [showLinks, setShowLinks] = useState(false);
+
   const [isLoggedInFromLS, setIsLoggedInFromLS] = useState(false);
 
   useEffect(() => {
@@ -24,7 +26,17 @@ const StudentDashboardHeader = ({ usersData = {}, decryptedUserIdState }) => {
   }, []);
 
   console.log('user data from the student dashboard header', usersData);
-
+  // const handleLogOut = () => {
+  //   settiAuth({
+  //     ...tiAuth,
+  //     user: null,
+  //     token: "",
+  //     userDecryptedId:"",
+  //     isLoggedIn: false,
+  //   });
+  //   localStorage.removeItem("tiAuth");
+  //   navigate("/userlogin");
+  // };
   return (
     <div>
       <div className="SDHParentContainer">
@@ -45,7 +57,7 @@ const StudentDashboardHeader = ({ usersData = {}, decryptedUserIdState }) => {
                     <div className="toBeDisplayedWhenHovered">
                       <div className='sub-links-userrr'>Profile</div>
                       <div className='sub-links-userrr'>Change Password</div>
-                      <div className='sub-links-userrr'>Log Out</div>
+                      <div className='sub-links-userrr' >Log Out</div>
                     </div>
                   </div>
                 ))}

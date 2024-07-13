@@ -4,17 +4,18 @@ import axios from 'axios';
 import '../../EgradTutorWebsit/StudentDashbord/Style/StudentDashbord_Settings.css'
 
 const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
-  // const imageUrl = {`http://localhost:5000/uploads/${1720682758460.png}`}
   // form states
-  const img = "1710997778188.png"
-  const [studentImg, setStudentImg] = useState("")
-
   const [otp, setOtp] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [errorsOfForm, setErrorsOfForm] = useState("");
-
   const [showChangePasswordForm, setShowPasswordForm] = useState(true)
+
+// useEffect for getting the role
+useEffect(()=>{
+  const isLoggedIn=localStorage.getItem("tiAuth")
+})
+
   const handleChangePassword = async (decryptedUserId) => {
     console.log(decryptedUserId, "this is decryptedUserId from handleChangePassword");
     //  i need to send otp to the user reg email if he selects yes from the alert
@@ -65,6 +66,7 @@ const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
   const handleClose = () => {
     setShowPasswordForm(false)
   }
+
 
   return (
     <div className="dashboard_settings">
