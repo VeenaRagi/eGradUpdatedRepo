@@ -179,8 +179,8 @@ function App({decryptedUserIdState}) {
          path="/UserReport/:id/:testCreationTableId/:courseCreationId"
            element={<UserReport />} 
           />
-          <Route path="/ThemesAdmin" element={<ThemesSection/>}/>
-          <Route path="/leftNav" element={<Exam_portal_admin_integration/>}/>
+          <Route path="/WebsiteAdmin" element={<ThemesSection/>}/>
+          <Route path="/CourseAdmin" element={<Exam_portal_admin_integration/>}/>
           <Route path="/adminProfile" element={<AdminProfile/>}/>
             </Routes>
           </Router>
