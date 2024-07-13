@@ -431,22 +431,16 @@ a {
 /* Full-page overlay to cover the background when the card is open */
 .overlay {
     position: fixed;
-    /* Cover the entire viewport */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent black background */
-    /* background-color: transparent; */
     display: flex;
     align-items: center;
-    /* Center content vertically */
     justify-content: center;
-    /* Center content horizontally */
     z-index: 999;
-    /* Ensure it is above other content */
-    backdrop-filter: blur(5px); /* Adds the blur effect */
+    backdrop-filter: blur(5px);
 }
 
 /* The card container */
@@ -466,7 +460,8 @@ a {
     text-align: center;
 }
 
-.UploadPopups_Container input, .UploadPopups_Container textarea {
+.UploadPopups_Container input,
+.UploadPopups_Container textarea {
     /* width: 100%; */
     /* padding: 0.5rem; */
     /* margin: 0.5rem 2rem; */
@@ -587,8 +582,9 @@ button:hover {
     background: #055e05;
     /* Darker background color on hover */
 }
+
 .Delete_button {
-    background:rgb(236, 67, 67);
+    background: rgb(236, 67, 67);
     color: white;
     font-weight: bold;
     font-size: 20px;
@@ -597,12 +593,14 @@ button:hover {
 .UploadPopups_Container li {
     color: black;
 }
+
 .UploadPopups_Container img {
-    width:200px;
+    width: 200px;
 }
+
 .chooseUs_image_Container {
     display: flex;
-    gap:2rem;
+    gap: 2rem;
     align-items: center;
 }
 
@@ -610,17 +608,22 @@ button:hover {
 
 .Exams_Container {
     display: flex;
-    flex-wrap: wrap; /* Allows items to wrap onto the next line */
-    gap: 16px; /* Optional: Adds spacing between items */
+    flex-wrap: wrap;
+    /* Allows items to wrap onto the next line */
+    gap: 16px;
+    /* Optional: Adds spacing between items */
 }
 
 .Exam_Item {
-    flex: 1 1 calc(50% - 16px); /* Flex item will take up 50% of the container width minus the gap */
-    box-sizing: border-box; /* Ensures padding and border are included in the width */
+    flex: 1 1 calc(50% - 16px);
+    /* Flex item will take up 50% of the container width minus the gap */
+    box-sizing: border-box;
+    /* Ensures padding and border are included in the width */
     display: flex;
     justify-content: space-between;
 }
+
 .Icons_container {
     display: flex;
-    gap:2rem;
+    gap: 2rem;
 }
