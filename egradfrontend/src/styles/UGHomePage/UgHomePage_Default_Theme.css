@@ -64,10 +64,10 @@ ul.themeUgHeaderUlDefault {
     flex-direction: row;
 }
 li.themeUgHeaderLiDefault {
-        color: #fff;
-        position: relative;
-        font-size: 1.3rem;
-        font-weight: 500;
+    color: #fff;
+    position: relative;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
  
 li.themeUgHeaderLiDefault:hover {
@@ -603,9 +603,10 @@ ul.defaultCoursesUl li:hover {
   }
   ul.themeUgHeaderUlDefault {
     display: flex;
-    gap:1.5rem;
+    gap: 1.5rem;
     padding-left: 0px;
     flex-direction: row;
+    padding-top: 18px;
 }
 @media (max-width:1280px) {
 
