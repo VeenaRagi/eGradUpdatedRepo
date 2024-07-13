@@ -9,6 +9,7 @@ import StudentDashbord_MyResults from "./StudentDashbord_MyResults";
 import StudentDashbord_Bookmarks from "./StudentDashbord_Bookmarks";
 import StudentDashbord_Settings from "./StudentDashbord_Settings";
 import StudentDashboardHeader from "./StudentDashboardHeader";
+
 const Student_dashboard_Container = ({ usersData, decryptedUserIdState }) => {
   const [activeComponent, setActiveComponent] = useState("home");
 
@@ -20,10 +21,10 @@ const Student_dashboard_Container = ({ usersData, decryptedUserIdState }) => {
   const handleToggleLeftMenu = () => {
     setShowLeftMenu(!showLeftMenu);
   };
+
   return (
     <>
-      <StudentDashboardHeader usersData={usersData}
-            decryptedUserIdState={decryptedUserIdState} />
+      <StudentDashboardHeader usersData={usersData} decryptedUserIdState={decryptedUserIdState} />
       <div className="ug_quiz_dashBoard_Main_container">
         <div
           className="ugquiz_StudentDashbordconatiner_handleToggleLeftMenu"
@@ -34,53 +35,51 @@ const Student_dashboard_Container = ({ usersData, decryptedUserIdState }) => {
         <div className="ugquiz_StudentDashbordconatiner">
           <div
             className={`${showLeftMenu
-                ? "ugquiz_StudentDashbordconatiner_left_mobile"
-                : "ugquiz_StudentDashbordconatiner_left"
-              }`}
+              ? "ugquiz_StudentDashbordconatiner_left_mobile"
+              : "ugquiz_StudentDashbordconatiner_left"
+            }`}
           >
             <div className="ugquiz_StudentDashbordconatiner_left_menu">
               <button
-                className={activeComponent ? "activeButton" : ""}
+                className={activeComponent === "home" ? "activeButton" : ""}
                 onClick={() => handleMenuClick("home")}
               >
-                 <span class="material-symbols-outlined">dashboard</span>
+                <span className="material-symbols-outlined">dashboard</span>
                 Dashboard
               </button>
               <button
-                className={activeComponent ? "activeButton" : ""}
+                className={activeComponent === "myCourses" ? "activeButton" : ""}
                 onClick={() => handleMenuClick("myCourses")}
               >
-                   <span class="material-symbols-outlined">box</span>
+                <span className="material-symbols-outlined">box</span>
                 My Courses
               </button>
               <button
-                className={activeComponent ? "activeButton" : ""}
+                className={activeComponent === "buyCourses" ? "activeButton" : ""}
                 onClick={() => handleMenuClick("buyCourses")}
               >
-                   <span class="material-symbols-outlined">shopping_cart</span> 
+                <span className="material-symbols-outlined">shopping_cart</span>
                 Buy Courses
               </button>
               <button
-                className={activeComponent ? "activeButton" : ""}
+                className={activeComponent === "myResults" ? "activeButton" : ""}
                 onClick={() => handleMenuClick("myResults")}
               >
-                     <span class="material-symbols-outlined">grading</span>
+                <span className="material-symbols-outlined">grading</span>
                 My Results
               </button>
               <button
-                className={activeComponent ? "activeButton" : ""}
+                className={activeComponent === "bookmarks" ? "activeButton" : ""}
                 onClick={() => handleMenuClick("bookmarks")}
               >
-                  <span class="material-symbols-outlined">bookmark_added</span>
+                <span className="material-symbols-outlined">bookmark_added</span>
                 Bookmarks
               </button>
               <button
-                className={activeComponent ? "activeButton" : ""}
+                className={activeComponent === "settings" ? "activeButton" : ""}
                 onClick={() => handleMenuClick("settings")}
               >
-                 <span class="material-symbols-outlined">
-                settings_account_box
-              </span>
+                <span className="material-symbols-outlined">settings_account_box</span>
                 Settings
               </button>
             </div>
@@ -89,8 +88,7 @@ const Student_dashboard_Container = ({ usersData, decryptedUserIdState }) => {
 
         <div className="ugquiz_StudentDashbordconatiner_right_Std_MB_Course">
           {activeComponent === "home" && (
-            <Student_dashboard_Home usersData={usersData}
-              decryptedUserIdState={decryptedUserIdState} />
+            <Student_dashboard_Home usersData={usersData} decryptedUserIdState={decryptedUserIdState} />
           )}
           {activeComponent === "myCourses" && (
             <StudentDashbord_MyCourses usersData={usersData} decryptedUserIdState={decryptedUserIdState} />
@@ -114,5 +112,3 @@ const Student_dashboard_Container = ({ usersData, decryptedUserIdState }) => {
 };
 
 export default Student_dashboard_Container;
-
-
