@@ -9,6 +9,10 @@
     flex-direction: row;
     width: 80%;
     margin: 0 auto;
+    cursor: pointer;
+}
+.t1CoursePageHeaderContainer .t1CPHeaderUl li span:hover{
+    color: rgb(36, 80, 175);
 }
 
 .t1CPHeaderUl {

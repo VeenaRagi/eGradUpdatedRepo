@@ -121,7 +121,7 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
               <div className={` ${themeDetails.themeTabDetailsDiv}`}>
                 <div className={` ${themeDetails.themeTabDetailsSubDiv}`}>
                   <div className={` ${themeDetails.themeTabImageDiv}`}>
-                    {images.length > 0 ? (
+                    {/* {images.length > 0 ? (
                       images.map((image) => (
                         <div key={image.course_tab_id}>
                           <h2>Course Tab ID: {image.course_tab_id}</h2>
@@ -136,7 +136,7 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
                       ))
                     ) : (
                       <p>No images found.</p>
-                    )}
+                    )} */}
                     {/* <img src={`data:image/png;base64,${selectedTabContent.course_tab_image}`} alt="Tab content" /> */}
                   </div>
                   <div className={`${themeDetails.themeCardsToBeFlexed}`}>
