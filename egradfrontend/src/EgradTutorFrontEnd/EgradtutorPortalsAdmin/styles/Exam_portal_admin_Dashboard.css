@@ -70,7 +70,7 @@
    button{
     background: linear-gradient(to right, #000102 -26%, #053456 24%, #000000 172%);
     color: #fff;
-    
+    gap: 10px;
   }
 }
 
