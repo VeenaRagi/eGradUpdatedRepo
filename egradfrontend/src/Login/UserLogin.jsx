@@ -32,14 +32,14 @@ const UserLogin = () => {
 
       console.log("Response Data:", response.data);
 
-      const { user_Id, role, accessToken, decryptedId } = response.data;
-      console.log("Extracted Data:", { user_Id, role, accessToken });
+      const { user_Id, role, accessToken, decryptedId,userDetails } = response.data;
+      console.log("Extracted Data:", { user_Id, role, accessToken,userDetails });
       if (!user_Id) {
         throw new Error('User ID is missing');
       }
       if (role === 'User') {
-        console.log("User role detected:", user_Id, role, accessToken);
-        console.log("encryting data using cru[t", user_Id, secretKey,)
+        console.log("User role detected:", user_Id, role, accessToken,userDetails);
+        console.log("encryting data using cru[t", user_Id, secretKey,userDetails)
 
         // const encryptedUserId=encryptUserId(user_Id)
         // console.log("encrypting data using cru[t",user_Id,secretKey,"and after encryption",encryptedUserId)
@@ -49,12 +49,13 @@ const UserLogin = () => {
           token: accessToken,
           role: role,
           userDecryptedId: decryptedId,
-          isLoggedIn: true
+          isLoggedIn: true,
+          userData:userDetails,
         };
         console.log("New Auth State:", newAuthState);
         settiAuth(newAuthState);
 
-        localStorage.setItem("tiAuth", JSON.stringify(newAuthState));
+        localStorage.setItem("tiAuth2", JSON.stringify(newAuthState));
 
         console.log("Stored in localStorage and useContext:", tiAuth);
         const encodedUserId = encodeURIComponent((user_Id));

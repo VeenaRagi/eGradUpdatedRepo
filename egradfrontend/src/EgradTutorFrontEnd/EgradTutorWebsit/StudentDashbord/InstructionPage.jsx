@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import BASE_URL from "../../../apiConfig";
@@ -7,6 +5,7 @@ import { decryptData, encryptData } from "./utils/crypto";
 import { Navbar, Intro_content } from "./Data/Introduction_Page_Data";
 import { AiOutlineArrowRight } from "react-icons/ai";
 // import "./styles/Instructions.scss";
+import axios from "axios";
 
 const InstructionPage = () => {
   const { param1, param2, param3 } = useParams();
@@ -54,32 +53,12 @@ const InstructionPage = () => {
   }, [param1, param2, param3, navigate]);
 
   const Header = () => {
-    const [testName, setTestName] = useState("");
-    const { testCreationTableId, Portale_Id } = useParams();
-
-    useEffect(() => {
-      fetchTestName();
-    }, [testCreationTableId]);
-
-    const fetchTestName = async () => {
-      try {
-        const response = await fetch(
-          `${BASE_URL}/QuizPage/questionOptions/${testCreationTableId}`
-        );
-        const data = await response.json();
-        const testName = data.questions[0].TestName;
-        setTestName(testName);
-      } catch (error) {
-        console.error("Error fetching test name:", error);
-      }
-    };
-
     const [testDetails, setTestDetails] = useState([]);
     useEffect(() => {
       const fetchTestDetails = async () => {
         try {
           const response = await fetch(
-            `${BASE_URL}/TestResultPage/testName/${testCreationTableId}/${Portale_Id}`
+            `${BASE_URL}/TestResultPage/testDetails/${decryptedParam1}`
           );
 
           if (!response.ok) {
@@ -93,29 +72,42 @@ const InstructionPage = () => {
         }
       };
 
-      if (testCreationTableId) {
+      if (decryptedParam1) {
         fetchTestDetails();
       }
-    }, [testCreationTableId, Portale_Id]);
+    }, [decryptedParam1]);
+
+    const [image, setImage] = useState(null);
+    const fetchImage = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/Logo/image`, {
+          responseType: "arraybuffer",
+        });
+        const imageBlob = new Blob([response.data], { type: "image/png" });
+        const imageUrl = URL.createObjectURL(imageBlob);
+        setImage(imageUrl);
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    };
+    useEffect(() => {
+      fetchImage();
+    }, []);
 
     return (
       <>
-        {/* {Navbar.map((nav, index) => (
-          <div className="Quiz_header" key={index}>
-            <div className="Q_logo">
-              <img src={nav.Q_logo} alt="" />
-            </div>
-            <div className="Q_title">
-              {testDetails && testDetails.length > 0 && (
-                <div>
-                  <p className="testname_heading">
-                    {testDetails[0].TestName}
-                  </p>
-                </div>
-              )}
-            </div>
+        <div className="Quiz_header">
+          <div className="Q_logo">
+            <img src={image} alt="Current" />
           </div>
-        ))} */}
+          <div className="Q_title">
+            {testDetails && testDetails.length > 0 && (
+              <div>
+                <p className="testname_heading">{testDetails[0].TestName}</p>
+              </div>
+            )}
+          </div>
+        </div>
       </>
     );
   };
@@ -178,7 +170,6 @@ const InstructionPage = () => {
 
     return (
       <>
-       
         {Intro_content.map((Intro_content, index) => (
           <div key={index} className="Q_container">
             <h2>{Intro_content.Intro_content_text_center}</h2>

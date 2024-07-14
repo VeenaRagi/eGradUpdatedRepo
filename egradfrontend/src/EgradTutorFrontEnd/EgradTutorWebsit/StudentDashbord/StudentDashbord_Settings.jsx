@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import BASE_URL from '../../../apiConfig';
 import axios from 'axios';
 import '../../EgradTutorWebsit/StudentDashbord/Style/StudentDashbord_Settings.css'
-
+import { useTIAuth } from '../../../TechInfoContext/AuthContext';
 const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
   // form states
   const [otp, setOtp] = useState(false);
@@ -10,12 +10,25 @@ const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [errorsOfForm, setErrorsOfForm] = useState("");
   const [showChangePasswordForm, setShowPasswordForm] = useState(false)
+  const[userNameFromContext,setUserNameFromContext]=useState("")
 
 // useEffect for getting the role
 useEffect(()=>{
   const isLoggedIn=localStorage.getItem("tiAuth")
 })
+// const {tiAuth}=useTIAuth();
+const [tiAuth] = useTIAuth();
 
+  // Access user details
+  const { userData } = tiAuth;
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
+//  const { userData } = tiAuth;
+ const userName = userData.users[0].username;
+ setUserNameFromContext(userName)
+console.log(userName,"ddddddddddddddddddddddddddddddddddddddd")
   const handleChangePassword = async (decryptedUserId) => {
     console.log(decryptedUserId, "this is decryptedUserId from handleChangePassword");
     //  i need to send otp to the user reg email if he selects yes from the alert
@@ -128,6 +141,9 @@ useEffect(()=>{
       ) : (
         <button onClick={() => handleChangePassword(decryptedUserIdState)}>Change Password ?</button>
       )}
+      <h1>This is the username from the context globally so that every component can access..........</h1>
+      <p>{userNameFromContext}</p>
+
 
     </div>
   )

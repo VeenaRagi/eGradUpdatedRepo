@@ -53,9 +53,14 @@
     background: linear-gradient(326deg, #0a9396, #005f73, #003d4e);
     padding: 8px;
     font-size: 18px;
-    color:white;
-
-} 
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.FaqData.t2FaqData {
+    cursor: pointer;
+}
 .FaqSubContainer.t2FaqSubContainer {
     height: 65vh;
 }

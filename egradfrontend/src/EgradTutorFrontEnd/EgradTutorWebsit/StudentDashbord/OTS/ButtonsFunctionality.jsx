@@ -8,7 +8,7 @@ import "../Style/RightSidebar.css"
 // import axios from "axios";
 import BASE_URL from "../../../../apiConfig";
 import { decryptData, encryptData } from "../utils/crypto"; 
-
+import { useTIAuth } from "../../../../TechInfoContext/AuthContext";
 
 // This component manages the functionality of buttons in the right sidebar
 const ButtonsFunctionality = ({
@@ -386,17 +386,40 @@ const ButtonsFunctionality = ({
 
   // Fetch test name based on testCreationTableId
 
+
+
+
+  const [tiAuth] = useTIAuth();
+  const { userData2 } = tiAuth;
+  const [userNameFromContext,setUserNameFromContext]=useState("")
+
+  // useEffect for getting the role
+ // useEffect for getting the role
+useEffect(() => {
+  if (!userData2 || !userData2.users || userData2.users.length === 0) {
+    return;
+  }
+  
+  const userName = userData2.users[0].username;
+  setUserNameFromContext(userName);
+}, [userData2]);
+
+if (!userData2) {
+  return <div>Loading...</div>;
+}
   
   return (
     <>
       <div className="right-side-bar">
         <div className="rightSidebar-topHeader">
           <img
-            title={userData.username}
+            // title={userData.username}
+            title={userNameFromContext}
             src={userData.imageData}
             alt={`Image ${userData.user_Id}`}
           />
-          <p>Candidate Name: {userData.username}</p>
+          {/* <p>Candidate Name: {userData.username}</p> */}
+          <p>Candidate Name:{userNameFromContext}</p>
           <p key={testName.testCreationTableId}>Test Name: {testName}</p>
         </div>
 

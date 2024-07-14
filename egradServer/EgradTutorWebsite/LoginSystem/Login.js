@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
       console.log("refreshToken:",refreshToken,"accessToken: ",accessToken )
       const encryptedUserId=encryptData(user.user_Id.toString())
       console.log("sending detail are",encryptedUserId,refreshToken,accessToken)
-      res.json({user_Id: encryptedUserId,decryptedId:user.user_Id,refreshToken, accessToken, role: user.role });
+      res.json({user_Id: encryptedUserId,decryptedId:user.user_Id,refreshToken, accessToken, role: user.role ,userDetails:user});
     } catch (error) {
       console.error('Error during login:', error);
       res.status(500).json({ message: 'Server error' });

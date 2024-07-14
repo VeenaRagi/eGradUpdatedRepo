@@ -6,7 +6,7 @@ import welcome_greeting_img from '../../../styles/Girl.png'
 import { useLocation, useNavigate } from 'react-router-dom';
 // import welcome_greeting_img from './Images/welcome_greeting_img.png'
 // import welcome_greeting_img from './Images/welcome_greeting_img.png'
-const Student_dashboard_Home = ({ usersData }) => {
+const Student_dashboard_Home = ({ usersData,decryptedUserIdState }) => {
   const [roleOfLoggedIn, setRoleOfLoggedIn] = useState("");
   // const roleOfTheUser=usersData.users&&usersData.length>0?(
 
@@ -45,21 +45,21 @@ const Student_dashboard_Home = ({ usersData }) => {
     setGreeting(newGreeting);
   }, []);
 
-  // const [attemptedTestCount, setAttemptedTestCount] = useState([]);
-  // useEffect(() => {
-  //   const fetchAttemptedTestCount = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${BASE_URL}/Myresult/attempted_test_count/${user_Id}`
-  //       );
-  //       setAttemptedTestCount(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching attempted test count:", error);
-  //     }
-  //   };
+  const [attemptedTestCount, setAttemptedTestCount] = useState([]);
+  useEffect(() => {
+    const fetchAttemptedTestCount = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/Myresult/attempted_test_count/${decryptedUserIdState}`
+        );
+        setAttemptedTestCount(response.data);
+      } catch (error) {
+        console.error("Error fetching attempted test count:", error);
+      }
+    };
 
-  //   fetchAttemptedTestCount();
-  // }, [user_Id]);
+    fetchAttemptedTestCount();
+  }, [user_Id]);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -100,7 +100,7 @@ const Student_dashboard_Home = ({ usersData }) => {
       </div>
       <div>
         <div className="testcounts_student_dashbard">
-          {/* {attemptedTestCount
+          {attemptedTestCount
             .filter((item) => item.Portale_Id === 1 || item.Portale_Id === 2)
             .map(
               (item, index) =>
@@ -132,7 +132,7 @@ const Student_dashboard_Home = ({ usersData }) => {
                     </ul>
                   </div>
                 )
-            )} */}
+            )}
         </div>
       </div>
       {/* {showLogOutContent && (
