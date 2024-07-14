@@ -602,3 +602,14 @@ ul.courseHeaderUl.undefined span {
 .before_start_now.defaultBuyButtonInCP a {
     color: white;
 }
+.menu-link.CoursePageItemsContainer.undefined {
+    background-color: #53505054;
+}
+ul.courseHeaderUl.undefined span {
+    color: white;
+    font-size: 18px;
+}
+ul.courseHeaderUl.undefined a {
+    color: white;
+    font-size: 18px;
+}
