@@ -3,6 +3,7 @@ import axios from "axios";
 import BASE_URL from "../../../../apiConfig";
 // import FooterMain_Page from "../Footer_Admin/FooterMain_Page";
 import FAQEdit from "./FAQEdit";
+import { FaPlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { AiFillPushpin } from "react-icons/ai";
@@ -15,7 +16,7 @@ import '../../../../styles/Theme2LinksPage.css';
 import Footer from "../../Footer/Footer";
 import { IoMdAdd } from "react-icons/io";
 import ExamPageHeader from "../../ExamHomePage/ExamHomepageHeader/ExamPageHeader";
-const FAQ = ({isEditMode, userRole }) => {
+const FAQ = ({ isEditMode, userRole }) => {
   const [faqs, setFaqs] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [image, setImage] = useState(null);
@@ -52,7 +53,7 @@ const FAQ = ({isEditMode, userRole }) => {
     setOpenFAQId(prevId => (prevId === faqId ? null : faqId));
   };
 
-  
+
   const fetchImage = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/Logo/image`, {
@@ -74,36 +75,36 @@ const FAQ = ({isEditMode, userRole }) => {
 
   return (
     <>
-{/* ExamPageHeader */}
-<div
-            className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`}
-          >
-            {image ? (
-              <Link to="/">
-                <img src={image} alt="Current" />
-              </Link>
-            ) : userRole === "user" ? (
-              <p>
-                Unable to load the image at the moment. Please try again later.
-              </p>
-            ) : userRole === "admin" ? (
-              <p>No image available. Please upload the necessary image.</p>
-            ) : (
-              <p>
-                Unable to load the image. Please contact support if this issue
-                persists.
-              </p>
-            )}
+      {/* ExamPageHeader */}
+      <div
+        className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`}
+      >
+        {image ? (
+          <Link to="/">
+            <img src={image} alt="Current" />
+          </Link>
+        ) : userRole === "user" ? (
+          <p>
+            Unable to load the image at the moment. Please try again later.
+          </p>
+        ) : userRole === "admin" ? (
+          <p>No image available. Please upload the necessary image.</p>
+        ) : (
+          <p>
+            Unable to load the image. Please contact support if this issue
+            persists.
+          </p>
+        )}
 
-            <span>
-              <Link to={`/`}>
-                <IoHome />
-                Home
-              </Link>
-            </span>
-          </div>
-    <div className={`FaqMainContainer ${themeDetails.FaqMainContainer}`}>
-      {/* <div
+        <span>
+          <Link to={`/`}>
+            <IoHome />
+            Home
+          </Link>
+        </span>
+      </div>
+      <div className={`FaqMainContainer ${themeDetails.FaqMainContainer}`}>
+        {/* <div
         className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`}
       >
         {image ? (
@@ -130,46 +131,51 @@ const FAQ = ({isEditMode, userRole }) => {
           </Link>
         </span>
       </div> */}
-      
-      <div className={`FaqSubContainer ${themeDetails.FaqSubContainer}`}>
-        <h1>FREQUENTLY ASKED QUESTIONS</h1>
-        <button onClick={() => setShowFaqForm(!showFaqForm)}>
-          {showFaqForm ? "Close FAQ Form" : "Add FAQ"}
-        </button>
-        {/* <button onClick={openAddForm} className="add-clicked"><FaRegPenToSquare /></button> */}
 
-        <div className={`FaqDataContainer ${themeDetails.FaqDataContainer}`}>
-          {showFaqForm && <FAQEdit type="aboutFaq" />}
-          {faqs.length > 0 ? (
-            faqs.map((faq) => (
-              <div
-                key={faq.faq_id}
-                className={`FaqData ${themeDetails.FaqData}`}
-              >
-                 <h3 id={`faq_${faq.faq_id}`} onClick={() => toggleAnswer(faq.faq_id)}>
-            <AiFillPushpin />
-            {faq.faq_questions}
-          </h3>
-          {openFAQId === faq.faq_id && (
-            <p>{faq.faq_answer}</p>
-          )}
-              </div>
-            ))
-          ) : userRole === "user" ? (
-            <p>No FAQs are available at the moment. Please check back later.</p>
-          ) : userRole === "admin" ? (
-            <p>No FAQs available. Please add the FAQs.</p>
-          ) : (
-            <p>
-              No FAQs are available. Please contact support if this issue
-              persists.
-            </p>
-          )}
+        <div className={`FaqSubContainer ${themeDetails.FaqSubContainer}`}>
+          <h1>FREQUENTLY ASKED QUESTIONS</h1>
+          <button onClick={() => setShowFaqForm(!showFaqForm)}>
+            {showFaqForm ? "Close FAQ Form" : "Add FAQ"}
+          </button>
+          {/* <button onClick={openAddForm} className="add-clicked"><FaRegPenToSquare /></button> */}
+
+          <div className={`FaqDataContainer ${themeDetails.FaqDataContainer}`}>
+            {showFaqForm && <FAQEdit type="aboutFaq" />}
+            {faqs.length > 0 ? (
+              faqs.map((faq) => (
+                <div
+                  key={faq.faq_id}
+                  className={`FaqData ${themeDetails.FaqData}`}
+                >
+
+                  <h3 id={`faq_${faq.faq_id}`} onClick={() => toggleAnswer(faq.faq_id)}>
+                    <div>
+                      <AiFillPushpin />
+                      {faq.faq_questions}
+                    </div>
+                    <FaPlus />
+                  </h3>
+
+                  {openFAQId === faq.faq_id && (
+                    <p>{faq.faq_answer}</p>
+                  )}
+                </div>
+              ))
+            ) : userRole === "user" ? (
+              <p>No FAQs are available at the moment. Please check back later.</p>
+            ) : userRole === "admin" ? (
+              <p>No FAQs available. Please add the FAQs.</p>
+            ) : (
+              <p>
+                No FAQs are available. Please contact support if this issue
+                persists.
+              </p>
+            )}
+          </div>
         </div>
-      </div>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
     </>
   );
 };
