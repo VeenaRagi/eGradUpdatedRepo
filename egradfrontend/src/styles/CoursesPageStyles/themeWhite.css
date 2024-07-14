@@ -492,16 +492,17 @@ ul.courseHeaderUl.undefined {
 }
 ul.courseHeaderUl.undefined a {
     color: white;
-    font-size: 16px;
+    font-size: 20px;
     text-transform: uppercase !important;
-  
 }
 h2.whiteContant {
     color: #108dc1;
     text-align: center;
-    font-size: 25px;
+    font-size: 30px;
     background: #e6ebed;
-    box-shadow: 5px 5px 5px 0px rgba(16, 141, 193, 0.3); /* #108dc1 color with 30% opacity */
+    box-shadow: 5px 5px 5px 0px rgba(16, 141, 193, 0.3);
+    height: 6vh;
+    padding: 1rem;
 }
 .themeBuyCourseSpanDefault {
     text-align: center;
@@ -592,11 +593,8 @@ h2.whiteContant {
     color: white !important;
     text-transform: uppercase !important;
 }
-
-
-
-.menu-link.CoursePageItemsContainer.undefined {
-    background-color: #53505054 !important;
+h2.whiteContant {
+    height: 9vh;
 }
 ul.courseHeaderUl.undefined span {
     color: white !important;
@@ -609,7 +607,10 @@ ul.courseHeaderUl.undefined a {
 ul.courseHeaderUl.undefined {
     display: flex;
     gap: 2rem;
-    flex-direction: column;
+    /* flex-direction: column; */
+}
+.menu-link.CoursePageItemsContainer.undefined {
+    background-color:transparent;
 }
 .mobileMenuLink li {
     width: 100%;
@@ -634,7 +635,15 @@ ul.courseHeaderUl.undefined {
 ul.courseHeaderUl.undefined span {
     COLOR: WHITE;
     FONT-WEIGHT: 500;
+    font-size: 20px;
+    text-transform: uppercase !important;
+    cursor: pointer;
 }
+
+ul.courseHeaderUl span:hover {
+    color: black;
+  }
+  
 
 .before_start_now.defaultBuyButtonInCP a {
     color: white;
@@ -670,7 +679,19 @@ ul.courseHeaderUl.undefined span {
         height: 10vh;
         padding: 3rem 2rem;
     }
+
+    h2.whiteContant {
+        color: #108dc1;
+        text-align: center;
+        font-size: 30px;
+        background: #e6ebed;
+        box-shadow: 5px 5px 5px 0px rgba(16, 141, 193, 0.3);
+        height: 10vh;
+        padding: 1rem;
+    }
 }
+
+
 
 
 

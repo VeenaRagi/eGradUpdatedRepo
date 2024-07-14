@@ -1017,8 +1017,9 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
 
 .themeFooterSMIconsDefault {
     display: flex;
-    justify-content: flex-end;
-    margin-right: 20rem;
+    justify-content: end;
+    /* margin-right: 20rem; */
+    /* margin-left: 54px; */
 }
 .themeFooterSMIconsDefault a {
     color: white;
@@ -1117,5 +1118,29 @@ font-size: 10px;
     .Ug_header_logoIMG.themeUgHeaderLogoImgDefault .Ug_header_logoIMG img {
       width: 208px;
     }
+
+    .FaqDataContainer.FaqDataContainerDefault {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 0;
+    }
   }
   
+  .Footer_Links_Content.themeFooterLinksContentDefault {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    gap: 10px; /* Adjust the gap between items as needed */
+  }
+  
+  .Footer_Links_Content.themeFooterLinksContentDefault .item {
+    flex: 1 1 auto; /* Items will grow and shrink to fit available space */
+    min-width: 200px; /* Minimum width to ensure items don't get too small */
+    margin: 5px; /* Adjust the margin as needed */
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+  }
+
+  @media (max-width:800px) {
+    .Footer_Contact_Us_Content.themeFooterContactUsContentDefault {
+        margin-left: 1rem;
+    }  
+  }
