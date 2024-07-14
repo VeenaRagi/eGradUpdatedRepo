@@ -153,7 +153,7 @@ const FAQ = ({ isEditMode, userRole }) => {
                       <AiFillPushpin />
                       {faq.faq_questions}
                     </div>
-                    <FaPlus />
+                    {/* <FaPlus /> */}
                   </h3>
 
                   {openFAQId === faq.faq_id && (
