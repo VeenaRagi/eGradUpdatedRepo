@@ -17,11 +17,12 @@
     padding-top:0px;
 }
 .FaqData.FaqDataDefault h3 {
-        background-color: #000;
-        color: #fff;
-        text-align: justify;
-        font-size: 20px;
-        padding: 10px;
+    background-color: #000;
+    color: #fff;
+    text-align: justify;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 2rem;
 }
 /* h3#faq_title {
     display: flex;
@@ -71,4 +72,19 @@
         font-size: 0rem;
         font-weight: bold;
     }
+}
+
+
+.FaqDataContainer.FaqDataContainerDefault {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0; /* Remove the default gap */
+}
+
+.FaqDataContainer.FaqDataContainerDefault > div {
+    margin-right: 1rem; /* Add margin to create space on the right */
+}
+
+.FaqDataContainer.FaqDataContainerDefault > div:last-child {
+    margin-right: 0; /* Remove margin from the last item */
 }

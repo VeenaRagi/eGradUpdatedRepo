@@ -51,7 +51,7 @@
 
 
 .Newlandingpage .Egate_eLanding_Container_Egate_landing .EGATE_eCordsLanding .EGATE_elandUl-pg_Default button {
-    background-color: #00222c !important;
+    background-color: #003d4e !important;
     text-align: center;
     box-shadow: 0 0 5px black !important;
     border-radius: 10px;
@@ -60,6 +60,12 @@
 .EGATE_elandUl-pg_Default button:hover {
     background-color: #062833;
     text-align: center;
+}
+
+.Newlandingpage .Egate_eLanding_Container_Egate_landing .EGATE_eCordsLanding .EGATE_elandUl-pg_Default button a {
+        color: #fff;
+        font-size: 20px;
+        font-size: Robot, sans-serif;
 }
 
 .Pg_buttonn_Default_Cards ul li {
