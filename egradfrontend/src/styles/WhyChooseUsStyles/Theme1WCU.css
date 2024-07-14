@@ -283,12 +283,12 @@
     }
     .t1CoursePageHeaderContainer .hamburgerMenu.courseHMenu {
 color: black !important;
-width: 200px;
+/* width: 200px; */
     }
     .t1CoursePageHeaderContainer .mobileMenuLink {
         position: absolute;
         display: flex;
-        top: 0%;
+        top: 16%;
         border-radius: 20px;
         right: 3%;
         color: black;
@@ -297,5 +297,13 @@ width: 200px;
         align-items: start;
         border: 1px solid #1f4c60;
         box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    }
+
+    .t1SelectedTabContentDiv{
+        width: 100%;
+    }
+
+    .t1CPHeaderUl li {
+        border: 1px solid #30392b;
     }
 }
