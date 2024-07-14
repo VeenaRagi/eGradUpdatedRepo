@@ -62,6 +62,10 @@
         font-size: 16px;
         padding: 6px;
     }
+
+    .FaqDataContainer.FaqDataContainerDefault {
+        grid-template-columns: 1fr; /* Display only one column */
+      }
     .FaqSubContainer.FaqSubContainerDefault {
         background-color: #e2f7fb;
         /* height: 79vh; */
