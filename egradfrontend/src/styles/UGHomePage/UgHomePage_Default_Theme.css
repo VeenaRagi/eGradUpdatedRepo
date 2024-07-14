@@ -40,12 +40,17 @@
     box-shadow: 0 0 5px 3px rgba(0, 0, 0, .2);
     display: flex;
     justify-content: center;
-    /* width: 120px; */
+  height: 45px;
     padding: 5px;
     color: white;
     font-weight: bold;
     text-decoration: none;
 }
+
+.themeUgDivLinksOfHeaderDefault a:hover{
+color: black;
+}
+
 .ug_container.themeUgHContainerDefault {
     align-items: center;
     background-color: #000;
@@ -53,6 +58,7 @@
     display: block;
     display: flex;
     justify-content: space-between;
+    padding: 10px;
     margin: 0 auto;
     padding: -30.5rem 0;
     height: 60px;
@@ -74,7 +80,7 @@ li.themeUgHeaderLiDefault:hover {
     -webkit-animation: navhover .5s alternate forwards;
     animation: navhover .5s alternate forwards;
     color: #fff;
-    font-weight: 900;
+    font-weight: 500;
     text-decoration: underline;
     text-decoration-color: #099bdf;
 }
@@ -150,7 +156,7 @@ ul.themeUgHeaderUlDefault {
 }
 h2#EXPLORE_Exam_Heading {
     color: #00a3ff;
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin: 2rem auto;
 }
 .NewExploreExams_Sub_Container.themeExploreExamsSubContainerDefault {
@@ -187,13 +193,16 @@ h2#EXPLORE_Exam_Heading {
     display: flex;
     flex-direction: column;
     gap: .8rem;
-    /* height: 166px; */
-    /* justify-content: center; */
-    padding: 1.5rem;
+       padding: 1.5rem;
     text-align: center;
     text-transform: capitalize;
     width: 256px;
     height: 280px;
+}
+
+.NewExploreExams_PortalNames_Container.NewExploreExams_PortalNames_ContainerDefault {
+    padding: 20px;
+    text-align: center;
 }
 .NewExploreExams_EachCard_Container.NewExploreExams_EachCard_ContainerDefault ul li.defaultLinkToSpecificExam{
     background: #3ad4ba;
@@ -226,11 +235,12 @@ li.defaultLinkToSpecificExam a{
     background: #fff;
     padding: .5rem 0;
 }
-h2#Our_Courses_heading{
-        color: #00a3ff;
-        font-size: 2rem;
-        margin: 1rem auto;
-        text-align: center;
+
+h2#Our_Courses_heading {
+    color: #00a3ff;
+    font-size: 2.5rem;
+    margin: 1rem auto;
+    text-align: center;
 }
 .defaultCoursesSubContainer {
     grid-gap: 2rem;
@@ -283,13 +293,18 @@ strong.defaultPortalName {
 .defaultFeatureImgC img {
     height: 250px;
     width: 250px;
+    padding: 20px;
 }
  
 .defaultFeaturesContainer {
-    /* line-height: 32px; */
     padding-top: 4.6rem;
     text-align: justify;
     font-weight: 600;
+}
+
+li.defaultFeatures {
+    font-size: 15px;
+    font-weight: 500;
 }
 h3.undefined {
     font-family: Roboto,sans-serif;
@@ -607,6 +622,7 @@ ul.defaultCoursesUl li:hover {
     padding-left: 0px;
     flex-direction: row;
     padding-top: 18px;
+    cursor: pointer;
 }
 @media (max-width:1280px) {
 
@@ -994,6 +1010,10 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
     margin-bottom: 10px;
 }
 
+
+.themeFooterSMIconsDefault a svg:hover{
+color: #3941b1;
+}
 /* responsive */
 @media(max-width:430px) {
     .LinkPage_footer-content__EHAOJ {

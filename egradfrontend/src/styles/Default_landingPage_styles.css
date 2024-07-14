@@ -233,6 +233,7 @@ a {
     color: #279eff;
     font-size: 1.5rem;
     font-weight: 700;
+    text-align: start;
     padding-bottom: 1rem;
     text-shadow: 2px 9px 8px #000;
 }
@@ -258,9 +259,14 @@ a {
     text-decoration: underline !important;
 }
 
+.Footer_Links_Content.themeFooterLinksContentDefault ul li a:hover{
+    color: rgb(42, 19, 168) !important;
+}
+
 .themeFooterContactDataDefault h2 {
     color: #279eff;
     font-size: 1.5rem;
+    text-align: start;
     font-weight: 700;
     padding-bottom: 1rem;
     text-shadow: 2px 9px 8px #000;
@@ -276,6 +282,14 @@ a {
 
 }
 
+.logo_Img_container.themeLogoImgCDefault img {
+    width: 280px;
+}
+
+
+.Egate_landiing_ojnkl p{
+    text-align: end;
+}
 
 .Footer_Copywrite_Content_Container.themeFooterCopywriteContentContainerDefault p {
     /* line-height: 1.5rem; */
@@ -722,7 +736,8 @@ button:hover {
     padding: 20px;
     border-radius: 8px;
     position: relative;
-  }
+    margin-top: 160px;
+}
   
   .close-button {
     position: absolute;
