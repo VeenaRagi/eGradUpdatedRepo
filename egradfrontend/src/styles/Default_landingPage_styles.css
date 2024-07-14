@@ -463,19 +463,7 @@ a {
 
 /* Full-page overlay to cover the background when the card is open */
 /* Overlay for blurred background */
-.Blur_Effect_Mode{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999; /* Ensure it is above other content */
-    backdrop-filter: blur(5px); /* Adds blur effect */
-}
+
 
 /* Popup card styling */
 .UploadPopups_Container {
@@ -680,21 +668,17 @@ button:hover {
 
 
 
-
-.Blur_Effect_Mode {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-  
   .UploadPopups_Container {
+    position: relative;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px; /* Adjust size as needed */
+    width: 90%;
+  }
+
+  .UploadPopups_Container2{
     position: relative;
     background: white;
     padding: 20px;
@@ -722,28 +706,6 @@ button:hover {
 
 
 
-
-
-
-
-
-
-
-
-  .Blur_Effect_Mode {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-    backdrop-filter: blur(5px);
-  }
-  
   .UploadPopups_Container {
     background: white;
     padding: 20px;
@@ -772,5 +734,48 @@ button:hover {
 
 
 
+/* 
+  
+  .Blur_Effect_Mode {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    backdrop-filter: blur(5px);
+  }
+  
 
   
+.Blur_Effect_Mode {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+
+  .Blur_Effect_Mode{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999; 
+    backdrop-filter: blur(5px); 
+} */
