@@ -50,9 +50,6 @@ const StudentDashboardHeader = ({ usersData = {}, decryptedUserIdState,setActive
             <div className="SDHeaderLogoContainer">
               <img src={logo} alt="no logo " />
             </div>
-            <div>
-              Contact Us
-            </div>
             {usersData.users && usersData.users.length > 0 && (
               <div>
                 {usersData.users.map((user) => (
