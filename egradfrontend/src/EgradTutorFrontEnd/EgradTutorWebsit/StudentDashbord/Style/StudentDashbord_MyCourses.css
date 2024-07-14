@@ -461,7 +461,7 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   grid-template-columns: repeat(auto-fill, minmax(00px, 250px));
   /* color: #fff; */
   background-color: lightblue;
-  padding: 0;
+  padding: 10px;
   margin: 0.5rem 0;
 
   gap: 0.5rem;
@@ -511,6 +511,7 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: absolute;
   right: 0;
   bottom: 0;
+ 
 }
 
 

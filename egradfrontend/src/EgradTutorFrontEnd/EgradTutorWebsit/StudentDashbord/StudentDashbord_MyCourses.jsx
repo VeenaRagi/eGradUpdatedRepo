@@ -407,6 +407,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
       return (
         <span
           className="span_style_attempt_status"
+          
           // style={{
           //   backgroundColor: "red",
           //   color: "white",
@@ -735,7 +736,6 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
 
               <div className="test_card_subcontainer">
                 <div className="Types_of_Tests">
-                  {/* <h1>Filtered Test Details</h1> */}
                   <ul>
                     <div>
                       <div className="testPageHeading">
@@ -783,7 +783,10 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
 
                 <div>
                   {selectedTypeOfTest ? (
-                    <div className="by_selected_type">
+                    <div 
+                    // className="by_selected_type" 
+
+                    className="default_test_cards">
                       <div className="testPageHeading">
                         <h4>{selectedTypeOfTest}</h4>
                       </div>
@@ -840,8 +843,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
                               .filter((test) => test.typeOfTestName === type)
                               .map((test, testIndex) => (
                                 <div key={testIndex} className="test_card">
-                                  {/* <h1>{test.Portale_Name}</h1>
-                                  <h2>{test.courseName}</h2> */}
+                              
                                   <ul
                                     // className="testcard_inline"
                                     className="testcard_inline"

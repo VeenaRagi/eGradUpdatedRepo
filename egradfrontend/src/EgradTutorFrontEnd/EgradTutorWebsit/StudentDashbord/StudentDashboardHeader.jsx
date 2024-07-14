@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './Style/StudentDashboardHeader.css';
+import { useNavigate,Link } from "react-router-dom";
 import BASE_URL from '../../../apiConfig';
 import logo from '../../../styles/MicrosoftTeams-image (7).png';
+import { useTIAuth } from "../../../TechInfoContext/AuthContext";
 
-const StudentDashboardHeader = ({ usersData = {}, decryptedUserIdState }) => {
+const StudentDashboardHeader = ({ usersData = {}, decryptedUserIdState,setActiveComponent  }) => {
   const [showLinks, setShowLinks] = useState(false);
-
+  const navigate = useNavigate();
+  const [tiAuth, settiAuth] = useTIAuth();
   const [isLoggedInFromLS, setIsLoggedInFromLS] = useState(false);
 
   useEffect(() => {
@@ -26,17 +29,19 @@ const StudentDashboardHeader = ({ usersData = {}, decryptedUserIdState }) => {
   }, []);
 
   console.log('user data from the student dashboard header', usersData);
-  // const handleLogOut = () => {
-  //   settiAuth({
-  //     ...tiAuth,
-  //     user: null,
-  //     token: "",
-  //     userDecryptedId:"",
-  //     isLoggedIn: false,
-  //   });
-  //   localStorage.removeItem("tiAuth");
-  //   navigate("/userlogin");
-  // };
+  const handleLogOut = () => {
+    settiAuth({
+      ...tiAuth,
+      user: null,
+      token: "",
+      userDecryptedId:"",
+      isLoggedIn: false,
+    });
+    localStorage.removeItem("tiAuth");
+    navigate("/userlogin");
+  };
+
+
   return (
     <div>
       <div className="SDHParentContainer">
@@ -44,6 +49,9 @@ const StudentDashboardHeader = ({ usersData = {}, decryptedUserIdState }) => {
           <div className="SDHContentContainer">
             <div className="SDHeaderLogoContainer">
               <img src={logo} alt="no logo " />
+            </div>
+            <div>
+              Contact Us
             </div>
             {usersData.users && usersData.users.length > 0 && (
               <div>
@@ -55,9 +63,9 @@ const StudentDashboardHeader = ({ usersData = {}, decryptedUserIdState }) => {
                       alt={`no img${user.UplodadPhto}`}
                     />
                     <div className="toBeDisplayedWhenHovered">
-                      <div className='sub-links-userrr'>Profile</div>
-                      <div className='sub-links-userrr'>Change Password</div>
-                      <div className='sub-links-userrr' >Log Out</div>
+                      <Link to='#' className='sub-links-userrr'  onClick={() => setActiveComponent("settings")}>Profile</Link>
+                      <Link to='#' className='sub-links-userrr'  onClick={() => setActiveComponent("settings")}>Change Password</Link>
+                      <button className='sub-links-userrr' onClick={handleLogOut}>Log Out</button>
                     </div>
                   </div>
                 ))}
