@@ -1237,7 +1237,7 @@ i#footerIcons:hover {
 }
 
  
-.subheading {
+.green_exam_group .subheading {
   width: 100%;
   font-size: 20px;
   padding: 10px;
@@ -1245,7 +1245,6 @@ i#footerIcons:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: flickerAnimation 2s infinite;
 }
 .subheadingNote_dashboard_forPerformance {
   position: relative;
