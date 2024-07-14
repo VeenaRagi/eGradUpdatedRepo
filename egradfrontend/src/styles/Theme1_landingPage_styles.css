@@ -880,6 +880,9 @@ margin-bottom: 0px;
     width: 200px;
 } */
 
+.t1FooterSMIcons svg:hover{
+    color: rgb(109, 100, 100);
+}
 
 .t1FooterFirstContentContainer {
     margin-left: 60px;
