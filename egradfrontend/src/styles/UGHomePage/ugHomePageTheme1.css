@@ -285,6 +285,7 @@ margin: 10px 0;
     background-color: #d9efdf52;
     padding: 20px;
     line-break: anywhere;
+    border: 1px solid black;
     line-height: 28px;
     transform: translateX(5px);
   
@@ -357,7 +358,7 @@ margin: 10px 0;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 10px;
     width: 80%;
     margin: 0 auto;

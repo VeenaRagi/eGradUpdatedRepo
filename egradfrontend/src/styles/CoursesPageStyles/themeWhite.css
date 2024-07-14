@@ -592,6 +592,43 @@ h2.whiteContant {
     color: white !important;
     text-transform: uppercase !important;
 }
+
+
+
+.menu-link.CoursePageItemsContainer.undefined {
+    background-color: #53505054 !important;
+}
+ul.courseHeaderUl.undefined span {
+    color: white !important;
+    font-size: 18px !important;
+}
+ul.courseHeaderUl.undefined a {
+    color: white !important;
+    font-size: 18px !important;
+}
+ul.courseHeaderUl.undefined {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+}
+.mobileMenuLink li {
+    width: 100%;
+    border-bottom:none;
+}
+.CoursePage_header_Container.CoursePageHeaderContainerDefault {
+    background-color: rgb(19, 170, 230);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    padding: 3rem 2rem;
+}
+
+
+
+
+
+
 }
 
 ul.courseHeaderUl.undefined span {
@@ -602,3 +639,38 @@ ul.courseHeaderUl.undefined span {
 .before_start_now.defaultBuyButtonInCP a {
     color: white;
 }
+
+
+@media (max-width: 600px) {
+    .menu-link.CoursePageItemsContainer.undefined {
+        background-color: #53505054 !important;
+    }
+    ul.courseHeaderUl.undefined span {
+        color: white !important;
+        font-size: 18px !important;
+    }
+    ul.courseHeaderUl.undefined a {
+        color: white !important;
+        font-size: 18px !important;
+    }
+    ul.courseHeaderUl.undefined {
+        display: flex;
+        gap: 2rem;
+        flex-direction: column;
+    }
+    .mobileMenuLink li {
+        width: 100%;
+        border-bottom:none;
+    }
+    .CoursePage_header_Container.CoursePageHeaderContainerDefault {
+        background-color: rgb(19, 170, 230);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 10vh;
+        padding: 3rem 2rem;
+    }
+}
+
+
+
