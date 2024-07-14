@@ -1,5 +1,5 @@
 // src/components/RegistrationForm.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import './Style/Registrationform.css'
@@ -36,6 +36,10 @@ const RegistrationForm = () => {
   const [formErrors, setFormErrors] = useState({});
   const [emailExists, setEmailExists] = useState(false);
   const [submitType, setSubmitType] = useState("");
+
+  const handleeBack = () => {
+    navigate('/CoursePage/1/1'); // This navigates to the home page
+  };
 
   useEffect(() => {
     if (courseCreationId) {
@@ -81,7 +85,10 @@ const RegistrationForm = () => {
     } catch (error) {
       console.error("Error checking email:", error);
     }
+    
   };
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted with data:', formData);
@@ -226,6 +233,9 @@ const RegistrationForm = () => {
 
       <form onSubmit={handleSubmit} className="registrationForm" encType="multipart/form-data">
         <div className="">
+         <div className="">
+          <button className="" onClick={handleeBack}>Back</button>
+         </div>
           <div className="fieldsToBeGrid">
             <h1>PersonalDetails</h1>
             <div>
