@@ -19,7 +19,6 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
   const [welcomeDataList, setWelcomeDataList] = useState([]);
   const [showwelcomeForm, setShowWelcomeForm] = useState(false);
   const [fetchError, setFetchError] = useState(false);
-  
 
   const themeFromContext = useContext(ThemeContext);
   const [error, setError] = useState(false);
@@ -134,15 +133,14 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
               <Maintenance1 />
             )} */}
 
-            {welcomeimage ? (
-              <img src={welcomeimage} alt="welcomeCurrent" />
-            ) : userRole === "user" ? (
-              <p>Unable to load image at the moment. Please try again later.</p>
-            ) : userRole === "admin" ? (
-              <p>There is no data available. Please add the data.</p>
-            ) : (
-              <p>Unable to load image. Please contact support.</p> // Default message for any other user roles
-            )}
+{welcomeimage ? (
+  <img src={welcomeimage} alt="welcomeCurrent" />
+) : userRole === "admin" ? (
+  <p>There is no data available. Please add the data.</p>
+) : (
+  <p>Unable to load image at the moment. Please try again later.</p>
+)}
+
           </div>
           <div
             className={`landing_heading_div_container ${themeDetails.themeCapTextContainer}`}

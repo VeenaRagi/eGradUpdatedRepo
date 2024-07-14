@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { decryptData, encryptData } from "./utils/crypto"; // Assuming these are your encryption utilities
 import BASE_URL from "../../../apiConfig";
-import "./Style/Instructions.scss"
+import "./Style/Instructions.scss";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import axios from "axios";
 // import { Header } from "./Header";
 
 const General_intructions_page_container = () => {
@@ -116,8 +117,6 @@ const General_intructions_page_container = () => {
     setIsChecked(e.target.checked);
   };
 
-
-
   const openQuizPage = async () => {
     try {
       const encryptedParam1 = await encryptData(decryptedParam1.toString());
@@ -139,19 +138,40 @@ const General_intructions_page_container = () => {
       } else if (decryptedParam3 == 2) {
         navigate(url2);
       }
-   
     } catch (error) {
       console.error("Error encrypting data:", error);
     }
   };
 
-
+  const [image, setImage] = useState(null);
+  const fetchImage = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/Logo/image`, {
+        responseType: "arraybuffer",
+      });
+      const imageBlob = new Blob([response.data], { type: "image/png" });
+      const imageUrl = URL.createObjectURL(imageBlob);
+      setImage(imageUrl);
+    } catch (error) {
+      console.error("Error fetching image:", error);
+    }
+  };
+  useEffect(() => {
+    fetchImage();
+  }, []);
 
   return (
     <>
       {/* <Header /> */}
+      <div className="Quiz_header">
+        <div className="Q_logo">
+          <img src={image} alt="Current" />
+        </div>
+        <h1 className="general_instruction_page_heading">General Instructions</h1>
+      </div>
+     
       <div className="Instructions_container">
-        <h1>General Instructions</h1>
+   
         <ul className="Instructions_points">
           {instructionsData.map((instruction, index) => (
             <React.Fragment key={index}>
@@ -187,7 +207,6 @@ const General_intructions_page_container = () => {
             </span>
           </div>
         )}
-   
       </div>
     </>
   );

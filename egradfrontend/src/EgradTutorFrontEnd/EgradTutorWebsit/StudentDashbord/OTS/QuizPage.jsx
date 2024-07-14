@@ -63,7 +63,6 @@ const QuizPage = () => {
   console.log("decryptedParam1", decryptedParam1);
   console.log("decryptedParam2", decryptedParam2);
 
-  
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const toggleSidebar = () => {
     setSidebarVisible(!isSidebarVisible);
@@ -273,7 +272,6 @@ const QuizPage = () => {
     }
   };
 
-
   const handleBlur = () => {
     console.log("Window is not focused");
     setShowMalPractisePopup(true);
@@ -282,7 +280,6 @@ const QuizPage = () => {
   const handleFocus = () => {
     console.log("Window is focused");
   };
-
 
   // useEffect(() => {
   //   if ("hidden" in document) {
@@ -344,7 +341,6 @@ const QuizPage = () => {
 
       window.addEventListener("focus", handleFocus);
       window.addEventListener("blur", handleBlur);
-
 
       document.addEventListener("keydown", handleKeyDown);
       document.addEventListener("keyup", handleKeyUp);
@@ -2475,13 +2471,12 @@ const QuizPage = () => {
   //   }
   // };
 
-
   const handleSubmit = async () => {
     try {
       setShowExamSumary(true);
       setShowButtonNo(true);
       calculateResult();
-  
+
       const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
       const counts = calculateQuestionCounts();
       setAnsweredCount(counts.answered);
@@ -2489,50 +2484,59 @@ const QuizPage = () => {
       setMarkedForReviewCount(counts.markedForReview);
       setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
       setVisitedCount(counts.VisitedCount);
-  
+
       const currentQuestion = questionData.questions[currentQuestionIndex];
       const questionId = currentQuestion.question_id;
-  
+
       const formattedTime = WformatTime(wtimer);
-  
+
       // Save exam summary
-      const saveExamSummaryResponse = await fetch(`${BASE_URL}/QuizPage/saveExamSummary`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: decryptedParam2,
-          totalUnattempted: notAnsweredCount,
-          totalAnswered: answeredCount,
-          NotVisitedb: NotVisitedb,
-          testCreationTableId: decryptedParam1,
-        }),
-      });
-  
+      const saveExamSummaryResponse = await fetch(
+        `${BASE_URL}/QuizPage/saveExamSummary`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: decryptedParam2,
+            totalUnattempted: notAnsweredCount,
+            totalAnswered: answeredCount,
+            NotVisitedb: NotVisitedb,
+            testCreationTableId: decryptedParam1,
+          }),
+        }
+      );
+
       const saveExamSummaryResult = await saveExamSummaryResponse.json();
       console.log("Exam summary saved:", saveExamSummaryResult);
-  
+
       // Submit time left
-      const submitTimeLeftResponse = await fetch(`${BASE_URL}/QuizPage/submitTimeLeft`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: decryptedParam2,
-          testCreationTableId: decryptedParam1,
-          timeLeft: formattedTime,
-        }),
-      });
-  
+      const submitTimeLeftResponse = await fetch(
+        `${BASE_URL}/QuizPage/submitTimeLeft`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: decryptedParam2,
+            testCreationTableId: decryptedParam1,
+            timeLeft: formattedTime,
+          }),
+        }
+      );
+
       const submitTimeLeftResult = await submitTimeLeftResponse.json();
       console.log("Time left submission result:", submitTimeLeftResult);
-  
+
       // Clear local storage data for the current question
       if (questionId) {
         try {
-          console.log("Removing from local storage for questionId:", questionId);
+          console.log(
+            "Removing from local storage for questionId:",
+            questionId
+          );
           localStorage.removeItem(`calculatorValue_${questionId}`);
           console.log("Item removed successfully.");
         } catch (error) {
@@ -2543,9 +2547,6 @@ const QuizPage = () => {
       console.error("Error in handleSubmit:", error);
     }
   };
-  
-
-  
 
   const handlePreviousClick = () => {
     const currentQuestion = questionData.questions[currentQuestionIndex];
@@ -2850,14 +2851,13 @@ const QuizPage = () => {
     // <div className="QuestionPaper_-container"  ref={quizRef}
     // onClick={enterFullscreen}  style={{ backgroundColor: 'white', }}>
     // <div className="QuestionPaper_-container"  >
-    
+
     <div
       className="QuestionPaper_-container"
       ref={quizRef}
       onClick={enterFullscreen}
       style={{ backgroundColor: "white" }}
     >
-     
       {/* {showMalPractisePopup && (
         <div className="popup">
           <div className="popup-content">
@@ -2925,11 +2925,10 @@ const QuizPage = () => {
       {/* <p>Decrypted Param 1: {decryptedParam1}</p>
       <p>Decrypted Param 2: {decryptedParam2}</p> */}
 
-    
-        {!showExamSumary ? (
-          <div className="quiz_exam_interface_body">
-            {/* --------------- quiz examconatiner -------------------- */}
-            <div className="quizPagewatermark">
+      {!showExamSumary ? (
+        <div className="quiz_exam_interface_body">
+          {/* --------------- quiz examconatiner -------------------- */}
+          <div className="quizPagewatermark">
             <div className="quiz_exam_interface_body_left_container">
               {/* --------------- quiz sub container -------------------- */}
 
@@ -3767,52 +3766,52 @@ const QuizPage = () => {
                           title="Click here to Save & Mark for Review"
                           arrow
                         > */}
-                          <button
-                            className="Quiz_Save_MarkforReview"
-                            onClick={markForReview}
-                          >
-                            Save & Mark for Review
-                          </button>
+                        <button
+                          className="Quiz_Save_MarkforReview"
+                          onClick={markForReview}
+                        >
+                          Save & Mark for Review
+                        </button>
                         {/* </Tooltip> */}
                         {/* <Tooltip title="Click here to Clear Response" arrow> */}
-                          <button
-                            className="Quiz_clearResponse"
-                            onClick={clearResponse}
-                          >
-                            Clear Response
-                          </button>
+                        <button
+                          className="Quiz_clearResponse"
+                          onClick={clearResponse}
+                        >
+                          Clear Response
+                        </button>
                         {/* </Tooltip> */}
                         {/* <Tooltip title="Click here to Save & Next" arrow> */}
-                          <button
-                            className="quizsave_next"
-                            onClick={handleSaveNextQuestion}
-                          >
-                            Save & Next
-                          </button>
+                        <button
+                          className="quizsave_next"
+                          onClick={handleSaveNextQuestion}
+                        >
+                          Save & Next
+                        </button>
                         {/* </Tooltip> */}
                       </div>
                       <div className="quiz_Next_back">
                         {/* <Tooltip title="Click here to go Back" arrow> */}
-                          <button
-                            className="previous-btn"
-                            onClick={handlePreviousClick}
-                            disabled={currentQuestionIndex === 0}
-                          >
-                            <i className="fa-solid fa-angles-left"></i> Back
-                          </button>
+                        <button
+                          className="previous-btn"
+                          onClick={handlePreviousClick}
+                          disabled={currentQuestionIndex === 0}
+                        >
+                          <i className="fa-solid fa-angles-left"></i> Back
+                        </button>
                         {/* </Tooltip> */}
                         {/* <Tooltip title="Click here to go Next" arrow> */}
-                          <button onClick={handleNextQuestion}>Next</button>
+                        <button onClick={handleNextQuestion}>Next</button>
                         {/* </Tooltip> */}
 
                         {/* <Tooltip title="Click here to Submit" arrow> */}
-                          <button
-                            style={{ background: "#f0a607da" }}
-                            onClick={handleSubmit}
-                            id="resume_btn"
-                          >
-                            Submit
-                          </button>
+                        <button
+                          style={{ background: "#f0a607da" }}
+                          onClick={handleSubmit}
+                          id="resume_btn"
+                        >
+                          Submit
+                        </button>
                         {/* </Tooltip> */}
                       </div>
                     </div>
@@ -3824,128 +3823,125 @@ const QuizPage = () => {
 
               {/* --------------- quiz btns container -------------------- */}
             </div>
- </div>
-            <div className="quiz_exam_interface_body_right_container">
-              {/* --------------- right bar -------------------- */}
-              <div className="rightsidebar_container">
-                <div
-                  className="rightsidebar_container_btn_menubar"
-                  onClick={toggleSidebar}
-                >
-                  <BiMenuAltLeft />
-                </div>
-                <div
-                  className={
-                    isSidebarVisible ? "rightsidebar visible" : "rightsidebar"
-                  }
-                >
-                  <ButtonsFunctionality
-                    onQuestionSelect={handleQuestionSelect}
-                    questionStatus={questionStatus}
-                    setQuestionStatus={setQuestionStatus}
-                    answeredCount={answeredCount}
-                    notAnsweredCount={notAnsweredCount}
-                    answeredmarkedForReviewCount={answeredmarkedForReviewCount}
-                    markedForReviewCount={markedForReviewCount}
-                    VisitedCount={VisitedCount}
-                    selectedSubject={selectedSubject}
-                    questionData={questionData}
-                    updateQuestionStatus={updateQuestionStatus}
-                    // seconds={seconds}
-                    seconds={600}
-                    onUpdateOption={handleUpdateOption}
-                    option={option}
-                  />
-                </div>
+          </div>
+          <div className="quiz_exam_interface_body_right_container">
+            {/* --------------- right bar -------------------- */}
+            <div className="rightsidebar_container">
+              <div
+                className="rightsidebar_container_btn_menubar"
+                onClick={toggleSidebar}
+              >
+                <BiMenuAltLeft />
+              </div>
+              <div
+                className={
+                  isSidebarVisible ? "rightsidebar visible" : "rightsidebar"
+                }
+              >
+                <ButtonsFunctionality
+                  onQuestionSelect={handleQuestionSelect}
+                  questionStatus={questionStatus}
+                  setQuestionStatus={setQuestionStatus}
+                  answeredCount={answeredCount}
+                  notAnsweredCount={notAnsweredCount}
+                  answeredmarkedForReviewCount={answeredmarkedForReviewCount}
+                  markedForReviewCount={markedForReviewCount}
+                  VisitedCount={VisitedCount}
+                  selectedSubject={selectedSubject}
+                  questionData={questionData}
+                  updateQuestionStatus={updateQuestionStatus}
+                  // seconds={seconds}
+                  seconds={600}
+                  onUpdateOption={handleUpdateOption}
+                  option={option}
+                />
               </div>
             </div>
           </div>
-        ) : (
+        </div>
+      ) : (
+        <div >
           <div className="examSummary_quizPagewatermark">
-            <div className="result">
-              <h3 id="result_header">Exam Summary</h3>
-              <div className="result_page_links"></div>
+            <h3 className="Exam_summary_heading">Exam Summary</h3>
 
-              <div className="Exam_summary_table">
-                <table id="customers">
-                  <tr>
-                    <td>Total Questions</td>
-                    <td>Answered Questions</td>
-                    <td>Not Answered Questions</td>
-                    <td>Not Visited Count</td>
-                    <td>Marked for Review Questions</td>
-                    <td>Answered & Marked for Review Questions</td>
-                  </tr>
-                  <tr>
-                    <td>{questionData.questions.length}</td>
-                    <td>{answeredCount}</td>
-                    <td>{notAnsweredCount}</td>
-                    <td>{NotVisitedb}</td>
-                    <td>{markedForReviewCount}</td>
-                    <td>{answeredmarkedForReviewCount}</td>
-                  </tr>
-                </table>
-              </div>
-              <div></div>
-              <div>
-                {/* {showButtonNo && (
+            <div className="Exam_summary_table">
+              <table id="customers" className="exam_summary_table">
+                <tr className="exam_summary_table_tr">
+                  <td>Total Questions</td>
+                  <td>Answered Questions</td>
+                  <td>Not Answered Questions</td>
+                  <td>Not Visited Count</td>
+                  <td>Marked for Review Questions</td>
+                  <td>Answered & Marked for Review Questions</td>
+                </tr>
+                <tr>
+                  <td>{questionData.questions.length}</td>
+                  <td>{answeredCount}</td>
+                  <td>{notAnsweredCount}</td>
+                  <td>{NotVisitedb}</td>
+                  <td>{markedForReviewCount}</td>
+                  <td>{answeredmarkedForReviewCount}</td>
+                </tr>
+              </table>
+            </div>
+            <div>
+              {/* {showButtonNo && (
               <h2 className="Exam_summary_question_tag">
                 Are you sure you want to submit ? <br />
                 No changes will be allowed after submission.
               </h2>
             )} */}
-                {showButtonNo === false ? (
-                  <h2 className="Exam_summary_question_tag">
-                    Please press okay to view your result.
-                  </h2>
-                ) : (
-                  <h2 className="Exam_summary_question_tag">
-                    Are you sure you want to submit ? <br />
-                    No changes will be allowed after submission.
-                  </h2>
-                )}
+              {showButtonNo === false ? (
+                <h2 className="Exam_summary_question_tag">
+                  Please press okay to view your result.
+                </h2>
+              ) : (
+                <h2 className="Exam_summary_question_tag">
+                  Are you sure you want to submit ? <br />
+                  No changes will be allowed after submission.
+                </h2>
+              )}
 
-                <div className="Exam_summary_btns">
-                  {showButtonNo === false ? (
-                    // <Tooltip title="Yes" arrow>
-                      <>
-                        <Link
-                          className="es_btn"
-                          // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
-                          // to='/Submit_Page'
-                          onClick={handleYes}
-                        >
-                          Okay
-                        </Link>
-                      </>
-                    // {/* </Tooltip> */}
-                  ) : (
-                    // <Tooltip title="Yes" arrow>
-                      <>
-                        <Link
-                          className="es_btn"
-                          // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
-                          // to='/Submit_Page'
-                          onClick={handleYes}
-                        >
-                          Yes
-                        </Link>
-                      </>
-                    // {/* </Tooltip> */}
-                  )}
-                  {showButtonNo && (
-                    // <Tooltip title="No" arrow>
-                      <button className="es_btn" onClick={handleNo}>
-                        NO
-                      </button>
-                    // {/* </Tooltip> */}
-                  )}
-                </div>
+              <div className="Exam_summary_btns">
+                {showButtonNo === false ? (
+                  // <Tooltip title="Yes" arrow>
+                  <>
+                    <Link
+                      className="es_btn"
+                      // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
+                      // to='/Submit_Page'
+                      onClick={handleYes}
+                    >
+                      Okay
+                    </Link>
+                  </>
+                ) : (
+                  // {/* </Tooltip> */}
+                  // <Tooltip title="Yes" arrow>
+                  <>
+                    <Link
+                      className="es_btn"
+                      // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
+                      // to='/Submit_Page'
+                      onClick={handleYes}
+                    >
+                      Yes
+                    </Link>
+                  </>
+                  // {/* </Tooltip> */}
+                )}
+                {showButtonNo && (
+                  // <Tooltip title="No" arrow>
+                  <button className="es_btn" onClick={handleNo}>
+                    NO
+                  </button>
+                  // {/* </Tooltip> */}
+                )}
               </div>
             </div>
           </div>
-        )}
-     
+        </div>
+      )}
     </div>
   );
 };
