@@ -11,24 +11,18 @@ const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
   const [errorsOfForm, setErrorsOfForm] = useState("");
   const [showChangePasswordForm, setShowPasswordForm] = useState(false)
   const[userNameFromContext,setUserNameFromContext]=useState("")
+  const [tiAuth] = useTIAuth();
 
 // useEffect for getting the role
 useEffect(()=>{
-  const isLoggedIn=localStorage.getItem("tiAuth")
-})
-// const {tiAuth}=useTIAuth();
-const [tiAuth] = useTIAuth();
-
-  // Access user details
   const { userData } = tiAuth;
-
   if (!userData) {
     return <div>Loading...</div>;
   }
-//  const { userData } = tiAuth;
  const userName = userData.users[0].username;
  setUserNameFromContext(userName)
 console.log(userName,"ddddddddddddddddddddddddddddddddddddddd")
+})
   const handleChangePassword = async (decryptedUserId) => {
     console.log(decryptedUserId, "this is decryptedUserId from handleChangePassword");
     //  i need to send otp to the user reg email if he selects yes from the alert
