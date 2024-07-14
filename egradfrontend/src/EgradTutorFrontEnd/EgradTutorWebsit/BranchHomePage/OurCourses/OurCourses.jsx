@@ -73,17 +73,18 @@ const OueCourses = ({ isEditMode, userRole}) => {
             {showFeatureForm && <OurCoursesEdit type="AddFeatures" />}
           </div>
         )}
+
       </div>
       {themeColor === 'Theme-1' ? <div className={`${themeDetails.themeCoursesHeaddings}`}>
         <div>
-          {isEditMode && (
+          {/* {isEditMode && (
             <div>
               <button onClick={handleAddFeaturesClick}>
                 {showFeatureForm ? "Close Feature Form" : "Add Features"}
               </button>
               {showFeatureForm && <OurCoursesEdit type="AddFeatures" />}
             </div>
-          )}
+          )} */}
         </div>
         <div class="wrapper ten">
         <div>

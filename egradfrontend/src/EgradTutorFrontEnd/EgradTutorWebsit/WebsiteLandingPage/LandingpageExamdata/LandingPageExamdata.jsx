@@ -12,7 +12,7 @@ import { FcGraduationCap } from "react-icons/fc";
 import { MdFileUpload } from "react-icons/md";
 import { LiaEditSolid } from "react-icons/lia";
 import { IoMdAddCircleOutline } from "react-icons/io";
- 
+
 const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
   const [image, setImage] = useState(null);
   const [branches, setBranches] = useState([]);
@@ -23,32 +23,32 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
   const themeDetails = JSONClasses[themeColor] || [];
   const [openAddExamForm, setOpenAddExamForm] = useState(false);
   const [examImages, setExamImages] = useState([]);
- const [openUgExamsUpload,setOpenUgExamsUpload] = useState(false);
+  const [openUgExamsUpload, setOpenUgExamsUpload] = useState(false);
   const OpenAddExamForm = (branchBranch_Id) => {
     console.log(branchBranch_Id);
     setOpenAddExamForm(branchBranch_Id); // Set the state to the branch's ID
   };
- 
+
   const refreshChannel = new BroadcastChannel("refresh_channel");
   refreshChannel.onmessage = function (event) {
     if (event.data === "refresh_page") {
       window.location.reload(); // Reload the page
     }
   };
- 
+
   const [openUgExamImageUpload, setOpenUgExamImageUpload] = useState(false);
   const OpenExamImageUplaod = () => {
     setOpenUgExamImageUpload(true);
   };
- 
+
   const handleEditClick = (branch) => {
     setSelectedBranch(branch);
     setShowPopup(true);
   };
- 
+
   const [selectedBranch, setSelectedBranch] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
- 
+
   const fetchImage = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/Logo/image`, {
@@ -61,11 +61,11 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
       console.error("Error fetching image:", error);
     }
   };
- 
+
   useEffect(() => {
     fetchImage();
   }, []);
- 
+
   const fetchBranches = async () => {
     try {
       const response = await fetch(`${BASE_URL}/LandingPageExamData/branches`);
@@ -80,7 +80,7 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
       setLoading(false);
     }
   };
- 
+
   const fetchExamImages = async () => {
     try {
       const response = await axios.get(
@@ -91,24 +91,24 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
       console.error("Error fetching exam images:", error);
     }
   };
- 
+
   useEffect(() => {
     fetchExamImages();
   }, []);
- 
+
   useEffect(() => {
     fetchBranches();
     fetchExamImages();
   }, []);
- 
+
   if (loading) {
     return <div>Loading...</div>;
   }
- 
+
   if (error) {
     return <div>{error}</div>;
   }
- 
+
   if (branches.length === 0) {
     return (
       <div>
@@ -122,8 +122,8 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
       </div>
     );
   }
- 
- 
+
+
   return (
     <>
       {themeColor === "Theme-1" ? (
@@ -186,8 +186,8 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
             ) : (
               <p>No branches available</p>
             )} */}
- 
- 
+
+
             {branches && branches.length > 0 ? (
               branches.map((branch) => (
                 <div
@@ -247,13 +247,51 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
             ) : (
               <p>No branches available</p>
             )}
- 
- 
- 
- 
- 
+
+
+            {isEditMode && (
+              <div>
+                <button
+                  onClick={() => setOpenUgExamImageUpload(!openUgExamImageUpload)}
+                >
+                  {openUgExamImageUpload ? "Close Form" : "Image Uplaod"}
+                </button>
+
+                {openUgExamImageUpload && (
+                  <LandingPageExamdataEdit type="UploadExamImage" />
+                )}
+
+
+              </div>
+
+
+            )}
+
+
+            {isEditMode && (
+              <div>
+                <button
+                  onClick={() => setOpenUgExamsUpload(!openUgExamsUpload)}
+                >
+                  {openUgExamsUpload ? "Close Form" : "Exams Uplaod"}
+                </button>
+
+                {openUgExamsUpload && (
+                  <LandingPageExamdataEdit type="Upload/EditExams" />
+                )}
+
+
+              </div>
+
+
+            )}
+
+
           </div>
         </div>
+
+
+
       ) : (
         <div className="Newlandingpage">
           <div
@@ -320,108 +358,108 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
               ) : (
                 <p>No branches available</p>
               )} */}
- 
- 
-{branches && branches.length > 0 ? (
-  branches.map((branch) => (
-    <div
-      className={`Newlandingpage_branch_box ${themeDetails.themeBranchBox}`}
-      key={branch.Branch_Id}
-    >
-      <button className={`${themeDetails.themeUgAndPgButtons}`}>
-        <Link
-          to={{ pathname: `/BranchHomePage/${branch.Branch_Id}` }}
-        >
-          {branch.Branch_Name}
-        </Link>
-      </button>
- 
-      <div
-        className={`Newlandingpage_exams_button_box ${themeDetails.themeExamButtonsBox}`}
-      >
-        <div
-          className={`NewlandingPage_exams_image ${themeDetails.themeExamImageBox}`}
-        >
-          {themeColor === "Theme-2" &&
-            examImages
-              ?.filter((image) => image.Branch_Id === branch.Branch_Id) // Filter images by branch ID
-              .map((image, index) => (
-                <div key={index} className="image-item">
-                  {image.Exam_Image && (
-                    <img
-                      src={`data:image/jpeg;base64,${image.Exam_Image}`} // Adjust the MIME type if necessary
-                      alt={`Exam ${index + 1}`}
-                      style={{ width: "200px", height: "auto" }}
-                    />
-                  )}
-                </div>
-              ))}
-        </div>
-        <div
-          className={`${themeDetails.themeLanding_branch_box_btns}`}
-        >
-          <ul>
-            {branch.EntranceExams.slice(0, 4).map((exam) => (
-              <li
-                key={exam.EntranceExams_Id}
-                className={`${themeDetails.themeLanding_branch_box_li_buttons}`}
-              >
-                <Link
-                  to={`/ExamHomePage/${exam.EntranceExams_Id}`}
-                >
-                  {exam.EntranceExams_name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  ))
-) : (
-  <p>No branches available</p>
-)}
- 
- 
- 
+
+
+              {branches && branches.length > 0 ? (
+                branches.map((branch) => (
+                  <div
+                    className={`Newlandingpage_branch_box ${themeDetails.themeBranchBox}`}
+                    key={branch.Branch_Id}
+                  >
+                    <button className={`${themeDetails.themeUgAndPgButtons}`}>
+                      <Link
+                        to={{ pathname: `/BranchHomePage/${branch.Branch_Id}` }}
+                      >
+                        {branch.Branch_Name}
+                      </Link>
+                    </button>
+
+                    <div
+                      className={`Newlandingpage_exams_button_box ${themeDetails.themeExamButtonsBox}`}
+                    >
+                      <div
+                        className={`NewlandingPage_exams_image ${themeDetails.themeExamImageBox}`}
+                      >
+                        {themeColor === "Theme-2" &&
+                          examImages
+                            ?.filter((image) => image.Branch_Id === branch.Branch_Id) // Filter images by branch ID
+                            .map((image, index) => (
+                              <div key={index} className="image-item">
+                                {image.Exam_Image && (
+                                  <img
+                                    src={`data:image/jpeg;base64,${image.Exam_Image}`} // Adjust the MIME type if necessary
+                                    alt={`Exam ${index + 1}`}
+                                    style={{ width: "200px", height: "auto" }}
+                                  />
+                                )}
+                              </div>
+                            ))}
+                      </div>
+                      <div
+                        className={`${themeDetails.themeLanding_branch_box_btns}`}
+                      >
+                        <ul>
+                          {branch.EntranceExams.slice(0, 4).map((exam) => (
+                            <li
+                              key={exam.EntranceExams_Id}
+                              className={`${themeDetails.themeLanding_branch_box_li_buttons}`}
+                            >
+                              <Link
+                                to={`/ExamHomePage/${exam.EntranceExams_Id}`}
+                              >
+                                {exam.EntranceExams_name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>No branches available</p>
+              )}
+
+
+
             </div>
           </div>
- 
+
           {isEditMode && (
             <div>
               <button
                 onClick={() => setOpenUgExamImageUpload(!openUgExamImageUpload)}
               >
-                {openUgExamImageUpload ? "Close Form" : "Exam/Image Uplaod"}
+                {openUgExamImageUpload ? "Close Form" : "Image Uplaod"}
               </button>
- 
+
               {openUgExamImageUpload && (
                 <LandingPageExamdataEdit type="UploadExamImage" />
               )}
- 
- 
+
+
             </div>
- 
- 
+
+
           )}
 
 
-{isEditMode && (
+          {isEditMode && (
             <div>
               <button
                 onClick={() => setOpenUgExamsUpload(!openUgExamsUpload)}
               >
                 {openUgExamsUpload ? "Close Form" : "Exams Uplaod"}
               </button>
- 
+
               {openUgExamsUpload && (
                 <LandingPageExamdataEdit type="Upload/EditExams" />
               )}
- 
- 
+
+
             </div>
- 
- 
+
+
           )}
 
         </div>
@@ -429,5 +467,5 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
     </>
   );
 };
- 
+
 export default LandingPageExamdata;
