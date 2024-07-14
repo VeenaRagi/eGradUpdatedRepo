@@ -314,7 +314,7 @@ refreshChannel.onmessage = function (event) {
               <div className={`${themeDetails.themeFooterSMIcons}`}>
                 <Link to='/'> <FaFacebook /></Link>
                 <Link> <GrInstagram /></Link>
-                <Link><SiYoutube /></Link>
+                <Link to='https://www.youtube.com/@eGRADTutor'><SiYoutube /></Link>
                 <Link><ImLinkedin /></Link>
               </div>
             </div>
