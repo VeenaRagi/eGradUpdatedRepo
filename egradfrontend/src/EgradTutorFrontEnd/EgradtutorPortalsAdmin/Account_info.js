@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
 import BASE_URL from '../../apiConfig';
+import '../../EgradTutorFrontEnd/EgradtutorPortalsAdmin/styles/Account_info.css'
 
 Modal.setAppElement('#root'); // Set the root element for accessibility
 
@@ -77,24 +78,28 @@ const AccountInfo = () => {
   };
 
   return (
-    <div>
+    <div className='admin_account_info_container'>
       <h1>Account Information</h1>
       {userData.length === 0 ? (
         <p>No user data available</p>
       ) : (
-        <ul>
+        <ul className='admin_ul_container'>
           {userData.map(user => (
-            <li key={user.studentRegistationId}>
+            <li className='admin_img_container' key={user.studentRegistationId}>
               <img 
-                className="users_profile_img" 
+                className="users_profile_img_admin" 
                 src={`${BASE_URL}/uploads/studentinfoimeages/${user.UplodadPhto}`} 
                 alt={`no img${user.UplodadPhto}`} 
               />
-              <p>Name: {user.username}</p>
-              <p>Email: {user.email}</p>
-              <p>Role: {user.role === 'User' ? 'Student' : user.role}</p>
-              <button onClick={() => openModal(user, false)}>More Info</button>
-              <button onClick={() => openCourseModal(user)}>Course Activation</button>
+              <div className='detailsss_container'>
+              <p className='admin_para'>Name: {user.username}</p>
+              <p className='admin_para'>Email: {user.email}</p>
+              <p className='admin_para'>Role: {user.role === 'User' ? 'Student' : user.role}</p>
+              </div>
+              <div className='btns_adminn_contaainer'>
+              <button className='more_btn_admin' onClick={() => openModal(user, false)}>More Info</button>
+              <button className='course_activation_btn_admin' onClick={() => openCourseModal(user)}>Course Activation</button>
+              </div>
             </li>
           ))}
         </ul>

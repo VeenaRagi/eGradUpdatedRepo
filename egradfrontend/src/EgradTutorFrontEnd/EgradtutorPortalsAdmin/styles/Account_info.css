@@ -268,3 +268,67 @@
     }
   }
 }
+
+
+
+
+
+
+/* ********* Register students info.jsx CSS********* */
+.admin_account_info_container h1{
+text-align: center;
+padding: 20px;
+}
+
+.admin_ul_container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin_img_container{
+  height: 200px;
+  width: 200px;
+  justify-content: center;
+}
+
+.users_profile_img_admin{
+  height: 100%;
+  border: 1px solid gray;
+  border-radius: 100px;
+  width: 100%;
+}
+
+.detailsss_container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+
+.admin_para{
+color: black;
+font-size: 20px;
+}
+
+.btns_adminn_contaainer{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.more_btn_admin{
+  background-color: rgb(158, 216, 158);
+}
+
+
+.course_activation_btn_admin{
+  background-color: rgb(130, 196, 240);
+}
+
+@media (max-width:768px){
+  .btns_adminn_contaainer{
+    flex-direction: column;
+  }
+}
