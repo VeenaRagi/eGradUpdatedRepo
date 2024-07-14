@@ -24,7 +24,7 @@ const Student_dashboard_Container = ({ usersData, decryptedUserIdState }) => {
 
   return (
     <>
-      <StudentDashboardHeader usersData={usersData} decryptedUserIdState={decryptedUserIdState} />
+      <StudentDashboardHeader usersData={usersData} decryptedUserIdState={decryptedUserIdState}  setActiveComponent={setActiveComponent} />
       <div className="ug_quiz_dashBoard_Main_container">
         <div
           className="ugquiz_StudentDashbordconatiner_handleToggleLeftMenu"
