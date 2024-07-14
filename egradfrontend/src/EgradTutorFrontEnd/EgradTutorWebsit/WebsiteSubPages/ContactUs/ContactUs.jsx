@@ -141,7 +141,7 @@ refreshChannel.onmessage = function (event) {
             className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`}
           >
             {image ? (
-              <Link to="/">
+            <Link to={`/`}>
                 <img src={image} alt="Current" />
               </Link>
             ) : userRole === "user" ? (

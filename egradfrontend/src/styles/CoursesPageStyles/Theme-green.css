@@ -86,7 +86,7 @@
   gap: 10px;
   box-shadow: 0px 4px 10px -3px #55bf82;
   border-radius: 6px;
-  padding: 36px 0;
+  padding: 30px 0 10px 20px;
 }
 
 
@@ -161,9 +161,9 @@
     font-family: var(--greenFont);
     font-weight: 500;
   }
-  & .Price_Discount{
-    justify-content: left;
-  }
+  & & .Price_Discount {
+    justify-content: space-between;
+}
 }
 .greenCourseNameInCard {
   padding: 10px 0 !important;

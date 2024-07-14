@@ -39,7 +39,8 @@ const WhychooseUsEdit = ({ type }) => {
     courseTabId: "",
     // courseTabTitle: "",
     courseTabDescription: "",
-    courseTabImage: null
+    courseTabImage: null,
+    courseTabUniqueId:""
 
   })
   const [portales, setPortales] = useState([])
@@ -75,6 +76,7 @@ const WhychooseUsEdit = ({ type }) => {
         );
         const data = await response.json();
         setWhyChooseUsItems(data);
+        console.log(data)
       } catch (error) {
         console.error("Error fetching items:", error);
       }
@@ -88,6 +90,7 @@ const WhychooseUsEdit = ({ type }) => {
       ...formData,
       [name]: value,
     });
+    console.log(formData,"this isfrommmmmmm")
   };
 
   const handleFileChange = (e) => {
@@ -99,18 +102,15 @@ const WhychooseUsEdit = ({ type }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const url = editMode
       ? `${BASE_URL}/WhychooseUsEdit/updateWhyChooseUsItem/${editId}`
       : `${BASE_URL}/WhychooseUsEdit/saveWhyChooseUsItem`;
     const method = editMode ? "PUT" : "POST";
-
     const formDataToSend = new FormData();
     formDataToSend.append("title", formData.title);
     formDataToSend.append("description", formData.description);
     formDataToSend.append("order", formData.order);
     formDataToSend.append("image", formData.image);
-
     try {
       const response = await fetch(url, {
         method,
@@ -232,6 +232,7 @@ const WhychooseUsEdit = ({ type }) => {
     formData.append('courseTabId', tabsData.courseTabId);
     formData.append('courseTabDescription', tabsData.courseTabDescription);
     formData.append('courseTabImage', tabsData.courseTabImage);
+    formData.append("courseTabUniqueId",tabsData.courseTabUniqueId)
   
     if (isEditFlag) {
       try {
@@ -253,19 +254,13 @@ const WhychooseUsEdit = ({ type }) => {
     } 
     else {
       try {
+        console.log(formData,"this is the data we are senidnf")
         const response = await axios.post(`${BASE_URL}/courseTab/courseTabFormData`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
-        console.log(response);
-        // if (response.data.exists) {
-        //   if (window.confirm("Data already exists. Do you want to overwrite it?")) {
-        //     // await handleOverwriteSubmit();
-        //   }
-        // } else {
-        //   alert("Data inserted successfully");
-        // }
+        console.log(response,"this is the response from handleDataSubmit");
       } catch (error) {
         console.log(error, "Error happened while posting the tabs data");
         alert("An error occurred while inserting the tab data");
@@ -328,6 +323,7 @@ const WhychooseUsEdit = ({ type }) => {
      {coursePortaleId:objPre.course_portale_id,
       courseTabId:objPre.course_tab_title_id,
       courseTabDescription:objPre.course_tab_text,
+      courseTabUniqueId:objPre.tab_id
       // courseTabImage:objPre.course_tab_image,
     }
     )
@@ -490,7 +486,7 @@ const handleDeleteTab=async(objPre)=>{
                     <button className = "Edit_button" type="button" onClick={() => handlePreFillDropDown(objPre)}><CiEdit /></button>
                     <button className = "Delete_button" type="button" onClick={()=>handleDeleteTab(objPre)}><RiDeleteBin6Line /></button>
                     <div className="why-chooseUs_image_Container">
-                      <img src={`data:image/png;base64,${objPre.course_tab_image}`} alt="nopeeeeee" />
+                      {/* <img src={`data:image/png;base64,${objPre.course_tab_image}`} alt="nopeeeeee" /> */}
                     <span>{objPre.course_tab_text}</span>
                     </div>
                   </div>
