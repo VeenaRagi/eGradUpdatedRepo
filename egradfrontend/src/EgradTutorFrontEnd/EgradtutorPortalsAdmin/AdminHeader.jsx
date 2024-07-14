@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 // import axios from '../../api/axios';
 import BASE_URL from '../../apiConfig';
 import { IoHome } from "react-icons/io5";
@@ -8,13 +8,14 @@ import JSONClasses from '../../ThemesFolder/JSONForCSS/JSONClasses';
 import './styles/AdminHeader.css'
 import { RxHamburgerMenu } from "react-icons/rx";
 import axios from 'axios';
+import AdminLogin from '../../Login/AdminLogin';
 const AdminHeader = ({ userRole }) => {
   const { EntranceExams_Id } = useParams();
   const [entranceExam, setEntranceExam] = useState([]);
   const [image, setImage] = useState(null);
   const themeFromContext = useContext(ThemeContext);
   const [showLinks, setShowLinks] = useState(false);
-
+const navigate=useNavigate();
   const themeColor = themeFromContext[0]?.current_theme;
   console.log(themeColor, "this is the theme json classesssssss")
   const themeDetails = JSONClasses[themeColor] || []
@@ -49,7 +50,10 @@ const AdminHeader = ({ userRole }) => {
   useEffect(() => {
     fetchImage();
   }, []);
-
+const handleLogOut=()=>{
+  localStorage.removeItem("tiAuth")
+  navigate("/adminLogin")
+}
   return (
     <div>
       <div className={`adminHeaderParentContainer _dFlex`}>
@@ -76,6 +80,7 @@ const AdminHeader = ({ userRole }) => {
             <Link to='/CourseAdmin'>Course Admin</Link>
             <Link to='/adminProfile'>Profile</Link>
             <Link to={`/`}><IoHome />Home</Link>
+            <button onClick={handleLogOut}> LogOut</button>
           </div>
           <div
               className="hamburgerMenu adminHeaderhamburgerMenu"

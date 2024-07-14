@@ -6,9 +6,9 @@ import BASE_URL from "../../../apiConfig";
 import { MdDelete } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import '../../../styles/Default_landingPage_styles.css' 
+import '../../../styles/Default_landingPage_styles.css'
 const FooterEdit = ({ type }) => {
-      const[contactUsContent, setContactUsContent] = useState('');
+    const [contactUsContent, setContactUsContent] = useState('');
     const [egardTutorItem, setEgardTutorItem] = useState('');
 
     const [dataOne, setDataOne] = useState([]);
@@ -32,7 +32,7 @@ const FooterEdit = ({ type }) => {
     const [currentDocumentName, setCurrentDocumentName] = useState('');
     const [editLinkFileData, setEditLinkFileData] = useState("");
     const [dataTwo, setDataTwo] = useState([]);
- 
+
     const [editItemId, setEditItemId] = useState(null);
     const [editedItem, setEditedItem] = useState(null);
     const [dataThree, setDataThree] = useState([]);
@@ -41,47 +41,48 @@ const FooterEdit = ({ type }) => {
         content_name: "",
     });
     const [editedValue, setEditedValue] = useState("");
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
- 
- 
- 
+    // const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isPopupOpen, setIsPopupOpen] = useState(true);
+
+
+
     const handleEditClickPopupOne = (content_id, content) => {
         setEditedItemIdOne(content_id);
         setEditedItemOne({ content: content });
     };
- 
+
 
     const handleSubmiteGRADTutorContent = async (e) => {
         e.preventDefault();
-    
-        try {
-          const response = await axios.post(`${BASE_URL}/FooterEdit/Add_eGARDTutorContent`, {
-            content: egardTutorItem
-          });
-          console.log('Server Response:', response.data);
-          alert('Content inserted successfully');
-          setEgardTutorItem(''); // Clear input after successful submission
-        } catch (error) {
-          console.error('Error inserting content:', error);
-          alert('Failed to insert content');
-        }
-      };
 
-      const handleSubmitContactUsContent = async (e) => {
-        e.preventDefault();
-    
         try {
-          const response = await axios.post(`${BASE_URL}/FooterEdit/Add_ContactUsContent`, {
-            content: contactUsContent
-          });
-          console.log('Server Response:', response.data);
-          alert('Content inserted successfully');
-          setContactUsContent(''); // Clear input after successful submission
+            const response = await axios.post(`${BASE_URL}/FooterEdit/Add_eGARDTutorContent`, {
+                content: egardTutorItem
+            });
+            console.log('Server Response:', response.data);
+            alert('Content inserted successfully');
+            setEgardTutorItem(''); // Clear input after successful submission
         } catch (error) {
-          console.error('Error inserting content:', error);
-          alert('Failed to insert content');
+            console.error('Error inserting content:', error);
+            alert('Failed to insert content');
         }
-      };
+    };
+
+    const handleSubmitContactUsContent = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post(`${BASE_URL}/FooterEdit/Add_ContactUsContent`, {
+                content: contactUsContent
+            });
+            console.log('Server Response:', response.data);
+            alert('Content inserted successfully');
+            setContactUsContent(''); // Clear input after successful submission
+        } catch (error) {
+            console.error('Error inserting content:', error);
+            alert('Failed to insert content');
+        }
+    };
 
 
 
@@ -91,14 +92,14 @@ const FooterEdit = ({ type }) => {
             const response = await axios.delete(
                 `${BASE_URL}/FooterEdit/landingfooterContentDataOne/${content_id}`
             );
- 
+
             console.log("Success:", response.data);
             console.log("Item deleted");
- 
+
             setDataOne((prevData) =>
                 prevData.filter((dataItem) => dataItem.Content_id !== content_id)
             );
-               alert("Item deleted successfully!");
+            alert("Item deleted successfully!");
         } catch (error) {
             console.error("Error deleting data:", error);
         }
@@ -107,7 +108,7 @@ const FooterEdit = ({ type }) => {
         const newValue = e.target.value;
         setEditedItemOne({ content: newValue });
     };
- 
+
     const handleEditSaveOne = async (content_id, editedContent, setDataOne) => {
         console.log(content_id);
         console.log(editedContent);
@@ -116,9 +117,9 @@ const FooterEdit = ({ type }) => {
                 `${BASE_URL}/FooterEdit/landingfooterContentDataTwoUpdate/${content_id}`,
                 { content_name: editedContent } // Ensure the correct field name is sent to the backend
             );
- 
+
             console.log("Data updated successfully:", response.data);
- 
+
             setDataOne((prevData) =>
                 prevData.map((item) =>
                     item.content_id === content_id
@@ -130,13 +131,13 @@ const FooterEdit = ({ type }) => {
                 )
             );
             alert("Item updated successfully!");
- 
+
             setEditedItemIdOne(null);
         } catch (error) {
             console.error("Error updating data:", error);
         }
     };
- 
+
     useEffect(() => {
         axios
             .get(`${BASE_URL}/Footer/landingfooterContentDataOne`)
@@ -147,9 +148,9 @@ const FooterEdit = ({ type }) => {
                 console.error("Error fetching data from landing_page_one:", error);
             });
     }, []);
- 
+
     //Footer first part eGRADTtorData End //
- 
+
     const handleSubmitFooterLinks = async (e) => {
         e.preventDefault();
         try {
@@ -160,7 +161,7 @@ const FooterEdit = ({ type }) => {
             }
             formDataWithFile.append("Link_Item", formData.Link_Item);
             formDataWithFile.append("Link_Routing_Data", formData.Link_Routing_Data);
- 
+
             const response = await axios.post(
                 `${BASE_URL}/FooterEdit/footerLinks`,
                 formDataWithFile,
@@ -171,7 +172,7 @@ const FooterEdit = ({ type }) => {
                 }
             );
             console.log("Response:", response.data);
- 
+
             // Show success message
             setShowSuccessMessage(true);
             alert("Footer link submitted successfully!");
@@ -181,12 +182,12 @@ const FooterEdit = ({ type }) => {
             // Handle error if needed
         }
     };
- 
- 
+
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
- 
+
     const handleEditFileChange = (event) => {
         const file = event.target.files[0];
         setSelectedFile(file);
@@ -195,12 +196,12 @@ const FooterEdit = ({ type }) => {
         // setDocumentName(fileName); // Set the document name to display
         setDocumentName(file ? file.name : '');
     };
- 
- 
+
+
     useEffect(() => {
         fetchFooterLinks();
     }, []);
- 
+
     const fetchFooterLinks = async () => {
         try {
             const response = await axios.get(`${BASE_URL}/Footer/footerLinks`);
@@ -209,10 +210,10 @@ const FooterEdit = ({ type }) => {
             console.error("Error fetching footer links:", error);
         }
     };
- 
+
     const handleChangeLinkRoutingData = (e) =>
         setEditedLinkRoutingData(e.target.value);
- 
+
     const handleSaveFooterItem = async (Link_Id) => {
         console.log("document_name", documentName);
         const formData = new FormData();
@@ -222,7 +223,7 @@ const FooterEdit = ({ type }) => {
         if (selectedFile) {
             formData.append("file", selectedFile);
         }
- 
+
         try {
             const response = await axios.put(
                 `${BASE_URL}/FooterEdit/footerLinks/${Link_Id}`,
@@ -234,7 +235,7 @@ const FooterEdit = ({ type }) => {
                 }
             );
             console.log("Response:", response.data);
- 
+
             // Reset edit state
             setEditFooterItemId(null);
             setEditedLinkItem("");
@@ -265,7 +266,7 @@ const FooterEdit = ({ type }) => {
         setEditLinkFileData(footer_document_data);
         setDocumentName(document_name);
     };
- 
+
     const handleDeleteFooterItem = async (Link_Id) => {
         console.log("Link_Id", Link_Id);
         try {
@@ -278,7 +279,7 @@ const FooterEdit = ({ type }) => {
             console.error("Error deleting data:", error);
         }
     };
- 
+
     useEffect(() => {
         const fetchFooterData = async () => {
             try {
@@ -290,17 +291,17 @@ const FooterEdit = ({ type }) => {
                 console.error("Error fetching data from landing_page_two:", error);
             }
         };
- 
+
         fetchFooterData();
     }, []);
- 
+
     const handleEditClickPopup = (id) => {
         setEditItemId(id);
         // Find the item associated with the editItemId and store it in state
         const itemToEdit = dataTwo.find((item) => item.Content_id === id);
         setEditedItem(itemToEdit);
     };
- 
+
     const handleDeleteItemTwo = async (content_id) => {
         try {
             console.log("Deleting item with ID:", content_id);
@@ -320,16 +321,16 @@ const FooterEdit = ({ type }) => {
     const handleExistingValueChange = (e) => {
         setEditedItem({ ...editedItem, content_name: e.target.value });
     };
- 
+
     const handleEditSave = async (content_id, editedContent, setDataTwo) => {
         try {
             const response = await axios.put(
                 `${BASE_URL}/FooterEdit/landingfooterContentDataOneUpdate/${content_id}`,
                 { content_name: editedContent }
             );
- 
+
             console.log("Data updated successfully:", response.data);
- 
+
             setDataTwo((prevData) =>
                 prevData.map((item) =>
                     item.Content_id === content_id
@@ -358,10 +359,10 @@ const FooterEdit = ({ type }) => {
             const response = await axios.delete(
                 `${BASE_URL}/FooterEdit/landingfooterContentDataThree/${content_id}`
             );
- 
+
             console.log("Success:", response.data);
             console.log("Item deleted");
- 
+
             setDataThree((prevData) =>
                 prevData.filter((dataItem) => dataItem.Content_id !== content_id)
             );
@@ -378,7 +379,7 @@ const FooterEdit = ({ type }) => {
         handleEditSaveThree(editItemIdThree, editedValue); // Assuming handleEditSaveThree updates the dataThree state
         setIsPopupOpen(false); // Close the popup
     };
- 
+
     const handleEditSaveThree = async (
         content_id,
         editedContent,
@@ -389,9 +390,9 @@ const FooterEdit = ({ type }) => {
                 `${BASE_URL}/FooterEdit/landingfooterContentDataThreeUpdate/${content_id}`,
                 { content_name: editedContent }
             );
- 
+
             console.log("Data updated successfully:", response.data);
- 
+
             setDataThree((prevData) =>
                 prevData.map((item) =>
                     item.content_id === content_id
@@ -402,13 +403,13 @@ const FooterEdit = ({ type }) => {
                         : item
                 )
             );
- 
+
             setEditItemIdThree(null);
         } catch (error) {
             console.error("Error updating data:", error);
         }
     };
- 
+
     useEffect(() => {
         const fetchFooterCopyWriteData = async () => {
             try {
@@ -422,56 +423,67 @@ const FooterEdit = ({ type }) => {
         };
         fetchFooterCopyWriteData();
     }, []);
+
+    const handleClosePopup = () => {
+        setIsPopupOpen(false); // Close the popup by setting state to false
+      };
+
+
     return (
-        <div className="overlay">
+        <div>
+        {isPopupOpen && (
+          <>
+        <div className="Blur_Effect_Mode">
+        <div className="handleCloseBtn">
+        <button className="HCbutton" onClick={handleClosePopup}>close</button>
+      </div>
+            {type === "Add eGRADTutor" && (
+                <div className="UploadPopups_Container">
+                    <form onSubmit={handleSubmiteGRADTutorContent}>
+                        <label>
+                            Content:
+                            <textarea
+                                value={egardTutorItem}
+                                onChange={(e) => setEgardTutorItem(e.target.value)}
+                                required
+                                placeholder="Enter the content"
+                            />
+                        </label>
+                        <br />
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            )}
 
-         {type === "Add eGRADTutor" && (
-             <div className="UploadPopups_Container">
-          <form onSubmit={handleSubmiteGRADTutorContent}>
-          <label>
-            Content:
-            <textarea
-              value={egardTutorItem}
-              onChange={(e) => setEgardTutorItem(e.target.value)}
-              required
-              placeholder="Enter the content"
-            />
-          </label>
-          <br />
-          <button type="submit">Submit</button>
-        </form>
-        </div>
-        )}
 
-
-{type === "Add ContactUs" && (
-     <div className="UploadPopups_Container">
-          <form onSubmit={handleSubmitContactUsContent}>
-          <label>
-            Content:
-            <textarea
-              value={contactUsContent}
-              onChange={(e) => setContactUsContent(e.target.value)}
-                   placeholder="Enter the content"
-              required
-            />
-          </label>
-          <br />
-          <button type="submit">Submit</button>
-        </form>
-        </div>
-        )}
+            {type === "Add ContactUs" && (
+                <div className="UploadPopups_Container">
+                    <form onSubmit={handleSubmitContactUsContent}>
+                        <label>
+                            Content:
+                            <textarea
+                                value={contactUsContent}
+                                onChange={(e) => setContactUsContent(e.target.value)}
+                                placeholder="Enter the content"
+                                required
+                            />
+                        </label>
+                        <br />
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            )}
 
             {type === "eGRADTutor" && (
-                 <div className="UploadPopups_Container">
+                <div className="UploadPopups_Container">
                     {dataOne.map((item) => (
                         <li key={item.content_id}>
                             {item.content}
                             <div className="new_landingfooter_conatinerfristpopupbtncontiner">
-                                <button className = "Edit_button" onClick={() => handleEditClickPopupOne(item.content_id, item.content)}>
+                                <button className="Edit_button" onClick={() => handleEditClickPopupOne(item.content_id, item.content)}>
                                     <CiEdit />
                                 </button>
-                                <button  className = "Delete_button" onClick={() => handleDeleteItemOne(item.content_id)}>
+                                <button className="Delete_button" onClick={() => handleDeleteItemOne(item.content_id)}>
                                     <MdDelete />
                                 </button>
                             </div>
@@ -498,7 +510,7 @@ const FooterEdit = ({ type }) => {
                 </div>
             )}
             {type === "Add_Footer_Links" && (
-                 <div className="UploadPopups_Container">
+                <div className="UploadPopups_Container">
                     <h3>Add Footer Links</h3>
                     <form onSubmit={handleSubmitFooterLinks}>
                         <li>
@@ -536,74 +548,74 @@ const FooterEdit = ({ type }) => {
                 <div className="success-message">Data uploaded successfully!</div>
             )}
             {type === "Update_Footer_Links" && (
-               <div className="UploadPopups_Container">
-                    
-                        {footerLinkData.map((item) => (
-                            <li key={item.Link_Id}>
-                                {editFooterItemId === item.Link_Id ? (
-                                    <>
-                                        <div className="edittwoinputinlinkscontiner">
-                                            <h1>update</h1>
-                                            <input
-                                                type="text"
-                                                value={editedLinkItem}
-                                                onChange={handleChangeLinkItem}
-                                                required
-                                            />
-                                            <input
-                                                type="text"
-                                                value={editedLinkRoutingData}
-                                                onChange={handleChangeLinkRoutingData}
-                                                required
-                                            />
-                                            <label>Upload File:</label>
-                                            <input
-                                                type="file"
-                                                onChange={handleEditFileChange}
-                                            />
-                                            <p style={{ color: "black" }}>
-                                                {selectedFile ? documentName : item.document_name}
-                                            </p>
-                                            <div className="edittwoinputinlinksbtncontiner">
-                                                <button onClick={() => handleSaveFooterItem(item.Link_Id)}>
-                                                    Save
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <>
-                                        <Link to={item.Link_Routing_Data} style={{ color: "black" }}>
-                                            {item.Link_Item}
-                                        </Link>
-                                        <div className="new_landingfooter_conatinersecondpopup_linksbtncontiner">
-                                            <button className = "Edit_button" onClick={() => handleEditFooterItemClick(item.Link_Id, item.Link_Item, item.Link_Routing_Data, item.document_name)}>
-                                                <CiEdit />
-                                            </button>
-                                            <button className="Delete_button" onClick={() => handleDeleteFooterItem(item.Link_Id)}>
-                                                <RiDeleteBin6Line />
+                <div className="UploadPopups_Container">
+
+                    {footerLinkData.map((item) => (
+                        <li key={item.Link_Id}>
+                            {editFooterItemId === item.Link_Id ? (
+                                <>
+                                    <div className="edittwoinputinlinkscontiner">
+                                        <h1>update</h1>
+                                        <input
+                                            type="text"
+                                            value={editedLinkItem}
+                                            onChange={handleChangeLinkItem}
+                                            required
+                                        />
+                                        <input
+                                            type="text"
+                                            value={editedLinkRoutingData}
+                                            onChange={handleChangeLinkRoutingData}
+                                            required
+                                        />
+                                        <label>Upload File:</label>
+                                        <input
+                                            type="file"
+                                            onChange={handleEditFileChange}
+                                        />
+                                        <p style={{ color: "black" }}>
+                                            {selectedFile ? documentName : item.document_name}
+                                        </p>
+                                        <div className="edittwoinputinlinksbtncontiner">
+                                            <button onClick={() => handleSaveFooterItem(item.Link_Id)}>
+                                                Save
                                             </button>
                                         </div>
-                                    </>
-                                )}
-                            </li>
-                        ))}
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to={item.Link_Routing_Data} style={{ color: "black" }}>
+                                        {item.Link_Item}
+                                    </Link>
+                                    <div className="new_landingfooter_conatinersecondpopup_linksbtncontiner">
+                                        <button className="Edit_button" onClick={() => handleEditFooterItemClick(item.Link_Id, item.Link_Item, item.Link_Routing_Data, item.document_name)}>
+                                            <CiEdit />
+                                        </button>
+                                        <button className="Delete_button" onClick={() => handleDeleteFooterItem(item.Link_Id)}>
+                                            <RiDeleteBin6Line />
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </li>
+                    ))}
                 </div>
             )}
             {type === "ContactUs" && (
-               <div className="UploadPopups_Container">
+                <div className="UploadPopups_Container">
                     {dataTwo.map((item) => (
                         <li key={item.Content_id} className="black-text">
                             {item.content_name}{" "}
                             <div className="new_landingfooter_conatinerthridpopupbtncontiner">
-                                <button className = "Edit_button">
+                                <button className="Edit_button">
                                     <CiEdit
                                         onClick={() =>
                                             handleEditClickPopup(item.Content_id)
                                         }
                                     />{" "}
                                 </button>
-                                <button  className = "Delete_button">
+                                <button className="Delete_button">
                                     <MdDelete
                                         onClick={() => handleDeleteItemTwo(item.Content_id)}
                                     />
@@ -611,9 +623,9 @@ const FooterEdit = ({ type }) => {
                             </div>
                         </li>
                     ))}
- 
+
                     {editItemId && editedItem && (
-                         <div className="UploadPopups_Container">
+                        <div className="UploadPopups_Container">
                             <h3>Edit</h3>
                             <li>
                                 <input
@@ -642,21 +654,21 @@ const FooterEdit = ({ type }) => {
                     )}
                 </div>
             )}
- 
+
             {type === "CopyWriteTable" && (
-               <div className="UploadPopups_Container">
+                <div className="UploadPopups_Container">
                     {dataThree.map((item) => (
                         <li key={item.content_id} className="black-text">
                             {item.content_name}{" "}
                             <div className="new_landingfooter_copyrightpopupbtncontainer">
-                                <button className = "Edit_button">
+                                <button className="Edit_button">
                                     <CiEdit
                                         onClick={() =>
                                             handleEditClickPopupThree(item.content_id, item.content_name)
                                         }
                                     />
                                 </button>
-                                <button  className = "Delete_button">
+                                <button className="Delete_button">
                                     {" "}
                                     <MdDelete
                                         onClick={() => handleDeleteItemThree(item.content_id)}
@@ -678,11 +690,14 @@ const FooterEdit = ({ type }) => {
                             </div>
                         </div>
                     )}
- 
+
                 </div>
             )}
         </div>
+        </>
+        )}
+        </div>
     )
 }
- 
+
 export default FooterEdit
