@@ -81,7 +81,7 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
     return <div>Error: {error}</div>;
   }
   return (
-    <div className={`${themeDetails.themeTabsDivMainContainer}`} >
+    <div id="WhyChooseUs" className={`${themeDetails.themeTabsDivMainContainer}`} >
       <div className={`${themeDetails.themeTabsDiv}`}>
         <div className={`${themeDetails.themeTabsSubContainer}`}>
           {isEditMode && (

@@ -1245,7 +1245,7 @@ i#footerIcons:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* animation: flickerAnimation 2s infinite; */
+  animation: flickerAnimation 2s infinite;
 }
 .subheadingNote_dashboard_forPerformance {
   position: relative;
@@ -1431,7 +1431,7 @@ i#footerIcons:hover {
       a {
         background: #00bf8e;
         color: #fff;
-        width: 150px;
+        width: 170px;
         font-weight: 700;
         padding: 0.5rem;
         display: flex;

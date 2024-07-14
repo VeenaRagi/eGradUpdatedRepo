@@ -858,7 +858,8 @@ form.ContactUsFormData.ContactUsFormDataDefault #firstName, #lastName, #email, #
     width: 90%;
 }
 form.ContactUsFormData.ContactUsFormDataDefault #category {
-    margin-bottom:20px;
+    margin-bottom: 20px;
+    margin-left: 0px;
 }
 form.ContactUsFormData.ContactUsFormDataDefault button {
     background: #279eff;

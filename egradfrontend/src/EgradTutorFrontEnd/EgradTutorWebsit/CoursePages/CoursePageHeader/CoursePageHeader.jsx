@@ -11,10 +11,13 @@ import '../../../../styles/CoursesPageStyles/themeWhite.css';
 import { RiLoginBoxLine } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
 import '../../../../styles/WhyChooseUsStyles/Theme2WCU.css'
+import { Link as ScrollLink } from 'react-scroll';
+import { useNavigate } from 'react-router-dom';
 
 const CoursePageHeader = ({ isEditMode, userRole}) => {
   const [image, setImage] = useState(null);
   const [showLinks, setShowLinks] = useState(false);
+  const navigate = useNavigate();
 
   const [showHeaderMenuForm, setShowHeaderMenuForm] = useState(false);
   const [headers, setHeaders] = useState([]);
@@ -46,6 +49,33 @@ const CoursePageHeader = ({ isEditMode, userRole}) => {
       console.error("Error fetching header items:", error);
     }
   };
+
+  
+
+
+  const renderNavItemInCoursePage = (headeritem) => {
+    // Check if the link should scroll or redirect
+    const isInternalLink = headeritem.HeaderItemLink.startsWith('PoopularCourses') || headeritem.HeaderItemLink.startsWith('WhyChooseUs');
+
+    if (isInternalLink) {
+      // Internal link for scrolling
+      return (
+        <ScrollLink to={headeritem.HeaderItemLink} smooth={true} duration={100}>
+          {headeritem.HeaderItemName}
+        </ScrollLink>
+      );
+    } else {
+      // External link for navigation
+      return (
+        <span onClick={() => navigate(headeritem.HeaderItemLink)}>
+          {headeritem.HeaderItemName}
+        </span>
+      );
+    }
+  };
+
+
+  
 
   const themeFromContext = useContext(ThemeContext);
   const themeColor = themeFromContext[0]?.current_theme;
@@ -87,13 +117,11 @@ const CoursePageHeader = ({ isEditMode, userRole}) => {
       className={`${showLinks?"menu-link mobileMenuLink":"menu-link"} CoursePageItemsContainer ${themeDetails.themeCoursePageHeaderContainer} `}>
         <ul className={`courseHeaderUl ${themeDetails.themeCPHeaderUl} `}>
         {headers.length > 0 ? (
-        headers.map((headeritem) => (
-          <li key={headeritem.HeaderItem_Id}>
-            <Link to={headeritem.HeaderItemLink}>
-              {headeritem.HeaderItemName}
-            </Link>
-          </li>
-        ))
+     headers.map((headeritem) => (
+      <li key={headeritem.HeaderItem_Id}>
+        {renderNavItemInCoursePage(headeritem)}
+      </li>
+    ))
       ) : userRole === 'user' ? (
         <p>No items available at the moment. Please check back later.</p>
       ) : userRole === 'admin' ? (

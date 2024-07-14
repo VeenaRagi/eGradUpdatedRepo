@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
-// import "./styles/TestResultPage.css";
+import "./Style/TestResultPage.css";
 import BASE_URL from "../../../apiConfig";
 import axios from "axios";
 import { Navbar } from "./Data/Introduction_Page_Data";
@@ -523,6 +523,36 @@ const TestResultsPage = () => {
     return pageNumbers;
   };
 
+  const [userIdLink,setUserIdLink]= useState("")
+
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const checkLoggedIn = () => {
+      const isLoggedInObjFromLS = localStorage.getItem("tiAuth");
+      console.log(isLoggedInObjFromLS);
+      if (isLoggedInObjFromLS) {
+        try {
+          const tiAuth = JSON.parse(isLoggedInObjFromLS);
+          console.log("veenaaaaaaaaaaaa")
+          console.log(tiAuth.user,"this is the status")
+          const role=tiAuth.user
+          setUserIdLink(role)
+          // setIsLoggedInFromLS(tiAuth.isLoggedIn);
+          // console.log(tiAuth,"this is ssssssssssss")
+          // console.log(isLoggedInFromLS, "wwwwwwwwwwwwwwwwwwwwwww");
+          if (role === "User") {
+            setIsAdmin(true);
+
+          }
+        } catch (error) {
+          console.log(error, "parsing the tiauth for back button");
+        }
+      }
+    };
+    checkLoggedIn();
+  }, []);
+
   const openPopup = () => {
     // Close the current window
     window.close();
@@ -541,21 +571,22 @@ const TestResultsPage = () => {
 
     // Open the desired URL in a new window
     // window.open("/Student_dashboard");
-    navigate('/StudentDashbord_MyResults')
+    // navigate('/StudentDashbord_MyResults')
+    navigate(`/Student_dashboard/${userIdLink}`)
   };
 
 
   return (
     <>
       <div className="testResult_-container">
-        <div className="popup-container">
-          <div className="popup-content">
-            <h2 className="popup-heading">
+        <div className="viewReport_popup_container">
+          <div className="viewReport_popup_content">
+            <h2 className="viewReport_popup_heading">
               Your Test has been submitted successfully. <br />
               Your result will be available My Result Tab In student DashBoard.
             </h2>
-            <h3 className="popup-subheading">View your Test Report</h3>
-            <button onClick={openPopup} className="popup-button">
+            <h3 className="viewReport_popup_subheading">View your Test Report</h3>
+            <button onClick={openPopup} className="viewReport_popup_button">
               View Report
             </button>
           </div>

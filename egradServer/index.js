@@ -115,7 +115,8 @@ const PayU = require("./PaymentGatway/PayU");
 app.use("/PayU", PayU);
 
 
-
+const StudentDataforBuyCourses = require("./eGradTutorStudentDashboard/StudentDataforBuyCourses");
+app.use("/StudentDataforBuyCourses", StudentDataforBuyCourses);
 
 const Dashboard = require("./OTS_Quiz_Admin/Dashbord");
 app.use("/Dashboard", Dashboard);
@@ -155,6 +156,10 @@ app.use("/OtsvidesUploads",OtsvidesUploads)
 const ughomepage_banner_login =require("./OTS_Quiz_Admin/ughomepage_banner_login")
 
 app.use("/ughomepage_banner_login" , ughomepage_banner_login)
+
+
+const AdminProfile=require("./OTS_Quiz_Admin/AdminProfile")
+app.use("/AdminProfile",AdminProfile)
 
 //================OTS_QUIZAPP_IMPORTS_START=================
 const ExamPage = require("./eGradTutorStudentDashboard/ExamPage");

@@ -594,4 +594,11 @@ h2.whiteContant {
 }
 }
 
+ul.courseHeaderUl.undefined span {
+    COLOR: WHITE;
+    FONT-WEIGHT: 500;
+}
 
+.before_start_now.defaultBuyButtonInCP a {
+    color: white;
+}

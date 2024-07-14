@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import BASE_URL from "../../../apiConfig";
-import "./Style/StudentDashbord_MyCourses.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import { encryptData } from "./utils/crypto";
 import "./Style/StudentDashbord_MyCourses.css";
 import { FaBookOpenReader } from "react-icons/fa6";
@@ -19,14 +19,14 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   const [selectedPortal, setSelectedPortal] = useState("");
   const [selectedTypeOfTest, setSelectedTypeOfTest] = useState("");
   const [filteredTestData, setFilteredTestData] = useState([]);
-
+  const { courseCreationId } = useParams();
   const user_Id = decryptedUserIdState;
   // Fetch test details based on courseCreationId and decryptedUserIdState
   useEffect(() => {
     const fetchTestDetails = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/TestPage/feachingOveralltest/1/${user_Id}`
+          `${BASE_URL}/TestPage/feachingOveralltest/${courseCreationId}/${user_Id}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -119,7 +119,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
       console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
       console.log(data);
       setShowQuizCourses(false);
-      // setShowtestContainer2(true);
+      setShowtestContainer2(true);
     } catch (error) {
       console.error("Error fetching test details:", error);
     } finally {
@@ -189,11 +189,14 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
       const token = new Date().getTime().toString();
       sessionStorage.setItem("navigationToken", token);
 
+     
       const url = `/Instructions/${encodeURIComponent(
         encryptedParam1
       )}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(
         encryptedParam3
       )}`;
+
+
 
       const newWinRef = window.open(
         url,
@@ -201,10 +204,14 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
         `width=${screenWidth},height=${screenHeight},fullscreen=yes`
       );
 
-       // Wait for the new window to load and then post the message
-       newWinRef.onload = () => {
-        newWinRef.postMessage({ usersData }, '*');
-      };
+      if (newWinRef) {
+        newWinRef.onload = () => {
+          newWinRef.postMessage({ usersData }, '*');
+        };
+      } else {
+        console.error("Failed to open new window");
+      }
+  
 
       // if (newWinRef && !newWinRef.closed) {
       //   newWinRef.focus();
@@ -365,7 +372,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     setShowQuizCourses(true);
     // setShowtestContainer(false);
     setShowtestContainer1(false);
-    // setShowtestContainer2(false);
+    setShowtestContainer2(false);
     // setShowCompletePackageContainer(false);
   };
 
@@ -399,14 +406,13 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     if (Portale_Id === 1 && testAttemptStatus === "Attempted") {
       return (
         <span
-          className=""
-          style={{
-            backgroundColor: "#9800ff",
-            color: "white",
-            padding: "5.9px",
-            textDecoration: "none",
-            fontSize: "22px",
-          }}
+          className="span_style_attempt_status"
+          // style={{
+          //   backgroundColor: "red",
+          //   color: "white",
+          //   padding: "2.9px",
+          //   textDecoration: "none",
+          // }}
         >
           Attempted
         </span>
@@ -415,7 +421,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
 
     return (
       <Link
-        className="test_start_button"
+         className="span_style_start_button"
         to="#"
         onClick={() => {
           openPopup(testCreationTableId, user_Id, Portale_Id);
@@ -537,6 +543,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleViewVideo = async (OVL_Linke_Id) => {
+    console.log("helloooooooo")
     try {
       const video = videos.find((video) => video.OVL_Linke_Id === OVL_Linke_Id);
       if (!video) {
@@ -553,6 +560,17 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     setSelectedVideo(null);
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    if (selectedTypeOfTest === "") {
+      setFilteredTestData(testDetails);
+    } else {
+      const filteredData = testDetails.filter(
+        (test) => test.typeOfTestName === selectedTypeOfTest
+      );
+      setFilteredTestData(filteredData);
+    }
+  }, [testDetails, selectedTypeOfTest]);
 
   return (
     <div>
@@ -773,7 +791,8 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
                       <div className="test_cards">
                         {filteredTestData.map((test, index) => (
                           <>
-                            <ul className="testcard_inline">
+                          <div className="test_card">
+                            <ul className="testcard_inline" >
                               <li>
                                 <span>
                                   {" "}
@@ -794,6 +813,8 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
                               </li>
                               <li>{renderTestAction(test)}</li>
                             </ul>
+                          </div>
+                            
                           </>
                         ))}
                       </div>
@@ -972,7 +993,16 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
           </div>
         </div>
       )}
-      {/* //main */}
+     
+    </div>
+  );
+};
+
+export default StudentDashbord_MyCourses;
+
+
+
+ {/* //main */}
       {/* {showCompletePackageContainer && (
           <div>
             <div className="card_container_dashbordflowtest">
@@ -1039,8 +1069,3 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
             </div>
           </div>
         )} */}
-    </div>
-  );
-};
-
-export default StudentDashbord_MyCourses;

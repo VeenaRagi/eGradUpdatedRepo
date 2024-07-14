@@ -39,7 +39,7 @@ import {UserReport} from './EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/
 import ThemesSection from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/ThemesSection.jsx";
 import Leftnav from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/Leftnav.jsx";
 import AdminProfile from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/AdminProfile.jsx";
-
+import axios from "axios";
 function App({decryptedUserIdState}) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -65,6 +65,26 @@ function App({decryptedUserIdState}) {
       }
     };
     checkLoggedIn();
+  }, []);
+
+
+
+
+  useEffect(() => {
+    // Function to check server status
+    const checkServerStatus = async () => {
+      try {
+        // Example: Make a request to an endpoint on your server
+        const response = await axios.get(`${BASE_URL}/api/server/status`);
+        // If response is successful, server is running
+        setServerError(false);
+      } catch (error) {
+        // If request fails, server is not running or there's an error
+        setServerError(true);
+      }
+    };
+ 
+    checkServerStatus();
   }, []);
 
   const toggleEditMode = () => {
@@ -179,8 +199,12 @@ function App({decryptedUserIdState}) {
          path="/UserReport/:id/:testCreationTableId/:courseCreationId"
            element={<UserReport />} 
           />
-          <Route path="/ThemesAdmin" element={<ThemesSection/>}/>
-          <Route path="/leftNav" element={<Exam_portal_admin_integration/>}/>
+            <Route
+         path="/Error"
+           element={<NotFound />} 
+          />
+          <Route path="/WebsiteAdmin" element={<ThemesSection/>}/>
+          <Route path="/CourseAdmin" element={<Exam_portal_admin_integration/>}/>
           <Route path="/adminProfile" element={<AdminProfile/>}/>
             </Routes>
           </Router>

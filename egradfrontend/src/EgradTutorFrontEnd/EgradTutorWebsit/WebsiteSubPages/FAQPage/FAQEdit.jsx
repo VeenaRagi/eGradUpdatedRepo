@@ -118,7 +118,6 @@ const FAQEdit = ({type}) => {
       console.error("Error updating FAQ item", error);
     }
   };
-
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(`${BASE_URL}/FaqEdit/faq/${id}`);
@@ -175,7 +174,6 @@ const FAQEdit = ({type}) => {
                     }
               }
             >
-              
               <div>
                 <h3>
                   {modalMode === "add" ? "Enter Question" : "Update Question"}
@@ -236,6 +234,7 @@ const FAQEdit = ({type}) => {
                 <button onClick={() => openEditForm(faq.faq_id)} className="popup_edit_btn"><BiSolidEditAlt /></button>
                 <button onClick={() => handleDelete(faq.faq_id)} className="popup_delete_btn"><MdDelete /></button>
               </div>
+              <button onClick={() => handleDelete(faq.faq_id)} className="popup_delete_btn">Update</button>
             </div>
           ))}
         </div>

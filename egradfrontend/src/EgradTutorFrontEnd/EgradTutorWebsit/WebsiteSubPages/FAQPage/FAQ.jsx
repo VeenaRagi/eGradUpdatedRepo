@@ -36,7 +36,7 @@ const FAQ = ({isEditMode, userRole }) => {
       console.error("Error fetching FAQs", error);
     }
   };
-
+  const [openFAQId, setOpenFAQId] = useState(null);
   const fetchAnswers = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/Faq/answers`);
@@ -48,9 +48,11 @@ const FAQ = ({isEditMode, userRole }) => {
 
   const [openFaqId, setOpenFaqId] = useState(null);
 
-  const toggleAnswer = (faq_id) => {
-    setOpenFaqId((prevId) => (prevId === faq_id ? null : faq_id));
+  const toggleAnswer = (faqId) => {
+    setOpenFAQId(prevId => (prevId === faqId ? null : faqId));
   };
+
+  
   const fetchImage = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/Logo/image`, {
@@ -144,18 +146,13 @@ const FAQ = ({isEditMode, userRole }) => {
                 key={faq.faq_id}
                 className={`FaqData ${themeDetails.FaqData}`}
               >
-                <h3 id="faq_title" onClick={() => toggleAnswer(faq.faq_id)}>
-                  <AiFillPushpin />
-                  {faq.faq_questions}
-                </h3>
-                <p
-                  id={`faq_ans_${faq.faq_id}`}
-                  className={`faq_ans ${
-                    openFaqId === faq.faq_id ? "show" : ""
-                  }`}
-                >
-                  {faq.faq_answer}
-                </p>
+                 <h3 id={`faq_${faq.faq_id}`} onClick={() => toggleAnswer(faq.faq_id)}>
+            <AiFillPushpin />
+            {faq.faq_questions}
+          </h3>
+          {openFAQId === faq.faq_id && (
+            <p>{faq.faq_answer}</p>
+          )}
               </div>
             ))
           ) : userRole === "user" ? (
