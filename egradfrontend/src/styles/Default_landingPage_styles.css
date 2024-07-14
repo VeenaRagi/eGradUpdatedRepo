@@ -749,7 +749,7 @@ button:hover {
     padding: 20px;
     border-radius: 8px;
     position: relative;
-    margin-top: 160px;
+    /* margin-top: 160px; */
 }
   
   .close-button {

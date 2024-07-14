@@ -107,7 +107,8 @@ const CoursePageHeader = ({ isEditMode, userRole}) => {
         {isEditMode && (
           <div>
             <button onClick={() => setShowHeaderMenuForm(!showHeaderMenuForm)}>
-              {showHeaderMenuForm ? "Close" : "Add Menu"}
+              {/* {showHeaderMenuForm ? "Close" : "Add Menu"} */}
+              Add Menu
             </button>
             {showHeaderMenuForm && <CoursePageHeaderEdit type="HeaderMenu" />}
           </div>
