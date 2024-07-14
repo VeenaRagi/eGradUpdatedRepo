@@ -54,6 +54,12 @@ width: 100%;
 .t2CPHeaderUl li{
   cursor: pointer;
 }
+.courseheader_continer.t2Courseheader_continer .theme_COURSES {
+  padding-top: 2rem;
+}
+.before_login_first_carddel.orangeCardBody p{
+  margin-bottom: 10px;
+}
   .CoursePage_header_Container.CoursePageHeaderContainerDefault {
     background-color: rgb(19, 170, 230);
     display: flex;

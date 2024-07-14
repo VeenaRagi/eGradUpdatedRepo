@@ -91,7 +91,12 @@ function App({decryptedUserIdState}) {
     setIsEditMode(!isEditMode);
   };
   const [serverError, setServerError] = useState(false);
-
+  const refreshChannel2 = new BroadcastChannel("refresh_channel_for_enabling_buttons");
+  refreshChannel2.onmessage = function (event) {
+    if (event.data === "refresh_page_for_enabling_buttons") {
+      window.location.reload(); // Reload the page
+    }
+  };
   
   return (
     <ThemeProvider>

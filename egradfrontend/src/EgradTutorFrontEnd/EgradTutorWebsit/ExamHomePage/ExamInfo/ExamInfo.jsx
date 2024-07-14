@@ -132,7 +132,8 @@ refreshChannel.onmessage = function (event) {
               onClick={handleEditClick}
               className={isEditing ? "hide-clicked" : "add-clicked"}
             >
-              {isEditing ? <IoMdClose /> : <FaRegPenToSquare />}
+              {/* {isEditing ? <IoMdClose /> : <FaRegPenToSquare />} */}
+              <FaRegPenToSquare /> Edit
             </button>
 
             {isEditing && <ExamInfoEdit type="aboutUs" />}
