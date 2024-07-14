@@ -52,6 +52,7 @@ const FAQ = ({isEditMode, userRole }) => {
     setOpenFAQId(prevId => (prevId === faqId ? null : faqId));
   };
 
+  
   const fetchImage = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/Logo/image`, {
