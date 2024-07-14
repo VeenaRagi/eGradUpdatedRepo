@@ -9,6 +9,7 @@ const LandingPageHeaderEdit = ({ type }) => {
   const [welcomeLongText, setWelcomeLongText] = useState("");
   const [welcomeText, setWelcomeText] = useState("");
   const [welcomeimage, setWelcomeImage] = useState(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(true);
 
   const handlewelcomeImageChange = (e) => {
     setWelcomeImage(e.target.files[0]);
@@ -82,8 +83,19 @@ const LandingPageHeaderEdit = ({ type }) => {
     }
   };
 
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false); // Close the popup by setting state to false
+  };
+  
   return (
+    <div>
+    {isPopupOpen && (
+      <>
     <div className="Blur_Effect_Mode">
+      <div className="">
+        <button onClick={handleClosePopup}>close</button>
+      </div>
       {type === "addLogo" && (
         <div className="UploadPopups_Container">
           <h2>Upload Image</h2>
@@ -91,7 +103,8 @@ const LandingPageHeaderEdit = ({ type }) => {
           <button onClick={handleUpload}>Submit</button>
         </div>
       )}
-      <div className="UploadPopups_Container">
+      <div className="UploadPopups_Container pop-up-form">
+        
       {type === "WelcomeForm" && ( <div>
           <h2>Upload Image</h2>
           <input type="file" onChange={handlewelcomeImageChange} />
@@ -115,8 +128,10 @@ const LandingPageHeaderEdit = ({ type }) => {
         </div>)}
        
       </div>
-      
     </div>
+    </>
+  )}
+      </div>
   );
 };
 

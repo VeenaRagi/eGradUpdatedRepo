@@ -114,7 +114,7 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
             {isEditMode && (
           <div>
             <button className="button" onClick={() => setShowImage(!showImage)}>
-              {showImage ? "Close" : "Add Logo"}
+              {/* {showImage ? "Close" : "Add Logo"} */}Add Logo
             </button>
             {showImage && <LandingPageHeaderEdit type="addLogo" />}
           </div>
@@ -171,9 +171,10 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
             {isEditMode && (
           <div>
             <button className="toggle-button-container" onClick={() => setShowWelcomeForm(!showwelcomeForm)}>
-              {showwelcomeForm ? "X" : "Add Welcome info"}
+              {/* {showwelcomeForm ? "X" : "Add Welcome info"} */}Add Welcome info
             </button>
             {showwelcomeForm && <LandingPageHeaderEdit type="WelcomeForm" />}
+        
           </div>
         )}
           </div>

@@ -829,7 +829,30 @@ refreshChannel.onmessage = function (event) {
               </div>
 
             </div>
+
+
+
+       
+
+
             <div className="footer-last-heading">
+            {isEditMode && (
+                <div>
+                  <button
+                    onClick={() =>
+                      setIsCopyRightSectionVisible(!isCopyRightSectionVisible)
+                    }
+                    className="editbtn"
+                  >
+                    {isCopyRightSectionVisible
+                      ? "Hide copywrite form"
+                      : "Edit copywrite"}
+                  </button>
+                  {isCopyRightSectionVisible && (
+                    <FooterEdit type="CopyWriteTable" />
+                  )}
+                </div>
+              )}
             {dataThree.length > 0 ? (
                   dataThree.map((item) => (
                     <li key={item.Content_id}>{item.content_name}</li>
