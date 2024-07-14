@@ -161,9 +161,9 @@
     font-family: var(--greenFont);
     font-weight: 500;
   }
-  & .Price_Discount{
-    justify-content: left;
-  }
+  & & .Price_Discount {
+    justify-content: space-between;
+}
 }
 .greenCourseNameInCard {
   padding: 10px 0 !important;
