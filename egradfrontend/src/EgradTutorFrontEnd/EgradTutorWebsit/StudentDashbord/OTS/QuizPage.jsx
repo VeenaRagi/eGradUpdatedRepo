@@ -13,9 +13,22 @@ import { BiMenuAltLeft } from "react-icons/bi";
 import BASE_URL from "../../../../apiConfig";
 import { decryptData, encryptData } from "../utils/crypto";
 import "../Style/Watermark.css";
+import { useTIAuth } from "../../../../TechInfoContext/AuthContext";
 const QuizPage = () => {
   const navigate = useNavigate();
 
+  const [tiAuth] = useTIAuth();
+  const[userNameFromContext,setUserNameFromContext]=useState("")
+  // useEffect for getting the role
+  useEffect(()=>{
+    const { userData } = tiAuth;
+    if (!userData) {
+      return <div>Loading...</div>;
+    }
+   const userName = userData.users[0];
+   setUserNameFromContext(userName)
+  console.log(userName,"ddddddddddddddddddddddddddddddddddddddd")
+  })
   const { param1, param2 } = useParams();
 
   const [decryptedParam1, setDecryptedParam1] = useState("");
@@ -3854,6 +3867,7 @@ const QuizPage = () => {
                   seconds={600}
                   onUpdateOption={handleUpdateOption}
                   option={option}
+                  userDataFromContext={setUserNameFromContext}
                 />
               </div>
             </div>
