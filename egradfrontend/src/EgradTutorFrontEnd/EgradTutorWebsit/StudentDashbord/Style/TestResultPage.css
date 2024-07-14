@@ -1,0 +1,208 @@
+.testResult_-container{
+  width: 100%;
+  /* padding: 1rem; */
+}
+
+.testResult_subcontainer{
+  display: flex;
+  /* gap: 3rem; */
+  font-size: 1rem;
+  letter-spacing: 1px;
+  word-spacing: 3px;
+  text-align: left;
+
+}
+
+.testResult_subcontainer p{
+  
+  font-size: 1rem;
+ 
+  text-align: left;
+
+}
+.testresult_left_conatiner {
+    /* background: #000; */
+    box-shadow: 0 0 1px 0px rgba(0, 0, 0, 0.712);
+    padding: 6rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+.testresult_profile_conatiner_img{
+  width: 200px;
+  height: 200px;
+border-radius: 50%;
+  background: #f5f0f0;
+display: flex;
+justify-content: center;
+align-items: center;
+  padding: 0.5rem;
+
+}
+
+
+
+.testresult_profile_conatiner_img img{
+width: 100%;
+height: 100%;
+}
+.testResultTable_container{
+  background: #000;
+}
+
+.testresult_right_conatiner{
+  width: 100%;
+     /* background: #000; */
+    /* box-shadow: 0 0 1px 0px rgba(0, 0, 0, 0.712); */
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+background: #d0e7eb36;
+    /* gap: 3rem; */
+}
+
+
+.testresult_right_conatiner h1{
+  margin: 0;padding: 0;
+  font-size: 2rem ;
+  color: #000000ce;
+}
+
+.testResultTable_container_info{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#testResultTable_container_info_TB_1{
+    width: 50rem;
+  border-collapse: collapse;
+
+
+}
+#testResultTable_container_info_TB_1 td{
+  border: 2px solid rgb(15, 15, 15);
+  padding: 0.5rem;
+  text-align: center;
+}
+.testResultTable_with_btn_nav{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.pagination{
+    width: 50rem;
+  
+  display: flex;
+  justify-content: space-evenly;
+}
+.active_result_cunt{
+      padding: 0.5rem ;
+  width: 50px;
+  height: 50px;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    background: #72c7ee;
+    transition: 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f5f0f0;
+}
+
+.pagination p{
+margin: 0;
+padding: 0;
+      padding: 0.5rem ;
+  width: 50px;
+  height: 50px;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+  
+    transition: 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+/* ---------------------------------------POPUP BOX CSS---------------- */
+
+.viewReport_popup_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewReport_popup_content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-out; /* Fade-in animation */
+  width: 80%; /* Set width */
+  max-width: 400px; /* Maximum width */
+  text-align: center; /* Center content */
+}
+
+.viewReport_popup_heading,
+.viewReport_popup_subheading {
+  margin: 0 0 10px;
+ font-size: 20px;
+}
+
+.viewReport_popup_button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.viewReport_popup_button:hover {
+  background-color: #0056b3;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .viewReport_popup_content {
+    width: 90%;
+    max-width: 300px;
+  }
+}
