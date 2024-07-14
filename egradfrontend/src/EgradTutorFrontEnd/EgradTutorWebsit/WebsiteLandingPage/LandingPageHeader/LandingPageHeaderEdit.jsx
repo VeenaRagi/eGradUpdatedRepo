@@ -93,8 +93,8 @@ const LandingPageHeaderEdit = ({ type }) => {
     {isPopupOpen && (
       <>
     <div className="Blur_Effect_Mode">
-      <div className="">
-        <button onClick={handleClosePopup}>close</button>
+      <div className="handleCloseBtn">
+        <button className="HCbutton" onClick={handleClosePopup}>close</button>
       </div>
       {type === "addLogo" && (
         <div className="UploadPopups_Container">

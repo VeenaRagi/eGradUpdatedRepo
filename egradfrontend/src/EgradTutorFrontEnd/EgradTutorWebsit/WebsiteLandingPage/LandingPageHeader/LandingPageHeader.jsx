@@ -79,7 +79,7 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
   return (
     <div className="Newlandingpage">
       <div>
-       
+
         <div
           className={`Newlandingpage_logocontainer ${themeDetails.themeHeaderColor}`}
         >
@@ -112,13 +112,13 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
               <div className={`logoImgContainer ${themeDetails.logoC}`}></div>
             </div>
             {isEditMode && (
-          <div>
-            <button className="button" onClick={() => setShowImage(!showImage)}>
-              {/* {showImage ? "Close" : "Add Logo"} */}Add Logo
-            </button>
-            {showImage && <LandingPageHeaderEdit type="addLogo" />}
-          </div>
-        )}
+              <div>
+                <button className="button" onClick={() => setShowImage(!showImage)}>
+                  {/* {showImage ? "Close" : "Add Logo"} */}Add Logo
+                </button>
+                {showImage && <LandingPageHeaderEdit type="addLogo" />}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -133,13 +133,13 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
               <Maintenance1 />
             )} */}
 
-{welcomeimage ? (
-  <img src={welcomeimage} alt="welcomeCurrent" />
-) : userRole === "admin" ? (
-  <p>There is no data available. Please add the data.</p>
-) : (
-  <p>Unable to load image at the moment. Please try again later.</p>
-)}
+            {welcomeimage ? (
+              <img src={welcomeimage} alt="welcomeCurrent" />
+            ) : userRole === "admin" ? (
+              <p>There is no data available. Please add the data.</p>
+            ) : (
+              <p>Unable to load image at the moment. Please try again later.</p>
+            )}
 
           </div>
           <div
@@ -169,14 +169,14 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
               )}
             </div>
             {isEditMode && (
-          <div>
-            <button className="toggle-button-container" onClick={() => setShowWelcomeForm(!showwelcomeForm)}>
-              {/* {showwelcomeForm ? "X" : "Add Welcome info"} */}Add Welcome info
-            </button>
-            {showwelcomeForm && <LandingPageHeaderEdit type="WelcomeForm" />}
-        
-          </div>
-        )}
+              <div>
+                <button className="toggle-button-container" onClick={() => setShowWelcomeForm(!showwelcomeForm)}>
+                  {/* {showwelcomeForm ? "X" : "Add Welcome info"} */}Add Welcome info
+                </button>
+                {showwelcomeForm && <LandingPageHeaderEdit type="WelcomeForm" />}
+
+              </div>
+            )}
           </div>
         </div>
       </div>
