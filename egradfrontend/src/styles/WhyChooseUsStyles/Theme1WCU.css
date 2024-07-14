@@ -227,6 +227,13 @@
 .t1TabContentSplittedTextInDiv p {
     padding: 10px;
 }
+@media screen and (min-width: 924px){
+    .CoursePage_header_Container.t1CoursePageHeaderContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+}
 
 
 @media (max-width:600px) {

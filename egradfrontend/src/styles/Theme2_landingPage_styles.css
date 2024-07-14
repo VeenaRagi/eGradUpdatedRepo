@@ -90,6 +90,7 @@ img.t2LogoImg {
     border-radius: 27px;
     transition: transform 0.3s ease-in-out;
     background-color: rgb(255, 255, 255);
+    cursor: pointer;
 }
 .Newlandingpage_branchescontainer.t2BranchesContainer .Newlandingpage_branch_box.t2BranchBox  .Newlandingpage_exams_button_box.t2ExamButtonsBox .t2Landing_branch_box_btns ul li:hover{
      transform: scale(1.06);
@@ -323,6 +324,9 @@ color: black;
 .landing_img_div.t2LCapImgDiv {
     width: 597px;
     height: 359px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 @media screen and (max-width: 955px) {
     .landing_img_div.t2LCapImgDiv {
