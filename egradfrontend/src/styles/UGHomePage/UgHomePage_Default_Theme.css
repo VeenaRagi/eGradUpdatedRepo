@@ -397,9 +397,23 @@ ul.defaultCoursesUl li:hover {
 @media (max-width: 376px) {
     li.themeUgHeaderLiDefault {
       color: #fff;
-      font-size: 13px !important;
+      font-size: 12px !important;
       font-weight: 500;
       text-align: center;
+    }
+
+
+    .menu-link.mobileMenuLink.themeUgDivLinksOfHeaderDefault {
+        align-items: center;
+        animation: mobile_menu .4s linear alternate forwards;
+        background: #66656567;
+        display: flex;
+        height: 88%;
+        /* justify-content: center; */
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 50%;
     }
   }
 @media (max-width: 600px) {
@@ -407,6 +421,11 @@ ul.defaultCoursesUl li:hover {
 
     .Ug_header_logoIMG img {
         width: 145px;
+    }
+
+    .menu-link.mobileMenuLink.themeUgDivLinksOfHeaderDefault {
+        height: auto;
+        top: 102px;
     }
   
 
@@ -644,7 +663,6 @@ ul.defaultCoursesUl li:hover {
     align-items: center;
     background: transparent;
     position: relative;
-    line-height: 6rem;
     color:white;
     font-size:11px;
 }
@@ -1092,6 +1110,12 @@ font-size: 10px;
         margin-right: 0.6rem;
         /* margin-left: 1.8rem; */
         margin-bottom: 10px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .Ug_header_logoIMG.themeUgHeaderLogoImgDefault .Ug_header_logoIMG img {
+      width: 208px;
     }
   }
   
