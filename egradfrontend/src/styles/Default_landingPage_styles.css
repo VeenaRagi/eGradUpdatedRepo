@@ -49,6 +49,19 @@
     color: white;
 }
 
+/* handle close popup */
+.handleCloseBtn {
+    height: 200px;
+    position: absolute;
+    top: 155px;
+    right: 200px;
+}
+
+.handleCloseBtn .HCbutton{
+    background-color: rgb(202, 95, 95);
+    color: white;
+}
+
 
 .Newlandingpage .Egate_eLanding_Container_Egate_landing .EGATE_eCordsLanding .EGATE_elandUl-pg_Default button {
     background-color: #003d4e !important;

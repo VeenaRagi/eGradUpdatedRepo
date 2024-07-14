@@ -3860,7 +3860,7 @@ const QuizPage = () => {
           </div>
         </div>
       ) : (
-        <div >
+        <div>
           <div className="examSummary_quizPagewatermark">
             <h3 className="Exam_summary_heading">Exam Summary</h3>
 
