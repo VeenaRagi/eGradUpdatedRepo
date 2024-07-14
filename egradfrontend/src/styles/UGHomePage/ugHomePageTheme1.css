@@ -143,8 +143,8 @@
 
 
 .t1ExamPageHeaderContainer a img {
-    height: 100%;
-    width:350px;
+    height: 160px;
+    width: 350px;
 }
 
 .t1TotalExamContainer{
@@ -241,9 +241,8 @@ margin: 10px 0;
 /* Additional styling for toggle content */
 .t1Toggles {
     padding: 18px;
+    cursor: pointer;
     border-top: 1px solid #ddd;
-    
- 
 }
 
 .t1ExamInfoDivs {
