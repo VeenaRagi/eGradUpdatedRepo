@@ -55,7 +55,7 @@ const UserLogin = () => {
         console.log("New Auth State:", newAuthState);
         settiAuth(newAuthState);
 
-        localStorage.setItem("tiAuth2", JSON.stringify(newAuthState));
+        localStorage.setItem("tiAuth", JSON.stringify(newAuthState));
 
         console.log("Stored in localStorage and useContext:", tiAuth);
         const encodedUserId = encodeURIComponent((user_Id));
