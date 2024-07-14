@@ -93,7 +93,7 @@ const AccountInfo = () => {
               />
               <div className='detailsss_container'>
               <p className='admin_para'>Name: {user.username}</p>
-              <p className='admin_para'>Email:{user.email}</p>
+              <p className='admin_para'>Email: {user.email}</p>
               <p className='admin_para'>Role: {user.role === 'User' ? 'Student' : user.role}</p>
               </div>
               <div className='btns_adminn_contaainer'>
