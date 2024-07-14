@@ -150,9 +150,10 @@ const FAQEdit = ({type}) => {
   };
 
   return (
-    <div>
+    <div className="UploadPopups_Container">
+
       <div>
-        {image ? <img src={image} alt="Current" /> : <p>No image available</p>}
+        {/* {image ? <img src={image} alt="Current" /> : <p>No image available</p>} */}
       </div>
       <div>
         <h1>FREQUENTLY ASKED QUESTIONS</h1>
@@ -231,10 +232,10 @@ const FAQEdit = ({type}) => {
                     {faq.faq_answer}
                   </p>
                 </div>
-                <button onClick={() => openEditForm(faq.faq_id)} className="popup_edit_btn"><BiSolidEditAlt /></button>
-                <button onClick={() => handleDelete(faq.faq_id)} className="popup_delete_btn"><MdDelete /></button>
+                <button onClick={() => openEditForm(faq.faq_id)} className="Edit_button"><BiSolidEditAlt /></button>
+                <button onClick={() => handleDelete(faq.faq_id)} className="Delete_button"><MdDelete /></button>
               </div>
-              <button onClick={() => handleDelete(faq.faq_id)} className="popup_delete_btn">Update</button>
+              {/* <button onClick={() => handleDelete(faq.faq_id)} className="popup_delete_btn">Update</button> */}
             </div>
           ))}
         </div>
