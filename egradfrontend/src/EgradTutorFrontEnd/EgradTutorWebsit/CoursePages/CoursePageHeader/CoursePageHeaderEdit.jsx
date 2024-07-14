@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BASE_URL from "../../../../apiConfig";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import '../../../../styles/Default_landingPage_styles.css'
 const CoursePageHeaderEdit = ({type}) => {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const CoursePageHeaderEdit = ({type}) => {
   const [headers, setHeaders] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(true);
 
   useEffect(() => {
     const fetchHeaderData = async () => {
@@ -101,10 +103,21 @@ const CoursePageHeaderEdit = ({type}) => {
     }
   };
 
+  const handleClosePopup = () => {
+    setIsPopupOpen(false); // Close the popup by setting state to false
+  };
+  
+
   return (
     <div>
+    {isPopupOpen && (
+      <>
+    <div>
     {type === "HeaderMenu" && (
-     <div className="UploadPopups_Container">
+     <div className="Blur_Effect_Mode">
+      <div className="handleCloseBtn">
+        <button className="HCbutton" onClick={handleClosePopup}>close</button>
+      </div>
         <form onSubmit={handleSubmit}>
           <div>
             <label>
@@ -160,7 +173,9 @@ const CoursePageHeaderEdit = ({type}) => {
       </div>
     )}
   </div>
-  
+  </>
+    )}
+    </div>
   );
 };
 
