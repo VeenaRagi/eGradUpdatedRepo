@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import BASE_URL from "../../../apiConfig";
 import { MdDeleteForever } from "react-icons/md";
 import { Navigate, useParams } from "react-router-dom";
-export const StudentDashbordbookmark = ({ usersData,decryptedUserIdState }) => {
+import './Style/StudentDashbord_Bookmarks.css'
+
+const StudentDashbord_Bookmarks = ({ usersData,decryptedUserIdState }) => {
   const { testCreationTableId, question_id } = useParams();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [Questionbookmark, setQuestionbookmark] = useState([]);
@@ -62,7 +64,7 @@ export const StudentDashbordbookmark = ({ usersData,decryptedUserIdState }) => {
   if (Questionbookmark.length === 0) {
     return (
       <div className="container">
-        <div className="subheading">You haven't bookmarked anything yet.</div>
+        <div className="bookmark_subheading">You haven't bookmarked anything yet.</div>
       </div>
     );
   }
@@ -158,4 +160,4 @@ export const StudentDashbordbookmark = ({ usersData,decryptedUserIdState }) => {
   );
 };
 
-export default StudentDashbordbookmark;
+export default StudentDashbord_Bookmarks;

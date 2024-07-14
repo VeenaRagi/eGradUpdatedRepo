@@ -403,7 +403,7 @@ li {
 }
 
 .default_test_cards .test_cards .test_card .testcard_inline{
-height: 100px;
+height: 50px;
 width:90%;
 margin: 0 auto;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -426,11 +426,11 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   height: 50px;
   font-size: 20px;
   border-radius: 5px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   justify-content: center;
   color: white;
   align-items: center;
-  text-align: center;
+  /* text-align: center; */
 
 }
 
@@ -441,15 +441,15 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 .default_test_cards .test_cards .test_card .testcard_inline li .span_style_start_button{
   display: flex;
   background-color: rgb(29, 28, 28);
-  width: 112px;
-  height: 50px;
+  /* width: 112px; */
+  /* height: 50px; */
   font-size: 20px;
   border-radius: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 3px;
   justify-content: center;
   color: white;
   align-items: center;
-  text-align: center;
+  /* text-align: center; */
 }
 
 
@@ -472,12 +472,13 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   gap: 0.5rem;
   li {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 16px;
     span {
       /* color: #1f2641; */
       /* font-size: 2rem; */
       /* font-weight: 500; */
       text-decoration: none;
+    
     }
     a {
       background: #000000;

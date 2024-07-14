@@ -14,15 +14,20 @@
     50%  { opacity: 0; }
     100% { opacity: 1; }
   }
+
+  .test_card_subcontainer{
+    margin: 2rem 2rem;
+  }
   
-  p.no_tests_message {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    color: red;
+.no_tests_message {
+    width: 100%;
     font-size: 20px;
-    margin-top: 350px;
-    align-items: center;
-    animation: flickerAnimation 2s infinite;
+    padding: 10px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    height: 3rem;
+    background-color: #e9f2ee;
+    font-weight: 600;
 }
   

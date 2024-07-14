@@ -18,3 +18,15 @@
     transform: translate(-50%, -50%);
     /* Additional styles for the watermark */
   }
+
+  .bookmark_subheading{
+    width: 100%;
+    font-size: 20px;
+    padding: 10px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    height: 3rem;
+    background-color: #e9f2ee;
+    font-weight: 600;
+  }
