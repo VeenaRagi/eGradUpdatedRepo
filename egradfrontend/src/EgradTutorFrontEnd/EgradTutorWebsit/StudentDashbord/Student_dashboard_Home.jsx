@@ -59,7 +59,7 @@ const Student_dashboard_Home = ({ usersData,decryptedUserIdState }) => {
     };
 
     fetchAttemptedTestCount();
-  }, []);
+  }, [decryptedUserIdState]);
   const navigate = useNavigate();
   const location = useLocation();
 

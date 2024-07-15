@@ -60,6 +60,7 @@ padding: 4rem;
 
 .SDHeaderImgContainer {
     position: relative;
+    cursor: pointer;
   }
     .toBeDisplayedWhenHovered {
     display: none; 

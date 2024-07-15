@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import BASE_URL from "../../../apiConfig";
 import { PiHandTapBold, PiHandTapThin } from "react-icons/pi";
-import { Link } from "react-router-dom";
-const StudentDashbord_BuyCourses = ({ usersData, decryptedUserIdState }) => {
+import { Link, useNavigate, useParams } from "react-router-dom";
+
+const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
+  const navigate = useNavigate(); 
   const [unPurchasedCourses, setUnPurchasedCourses] = useState([]);
   const [popupContent, setPopupContent] = useState(null);
   const [selectedPortal, setSelectedPortal] = useState("");
@@ -56,6 +58,7 @@ const StudentDashbord_BuyCourses = ({ usersData, decryptedUserIdState }) => {
     {}
   );
   async function studentbuynowbtnuserboughtcoursecheck(courseCreationId, decryptedUserIdState) {
+    console.log("studentbuynowbtnuserboughtcoursecheck",courseCreationId)
     try {
         // Fetch registration data
         const response = await fetch(`${BASE_URL}/StudentDataforBuyCourses/getotsregistrationdata/${courseCreationId}/${decryptedUserIdState}`);
@@ -67,24 +70,25 @@ const StudentDashbord_BuyCourses = ({ usersData, decryptedUserIdState }) => {
 
         const data = await response.json();
         console.log(data.message);
+        console.log("sindhu",data)
 
         if (data.message === "Data found") {
             // Insert data into STB table
             const insertResponse = await fetch(`${BASE_URL}/StudentDataforBuyCourses/insertthedatainstbtable/${courseCreationId}/${decryptedUserIdState}`, {
+              
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ courseCreationId, decryptedUserIdState }), // Assuming data contains the data you want to write
+                body: JSON.stringify({ courseCreationId, decryptedUserIdState }), 
+                
             });
 
             const insertData = await insertResponse.json();
             console.log(courseCreationId, decryptedUserIdState);
             console.log(insertData.message);
         }
-
-        // Redirect to PayU page
-        window.location.href = `/PayU/${courseCreationId}`;
+        navigate(`/PayU/${courseCreationId}`);
     } catch (error) {
         console.error("Error:", error);
     }
@@ -108,6 +112,7 @@ const StudentDashbord_BuyCourses = ({ usersData, decryptedUserIdState }) => {
     }
   }
   const handlemoreinfo = async (decryptedUserIdState, Portale_Id, courseCreationId) => {
+    console.log("handlemoreinfo",courseCreationId)
     // setPopupbeforelogin(true);
     try {
       const response = await fetch(

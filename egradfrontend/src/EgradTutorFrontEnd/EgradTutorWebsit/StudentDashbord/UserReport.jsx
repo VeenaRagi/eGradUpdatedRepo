@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Modal from "react-modal";
 // import { nav } from "../Exam_Portal_QuizApp/Data/Data";
-import { Link, Navigate, useParams,useNavigate } from "react-router-dom";
+import { Link, Navigate, useParams,useNavigate,useLocation } from "react-router-dom";
 import "./Style/StudentDashbord.css";
 import "./Style/StudentDashbordmyresult.css";
 import { TbArrowBarToUp } from "react-icons/tb";
@@ -17,12 +17,23 @@ import BASE_URL from "../../../apiConfig";
 import CryptoJS from 'crypto-js';
 
 
-export const UserReport = ( { decryptedUserIdState,usersData }) => {
+export const UserReport = ( ) => {
+  // { usersData,decryptedUserIdState }
+
   // const user_Id = usersData.users && usersData.users.length > 0 ? (
   //   usersData.users.map((user) => user.user_Id)
 
   // ) : null;
+
+// const user_Id = decryptedUserIdState;
+
+// const { state } = useLocation();
+// const { usersData, decryptedUserIdState } = state || {};
+const location = useLocation();
+const { usersData, decryptedUserIdState } = location.state || {};
+
 const user_Id = decryptedUserIdState;
+
   const [isVisible, setVisible] = useState(false);
 
   const handleScrole = () => {
@@ -141,12 +152,12 @@ const user_Id = decryptedUserIdState;
     fetchData();
   }, [user_Id]);
   
-  useEffect(()=>{
-    const encryptedId=localStorage.getItem("tiAuth2");
-    console.log(encryptedId,"hhhhhhhhhhhhhh")
-    console.log(encryptedId.user)
+  // useEffect(()=>{
+  //   const encryptedId=localStorage.getItem("tiAuth2");
+  //   console.log(encryptedId,"hhhhhhhhhhhhhh")
+  //   console.log(encryptedId.user)
 
-  },[])
+  // },[])
 
   // const [questionDataResult, setQuestionDataResult] = useState([]);
   const [selectedSection, setSelectedSection] = useState(null);
@@ -1374,34 +1385,37 @@ const user_Id = decryptedUserIdState;
 //     checkLoggedIn();
 //   }, []);
   
-const [encodedUserId, setEncodedUserId] = useState('');
+// const [encodedUserId, setEncodedUserId] = useState('');
 
-const encryptUserId = (user_Id) => {
-  const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
-  return CryptoJS.AES.encrypt(user_Id.toString(), secretKey).toString();
-};
+// const encryptUserId = (user_Id) => {
+//   const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
+//   return CryptoJS.AES.encrypt(user_Id.toString(), secretKey).toString();
+// };
 
-useEffect(() => {
-  if (user_Id) {
-    const encryptedUserId = encryptUserId(user_Id);
-    const encodedUserId = encodeURIComponent(encryptedUserId);
-    setEncodedUserId(encodedUserId);
-  }
-}, [user_Id]);
+// useEffect(() => {
+//   if (user_Id) {
+//     const encryptedUserId = encryptUserId(user_Id);
+//     const encodedUserId = encodeURIComponent(encryptedUserId);
+//     setEncodedUserId(encodedUserId);
+//   }
+// }, [user_Id]);
 
+console.log("Shinchannnnnnnnnnnnnnnn",decryptedUserIdState)
 
   return (
     <div className="resultContainerSection">
       <div className="StudentDashbord_Container">
+      <p>Decrypted User ID: {decryptedUserIdState}</p>
+            <p>Users Data: {JSON.stringify(usersData)}</p>
         <section>
           <div className="StudentDashbord_navLocation">
             <span className="selectedButtonNameLink">{selectedButtonName}</span>{" "}
             <span>
               {" "}
               <div className="Go_back_from_test_section">
-                <Link to={`/Student_dashboard/${encodedUserId}`} style={{ color: "black" }}>
+                {/* <Link to={`/Student_dashboard/${encodedUserId}`} style={{ color: "black" }}>
                   Go Back
-                </Link>
+                </Link> */}
               </div>
             </span>
           </div>
@@ -1419,6 +1433,19 @@ useEffect(() => {
             ))}
           </ul>
         )} */}
+         {usersData && usersData.users && usersData.users.length > 0 && (
+                <ul>
+                    {usersData.users.map((user) => (
+                        <li key={user.user_Id}>
+                            <div className="greeting_section">
+                                <h2 className="dashboard_greeting_container">
+                                    {user.username}
+                                </h2>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            )}
         <section className="StudentDashbord_contant">
           <div className="Your_PerformanceHeader">
             {/* {userTest && userTest.map((item) => (

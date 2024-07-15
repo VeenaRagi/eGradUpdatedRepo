@@ -40,7 +40,7 @@ import ThemesSection from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/ThemesSec
 import Leftnav from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/Leftnav.jsx";
 import AdminProfile from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/AdminProfile.jsx";
 import axios from "axios";
-function App({decryptedUserIdState}) {
+function App({decryptedUserIdState,usersData}) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -195,8 +195,12 @@ function App({decryptedUserIdState}) {
             path="/TestResultsPage/:param1/:param2"
            element={<TestResultsPage />} 
           />
-            <Route
+            {/* <Route
          path="/UserReport/:id/:testCreationTableId/:courseCreationId"
+           element={<UserReport usersData={usersData} decryptedUserIdState={decryptedUserIdState}/>} 
+          /> */}
+           <Route
+         path="/UserReport/:decryptedUserIdState/:testCreationTableId/:courseCreationId"
            element={<UserReport />} 
           />
             <Route
