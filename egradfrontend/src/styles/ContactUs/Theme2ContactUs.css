@@ -52,7 +52,7 @@ form.ContactUsFormData.t2CUForm textarea#message {
     padding: 10px;
     border-radius: 11px;
     border: 1px solid #19596e;
-    border-top: unset;
+    /* border-top: unset; */
     /* background-color: transparent; */
     font-family: "LXGW WenKai TC", cursive;
     font-weight: 400;
@@ -179,6 +179,9 @@ form.ContactUsFormData.t2CUForm button:hover{
     font-family: "LXGW WenKai TC", cursive;
     font-weight: 400;
     font-style: normal;
+}
+.form.ContactUsFormData.t2CUForm input{
+    border: none;
 }
 /* 986 */
 @media (max-width: 986px){
