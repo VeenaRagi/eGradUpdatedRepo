@@ -403,8 +403,9 @@ li {
 }
 
 .default_test_cards .test_cards .test_card .testcard_inline{
-height: 50px;
+height: 150px;
 width:90%;
+padding: 10px;
 margin: 0 auto;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -414,6 +415,9 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   flex-direction: column;
 }
 
+.test_card .testcard_inline li a{
+  border-radius: 10px;
+}
 
 
 .default_test_cards{
@@ -516,6 +520,56 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 
+.test_card {
+  background-color: #fff; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  padding: 20px; 
+  margin: 10px;
+}
+
+.testcard_inline {
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
+  display: flex;
+  gap: 50px;
+}
+
+.testcard_inline li {
+  display: flex;
+  align-items: center;
+  font-size: 16px;  color: #333; 
+}
+
+.testcard_inline li span {
+  margin-right: 8px; 
+}
+
+.testcard_inline li ul {
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
+}
+
+.testcard_inline li ul li {
+  font-size: 14px;
+  color: #555; 
+}
+
+
+.testcard_inline .action-button {
+  color: #007bff; 
+  text-decoration: none; 
+  font-weight: bold; 
+}
+
+.testcard_inline .action-button:hover {
+  text-decoration: underline; 
+}
+
+
+
 @media (max-width:768px){
   .default_test_cards .test_cards .test_card .testcard_inline li .span_style_attempt_status {
     height: 50px;
@@ -526,6 +580,7 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   .default_test_cards .test_cards .test_card .testcard_inline {
     display: flex;
     width: 100%;
+    height: 400px;
     flex-direction: column;
   }
   
@@ -539,5 +594,18 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     flex-direction: column;
   }
   
+  .test_cards{
+    height: 400x;
+  }
+
+  
   
 }
+
+
+
+
+
+
+
+
