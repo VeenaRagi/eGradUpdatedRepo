@@ -26,6 +26,7 @@ const ButtonsFunctionality = ({
   updateQuestionStatus,
   onUpdateOption,
   option,
+  userData,
 }) => {
 
   
@@ -150,34 +151,34 @@ const ButtonsFunctionality = ({
     : null;
 
   // Fetch user data
-  const [userData, setUserData] = useState({});
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          `${BASE_URL}/ughomepage_banner_login/user`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Attach token to headers for authentication
-            },
-          }
-        );
+  // const [userData, setUserData] = useState({});
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       const response = await fetch(
+  //         `${BASE_URL}/ughomepage_banner_login/user`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`, // Attach token to headers for authentication
+  //           },
+  //         }
+  //       );
 
-        if (response.ok) {
-          const userData = await response.json();
-          setUserData(userData);
-          // console.log(userData);
-        } else {
-          // Handle errors, e.g., if user data fetch fails
-        }
-      } catch (error) {
-        // Handle other errors
-      }
-    };
+  //       if (response.ok) {
+  //         const userData = await response.json();
+  //         setUserData(userData);
+  //         // console.log(userData);
+  //       } else {
+  //         // Handle errors, e.g., if user data fetch fails
+  //       }
+  //     } catch (error) {
+  //       // Handle other errors
+  //     }
+  //   };
 
-    fetchUserData();
-  }, []);
+  //   fetchUserData();
+  // }, []);
 
   // Handle button click for selecting questions
   // const handleButtonClick = useCallback(
@@ -412,12 +413,33 @@ const ButtonsFunctionality = ({
     <>
       <div className="right-side-bar">
         <div className="rightSidebar-topHeader">
-          <img
+        <h1>hellooooo</h1>
+          {userData.users && userData.users.length > 0 && (
+            <ul>
+              {userData.users.map((user) => (
+                <div>
+                     <img
+                   title={user.username}
+                   // title={userNameFromContext}
+                   src={`${BASE_URL}/uploads/studentinfoimeages/${user.UplodadPhto}`}
+                      alt={`no img${user.UplodadPhto}`}
+                 />
+                 <p>Candidate Name: {user.username}</p>
+                </div>
+                // <div className="greeting_section">
+                //   <h2 className="dashboard_greeting_container">
+                //     {user.username}
+                //   </h2>
+                // </div>
+              ))}
+            </ul>
+          )}
+          {/* <img
             title={userData.username}
             // title={userNameFromContext}
             src={userData.imageData}
             alt={`Image ${userData.user_Id}`}
-          />
+          /> */}
           {/* <p>Candidate Name: {userData.username}</p> */}
           {/* <p>Candidate Name:{userNameFromContext}</p> */}
           <p key={testName.testCreationTableId}>Test Name: {testName}</p>

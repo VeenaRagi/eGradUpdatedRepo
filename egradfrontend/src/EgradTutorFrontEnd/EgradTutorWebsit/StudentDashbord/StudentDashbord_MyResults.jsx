@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import BASE_URL from "../../../apiConfig";
 import axios from "axios";
 import { FaBookOpenReader } from "react-icons/fa6";
 import './Style/StudentDashbord_MyResults.css'
+import CryptoJS from 'crypto-js';
 
 export const StudentDashbord_MyResults = ({ usersData,decryptedUserIdState }) => {
+  const user_Id = usersData.users && usersData.users.length > 0 ? (
+    usersData.users.map((user) => user.user_Id)
+
+  ) : null;
   const [testDetails, setTestDetails] = useState([]);
   const [selectedTypeOfTest, setSelectedTypeOfTest] = useState("");
   const [filteredTestData, setFilteredTestData] = useState([]);
   const [testPageHeading, setTestPageHeading] = useState([]);
+  const {testCreationTableId,courseCreationId} = useParams()
   useEffect(() => {
     const fetchTestDetails = async () => {
       try {
@@ -23,7 +29,7 @@ export const StudentDashbord_MyResults = ({ usersData,decryptedUserIdState }) =>
     };
 
     fetchTestDetails();
-  }, [decryptedUserIdState]);
+  }, []);
   function getBackgroundColor(type, test) {
     switch (type) {
       case "Chapter Wise Test":
@@ -44,9 +50,9 @@ export const StudentDashbord_MyResults = ({ usersData,decryptedUserIdState }) =>
         return "#f5f5f5"; // light gray
     }
   }
-  const openPopup = (decryptedUserIdState, testCreationTableId, courseCreationId) => {
+  const openPopup = (user_Id, testCreationTableId, courseCreationId) => {
     const newWinRef = window.open(
-      `/Instructions/${decryptedUserIdState}/${testCreationTableId}/${courseCreationId}`,
+      `/Instructions/${user_Id}/${testCreationTableId}/${courseCreationId}`,
       "_blank",
       "width=1000,height=1000"
     );
@@ -110,10 +116,43 @@ export const StudentDashbord_MyResults = ({ usersData,decryptedUserIdState }) =>
     return `${day}-${month}-${year}`;
   };
 
+
+
+  const navigate = useNavigate();
+
+  // const encryptUserId = (decryptedUserIdState) => {
+  //   const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
+  //   return CryptoJS.AES.encrypt(decryptedUserIdState.toString(), secretKey).toString();
+  // };
+
+  // const openResultPage = (testCreationTableId, courseCreationId) => {
+  //     const url = `/Student_dashboard/${decryptedUserIdState}/${testCreationTableId}/${courseCreationId}`;
+  //     console.log("Navigating to URL:", url);
+  //     navigate(url, { state: { usersData } });
+   
+  // };
+
+  const handleResultAnalysisClick = (decryptedUserIdState, testCreationTableId, courseCreationId) => {
+    console.log("3333333333333333333",decryptedUserIdState,testCreationTableId,courseCreationId)
+    navigate(`/UserReport/${decryptedUserIdState}/${testCreationTableId}/${courseCreationId}`, { state: { usersData } });
+  };
   return (
     <div className="card_container_dashbordflowtest">
       <div className="test_card_subcontainer">
         {" "}
+        {/* {usersData.users && usersData.users.length > 0 && (
+          <ul>
+            {usersData.users.map((user) => (
+              <div className="greeting_section">
+                <h2 className="dashboard_greeting_container">
+                {user.username}
+                </h2>
+               
+              </div>
+            ))}
+          </ul>
+        )} */}
+
         <div className="Types_of_Tests">
           <ul>
             <div>
@@ -165,12 +204,24 @@ export const StudentDashbord_MyResults = ({ usersData,decryptedUserIdState }) =>
                         {test.test_status === "Completed" ? (
                           <Link
                             className="Result_Analysis"
+                            // onClick={openResultPage}
+                            // onClick={() => openResultPage(test.testCreationTableId, test.courseCreationId)}
                             to={`/UserReport/${decryptedUserIdState}/${test.testCreationTableId}/${test.courseCreationId}`}
+
+                            // onClick={() =>
+                            //   handleResultAnalysisClick(
+                            //     decryptedUserIdState,
+                            //     test.testCreationTableId,
+                            //     test.courseCreationId
+                            //   )
+                            // }
+
                             style={{
                               backgroundColor: "green",
                               color: "white",
                               padding: "3.9px",
                               textDecoration: "none",
+                              marginBottom: "7px",
                             }}
                           >
                             Result Analysis{" "}

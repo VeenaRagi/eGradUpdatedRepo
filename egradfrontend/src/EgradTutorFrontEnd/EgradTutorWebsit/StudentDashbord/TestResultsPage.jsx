@@ -6,8 +6,16 @@ import BASE_URL from "../../../apiConfig";
 import axios from "axios";
 import { Navbar } from "./Data/Introduction_Page_Data";
 import { decryptData, encryptData } from "./utils/crypto";
+import { useLocation } from 'react-router-dom';
+import CryptoJS from 'crypto-js';
 
 const TestResultsPage = () => {
+console.log("11111111111111111111111111111111111111")
+  const location = useLocation();
+  const { userData } = location.state || {}; 
+
+
+
   const navigate = useNavigate();
 
   const { param1, param2 } = useParams();
@@ -53,10 +61,12 @@ const TestResultsPage = () => {
     decryptParams();
   }, [param1, param2, navigate]);
 
+
+  console.log(decryptedParam1)
   // const { testCreationTableId, user_Id, userId } = useParams();
   const [testName, setTestName] = useState("");
 
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
   const fetchTestName = async () => {
     try {
       const response = await fetch(
@@ -72,37 +82,42 @@ const TestResultsPage = () => {
   useEffect(() => {
     fetchTestName();
   }, [decryptedParam1]);
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          `${BASE_URL}/ughomepage_banner_login/user`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Attach token to headers for authentication
-            },
-          }
-        );
 
-        if (response.ok) {
-          const userData = await response.json();
-          setUserData(userData);
-          // console.log(userData);
-        } else {
-          // Handle errors, e.g., if user data fetch fails
-        }
-      } catch (error) {
-        // Handle other errors
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       const response = await fetch(
+  //         `${BASE_URL}/ughomepage_banner_login/user`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`, // Attach token to headers for authentication
+  //           },
+  //         }
+  //       );
 
-    fetchUserData();
-  }, []);
+  //       if (response.ok) {
+  //         const userData = await response.json();
+  //         setUserData(userData);
+  //         // console.log(userData);
+  //       } else {
+  //         // Handle errors, e.g., if user data fetch fails
+  //       }
+  //     } catch (error) {
+  //       // Handle other errors
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, []);
 
   const [answer, setAnswer] = useState([]);
 
-  console.log(decryptedParam2);
+  console.log("helloooooo shizukaaaaaaaaa");
+  console.log("decryptedParam1", decryptedParam1);
+  console.log("decryptedParam2", decryptedParam2);
+
+
   useEffect(() => {
     const fetchAnswer = async () => {
       try {
@@ -116,31 +131,31 @@ const TestResultsPage = () => {
       }
     };
 
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          `${BASE_URL}/ughomepage_banner_login/user`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+    // const fetchUserData = async () => {
+    //   try {
+    //     const token = localStorage.getItem("token");
+    //     const response = await fetch(
+    //       `${BASE_URL}/ughomepage_banner_login/user`,
+    //       {
+    //         headers: {
+    //           Authorization: `Bearer ${token}`,
+    //         },
+    //       }
+    //     );
 
-        if (response.ok) {
-          const userData = await response.json();
-          setUserData(userData);
-        } else {
-          // Handle errors, e.g., if user data fetch fails
-        }
-      } catch (error) {
-        // Handle other errors
-      }
-    };
+    //     if (response.ok) {
+    //       const userData = await response.json();
+    //       setUserData(userData);
+    //     } else {
+    //       // Handle errors, e.g., if user data fetch fails
+    //     }
+    //   } catch (error) {
+    //     // Handle other errors
+    //   }
+    // };
 
     fetchAnswer();
-    fetchUserData();
+    // fetchUserData();
   }, [decryptedParam1, decryptedParam2]); // Include dependencies in the dependency array
   // Include dependencies in the dependency array
 
@@ -523,61 +538,91 @@ const TestResultsPage = () => {
     return pageNumbers;
   };
 
+
   const [userIdLink,setUserIdLink]= useState("")
 
   const [isAdmin, setIsAdmin] = useState(false);
 
-  useEffect(() => {
-    const checkLoggedIn = () => {
-      const isLoggedInObjFromLS = localStorage.getItem("tiAuth");
-      console.log(isLoggedInObjFromLS);
-      if (isLoggedInObjFromLS) {
-        try {
-          const tiAuth = JSON.parse(isLoggedInObjFromLS);
-          console.log("veenaaaaaaaaaaaa")
-          console.log(tiAuth.user,"this is the status")
-          const role=tiAuth.user
-          setUserIdLink(role)
-          // setIsLoggedInFromLS(tiAuth.isLoggedIn);
-          // console.log(tiAuth,"this is ssssssssssss")
-          // console.log(isLoggedInFromLS, "wwwwwwwwwwwwwwwwwwwwwww");
-          if (role === "User") {
-            setIsAdmin(true);
+  // useEffect(() => {
+  //   const checkLoggedIn = () => {
+  //     const isLoggedInObjFromLS = localStorage.getItem("tiAuth");
+  //     console.log(isLoggedInObjFromLS,"ggggggggggggggggggggggggggggg");
 
-          }
-        } catch (error) {
-          console.log(error, "parsing the tiauth for back button");
-        }
-      }
-    };
-    checkLoggedIn();
-  }, []);
+  //     if (isLoggedInObjFromLS) {
+  //       try {
+  //         const tiAuth = JSON.parse(isLoggedInObjFromLS);
+  //         console.log("veenaaaaaaaaaaaa")
+  //         console.log(tiAuth.user,"this is the status")
+  //         const role=tiAuth.user
+  //         setUserIdLink(role)
+  //         // setIsLoggedInFromLS(tiAuth.isLoggedIn);
+  //         // console.log(tiAuth,"this is ssssssssssss")
+  //         // console.log(isLoggedInFromLS, "wwwwwwwwwwwwwwwwwwwwwww");
+  //         if (role === "User") {
+  //           setIsAdmin(true);
+
+  //         }
+  //       } catch (error) {
+  //         console.log(error, "parsing the tiauth for back button");
+  //       }
+  //     }
+  //   };
+  //   checkLoggedIn();
+  // }, []);
+
+
+  const encryptUserId = (decryptedParam2) => {
+    const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
+    return CryptoJS.AES.encrypt(decryptedParam2.toString(), secretKey).toString();
+  };
 
   const openPopup = () => {
-    // Close the current window
     window.close();
-
-    // // Set student dashboard state in local storage
-    // const state = {
-    //   studentDashbordconatiner: false,
-    //   studentDashbordmycourse: false,
-    //   studentDashbordbuycurses: false,
-    //   studentDashbordmyresult: true, // Set to true for the desired section
-    //   studentDashborddountsection: false,
-    //   studentDashbordbookmark: false,
-    //   studentDashbordsettings: false,
-    // };
-    // localStorage.setItem("student_dashboard_state", JSON.stringify(state));
-
-    // Open the desired URL in a new window
-    // window.open("/Student_dashboard");
-    // navigate('/StudentDashbord_MyResults')
-    navigate(`/Student_dashboard/${userIdLink}`)
+    if (decryptedParam2) {
+      const encryptedUserId = encryptUserId(decryptedParam2);
+      const encodedUserId = encodeURIComponent(encryptedUserId);
+      navigate(`/Student_dashboard/${encodedUserId}`);
+    }
   };
+
+
+  // const openPopup = () => {
+  //   // Close the current window
+  //   window.close();
+
+  //   // // Set student dashboard state in local storage
+  //   // const state = {
+  //   //   studentDashbordconatiner: false,
+  //   //   studentDashbordmycourse: false,
+  //   //   studentDashbordbuycurses: false,
+  //   //   studentDashbordmyresult: true, // Set to true for the desired section
+  //   //   studentDashborddountsection: false,
+  //   //   studentDashbordbookmark: false,
+  //   //   studentDashbordsettings: false,
+  //   // };
+  //   // localStorage.setItem("student_dashboard_state", JSON.stringify(state));
+
+  //   // Open the desired URL in a new window
+  //   // window.open("/Student_dashboard");
+  //   // navigate('/StudentDashbord_MyResults')
+  //   navigate(`/Student_dashboard/${userIdLink}`)
+  // };
 
 
   return (
     <>
+        <h1>hellooooo</h1>
+          {userData.users && userData.users.length > 0 && (
+            <ul>
+              {userData.users.map((user) => (
+                <div className="greeting_section">
+                  <h2 className="dashboard_greeting_container">
+                    {user.username}
+                  </h2>
+                </div>
+              ))}
+            </ul>
+          )}
       <div className="testResult_-container">
         <div className="viewReport_popup_container">
           <div className="viewReport_popup_content">
@@ -624,39 +669,7 @@ export const Header = () => {
     }
   };
 
-  // useEffect(() => {
 
-  //   const fetchTestDetails = async () => {
-
-  //     try {
-
-  //       const response = await fetch(`/testDetails/${testCreationTableId}`);
-
-  //       if (!response.ok) {
-
-  //         throw new Error("Failed to fetch test details");
-
-  //       }
-
-  //       const data = await response.json();
-
-  //       setTestDetails(data.results);
-
-  //     } catch (error) {
-
-  //       setError(error.message);
-
-  //     }
-
-  //   };
-
-  //   if (testCreationTableId) {
-
-  //     fetchTestDetails();
-
-  //   }
-
-  // }, [testCreationTableId]);
 
   return (
     <>
