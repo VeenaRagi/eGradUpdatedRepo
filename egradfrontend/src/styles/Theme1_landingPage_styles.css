@@ -992,6 +992,7 @@ background-repeat: no-repeat;
 .t1FooterContentColumn {
     box-sizing: border-box;
     float: left;
+    margin-left: 17px;
     /* padding-left: 15px;
     padding-right: 15px; */
     width: 100%;
@@ -1119,5 +1120,6 @@ background-repeat: no-repeat;
         display: flex;
         flex-direction: row;
     }
+
 
 }
