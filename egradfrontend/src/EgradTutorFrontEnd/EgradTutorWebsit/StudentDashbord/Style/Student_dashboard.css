@@ -63,15 +63,26 @@
     margin: 30px auto;
     width: 90%;
     border-radius: 20px;
+    flex-wrap: wrap; 
+    gap: 20px; 
+    padding: 20px; 
 }
 
 .test_counts_dashboard_tests_status{
 padding: 20px;
+background-color: #fff; 
+border-radius: 8px; 
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+padding: 20px;
+width: 100%; 
+max-width: 460px;
 }
 
 .dashboard_tests_status_portal_name{
-    color: rgb(15, 15, 15);
     padding: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
 }
 
 .dashboard_tests_status_ul{
@@ -79,10 +90,21 @@ padding: 20px;
     display: flex;
     flex-direction: row;
     gap: 30px;
+    list-style: none; 
+    padding: 0;     
 }
 
 .total_count_container{
-   font-size: 20px;
+   margin-bottom: 10px;    
+   font-size: 16px;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .test_counts_dashboard_tests_status {
+        width: 100%; 
+        max-width: none; 
+    }
 }
 
 
@@ -130,3 +152,9 @@ padding: 20px;
 
 
 /***************************** ## END ## Styles for Student_dashboard_Home.jsx ## END ##  *************** */
+
+
+
+
+
+
