@@ -413,7 +413,6 @@ const ButtonsFunctionality = ({
     <>
       <div className="right-side-bar">
         <div className="rightSidebar-topHeader">
-        <h1>hellooooo</h1>
           {userData.users && userData.users.length > 0 && (
             <ul>
               {userData.users.map((user) => (

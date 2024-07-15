@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import BASE_URL from "../../../apiConfig";
 import { MdDeleteForever } from "react-icons/md";
 import { Navigate, useParams } from "react-router-dom";
 import './Style/StudentDashbord_Bookmarks.css'
+import UserContext from '../../../UserContext';
 
-const StudentDashbord_Bookmarks = ({ usersData,decryptedUserIdState }) => {
+
+
+
+const StudentDashbord_Bookmarks = () => {
+
+  const { decryptedUserIdState, usersData } = useContext(UserContext);
+  const { decryptedUserIdState: paramUserId } = useParams();
+  // const user_Id = decryptedUserIdState;
+
   const { testCreationTableId, question_id } = useParams();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [Questionbookmark, setQuestionbookmark] = useState([]);
@@ -68,6 +77,10 @@ const StudentDashbord_Bookmarks = ({ usersData,decryptedUserIdState }) => {
       </div>
     );
   }
+
+  console.log("Shizukaaaaaaaaaaaaaaa",decryptedUserIdState)
+
+// console.log("Shizukaaaaaaaaaaaaaaa",encodedUserId)
 
   return (
     <div className="Questionbookmark_container">
