@@ -13,7 +13,13 @@ import { BiMenuAltLeft } from "react-icons/bi";
 import BASE_URL from "../../../../apiConfig";
 import { decryptData, encryptData } from "../utils/crypto";
 import "../Style/Watermark.css";
+import { useLocation } from 'react-router-dom';
+
 const QuizPage = () => {
+
+  const location = useLocation();
+  const { userData } = location.state || {}; 
+
   const navigate = useNavigate();
 
   const { param1, param2 } = useParams();
@@ -1214,12 +1220,12 @@ const QuizPage = () => {
         encryptedParam1
       )}/${encodeURIComponent(encryptedParam2)}`;
 
-      navigate(url);
+      navigate(url, { state: { userData } });
     } catch (error) {
       console.error("Error encrypting data:", error);
     }
     try {
-      const userId = decryptedParam2;
+      // const userId = decryptedParam2;
       console.log("sddvfnjdxnvjkncmvncx");
       console.log(decryptedParam2);
       const courseCreationId = testDetails?.[0]?.courseCreationId;
@@ -1442,33 +1448,33 @@ const QuizPage = () => {
   //end Subjects fetching use effect code
 
   //users fetching use effect code
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          `${BASE_URL}/ughomepage_banner_login/user1`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Attach token to headers for authentication
-            },
-          }
-        );
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       const response = await fetch(
+  //         `${BASE_URL}/ughomepage_banner_login/user1`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`, // Attach token to headers for authentication
+  //           },
+  //         }
+  //       );
 
-        if (response.ok) {
-          const userData = await response.json();
-          setUserData(userData);
-          // console.log(userData);
-        } else {
-          // Handle errors, e.g., if user data fetch fails
-        }
-      } catch (error) {
-        // Handle other errors
-      }
-    };
+  //       if (response.ok) {
+  //         const userData = await response.json();
+  //         setUserData(userData);
+  //         // console.log(userData);
+  //       } else {
+  //         // Handle errors, e.g., if user data fetch fails
+  //       }
+  //     } catch (error) {
+  //       // Handle other errors
+  //     }
+  //   };
 
-    fetchUserData();
-  }, []);
+  //   fetchUserData();
+  // }, []);
   //end users fetching use effect code
 
   //counts use effect code
@@ -1511,35 +1517,35 @@ const QuizPage = () => {
   const currentQuestion =
     questionData.questions && questionData.questions[currentQuestionIndex];
 
-  const [userData, setUserData] = useState({});
-  // user data
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          `${BASE_URL}/ughomepage_banner_login/user`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Attach token to headers for authentication
-            },
-          }
-        );
+  // const [userData, setUserData] = useState({});
+  // // user data
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       const response = await fetch(
+  //         `${BASE_URL}/ughomepage_banner_login/user`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`, // Attach token to headers for authentication
+  //           },
+  //         }
+  //       );
 
-        if (response.ok) {
-          const userData = await response.json();
-          setUserData(userData);
-          // console.log(userData);
-        } else {
-          // Handle errors, e.g., if user data fetch fails
-        }
-      } catch (error) {
-        // Handle other errors
-      }
-    };
+  //       if (response.ok) {
+  //         const userData = await response.json();
+  //         setUserData(userData);
+  //         // console.log(userData);
+  //       } else {
+  //         // Handle errors, e.g., if user data fetch fails
+  //       }
+  //     } catch (error) {
+  //       // Handle other errors
+  //     }
+  //   };
 
-    fetchUserData();
-  }, []);
+  //   fetchUserData();
+  // }, []);
 
   const [originalStatuses, setOriginalStatuses] = useState(
     Array(questionData.questions.length).fill("notVisited")
@@ -1997,8 +2003,8 @@ const QuizPage = () => {
       );
 
       if (response_user.ok) {
-        const userData = await response_user.json();
-        setUserData(userData);
+        // const userData = await response_user.json();
+        // setUserData(userData);
 
         // Ensure userId is defined
         const userId = decryptedParam2;
@@ -3854,6 +3860,7 @@ const QuizPage = () => {
                   seconds={600}
                   onUpdateOption={handleUpdateOption}
                   option={option}
+                  userData={userData} 
                 />
               </div>
             </div>
@@ -3884,6 +3891,18 @@ const QuizPage = () => {
                 </tr>
               </table>
             </div>
+            {/* <h1>hellooooo</h1>
+          {userData.users && userData.users.length > 0 && (
+            <ul>
+              {userData.users.map((user) => (
+                <div className="greeting_section">
+                  <h2 className="dashboard_greeting_container">
+                    {user.username}
+                  </h2>
+                </div>
+              ))}
+            </ul>
+          )} */}
             <div>
               {/* {showButtonNo && (
               <h2 className="Exam_summary_question_tag">

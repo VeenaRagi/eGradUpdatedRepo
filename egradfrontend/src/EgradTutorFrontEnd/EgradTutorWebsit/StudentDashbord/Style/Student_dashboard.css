@@ -56,6 +56,34 @@
     width: 100%;
 }
 
+.testcounts_student_dashbard{
+    display: flex;
+    border: 1px solid gray;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 30px auto;
+    width: 90%;
+    border-radius: 20px;
+}
+
+.test_counts_dashboard_tests_status{
+padding: 20px;
+}
+
+.dashboard_tests_status_portal_name{
+    color: rgb(15, 15, 15);
+    padding: 10px;
+}
+
+.dashboard_tests_status_ul{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.total_count_container{
+   font-size: 20px;
+}
 
 
 @media (max-width:900px) {
@@ -83,7 +111,14 @@
         justify-content: center;
         margin: 0 auto;
     }
+
+    .dashboard_tests_status_ul{
+        flex-direction: column;
+        gap: 10px;
+    }
 }
+
+
 
 @media (min-width:900px) {
     .dashboard_welcome_img_section {

@@ -59,7 +59,7 @@ const Student_dashboard_Home = ({ usersData,decryptedUserIdState }) => {
     };
 
     fetchAttemptedTestCount();
-  }, [user_Id]);
+  }, []);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -108,9 +108,9 @@ const Student_dashboard_Home = ({ usersData,decryptedUserIdState }) => {
                   (item.Portale_Id !== 2 &&
                     (item.attempted_test_count !== 0 ||
                       item.unattempted_test_count !== 0))) && (
-                  <div key={index}>
-                    <h3>{item.Portale_Name}</h3>
-                    <ul>
+                  <div className='test_counts_dashboard_tests_status' key={index}>
+                    <h3 className='dashboard_tests_status_portal_name'>{item.Portale_Name}</h3>
+                    <ul className='dashboard_tests_status_ul'>
                       {item.test_count !== 0 && (
                         <li className="total_count_container">
                           Total Tests: {item.test_count}

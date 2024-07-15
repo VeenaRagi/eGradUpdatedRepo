@@ -14,10 +14,15 @@ import { GrAttachment } from "react-icons/gr";
 import TrophyImage from "./Images/TrophyImage.png";
 import { IoMdClose } from "react-icons/io";
 import BASE_URL from "../../../apiConfig";
+import CryptoJS from 'crypto-js';
 
 
+export const UserReport = ( { decryptedUserIdState,usersData }) => {
+  // const user_Id = usersData.users && usersData.users.length > 0 ? (
+  //   usersData.users.map((user) => user.user_Id)
 
-export const UserReport = ({decryptedUserIdState}) => {
+  // ) : null;
+const user_Id = decryptedUserIdState;
   const [isVisible, setVisible] = useState(false);
 
   const handleScrole = () => {
@@ -100,7 +105,7 @@ export const UserReport = ({decryptedUserIdState}) => {
   //   }
   // };
 
-  const user_Id = decryptedUserIdState;
+  // const user_Id = decryptedUserIdState;
   // useEffect(() => {
   //   const fetchTestDetails = async () => {
   //     try {
@@ -120,7 +125,7 @@ export const UserReport = ({decryptedUserIdState}) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/Myresult/questionOptions_result/${testCreationTableId}/${decryptedUserIdState}`
+          `${BASE_URL}/Myresult/questionOptions_result/${testCreationTableId}/${user_Id}`
         );
 
         // if (!response.ok) {
@@ -134,7 +139,14 @@ export const UserReport = ({decryptedUserIdState}) => {
       }
     };
     fetchData();
-  }, [decryptedUserIdState]);
+  }, [user_Id]);
+  
+  useEffect(()=>{
+    const encryptedId=localStorage.getItem("tiAuth2");
+    console.log(encryptedId,"hhhhhhhhhhhhhh")
+    console.log(encryptedId.user)
+
+  },[])
 
   // const [questionDataResult, setQuestionDataResult] = useState([]);
   const [selectedSection, setSelectedSection] = useState(null);
@@ -204,7 +216,7 @@ export const UserReport = ({decryptedUserIdState}) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/Myresult/YourPerformance_testResults/${decryptedUserIdState}/${testCreationTableId}`
+          `${BASE_URL}/Myresult/YourPerformance_testResults/${user_Id}/${testCreationTableId}`
         );
         setTestData(response.data);
         const Duration = response.data[0].Duration;
@@ -234,7 +246,7 @@ export const UserReport = ({decryptedUserIdState}) => {
       }
     };
     fetchData();
-  }, [decryptedUserIdState]);
+  }, [user_Id]);
 
   const chartRef = useRef(null);
   const [answerEvaluation, setAnswerEvaluation] = useState([]);
@@ -246,7 +258,7 @@ export const UserReport = ({decryptedUserIdState}) => {
     const fetchBuildChart = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/Myresult/AnswerEvaluation/${decryptedUserIdState}/${testCreationTableId}`
+          `${BASE_URL}/Myresult/AnswerEvaluation/${user_Id}/${testCreationTableId}`
         );
 
         if (!response.ok) {
@@ -261,7 +273,7 @@ export const UserReport = ({decryptedUserIdState}) => {
     };
 
     fetchBuildChart();
-  }, [decryptedUserIdState, testCreationTableId]);
+  }, [user_Id, testCreationTableId]);
 
   //main
   // useEffect(() => {
@@ -460,7 +472,7 @@ export const UserReport = ({decryptedUserIdState}) => {
   useEffect(() => {
     axios
       .get(
-        `${BASE_URL}/Myresult/userResponses/${decryptedUserIdState}/${testCreationTableId}`
+        `${BASE_URL}/Myresult/userResponses/${user_Id}/${testCreationTableId}`
       )
       .then((response) => {
         setKeyData(response.data);
@@ -468,7 +480,7 @@ export const UserReport = ({decryptedUserIdState}) => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [decryptedUserIdState]);
+  }, [user_Id]);
 
   const [score, setScoreCount] = useState({ totalMarks: 0, netMarks: 0 });
 
@@ -548,7 +560,7 @@ export const UserReport = ({decryptedUserIdState}) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/Myresult/sectionwiseScoreAndTotalMarks/${decryptedUserIdState}/${testCreationTableId}`
+          `${BASE_URL}/Myresult/sectionwiseScoreAndTotalMarks/${user_Id}/${testCreationTableId}`
         );
         const data = await response.json();
         setSectionWiseScores(data.sectionWiseScores);
@@ -559,7 +571,7 @@ export const UserReport = ({decryptedUserIdState}) => {
     };
 
     fetchData();
-  }, [decryptedUserIdState]);
+  }, [user_Id]);
 
   const [rankData, setRankData] = useState([]);
   useEffect(() => {
@@ -588,7 +600,7 @@ export const UserReport = ({decryptedUserIdState}) => {
     const fetchiUserRankData = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/Myresult/rankforeachuser/${decryptedUserIdState}/${testCreationTableId}`
+          `${BASE_URL}/Myresult/rankforeachuser/${user_Id}/${testCreationTableId}`
         );
 
         if (!response.ok) {
@@ -604,7 +616,7 @@ export const UserReport = ({decryptedUserIdState}) => {
     };
 
     fetchiUserRankData();
-  }, [decryptedUserIdState]);
+  }, [user_Id]);
 
   const [topThreeRanks, setTopThreeRanks] = useState([]);
 
@@ -636,7 +648,7 @@ export const UserReport = ({decryptedUserIdState}) => {
     const fetchUserMarks = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/Myresult/usermarks/${decryptedUserIdState}/${testCreationTableId}`
+          `${BASE_URL}/Myresult/usermarks/${user_Id}/${testCreationTableId}`
         );
 
         if (!response.ok) {
@@ -653,7 +665,7 @@ export const UserReport = ({decryptedUserIdState}) => {
     };
 
     fetchUserMarks();
-  }, [decryptedUserIdState]);
+  }, [user_Id]);
 
   const [usercount, setUserCount] = useState([]);
 
@@ -786,12 +798,12 @@ export const UserReport = ({decryptedUserIdState}) => {
 
   useEffect(() => {
     fetchInitialBookmarks();
-  }, [decryptedUserIdState]);
+  }, [user_Id]);
 
   const fetchInitialBookmarks = async () => {
     try {
       const response = await fetch(
-        `${BASE_URL}/Bookmark/getBookmarks/${decryptedUserIdState}`
+        `${BASE_URL}/Bookmark/getBookmarks/${user_Id}`
       );
 
       if (!response.ok) {
@@ -818,7 +830,7 @@ export const UserReport = ({decryptedUserIdState}) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/Myresult/sectionwiseScore/${decryptedUserIdState}/${testCreationTableId}`
+          `${BASE_URL}/Myresult/sectionwiseScore/${user_Id}/${testCreationTableId}`
         );
         const data = await response.json();
 
@@ -829,7 +841,7 @@ export const UserReport = ({decryptedUserIdState}) => {
     };
 
     fetchData();
-  }, [decryptedUserIdState]);
+  }, [user_Id]);
 
   // Section Wise Result View barChartsContainer  --------------------------------------------------------------------------------------------------------
 
@@ -1004,7 +1016,7 @@ export const UserReport = ({decryptedUserIdState}) => {
       // };
       const formData = new FormData();
       formData.append("Doubt_text", challengeText);
-      formData.append("user_Id", decryptedUserIdState);
+      formData.append("user_Id", user_Id);
       formData.append("testCreationTableId", testCreationTableId);
       formData.append("question_id", challengeQuestionId);
       formData.append("image", image);
@@ -1066,7 +1078,7 @@ export const UserReport = ({decryptedUserIdState}) => {
               `${BASE_URL}/DoubtSection/getChallenge`,
               {
                 params: {
-                  user_Id: decryptedUserIdState,
+                  user_Id: user_Id,
                   testCreationTableId: testCreationTableId,
                   question_id: question.question_id,
                 },
@@ -1093,7 +1105,7 @@ export const UserReport = ({decryptedUserIdState}) => {
     };
 
     fetchData();
-  }, [selectedSection, groupedQuestions, decryptedUserIdState, testCreationTableId]);
+  }, [selectedSection, groupedQuestions, user_Id, testCreationTableId]);
 
   // const [messageBody, setMessageBody] = useState("");
   // const [selectedFile, setSelectedFile] = useState(null);
@@ -1162,7 +1174,7 @@ export const UserReport = ({decryptedUserIdState}) => {
   // };
   //end
   const handleChallengeSubmit = async (questionId) => {
-    const user_Id = decryptedUserIdState;
+    // const user_Id = decryptedUserIdState;
     try {
       console.log("Data being sent to server:", {
         messageBody,
@@ -1332,36 +1344,51 @@ export const UserReport = ({decryptedUserIdState}) => {
     transition: "background 0.005s linear", // Smooth transition for the background
   };
   const navigate = useNavigate();
- const [userIdLink,setUserIdLink]= useState("")
+//  const [userIdLink,setUserIdLink]= useState("")
 
-  const [isAdmin, setIsAdmin] = useState(false);
+//   const [isAdmin, setIsAdmin] = useState(false);
 
-  useEffect(() => {
-    const checkLoggedIn = () => {
-      const isLoggedInObjFromLS = localStorage.getItem("tiAuth");
-      console.log(isLoggedInObjFromLS);
-      if (isLoggedInObjFromLS) {
-        try {
-          const tiAuth = JSON.parse(isLoggedInObjFromLS);
-          console.log("veenaaaaaaaaaaaa")
-          console.log(tiAuth.user,"this is the status")
-          const role=tiAuth.user
-          setUserIdLink(role)
-          // setIsLoggedInFromLS(tiAuth.isLoggedIn);
-          // console.log(tiAuth,"this is ssssssssssss")
-          // console.log(isLoggedInFromLS, "wwwwwwwwwwwwwwwwwwwwwww");
-          if (role === "User") {
-            setIsAdmin(true);
+//   useEffect(() => {
+//     const checkLoggedIn = () => {
+//       const isLoggedInObjFromLS = localStorage.getItem("tiAuth");
+//       console.log(isLoggedInObjFromLS);
+//       if (isLoggedInObjFromLS) {
+//         try {
+//           const tiAuth = JSON.parse(isLoggedInObjFromLS);
+//           console.log("veenaaaaaaaaaaaa")
+//           console.log(tiAuth.user,"this is the status")
+//           const role=tiAuth.user
+//           setUserIdLink(role)
+//           // setIsLoggedInFromLS(tiAuth.isLoggedIn);
+//           // console.log(tiAuth,"this is ssssssssssss")
+//           // console.log(isLoggedInFromLS, "wwwwwwwwwwwwwwwwwwwwwww");
+//           if (role === "User") {
+//             setIsAdmin(true);
 
-          }
-        } catch (error) {
-          console.log(error, "parsing the tiauth for back button");
-        }
-      }
-    };
-    checkLoggedIn();
-  }, []);
+//           }
+//         } catch (error) {
+//           console.log(error, "parsing the tiauth for back button");
+//         }
+//       }
+//     };
+//     checkLoggedIn();
+//   }, []);
   
+const [encodedUserId, setEncodedUserId] = useState('');
+
+const encryptUserId = (user_Id) => {
+  const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
+  return CryptoJS.AES.encrypt(user_Id.toString(), secretKey).toString();
+};
+
+useEffect(() => {
+  if (user_Id) {
+    const encryptedUserId = encryptUserId(user_Id);
+    const encodedUserId = encodeURIComponent(encryptedUserId);
+    setEncodedUserId(encodedUserId);
+  }
+}, [user_Id]);
+
 
   return (
     <div className="resultContainerSection">
@@ -1372,14 +1399,26 @@ export const UserReport = ({decryptedUserIdState}) => {
             <span>
               {" "}
               <div className="Go_back_from_test_section">
-                <Link to={`/Student_dashboard/${userIdLink}`} style={{ color: "black" }}>
+                <Link to={`/Student_dashboard/${encodedUserId}`} style={{ color: "black" }}>
                   Go Back
                 </Link>
               </div>
             </span>
           </div>
         </section>
-
+        <h1> hiiiiiiiii</h1>
+        {/* {usersData.users && usersData.users.length > 0 && (
+          <ul>
+            {usersData.users.map((user) => (
+              <div className="greeting_section">
+                <h2 className="dashboard_greeting_container">
+                {user.username}
+                </h2>
+               
+              </div>
+            ))}
+          </ul>
+        )} */}
         <section className="StudentDashbord_contant">
           <div className="Your_PerformanceHeader">
             {/* {userTest && userTest.map((item) => (
