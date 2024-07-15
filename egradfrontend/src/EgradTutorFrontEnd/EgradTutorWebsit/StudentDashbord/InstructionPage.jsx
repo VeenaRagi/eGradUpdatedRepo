@@ -13,7 +13,7 @@ const InstructionPage = () => {
   const [decryptedParam1, setDecryptedParam1] = useState("");
   const [decryptedParam2, setDecryptedParam2] = useState("");
   const [decryptedParam3, setDecryptedParam3] = useState("");
-
+  const [userData, setUserData] = useState(null);
   useEffect(() => {
     const token = sessionStorage.getItem("navigationToken");
 
@@ -94,6 +94,37 @@ const InstructionPage = () => {
       fetchImage();
     }, []);
 
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+      // Function to handle message event
+      const handleMessage = (event) => {
+        // Verify if the message is from a trusted source if necessary
+        const { usersData } = event.data;
+        console.log("Received usersData:", usersData);
+
+        // Ensure usersData is valid before updating state
+        if (
+          usersData &&
+          typeof usersData === "object" &&
+          usersData.users &&
+          usersData.users.length > 0
+        ) {
+          setUserData(usersData); // Store usersData in component state
+          setLoading(false); // Turn off loading indicator once data is received
+        } else {
+          console.warn("Received undefined or invalid usersData:", usersData);
+        }
+      };
+
+      // Listen for messages from the parent window
+      window.addEventListener("message", handleMessage);
+
+      return () => {
+        window.removeEventListener("message", handleMessage);
+      };
+    }, []);
+
     return (
       <>
         <div className="Quiz_header">
@@ -107,6 +138,7 @@ const InstructionPage = () => {
               </div>
             )}
           </div>
+         
         </div>
       </>
     );
@@ -162,7 +194,7 @@ const InstructionPage = () => {
           encryptedParam3
         )}`;
 
-        navigate(url);
+        navigate(url,{ state: { userData } });
       } catch (error) {
         console.error("Error encrypting data:", error);
       }

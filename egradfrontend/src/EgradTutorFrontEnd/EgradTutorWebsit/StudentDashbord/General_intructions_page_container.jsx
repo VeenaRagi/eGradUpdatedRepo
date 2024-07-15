@@ -5,9 +5,13 @@ import BASE_URL from "../../../apiConfig";
 import "./Style/Instructions.scss";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import axios from "axios";
-// import { Header } from "./Header";
+import { useLocation } from 'react-router-dom';
 
 const General_intructions_page_container = () => {
+
+  const location = useLocation();
+  const { userData } = location.state || {}; 
+
   const { param1, param2, param3 } = useParams();
   const navigate = useNavigate();
   const [decryptedParam1, setDecryptedParam1] = useState("");
@@ -15,7 +19,7 @@ const General_intructions_page_container = () => {
   const [decryptedParam3, setDecryptedParam3] = useState("");
   const [instructionsData, setInstructionsData] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
   // const user_Id = decryptedUserIdState;
 
   useEffect(() => {
@@ -77,42 +81,6 @@ const General_intructions_page_container = () => {
     }
   }, [decryptedParam1]);
 
-  useEffect(() => {
-    const checkLoggedIn = () => {
-      const loggedIn = localStorage.getItem("isLoggedIn");
-      if (loggedIn === "true") {
-        fetchUserData();
-      }
-    };
-    checkLoggedIn();
-  }, []);
-
-  const fetchUserData = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(
-        `http://localhost:5001/ughomepage_banner_login/user`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("token");
-        navigate("/Login"); // Redirect to login page if not authenticated
-        return;
-      }
-
-      const userData = await response.json();
-      setUserData(userData);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
-
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked);
   };
@@ -134,9 +102,11 @@ const General_intructions_page_container = () => {
       )}/${encodeURIComponent(encryptedParam2)}`;
 
       if (decryptedParam3 == 1) {
-        navigate(url1);
+        // navigate(url1);
+        navigate(url1, { state: { userData } });
       } else if (decryptedParam3 == 2) {
-        navigate(url2);
+        // navigate(url2);
+        navigate(url2, { state: { userData } });
       }
     } catch (error) {
       console.error("Error encrypting data:", error);
@@ -169,7 +139,18 @@ const General_intructions_page_container = () => {
         </div>
         <h1 className="general_instruction_page_heading">General Instructions</h1>
       </div>
-     
+      {/* <h1>hellooooo</h1>
+          {userData.users && userData.users.length > 0 && (
+            <ul>
+              {userData.users.map((user) => (
+                <div className="greeting_section">
+                  <h2 className="dashboard_greeting_container">
+                    {user.username}
+                  </h2>
+                </div>
+              ))}
+            </ul>
+          )} */}
       <div className="Instructions_container">
    
         <ul className="Instructions_points">
@@ -213,3 +194,44 @@ const General_intructions_page_container = () => {
 };
 
 export default General_intructions_page_container;
+
+
+
+
+
+
+  // useEffect(() => {
+  //   const checkLoggedIn = () => {
+  //     const loggedIn = localStorage.getItem("isLoggedIn");
+  //     if (loggedIn === "true") {
+  //       fetchUserData();
+  //     }
+  //   };
+  //   checkLoggedIn();
+  // }, []);
+
+  // const fetchUserData = async () => {
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     const response = await fetch(
+  //       `http://localhost:5001/ughomepage_banner_login/user`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     if (!response.ok) {
+  //       localStorage.removeItem("isLoggedIn");
+  //       localStorage.removeItem("token");
+  //       navigate("/Login"); // Redirect to login page if not authenticated
+  //       return;
+  //     }
+
+  //     const userData = await response.json();
+  //     setUserData(userData);
+  //   } catch (error) {
+  //     console.error("Error fetching user data:", error);
+  //   }
+  // };
