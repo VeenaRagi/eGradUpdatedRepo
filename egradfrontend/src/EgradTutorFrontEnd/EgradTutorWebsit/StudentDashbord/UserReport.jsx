@@ -1395,7 +1395,7 @@ const [encodedUserId, setEncodedUserId] = useState('');
 
 const encryptUserId = (decryptedUserIdState) => {
   const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
-  return CryptoJS.AES.encrypt(user_Id.toString(), secretKey).toString();
+  return CryptoJS.AES.encrypt(decryptedUserIdState.toString(), secretKey).toString();
 };
 
 useEffect(() => {
