@@ -84,15 +84,17 @@ padding: 4rem;
     font-size: 20px;
   }
   
-  button.sub-links-userrr {
+.sub-links-userrr {
     height: 34px;
     font-size: 18px;
-    background-color: #ff00008f;
+    border: none;
+    background-color: none;
 }
 
-  .SDHeaderImgContainer:hover .toBeDisplayedWhenHovered {
-    display: block;
-    width: 200px;
-    border-radius: 25px;
-    padding: 20px;
+.SDHeaderImgContainer:hover .toBeDisplayedWhenHovered {
+  display: block;
+  width: 200px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
 }
