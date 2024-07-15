@@ -141,7 +141,8 @@ export const StudentDashbord_MyResults = ({
   const handleResultAnalysisClick = (
     decryptedUserIdState,
     testCreationTableId,
-    courseCreationId
+    courseCreationId,
+    usersData
   ) => {
     const url = `/UserReport/${decryptedUserIdState}/${testCreationTableId}/${courseCreationId}`;
     return (

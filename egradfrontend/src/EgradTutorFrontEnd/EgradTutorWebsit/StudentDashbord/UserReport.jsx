@@ -1433,6 +1433,19 @@ console.log("Shinchannnnnnnnnnnnnnnn",decryptedUserIdState)
             ))}
           </ul>
         )} */}
+         {usersData && usersData.users && usersData.users.length > 0 && (
+                <ul>
+                    {usersData.users.map((user) => (
+                        <li key={user.user_Id}>
+                            <div className="greeting_section">
+                                <h2 className="dashboard_greeting_container">
+                                    {user.username}
+                                </h2>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            )}
         <section className="StudentDashbord_contant">
           <div className="Your_PerformanceHeader">
             {/* {userTest && userTest.map((item) => (
