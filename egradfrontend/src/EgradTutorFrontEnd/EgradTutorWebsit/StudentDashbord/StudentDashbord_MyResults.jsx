@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext  } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import BASE_URL from "../../../apiConfig";
 import axios from "axios";
 import { FaBookOpenReader } from "react-icons/fa6";
 import "./Style/StudentDashbord_MyResults.css";
 import CryptoJS from "crypto-js";
+import UserContext from '../../../UserContext';
+
+
 
 export const StudentDashbord_MyResults = ({
   usersData,
@@ -138,14 +141,22 @@ export const StudentDashbord_MyResults = ({
   //   navigate(`/UserReport/${decryptedUserIdState}/${testCreationTableId}/${courseCreationId}`, { state: { usersData, decryptedUserIdState } });
   // };
 
+  const { setDecryptedUserIdState, setUsersData } = useContext(UserContext);
+
+
+
   const handleResultAnalysisClick = (
     decryptedUserIdState,
     testCreationTableId,
     courseCreationId,
     usersData
   ) => {
+    setDecryptedUserIdState(decryptedUserIdState);
+    setUsersData(usersData);
     const url = `/UserReport/${decryptedUserIdState}/${testCreationTableId}/${courseCreationId}`;
+    // navigate({ pathname: url, state: { usersData, decryptedUserIdState } })
     return (
+      // navigate({ pathname: url, state: { usersData, decryptedUserIdState } })
       <Link
         className="Result_Analysis"
         to={{ pathname: url, state: { usersData, decryptedUserIdState } }}
@@ -235,6 +246,42 @@ export const StudentDashbord_MyResults = ({
                               test.courseCreationId
                             )}
                           </div>
+                          // <button 
+                          //      onClick={() =>
+                          //     handleResultAnalysisClick(
+                          //       decryptedUserIdState,
+                          //       test.testCreationTableId,
+                          //       test.courseCreationId
+                          //     )
+                          //   }
+                          // >Result Analysis</button>
+                          //    <Link
+                          //   className="Result_Analysis"
+                          //   // onClick={openResultPage}
+                          //   // onClick={() => openResultPage(test.testCreationTableId, test.courseCreationId)}
+                          //   to={`/UserReport/${decryptedUserIdState}/${test.testCreationTableId}/${test.courseCreationId}`}
+
+                          //   // onClick={() =>
+                          //   //   handleResultAnalysisClick(
+                          //   //     decryptedUserIdState,
+                          //   //     test.testCreationTableId,
+                          //   //     test.courseCreationId
+                          //   //   )
+                          //   // }
+
+                          //   style={{
+                          //     backgroundColor: "green",
+                          //     color: "white",
+                          //     padding: "3.9px",
+                          //     textDecoration: "none",
+                          //     marginBottom: "7px",
+                          //   }}
+                          // >
+                          //   Result Analysis{" "}
+                          //   <span class="material-symbols-outlined">
+                          //     navigate_next
+                          //   </span>
+                          // </Link>
                         ) : (
                           // <Link
                           //   className="Result_Analysis"
