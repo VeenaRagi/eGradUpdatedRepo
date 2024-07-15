@@ -1041,6 +1041,16 @@ fieldset > legend {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+
+@media (max-width:768px){
+  .courseOtsPqbOvl_Btns ul{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    margin-top: 100px;
+  }
+}
 @media (max-width: 425px) {
   .quz_menu2 {
     display: flex;
@@ -1048,5 +1058,12 @@ fieldset > legend {
     gap: 0.3rem;
     /* display: none; */
     margin-top: 5px;
+}
+
+.courseOtsPqbOvl_Btns ul{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin-top: 100px;
 }
 }

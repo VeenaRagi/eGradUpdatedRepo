@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import BASE_URL from "../../apiConfig";
 import { FaSearch } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
+import '../EgradtutorPortalsAdmin/styles/Portal_coures_creation_admin.css'
+
 function Portal_coures_creation_admin() {
   const [courseData, setCourseData] = useState([]);
   const [portals, setPortals] = useState([]);
@@ -891,7 +893,7 @@ function Portal_coures_creation_admin() {
                 Close
               </button>
             </div>
-            <div>
+            <div className="total_container_flex">
               <div className="coures-contant_-flexCOntantc examSubjects_-contant">
                 <div className="testCreation_-list">
                   <label htmlFor="courseName">Course Name:</label>
@@ -917,7 +919,7 @@ function Portal_coures_creation_admin() {
                 </div>
               </div>
               <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-                <div className="testCreation_list">
+                <div className="testCreation_lists">
                   <label>Type of test:</label>
                   <div className="coures_-typeOfTest">
                     {typeOfTest.map((typeofTest) => (
