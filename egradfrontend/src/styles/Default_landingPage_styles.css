@@ -85,7 +85,12 @@
     text-align: left;
     font-weight: bold;
     box-shadow: 0 0 1px rgb(83, 81, 81) !important;
+    font-size:20px;
     /* border:2px; */
+}
+
+.Pg_buttonn_Default_Cards ul li :hover{
+    background: #80808014;
 }
 
 .Pg_buttonn_Default_Cards ul li:hover {
@@ -728,8 +733,20 @@ button:hover {
     color: red; /* Optional: Change color on hover */
   }
   
+  .Newlandingpage .Egate_eLanding_Container_Egate_landing .EGATE_eCordsLanding .EGATE_elandUl-pg_Default button:hover {
+    background: #2a7184;
+    color: #fff;
+    outline: 0;
+    width: 100%;
+
+} 
 
 
+.Newlandingpage .Egate_eLanding_Container_Egate_landing .EGATE_eCordsLanding .EGATE_elandUl-pg_Default a:hover {
+    opacity: 0.75;
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
 /* Course page */
 
 
