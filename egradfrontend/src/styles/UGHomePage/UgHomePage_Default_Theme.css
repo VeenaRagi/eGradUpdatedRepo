@@ -1144,3 +1144,11 @@ font-size: 10px;
         margin-left: 1rem;
     }  
   }
+
+
+  .themeFooterSMIconsDefault {
+    display: flex;
+    margin-right: 20rem;
+    /* margin-left: 54px; */
+    justify-content: flex-end;
+}
