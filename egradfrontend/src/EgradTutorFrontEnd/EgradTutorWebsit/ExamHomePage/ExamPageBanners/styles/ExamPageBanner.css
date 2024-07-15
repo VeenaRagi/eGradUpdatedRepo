@@ -283,3 +283,7 @@ button.disable {
 .carousel-item.fade-out {
   opacity: 0; /* Fades out the element */
 }
+
+.adminHeaderNavLinks button{
+  background-color: rgb(223, 160, 160);
+}

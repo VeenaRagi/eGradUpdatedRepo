@@ -627,10 +627,9 @@ refreshChannel.onmessage = function (event) {
                           setAddeGRADTutorContent(!addeGRADTutorContent)
                         }
                       >
-                        {/* {addeGRADTutorContent
+                        {addeGRADTutorContent
                           ? "Hide eGRADTtor Form"
-                          : "Add GRADTtorData"} */}
-                          Add GRADTtorData
+                          : "Add GRADTtorData"}
                       </button>
                       {addeGRADTutorContent && (
                         <FooterEdit type="Add eGRADTutor" />
@@ -644,10 +643,9 @@ refreshChannel.onmessage = function (event) {
                       <button
                         onClick={() => setFirstPopupVisible(!FirstPopupVisible)}
                       >
-                        {/* {FirstPopupVisible
+                        {FirstPopupVisible
                           ? "Hide eGRADTtor Form"
-                          : "EditeGRADTtorData"} */}
-                          Edit eGRADTtorData
+                          : "EditeGRADTtorData"}
                       </button>
                       {FirstPopupVisible && <FooterEdit type="eGRADTutor" />}
                     </div>
@@ -705,8 +703,7 @@ refreshChannel.onmessage = function (event) {
                             setShowFooterLinksData(!showFooterLinksData)
                           }
                         >
-                          {/* {showFooterLinksData ? "Hide Add Link" : "Add Link"} */}
-                          Add Link
+                          {showFooterLinksData ? "Hide Add Link" : "Add Link"}
                         </button>
                         {showFooterLinksData && (
                           <FooterEdit type="Add_Footer_Links" />
@@ -720,10 +717,9 @@ refreshChannel.onmessage = function (event) {
                             setShowPreviousLinksData(!showPreviousLinksData)
                           }
                         >
-                          {/* {showPreviousLinksData
+                          {showPreviousLinksData
                             ? "Hide Edit Links"
-                            : "Edit Links"} */}
-                            Edit Links
+                            : "Edit Links"}
                         </button>
                         {showPreviousLinksData && (
                           <FooterEdit type="Update_Footer_Links" />
@@ -774,10 +770,9 @@ refreshChannel.onmessage = function (event) {
                         }
                         className="editbtn"
                       >
-                        {/* {addContactUsContent
+                        {addContactUsContent
                           ? "Hide ContactUs"
-                          : "Add ContactUs Data"} */}
-                          Add ContactUs Data
+                          : "Add ContactUs Data"}
                       </button>
                       {addContactUsContent && (
                         <FooterEdit type="Add ContactUs" />
@@ -794,10 +789,9 @@ refreshChannel.onmessage = function (event) {
                         }
                         className="editbtn"
                       >
-                        {/* {isContactUsSectionVisible
+                        {isContactUsSectionVisible
                           ? "Hide ContactUs"
-                          : "Edit ContactUs Data"} */}
-                          Edit ContactUs Data
+                          : "Edit ContactUs Data"}
                       </button>
                       {isContactUsSectionVisible && (
                         <FooterEdit type="ContactUs" />
@@ -850,10 +844,9 @@ refreshChannel.onmessage = function (event) {
                     }
                     className="editbtn"
                   >
-                    {/* {isCopyRightSectionVisible
+                    {isCopyRightSectionVisible
                       ? "Hide copywrite form"
-                      : "Edit copywrite"} */}
-                      Edit copywrite
+                      : "Edit copywrite"}
                   </button>
                   {isCopyRightSectionVisible && (
                     <FooterEdit type="CopyWriteTable" />

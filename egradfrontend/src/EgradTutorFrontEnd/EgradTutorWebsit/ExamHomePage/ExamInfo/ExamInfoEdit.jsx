@@ -108,9 +108,9 @@ const ExamInfoEdit = ({ type }) => {
     {isPopupOpen && (
       <>
     <div className="Blur_Effect_Mode">
-    <div className="handleCloseBtn">
+    {/* <div className="handleCloseBtn">
         <button className="HCbutton" onClick={handleClosePopup}>close</button>
-      </div>
+      </div> */}
       {type === "aboutUs" && (
         <div className="about_egt_popup">
           <div className="about_egt_form">

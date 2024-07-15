@@ -617,6 +617,7 @@
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap-reverse;
+  margin: 0 auto;
 }
 
 .dashboard_welcome_img_section img {

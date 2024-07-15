@@ -254,8 +254,7 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
                 <button
                   onClick={() => setOpenUgExamImageUpload(!openUgExamImageUpload)}
                 >
-                  {/* {openUgExamImageUpload ? "Close Form" : "Image Uplaod"} */}
-                  Image Uplaod
+                  {openUgExamImageUpload ? "Close Form" : "Image Uplaod"}
                 </button>
 
                 {openUgExamImageUpload && (
@@ -274,8 +273,7 @@ const LandingPageExamdata = ({ enableEditFromP, isEditMode, userRole }) => {
                 <button
                   onClick={() => setOpenUgExamsUpload(!openUgExamsUpload)}
                 >
-                  {/* {openUgExamsUpload ? "Close Form" : "Exams Uplaod"} */}
-                  Exams Uplaod
+                  {openUgExamsUpload ? "Close Form" : "Exams Uplaod"}
                 </button>
 
                 {openUgExamsUpload && (

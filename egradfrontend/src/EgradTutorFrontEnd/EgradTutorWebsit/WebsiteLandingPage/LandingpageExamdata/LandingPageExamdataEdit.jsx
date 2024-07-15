@@ -3,7 +3,6 @@ import axios from 'axios'
 import BASE_URL from '../../../../apiConfig';
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
-import '../../../../styles/Default_landingPage_styles.css'
 
 const LandingPageExamdataEdit = ({ type }) => {
   const [branches, setBranches] = useState([]);
@@ -20,7 +19,6 @@ const LandingPageExamdataEdit = ({ type }) => {
   const [examImageFile, setExamImageFile] = useState(null);
   const [editingExamId, setEditingExamId] = useState(null);
   const [editedExamName, setEditedExamName] = useState('');
-  const [isPopupOpen, setIsPopupOpen] = useState(true);
 
 
   const fetchExamImages = async () => {
@@ -235,128 +233,116 @@ const LandingPageExamdataEdit = ({ type }) => {
     }
   };
 
-  const handleClosePopup = () => {
-    setIsPopupOpen(false); // Close the popup by setting state to false
-  };
 
   return (
-    <div>
-      {isPopupOpen && (
-        <>
-          <div className="Blur_Effect_Mode">
-          <div className="handleCloseBtn">
-        <button className="HCbutton" onClick={handleClosePopup}>close</button>
+    <div className="overlay">
+ {type === "UploadExamImage" && (
+  <div className="UploadPopups_Container">
+    <h2>Upload Exam Image</h2>
+    <form onSubmit={handleSubmitExamImage}>
+      <div>
+        <label>Select Branch:</label>
+        <select value={branchId} onChange={handleBranchIdChange} required>
+          <option value="">Select Branch</option>
+          {branches.map(branch => (
+            <option key={branch.Branch_Id} value={branch.Branch_Id}>
+              {branch.Branch_Name}
+            </option>
+          ))}
+        </select>
       </div>
-            {type === "UploadExamImage" && (
-              <div className="UploadPopups_Container">
-                <h2>Upload Exam Image</h2>
-                <form onSubmit={handleSubmitExamImage}>
+      <div>
+        <label>Exam Image:</label>
+        <input type="file" onChange={handleExamImageChange} required />
+      </div>
+      <button type="submit">Upload</button>
+    </form>
+    <ul>
+      {examImages.map(image => (
+        <li key={image.Image_Id}>
+          <button onClick={() => handleUpdateExamImage(image.Image_Id)}>Update</button>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+
+{type === "Upload/EditExams" && (
+  <div className="UploadPopups_Container">
+
+    {/* Section for Adding Exam */}
+    <div>
+      <h2>Add Exam</h2>
+      <form onSubmit={handleSubmit}>
+        <select
+          value={selectedBranch}
+          onChange={(e) => setSelectedBranch(e.target.value)}
+        >
+          <option value="">Select Branch</option>
+          {branches.length > 0 ? (
+            branches.map((branch) => (
+              <option key={branch.Branch_Id} value={branch.Branch_Id}>
+                {branch.Branch_Name}
+              </option>
+            ))
+          ) : (
+            <option value="" disabled>No branches available</option>
+          )}
+        </select>
+
+        <textarea
+          placeholder="Enter Exam Name"
+          value={examName}
+          onChange={(e) => setExamName(e.target.value)}
+        />
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    {/* Section for Updating/Editing Exams */}
+    <div>
+      <h2>Update Exams</h2>
+      {branches.map(branch => (
+        <div key={branch.Branch_Id}>
+          <ul>
+            {branch.EntranceExams.map(exam => (
+              <li key={exam.EntranceExams_Id}>
+                {editingExamId === exam.EntranceExams_Id ? (
                   <div>
-                    <label>Select Branch:</label>
-                    <select value={branchId} onChange={handleBranchIdChange} required>
-                      <option value="">Select Branch</option>
-                      {branches.map(branch => (
-                        <option key={branch.Branch_Id} value={branch.Branch_Id}>
-                          {branch.Branch_Name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label>Exam Image:</label>
-                    <input type="file" onChange={handleExamImageChange} required />
-                  </div>
-                  <button type="submit">Upload</button>
-                </form>
-                <ul>
-                  {examImages.map(image => (
-                    <li key={image.Image_Id}>
-                      <button onClick={() => handleUpdateExamImage(image.Image_Id)}>Update</button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-
-            {type === "Upload/EditExams" && (
-              <div className="UploadPopups_Container">
-
-                {/* Section for Adding Exam */}
-                <div>
-                  <h2>Add Exam</h2>
-                  <form onSubmit={handleSubmit}>
-                    <select
-                      value={selectedBranch}
-                      onChange={(e) => setSelectedBranch(e.target.value)}
-                    >
-                      <option value="">Select Branch</option>
-                      {branches.length > 0 ? (
-                        branches.map((branch) => (
-                          <option key={branch.Branch_Id} value={branch.Branch_Id}>
-                            {branch.Branch_Name}
-                          </option>
-                        ))
-                      ) : (
-                        <option value="" disabled>No branches available</option>
-                      )}
-                    </select>
-
-                    <textarea
-                      placeholder="Enter Exam Name"
-                      value={examName}
-                      onChange={(e) => setExamName(e.target.value)}
+                    <input
+                      type="text"
+                      value={editedExamName}
+                      onChange={handleInputChange}
                     />
-
-                    <button type="submit">Submit</button>
-                  </form>
-                </div>
-
-                {/* Section for Updating/Editing Exams */}
-                <div>
-                  <h2>Update Exams</h2>
-                  {branches.map(branch => (
-                    <div key={branch.Branch_Id}>
-                      <ul>
-                        {branch.EntranceExams.map(exam => (
-                          <li key={exam.EntranceExams_Id}>
-                            {editingExamId === exam.EntranceExams_Id ? (
-                              <div>
-                                <input
-                                  type="text"
-                                  value={editedExamName}
-                                  onChange={handleInputChange}
-                                />
-                                <button onClick={handleSaveClick}>Save</button>
-                                <button onClick={handleCancelClick}>Cancel</button>
-                              </div>
-                            ) : (
-                              <div className="Exams_Container">
-                                <div className="Exam_Item">
-                                  {exam.EntranceExams_name}
-                                  <div className="Icons_container">
-                                    <button className="Edit_button" onClick={() => handleEditClick(exam.EntranceExams_Id, exam.EntranceExams_name)}>
-                                      <CiEdit />
-                                    </button>
-                                    <button className="Delete_button" onClick={() => handleDelete(exam.EntranceExams_Id)}>
-                                      <MdDelete />
-                                    </button>
-                                  </div>
-
-                                </div>
-                              </div>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
+                    <button onClick={handleSaveClick}>Save</button>
+                    <button onClick={handleCancelClick}>Cancel</button>
+                  </div>
+                ) : (
+                  <div className="Exams_Container">
+                    <div className="Exam_Item">
+                    {exam.EntranceExams_name}
+                    <div className="Icons_container">
+                    <button  className = "Edit_button" onClick={() => handleEditClick(exam.EntranceExams_Id, exam.EntranceExams_name)}>
+                      <CiEdit />
+                    </button>
+                    <button  className = "Delete_button" onClick={() => handleDelete(exam.EntranceExams_Id)}>
+                      <MdDelete />
+                    </button>
                     </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </>
-      )}
+                   
+                  </div>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
     </div>
   )
 }
