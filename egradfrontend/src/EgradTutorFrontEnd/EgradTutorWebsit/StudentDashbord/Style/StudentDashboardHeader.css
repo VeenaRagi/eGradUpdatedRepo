@@ -84,10 +84,11 @@ padding: 4rem;
     font-size: 20px;
   }
   
-  .sub-links-userrr:hover{
-    color: green;
-    font-weight: 500;
-  }
+  button.sub-links-userrr {
+    height: 34px;
+    font-size: 18px;
+    background-color: #ff00008f;
+}
 
   .SDHeaderImgContainer:hover .toBeDisplayedWhenHovered {
     display: block;

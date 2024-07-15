@@ -1,0 +1,103 @@
+
+   .coures-contant_-flexCOntantc.examSubjects_-contant {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .testCreation_list {
+    margin-bottom: 20px;
+  }
+  
+  .course_checkbox_continer_content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .course_checkbox_continer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .course_checkbox_continer .fa-caret-right {
+    color: #007bff;
+    margin-right: 5px;
+  }
+  
+  .inputLable {
+    margin-left: 10px;
+  }
+  
+  .label {
+    font-weight: bold;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .coures-contant_-flexCOntantc.examSubjects_-contant {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    .course_checkbox_continer_content {
+      gap: 8px;
+    }
+  
+    .course_checkbox_continer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .inputLable {
+      margin-left: 0;
+    }
+  
+    .label {
+      font-size: 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .ots_-Form{
+        margin-top: 130px;
+    }
+    .coures-contant_-flexCOntantc.examSubjects_-contant {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .course_checkbox_continer_content {
+      gap: 5px;
+    }
+  
+    .course_checkbox_continer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .label {
+      font-size: 14px;
+    }
+
+    .ots_courseTitle_text{
+        font-size: 20px;
+    }
+
+    .course_checkbox_continer.course_frominput_container_media {
+        display: flex;
+        flex-direction: row;
+        align-items: center; 
+        justify-content: space-between;
+    }
+
+
+  }
+  

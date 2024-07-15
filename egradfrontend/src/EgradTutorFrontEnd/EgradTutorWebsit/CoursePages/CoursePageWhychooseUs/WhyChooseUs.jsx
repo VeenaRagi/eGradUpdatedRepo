@@ -9,7 +9,8 @@ import { useParams } from 'react-router-dom';
 import { VscDebugBreakpointLog } from "react-icons/vsc";
 import { ThemeContext } from "../../../../ThemesFolder/ThemeContext/Context";
 import JSONClasses from "../../../../ThemesFolder/JSONForCSS/JSONClasses";
-
+import '../../../../styles/UGHomePage/UgHomePage_Default_Theme.css';
+ 
 const WhyChooseUs = ({ isEditMode, userRole }) => {
   const [whyChooseUsItems, setWhyChooseUsItems] = useState([]);
   const [showTabButtonForm, setShowTabButtonForm] = useState(false);
@@ -19,7 +20,7 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
   const { Portale_Id } = useParams();
   const themeFromContext = useContext(ThemeContext);
   const [uniqueTitles, setUniqueTitles] = useState([]);
-
+ 
   useEffect(() => {
     if (courseTabButtonNames.length > 0) {
       // Extract unique course_tab_title values
@@ -27,7 +28,7 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
       setUniqueTitles(Array.from(titlesSet));
     }
   }, [courseTabButtonNames]);
-
+ 
   useEffect(() => {
     const fetchWhyChooseUsData = async () => {
       try {
@@ -40,11 +41,11 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
     };
     fetchWhyChooseUsData();
   }, []);
-
+ 
   useEffect(() => {
     fetchCourseTabButtonNames();
   }, [Portale_Id]);
-
+ 
   const fetchCourseTabButtonNames = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/courseTab/getCourseTabButtonDetails/${Portale_Id}`);
@@ -54,9 +55,9 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
       console.error("Error while getting course tab names", error);
     }
   };
-
-
-
+ 
+ 
+ 
   // Default tab displaying
   useEffect(() => {
     if (courseTabButtonNames.length > 0) {
@@ -68,7 +69,7 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
     }
     // Find the tab with the course_tab_title_id of 1
     const defaultTab = courseTabButtonNames.find(tab => tab.course_tab_title_id === 1);
-
+ 
     if (defaultTab) {
       setSelectedTabId(defaultTab.course_tab_title_id);
       setSelectedTabContent(defaultTab);
@@ -78,7 +79,7 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
       console.error("Tab with course_tab_title_id 1 not found");
     }
   }, [courseTabButtonNames]);
-
+ 
   const themeColor = themeFromContext[0]?.current_theme;
   const themeDetails = JSONClasses[themeColor] || [];
   const [images, setImages] = useState([]);
@@ -94,17 +95,17 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
         console.error('Error fetching course tab images:', error);
       }
     };
-
+ 
     fetchImages();
   }, []);
   useEffect(() => {
     console.log("Selected Tab Data Updated:", selectedTabData);
   }, [selectedTabData]);
-
+ 
   if (error) {
     return <div>Error: {error}</div>;
   }
-
+ 
   const handleButtonClick = (title) => {
     // Find the data related to the clicked title
     const relatedData = courseTabButtonNames.filter(tab => tab.course_tab_title === title);
@@ -116,7 +117,7 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
     setSelectedTabContent(tab);
     // console.log(selectedTabContent,"Vvvvvvvvvvvvvvvvv")
   };
-  
+ 
   return (
     <div id="WhyChooseUs" className={`${themeDetails.themeTabsDivMainContainer}`} >
       <div className={`${themeDetails.themeTabsDiv}`}>
@@ -129,7 +130,7 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
               {showTabButtonForm && <WhychooseUsEdit type="tabButtonForm" />}
             </div>
           )}
-
+ 
           <ul className={`tabButtonUl ${themeDetails.themeTabButtonUl}`}>
             {uniqueTitles.map((title, index) => (
                <li key={title.course_tab_title}>
@@ -150,7 +151,7 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
                         //  &&
                           (
                           <div key={image.course_tab_id}>
-                            <h2>Course Tab ID: {image.course_tab_id}and {selectedTabId}</h2>
+                            {/* <h2>Course Tab ID: {image.course_tab_id}and {selectedTabId}</h2> */}
                             <div style={{ height: "100px", width: "100px" }}>
                               {image.course_tab_image ? (
                                 <img src={image.course_tab_image} alt={`Course Tab ${image.course_tab_id}`} />
@@ -179,7 +180,7 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
                       </>
                     )}
                     </div>
-                    
+                   
                   </div>
                 </div>
               </div>
@@ -190,5 +191,6 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
     </div>
   );
 };
-
+ 
 export default WhyChooseUs;
+ 

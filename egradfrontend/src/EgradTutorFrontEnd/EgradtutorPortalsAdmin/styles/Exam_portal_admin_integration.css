@@ -503,6 +503,12 @@
 .courseupdate_btn_container {
   display: flex;
 }
+
+.courseOtsPqbOvl_Btns {
+  background: #e0d7d7;
+  margin-top: 20px;
+  box-shadow: 0px 0px 10px rgba(155, 162, 168, 0.822);
+}
 .courseupdate_btn,
 .coursedelte_btn {
   display: inline;
@@ -1025,7 +1031,7 @@ fieldset > legend {
   display: flex;
   gap: 2rem;
   padding-top: 2rem;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
 }
 .courseOtsPqbOvl_Btns ul li button {
   background-color: #06131f;
@@ -1035,6 +1041,16 @@ fieldset > legend {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+
+@media (max-width:768px){
+  .courseOtsPqbOvl_Btns ul{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    margin-top: 100px;
+  }
+}
 @media (max-width: 425px) {
   .quz_menu2 {
     display: flex;
@@ -1042,5 +1058,12 @@ fieldset > legend {
     gap: 0.3rem;
     /* display: none; */
     margin-top: 5px;
+}
+
+.courseOtsPqbOvl_Btns ul{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin-top: 100px;
 }
 }

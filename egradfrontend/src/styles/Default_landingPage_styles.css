@@ -249,17 +249,17 @@ a {
 
 .Footer_FirstContent.themeFooterFirstContentDefault h2 {
     color: #279eff;
-    font-size: 1.5rem;
+    font-size: 30px;
     font-weight: 700;
     text-align: start;
     padding-bottom: 1rem;
     text-shadow: 2px 9px 8px #000;
 }
-
 .Footer_eGRADTtutor__Content.themeFootereGRADTtutoContentDefault p {
-    line-height: 2.3rem;
+    line-height: 2rem;
     text-align: justify;
     color: white !important;
+    font-size: 18px;
 }
 
 .NewExploreExams_Image.themeNewExploreExams_ImageDefault img {
@@ -275,6 +275,12 @@ a {
     color: white !important;
     margin-right: 10px;
     text-decoration: underline !important;
+    font-size:18px;
+}
+.Footer_Contact_Us_Content.themeFooterContactUsContentDefault p {
+    color: white;
+    line-height: 2rem;
+    font-size: 18px;
 }
 
 .Footer_Links_Content.themeFooterLinksContentDefault ul li a:hover{
@@ -283,7 +289,7 @@ a {
 
 .themeFooterContactDataDefault h2 {
     color: #279eff;
-    font-size: 1.5rem;
+    font-size:30px;
     text-align: start;
     font-weight: 700;
     padding-bottom: 1rem;
@@ -463,6 +469,24 @@ a {
 
 }
 
+
+.Newlandingpage_branch_box.EGATE_elandUl-pg_Default {
+    --b: 1px;
+    --s: .45em;
+    --color: #00222c;
+    --_p: var(--s);
+    border: 0;
+    box-shadow: 0 0 12px 2px #00222c;
+    color: var(--color);
+    font-size: 16px;
+    outline: var(--b) solid #00222c;
+    outline-offset: -1px;
+    padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+    touch-action: manipulation;
+    transition: .3s linear,color 0s,background-color 0s;
+    user-select: none;
+    -webkit-user-select: none;
+}
 
 /* Admin side Popups css */
 
@@ -798,3 +822,5 @@ button:hover {
     z-index: 999; 
     backdrop-filter: blur(5px); 
 } */
+
+
