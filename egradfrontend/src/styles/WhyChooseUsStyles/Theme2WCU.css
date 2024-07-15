@@ -51,6 +51,15 @@ width: 100%;
     /* border: 1px solid #456776; */
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
+.t2CPHeaderUl li{
+  cursor: pointer;
+}
+.courseheader_continer.t2Courseheader_continer .theme_COURSES {
+  padding-top: 2rem;
+}
+.before_login_first_carddel.orangeCardBody p{
+  margin-bottom: 4px;
+}
   .CoursePage_header_Container.CoursePageHeaderContainerDefault {
     background-color: rgb(19, 170, 230);
     display: flex;

@@ -18,6 +18,15 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
   const [selectedTabContent, setSelectedTabContent] = useState(null);
   const { Portale_Id } = useParams();
   const themeFromContext = useContext(ThemeContext);
+  const [uniqueTitles, setUniqueTitles] = useState([]);
+
+  useEffect(() => {
+    if (courseTabButtonNames.length > 0) {
+      // Extract unique course_tab_title values
+      const titlesSet = new Set(courseTabButtonNames.map(tab => tab.course_tab_title));
+      setUniqueTitles(Array.from(titlesSet));
+    }
+  }, [courseTabButtonNames]);
 
   useEffect(() => {
     const fetchWhyChooseUsData = async () => {
@@ -40,23 +49,33 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
     try {
       const response = await axios.get(`${BASE_URL}/courseTab/getCourseTabButtonDetails/${Portale_Id}`);
       setCourseTabButtonNames(response.data);
+      console.log(courseTabButtonNames, "eeeeeeeeee")
     } catch (error) {
       console.error("Error while getting course tab names", error);
     }
   };
 
-  const handleTabCClick = (tab) => {
-    setSelectedTabId(tab.course_tab_title);
-    setSelectedTabContent(tab);
-  };
+
 
   // Default tab displaying
   useEffect(() => {
     if (courseTabButtonNames.length > 0) {
-      const firstPortal = courseTabButtonNames[0];
-      const firstTab = firstPortal.tabs[0];
-      setSelectedTabId(firstTab.course_tab_title);
-      setSelectedTabContent(firstTab);
+      console.log(courseTabButtonNames, "buttton names")
+      // const firstPortal = courseTabButtonNames[0];
+      // const firstTab = firstPortal.tabs[0];
+      // setSelectedTabId(firstTab.course_tab_title);
+      // setSelectedTabContent(firstTab);
+    }
+    // Find the tab with the course_tab_title_id of 1
+    const defaultTab = courseTabButtonNames.find(tab => tab.course_tab_title_id === 1);
+
+    if (defaultTab) {
+      setSelectedTabId(defaultTab.course_tab_title_id);
+      setSelectedTabContent(defaultTab);
+      console.log(selectedTabContent, selectedTabId)
+    } else {
+      // Handle the case where tab with course_tab_title_id 1 is not found
+      console.error("Tab with course_tab_title_id 1 not found");
     }
   }, [courseTabButtonNames]);
 
@@ -64,6 +83,7 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
   const themeDetails = JSONClasses[themeColor] || [];
   const [images, setImages] = useState([]);
   const [error, setError] = useState(null);
+  const [selectedTabData, setSelectedTabData] = useState(null);
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -77,9 +97,26 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
 
     fetchImages();
   }, []);
+  useEffect(() => {
+    console.log("Selected Tab Data Updated:", selectedTabData);
+  }, [selectedTabData]);
+
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+  const handleButtonClick = (title) => {
+    // Find the data related to the clicked title
+    const relatedData = courseTabButtonNames.filter(tab => tab.course_tab_title === title);
+    setSelectedTabData(relatedData);
+    console.log(selectedTabData)
+  };
+  const handleTabCClick = (tab) => {
+    setSelectedTabId(tab.course_tab_title);
+    setSelectedTabContent(tab);
+    // console.log(selectedTabContent,"Vvvvvvvvvvvvvvvvv")
+  };
+  
   return (
     <div id="WhyChooseUs" className={`${themeDetails.themeTabsDivMainContainer}`} >
       <div className={`${themeDetails.themeTabsDiv}`}>
@@ -92,63 +129,57 @@ const WhyChooseUs = ({ isEditMode, userRole }) => {
               {showTabButtonForm && <WhychooseUsEdit type="tabButtonForm" />}
             </div>
           )}
+
           <ul className={`tabButtonUl ${themeDetails.themeTabButtonUl}`}>
-            {courseTabButtonNames.length > 0 ? (
-              courseTabButtonNames.flatMap(portal =>
-                portal.tabs.map(tab => (
-                  <li key={tab.course_tab_title}>
-                    <div className={`${themeDetails.themeTabsChange}`}>
-                      <button
-                        onClick={() => handleTabCClick(tab)}
-                        className={tab.course_tab_title === selectedTabId ? 'selectedButton' : 'notSelectedButton'}
-                      >
-                        {tab.course_tab_title}
-                      </button>
-                    </div>
-                  </li>
-                ))
-              )
-            ) : userRole === 'user' ? (
-              <p>No tabs are available at the moment. Please check back later.</p>
-            ) : userRole === 'admin' ? (
-              <p>No tabs are available. Please add the necessary tabs.</p>
-            ) : (
-              <p>No tabs are available. Please contact support if this issue persists.</p>
-            )}
+            {uniqueTitles.map((title, index) => (
+               <li key={title.course_tab_title}>
+              <button key={index} onClick={() => handleButtonClick(title)}>
+                {title}
+              </button>
+              </li>
+            ))}
           </ul>
           {selectedTabContent && (
             <div className={`${themeDetails.themeSelectedTabContentDiv}`}>
               <div className={` ${themeDetails.themeTabDetailsDiv}`}>
                 <div className={` ${themeDetails.themeTabDetailsSubDiv}`}>
                   <div className={` ${themeDetails.themeTabImageDiv}`}>
-                    {/* {images.length > 0 ? (
+                    {images.length > 0 ? (
                       images.map((image) => (
-                        <div key={image.course_tab_id}>
-                          <h2>Course Tab ID: {image.course_tab_id}</h2>
-                          <div style={{height:"100px" ,width:"100px"}}>
-                          {image.course_tab_image ? (
-                            <img src={image.course_tab_image} alt={`Course Tab ${image.course_tab_id}`} />
-                          ) : (
-                            <p>No image available</p>
-                          )}
+                        // image.course_tab_id === selectedTabData.course_tab_title_id
+                        //  &&
+                          (
+                          <div key={image.course_tab_id}>
+                            <h2>Course Tab ID: {image.course_tab_id}and {selectedTabId}</h2>
+                            <div style={{ height: "100px", width: "100px" }}>
+                              {image.course_tab_image ? (
+                                <img src={image.course_tab_image} alt={`Course Tab ${image.course_tab_id}`} />
+                              ) : (
+                                <p>No image available</p>
+                              )}
+                            </div>
                           </div>
-                        </div>
+                        )
                       ))
                     ) : (
                       <p>No images found.</p>
-                    )} */}
-                    {/* <img src={`data:image/png;base64,${selectedTabContent.course_tab_image}`} alt="Tab content" /> */}
+                    )}
                   </div>
                   <div className={`${themeDetails.themeCardsToBeFlexed}`}>
                     <div className={`${themeDetails.themeTabContentSplittedText}`}>
-                      {selectedTabContent.course_tab_text.map((text, index) => (
-                        <div className={`${themeDetails.themeTabContentSplittedTextInDiv}`} key={index}>
-                          <p> <span><VscDebugBreakpointLog /></span>
-                            {text}
-                          </p>
-                        </div>
-                      ))}
+                    {selectedTabData && (
+                      <>
+                        {selectedTabData.map((tab, index) => (
+                          <div key={index}>
+                            {/* <h3>{tab.course_tab_title}</h3> */}
+                            <p>{tab.course_tab_text}</p>
+                            {/* <a href={tab.portalLink}>Go to Portal</a> */}
+                          </div>
+                        ))}
+                      </>
+                    )}
                     </div>
+                    
                   </div>
                 </div>
               </div>

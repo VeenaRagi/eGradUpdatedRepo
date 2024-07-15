@@ -43,7 +43,7 @@
   display: block;
   width: 30px;
   height: 3px;
-  background: white;
+  background: rgb(5, 5, 5);
   gap: 0.5rem;
   transition: 0.5s ease-in-out;
   margin-left: 10px;

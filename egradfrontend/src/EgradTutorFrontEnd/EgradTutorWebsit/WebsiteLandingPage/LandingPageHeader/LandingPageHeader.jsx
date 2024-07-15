@@ -114,7 +114,7 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
             {isEditMode && (
           <div>
             <button className="button" onClick={() => setShowImage(!showImage)}>
-              {/* {showImage ? "Close" : "Add Logo"} */}Add Logo
+              {showImage ? "Close" : "Add Logo"}
             </button>
             {showImage && <LandingPageHeaderEdit type="addLogo" />}
           </div>
@@ -133,14 +133,15 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
               <Maintenance1 />
             )} */}
 
-{welcomeimage ? (
-  <img src={welcomeimage} alt="welcomeCurrent" />
-) : userRole === "admin" ? (
-  <p>There is no data available. Please add the data.</p>
-) : (
-  <p>Unable to load image at the moment. Please try again later.</p>
-)}
-
+            {welcomeimage ? (
+              <img src={welcomeimage} alt="welcomeCurrent" />
+            ) : userRole === "user" ? (
+              <p>Unable to load image at the moment. Please try again later.</p>
+            ) : userRole === "admin" ? (
+              <p>There is no data available. Please add the data.</p>
+            ) : (
+              <p>Unable to load image. Please contact support.</p> // Default message for any other user roles
+            )}
           </div>
           <div
             className={`landing_heading_div_container ${themeDetails.themeCapTextContainer}`}
@@ -171,10 +172,9 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
             {isEditMode && (
           <div>
             <button className="toggle-button-container" onClick={() => setShowWelcomeForm(!showwelcomeForm)}>
-              {/* {showwelcomeForm ? "X" : "Add Welcome info"} */}Add Welcome info
+              {showwelcomeForm ? "X" : "Add Welcome info"}
             </button>
             {showwelcomeForm && <LandingPageHeaderEdit type="WelcomeForm" />}
-        
           </div>
         )}
           </div>

@@ -5,9 +5,9 @@ import { useParams, Link } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import '../../../../styles/ExamPage/DefaultThemeExamPage.css';
-
+import '../../../../styles/Default_landingPage_styles.css'
 const ExamInfoEdit = ({ type }) => {
-
+  const [isPopupOpen, setIsPopupOpen] = useState(true);
 
   const { EntranceExams_Id } = useParams();
   const [existingInfo, setExistingInfo] = useState(false);
@@ -99,8 +99,18 @@ const ExamInfoEdit = ({ type }) => {
   const handleEditClick = () => {
     setIsEditing(!isEditing); // Toggle editing state
   };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false); // Close the popup by setting state to false
+  };
   return (
     <div>
+    {isPopupOpen && (
+      <>
+    <div className="Blur_Effect_Mode">
+    {/* <div className="handleCloseBtn">
+        <button className="HCbutton" onClick={handleClosePopup}>close</button>
+      </div> */}
       {type === "aboutUs" && (
         <div className="about_egt_popup">
           <div className="about_egt_form">
@@ -165,6 +175,9 @@ const ExamInfoEdit = ({ type }) => {
         </div>
       )}
     
+    </div>
+    </>
+    )}
     </div>
   )
 }

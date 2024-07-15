@@ -26,6 +26,8 @@ const AdminLogin = () => {
       // localStorage.setItem('token', accessToken);
       settiAuth(newAuthState);
       localStorage.setItem("tiAuth", JSON.stringify(newAuthState));
+      const refreshChannel2 = new BroadcastChannel('refresh_channel_for_enabling_buttons');
+      refreshChannel2.postMessage('refresh_page_for_enabling_buttons');
       if (role === 'admin') {
         navigate('/Adminpage');
       } else if (role === 'User') {
