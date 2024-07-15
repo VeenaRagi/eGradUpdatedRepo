@@ -403,8 +403,8 @@ li {
 }
 
 .default_test_cards .test_cards .test_card .testcard_inline{
-height: 150px;
-width:90%;
+height: 50px;
+/* width:90%; */
 padding: 10px;
 margin: 0 auto;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -450,7 +450,7 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-size: 20px;
   border-radius: 5px;
   margin-bottom: 3px;
-  justify-content: center;
+  /* justify-content: center; */
   color: white;
   align-items: center;
   /* text-align: center; */
@@ -459,7 +459,7 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
 .testcard_inline {
   width: 100%;
-  /* background: #000; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   display: flex;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(00px, 250px));
@@ -510,7 +510,7 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   grid-column: span 1/2; 
 } */
 .testcard_inline li:nth-child(1) {
-  grid-column: span 2;
+  /* grid-column: span 2; */
 }
 .testcard_inline li:nth-child(5) {
   position: absolute;
@@ -521,20 +521,14 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
 
 .test_card {
-  background-color: #fff; 
+  /* background-color: #fff;  */
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
   padding: 20px; 
   margin: 10px;
 }
 
-.testcard_inline {
-  list-style: none; 
-  padding: 0; 
-  margin: 0; 
-  display: flex;
-  gap: 50px;
-}
+
 
 .testcard_inline li {
   display: flex;
@@ -580,7 +574,7 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   .default_test_cards .test_cards .test_card .testcard_inline {
     display: flex;
     width: 100%;
-    height: 400px;
+    height: 270px;
     flex-direction: column;
   }
   
