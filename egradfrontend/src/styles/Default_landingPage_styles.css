@@ -464,6 +464,24 @@ a {
 }
 
 
+.Newlandingpage_branch_box.EGATE_elandUl-pg_Default {
+    --b: 1px;
+    --s: .45em;
+    --color: #00222c;
+    --_p: var(--s);
+    border: 0;
+    box-shadow: 0 0 12px 2px #00222c;
+    color: var(--color);
+    font-size: 16px;
+    outline: var(--b) solid #00222c;
+    outline-offset: -1px;
+    padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+    touch-action: manipulation;
+    transition: .3s linear,color 0s,background-color 0s;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 /* Admin side Popups css */
 
 /* Full-page overlay to cover the background when the card is open */
@@ -798,3 +816,5 @@ button:hover {
     z-index: 999; 
     backdrop-filter: blur(5px); 
 } */
+
+
