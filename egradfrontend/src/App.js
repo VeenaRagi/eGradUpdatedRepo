@@ -67,8 +67,9 @@ const PrivateRoute = ({ element }) => {
 
 const App = () => {
   const [isEditMode, setIsEditMode] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-
+  // const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState({});
   useEffect(() => {
     const checkServerStatus = async () => {
       try {
@@ -83,6 +84,44 @@ const App = () => {
     checkServerStatus();
   }, []);
 
+  useEffect(() => {
+    const checkLoggedIn = () => {
+      const loggedIn = localStorage.getItem("isLoggedIn");
+      if (loggedIn === "true") {
+        setIsLoggedIn(true);
+        fetchUserData();
+      }
+    };
+    checkLoggedIn();
+  }, []);
+
+  const fetchUserData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        "http://localhost:5001/ughomepage_banner_login/user",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+        return <Navigate to="/userlogin" />;
+      }
+
+      if (response.ok) {
+        const userData = await response.json();
+        setUserData(userData);
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
   const toggleEditMode = () => {
     setIsEditMode(!isEditMode);
   };
@@ -91,7 +130,7 @@ const App = () => {
     <State>
       <ThemeProvider>
         <div>
-          {isAdmin && (
+          {isLoggedIn && (
             <button onClick={toggleEditMode}>
               {isEditMode ? "Disable Edit" : "Enable Edit"}
             </button>
