@@ -1528,3 +1528,22 @@ p:nth-child(1){
 .card_container:hover {
   transform: scale(0.95); /* Scale down on hover */
 }
+
+.subheading {
+  background: #e3ebe373;
+  height: 3rem;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+p.no_tests_message {
+  background: #e3ebe373;
+  height: 3rem;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
