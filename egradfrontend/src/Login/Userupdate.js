@@ -91,7 +91,7 @@ const handleClick = async (e) => {
           );
         })} */}
       </div>
-      <div className="container">
+      <div className="userContainer">
         <h1>Edit Form</h1>
         <form className="formInUserUpdate">
           <div className="mb-3 mt-3">
@@ -178,7 +178,7 @@ const handleClick = async (e) => {
             </button>
           )}
         </form>
-        <div className="container d-flex justify-content-center">
+        <div className="userContainer d-flex justify-content-center">
           <Link to="/">See all users</Link>
         </div>
       </div>
