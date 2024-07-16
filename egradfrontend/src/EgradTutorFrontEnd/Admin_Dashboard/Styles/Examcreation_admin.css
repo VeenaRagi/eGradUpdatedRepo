@@ -247,4 +247,6 @@
     gap:10px
 }
 
-
+.create_exam_header_SearchBar h3{
+    margin-top: 30px;
+}

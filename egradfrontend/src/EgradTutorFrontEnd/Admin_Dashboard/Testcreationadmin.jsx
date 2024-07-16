@@ -468,8 +468,9 @@ const Testcreationadmin = ({
               </div>
               <div className="testCreation_-contant_-flexCOntant examSubjects_-contant">
                 <div className="testCreation_-list">
-                  <label>Test Name:</label>
+                  <label className="testCreation_-list_label">Test Name:</label>
                   <input
+                  className="testCreation_-list_input_test_name"
                     type="text"
                     value={testName}
                     onChange={handleInputChange}
@@ -481,17 +482,17 @@ const Testcreationadmin = ({
                     </span>
                   )}
                 </div>
-                <div className="testCreation_-list"></div>
               </div>
               <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
                 <div className="testCreation_-list">
-                  <label>Select Course:</label>
-                  <select value={selectedCourse} onChange={handleSelectChange}>
-                    <option value="" disabled>
+                  <label  className="testCreation_-list_label">Select Course:</label>
+                  <select className="testCreation_-list_select" value={selectedCourse} onChange={handleSelectChange}>
+                    <option className="testCreation_-list_select_option_test_name" value="" disabled>
                       Select a course
                     </option>
                     {courses.map((course) => (
                       <option
+                      className="testCreation_-list_select_option_test_name" 
                         key={course.courseCreationId}
                         value={course.courseCreationId}
                       >
@@ -506,8 +507,9 @@ const Testcreationadmin = ({
                   )}
                 </div>
                 <div className="testCreation_-list">
-                  <label>Type of Tests:</label>
+                  <label className="testCreation_-list_label">Type of Tests:</label>
                   <select
+                  className="testCreation_-list_select"
                     value={selectedtypeOfTest}
                     onChange={handleSelectTypeOfTest}
                   >
@@ -532,7 +534,7 @@ const Testcreationadmin = ({
               </div>
               <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant ">
                 <div className="testCreation_-list">
-                  <label>Test Start Date:</label>
+                  <label className="testCreation_-list_label">Test Start Date:</label>
                   <input
                     type="date"
                     value={startDate}
@@ -546,7 +548,7 @@ const Testcreationadmin = ({
                   )}
                 </div>
                 <div className="testCreation_-list">
-                  <label>Start Time:</label>
+                  <label className="testCreation_-list_label">Start Time:</label>
                   <input
                     type="time"
                     value={startTime}
@@ -562,7 +564,7 @@ const Testcreationadmin = ({
               </div>
               <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
                 <div className="testCreation_-list">
-                  <label>Test End Date:</label>
+                  <label className="testCreation_-list_label">Test End Date:</label>
                   <input
                     type="date"
                     value={endDate}
@@ -576,7 +578,7 @@ const Testcreationadmin = ({
                   )}
                 </div>
                 <div className="testCreation_-list">
-                  <label>End Time:</label>
+                  <label className="testCreation_-list_label">End Time:</label>
                   <input
                     type="time"
                     value={endTime}
@@ -592,8 +594,9 @@ const Testcreationadmin = ({
               </div>
               <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
                 <div className="testCreation_-list">
-                  <label>Instructions:</label>
+                  <label className="testCreation_-list_label">Instructions:</label>
                   <select
+                   className="testCreation_-list_select"
                     value={selectedInstruction}
                     onChange={handleInstructionChange}
                   >
@@ -617,8 +620,8 @@ const Testcreationadmin = ({
                   )}
                 </div>
                 <div className="testCreation_-list">
-                  <label>Calculator:</label>
-                  <select value={calculator} onChange={handleCalculatorChange}>
+                  <label className="testCreation_-list_label">Calculator:</label>
+                  <select  className="testCreation_-list_select" value={calculator} onChange={handleCalculatorChange}>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                   </select>
@@ -626,7 +629,7 @@ const Testcreationadmin = ({
               </div>
               <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
                 <div className="testCreation_-list">
-                  <label>Duration (in minutes):</label>
+                  <label className="testCreation_-list_label">Duration (in minutes):</label>
                   <input
                     type="number"
                     value={duration}
@@ -635,7 +638,7 @@ const Testcreationadmin = ({
                   />
                 </div>
                 <div className="testCreation_-list">
-                  <label>Total Questions:</label>
+                  <label className="testCreation_-list_label">Total Questions:</label>
                   <input
                     type="number"
                     value={totalQuestions}
@@ -652,7 +655,7 @@ const Testcreationadmin = ({
               </div>
               <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
                 <div className="testCreation_-list">
-                  <label>Total Marks:</label>
+                  <label className="testCreation_-list_label">Total Marks:</label>
                   <input
                     type="number"
                     value={totalMarks}
@@ -667,8 +670,8 @@ const Testcreationadmin = ({
                   )}
                 </div>
                 <div className="testCreation_-list">
-                  <label>Select Option Pattern:</label>
-                  <select value={selectedoptions} onChange={handleSelectOption}>
+                  <label className="testCreation_-list_label">Select Option Pattern:</label>
+                  <select  className="testCreation_-list_select" value={selectedoptions} onChange={handleSelectOption}>
                     <option value="" disabled>
                       Select a Pattern
                     </option>
@@ -691,7 +694,7 @@ const Testcreationadmin = ({
               <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
                 <div className="testCreation_-list">
                   {/* <label>SECTION</label> */}
-                  <label>Any sections in the test click here</label>
+                  <label className="testCreation_-list_label">Any sections in the test click here</label>
                   <input
                     className="inputLable"
                     type="checkbox"
@@ -704,7 +707,7 @@ const Testcreationadmin = ({
               <div>
                 {showTotalSections && (
                   <div>
-                    <label>
+                    <label className="testCreation_-list_label">
                       <input
                         className="inputLable"
                         type="checkbox"
