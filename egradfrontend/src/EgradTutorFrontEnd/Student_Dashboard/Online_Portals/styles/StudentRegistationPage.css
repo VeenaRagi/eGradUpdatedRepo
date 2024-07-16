@@ -452,7 +452,7 @@ span{
 
 .from_submit{
    
-  width: 55%;
+  /* width: 55%; */
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
@@ -505,4 +505,12 @@ div{
     gap: 1rem;
 }
 }
+}
+
+@media (min-width: 1024px) {
+  .from_submit{
+    width: 80%;
+    margin: 10px auto;
+
+  }
 }
