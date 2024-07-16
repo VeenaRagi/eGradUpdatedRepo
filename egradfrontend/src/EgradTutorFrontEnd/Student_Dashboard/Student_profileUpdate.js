@@ -342,7 +342,9 @@ const Student_profileUpdate = () => {
           <form className="Student_profileUpdate_editsubconatiner_from">
             <div className="std_pswd_edit">{passwordchangemessage}</div>
             <div style={{ color: "green" }}>{suceessupdatechangemessage}</div>
-            <div className="pswd_id">
+
+<div className="total_container">
+<div className="pswd_id">
               <label className="form-label"> ID:</label>
               <input
                 type="text"
@@ -354,6 +356,8 @@ const Student_profileUpdate = () => {
                 disabled
               />
             </div>
+</div>
+            
 
             <div className="full-name_pswd">
               <label className="form-label"> Full Name:</label>
@@ -366,11 +370,11 @@ const Student_profileUpdate = () => {
                 onChange={handleChange}
               />
             </div>
-            <div  className="full-name_email">
+            <div className="full-name_email">
               <label className="form-label">Email:</label>
               <input
                 type="email"
-                className="form-control"
+                className="form-control-emaillll"
                 id="email"
                 placeholder="Enter email"
                 name="email"
@@ -379,7 +383,7 @@ const Student_profileUpdate = () => {
                 disabled
               />
             </div>
-     
+
             <div className="Student_profileUpdate_editsubconatiner_from_choss_img_cinatiner">
               <label className="form-label">Profile Image:</label>
 
@@ -415,43 +419,48 @@ const Student_profileUpdate = () => {
           <>
             <div style={{ color: "red" }}>{passwordchangemessage}</div>
             <div style={{ color: "green" }}>{suceessupdatechangemessage}</div>
+            <div className="user_update_pswd_cntner_main">
+              <div className="user_update_pswd_cntner">
+                <label className="form-label">Current Password:</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="currentPassword"
+                  placeholder="Enter current password"
+                  name="currentPassword"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="user_update_pswd_cntner">
+                <label className="form-label">New Password:</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="newPassword"
+                  placeholder="Enter new password"
+                  name="newPassword"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="user_update_pswd_cntner">
+                <label className="form-label">Confirm Password:</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="confirmPassword"
+                  placeholder="Confirm new password"
+                  name="confirmpassword"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="pswd_update_btn_container">
+                <button className="pswd_update_btn" type="submit" onClick={handlePASSWORDClick}>
+                  Update
+                </button>
+              </div>
+            </div>
 
-            <div className="user_update_pswd_cntner">
-              <label className="form-label">Current Password:</label>
-              <input
-                type="password"
-                className="form-control"
-                id="currentPassword"
-                placeholder="Enter current password"
-                name="currentPassword"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mb-3 mt-3">
-              <label className="form-label">New Password:</label>
-              <input
-                type="password"
-                className="form-control"
-                id="newPassword"
-                placeholder="Enter new password"
-                name="newPassword"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label className="form-label">Confirm Password:</label>
-              <input
-                type="password"
-                className="form-control"
-                id="confirmPassword"
-                placeholder="Confirm new password"
-                name="confirmpassword"
-                onChange={handleChange}
-              />
-            </div>
-            <button type="submit" onClick={handlePASSWORDClick}>
-              Update
-            </button>
+
           </>
         ) : null}
         {/* <div className="container d-flex justify-content-center">

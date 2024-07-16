@@ -5,7 +5,7 @@
     text-align: center;
   }
   
-  .container {
+  .userContainer {
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
@@ -68,17 +68,17 @@
     margin: 10px 0;
   }
   
-  .container .justify-content-center {
+  .userContainer .justify-content-center {
     margin-top: 20px;
   }
   
-  .container .justify-content-center a {
+  .userContainer .justify-content-center a {
     color: #007bff;
     text-decoration: none;
     transition: color 0.3s ease;
   }
   
-  .container .justify-content-center a:hover {
+  .userContainer .justify-content-center a:hover {
     color: #0056b3;
   }
   .formInUserUpdate div input {
