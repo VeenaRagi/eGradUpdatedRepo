@@ -1,0 +1,26 @@
+.UploadPopups_Logo_Container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px; 
+    max-width: 400px; 
+    margin: auto; 
+    position: relative; 
+    text-align: center; 
+  }
+  .UploadPopups_Logo_Container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #048bc3;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.UploadPopups_WelcomeDataContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px; 
+    max-width: 400px; 
+    margin: auto; 
+    position: relative; 
+    text-align: center; 
+  }

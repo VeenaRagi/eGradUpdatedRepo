@@ -11,6 +11,12 @@ width: 100%;
     justify-content: center;
     background-color: rebeccapurple;
 }
+.activeButton {
+  background-color: #007bff; /* Example color */
+  color: white;
+}
+
+
 .t2TabImageDiv {
   /* height: 230px; */
   height: 249px;
@@ -54,6 +60,11 @@ width: 100%;
 .t2CPHeaderUl li{
   cursor: pointer;
 }
+.t2CPHeaderUl li span:hover{
+  cursor: pointer;
+  color: white;
+}
+
 .courseheader_continer.t2Courseheader_continer .theme_COURSES {
   padding-top: 2rem;
 }

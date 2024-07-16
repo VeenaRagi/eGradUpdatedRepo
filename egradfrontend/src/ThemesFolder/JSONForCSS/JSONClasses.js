@@ -640,6 +640,7 @@ themeMainFooterContainer:"t1MainFooterContainer",
     themeFormNdCardSubContainer: "t2FormNdCardSubContainer",
     themeCUSubmitButtonDiv: "t2CUSubmitButtonDiv",
     themeFooterSMIcons: "t2FooterSMIcons",
+    themeContactUsImgContainer:"t2ContactUsImgContainer",
     // theme orange classes for the course pasge
     // id: "quizHomeOrange",
     theme_COURSES: "orangeCOURSES",
