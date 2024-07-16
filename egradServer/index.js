@@ -98,10 +98,6 @@ app.use("/PoopularCourses", PoopularCourses);
 const courseTab=require('./EgradTutorWebsite/CourseTabsAPIS/CourseTabs')
 app.use('/courseTab',courseTab);
 
-
-
-
-
 const LandingPageExamEdit = require("./EgradTutorWebsite/LandingPage/LandingPageExamEdit");
 app.use("/LandingPageExamEdit", LandingPageExamEdit);
 
@@ -170,6 +166,43 @@ app.use("/TestActivationPage",TestActivationPage);
 const TestCreation=require("./OTS_Quiz_Admin/TestCreation")
 app.use("/TestCreation",TestCreation);
 
+
+const OtsvidesUploads =require('./OVL_Admin/OtsvidesUploads')
+app.use("/OtsvidesUploads",OtsvidesUploads)
+
+const OVL_ExamCreation =require('./OVL_Admin/OVL_ExamCreation')
+app.use("/OVL_ExamCreation",OVL_ExamCreation)
+ 
+const OVL_CourseCreation =require('./OVL_Admin/OVL_CourseCreation')
+app.use('/OVL_CourseCreation',OVL_CourseCreation)
+
+const OVL_Landing_page=require('./OVL_Admin/OVL_Landing_page')
+app.use('/OVL_Landing_page',OVL_Landing_page)
+
+
+const PQB_Landing_page=require('./PracticeQuestionBank/PQB_Landing_page')
+app.use('/PQB_Landing_page',PQB_Landing_page)
+
+
+//___________________________________________________________________________student Dashbord_______________________________________________
+
+const Myresult =require('./StudentDashbord/Myresult')
+
+app.use("/Myresult",Myresult)
+ 
+
+const Bookmark = require('./StudentDashbord/Bookmark')
+app.use("/Bookmark", Bookmark)
+
+const DoubtSection =require('./StudentDashbord/DoubtSection')
+app.use("/DoubtSection",DoubtSection)
+
+const Student_Portals =require('./StudentDashbord/Student_Portals')
+app.use('/Student_Portals',Student_Portals)
+
+const ughomepage_banner_login = require("./Website_Admin/ughomepage_banner_login");
+app.use("/ughomepage_banner_login", ughomepage_banner_login);
+ 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
