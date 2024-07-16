@@ -1,5 +1,4 @@
 
-
 .create_exam_header_SearchBar {
     width: 100%;
     margin: 0 auto;
@@ -246,5 +245,10 @@
     justify-content: center;
     gap:10px
 }
-
+@media  screen and (max-width: 1024px) {
+    .overFlowXScroll{
+        overflow-x: scroll;
+    }
+    
+}
 
