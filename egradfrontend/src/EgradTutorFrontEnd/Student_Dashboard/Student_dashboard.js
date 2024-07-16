@@ -1234,9 +1234,9 @@ export const StudentDashbordmycourse = () => {
     }
   };
 
-  useEffect(() => {
-    fetchPurchasedCourses();
-  }, []);
+  // useEffect(() => {
+  //   fetchPurchasedCourses();
+  // }, []);
 
   const fetchPurchasedCourses = async () => {
     try {
@@ -1244,6 +1244,8 @@ export const StudentDashbordmycourse = () => {
         `${BASE_URL}/Exam_Course_Page/purchasedCourses/${userData.id}`
       );
       const data = await response.json();
+      console.log(data);
+      console.log(userData.id)
       setPurchasedCourses(data);
     } catch (error) {
       console.error("Error fetching purchased courses:", error);
