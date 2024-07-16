@@ -1251,7 +1251,7 @@ function Testcreationadminforms() {
         />
       </div>
       <h3 className="list_-otsTitels">Created test Details</h3>
-      <div className="testCreation_-GettingDAta_-container tableToBeAdjusted">
+      <div className="testCreation_-GettingDAta_-container overFlowX">
         <table className="otc_-table" style={{ textAlign: "center" }}>
           <thead className="otsGEt_-contantHead otc_-table_-header">
             <tr>

@@ -7,7 +7,8 @@ import { encryptData } from "./utils/crypto";
 import "./Style/StudentDashbord_MyCourses.css";
 import { FaBookOpenReader } from "react-icons/fa6";
 import ReactPlayer from "react-player";
-import Control from "./Control";
+import ProgressPieChart from "../ProgressPieChart ";
+
 
 const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   const [showQuizCourses, setShowQuizCourses] = useState(true);
@@ -21,6 +22,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   const [filteredTestData, setFilteredTestData] = useState([]);
   const { courseCreationId } = useParams();
   const user_Id = decryptedUserIdState;
+  const [videoProgress, setVideoProgress] = useState({ watched: 0, total: 0 });
   // Fetch test details based on courseCreationId and decryptedUserIdState
   useEffect(() => {
     const fetchTestDetails = async () => {
@@ -385,12 +387,12 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
         <span
           className="span_style_attempt_status"
 
-          // style={{
-          //   backgroundColor: "red",
-          //   color: "white",
-          //   padding: "2.9px",
-          //   textDecoration: "none",
-          // }}
+        // style={{
+        //   backgroundColor: "red",
+        //   color: "white",
+        //   padding: "2.9px",
+        //   textDecoration: "none",
+        // }}
         >
           Attempted
         </span>
@@ -452,99 +454,122 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   }, [testDetails, selectedTypeOfTest]);
 
 
-// =======================OVL START====================
-const [videos, setVideos] = useState([]);
-const [selectedVideo, setSelectedVideo] = useState(null);
-const [isModalOpen, setIsModalOpen] = useState(false);
-const [isFullscreen, setIsFullscreen] = useState(false);
-const playerRef = useRef(null);
-const [playing, setPlaying] = useState(true);
-const [seeking, setSeeking] = useState(false);
-const [played, setPlayed] = useState(0);
-const [duration, setDuration] = useState(0);
+  // =======================OVL START====================
+  const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const playerRef = useRef(null);
+  const [playing, setPlaying] = useState(true);
+  const [seeking, setSeeking] = useState(false);
+  const [played, setPlayed] = useState(0);
+  const [duration, setDuration] = useState(0);
 
-const handleVideosClick = async (OVL_Course_Id) => {
-  try {
-    const response = await fetch(
-      `${BASE_URL}/OtsvidesUploads/videos/${OVL_Course_Id}`
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch videos");
-    }
-    const data = await response.json();
-    setVideos(data);
-    console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
-    console.log(data);
-    setShowQuizCourses(false);
-    setShowtestContainer2(true);
-  } catch (error) {
-    console.error("Error fetching test details:", error);
-  } finally {
-    setIsLoading(false);
-  }
-};
 
-const handleViewVideo = async (OVL_Linke_Id) => {
-  try {
-      const video = videos.find((video) => video.OVL_Linke_Id === OVL_Linke_Id);
-      if (!video) {
-          throw new Error("Video not found");
+  const [courses, setCourses] = useState([]);
+  const [initialPlayTime, setInitialPlayTime] = useState(0);
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/OtsvidesUploads/videos`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch videos');
+        }
+        const data = await response.json();
+        setVideos(data);
+      } catch (error) {
+        console.error('Error fetching videos:', error);
       }
+    };
 
-      setSelectedVideo(video.Drive_Link); // This should be a valid Base64 data URL
+    fetchVideos();
+  }, []);
+
+  const handleViewVideo = async (OVL_Linke_Id) => {
+    try {
+      const video = videos.find(video => video.OVL_Linke_Id === OVL_Linke_Id);
+      if (!video) {
+        throw new Error('Video not found');
+      }
+      const savedProgress = localStorage.getItem(`video-progress-${video.OVL_Linke_Id}`);
+      const initialPlayTime = savedProgress ? JSON.parse(savedProgress).playedSeconds : 0;
+      setSelectedVideo(video.Drive_Link); // Ensure this is a valid Base64 data URL
+      setInitialPlayTime(initialPlayTime);
       setIsModalOpen(true);
-  } catch (error) {
-      console.error("Error fetching video:", error);
-  }
-};
+    } catch (error) {
+      console.error('Error fetching video:', error);
+    }
+  };
 
-const handleCloseModal = () => {
-  setSelectedVideo(null);
-  setIsModalOpen(false);
-};
 
-const handleProgress = (state) => {
-  if (!seeking) {
-    setPlayed(state.played * 100);
-  }
-};
+  const handleVideosClick = async (OVL_Course_Id) => {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/OtsvidesUploads/videos/${OVL_Course_Id}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch videos");
+      }
+      const data = await response.json();
+      setVideos(data);
+      console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
+      console.log(data);
+      setShowQuizCourses(false);
+      setShowtestContainer2(true);
+    } catch (error) {
+      console.error("Error fetching test details:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-const handleDuration = (duration) => {
-  setDuration(duration);
-};
 
-const handlePlayPause = () => {
-  setPlaying(!playing);
-};
+  const handleCloseModal = () => {
+    setSelectedVideo(null);
+    setIsModalOpen(false);
+  };
 
-const handleRewind = () => {
-  if (playerRef.current) {
-    const currentTime = playerRef.current.getCurrentTime();
-    playerRef.current.seekTo(Math.max(currentTime - 10, 0), "seconds"); // Prevent negative time
-  }
-};
+  const handleProgress = (progress) => {
+    // Save the current playback position to local storage
+    // localStorage.setItem(`video-progress-${selectedVideo}`, JSON.stringify(progress));
+  };
 
-const handleFastForward = () => {
-  if (playerRef.current) {
-    const currentTime = playerRef.current.getCurrentTime();
-    playerRef.current.seekTo(Math.min(currentTime + 10, duration), "seconds"); // Prevent exceeding duration
-  }
-};
 
-const handleSeekChange = (e) => {
-  setPlayed(parseFloat(e.target.value));
-};
+  const handleDuration = (duration) => {
+    setDuration(duration);
+  };
 
-const handleSeekMouseDown = () => {
-  setSeeking(true);
-};
 
-const handleSeekMouseUp = (e) => {
-  setSeeking(false);
-  playerRef.current.seekTo(parseFloat(e.target.value) / 100);
-};
 
-// =======================OVL END====================
+
+  const handleFullscreenChange = () => {
+    if (document.fullscreenElement) {
+      setIsFullscreen(true);
+    } else {
+      setIsFullscreen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+
+    const preventRightClick = (e) => {
+      if (isFullscreen) {
+        e.preventDefault();
+      }
+    };
+
+    // Attach event listener to prevent right-click
+    document.addEventListener("contextmenu", preventRightClick);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener("contextmenu", preventRightClick);
+    };
+  }, [isFullscreen]);
+
+  // =======================OVL END====================
 
 
 
@@ -648,10 +673,10 @@ const handleSeekMouseUp = (e) => {
                                   {portalId === 1 || portalId === 2
                                     ? courseExamsDetails.totalTests
                                     : portalId === 3
-                                    ? courseExamsDetails.totalLectures
-                                    : portalId === 4
-                                    ? courseExamsDetails.topicName
-                                    : null}
+                                      ? courseExamsDetails.totalLectures
+                                      : portalId === 4
+                                        ? courseExamsDetails.topicName
+                                        : null}
                                 </p>
 
                                 <div className="QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoeprice QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoepricemycourses">
@@ -663,7 +688,7 @@ const handleSeekMouseUp = (e) => {
                                           user_Id,
                                           portalId
                                         );
-                                      } 
+                                      }
                                       else if (portalId === 3) {
                                         handleVideosClick(
                                           courseExamsDetails.courseCreationId
@@ -681,10 +706,10 @@ const handleSeekMouseUp = (e) => {
                                     {portalId === 1 || portalId === 2
                                       ? "Go to Test"
                                       : portalId === 3
-                                      ? "Start Lecture"
-                                      : portalId === 4
-                                      ? "Open Complete Package"
-                                      : null}
+                                        ? "Start Lecture"
+                                        : portalId === 4
+                                          ? "Open Complete Package"
+                                          : null}
                                   </Link>
                                 </div>
                               </div>
@@ -870,200 +895,112 @@ const handleSeekMouseUp = (e) => {
         </div>
       )}
       {showtestContainer2 && (
-         <div>
-         <div className="card_container_dashbordflowtest">
-           <div className="test_card_container">
-             <div
-               className="Go_back_from_test_section"
-               onClick={handleTypeOfTestClickback}
-             >
-               Go Back
-             </div>
+        <div>
+          <div className="card_container_dashbordflowtest">
+            <div className="test_card_container">
+              <div
+                className="Go_back_from_test_section"
+                onClick={handleTypeOfTestClickback}
+              >
+                Go Back
+              </div>
 
-             <div className="test_cards">
-               {/* {courses.map((course) => (
-         <div key={course.courseCreationId || course.OVL_Course_Id}> */}
+              <div className="test_cards">
+                {/* {courses.map((course) => (
+          <div key={course.courseCreationId || course.OVL_Course_Id}> */}
 
-               {/* {course.portal === "OVL" && ( */}
-               <div>
-                 <h2>OVL 2</h2>
-                 {/* <h2 className="OVL_subheading">{course.examName}</h2> */}
-                 <div
-                 // className="OVL_course_card OVL_continer_data"
-                 // key={course.OVL_Course_Id}
-                 >
-                   {videos.length > 0 && (
-                     <h2 className="OVL_PageHeading">
-                       {videos[0].OVL_Course_Name}
-                     </h2>
-                   )}
-                   <div className="OVL_cards">
-                     {videos.map((video) => (
-                       <div
-                         className="OVL_card_data"
-                         key={video.OVL_Linke_Id}
-                       >
-                         <h2 className="OVL_text">{video.Lectures_name}</h2>
-                         <button
-                           className="view-video-button"
-                           onClick={() =>
-                             handleViewVideo(video.OVL_Linke_Id)
-                           }
-                         >
-                           <i className="fa-solid fa-play"></i>
-                         </button>
-                       </div>
-                     ))}
-                   </div>
-                   {isModalOpen && (
-                     <div className="modal">
-                       <div className="ovlcontent">
-                         <button
-                           className="OVL_Video_close"
-                           onClick={handleCloseModal}
-                         >
-                           <i className="fa-solid fa-xmark"></i>
-                         </button>
-                         <div
-                           className={`video-container ${
-                             isFullscreen ? "disable-right-click" : ""
-                           }`}
-                         >
-                           <ReactPlayer
-                             className="OVL_Video"
-                             ref={playerRef}
-                             url={selectedVideo}
-                             loop={true}
-                             playing={playing}
-                             muted={true}
-                             width="1000px"
-                             height="500px"
-                             controls={true}
-                             onProgress={handleProgress}
-                             onDuration={handleDuration}
-                             config={{
-                               youtube: {
-                                 playerVars: {
-                                   autoplay: 1,
-                                   modestbranding: 1,
-                                   rel: 0,
-                                   showinfo: 0,
-                                 },
-                               },
-                               vimeo: {
-                                 playerOptions: {
-                                   controls: true,
-                                   autoplay: 1,
-                                 },
-                               },
-                               file: {
-                                 attributes: {
-                                   controlsList: "nodownload",
-                                 },
-                               },
-                             }}
-                             onError={(e) =>
-                               console.error("Video Error:", e)
-                             }
-                           />
-                           <Control
-                             onPlayPause={handlePlayPause}
-                             playing={playing}
-                             onRewind={handleRewind}
-                             onFastForward={handleFastForward}
-                             played={played}
-                             onSeek={handleSeekChange}
-                             onSeekMouseDown={handleSeekMouseDown}
-                             onSeekMouseUp={handleSeekMouseUp}
-                           />
-                         </div>
-                       </div>
-                     </div>
-                   )}
-                 </div>
-               </div>
-               {/* )} */}
-             </div>
-             {/* ))}
-     </div> */}
-           </div>
-         </div>
-       </div>
+                {/* {course.portal === "OVL" && ( */}
+                <div>
+                  <h2>OVL 2</h2>
+                  {/* <h2 className="OVL_subheading">{course.examName}</h2> */}
+                  <div
+                  // className="OVL_course_card OVL_continer_data"
+                  // key={course.OVL_Course_Id}
+                  >
+                    {videos.length > 0 && (
+                      <h2 className="OVL_PageHeading">
+                        {videos[0].OVL_Course_Name}
+                      </h2>
+                    )}
+                    <div className="OVL_cards">
+                      {/* {videos.map((video) => (
+                        <div
+                          className="OVL_card_data"
+                          key={video.OVL_Linke_Id}
+                        >
+                          <h2 className="OVL_text">{video.Lectures_name}</h2>
+                          <button
+                            className="view-video-button"
+                            onClick={() =>{
+                              handleViewVideo(video.OVL_Linke_Id)
+                              console.log(video.OVL_Linke_Id)
+                            }
+                             
+                            }
+                          >
+                            <i className="fa-solid fa-play"></i>
+                          </button>
+                          <div>
+                            <ProgressPieChart videoProgress={videoProgress} />
+                          </div>
+                        </div>
+                      ))} */}
+
+                      {videos.map((video) => (
+                        <div className="OVL_card_data" key={video.OVL_Linke_Id}>
+                          <h2 className="OVL_text">{video.Lectures_name}</h2>
+                          {/* <React.Fragment key={video.OVL_Linke_Id}> */}
+                          <ProgressPieChart className="pie_button"
+                            videoProgress={videoProgress}
+                            onClick={() => {
+                              handleViewVideo(video.OVL_Linke_Id);
+                              console.log(video.OVL_Linke_Id);
+                            }}
+                          />
+                          {/* </React.Fragment> */}
+                        </div>
+                      ))}
+                    </div>
+                    {isModalOpen && (
+                      <div className="video-modal">
+                        <button onClick={handleCloseModal}>Close</button>
+                        <div className="video-container">
+                          <ReactPlayer
+                            className="OVL_Video"
+                            ref={playerRef}
+                            url={selectedVideo}
+                            loop={true}
+                            playing={playing}
+                            muted={true}
+                            width="1000px"
+                            height="500px"
+                            controls={true}
+                            onProgress={handleProgress}
+                            played={initialPlayTime}
+                            config={{
+                              file: {
+                                attributes: {
+                                  controlsList: "nodownload",
+                                },
+                              },
+                            }}
+                            onError={(e) => console.error('Video Error:', e)}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {/* )} */}
+              </div>
+              {/* ))}
+      </div> */}
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
 };
 
 export default StudentDashbord_MyCourses;
-
-{
-  /* //main */
-}
-{
-  /* {showCompletePackageContainer && (
-          <div>
-            <div className="card_container_dashbordflowtest">
-              <div className="test_card_container">
-                <div
-                  className="Go_back_from_test_section"
-                  onClick={handleTypeOfTestClickback}
-                >
-                  Go Back
-                </div>
-                {completePackage.map((completeData, index) => (
-                  <div key={index}>
-                    <h2 className="portal_group_h2">
-                      {completeData.courseName}
-                      <div className="test_card">
-                        <ul className="testcard_inline">
-                          <li>
-                            <span>
-                              <svg
-                                stroke="currentColor"
-                                fill="currentColor"
-                                strokeWidth="0"
-                                viewBox="0 0 512 512"
-                                height="1em"
-                                width="1em"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path d="M160 96a96 96 0 1 1 192 0A96 96 0 1 1 160 96zm80 152V512l-48.4-24.2c-20.9-10.4-43.5-17-66.8-19.3l-96-9.6C12.5 457.2 0 443.5 0 427V224c0-17.7 14.3-32 32-32H62.3c63.6 0 125.6 19.6 177.7 56zm32 264V248c52.1-36.4 114.1-56 177.7-56H480c17.7 0 32 14.3 32 32V427c0 16.4-12.5 30.2-28.8 31.8l-96 9.6c-23.2 2.3-45.9 8.9-66.8 19.3L272 512z"></path>
-                              </svg>
-                            </span>
-                            {completeData.TestName}
-                          </li>
-                          <li>Total Marks: {completeData.totalMarks} Marks</li>
-                          <li>
-                            Test Duration: {completeData.Duration} Minutes
-                          </li>
-                          <li>
-                            <a
-                              className="test_start_button"
-                              href="/UgadminHome"
-                            >
-                              Start Test
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </h2>
-                  </div>
-                ))}
-                <div className="OVL_cards">
-                  {completePackage.map((video) => (
-                    <div className="OVL_card_data" key={video.OVL_Linke_Id}>
-                      <h2 className="OVL_text">{video.Lectures_name}</h2>
-                      <button
-                        className="view-video-button"
-                        onClick={() => handleViewVideo(video.OVL_Linke_Id)}
-                      >
-                        <i className="fa-solid fa-play"></i>
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )} */
-}

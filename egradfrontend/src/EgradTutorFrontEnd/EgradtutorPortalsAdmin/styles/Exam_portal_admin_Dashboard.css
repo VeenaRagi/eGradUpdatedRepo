@@ -62,7 +62,7 @@
   border-radius: 25px;
   text-align: center;
   width: 250px;
-  height: 300px;
+  height: 310px;
   background: #ffffff;
   color: rgb(0 0 0);
   box-shadow: 3px 3px 11px -4px #042a45;
@@ -361,10 +361,9 @@ color: #6c757d;
     margin-top: 5rem;
 }
 .Dashboard_contant {
-  width: 169px;
-  height: 209px;
-  padding: 0rem;
- 
+    width: 169px;
+    height: 250px;
+    padding: 0rem;
 }
 .Dashboard_contant:nth-child(1) i {
   font-size: 39px;

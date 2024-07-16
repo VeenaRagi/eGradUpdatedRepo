@@ -1786,8 +1786,8 @@ function Portal_coures_creation_admin() {
           />
         </div>
         <h3 className="list_-otsTitels">created COURSES list</h3>
-        <div className="tableToBeScrolled">
-        <table className="couresCreation_-table tableToBeAdjusted">
+        <div className="overFlowX">
+        <table className="couresCreation_-table ">
           <thead className="otsGEt_-contantHead couresotc_-table">
             <tr>
               <th>S.no</th>
