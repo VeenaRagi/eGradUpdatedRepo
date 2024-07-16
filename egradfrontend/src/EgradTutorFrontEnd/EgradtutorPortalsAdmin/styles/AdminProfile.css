@@ -29,8 +29,9 @@ justify-content: center;
     border: 1px solid;
     padding: 2rem 1rem;
     align-items: center;
+    height: 390px;
+    width: 360px;
 }
-
 .admins_profile_img_container{
     height: 200px;
     width: 200px;
