@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BASE_URL from "../../../../apiConfig";
 import axios from "axios";
 import '../../../../styles/Default_landingPage_styles.css'
-
+import '../../../../styles/AdminPopups.css';
 const LandingPageHeaderEdit = ({ type }) => {
   const [image, setImage] = useState(null);
   const [editingId, setEditingId] = useState(null);
@@ -85,7 +85,7 @@ const LandingPageHeaderEdit = ({ type }) => {
   return (
     <div className="Blur_Effect_Mode">
       {type === "addLogo" && (
-        <div className="UploadPopups_Container">
+        <div className="UploadPopups_Logo_Container">
           <h2>Upload Image</h2>
           <input type="file" onChange={handleImageChange} />
           <button onClick={handleUpload}>Submit</button>

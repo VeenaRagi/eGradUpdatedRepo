@@ -191,7 +191,7 @@ const handleEditAboutegrad = (about_egt_id) => {
   }, [type]);
  
   return (
-    <div>
+    <div className="Blur_Effect_Mode">
      
  
 {type === "aboutUs" && (

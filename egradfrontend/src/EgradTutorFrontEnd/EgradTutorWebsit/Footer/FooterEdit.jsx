@@ -423,7 +423,7 @@ const FooterEdit = ({ type }) => {
         fetchFooterCopyWriteData();
     }, []);
     return (
-        <div className="overlay">
+        <div className="Blur_Effect_Mode">
 
          {type === "Add eGRADTutor" && (
              <div className="UploadPopups_Container">
