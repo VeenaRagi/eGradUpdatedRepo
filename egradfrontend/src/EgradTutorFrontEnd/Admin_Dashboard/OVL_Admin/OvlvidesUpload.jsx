@@ -6,6 +6,7 @@ import BASE_URL from "../../../apiConfig";
 import ReactPaginate from "react-paginate";
 import { FaSearch } from "react-icons/fa";
 import { useParams } from 'react-router-dom';
+
 function OvlvidesUpload() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [courses, setCourses] = useState([]);
@@ -194,7 +195,7 @@ function OvlvidesUpload() {
 
       
       <div
-        className="uploadedDocumentFilds examSubjects_-contant ovl_Container"
+        className="uploadedDocumentFilds examSubjects_-contant ovl_Container overFlowXScroll"
         style={{ marginTop: "1rem" }}
       >
         <label>Select a course:</label>

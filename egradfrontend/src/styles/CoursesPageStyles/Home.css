@@ -986,7 +986,7 @@ i#footerIcons:hover {
   }
 }
  
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1024px) {
   .Quiz_main_page_navbar_SUBpart {
     display: none;
   }
