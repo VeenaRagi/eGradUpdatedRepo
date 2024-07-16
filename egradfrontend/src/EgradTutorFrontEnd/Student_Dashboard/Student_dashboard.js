@@ -1183,7 +1183,7 @@ export const StudentDashbordmycourse = () => {
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("token");
         setIsLoggedIn(false);
-        Navigate("/uglogin");
+        Navigate("/userlogin");
         return;
       }
 

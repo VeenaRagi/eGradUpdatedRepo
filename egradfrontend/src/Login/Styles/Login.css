@@ -95,7 +95,7 @@
   /* border: 2px solid red; */
   width: 100%;
   margin: 0 auto;
-  border-bottom: 1px solid #1110109d;
+  /* border-bottom: 1px solid #1110109d; */
 }
 
 .ug_logincontainer_box form input {
@@ -174,7 +174,7 @@
     /* border: 2px solid red; */
     width: 100%;
     margin: 0 auto;
-    border-bottom: 1px solid #1110109d;
+    /* border-bottom: 1px solid #1110109d; */
   }
 
   .login_from_continer p {
