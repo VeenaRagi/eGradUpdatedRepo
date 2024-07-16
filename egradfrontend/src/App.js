@@ -41,7 +41,7 @@ import QuizPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/Quiz
 import QuestionBankQuiz from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/QuestionBankQuiz";
 import TestResultsPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/TestResultsPage";
 import Quiz_dashboard from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/Quiz_dashboard";
-
+import {UserReport} from './EgradTutorFrontEnd/Student_Dashboard/UserReport'
 import ExamUpdataion_admin from "./EgradTutorFrontEnd/Admin_Dashboard/ExamUpdataion_admin";
 import UpdatingCourseInAdmin from "./EgradTutorFrontEnd/Admin_Dashboard/UpdatingCourseInAdmin";
 import TestUpdateadmin from "./EgradTutorFrontEnd/Admin_Dashboard/TestUpdateadmin";
@@ -205,6 +205,10 @@ const App = () => {
                   path="/TestResultsPage/:param1/:param2"
                   element={<PrivateRoute element={<TestResultsPage />} />}
                 />
+                  <Route
+            path="/UserReport/:id/:testCreationTableId/:courseCreationId"
+            element={<PrivateRoute element={<UserReport />} />}
+          />
                 <Route
                   path="/Error"
                   element={<PrivateRoute element={<NotFound />} />}

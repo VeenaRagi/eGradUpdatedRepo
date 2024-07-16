@@ -171,8 +171,10 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
+    gap: 2rem;
+    /* align-items: center; */
+    justify-content: center;
 }
-
 .t1SelectedTabContentDiv {
     width: 85%;
     box-shadow: rgb(185 226 198 / 1%) 59px 54px 55px, rgb(185 226 198) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 2px 3px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -238,7 +240,25 @@
     }
 }
 
+ul.tabButtonUl.t1TabButtonUl button {
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    width: 210px;
+    background-color: #bae2c6;
+    color:black;
+    font-weight:bold;
+}
 
+
+ul.tabButtonUl.t1TabButtonUl button:hover {
+    background-color: #aaf1bf;
+}
 @media (max-width:600px) {
 
     .t1CoursePageHeaderContainer .t1CPHeaderUl {

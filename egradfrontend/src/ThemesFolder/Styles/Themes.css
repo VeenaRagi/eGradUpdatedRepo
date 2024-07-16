@@ -9,7 +9,7 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    height: 320px;
+    height: 550px;
     flex: 1 0 auto;
     max-width: 41%; 
     margin: 10px;
@@ -122,4 +122,11 @@
     top: 20px; /* Adjust the distance from the top as needed */
     left: calc(50% - 26px); /* Center the button horizontally */
     z-index: 101;
+    background-color: #ff0000e3;
+    color: white;
+}
+.buttonsInPreviewDiv button{
+background-color: green;
+color: white;
+
 }

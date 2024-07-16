@@ -351,7 +351,7 @@ router.put(
       if (tabImage) {
         // Update query with image
         [result] = await db.query(
-          `INSERT INTO course_tab_images (course_tab_id, course_tab_images)
+          `INSERT INTO course_tab_images (course_tab_id, course_tab_image)
            VALUES (?, ?)
            ON DUPLICATE KEY UPDATE course_tab_image = VALUES(course_tab_image)`,
           [courseTabId, tabImage]
