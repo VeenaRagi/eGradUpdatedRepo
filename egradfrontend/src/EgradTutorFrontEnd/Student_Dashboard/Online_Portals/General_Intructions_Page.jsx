@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { decryptData, encryptData } from "../utils/crypto"; // Assuming these are your encryption utilities
@@ -7,6 +5,7 @@ import BASE_URL from "../../../apiConfig";
 import "./styles/Instructions.scss";
 import { AiOutlineArrowRight } from "react-icons/ai";
 // import { Header } from "./Header";
+import axios from "axios";
 
 const General_intructions_page_container = () => {
   const { param1, param2, param3 } = useParams();
@@ -157,7 +156,6 @@ const General_intructions_page_container = () => {
       } else if (decryptedParam3 == 2) {
         navigate(url2);
       }
-   
     } catch (error) {
       console.error("Error encrypting data:", error);
     }
@@ -175,11 +173,39 @@ const General_intructions_page_container = () => {
   //     // You can use Portale_Id, testCreationTableId, and user_Id here
   //   };
 
+  const [error, setError] = useState(false);
+  const [image, setImage] = useState(null);
+
+  const fetchImage = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/Logo/image`, {
+        responseType: "arraybuffer",
+      });
+      const imageBlob = new Blob([response.data], { type: "image/png" });
+      const imageUrl = URL.createObjectURL(imageBlob);
+      setImage(imageUrl);
+    } catch (error) {
+      console.error("Error fetching image:", error);
+      setError(true); // Set error state to true on failure
+    }
+  };
+
+  useEffect(() => {
+    fetchImage();
+  }, []);
+
   return (
     <>
       {/* <Header /> */}
+      
       <div className="Instructions_container">
+      <div className="Quiz_header">
+        <div className="Q_logo">
+          <img src={image} className="" alt="Current" />
+        </div>
         <h1>General Instructions</h1>
+      </div>
+       
         <ul className="Instructions_points">
           {instructionsData.map((instruction, index) => (
             <React.Fragment key={index}>

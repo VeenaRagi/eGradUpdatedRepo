@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import Modal from "react-modal";
-import { nav } from "../Exam_Portal_QuizApp/Data/Data";
+// import Modal from "react-modal";
+// import { nav } from "../Exam_Portal_QuizApp/Data/Data";
 import { Link, Navigate, useParams } from "react-router-dom";
 import "./styles/StudentDashbord.css";
 import Student_profileUpdate from "./Student_profileUpdate";
@@ -19,7 +19,7 @@ import { AiFillPicture } from "react-icons/ai";
 import { GrAttachment } from "react-icons/gr";
 import Sdresult from "./Images/Screenshot 2024-03-06 115328-Photoroom.png-Photoroom.png";
 import { IoMdClose } from "react-icons/io";
-import BASE_URL from "../../src/apiConfig";
+import BASE_URL from "../../apiConfig";
 
 export const UserReport = () => {
   const [isVisible, setVisible] = useState(false);
@@ -1488,17 +1488,17 @@ export const UserReport = () => {
                                 </p>
                               </li>
                             ) : (
-                              // <p>No data available.</p>
-                              <li>
-                                <p> Marks: 0</p>
-                                <p>
-                                  {" "}
-                                  Negative Marks: <b>0</b>
-                                </p>
-                                <p>
-                                  Obtained Total Marks: <b>0</b>
-                                </p>
-                              </li>
+                              <p>No data available.</p>
+                              // <li>
+                              //   <p> Marks: 0</p>
+                              //   <p>
+                              //     {" "}
+                              //     Negative Marks: <b>0</b>
+                              //   </p>
+                              //   <p>
+                              //     Obtained Total Marks: <b>0</b>
+                              //   </p>
+                              // </li>
                             )}
 
                             <li>
