@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../DataBase/db2');
 const multer = require('multer');
-
+const fetch = require('node-fetch');
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -181,7 +181,29 @@ router.delete("/videslink_delete", async (req, res) => {
     }
 });
 
+router.get('/OVL_courses', async (req, res) => {
+    const query =`SELECT courseCreationId, courseName, Portale_Id 
+    FROM course_creation_table 
+    WHERE Portale_Id IN (3, 4)`;
+    try {
+        const [result] = await db.query(query);
+        res.json(result);
+    } catch (error) {
+        console.error('Error fetching videos:', error);
+        res.status(500).json({ error: 'Failed to fetch videos' });
+    }
+});
 
+router.get('/OVL_data', async (req, res) => {
+    const query = 'SELECT ol.OVL_Linke_Id ,ol.Drive_Link,ol.Lectures_name,cc.courseCreationId,cc.courseName FROM ovl_links AS ol LEFT JOIN course_creation_table cc ON cc.courseCreationId =ol.courseCreationId';
+    try {
+        const [result] = await db.query(query);
+        res.json(result);
+    } catch (error) {
+        console.error('Error fetching videos:', error);
+        res.status(500).json({ error: 'Failed to fetch videos' });
+    }
+});
 
 router.put("/videslink_update/:OVL_Linke_Id", async (req, res) => {
     const { OVL_Linke_Id } = req.params;
