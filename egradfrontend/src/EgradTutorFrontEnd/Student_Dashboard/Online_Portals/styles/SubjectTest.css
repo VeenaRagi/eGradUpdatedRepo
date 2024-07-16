@@ -1,0 +1,570 @@
+/* .material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+       
+}
+.home-main-page{
+    background-color: whitesmoke;
+    width: 100rem;
+    height: 50rem;
+    margin: 50px 150px;
+    border: 1px solid whitesmoke;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.play-btn {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    text-decoration: none;
+    width: 190px;
+    color: white;
+    font-size: large;
+    font-weight: 10px;
+    background-color: rgb(69, 83, 116);
+    border: 1px solid rgb(28, 42, 73);
+    border-radius: 15px;
+    cursor: pointer;
+}
+.test-card-header{
+ 
+    border-bottom: 1px solid rgb(182, 167, 167);
+    display: flex;
+    flex-wrap: wrap;
+}
+.free-title{
+    background-color: rgb(75, 216, 157);
+    width: 40px;
+    color: white;
+    font-weight: 500;
+  
+    margin-bottom: 40px;
+    position: relative;
+    top: 30px;
+    right: 150px;
+}
+.testCard-second-header{
+    font-weight: 200;
+    color: white;
+}
+.test-btn {
+
+    display: flex;
+    justify-content: center;
+
+}
+.jee-test-1{
+    font-weight: 500;
+    color: white;
+     
+}
+.test-contents1{
+   
+    display: flex;
+    gap: 90px;
+}
+.test-card {
+    
+    text-align: center;
+    margin: 90px 670px;
+    border: 1px solid whitesmoke;
+    background-color: rgb(31, 54, 95);
+    width: 300px;
+    padding: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 15px;
+}
+
+.test-contents2{
+    display: flex;
+
+    padding: 10px;
+    gap: 5px;
+    color: white;
+}
+ */
+
+
+ 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+/* ------------------------------------------- nav bar start--------------------------------------------------------------------  */
+#close-icon {
+  cursor: pointer;
+}
+
+.navbar-div {
+  padding: 10px;
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-around;
+  border-bottom: 1px solid rgb(184, 181, 181);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  /* box-shadow: 2px gray; */
+}
+
+.auth-btn {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* ------------------------------------------- nav bar end --------------------------------------------------------------------  */
+
+/************ Login and signup forms start styling ****************/
+.main_conatiner {
+  position: relative;
+}
+
+#close-icon {
+  cursor: pointer;
+}
+
+#divContent1 {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  color: #ffff;
+  width: 450px;
+  height: 50vh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border-radius: 18px;
+}
+
+#divContent2 {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  color: #ffff;
+  width: 450px;
+  height: 50vh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border-radius: 18px;
+}
+
+#divContent > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#divContent #form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+#divContent #form h5 {
+  margin: 0.1rem;
+  text-align: left;
+}
+
+#divContent #form p {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+#divContent #form input {
+  border-radius: 18px;
+  padding: 0.5rem;
+  width: 100%;
+  height: 30px;
+  border: none;
+}
+
+#divContent #form input:focus {
+  outline: none;
+}
+
+#divContent a {
+  /* color: #FFFF; */
+  text-decoration: none;
+  text-align: center;
+
+  &:hover {
+    /* color: aliceblue; */
+    /* color: rgb(38, 0, 255); */
+  }
+}
+
+.login_close_container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.login_close_container p {
+  position: absolute;
+  right: 3%;
+  top: 5%;
+}
+
+/* .popup-box {
+    position: relative;
+    width: 300px;
+    background: #fff;
+    padding: 20px;
+    margin: 100px auto;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+}  */
+/************ Login and signup forms start styling ****************/
+
+/********************starting code Exam page Header  styling*****************/
+
+.ls-bar-exam-page {
+  display: grid;
+  grid-template-columns: 25% 75%;
+}
+
+.exam-middle-div {
+  width: 100%;
+  background-color: rgb(204, 226, 231);
+  /* display: flex;
+    flex-wrap: wrap; */
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.exam-heading {
+  padding-top: 30px;
+}
+
+.home-main-page {
+  background-color: rgb(253, 254, 255);
+  width: 100%;
+  height: 50rem;
+  margin: 20px auto;
+  /* margin: 50px 150px; */
+  border: 1px solid whitesmoke;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 4px;
+}
+
+.header-div1 {
+  padding: 20px;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.header-div2 {
+  margin-left: 45px;
+  margin-right: 45px;
+}
+
+.header-links {
+  display: flex;
+  gap: 5rem;
+  border-bottom: 2px solid rgb(168, 167, 167);
+}
+
+.content-link {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  &:hover {
+    color: #4400ff;
+
+  }
+}
+
+.active {
+  border-bottom: 2px solid rgb(0, 38, 255);
+  /* background: 2px solid lightskyblue; */
+  color: white;
+  /* width: 100px; */
+  padding: 0.1rem;
+  margin-bottom: -2px;
+  background-color: dodgerblue;
+  padding: 5px;
+}
+
+.quiz_header {
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: SPACE-BETWEEN;
+  padding: 0 2rem;
+}
+.quiz_header h3{
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+.header_logo {
+  padding: 10px;
+}
+.course_page_header_for_Q{
+  width: 100%;
+
+text-align: center;
+font-size: 2rem;
+}
+.course_page_header_for_Q h2{
+/* width: 100%; */
+
+text-align: center;
+font-size: 2rem;
+color: #fff;
+}
+/********************end code Exam page Header  styling*****************/
+
+/********************starting testcard code styling *****************/
+.test-card_conatiner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.test-card:hover {
+}
+.play-btn {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+  text-decoration: none;
+  width: 190px;
+  color: white;
+  font-size: large;
+  font-weight: 10px;
+  /* background-color: rgb(69, 83, 116); */
+  background-color: rgb(80, 158, 211);
+  border: 1px solid rgb(87, 135, 236);
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.test-card-header {
+  /* margin-top: 2px; */
+  border-bottom: 1px solid rgb(182, 167, 167);
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.test-card-header h3 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.free-title {
+  background-color: rgb(75, 216, 157);
+  width: 40px;
+  color: white;
+  font-weight: 500;
+  /* margin-left: 10px; */
+  margin-bottom: 40px;
+  position: relative;
+  top: 30px;
+  right: 150px;
+}
+
+.Types_of_Tests {
+  margin-top: 20px;
+}
+
+.testCard-second-header {
+  font-size: 0.9rem;
+  font-weight: 500;
+  /* color: white; */
+}
+
+.test-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.jee-test-1 {
+  font-weight: 500;
+  /* color: white; */
+}
+
+.test-contents1 {
+  display: flex;
+  gap: 90px;
+}
+
+.test-card {
+  text-align: center;
+
+  border: 1px solid whitesmoke;
+  background-color: rgba(242, 246, 248, 0.911);
+  /* width: 300px; */
+  width: 360px;
+  padding: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 15px;
+}
+
+.test-contents2 {
+  display: flex;
+  /* justify-content: center; */
+  padding: 10px;
+  gap: 5px;
+  /* color: white; */
+}
+.test-card:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+.test-contents2 li a {
+  background: rgb(164 162 241);
+  padding: 5px 10px;
+  color: #000000;
+  font-weight: 700;
+  border-radius: 10px;
+  &:hover {
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    background: none;
+    color: #000;
+    /* text-decoration: underline; */
+  }
+}
+
+/* .header-links li a {
+  &:hover {
+    width: fit-content;
+    height: fit-content;
+    padding: 0 0.5rem;
+    animation: header-links 3s linear alternate backwards;
+  
+    background: #000;
+  }
+} */
+/* .header-links li a {
+  font-size: 1rem;
+}
+
+@keyframes header-links {
+  0% {
+    border-radius: 8px;
+  
+    background: #000;
+  }
+  25% {
+    border-radius: 25px;
+   
+    background: #000;
+  }
+  50% {
+    border-radius: 50px;
+   
+    background: #000;
+  }
+  75% {
+    border-radius: 75px;
+  
+    background: #000;
+  }
+  100% {
+    border-radius: 100px;
+   
+    background: #000;
+  }
+} */
+
+/********************End testcard code styling *****************/
+
+.Login_logOUT {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 830px) {
+  .header-links {
+    gap: 3rem;
+  }
+
+  .header-links a {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .ls-bar-exam-page {
+    display: grid;
+
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0 0.3rem;
+  }
+  .header h2 {
+    font-size: 0.5rem;
+  }
+  .header_logo {
+    width: 150px;
+  }
+  .container_H100 {
+    display: grid;
+    place-items: center;
+  }
+  .card_container {
+    margin: 0.9rem auto;
+  }
+  ol,
+  ul {
+    padding: 0;
+  }
+  p {
+    margin: 0;
+  }
+  .first_card {
+    gap: 0;
+    transform: scale(0.9);
+    &:hover {
+      transform: scale(0.95);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

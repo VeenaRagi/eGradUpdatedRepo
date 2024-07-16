@@ -1,0 +1,84 @@
+
+.style{
+    
+    width: 200px;
+    background-color: #1065B7;
+     text-align: center; 
+     font-weight: 800;
+      padding: 11px 0px; 
+      color: white; 
+      font-size: 12px; 
+      display: inline-block;
+       text-decoration: none;
+    }
+
+*{
+    margin: 0;padding: 0;
+}
+
+.payujsx_container{
+   max-width: 500px;
+    margin: 2rem auto;
+}
+
+.payujsx_form_container{
+    /* border: 1px solid #000; */
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+
+    padding: 1rem;
+}
+
+.payujsx_form_container form{
+    width: fit-content;
+    margin: 0 auto;
+}
+.payujsx_form_container form div{
+   display: grid;
+
+   grid-template-columns: 1fr 1fr;
+   gap: 1.5rem;
+   margin: 1rem 0;
+}
+.payujsx_form_container form label{
+    color:#000000ad ;
+    font-weight: 400;
+}
+.payujsx_form_container form input{
+    border: 1px solid #000000b6;
+    height: 30px;
+    border-radius: 8px;
+}
+
+.payujsx_form_container form button{
+    /* background: #02973b; */
+    background: #01c3ff;
+    color: #fff;
+    font-weight: 400;
+    letter-spacing: 1px;
+    width: 100px;
+   
+ margin: 5rem auto;
+ margin: 0;
+ /* margin-left: 5rem; */
+}
+
+/* @media (max-width:780px) {
+    
+} */
+
+
+
+.style{
+    width: 135px;
+     background-color: #1065b7;
+      text-align: center;
+       font-weight: 800; 
+       padding: 11px 0px;
+        color: white; 
+        font-size: 12px; 
+        display: inline-block; 
+        text-decoration: none;
+    } 
+

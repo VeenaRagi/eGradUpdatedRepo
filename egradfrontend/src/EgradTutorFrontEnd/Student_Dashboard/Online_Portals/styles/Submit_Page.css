@@ -1,0 +1,64 @@
+.submit-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .submit-page-card {
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    text-align: center;
+    animation: fadeInUp 0.5s ease forwards;
+  }
+  
+  .submit-page-heading {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .submit-page-subheading {
+    font-size: 20px;
+    color: #555;
+    margin-top: 20px;
+  }
+  
+  .submit-page-button {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-page-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .submit-page-link {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .submit-page-card {
+      width: 80%;
+    }
+  }
+  

@@ -1,4 +1,4 @@
-import AboutUs from "../../EgradTutorFrontEnd/EgradTutorWebsit/WebsiteSubPages/AboutUsPage/AboutUs";
+import AboutUs from "../../EgradTutorFrontEnd/EgradTutorWebsite/WebsiteSubPages/AboutUsPage/AboutUs";
 
 const JSONClasses = {
   "Theme-default": {

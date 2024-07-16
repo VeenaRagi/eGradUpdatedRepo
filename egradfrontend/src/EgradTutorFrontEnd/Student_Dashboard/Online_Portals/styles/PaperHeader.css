@@ -1,0 +1,15 @@
+.jee-header{
+    background-color: rgb(70, 87, 107);
+    color: white;
+    font-size: 30px;
+    font-weight: 600;
+    width: 1905px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+}
+.logo{
+    position: relative;
+    right: 600px;
+}
+

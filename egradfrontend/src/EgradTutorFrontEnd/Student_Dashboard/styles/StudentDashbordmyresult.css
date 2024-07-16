@@ -1,0 +1,853 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+/* font-family: "PT Serif", serif; */
+@import url("https://fonts.googleapis.com/css2?family=Concert+One&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+/* font-family: "Concert One", sans-serif; */
+
+.resultContainerSection {
+  background: #eef1fbff;
+}
+.sub_PerformanceHeaderTestName {
+  padding: 15px;
+}
+.sdResults {
+  font-family: "Concert One", sans-serif;
+  font-size: 18px;
+}
+
+.StudentDashbord_Container {
+  background: rgb(255, 255, 255);
+  width: 75vw;
+  margin: 0 auto;
+}
+.selectedButtonNameLink {
+  font-size: 16px;
+  font-weight: 900;
+  /* color: #ff8383; */
+  color: #00aff0;
+  font-family: "PT Serif", serif;
+}
+.Time_ProgressConatainer {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+.StudentDashbord_navLocation {
+  background: #eef1fb;
+  display: flex;
+  justify-content: space-between;
+  color: #000000;
+  /* padding: 4px 10px; */
+  /* box-shadow: 0px 0px 11px -8px; */
+  padding: 9px 0;
+}
+.StudentDashbord_navLocation2 {
+  /* background: #f0f0f0; */
+  display: flex;
+  gap: 1rem;
+  color: #fff;
+  padding: 7px 10px;
+  font-family: "PT Serif", serif;
+}
+
+.User_result {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-family: "PT Serif", serif;
+  background: #eef1fb;
+  padding: 10px;
+}
+.User_result li {
+  font-family: "PT Serif", serif;
+}
+.User_result li {
+  box-shadow: 0px 1px 12px -9px;
+  padding: 0 10px;
+  border-radius: 4px;
+  /* background-image: linear-gradient(to bottom right, #ffffff, #ebebff); */
+  /* background-image: linear-gradient(to bottom right, #feeef0, #fcf9fc); */
+  /* background-image: linear-gradient(to bottom right, #dcf3e9, #fcf9fc); */
+  background: #ffff;
+}
+/* .StudentDashbord_contant{
+    /* padding: 0 5rem; */
+/* } */
+*/ .sub_PerformanceHeaderTestName {
+  padding-left: 20px;
+  color: #00aff0;
+  font-family: "PT Serif", serif;
+  font-weight: 700;
+}
+
+.SolutionshandleShowAnswer {
+  display: flex;
+  width: 100%;
+}
+
+.SolutionshandleShowAnswer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+.SolutionshandleShowAnswer:hover {
+  background: rgb(240 240 240);
+  color: #000;
+}
+.Cr_Answer {
+  box-shadow: 0px 0px 8px 8px #f0f0f0;
+}
+.Cr_Answer h4 {
+  padding-left: 14px;
+  font-size: 20px;
+  color: #575757;
+}
+.Result_container {
+  display: flex;
+  justify-content: space-around;
+  /* background: #f0f0f0; */
+  /* padding: 1rem 0; */
+  gap: 2rem;
+}
+
+/* .Result_contant {
+   
+} */
+
+.ResultTime_contant {
+  background: rgb(255, 255, 255);
+  width: 100%;
+  padding: 1rem 6px 0px 1rem;
+  box-shadow: 0px 0px 11px -8px;
+}
+.StudentDashbord_navLocation2 button {
+  color: #000000;
+  background: #ffffff;
+  padding: 2px 5px;
+  margin: 0;
+  /* color: #ff8383; */
+  color: #00aff0;
+  border: 2px solid #f0f0f0;
+}
+
+.StudentDashbord_contant {
+  /* background: linear-gradient(70deg,  #00aff0,#e64141); */
+  margin-top: 10px;
+  /* color: #ffff; */
+  /* height: 110px; */
+  box-shadow: 0px 0px 11px -8px;
+  background: #fff;
+  padding: 10px 0;
+}
+
+.PerformanceRank {
+  background-color: rgb(255, 255, 255);
+  padding: 1rem;
+  box-shadow: 0px 0px 11px -8px;
+}
+.IoTrophyOutlineI {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.IconIoTrophyOutlineI {
+  font-size: 150px;
+  color: #ededed;
+  max-width: 100%;
+}
+.IoTrophyOutlineI1 {
+  font-size: 200px;
+  max-width: 100%;
+}
+.IoTrophyOutline_container,
+.PerformanceRank {
+  position: relative;
+  /* background-image: linear-gradient(to right, rgb(255 205 70), rgb(255 242 205), rgb(255 249 232)); */
+}
+.IoTrophyOutline_span {
+  width: 100px;
+  height: 29px;
+  display: block;
+  background: #ededed;
+  position: absolute;
+  bottom: -17px;
+  left: 17%;
+}
+.IoTrophyOutline_span2 {
+  bottom: -16px;
+  left: -14%;
+  width: 263px;
+  background: #ededed;
+  position: absolute;
+  overflow: hidden;
+}
+
+.Section_Wise_Result_View {
+  box-shadow: 0px 0px 11px -8px;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+/* .Section_Wise_Result_View_card {
+    box-shadow: 0px 0px 2px 0px;
+} */
+
+.Section_Wise {
+  display: flex;
+}
+
+.result_Solutions {
+  /* background: #ebb5b5; */
+  margin: 1rem 0;
+  box-shadow: 0px 0px 11px -8px;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  /* padding: 2rem; */
+}
+.ChallengeButton {
+  /* width: 100px; */
+  margin: 0 auto;
+
+  /* padding: 10px 20px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #3f41404f;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0;
+  padding: 0.5rem;
+}
+.ChallengeButtonparet {
+  margin: 0;
+  padding: 0;
+  margin: 0 auto;
+  float: right;
+  
+}
+.notChallengeButton {
+  margin: 0 auto;
+
+  /* padding: 10px 20px; */ /* Commented out as per your CSS */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #198754;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0;
+  padding: 0.5rem;
+}
+
+.result_Solutions_Correct {
+  display: flex;
+  gap: 3rem;
+}
+.result_Solutions_Correct span b {
+  color: #000000;
+  /* background: red; */
+}
+
+.AnswerEvaluation_Container {
+  display: grid;
+  grid-template-columns: 40% 40%;
+}
+.AnswerEvaluation {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.YourTextDAta {
+  /* color: #ff8383; */
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.AnswerEvaluation_Container {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  justify-content: center;
+  gap: 2rem;
+  padding: 16px 0px;
+}
+
+.resultSolutionsQ {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 20px;
+  padding: 0 14px;
+}
+
+.Question_Paper_Key {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+.Question_KeyCOntainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+/* .Question_contant {
+    display: flex;
+    align-items: center;
+} */
+.Question_contant ul {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 0;
+}
+
+.Question_contant {
+  box-shadow: 0px 0px 5px -3px;
+  width: 76%;
+}
+
+.qk_index {
+  width: 160px;
+}
+.qk_index1 {
+  /* width: ; */
+  display: flex;
+}
+
+.individual_questions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0px 0px 5px -3px;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  gap: 10px;
+}
+
+.individual_questions p {
+  padding: 0;
+  margin: 0;
+}
+.individual_questions h4 {
+  margin: 0;
+}
+
+.sd_Result {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.sd_Result li {
+  background: #f2f2ff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 9px;
+  height: 100%;
+  /* background-image: linear-gradient(to bottom right, #fbfbff, #ffe6e6); */
+  /* background-image: linear-gradient(to bottom right, #fbfbff, #e1f4ec); */
+}
+.sd_Result li p {
+  font-family: "PT Serif", serif;
+}
+
+.sbrPageFOnt {
+  font-family: "PT Serif", serif;
+}
+
+.SD_Performance_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  background-image: linear-gradient(
+    to right,
+    rgb(255 234 179),
+    rgb(255 242 205),
+    rgb(255 249 232)
+  );
+}
+/* .SD_Performance_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background-image: linear-gradient(to right, rgb(255 234 179), rgb(255 242 205), rgb(255 249 232));
+    background-image: url(http://localhost:3000/static/media/dark-abstract-texture.dddfe0fb9bd0e7806016.jpg);
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    background-position-y: bottom;
+} */
+.PerformanceIMG img {
+  max-width: 450px;
+}
+.Top_Three_RanksList {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.Top_Three_Ranks h2 {
+  font-family: "Concert One", sans-serif;
+  font-size: 3rem;
+}
+.Top_Three_RanksList li {
+  font-family: "Concert One", sans-serif;
+  font-size: 1.5rem;
+}
+.Top_Three_RanksListSpn {
+  color: #1f3c88;
+  font-family: "Concert One", sans-serif;
+  font-size: 2rem;
+}
+.Section_WiseCOntainer {
+  display: flex;
+  justify-content: space-between;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+}
+.Section_WiseCOntainer li p {
+  font-family: "PT Serif", serif;
+}
+.SectionSubject {
+  color: red;
+}
+
+.Section_Wise_Result_View_card .SectionWise_Result {
+  display: flex;
+  justify-content: space-between;
+}
+
+.SectionWise_Result li {
+  background: red;
+  height: 100%;
+}
+
+.SectionWise_Result li {
+  background: #fffbee;
+  max-height: 311px;
+  padding: 11px;
+  display: flex;
+  flex-direction: column;
+}
+
+.SectionWise_Result li p:nth-child(0) {
+  background: red;
+}
+
+/*
+.circular-progress-bar {
+    width: 100px;
+    height: 100px;
+    position: relative;
+  }
+ 
+  .circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #d6d6d6;
+    position: relative;
+  }
+ 
+  .circle .mask,
+  .circle .fill,
+  .circle .inside-circle {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+  }
+ 
+  .circle .mask {
+    clip: rect(0, 50px, 100px, 0);
+  }
+ 
+  .circle .mask.full,
+  .circle .fill {
+    clip: rect(0, 100px, 100px, 50px);
+  }
+ 
+  .circle .mask.full,
+  .circle .mask.half,
+  .circle .fill {
+    background: #3e98c7;
+  }
+ 
+  .circle .mask.half {
+    clip: rect(0, 100px, 100px, 0);
+  }
+ 
+  .circle .fill.fix {
+    background: #d6d6d6;
+    clip: rect(0, 50px, 100px, 0);
+    animation: fillFix 1s reverse;
+  }
+ 
+  .circle .inside-circle {
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+ 
+  .circle .inside-circle .progress {
+    font-size: 16px;
+    color: #f88;
+  }
+ 
+  @keyframes fillFix {
+    0% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+   */
+#Answer_EvaluationCHart {
+  width: 400px;
+  height: 400px;
+}
+
+#sdTotal_Percentage {
+  width: 400px;
+  height: 400px;
+}
+
+#barChartsContainer {
+  width: 33%;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 1rem;
+}
+/* .Section_WiseResultChart{
+   
+} */
+.DropdownContainersectionId select {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .StudentDashbord_Container {
+    width: 94vw;
+  }
+  .resultSolutionsQ img {
+    width: 77vw;
+  }
+  .Result_container {
+    flex-direction: column;
+  }
+  #Answer_EvaluationCHart {
+    width: 350px;
+    height: 350px;
+  }
+  #sdTotal_Percentage {
+    width: 350px;
+    height: 350px;
+  }
+  .AnswerEvaluation_Container {
+    display: flex;
+    flex-direction: column;
+  }
+  .sd_Result {
+    display: flex;
+    flex-direction: column;
+  }
+  .sd_Result li p {
+    font-family: "PT Serif", serif;
+    text-align: center;
+  }
+  .sd_Result li p {
+    font-family: "PT Serif", serif;
+    text-align: center;
+  }
+  #barChartsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 1rem;
+    width: 50%;
+  }
+}
+@media (max-width: 820px) {
+  #barChartsContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+    padding: 1rem;
+    width: 100%;
+  }
+  .result_Solutions {
+    margin: 5px;
+  }
+}
+@media (max-width: 500px) {
+  .StudentDashbord_navLocation2 {
+    flex-direction: column;
+  }
+  .User_result {
+    flex-direction: column;
+  }
+  .Result_container {
+    flex-direction: column;
+  }
+  #Answer_EvaluationCHart {
+    width: 350px;
+    height: 350px;
+  }
+  #sdTotal_Percentage {
+    width: 200px;
+    height: 200px;
+  }
+  .AnswerEvaluation_Container {
+    display: flex;
+    flex-direction: column;
+  }
+  .Time_ProgressConatainer {
+    flex-direction: column;
+  }
+  .sd_Result li p {
+    font-family: "PT Serif", serif;
+    text-align: center;
+  }
+  #barChartsContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+    padding: 1rem;
+    width: 100%;
+  }
+  .StudentDashbord_Container {
+    width: 96vw;
+  }
+}
+/* width={400} height={400} */
+
+.BookmarkButton i {
+  font-size: 25px;
+}
+
+.BookmarkButton {
+  padding: 0.4rem;
+  margin: 0 0;
+  float: right;
+}
+
+.BookmarkButton.bookmarked {
+  /* Your bookmarked button styles go here */
+  color: black; /* Change to your desired color */
+}
+
+
+.doubtDatacontainerName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+ 
+  & p {
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+}
+.doubtDatacontainer {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+   .dount-img{
+    max-width: 500px;
+    min-width: 200px;
+  }
+}
+.Challenge_Popup {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.handleSend_Solution {
+  display: flex;
+  justify-content: space-between;
+}
+.ChallengeOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: rgb(0 0 0 / 2%); */
+}
+
+.ChallengePopup {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+  width: 800px;
+  min-height: 300px;
+  h3{
+    color: #000;
+  }
+  button{
+    background: 
+    #198754;
+  }
+
+  
+.handleCloseChallengeForm {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  font-size: 1rem;
+  color: #000;
+}
+  .message-body-section{
+  width: 100%;
+   min-height: 200px;
+   border: 1px solid #00000085;
+   margin: 0.5rem auto;
+     position: relative;
+  }
+  #attach-file-button{
+    background: none;
+    color: #000;
+    font-weight: 500;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 3.5rem;
+    right: 0.8rem;
+
+  }
+}
+.ChallengePopup form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: moveWatermark 22s infinite;
+  color: rgba(192, 184, 184, 0.5); /* Change color with alpha channel */
+}
+ 
+@keyframes moveWatermark {
+  0% {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  25% {
+    top: 0;
+    left: 0;
+    transform: translate(0, 0);
+  }
+  50% {
+    top: 0;
+    left: 100%;
+    transform: translate(-100%, 0);
+  }
+  50% {
+    top: 100%;
+    left: 100%;
+    transform: translate(-100%, -100%);
+  }
+  100% {
+    top: 100%;
+    left: 0;
+    transform: translate(0, -100%);
+  }
+}
+ 
+ 
+ 
+ 
+ 
+/* Top Watermark Animation */
+.top {
+  /* top: 8px; */
+  animation: moveWatermarkTop 8s infinite;
+  position: absolute;
+  left: 62px;
+  z-index: 99;
+}
+@keyframes moveWatermarkTop {
+  0%, 100% {
+    top: 0px;
+  }
+  100% {
+    top: 300px; /* Adjust to change the distance it moves */
+  }
+}
+ 
+
+/* .eGRADTutorWatermark {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  top: 35%;
+  right: 38%;
+  color: #dddddd;
+  font-size: 23px;
+} */
+
+.eGRADTutorWatermark {
+  position: relative;
+  /*  background-color: #f2f2f2; Gray background color */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url('../Watermark1.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
+
+}
+
+.eGRADTutorWatermark .eTorWatermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Additional styles for the watermark */
+}
+

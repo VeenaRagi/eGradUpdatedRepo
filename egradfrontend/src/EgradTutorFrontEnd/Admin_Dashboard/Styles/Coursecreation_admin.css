@@ -1,0 +1,143 @@
+.courseOtsPqbOvl_Btns {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    background: rgb(255, 255, 255);
+    width: 100%;
+    height: auto;
+    margin: 11px;
+    margin: 3rem 0;
+    border-radius: 8px;
+    & ul{
+            display: flex;
+            gap: 2rem ;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+
+            & li{
+                & button {
+                    background: #48bde9;
+
+                    /* background: linear-gradient(to right, #000102 -47%, #053456 48%, #00aff0 92%, white 101%); */
+                    color: white;
+                    padding: 2px 49px;
+                    &:hover{
+                        background: #bcd4e7;
+                        color: #053151;
+                    }
+                }
+            }
+    }
+}
+.coursUpdatingF_btn {
+    display: flex;
+    justify-content: right;
+}
+.coursePortals {
+    width: 89vw;
+    /* height: 90vh; */
+}
+.testCreation_list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.ccform_btnbs {
+    display: flex;
+    justify-content: right;
+    margin: 0 1rem;
+}
+.otsCloseBtn_Mar{
+    margin-bottom: 4rem;
+}
+.courseOtsPqbOvl_CloseBtns{
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: none;
+        color: red;
+        &:hover{
+            background: none;
+        }
+}
+.ots_courseTitle_text{
+    text-align: center;
+}
+.coures_-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 20px 0px;
+}
+
+.coures-contant_-flexCOntantc {
+    display: flex;
+    gap: 6rem;
+     /* grid-template-columns: repeat( auto-fit, minmax(250px, 450px) ); */
+     align-items: center;
+    /* grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) ); */
+}
+
+.coures_-typeOfTest {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.coures_-Subjects{
+    display: flex;
+    flex-wrap: wrap;
+}
+.couresCreation_-table{
+    border-collapse: collapse;
+    width: 100%;
+    text-transform: uppercase;
+}
+#rupee-sign {
+    font-size: 11px;
+    color: black;
+}
+.couresotc_-table tr th {
+    font-size: 14px;
+    padding: 3px;
+    border: 1px solid #b0c5d3;
+    border-top: none;
+    border-bottom: none;
+}
+.couresotc_-table_-tBody tr td {
+    font-size: 14px;
+    text-transform: uppercase;
+    /* padding: 5px; */
+    text-align: left;
+    font-weight: 500;
+    border: 1px solid #b0c5d3;
+    border-top: none;
+    border-bottom: none;
+}
+.couresotc_-table_-tBody {
+    text-align: center;
+}
+
+.Coures_-otsTitels {
+    font-size: 17px;
+    color: #042a45;
+    background: #edf7ff;
+    padding: 10px;
+    margin-bottom: 5px;
+    box-shadow: 0px 7px 11px -4px #043151;
+}
+
+@media (max-width:1300px) {
+    .couresotc_-table tr th {
+    font-size: 13px;
+    padding: 1px 0px;
+}
+    .couresotc_-table_-tBody tr td {
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 2px;
+    text-align: left;
+}
+    
+}

@@ -1,0 +1,72 @@
+
+.Questionbookmark_container {
+    width: 87vw;
+    padding-top: 2rem;
+    margin: 0 auto;
+    height: 92vh;
+    overflow-y: scroll;
+}
+.Questionbookmark_container::-webkit-scrollbar {
+    display: none;
+}
+.Questionbookmark_contant {
+    /* background: red; */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.QuestionbookmarkDAta{
+    box-shadow: 0px 0px 11px -8px;
+    /* padding: 1rem; */
+    background: #fff;
+    & button{
+        background: #e9f2ee;
+        color: #000000;
+        /* margin-bottom: 0.5rem; */
+        /* width: 150px; */
+        padding: 2px 7px !important;
+     
+    }
+}
+.dbq_Answer_sh {
+    width: 100%;
+}
+.qbmTitle {
+    background: #e9f2ee;
+    padding: 4px;
+    color: #000000;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.qbm_QuestionImage {
+    padding: 0;
+    margin: 10px 0;
+}
+.dbq_options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px 0;
+}
+.dbq_Answer_sh {
+    display: flex;
+    /* width: 100%; */
+    /* background: #ededed; */
+}
+.toggleAnswerMdDeleteForever {
+    display: flex;
+    gap: 2px;
+    justify-content: space-between;
+}
+.toggleAnswerMdDeleteForever button svg {
+    color: #e87474;
+    font-size: 34px;
+}
+.bdqSolution{
+    box-shadow: 0px 0px 11px -8px;
+    padding: 10px;
+ 
+}
+.qbm_Image{
+    max-width: 100%;
+}
