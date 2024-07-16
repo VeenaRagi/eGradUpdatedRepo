@@ -462,13 +462,24 @@ export const StudentDashbordheader = () => {
     }
   };
 
+  useEffect(() => {
+    fetchImage();
+  }, []);
+
+
   return (
     <div>
       <div className="Quiz_main_page_header">
         {/* {nav.map((nav, index) => { */}
         {/* return ( */}
         <div className="Quiz_main_page_navbar">
-          <div className="Quizzlogo"></div>
+          <div className="Quizzlogo">
+            <img
+                      src={image}
+                      className=""
+                      alt="Current"
+                    />
+          </div>
           {error ? (
             userRole === "user" ? (
               <p>Unable to load image at the moment. Please try again later.</p>
@@ -480,11 +491,16 @@ export const StudentDashbordheader = () => {
           ) : (
             image && (
               <Link to="/">
-                <img
+                {/* <img
                   src={image}
-                  // className={`${themeDetails.themeLogoImg}`}
+                  className={`${themeDetails.themeLogoImg}`}
                   alt="Current"
-                />
+                /> */}
+                  {/* <img
+                      src={image}
+                      className=""
+                      alt="Current"
+                    /> */}
               </Link>
             )
           )}

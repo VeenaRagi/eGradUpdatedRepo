@@ -1016,3 +1016,84 @@ body.popup-open .popup {
   height: 37rem;
   border: 1px solid #00000047;
 }
+
+
+
+.examSummary_quizPagewatermark {
+  background-image: url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png');
+  background-repeat: no-repeat;
+  background-size: 10%; /* Adjust the size of the watermark images */
+  background-position: 
+    center center, 
+    center 10%,
+    center 30%, 
+    75% center, 
+    100% center, 
+    75% 30%, 
+    75% 70%, 
+    25% 30%, 
+    75% 10%,
+    0% 30%, 
+    0% 70%,
+    0% 10%,
+    25% 10%,
+    0% 90%,
+    25% 70%, 
+    25% 90%,
+    center 70%, 
+    center 90%, 
+    75% 90%,
+    100% 10%,
+    100% 30%,
+    100% 70%,
+    100% 90%,
+    0% center,  
+    25% center;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  min-height: 100vh;
+  background-attachment: fixed; /* Ensures watermark stays fixed during scrolling */
+  padding: 2rem; /* Adds some padding around the content */
+}
+
+.Exam_summary_table {
+  width: 65%;
+  margin: 2rem 20rem;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.Exam_summary_table table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.Exam_summary_table th,
+.Exam_summary_table td {
+  padding: 10px;
+  border: 1px solid #dddddd;
+}
+
+.Exam_summary_table th {
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+}
+
+.Exam_summary_table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.Exam_summary_table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.Exam_summary_table td {
+  color: #555;
+}
+
+.Exam_summary_table td:first-child {
+  font-weight: bold;
+}
