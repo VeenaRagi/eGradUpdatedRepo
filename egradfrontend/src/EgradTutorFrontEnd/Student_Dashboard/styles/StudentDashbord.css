@@ -399,8 +399,12 @@
   margin-left: 0.6rem;
 }
 
-.Student_profileUpdate_editsubconatiner_from div input {
-  width: 100%;
+/* .full-name_email .Student_profileUpdate_editsubconatiner_from div input {
+  width: 50%;
+} */
+
+.StudentDashbordsettings_subconatiner .Student_profileUpdate_editconatiner .Student_profileUpdate_editsubconatiner .Student_profileUpdate_editsubconatiner_from .full-name_email input{
+  width: 50%;
 }
 
 .Student_profileUpdate_editsubconatiner_from button {
@@ -1047,6 +1051,60 @@
     place-items: center;
   }
 }
+
+input#email{
+  width: 40%;
+}
+
+
+.user_update_pswd_cntner{
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  margin-top: 20px;
+  width: 50%;
+}
+
+.form-label{
+  width: 50%;
+}
+
+.pswd_update_btn_container{
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding-left: 100px;
+}
+
+
+.pswd_update_btn{
+width: 150px;
+background-color: green;
+color: white;
+}
+
+.user_update_pswd_cntner_main{
+  border: 1px solid gray;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+
+
+
+@media (max-width:768px){
+  .user_update_pswd_cntner{
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+
 
 
 
