@@ -203,26 +203,6 @@ router.post(
     const tabImage = req.file ? req.file.buffer : null;
     const { coursePortaleId, courseTabId, courseTabDescription } = req.body;
     console.log(courseTabId, "this is the course tab id from the front end");
-    // if (tabImage) {
-    //   const isDuplicate=await db.query("select * from course_tab_images where course_tab_title_id=?",[courseTabId])
-    //   console.log(isDuplicate,"this is the result from the isDuplicate")
-    //   if(isDuplicate.length>0)
-    //   {
-
-    //   }
-    //   response = await db.query(
-    //   //   `INSERT INTO course_tab_images (course_tab_title_id,course_tab_image)
-    //   //    VALUES (?, ?)
-    //   //    ON DUPLICATE KEY UPDATE course_tab_image = VALUES(course_tab_image), course_tab_title_id = VALUES(course_tab_title_id)`,
-    //   //   [courseTabId,tabImage]
-    //   // );
-    //  `INSERT INTO course_tab_images (course_tab_title_id, course_tab_image)
-    //        VALUES (?, ?)
-    //        ON DUPLICATE KEY UPDATE course_tab_image = VALUES(course_tab_image)`,
-    //       [courseTabId, tabImage]
-    //     );
-
-    // }
     if (tabImage) {
       // Check if an image already exists for the given courseTabId
       const [existingImage] = await db.query(
@@ -243,6 +223,11 @@ router.post(
           [courseTabId, tabImage]
         );
       }
+      response = await db.query(
+        "INSERT INTO course_tab_details (course_portale_id, course_tab_title_id, course_tab_text) VALUES (?, ?, ?)",
+        [coursePortaleId, courseTabId, courseTabDescription]
+      );
+    console.log(response, "This is the response ");
     } else {
       response = await db.query(
         "INSERT INTO course_tab_details (course_portale_id, course_tab_title_id, course_tab_text) VALUES (?, ?, ?)",

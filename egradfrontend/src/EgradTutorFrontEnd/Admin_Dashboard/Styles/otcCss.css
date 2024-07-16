@@ -44,6 +44,7 @@ input[type="text"], input[type="number"], input[type="date"], input[type="time"]
 
 .activeSD{
   background: linear-gradient(to right, #000102 -15%, #053456 48%, #000000 117%);
+  padding: 1.5rem 0;
   & p{
     color: white;
   }

@@ -682,6 +682,12 @@ fieldset > legend {
     transform: scale(0.8);
   }
 }
+@media (max-width: 1003px) {
+  .left-nav-bar ul li a p {
+    /* font-size: 11px; */
+    margin: 0;
+}
+}
 @media (max-width: 1000px) {
   .mobile_menu {
     position: absolute;
