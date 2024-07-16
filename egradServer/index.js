@@ -19,11 +19,9 @@ app.get('/api/server/status', (req, res) => {
   res.send({ status: 'Server is running' });
 });
 
+
 const Logo = require("./EgradTutorWebsite/Logo");
 app.use("/Logo", Logo);
-
-const LoginApis = require("./LoginApis");
-app.use("/LoginApis", LoginApis);
 
 const LandingPageHeader = require("./EgradTutorWebsite/LandingPage/LandingPageHeader");
 app.use("/LandingPageHeader", LandingPageHeader);
@@ -97,94 +95,12 @@ app.use("/WhychooseUsEdit", WhychooseUsEdit);
 const PoopularCourses = require("./EgradTutorWebsite/CoursePage/PoopularCourses");
 app.use("/PoopularCourses", PoopularCourses);
 
-const StudentRegistationPage = require("./EgradTutorWebsite/StudentDashbord/StudentRegistationPage");
-app.use("/StudentRegistationPage", StudentRegistationPage);
 // courseTab
 const courseTab=require('./EgradTutorWebsite/CourseTabsAPIS/CourseTabs')
 app.use('/courseTab',courseTab);
 
-const Login = require("./EgradTutorWebsite/LoginSystem/Login");
-app.use("/Login", Login);
-
-
-
 const LandingPageExamEdit = require("./EgradTutorWebsite/LandingPage/LandingPageExamEdit");
 app.use("/LandingPageExamEdit", LandingPageExamEdit);
-
-const PayU = require("./PaymentGatway/PayU");
-app.use("/PayU", PayU);
-
-
-const StudentDataforBuyCourses = require("./eGradTutorStudentDashboard/StudentDataforBuyCourses");
-app.use("/StudentDataforBuyCourses", StudentDataforBuyCourses);
-
-const Dashboard = require("./OTS_Quiz_Admin/Dashbord");
-app.use("/Dashboard", Dashboard);
-
-const ExamCreation = require("./OTS_Quiz_Admin/ExamCreation");
-app.use("/ExamCreation", ExamCreation);
-
-const CoureseCreation = require("./OTS_Quiz_Admin/CoureseCreation");
-app.use("/CoureseCreation", CoureseCreation);
-
-const InstructionCreation = require('./OTS_Quiz_Admin/InstructionCreation')
-app.use("/InstructionCreation", InstructionCreation);
-
-
-const TestCreation = require('./OTS_Quiz_Admin/TestCreation')
-app.use("/TestCreation", TestCreation);
-
-const DocumentUpload =require('./OTS_Quiz_Admin/DocumentUpload')
-app.use("/DocumentUpload", DocumentUpload);
-
-const ImageUpload =require('./OTS_Quiz_Admin/ImageUpload')
-app.use("/ImageUpload", ImageUpload);
-
-const TestActivationPage =require('./OTS_Quiz_Admin/TestActivationPage')
-app.use("/TestActivationPage", TestActivationPage);
-
-const DoubtSection =require('./eGradTutorStudentDashboard/DoubtSection')
-app.use("/DoubtSection",DoubtSection)
-
-
-const Portal_coures_creation_admin=require('./OTS_Quiz_Admin/Portal_coures_creation_admin')
-app.use('/Portal_coures_creation_admin',Portal_coures_creation_admin)
-
-const OtsvidesUploads =require('./OTS_Quiz_Admin/OtsvidesUploads')
-app.use("/OtsvidesUploads",OtsvidesUploads)
-
-const ughomepage_banner_login =require("./OTS_Quiz_Admin/ughomepage_banner_login")
-
-app.use("/ughomepage_banner_login" , ughomepage_banner_login)
-
-
-const AdminProfile=require("./OTS_Quiz_Admin/AdminProfile")
-app.use("/AdminProfile",AdminProfile)
-
-//================OTS_QUIZAPP_IMPORTS_START=================
-const ExamPage = require("./eGradTutorStudentDashboard/ExamPage");
-const Exam_Course_Page = require("./eGradTutorStudentDashboard/Exam_Course_Page");
-const CoursePage = require("./eGradTutorStudentDashboard/CoursePage");
-const TestPage = require("./eGradTutorStudentDashboard/TestPage");
-const InstructionPage = require("./eGradTutorStudentDashboard/InstructionPage");
-const QuizPage = require("./eGradTutorStudentDashboard/QuizPage");
-const TestResultPage = require("./eGradTutorStudentDashboard/TestResultPage");
-const Myresult =require("./eGradTutorStudentDashboard/Myresult")
-const studentSettings=require('./eGradTutorStudentDashboard/StudentSettings')
-//================OTS_QUIZAPP_IMPORTS_END==================
- 
-//================OTS_QUIZAPP_ROUTES_START==================
-app.use("/ExamPage", ExamPage);
-app.use("/Exam_Course_Page", Exam_Course_Page);
-app.use("/CoursePage", CoursePage);
-app.use("/TestPage", TestPage);
-app.use("/InstructionPage", InstructionPage);
-app.use("/QuizPage", QuizPage);
-app.use("/TestResultPage", TestResultPage);
-app.use("/Myresult",Myresult);
-app.use('/studentSettings',studentSettings)
-//================OTS_QUIZAPP_ROUTES_END===============
-
 
 const EncrypDecryp = require("./UrlConversion/EncrypDecryp");
 // require('dotenv').config();
@@ -192,15 +108,102 @@ const EncrypDecryp = require("./UrlConversion/EncrypDecryp");
 // app.use(bodyParser.json());
 app.use('/EncrypDecryp', EncrypDecryp);
 
-// ---------------student setting api routs------------
+
+//***************************************************************OTS_QUIZ APP ******************************/
+const CoursePage =require("./OTS_QuizApp/CoursePage");
+app.use('/CoursePage',CoursePage)
+
+const Exam_Course_Page=require("./OTS_QuizApp/Exam_Course_Page");
+app.use('/Exam_Course_Page',Exam_Course_Page);
+
+const ExamPage=require("./OTS_QuizApp/ExamPage");
+app.use('/ExamPage',ExamPage)
+
+const InstructionPage=require("./OTS_QuizApp/InstructionPage");
+app.use("/InstructionPage",InstructionPage)
+
+const QuizPage=require("./OTS_QuizApp/QuizPage");
+app.use("/QuizPage",QuizPage);
+
+const StudentRegistationPage=require("./OTS_QuizApp/StudentRegistationPage");
+app.use("/StudentRegistationPage",StudentRegistationPage);
+
+const TestPage=require("./OTS_QuizApp/TestPage")
+app.use("/TestPage",TestPage);
+
+const TestResultPage=require("./OTS_QuizApp/TestResultPage");
+app.use("/TestResultPage",TestResultPage);
 
 
+//********************************************* */
+
+const PayU=require("./PayU/PayU");
+app.use("/PayU",PayU);
+
+const CoureseCreation=require("./OTS_Quiz_Admin/CoureseCreation");
+app.use("/CoureseCreation",CoureseCreation);
+
+const Dashbord=require("./OTS_Quiz_Admin/Dashbord");
+app.use("/Dashbord",Dashbord);
+
+const DocumentUpload=require("./OTS_Quiz_Admin/DocumentUpload");
+app.use("/DocumentUpload",DocumentUpload);
+
+const ExamCreation=require("./OTS_Quiz_Admin/ExamCreation");
+app.use("/ExamCreation",ExamCreation)
+
+const ImageUpload=require("./OTS_Quiz_Admin/ImageUpload");
+app.use("/ImageUpload",ImageUpload);
+
+const InstructionCreation=require("./OTS_Quiz_Admin/InstructionCreation");
+app.use("/InstructionCreation",InstructionCreation);
+
+const Portal_coures_creation_admin=require("./OTS_Quiz_Admin/Portal_coures_creation_admin");
+app.use("/Portal_coures_creation_admin",Portal_coures_creation_admin);
+
+const TestActivationPage=require("./OTS_Quiz_Admin/TestActivationPage");
+app.use("/TestActivationPage",TestActivationPage);
+
+const TestCreation=require("./OTS_Quiz_Admin/TestCreation")
+app.use("/TestCreation",TestCreation);
 
 
-// ----------------------------------------------------
+const OtsvidesUploads =require('./OVL_Admin/OtsvidesUploads')
+app.use("/OtsvidesUploads",OtsvidesUploads)
+
+const OVL_ExamCreation =require('./OVL_Admin/OVL_ExamCreation')
+app.use("/OVL_ExamCreation",OVL_ExamCreation)
+ 
+const OVL_CourseCreation =require('./OVL_Admin/OVL_CourseCreation')
+app.use('/OVL_CourseCreation',OVL_CourseCreation)
+
+const OVL_Landing_page=require('./OVL_Admin/OVL_Landing_page')
+app.use('/OVL_Landing_page',OVL_Landing_page)
 
 
+const PQB_Landing_page=require('./PracticeQuestionBank/PQB_Landing_page')
+app.use('/PQB_Landing_page',PQB_Landing_page)
 
+
+//___________________________________________________________________________student Dashbord_______________________________________________
+
+const Myresult =require('./StudentDashbord/Myresult')
+
+app.use("/Myresult",Myresult)
+ 
+
+const Bookmark = require('./StudentDashbord/Bookmark')
+app.use("/Bookmark", Bookmark)
+
+const DoubtSection =require('./StudentDashbord/DoubtSection')
+app.use("/DoubtSection",DoubtSection)
+
+const Student_Portals =require('./StudentDashbord/Student_Portals')
+app.use('/Student_Portals',Student_Portals)
+
+const ughomepage_banner_login = require("./Website_Admin/ughomepage_banner_login");
+app.use("/ughomepage_banner_login", ughomepage_banner_login);
+ 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
