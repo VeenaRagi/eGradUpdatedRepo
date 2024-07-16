@@ -566,7 +566,11 @@ refreshChannel.onmessage = function (event) {
             <div className={`${themeDetails.themeFooterSMIcons}`}>
               <Link to='/'> <FaFacebook /></Link>
               <Link> <GrInstagram /></Link>
-              <Link><SiYoutube /></Link>
+                <a href="https://www.youtube.com/@eGRADTutor" target="_blank" rel="noopener noreferrer">
+      <SiYoutube />
+    </a>
+              
+             
               <Link><ImLinkedin /></Link>
             </div>
 
@@ -685,7 +689,9 @@ refreshChannel.onmessage = function (event) {
                 <div className={`${themeDetails.themeFooterSMIcons}`}>
                   <Link to='/'> <FaFacebook /></Link>
                   <Link> <GrInstagram /></Link>
-                  <Link><SiYoutube /></Link>
+                  <a href="https://www.youtube.com/@eGRADTutor" target="_blank" rel="noopener noreferrer">
+      <SiYoutube />
+    </a>
                   <Link><ImLinkedin /></Link>
                 </div>
               </div>
