@@ -159,10 +159,11 @@ export const Student_dashboardparectcontainer = () => {
 
       <div className="ugquiz_StudentDashbordconatiner">
         <div
-          className={`${showLeftMenu
+          className={`${
+            showLeftMenu
               ? "ugquiz_StudentDashbordconatiner_left_mobile"
               : "ugquiz_StudentDashbordconatiner_left"
-            }`}
+          }`}
         >
           <div className="ugquiz_StudentDashbordconatiner_left_menu">
             <button
@@ -447,7 +448,6 @@ export const StudentDashbordheader = () => {
   const [error, setError] = useState(false);
   const [image, setImage] = useState(null);
 
-
   const fetchImage = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/Logo/image`, {
@@ -470,26 +470,24 @@ export const StudentDashbordheader = () => {
         <div className="Quiz_main_page_navbar">
           <div className="Quizzlogo"></div>
           {error ? (
-                userRole === "user" ? (
-                  <p>
-                    Unable to load image at the moment. Please try again later.
-                  </p>
-                ) : userRole === "admin" ? (
-                  <p>There is no data available. Please add the data.</p>
-                ) : (
-                  <p>Unable to load image at the moment.</p>
-                )
-              ) : (
-                image && (
-                  <Link to="/">
-                    <img
-                      src={image}
-                      // className={`${themeDetails.themeLogoImg}`}
-                      alt="Current"
-                    />
-                  </Link>
-                )
-              )}
+            userRole === "user" ? (
+              <p>Unable to load image at the moment. Please try again later.</p>
+            ) : userRole === "admin" ? (
+              <p>There is no data available. Please add the data.</p>
+            ) : (
+              <p>Unable to load image at the moment.</p>
+            )
+          ) : (
+            image && (
+              <Link to="/">
+                <img
+                  src={image}
+                  // className={`${themeDetails.themeLogoImg}`}
+                  alt="Current"
+                />
+              </Link>
+            )
+          )}
           <div
             className={
               !showQuizmobilemenu
@@ -509,20 +507,20 @@ export const StudentDashbordheader = () => {
                   {(userRole === "admin" ||
                     userRole === "ugotsadmin" ||
                     userRole === "ugadmin") && (
-                      <>
-                        <button id="dropdownmenu_foradim_page_btn">
-                          <img
-                            title={userData.username}
-                            src={userData.imageData}
-                            alt={`Image ${userData.user_Id}`}
-                          />
-                          <div className="dropdownmenu_foradim_page">
-                            <Link to="/student_dashboard">My profile</Link>
-                            <Link onClick={handleLogout}>Logout</Link>
-                          </div>
-                        </button>
-                      </>
-                    )}
+                    <>
+                      <button id="dropdownmenu_foradim_page_btn">
+                        <img
+                          title={userData.username}
+                          src={userData.imageData}
+                          alt={`Image ${userData.user_Id}`}
+                        />
+                        <div className="dropdownmenu_foradim_page">
+                          <Link to="/student_dashboard">My profile</Link>
+                          <Link onClick={handleLogout}>Logout</Link>
+                        </div>
+                      </button>
+                    </>
+                  )}
 
                   {userRole === "viewer" && (
                     <>
@@ -668,10 +666,10 @@ export const StudentDashbordconatiner = ({ width }) => {
   // console.log(overallpercentage.averageTestPercentage)
   const testData = userMarks
     ? userMarks.map((entry) => ({
-      testCreationTableId: entry.testCreationTableId,
-      TestName: entry.TestName,
-      percentage: parseFloat(entry.percentage),
-    }))
+        testCreationTableId: entry.testCreationTableId,
+        TestName: entry.TestName,
+        percentage: parseFloat(entry.percentage),
+      }))
     : [];
 
   useEffect(() => {
@@ -743,7 +741,8 @@ export const StudentDashbordconatiner = ({ width }) => {
                 label: function (context) {
                   return [
                     `Test ID: ${context.label}`,
-                    `Test Name: ${context.dataset.data[context.dataIndex].TestName
+                    `Test Name: ${
+                      context.dataset.data[context.dataIndex].TestName
                     }`,
                     `Percentage: ${context.parsed.y}%`,
                   ];
@@ -1149,10 +1148,6 @@ export const StudentDashbordmycourse = () => {
   }, {});
 
   useEffect(() => {
-    fetchPurchasedCourses();
-  }, [userData.id]);
-
-  useEffect(() => {
     if (selectedTypeOfTest === "") {
       setFilteredTestData(testDetails);
     } else {
@@ -1234,22 +1229,27 @@ export const StudentDashbordmycourse = () => {
     }
   };
 
+
   useEffect(() => {
+    const fetchPurchasedCourses = async () => {
+      try {
+        const response = await fetch(
+          `${BASE_URL}/Exam_Course_Page/purchasedCourses/${userData.id}`
+        );
+        const data = await response.json();
+        console.log(data);
+        console.log(userData.id);
+        setPurchasedCourses(data);
+      } catch (error) {
+        console.error("Error fetching purchased courses:", error);
+      }
+    };
     fetchPurchasedCourses();
-  }, []);
+  }, [userData.id]);
 
-  const fetchPurchasedCourses = async () => {
-    try {
-      const response = await fetch(
-        `${BASE_URL}/Exam_Course_Page/purchasedCourses/${userData.id}`
-      );
-      const data = await response.json();
-      setPurchasedCourses(data);
-    } catch (error) {
-      console.error("Error fetching purchased courses:", error);
-    }
-  };
-
+  console.log("shizukaaaaaaaaaaaaaaaaaa");
+  console.log(userData);
+  console.log(userData.id);
   // Function to check if a course is within the specified time frame
   const isCourseActive = (course) => {
     const currentDate = new Date();
@@ -1558,10 +1558,6 @@ export const StudentDashbordmycourse = () => {
       return "Start Test";
     }
   };
-  // console.log("lmkdklfjskjnfvdlskjvkfh");
-  // console.log(userData.id);
-  // console.log(purchasedCourses.courseCreationId);
-  // console.log(testDetails.testCreationTableId)
 
   // Function to format date as dd-mm-yyyy
   const formatDate = (dateString) => {
@@ -1690,141 +1686,6 @@ export const StudentDashbordmycourse = () => {
       console.error("Error fetching test details:", error);
     }
   };
-  //  const handleCompletePackage = async (
-  //    OVL_Course_Id,
-  //    courseCreationId,
-  //    user_Id
-  //  ) => {
-  //    console.log("courseCreationId, user_Id", courseCreationId, user_Id);
-  //    console.log("completePackage", completePackage);
-
-  //    try {
-  //      const response1 = await axios.get(
-  //        `${BASE_URL}/TestPage/CompletePackage/${courseCreationId}/${user_Id}`
-  //      );
-  //  const data1 = await response1.json();
-  //   setCompletePackage(response1.data1);
-
-  //      setShowQuizCourses(false);
-  //      setShowCompletePackageContainer(true);
-  //    } catch (error) {
-  //      console.error("Error fetching complete package:", error);
-  //    }
-
-  //    try {
-  //      const response2 = await fetch(
-  //        `${BASE_URL}/OtsvidesUploads/videos/${OVL_Course_Id}`
-  //      );
-
-  //      if (!response2.ok) {
-  //        throw new Error("Failed to fetch videos");
-  //      }
-
-  //      const data2 = await response2.json();
-  //      setVideos(data2);
-  //      console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
-  //      console.log(data2);
-  //      setShowQuizCourses(false);
-  //      setShowtestContainer2(true);
-  //    } catch (error) {
-  //      console.error("Error fetching videos:", error);
-  //    } finally {
-  //      setIsLoading(false);
-  //    }
-  //  };
-  // const handleCompletePackage = async (
-  //   OVL_Course_Id,
-  //   courseCreationId,
-  //   user_Id
-  // ) => {
-  //   console.log("courseCreationId, user_Id", courseCreationId, user_Id);
-  //   console.log("completePackage", completePackage);
-
-  //   try {
-  //     const response1 = await axios.get(
-  //       `${BASE_URL}/TestPage/CompletePackage/${courseCreationId}/${user_Id}`
-  //     );
-  //     if (!response1.ok) {
-  //       throw new Error("Failed to fetch complete package");
-  //     }
-  //     const data1 = await response1.json();
-  //     setCompletePackage(data1);
-  //     console.log('data1',data1)
-  //     setShowQuizCourses(false);
-  //     setShowCompletePackageContainer(true);
-  //   } catch (error) {
-  //     console.error("Error fetching complete package:", error);
-  //   }
-
-  //   try {
-  //     const response2 = await fetch(
-  //       `${BASE_URL}/OtsvidesUploads/videos/${OVL_Course_Id}`
-  //     );
-
-  //     if (!response2.ok) {
-  //       throw new Error("Failed to fetch videos");
-  //     }
-
-  //     const data2 = await response2.json();
-  //     setVideos(data2);
-  //       console.log('data2',data2)
-  //     console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
-  //     console.log(data2);
-  //     setShowQuizCourses(false);
-  //     setShowtestContainer2(true);
-  //   } catch (error) {
-  //     console.error("Error fetching videos:", error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
-  // const handleCompletePackage = async (
-  //   OVL_Course_Id,
-  //   courseCreationId,
-  //   user_Id
-  // ) => {
-  //   console.log("courseCreationId, user_Id", courseCreationId, user_Id);
-  //   console.log("completePackage", completePackage);
-
-  //   try {
-  //     const response1 = await axios.get(
-  //       `${BASE_URL}/TestPage/CompletePackage/${courseCreationId}/${user_Id}`
-  //     );
-  //     if (response1.status !== 200) {
-  //       throw new Error("Failed to fetch complete package");
-  //     }
-  //     const data1 = response1.data;
-  //     setCompletePackage(data1);
-  //     console.log('data1', data1)
-  //     setShowQuizCourses(false);
-  //     setShowCompletePackageContainer(true);
-  //   } catch (error) {
-  //     console.error("Error fetching complete package:", error);
-  //   }
-
-  //   try {
-  //     const response2 = await fetch(
-  //       `${BASE_URL}/OtsvidesUploads/videos/${OVL_Course_Id}`
-  //     );
-
-  //     if (!response2.ok) {
-  //       throw new Error("Failed to fetch videos");
-  //     }
-
-  //     const data2 = await response2.json();
-  //     setVideos(data2);
-  //     console.log('data2', data2)
-  //     console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
-  //     console.log(data2);
-  //     setShowQuizCourses(false);
-  //     setShowtestContainer2(true);
-  //   } catch (error) {
-  //     console.error("Error fetching videos:", error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
 
   const renderTestAction = (test) => {
     const {
@@ -1985,10 +1846,10 @@ export const StudentDashbordmycourse = () => {
                                       {portalId === 1 || portalId === 2
                                         ? courseExamsDetails.totalTests
                                         : portalId === 3
-                                          ? courseExamsDetails.totalLectures
-                                          : portalId === 4
-                                            ? courseExamsDetails.topicName
-                                            : null}
+                                        ? courseExamsDetails.totalLectures
+                                        : portalId === 4
+                                        ? courseExamsDetails.topicName
+                                        : null}
                                     </p>
 
                                     <div className="QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoeprice QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoepricemycourses">
@@ -2019,10 +1880,10 @@ export const StudentDashbordmycourse = () => {
                                         {portalId === 1 || portalId === 2
                                           ? "Go to Test"
                                           : portalId === 3
-                                            ? "Start Lecture"
-                                            : portalId === 4
-                                              ? "Open Complete Package"
-                                              : null}
+                                          ? "Start Lecture"
+                                          : portalId === 4
+                                          ? "Open Complete Package"
+                                          : null}
                                       </Link>
                                     </div>
                                   </div>
@@ -2262,8 +2123,9 @@ export const StudentDashbordmycourse = () => {
                               <i className="fa-solid fa-xmark"></i>
                             </button>
                             <div
-                              className={`video-container ${isFullscreen ? "disable-right-click" : ""
-                                }`}
+                              className={`video-container ${
+                                isFullscreen ? "disable-right-click" : ""
+                              }`}
                             >
                               <ReactPlayer
                                 className="OVL_Video"
@@ -2831,12 +2693,12 @@ export const StudentDashbordbuycurses = () => {
                                       courseExamsDetails.courseCreationId
                                     )
                                   }
-                                // onClick={() =>
-                                //   handlemoreinfo(
-                                //     userData.userId,
+                                  // onClick={() =>
+                                  //   handlemoreinfo(
+                                  //     userData.userId,
 
-                                //   )
-                                // }
+                                  //   )
+                                  // }
                                 >
                                   More Info...
                                 </a>
@@ -3132,10 +2994,7 @@ export const StudentDashbordmyresult = () => {
                     <div className="no_tests_message">
                       You have not attempted any tests yet.
                     </div>
-
                   </div>
-
-
                 )}
               </div>
               {/* Render test cards */}
