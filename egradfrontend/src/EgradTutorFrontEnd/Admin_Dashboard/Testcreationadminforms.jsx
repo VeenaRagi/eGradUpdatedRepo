@@ -868,8 +868,8 @@ function Testcreationadminforms() {
                     Question Limit:
                   </label>
 
-                  <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
-                    <table style={{ textAlign: "justify" }}>
+                  <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant ">
+                    <table style={{ textAlign: "justify" }} >
                       <thead>
                         <tr>
                           <th>#</th>
@@ -1251,7 +1251,8 @@ function Testcreationadminforms() {
         />
       </div>
       <h3 className="list_-otsTitels">Created test Details</h3>
-      <div className="testCreation_-GettingDAta_-container">
+      <div className="testCreation_-GettingDAta_-container ">
+        <div className="overFlowXScroll">
         <table className="otc_-table" style={{ textAlign: "center" }}>
           <thead className="otsGEt_-contantHead otc_-table_-header">
             <tr>
@@ -1334,6 +1335,7 @@ function Testcreationadminforms() {
             )}
           </tbody>
         </table>
+        </div>
         <ReactPaginate
   previousLabel={<i className="fa-solid fa-angles-left"></i>}
   nextLabel={<i className="fa-solid fa-angles-right"></i>}

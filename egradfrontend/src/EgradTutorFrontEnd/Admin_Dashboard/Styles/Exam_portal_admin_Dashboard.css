@@ -30,6 +30,7 @@
   /* background: red; */
   /* letter-spacing: 1px; */
   text-transform: uppercase;
+  font-size: 22px;
   /* font-family: "PT Serif", serif; */
 }
 .showExams_showCourses{
@@ -60,7 +61,7 @@
   border-radius: 25px;
   text-align: center;
   /* width: 200px; */
-  height: 274px;
+  height: 300px;
   background: #ffffff;
   color: rgb(0 0 0);
   box-shadow: 3px 3px 11px -4px #042a45;
@@ -301,7 +302,7 @@ color: #6c757d;
 }
 .Dashboard_contant {
   width: 169px;
-  height: 209px;
+  height: 250px;
   padding: 0rem;
 }
 .Dashboard_contant:nth-child(1) i {
@@ -324,8 +325,12 @@ color: #6c757d;
   font-size: 39px;
   margin-top: 23px;
 }
+.Dashboard_contant:nth-child(6) i {
+  font-size: 39px;
+  margin-top: 23px;
+}
 .left-nav-bar ul {
-  height: auto;
+  height: 100%;
 
 }
 .otc_-table tr th {

@@ -145,7 +145,8 @@
   width: 100%;
 
   &:hover {
-    background: #edf7ff;
+    /* background: #edf7ff; */
+    
     color: #042944;
 }
 }

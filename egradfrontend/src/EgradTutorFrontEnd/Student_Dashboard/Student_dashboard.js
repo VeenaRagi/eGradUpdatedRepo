@@ -159,11 +159,10 @@ export const Student_dashboardparectcontainer = () => {
 
       <div className="ugquiz_StudentDashbordconatiner">
         <div
-          className={`${
-            showLeftMenu
+          className={`${showLeftMenu
               ? "ugquiz_StudentDashbordconatiner_left_mobile"
               : "ugquiz_StudentDashbordconatiner_left"
-          }`}
+            }`}
         >
           <div className="ugquiz_StudentDashbordconatiner_left_menu">
             <button
@@ -473,20 +472,20 @@ export const StudentDashbordheader = () => {
                   {(userRole === "admin" ||
                     userRole === "ugotsadmin" ||
                     userRole === "ugadmin") && (
-                    <>
-                      <button id="dropdownmenu_foradim_page_btn">
-                        <img
-                          title={userData.username}
-                          src={userData.imageData}
-                          alt={`Image ${userData.user_Id}`}
-                        />
-                        <div className="dropdownmenu_foradim_page">
-                          <Link to="/student_dashboard">My profile</Link>
-                          <Link onClick={handleLogout}>Logout</Link>
-                        </div>
-                      </button>
-                    </>
-                  )}
+                      <>
+                        <button id="dropdownmenu_foradim_page_btn">
+                          <img
+                            title={userData.username}
+                            src={userData.imageData}
+                            alt={`Image ${userData.user_Id}`}
+                          />
+                          <div className="dropdownmenu_foradim_page">
+                            <Link to="/student_dashboard">My profile</Link>
+                            <Link onClick={handleLogout}>Logout</Link>
+                          </div>
+                        </button>
+                      </>
+                    )}
 
                   {userRole === "viewer" && (
                     <>
@@ -632,10 +631,10 @@ export const StudentDashbordconatiner = ({ width }) => {
   // console.log(overallpercentage.averageTestPercentage)
   const testData = userMarks
     ? userMarks.map((entry) => ({
-        testCreationTableId: entry.testCreationTableId,
-        TestName: entry.TestName,
-        percentage: parseFloat(entry.percentage),
-      }))
+      testCreationTableId: entry.testCreationTableId,
+      TestName: entry.TestName,
+      percentage: parseFloat(entry.percentage),
+    }))
     : [];
 
   useEffect(() => {
@@ -707,8 +706,7 @@ export const StudentDashbordconatiner = ({ width }) => {
                 label: function (context) {
                   return [
                     `Test ID: ${context.label}`,
-                    `Test Name: ${
-                      context.dataset.data[context.dataIndex].TestName
+                    `Test Name: ${context.dataset.data[context.dataIndex].TestName
                     }`,
                     `Percentage: ${context.parsed.y}%`,
                   ];
@@ -1950,10 +1948,10 @@ export const StudentDashbordmycourse = () => {
                                       {portalId === 1 || portalId === 2
                                         ? courseExamsDetails.totalTests
                                         : portalId === 3
-                                        ? courseExamsDetails.totalLectures
-                                        : portalId === 4
-                                        ? courseExamsDetails.topicName
-                                        : null}
+                                          ? courseExamsDetails.totalLectures
+                                          : portalId === 4
+                                            ? courseExamsDetails.topicName
+                                            : null}
                                     </p>
 
                                     <div className="QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoeprice QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoepricemycourses">
@@ -1984,10 +1982,10 @@ export const StudentDashbordmycourse = () => {
                                         {portalId === 1 || portalId === 2
                                           ? "Go to Test"
                                           : portalId === 3
-                                          ? "Start Lecture"
-                                          : portalId === 4
-                                          ? "Open Complete Package"
-                                          : null}
+                                            ? "Start Lecture"
+                                            : portalId === 4
+                                              ? "Open Complete Package"
+                                              : null}
                                       </Link>
                                     </div>
                                   </div>
@@ -2227,9 +2225,8 @@ export const StudentDashbordmycourse = () => {
                               <i className="fa-solid fa-xmark"></i>
                             </button>
                             <div
-                              className={`video-container ${
-                                isFullscreen ? "disable-right-click" : ""
-                              }`}
+                              className={`video-container ${isFullscreen ? "disable-right-click" : ""
+                                }`}
                             >
                               <ReactPlayer
                                 className="OVL_Video"
@@ -2797,12 +2794,12 @@ export const StudentDashbordbuycurses = () => {
                                       courseExamsDetails.courseCreationId
                                     )
                                   }
-                                  // onClick={() =>
-                                  //   handlemoreinfo(
-                                  //     userData.userId,
+                                // onClick={() =>
+                                //   handlemoreinfo(
+                                //     userData.userId,
 
-                                  //   )
-                                  // }
+                                //   )
+                                // }
                                 >
                                   More Info...
                                 </a>
@@ -3094,11 +3091,14 @@ export const StudentDashbordmyresult = () => {
                   </div>
                 ))}
                 {testDetails.length === 0 && (
-                  <div>
-                    <p className="no_tests_message">
+                  <div className="container">
+                    <div className="no_tests_message">
                       You have not attempted any tests yet.
-                    </p>
+                    </div>
+
                   </div>
+
+
                 )}
               </div>
               {/* Render test cards */}
