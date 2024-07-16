@@ -76,6 +76,10 @@ const LandingPageHeader = ({ isEditMode, userRole }) => {
   const themeColor = themeFromContext[0]?.current_theme;
   const themeDetails = JSONClasses[themeColor] || [];
 
+
+
+
+  
   return (
     <div className="Newlandingpage">
       <div>

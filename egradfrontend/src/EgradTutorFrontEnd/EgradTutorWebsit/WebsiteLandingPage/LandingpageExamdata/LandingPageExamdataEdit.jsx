@@ -235,7 +235,7 @@ const LandingPageExamdataEdit = ({ type }) => {
 
 
   return (
-    <div className="overlay">
+    <div className="Blur_Effect_Mode">
  {type === "UploadExamImage" && (
   <div className="UploadPopups_Container">
     <h2>Upload Exam Image</h2>
