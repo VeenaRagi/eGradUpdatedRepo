@@ -342,28 +342,26 @@ const Student_profileUpdate = () => {
           <form className="Student_profileUpdate_editsubconatiner_from">
             <div className="std_pswd_edit">{passwordchangemessage}</div>
             <div style={{ color: "green" }}>{suceessupdatechangemessage}</div>
-
-<div className="total_container">
-<div className="pswd_id">
-              <label className="form-label"> ID:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="id"
-                placeholder="Enter Your Full Name"
-                name="id"
-                value={user.id} // Assuming 'id' is the correct property for user id
-                disabled
-              />
+            <div className="total_container">
+              <div className="pswd_id">
+                <label className="form-label"> ID:</label>
+                <input
+                  type="text"
+                  // className="form-control"
+                  id="id"
+                  placeholder="Enter Your Full Name"
+                  name="id"
+                  value={user.id} // Assuming 'id' is the correct property for user id
+                  disabled
+                />
+              </div>
             </div>
-</div>
-            
 
             <div className="full-name_pswd">
               <label className="form-label"> Full Name:</label>
               <input
                 type="text"
-                className="form-control"
+                // className="form-control"
                 placeholder="Enter Your Full Name"
                 name="username"
                 value={user.username}
@@ -374,7 +372,7 @@ const Student_profileUpdate = () => {
               <label className="form-label">Email:</label>
               <input
                 type="email"
-                className="form-control-emaillll"
+                // className="form-control-emaillll"
                 id="email"
                 placeholder="Enter email"
                 name="email"
@@ -390,7 +388,11 @@ const Student_profileUpdate = () => {
               <div>
                 <p className="imggg_container">Image daata</p>
                 {/* {courseDa} */}
-                <img className="pswd_profile_imgg" src={user.imageData} alt="Profile" />
+                <img
+                  className="pswd_profile_imgg"
+                  src={user.imageData}
+                  alt="Profile"
+                />
                 {/* {user.imageData ? (
                   <img src={user.imageData} alt="Profile" />
                 ) : (
@@ -403,7 +405,7 @@ const Student_profileUpdate = () => {
                 )} */}
                 <input
                   type="file"
-                  className="form-control"
+                  // className="form-control"
                   name="profileImage"
                   onChange={handleImageChange}
                 />
@@ -424,7 +426,7 @@ const Student_profileUpdate = () => {
                 <label className="form-label">Current Password:</label>
                 <input
                   type="password"
-                  className="form-control"
+                  // className="form-control"
                   id="currentPassword"
                   placeholder="Enter current password"
                   name="currentPassword"
@@ -435,7 +437,7 @@ const Student_profileUpdate = () => {
                 <label className="form-label">New Password:</label>
                 <input
                   type="password"
-                  className="form-control"
+                  // className="form-control"
                   id="newPassword"
                   placeholder="Enter new password"
                   name="newPassword"
@@ -446,7 +448,7 @@ const Student_profileUpdate = () => {
                 <label className="form-label">Confirm Password:</label>
                 <input
                   type="password"
-                  className="form-control"
+                  // className="form-control"
                   id="confirmPassword"
                   placeholder="Confirm new password"
                   name="confirmpassword"
@@ -454,13 +456,15 @@ const Student_profileUpdate = () => {
                 />
               </div>
               <div className="pswd_update_btn_container">
-                <button className="pswd_update_btn" type="submit" onClick={handlePASSWORDClick}>
+                <button
+                  className="pswd_update_btn"
+                  type="submit"
+                  onClick={handlePASSWORDClick}
+                >
                   Update
                 </button>
               </div>
             </div>
-
-
           </>
         ) : null}
         {/* <div className="container d-flex justify-content-center">
