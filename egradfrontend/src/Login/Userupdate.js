@@ -1,12 +1,8 @@
-
-
-
-
-
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 // import { nav } from "../Exam_Portal_QuizApp/Data/Data";
+import './Styles/UserUpdate.css'
 
 const Userupdate = () => {
   const [showQuizmobilemenu, setShowQuizmobilemenu] = useState(false);
@@ -97,12 +93,12 @@ const handleClick = async (e) => {
       </div>
       <div className="container">
         <h1>Edit Form</h1>
-        <form>
+        <form className="formInUserUpdate">
           <div className="mb-3 mt-3">
             <label className="form-label"> ID:</label>
             <input
               type="text"
-              className="form-control"
+              // className="form-control"
               id="id"
               placeholder="Enter Your Full Name"
               name="id"
@@ -115,7 +111,7 @@ const handleClick = async (e) => {
             <label className="form-label"> Full Name:</label>
             <input
               type="text"
-              className="form-control"
+              // className="form-control"
               placeholder="Enter Your Full Name"
               name="username"
               value={user.username}
@@ -126,7 +122,7 @@ const handleClick = async (e) => {
             <label className="form-label">Email:</label>
             <input
               type="email"
-              className="form-control"
+              // className="form-control"
               id="email"
               placeholder="Enter email"
               name="email"
@@ -139,7 +135,7 @@ const handleClick = async (e) => {
             <label className="form-label">Password:</label>
             <input
               type="password"
-              className="form-control"
+              // className="form-control"
               id="password"
               placeholder="Enter password"
               name="password"
@@ -152,21 +148,21 @@ const handleClick = async (e) => {
             <label className="form-label">Role:</label>
             <input
               type="text"
-              className="form-control"
+              // className="form-control"
               id="password"
               name="role"
               value={user.role}
               onChange={handleChange}
             />
           </div>
-          <div className="mb-3 mt-3">
+          <div className="mb-3 mt-3 imgInUserUpdate">
             <label className="form-label">Profile Image:</label>
             Current Image:
-            <p></p>
+            {/* <p></p> */}
             <img src={user.profile_image} alt="" />
             <input
               type="file"
-              className="form-control"
+              // className="form-control"
               name="profileImage"
               // value={user.profile_image}
               onChange={handleImageChange}

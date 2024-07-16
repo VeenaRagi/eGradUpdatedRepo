@@ -39,7 +39,7 @@ const Student_profileUpdate = () => {
   };
 
   const handleImageChange = (e) => {
-    setUser((prev) => ({ ...prev, profile_image: e.target.files[0]}));
+    setUser((prev) => ({ ...prev, profile_image: e.target.files[0] }));
   };
 
   //  const handleImageChange = (e) => {
@@ -313,7 +313,7 @@ const Student_profileUpdate = () => {
   return (
     <>
       <div className="Student_profileUpdate_editsubconatiner">
-        <h3>Edit Profile</h3>
+        <h3 className="std_profile_edit">Edit Profile</h3>
         <div className="studentDashbordconatinereditfrombtns">
           <button
             onClick={handleClickstudentDashbordeditformnwithoutpassword}
@@ -340,9 +340,9 @@ const Student_profileUpdate = () => {
 
         {studentDashbordeditformnwithoutpassword ? (
           <form className="Student_profileUpdate_editsubconatiner_from">
-            <div>{passwordchangemessage}</div>
+            <div className="std_pswd_edit">{passwordchangemessage}</div>
             <div style={{ color: "green" }}>{suceessupdatechangemessage}</div>
-            <div>
+            <div className="pswd_id">
               <label className="form-label"> ID:</label>
               <input
                 type="text"
@@ -355,7 +355,7 @@ const Student_profileUpdate = () => {
               />
             </div>
 
-            <div>
+            <div className="full-name_pswd">
               <label className="form-label"> Full Name:</label>
               <input
                 type="text"
@@ -366,7 +366,7 @@ const Student_profileUpdate = () => {
                 onChange={handleChange}
               />
             </div>
-            <div>
+            <div  className="full-name_email">
               <label className="form-label">Email:</label>
               <input
                 type="email"
@@ -379,38 +379,14 @@ const Student_profileUpdate = () => {
                 disabled
               />
             </div>
-
-            {/* <div className="mb-3 mt-3">
-            <label className="form-label">Password:</label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              placeholder="Enter password"
-              name="password"
-              value={user.password}
-              onChange={handleChange}
-            />
-          </div> */}
-
-            {/* <div className="mb-3 mt-3">
-            <label className="form-label">Role:</label>
-            <input
-              type="text"
-              className="form-control"
-              id="password"
-              name="role"
-              value={user.role}
-              onChange={handleChange}
-            />
-          </div> */}
+     
             <div className="Student_profileUpdate_editsubconatiner_from_choss_img_cinatiner">
               <label className="form-label">Profile Image:</label>
 
               <div>
-                <p>Image daata</p>
+                <p className="imggg_container">Image daata</p>
                 {/* {courseDa} */}
-                <img src={user.imageData} alt="Profile" />
+                <img className="pswd_profile_imgg" src={user.imageData} alt="Profile" />
                 {/* {user.imageData ? (
                   <img src={user.imageData} alt="Profile" />
                 ) : (
@@ -430,7 +406,7 @@ const Student_profileUpdate = () => {
               </div>
               {/* Update this line */}
             </div>
-            <button type="submit" onClick={handleClick}>
+            <button className="update_pswd" type="submit" onClick={handleClick}>
               Update
             </button>
           </form>
@@ -440,7 +416,7 @@ const Student_profileUpdate = () => {
             <div style={{ color: "red" }}>{passwordchangemessage}</div>
             <div style={{ color: "green" }}>{suceessupdatechangemessage}</div>
 
-            <div>
+            <div className="user_update_pswd_cntner">
               <label className="form-label">Current Password:</label>
               <input
                 type="password"

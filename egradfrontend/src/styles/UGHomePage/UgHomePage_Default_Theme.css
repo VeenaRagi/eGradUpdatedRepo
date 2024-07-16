@@ -1052,8 +1052,8 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
 }
 
 
-.themeFooterSMIconsDefault a svg:hover{
-color: #3941b1;
+.themeFooterSMIconsDefault a svg:hover {
+    color: #00a3ff;
 }
 /* responsive */
 @media(max-width:430px) {

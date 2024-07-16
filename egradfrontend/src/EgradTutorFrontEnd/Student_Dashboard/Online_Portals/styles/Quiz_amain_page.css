@@ -54,7 +54,7 @@ background: linear-gradient(to right, #000102 -26%, #053456 24%, #000000 172%)
       color: #fff;
     }
   }
-  .UGhomepageadmin {
+  /* .UGhomepageadmin {
     
     background: #ffffff;
   
@@ -68,7 +68,7 @@ background: linear-gradient(to right, #000102 -26%, #053456 24%, #000000 172%)
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+  } */
   
   .UGhomepageadmin_inputs {
     display: flex;
