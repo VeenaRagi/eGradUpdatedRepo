@@ -30,3 +30,9 @@
     background-color: #e9f2ee;
     font-weight: 600;
   }
+
+  @media (max-width:768px){
+    .bookmark_subheading{
+      font-size: 18px;
+    }
+  }

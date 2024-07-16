@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState,useContext } from "react";
 import Modal from "react-modal";
 // import { nav } from "../Exam_Portal_QuizApp/Data/Data";
 import { Link, Navigate, useParams,useNavigate,useLocation } from "react-router-dom";
@@ -15,9 +15,15 @@ import TrophyImage from "./Images/TrophyImage.png";
 import { IoMdClose } from "react-icons/io";
 import BASE_URL from "../../../apiConfig";
 import CryptoJS from 'crypto-js';
+import { useTIAuth } from "../../../TechInfoContext/AuthContext";
+import UserContext from '../../../UserContext';
 
 
 export const UserReport = ( ) => {
+  const { decryptedUserIdState, usersData } = useContext(UserContext);
+  const { decryptedUserIdState: paramUserId } = useParams();
+
+
   // { usersData,decryptedUserIdState }
 
   // const user_Id = usersData.users && usersData.users.length > 0 ? (
@@ -25,15 +31,15 @@ export const UserReport = ( ) => {
 
   // ) : null;
 
-// const user_Id = decryptedUserIdState;
+const user_Id = decryptedUserIdState;
 
 // const { state } = useLocation();
 // const { usersData, decryptedUserIdState } = state || {};
-const location = useLocation();
-const { usersData, decryptedUserIdState } = location.state || {};
-
-const user_Id = decryptedUserIdState;
-
+// const location = useLocation();
+// const { usersData, decryptedUserIdState } = location.state || {};
+// const [decryptedUserIdState,setDecryptedUserIdState] = useState("");
+// const user_Id = decryptedUserIdState;
+// const user_Id = 40;
   const [isVisible, setVisible] = useState(false);
 
   const handleScrole = () => {
@@ -1385,67 +1391,44 @@ const user_Id = decryptedUserIdState;
 //     checkLoggedIn();
 //   }, []);
   
-// const [encodedUserId, setEncodedUserId] = useState('');
+const [encodedUserId, setEncodedUserId] = useState('');
 
-// const encryptUserId = (user_Id) => {
-//   const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
-//   return CryptoJS.AES.encrypt(user_Id.toString(), secretKey).toString();
-// };
+const encryptUserId = (decryptedUserIdState) => {
+  const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
+  return CryptoJS.AES.encrypt(decryptedUserIdState.toString(), secretKey).toString();
+};
 
-// useEffect(() => {
-//   if (user_Id) {
-//     const encryptedUserId = encryptUserId(user_Id);
-//     const encodedUserId = encodeURIComponent(encryptedUserId);
-//     setEncodedUserId(encodedUserId);
-//   }
-// }, [user_Id]);
+useEffect(() => {
+  if (decryptedUserIdState) {
+    const encryptedUserId = encryptUserId(decryptedUserIdState);
+    const encodedUserId = encodeURIComponent(encryptedUserId);
+    setEncodedUserId(encodedUserId);
+  }
+}, [decryptedUserIdState]);
 
 console.log("Shinchannnnnnnnnnnnnnnn",decryptedUserIdState)
+
+
+console.log("Doremonnnnnnnnnnnnnnnnn",encodedUserId)
+
+
 
   return (
     <div className="resultContainerSection">
       <div className="StudentDashbord_Container">
-      <p>Decrypted User ID: {decryptedUserIdState}</p>
-            <p>Users Data: {JSON.stringify(usersData)}</p>
         <section>
           <div className="StudentDashbord_navLocation">
             <span className="selectedButtonNameLink">{selectedButtonName}</span>{" "}
             <span>
               {" "}
               <div className="Go_back_from_test_section">
-                {/* <Link to={`/Student_dashboard/${encodedUserId}`} style={{ color: "black" }}>
+                <Link to={`/Student_dashboard/${encodedUserId}`} style={{ color: "black" }}>
                   Go Back
-                </Link> */}
+                </Link>
               </div>
             </span>
           </div>
         </section>
-        <h1> hiiiiiiiii</h1>
-        {/* {usersData.users && usersData.users.length > 0 && (
-          <ul>
-            {usersData.users.map((user) => (
-              <div className="greeting_section">
-                <h2 className="dashboard_greeting_container">
-                {user.username}
-                </h2>
-               
-              </div>
-            ))}
-          </ul>
-        )} */}
-         {usersData && usersData.users && usersData.users.length > 0 && (
-                <ul>
-                    {usersData.users.map((user) => (
-                        <li key={user.user_Id}>
-                            <div className="greeting_section">
-                                <h2 className="dashboard_greeting_container">
-                                    {user.username}
-                                </h2>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            )}
         <section className="StudentDashbord_contant">
           <div className="Your_PerformanceHeader">
             {/* {userTest && userTest.map((item) => (

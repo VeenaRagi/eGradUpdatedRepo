@@ -40,6 +40,10 @@ import ThemesSection from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/ThemesSec
 import Leftnav from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/Leftnav.jsx";
 import AdminProfile from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/AdminProfile.jsx";
 import axios from "axios";
+import { UserProvider } from './UserContext';
+
+
+
 function App({decryptedUserIdState,usersData}) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -106,7 +110,8 @@ function App({decryptedUserIdState,usersData}) {
           <NotFound />
         ) : (
           <Router>
-            <Routes>
+             <UserProvider>
+             <Routes>
               <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
               <Route path="/adminlogin" element={<AdminLogin />} />
               <Route path="/UserLogin" element={<UserLogin />} />
@@ -199,10 +204,13 @@ function App({decryptedUserIdState,usersData}) {
          path="/UserReport/:id/:testCreationTableId/:courseCreationId"
            element={<UserReport usersData={usersData} decryptedUserIdState={decryptedUserIdState}/>} 
           /> */}
+          
            <Route
          path="/UserReport/:decryptedUserIdState/:testCreationTableId/:courseCreationId"
-           element={<UserReport />} 
+         element={<UserReport/>}
           />
+         
+      
             <Route
          path="/Error"
            element={<NotFound />} 
@@ -211,6 +219,8 @@ function App({decryptedUserIdState,usersData}) {
           <Route path="/CourseAdmin" element={<Exam_portal_admin_integration/>}/>
           <Route path="/adminProfile" element={<AdminProfile/>}/>
             </Routes>
+             </UserProvider>
+         
           </Router>
         )}
       </div>

@@ -571,10 +571,25 @@ console.log("11111111111111111111111111111111111111")
   // }, []);
 
 
-  const encryptUserId = (decryptedParam2) => {
-    const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
-    return CryptoJS.AES.encrypt(decryptedParam2.toString(), secretKey).toString();
-  };
+  // const encryptUserId = (decryptedParam2) => {
+  //   const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
+  //   return CryptoJS.AES.encrypt(decryptedParam2.toString(), secretKey).toString();
+  // };
+
+  const [encodedUserId, setEncodedUserId] = useState('');
+
+const encryptUserId = (decryptedParam2) => {
+  const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
+  return CryptoJS.AES.encrypt(decryptedParam2.toString(), secretKey).toString();
+};
+
+useEffect(() => {
+  if (decryptedParam2) {
+    const encryptedUserId = encryptUserId(decryptedParam2);
+    const encodedUserId = encodeURIComponent(encryptedUserId);
+    setEncodedUserId(encodedUserId);
+  }
+}, [decryptedParam2]);
 
   const openPopup = () => {
     window.close();
@@ -611,7 +626,7 @@ console.log("11111111111111111111111111111111111111")
 
   return (
     <>
-        <h1>hellooooo</h1>
+        {/* <h1>hellooooo</h1>
           {userData.users && userData.users.length > 0 && (
             <ul>
               {userData.users.map((user) => (
@@ -622,7 +637,7 @@ console.log("11111111111111111111111111111111111111")
                 </div>
               ))}
             </ul>
-          )}
+          )} */}
       <div className="testResult_-container">
         <div className="viewReport_popup_container">
           <div className="viewReport_popup_content">
