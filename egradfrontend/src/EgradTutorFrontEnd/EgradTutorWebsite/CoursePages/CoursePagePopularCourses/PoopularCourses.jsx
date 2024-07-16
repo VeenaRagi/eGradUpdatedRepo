@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState,} from "react";
 import BASE_URL from "../../../../apiConfig";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams,useNavigate } from "react-router-dom";
 import { GoChevronDown } from "react-icons/go";
 import '../../../../styles/CoursesPageStyles/CoursePage.css'
 import { ThemeContext } from "../../../../ThemesFolder/ThemeContext/Context";
@@ -72,6 +72,108 @@ const PoopularCourses = ({userRole}) => {
       window.location.reload(); // Reload the page
     }
   };
+
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState({});
+  const navigate = useNavigate(); // Use this for navigation
+  // const [popupContent, setPopupContent] = useState(null);
+  useEffect(() => {
+    const checkLoggedIn = () => {
+      const loggedIn = localStorage.getItem("isLoggedIn");
+      if (loggedIn === "true") {
+        setIsLoggedIn(true);
+        fetchUserData();
+      }
+    };
+    checkLoggedIn();
+  }, []); // Dependency array is empty since we only need to check on initial mount
+
+  const fetchUserData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setIsLoggedIn(false);
+        navigate("/userlogin"); // Navigate to login if no token
+        return;
+      }
+
+      const response = await fetch(`${BASE_URL}/ughomepage_banner_login/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        // Token is expired or invalid, redirect to login page
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+        navigate("/userlogin");
+        return;
+      }
+
+      const data = await response.json();
+      setUserData(data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      navigate("/userlogin"); // Redirect on error
+    }
+  };
+
+
+  
+  function studentbuynowbtnuserboughtcoursecheck(courseCreationId, userId) {
+    // Make a GET request to your backend endpoint
+    fetch(
+      `http://localhost:5001/StudentRegistationPage/getotsregistrationdata/${courseCreationId}/${userId}`
+    )
+      .then((response) => {
+        if (response.ok) {
+          // Handle successful response
+          return response.json();
+        } else {
+          // Handle errors
+          console.error("Failed to send IDs to backend");
+          return { message: "Failed to send IDs to backend" };
+        }
+      })
+      .then((data) => {
+        // Log the message received from the backend
+        console.log(data.message);
+
+        // Check if data is found or not
+        if (data.message === "Data found") {
+          fetch(
+            `http://localhost:5001/StudentRegistationPage/insertthedatainstbtable/${courseCreationId}/${userId}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ courseCreationId, userId }), // Assuming data contains the data you want to write
+            }
+          )
+            .then((response) => response.json())
+            .then((responseData) => {
+              console.log(courseCreationId, userId);
+              console.log(responseData.message);
+
+              // Redirect to the found page
+              // /PayU/:courseCreationId
+              window.location.href = `/PayU/${courseCreationId}`;
+            })
+            .catch((error) => {
+              console.error("Error writing data:", error);
+            });
+        } else {
+          window.location.href = `/coursedataSRP/${courseCreationId}`; // Redirect to not found page
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
  
   return (
     <div id="PoopularCourses" className={`${themeDetails.themePopularCourses_container}`}>
@@ -178,7 +280,13 @@ const PoopularCourses = ({userRole}) => {
                             </p>
                             <div className={`before_start_now ${themeDetails.themeBuyButtonInCP}`}>
                               <Link
-                                to={`/RegistrationForm/${courseExamsDetails.courseCreationId}`}
+                                // to={`/RegistrationForm/${courseExamsDetails.courseCreationId}`}
+                                onClick={() =>
+                                  studentbuynowbtnuserboughtcoursecheck(
+                                    courseExamsDetails.courseCreationId,
+                                    userData.id
+                                  )
+                                }
                               >
                                 Buy Now
                               </Link>

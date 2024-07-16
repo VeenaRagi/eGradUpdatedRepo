@@ -32,7 +32,8 @@ import UgadminHome from "./Login/UgadminHome.js";
 
 import Student_dashboard from "./EgradTutorFrontEnd/Student_Dashboard/Student_dashboard";
 import Student_profileUpdate from "./EgradTutorFrontEnd/Student_Dashboard/Student_profileUpdate";
-// import CoursePage from './EgradTutorFrontEnd/Student_Dashboard/Online_Portals/CoursePage'
+import StudentRegistationPage from './EgradTutorFrontEnd/Student_Dashboard/Online_Portals/StudentRegistationPage'
+import Payu from './EgradTutorFrontEnd/Student_Dashboard/Payu/Payu.jsx'
 
 import InstructionPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/InstructionPage";
 import General_Intructions_Page from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/General_Intructions_Page";
@@ -161,6 +162,11 @@ const App = () => {
                   path="/UgadminHome"
                   element={<PrivateRoute element={<UgadminHome />} />}
                 />
+                 <Route
+            path="/coursedataSRP/:courseCreationId"
+            element={<StudentRegistationPage />}
+          />
+          <Route path="/PayU/:courseCreationId" element={<Payu />} />
                 {/* ==================LOGIN SYSTEM ROUTES END================== */}
 
                 {/* =====================STUDENT DASHBOARD ROUTES START================= */}
