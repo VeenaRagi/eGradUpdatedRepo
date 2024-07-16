@@ -95,10 +95,23 @@
     .uploadedDocumentFilds {
       display: flex;
       flex-direction: column;
+      padding-left: 20px;
+      
+    }
+
+    .uploadedDocumentFilds label{
+      text-align: start;
+      display: flex;
+      justify-content: start;
     }
 
     input#uploadInputFile_ovl_upload_file {
-      width: 80%;
+      width: 90%;
       margin:  0 auto;
+      text-align: start;
+    }
+
+    .ovl_upload_file{
+      padding-left: 20px;
     }
   }
