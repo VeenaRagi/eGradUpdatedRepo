@@ -9,6 +9,7 @@ import Exam_portal_admin_integration from "../../Admin_Dashboard/Exam_portal_adm
 // import UG_HOME from "../../UG_HOME";
 import "./styles/Quiz_amain_page.css";
 import BASE_URL from "../../../apiConfig";
+import ThemesSection from "../../../ThemesFolder/ThemesSection/ThemesSection";
 
 const Quiz_dashboard = () => {
   const [showQuizmobilemenu, setShowQuizmobilemenu] = useState(false);
@@ -262,6 +263,8 @@ export const Quiz_main_page_container = () => {
                 <div className="UGhomepageadmin">
                   {/* <UploadPage /> */}
 {/* asdf */}
+<ThemesSection/>
+
                 </div>
               ) : null}
               {activeCard.card2 ? (
@@ -282,6 +285,7 @@ export const Quiz_main_page_container = () => {
             <>
               {/* <UploadPage /> */}
 {/* asdf */}
+<ThemesSection/>
             </>
           )}
 
