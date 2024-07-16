@@ -885,6 +885,10 @@ fieldset > legend {
     height: 30px;
     font-size: 0.6rem;
   }
+
+  .Exam_portal_admin_integration_container{
+    background: linear-gradient(to right, #000102 -26%, #053456 24%, #000000 172%);
+  }
 }
 
 .Instruction_container {
