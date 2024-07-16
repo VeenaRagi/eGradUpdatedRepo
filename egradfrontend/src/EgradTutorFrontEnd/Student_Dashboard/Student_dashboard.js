@@ -1148,9 +1148,9 @@ export const StudentDashbordmycourse = () => {
     return portals;
   }, {});
 
-  useEffect(() => {
-    fetchPurchasedCourses();
-  }, [userData.id]);
+  // useEffect(() => {
+  //   fetchPurchasedCourses();
+  // }, [userData.id]);
 
   useEffect(() => {
     if (selectedTypeOfTest === "") {
@@ -1234,7 +1234,9 @@ export const StudentDashbordmycourse = () => {
     }
   };
 
-
+  // useEffect(() => {
+  //   fetchPurchasedCourses();
+  // }, []);
 
   const fetchPurchasedCourses = async () => {
     try {
@@ -1248,6 +1250,13 @@ export const StudentDashbordmycourse = () => {
     }
   };
 
+  useEffect(() => {
+    fetchPurchasedCourses();
+  }, [userData.id]);
+
+  console.log("shizukaaaaaaaaaaaaaaaaaa")
+  console.log(userData)
+  console.log(userData.id)
   // Function to check if a course is within the specified time frame
   const isCourseActive = (course) => {
     const currentDate = new Date();
