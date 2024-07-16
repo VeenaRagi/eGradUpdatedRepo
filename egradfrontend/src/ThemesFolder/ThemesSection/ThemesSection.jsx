@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from 'react'
 import BASE_URL from '../../apiConfig';
-// import imgOrange from './styles/ThemesScreenShots/orangePreview.png'
-// import imgBlue from './styles/ThemesScreenShots/bluePreview.png'
-// import imgGreen from './styles/ThemesScreenShots/greenPreview.png'
+import imgOrange from '../ThemesScreenShots/orangePreview.png'
+import imgBlue from '../ThemesScreenShots/bluePreview.png'
+import imgGreen from '../ThemesScreenShots/greenPreview.png'
 // import './styles/Themes.css'
 import { IoMdClose } from "react-icons/io";
 
@@ -158,11 +158,11 @@ const ThemesSection = () => {
                                 // onClick={() => handleDivClick(fClass.s_no, fClass.theme_color)}
                                 >
                                     {/* <p>have to show images</p> */}
-                                    {/* {fClass.theme_color === 'Theme-2' && <img src={imgOrange} onClick={() => handleImagePreview(imgOrange, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />} */}
+                                    {fClass.theme_color === 'Theme-2' && <img src={imgOrange} onClick={() => handleImagePreview(imgOrange, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />}
  
-                                    {/* {fClass.theme_color === 'Theme-default' && <img src={imgBlue} onClick={() => handleImagePreview(imgBlue, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />} */}
+                                    {fClass.theme_color === 'Theme-default' && <img src={imgBlue} onClick={() => handleImagePreview(imgBlue, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />}
                                     {/* {fClass.theme_color === 'theme-purple' && <img src={img} onClick={() => handleImagePreview(img, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />} */}
-                                    {/* {fClass.theme_color === 'Theme-1' && <img src={imgGreen} onClick={() => handleImagePreview(imgGreen, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />} */}
+                                    {fClass.theme_color === 'Theme-1' && <img src={imgGreen} onClick={() => handleImagePreview(imgGreen, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />}
                                     {/* {fClass.theme_color === 'theme-default' && <img src={imgDefault} onClick={() => handleImagePreview(imgDefault, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />} */}
                                     {/* {fClass.theme_color === 'theme-white' && <img src={imgWhite} onClick={()=>handleImagePreview(imgWhite,fClass.theme_color)}className='theme-selector-image' alt='themeImage' />} */}
                                 </div>
