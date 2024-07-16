@@ -1104,10 +1104,19 @@ color: white;
 }
 
 /* studet profile settings css */
-
+.studentUpdateProfileParentContainer {
+  padding: 1rem 0;
+  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+border: 1px solid gray;
+margin-top: 1rem;
+border-radius: 10px;
+}
 form.Student_profileUpdate_editsubconatiner_from {
-  border: 1px solid black;
-
+  /* border: 1px solid black; */
+  width: 90%;
+  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+  /* border: 1px solid gray; */
+  margin: auto;
 }
 
 .form.Student_profileUpdate_editsubconatiner_from input{
@@ -1137,7 +1146,9 @@ background-color: unset;
 
 }
 
+.studentUpdateProfileParentContainer{
 
+}
 
 
 

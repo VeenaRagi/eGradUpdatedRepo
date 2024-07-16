@@ -339,9 +339,10 @@ const Student_profileUpdate = () => {
         </div>
 
         {studentDashbordeditformnwithoutpassword ? (
+          <div className="studentUpdateProfileParentContainer">
           <form className="Student_profileUpdate_editsubconatiner_from">
-            <div className="std_pswd_edit">{passwordchangemessage}</div>
-            <div style={{ color: "green" }}>{suceessupdatechangemessage}</div>
+            {/* <div className="std_pswd_edit">{passwordchangemessage}</div> */}
+            {/* <div style={{ color: "green" }}>{suceessupdatechangemessage}</div> */}
             <div className="total_container">
               <div className="pswd_id">
                 <label className="form-label"> ID:</label>
@@ -416,6 +417,7 @@ const Student_profileUpdate = () => {
               Update
             </button>
           </form>
+          </div>
         ) : null}
         {studentDashbordeditformnwithpassword ? (
           <>
