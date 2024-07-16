@@ -50,3 +50,15 @@ tr th{
 .admin_S_R_INfo::-webkit-scrollbar{
     display: none;
 }
+.quz_menu2{
+    display: flex;
+    flex-direction: column;
+}
+.quz_menu2 .lines {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: white;
+    gap: 0.5rem;
+    transition: 0.5s ease-in-out;
+}

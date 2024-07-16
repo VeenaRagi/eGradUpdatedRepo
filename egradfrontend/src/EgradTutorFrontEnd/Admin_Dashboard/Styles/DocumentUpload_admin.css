@@ -37,19 +37,19 @@
     gap: 1rem;
 }
 
- .uploadedDocumentFilds select{
+.uploadedDocumentFilds select {
   width: 270px;
   padding: 6px;
   border: none;
-  box-shadow: 1px 4px 11px 0px #1A374D;
+  box-shadow: 1px 1px 3px 0px #1A374D;
 }
 
-.uploadedDocumentFilds input{
-    width: 200px;
-    padding: 6px;
-    border: none;
-    box-shadow: 1px 4px 11px 0px #1A374D;
-  }
+.uploadedDocumentFilds input {
+  width: 200px;
+  padding: 6px;
+  border: none;
+  box-shadow: 1px 1px 4px 0px #1A374D;
+}
 
   .uploadedDocumentFilds button{
     width: 100px;
