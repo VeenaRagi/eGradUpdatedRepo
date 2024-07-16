@@ -4,7 +4,7 @@ import BASE_URL from '../../apiConfig';
 import imgOrange from '../ThemesScreenShots/orangePreview.png'
 import imgBlue from '../ThemesScreenShots/bluePreview.png'
 import imgGreen from '../ThemesScreenShots/greenPreview.png'
-// import './styles/Themes.css'
+import '../Styles/Themes.css'
 import { IoMdClose } from "react-icons/io";
 
 const ThemesSection = () => {
