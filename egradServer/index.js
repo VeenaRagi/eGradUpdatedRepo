@@ -137,6 +137,39 @@ app.use("/TestPage",TestPage);
 const TestResultPage=require("./OTS_QuizApp/TestResultPage");
 app.use("/TestResultPage",TestResultPage);
 
+
+//********************************************* */
+
+const PayU=require("./PayU/PayU");
+app.use("/PayU",PayU);
+
+const CoureseCreation=require("./OTS_Quiz_Admin/CoureseCreation");
+app.use("/CoureseCreation",CoureseCreation);
+
+const Dashbord=require("./OTS_Quiz_Admin/Dashbord");
+app.use("/Dashbord",Dashbord);
+
+const DocumentUpload=require("./OTS_Quiz_Admin/DocumentUpload");
+app.use("/DocumentUpload",DocumentUpload);
+
+const ExamCreation=require("./OTS_Quiz_Admin/ExamCreation");
+app.use("/ExamCreation",ExamCreation)
+
+const ImageUpload=require("./OTS_Quiz_Admin/ImageUpload");
+app.use("/ImageUpload",ImageUpload);
+
+const InstructionCreation=require("./OTS_Quiz_Admin/InstructionCreation");
+app.use("/InstructionCreation",InstructionCreation);
+
+const Portal_coures_creation_admin=require("./OTS_Quiz_Admin/Portal_coures_creation_admin");
+app.use("/Portal_coures_creation_admin",Portal_coures_creation_admin);
+
+const TestActivationPage=require("./OTS_Quiz_Admin/TestActivationPage");
+app.use("/TestActivationPage",TestActivationPage);
+
+const TestCreation=require("./OTS_Quiz_Admin/TestCreation")
+app.use("/TestCreation",TestCreation);
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
