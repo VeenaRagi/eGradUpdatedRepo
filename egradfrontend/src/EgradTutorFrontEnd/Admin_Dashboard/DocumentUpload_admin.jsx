@@ -96,7 +96,9 @@ const DocumentUpload_admin = () => {
 
   return (
     <div className=" create_exam_container otsMainPages" >
-      <div className="" style={{ margin: '10px 0' }}>
+      <div className="" 
+      // style={{ margin: '10px 0' }}
+      >
         <h2 className="textColor">Document Upload Form </h2>
       </div>
       <form>
