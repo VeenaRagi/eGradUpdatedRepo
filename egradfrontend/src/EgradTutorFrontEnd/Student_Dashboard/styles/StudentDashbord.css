@@ -330,6 +330,7 @@
   padding: 1rem 1rem;
   height: auto;
   border-collapse: collapse;
+  border-radius: 10px;
 }
 
 .Student_profileUpdate_editconatiner {
@@ -431,8 +432,11 @@
 .Student_profileUpdate_editsubconatiner_from_choss_img_cinatiner div img {
   margin: 0 auto;
   border: 2px solid rgba(0, 0, 0, 0.5);
-  width: 150px;
+  width: 120px;
   margin-left: 0;
+  padding: 1rem;
+  /* margin: 0 1rem; */
+  margin-bottom: 1rem;
 }
 .ugquiz_StudentDashbordconatiner_handleToggleLeftMenu {
   display: none;
@@ -599,6 +603,7 @@
   text-align: left;
   letter-spacing: 1px;
   word-spacing: 3px;
+  font-weight: bold;
 }
 
 .dashboard_heading_div {
@@ -624,6 +629,7 @@
   font-size: 30px;
   font-weight: 700;
   color: #003515;
+  text-align: start;
 }
 
 .student_image {
@@ -1099,16 +1105,52 @@ color: white;
   }
 }
 
+/* studet profile settings css */
+.studentUpdateProfileParentContainer {
+  padding: 1rem 0;
+  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+border: 1px solid gray;
+margin-top: 1rem;
+border-radius: 10px;
+}
+form.Student_profileUpdate_editsubconatiner_from {
+  /* border: 1px solid black; */
+  width: 90%;
+  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+  /* border: 1px solid gray; */
+  margin: auto;
+}
 
+.form.Student_profileUpdate_editsubconatiner_from input{
+  width: 100%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
+}
+.form.Student_profileUpdate_editsubconatiner_from .full-name_email #email {
+width: 100%;
+background-color: unset;
+}
 
+.full-name_email #email{
+  width: inherit;
+  background-color: unset;
+  border: unset;
+  width: 350px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
 
+.Student_profileUpdate_editsubconatiner_from [type="text"],.Student_profileUpdate_editsubconatiner_from [type="number"],.Student_profileUpdate_editsubconatiner_from input[type="date"],
+.Student_profileUpdate_editsubconatiner_from input[type="time"] {
+  width: 350px;
+  padding: 6px;
+  border: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
+}
 
+.studentUpdateProfileParentContainer{
 
-
-
-
+}
 
 
 
