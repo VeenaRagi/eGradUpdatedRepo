@@ -868,7 +868,7 @@ function Testcreationadminforms() {
                     Question Limit:
                   </label>
 
-                  <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
+                  <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant ">
                     <table style={{ textAlign: "justify" }}>
                       <thead>
                         <tr>
@@ -1251,7 +1251,7 @@ function Testcreationadminforms() {
         />
       </div>
       <h3 className="list_-otsTitels">Created test Details</h3>
-      <div className="testCreation_-GettingDAta_-container">
+      <div className="testCreation_-GettingDAta_-container tableToBeAdjusted">
         <table className="otc_-table" style={{ textAlign: "center" }}>
           <thead className="otsGEt_-contantHead otc_-table_-header">
             <tr>

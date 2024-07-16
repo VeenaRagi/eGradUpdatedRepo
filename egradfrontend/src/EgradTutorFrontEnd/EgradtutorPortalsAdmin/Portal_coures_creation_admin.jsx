@@ -1786,7 +1786,8 @@ function Portal_coures_creation_admin() {
           />
         </div>
         <h3 className="list_-otsTitels">created COURSES list</h3>
-        <table className="couresCreation_-table">
+        <div className="tableToBeScrolled">
+        <table className="couresCreation_-table tableToBeAdjusted">
           <thead className="otsGEt_-contantHead couresotc_-table">
             <tr>
               <th>S.no</th>
@@ -1877,6 +1878,7 @@ function Portal_coures_creation_admin() {
             )}
           </tbody>
         </table>
+        </div>
         <ReactPaginate
   previousLabel={<i className="fa-solid fa-angles-left"></i>}
   nextLabel={<i className="fa-solid fa-angles-right"></i>}
