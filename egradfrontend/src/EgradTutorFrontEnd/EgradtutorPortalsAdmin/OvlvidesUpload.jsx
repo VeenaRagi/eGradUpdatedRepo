@@ -7,7 +7,7 @@ import ReactPaginate from "react-paginate";
 import { FaSearch } from "react-icons/fa";
 import { useParams } from 'react-router-dom';
 import '../../EgradTutorFrontEnd/EgradtutorPortalsAdmin/styles/Ovlvidesupload.css'
-
+// import '../../EgradTutorFrontEnd/'
 function OvlvidesUpload() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [courses, setCourses] = useState([]);
@@ -196,8 +196,8 @@ function OvlvidesUpload() {
 
       
       <div
-        className="uploadedDocumentFilds examSubjects_-contant ovl_Container"
-        style={{ marginTop: "1rem" }}
+        className="uploadedDocumentFilds examSubjects_-contant ovl_Container overFlowX"
+        style={{ marginTop: "1rem" }} 
       >
         <label>Select a course:</label>
         <select

@@ -13,22 +13,29 @@ justify-content: center;
     justify-content: center;
 }
 
-.admin_profile_ul{
-display: flex;
-justify-content: center;
-align-items: center;
+.admin_profile_ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    /* gap: 7rem; */
+    /* border: 1px solid; */
 }
-
-.admin_profile_li{
+.admin_profile_li {
     display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: center;
+    border: 1px solid;
+    padding: 2rem 1rem;
+    align-items: center;
 }
 
 .admins_profile_img_container{
     height: 200px;
     width: 200px;
+    border: 1px solid;
+
 }
 
 .admins_profile_img {

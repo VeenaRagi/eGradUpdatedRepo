@@ -1017,7 +1017,13 @@ fieldset > legend {
 
 .Banner_Poster_admin {
   text-align: center;
+}
+.Exam_portal_admin_integration_container .quz_menu2 .lines {
+  background: rgb(255 255 255);
 } 
+/* .Exam_portal_admin_integration_container .quz_menu2{
+  margin-top: 10px;
+} */
 
 
 .banner_close {

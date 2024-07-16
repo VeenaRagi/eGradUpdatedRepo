@@ -80,3 +80,8 @@
     gap: 20px;
     padding: 30px;
 }
+@media (max-width: 1575px) {
+  .overFlowX{
+    overflow-x: scroll;
+  }
+}

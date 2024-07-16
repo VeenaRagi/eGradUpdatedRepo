@@ -96,12 +96,12 @@ const DocumentUpload_admin = () => {
 
   return (
     <div className=" create_exam_container otsMainPages" >
-      <div className="" style={{ margin: '10px 0' }}>
+      <div className="" >
         <h2 className="textColor">Document Upload Form </h2>
       </div>
       <form>
-        <div className="uploadedDocument_container examSubjects_-contant">
-          <div className="uploadedDocumentFilds">
+        <div className="uploadedDocument_container examSubjects_-contant ">
+          <div className="uploadedDocumentFilds  ">
             <label htmlFor="testSelect">Select Test:</label>
             <select
               id="testSelect"
@@ -162,7 +162,7 @@ const DocumentUpload_admin = () => {
           </div>
         </div>
 
-        <div className="uploadedDocumentFilds" style={{ float: "right" }}>
+        <div className="uploadedDocumentFilds" style={{ float: "right" }} >
           <button className="ots_-createBtn" onClick={(e) => handleUpload(e)}>
             Upload
           </button>
