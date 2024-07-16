@@ -36,7 +36,7 @@ ul.tabButtonUl.themeTabButtonUlDefault {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); /* More visible shadow color */
 }
 .defaultTabContentSplittedText {
-    margin-left: 15rem;
+    margin-left: 1rem;
     text-align: left;
     list-style: disc;
 }

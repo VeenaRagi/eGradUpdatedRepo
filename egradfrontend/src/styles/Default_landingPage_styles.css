@@ -283,8 +283,8 @@ a {
     font-size: 18px;
 }
 
-.Footer_Links_Content.themeFooterLinksContentDefault ul li a:hover{
-    color: rgb(42, 19, 168) !important;
+.Footer_Links_Content.themeFooterLinksContentDefault ul li a:hover {
+    color: #00a3ff !important;
 }
 
 .themeFooterContactDataDefault h2 {
@@ -764,7 +764,11 @@ button:hover {
     width: 100%;
 
 } 
-
+.Newlandingpage_branch_box.EGATE_elandUl-pg_Default:hover{
+    --_p: 0px;
+    outline-color: var(--color);
+    outline-offset: .05em;
+}
 
 .Newlandingpage .Egate_eLanding_Container_Egate_landing .EGATE_eCordsLanding .EGATE_elandUl-pg_Default a:hover {
     opacity: 0.75;

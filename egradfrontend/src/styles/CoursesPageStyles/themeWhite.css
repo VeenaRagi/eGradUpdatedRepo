@@ -23,9 +23,9 @@
     height: 10vh;
         padding: 3rem 4rem;
 }
-.logo_Img_container.themeLogoImgCDefault img {
+/* .logo_Img_container.themeLogoImgCDefault img {
     width:225px;
-}
+} */
 .themeCourseAmountSpanDefault {
     border-bottom-left-radius: 10px;
     /* background-color: #ebcece; */
