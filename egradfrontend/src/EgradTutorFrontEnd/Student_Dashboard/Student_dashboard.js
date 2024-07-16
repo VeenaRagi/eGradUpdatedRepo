@@ -1234,9 +1234,7 @@ export const StudentDashbordmycourse = () => {
     }
   };
 
-  useEffect(() => {
-    fetchPurchasedCourses();
-  }, []);
+
 
   const fetchPurchasedCourses = async () => {
     try {
@@ -1558,10 +1556,6 @@ export const StudentDashbordmycourse = () => {
       return "Start Test";
     }
   };
-  // console.log("lmkdklfjskjnfvdlskjvkfh");
-  // console.log(userData.id);
-  // console.log(purchasedCourses.courseCreationId);
-  // console.log(testDetails.testCreationTableId)
 
   // Function to format date as dd-mm-yyyy
   const formatDate = (dateString) => {
@@ -1690,141 +1684,7 @@ export const StudentDashbordmycourse = () => {
       console.error("Error fetching test details:", error);
     }
   };
-  //  const handleCompletePackage = async (
-  //    OVL_Course_Id,
-  //    courseCreationId,
-  //    user_Id
-  //  ) => {
-  //    console.log("courseCreationId, user_Id", courseCreationId, user_Id);
-  //    console.log("completePackage", completePackage);
-
-  //    try {
-  //      const response1 = await axios.get(
-  //        `${BASE_URL}/TestPage/CompletePackage/${courseCreationId}/${user_Id}`
-  //      );
-  //  const data1 = await response1.json();
-  //   setCompletePackage(response1.data1);
-
-  //      setShowQuizCourses(false);
-  //      setShowCompletePackageContainer(true);
-  //    } catch (error) {
-  //      console.error("Error fetching complete package:", error);
-  //    }
-
-  //    try {
-  //      const response2 = await fetch(
-  //        `${BASE_URL}/OtsvidesUploads/videos/${OVL_Course_Id}`
-  //      );
-
-  //      if (!response2.ok) {
-  //        throw new Error("Failed to fetch videos");
-  //      }
-
-  //      const data2 = await response2.json();
-  //      setVideos(data2);
-  //      console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
-  //      console.log(data2);
-  //      setShowQuizCourses(false);
-  //      setShowtestContainer2(true);
-  //    } catch (error) {
-  //      console.error("Error fetching videos:", error);
-  //    } finally {
-  //      setIsLoading(false);
-  //    }
-  //  };
-  // const handleCompletePackage = async (
-  //   OVL_Course_Id,
-  //   courseCreationId,
-  //   user_Id
-  // ) => {
-  //   console.log("courseCreationId, user_Id", courseCreationId, user_Id);
-  //   console.log("completePackage", completePackage);
-
-  //   try {
-  //     const response1 = await axios.get(
-  //       `${BASE_URL}/TestPage/CompletePackage/${courseCreationId}/${user_Id}`
-  //     );
-  //     if (!response1.ok) {
-  //       throw new Error("Failed to fetch complete package");
-  //     }
-  //     const data1 = await response1.json();
-  //     setCompletePackage(data1);
-  //     console.log('data1',data1)
-  //     setShowQuizCourses(false);
-  //     setShowCompletePackageContainer(true);
-  //   } catch (error) {
-  //     console.error("Error fetching complete package:", error);
-  //   }
-
-  //   try {
-  //     const response2 = await fetch(
-  //       `${BASE_URL}/OtsvidesUploads/videos/${OVL_Course_Id}`
-  //     );
-
-  //     if (!response2.ok) {
-  //       throw new Error("Failed to fetch videos");
-  //     }
-
-  //     const data2 = await response2.json();
-  //     setVideos(data2);
-  //       console.log('data2',data2)
-  //     console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
-  //     console.log(data2);
-  //     setShowQuizCourses(false);
-  //     setShowtestContainer2(true);
-  //   } catch (error) {
-  //     console.error("Error fetching videos:", error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
-  // const handleCompletePackage = async (
-  //   OVL_Course_Id,
-  //   courseCreationId,
-  //   user_Id
-  // ) => {
-  //   console.log("courseCreationId, user_Id", courseCreationId, user_Id);
-  //   console.log("completePackage", completePackage);
-
-  //   try {
-  //     const response1 = await axios.get(
-  //       `${BASE_URL}/TestPage/CompletePackage/${courseCreationId}/${user_Id}`
-  //     );
-  //     if (response1.status !== 200) {
-  //       throw new Error("Failed to fetch complete package");
-  //     }
-  //     const data1 = response1.data;
-  //     setCompletePackage(data1);
-  //     console.log('data1', data1)
-  //     setShowQuizCourses(false);
-  //     setShowCompletePackageContainer(true);
-  //   } catch (error) {
-  //     console.error("Error fetching complete package:", error);
-  //   }
-
-  //   try {
-  //     const response2 = await fetch(
-  //       `${BASE_URL}/OtsvidesUploads/videos/${OVL_Course_Id}`
-  //     );
-
-  //     if (!response2.ok) {
-  //       throw new Error("Failed to fetch videos");
-  //     }
-
-  //     const data2 = await response2.json();
-  //     setVideos(data2);
-  //     console.log('data2', data2)
-  //     console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
-  //     console.log(data2);
-  //     setShowQuizCourses(false);
-  //     setShowtestContainer2(true);
-  //   } catch (error) {
-  //     console.error("Error fetching videos:", error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+  
 
   const renderTestAction = (test) => {
     const {
