@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import moment from "moment";
-import BASE_URL from '../../src/apiConfig'
+import BASE_URL from '../../apiConfig'
 import './Styles/ResponsiveForAdmin.css'
 
 

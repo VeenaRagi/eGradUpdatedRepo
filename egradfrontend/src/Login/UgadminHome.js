@@ -11,7 +11,7 @@ const UgadminHome = () => {
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userRole");
-    window.location.href = "/uglogin";
+    window.location.href = "/userlogin";
   };
 
   return (

@@ -450,53 +450,51 @@ export const StudentDashbordheader = () => {
     <div>
       <div className="Quiz_main_page_header">
         {/* {nav.map((nav, index) => { */}
-          return (
-            <div className="Quiz_main_page_navbar">
-              <div className="Quizzlogo">
-                {/* <img src={nav.logo} alt="" /> */}
-              </div>
+        {/* return ( */}
+        <div className="Quiz_main_page_navbar">
+          <div className="Quizzlogo">{/* <img src={nav.logo} alt="" /> */}</div>
 
-              <div
-                className={
-                  !showQuizmobilemenu
-                    ? "Quiz_main_page_navbar_SUBpart Quiz_main_page_navbar_SUBpart_mobile"
-                    : "Quiz_main_page_navbar_SUBpart_mobile"
-                }
-              >
-                <ul>
-                  <div className="Quiz_main_page_login_signUp_btn"></div>
-                </ul>
-              </div>
+          <div
+            className={
+              !showQuizmobilemenu
+                ? "Quiz_main_page_navbar_SUBpart Quiz_main_page_navbar_SUBpart_mobile"
+                : "Quiz_main_page_navbar_SUBpart_mobile"
+            }
+          >
+            <ul>
+              <div className="Quiz_main_page_login_signUp_btn"></div>
+            </ul>
+          </div>
 
-              <div className="quiz_app_quiz_menu_login_btn_contaioner">
-                <div>
-                  {isLoggedIn === true ? (
+          <div className="quiz_app_quiz_menu_login_btn_contaioner">
+            <div>
+              {isLoggedIn === true ? (
+                <>
+                  {(userRole === "admin" ||
+                    userRole === "ugotsadmin" ||
+                    userRole === "ugadmin") && (
                     <>
-                      {(userRole === "admin" ||
-                        userRole === "ugotsadmin" ||
-                        userRole === "ugadmin") && (
-                        <>
-                          <button id="dropdownmenu_foradim_page_btn">
-                            <img
-                              title={userData.username}
-                              src={userData.imageData}
-                              alt={`Image ${userData.user_Id}`}
-                            />
-                            <div className="dropdownmenu_foradim_page">
-                              <Link to="/student_dashboard">My profile</Link>
-                              <Link onClick={handleLogout}>Logout</Link>
-                            </div>
-                          </button>
-                        </>
-                      )}
+                      <button id="dropdownmenu_foradim_page_btn">
+                        <img
+                          title={userData.username}
+                          src={userData.imageData}
+                          alt={`Image ${userData.user_Id}`}
+                        />
+                        <div className="dropdownmenu_foradim_page">
+                          <Link to="/student_dashboard">My profile</Link>
+                          <Link onClick={handleLogout}>Logout</Link>
+                        </div>
+                      </button>
+                    </>
+                  )}
 
-                      {userRole === "viewer" && (
-                        <>
-                          <div className="dashbordheder_container">
-                            <HashLink to="/home#contact" className="Quiz__home">
-                              Contact Us
-                            </HashLink>
-                            {/* <a
+                  {userRole === "viewer" && (
+                    <>
+                      <div className="dashbordheder_container">
+                        <HashLink to="/home#contact" className="Quiz__home">
+                          Contact Us
+                        </HashLink>
+                        {/* <a
                               href="/home#contact"
                               className="Quiz__home"
                               target="_blank"
@@ -504,57 +502,57 @@ export const StudentDashbordheader = () => {
                               {" "}
                               Contact Us
                             </a> */}
-                            {/* <Link
+                        {/* <Link
                               to="http://localhost:3000/Exam_portal_home_page"
                               className="Quiz__home">
                               Home
                             </Link> */}
-                            <button id="dropdownmenu_foradim_page_btn">
-                              <img
-                                title={userData.username}
-                                src={userData.imageData}
-                                alt={`Image ${userData.user_Id}`}
-                              />
+                        <button id="dropdownmenu_foradim_page_btn">
+                          <img
+                            title={userData.username}
+                            src={userData.imageData}
+                            alt={`Image ${userData.user_Id}`}
+                          />
 
-                              {/* <img
+                          {/* <img
                                 title={userData.username}
                                 src={`${BASE_URL}/uploads/OtsStudentimeages/${userData.imageData}`}
                                 alt={`Image ${userData.user_Id}`}
                               /> */}
-                              <div className="dropdownmenu_foradim_page">
-                                {/* <Link to={`/userread/${user.id}`} className="btn btn-success mx-2">Read</Link> */}
-                                {/* <Link to={`/userdeatailspage/${user.id}`} >Account-info</Link> */}
-                                <Link onClick={openPopup}>My profile</Link>
+                          <div className="dropdownmenu_foradim_page">
+                            {/* <Link to={`/userread/${user.id}`} className="btn btn-success mx-2">Read</Link> */}
+                            {/* <Link to={`/userdeatailspage/${user.id}`} >Account-info</Link> */}
+                            <Link onClick={openPopup}>My profile</Link>
 
-                                <Link onClick={openPopuppasword}>
-                                  Change Password
-                                </Link>
-                                <Link onClick={handleLogout}>Logout</Link>
-                              </div>
-                            </button>
+                            <Link onClick={openPopuppasword}>
+                              Change Password
+                            </Link>
+                            <Link onClick={handleLogout}>Logout</Link>
                           </div>
-                        </>
-                      )}
-                    </>
-                  ) : (
-                    <>
-                      <a class="ugQUIz_login_btn" href="/UgadminHome">
-                        Login/Registration
-                      </a>
+                        </button>
+                      </div>
                     </>
                   )}
+                </>
+              ) : (
+                <>
+                  <a class="ugQUIz_login_btn" href="/UgadminHome">
+                    Login/Registration
+                  </a>
+                </>
+              )}
 
-                  {isLoggedIn === "flase" && (
-                    <>
-                      <button id="dropdownmenu_foradim_page_btn">
-                        <div className="dropdownmenu_foradim_page"></div>
-                      </button>
-                    </>
-                  )}
-                </div>
-              </div>
+              {isLoggedIn === "flase" && (
+                <>
+                  <button id="dropdownmenu_foradim_page_btn">
+                    <div className="dropdownmenu_foradim_page"></div>
+                  </button>
+                </>
+              )}
             </div>
-          );
+          </div>
+        </div>
+        {/* ); */}
         {/* })} */}
       </div>
     </div>
@@ -989,246 +987,6 @@ export const StudentDashbordconatiner = ({ width }) => {
   );
 };
 
-// export const StudentDashbordconatiner = ({ width }) => {
-//   const { testCreationTableId, courseCreationId } = useParams();
-//   const [isLoggedIn, setIsLoggedIn] = useState(false);
-//   const [userData, setUserData] = useState({});
-//   const [userMarks, setUserMarks] = useState([]);
-//   const chartRef = useRef();
-//   const chartInstance = useRef(null);
-
-//   useEffect(() => {
-//     const checkLoggedIn = () => {
-//       const loggedIn = localStorage.getItem("isLoggedIn");
-//       if (loggedIn === "true") {
-//         setIsLoggedIn(true);
-//         fetchUserData();
-//       }
-//     };
-//     checkLoggedIn();
-//   }, []);
-
-//   const fetchUserData = async () => {
-//     try {
-//       const token = localStorage.getItem("token");
-//       const response = await fetch(`${BASE_URL}/ughomepage_banner_login/user`, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-
-//       if (!response.ok) {
-//         localStorage.removeItem("isLoggedIn");
-//         localStorage.removeItem("token");
-//         setIsLoggedIn(false);
-//         Navigate("/uglogin");
-//         return;
-//       }
-
-//       const userData = await response.json();
-//       setUserData(userData);
-//     } catch (error) {
-//       console.error("Error fetching user data:", error);
-//     }
-//   };
-
-//   const [overallpercentage, setOverallpercentage] = useState();
-
-//   useEffect(() => {
-//     const fetchUserMarks = async () => {
-//       try {
-//         const response = await fetch(
-//           `${BASE_URL}/Myresult/usermarks/${userData.id}`
-//         );
-
-//         if (!response.ok) {
-//           throw new Error("Network response was not ok");
-//         }
-
-//         const result = await response.json();
-//         setUserMarks(result.usermarks);
-//         setOverallpercentage(result);
-//       } catch (error) {
-//         console.error("Error fetching user marks:", error);
-//       }
-//     };
-
-//     if (userData.id) {
-//       fetchUserMarks();
-//     }
-//   }, [userData.id]);
-//   const testData = userMarks
-//     ? userMarks.map((entry) => ({
-//         testCreationTableId: entry.testCreationTableId,
-//         TestName: entry.TestName,
-//         percentage: parseFloat(entry.percentage),
-//       }))
-//     : [];
-
-//   useEffect(() => {
-//     if (chartRef.current && testData.length > 0) {
-//       if (chartInstance.current) {
-//         chartInstance.current.destroy();
-//       }
-
-//       const ctx = chartRef.current.getContext("2d");
-//       chartInstance.current = new Chart(ctx, {
-//         type: "line",
-//         data: {
-//           labels: testData.map((entry) => entry.testCreationTableId),
-//           datasets: [
-//             {
-//               label: "Percentage",
-//               backgroundColor: "rgba(75, 192, 192, 0.2)",
-//               borderColor: "rgba(75, 192, 192, 1)",
-//               borderWidth: 2,
-//               pointBackgroundColor: "rgba(75, 192, 192, 1)",
-//               pointBorderColor: "rgba(75, 192, 192, 1)",
-//               pointHoverBackgroundColor: "rgba(75, 192, 192, 1)",
-//               pointHoverBorderColor: "rgba(75, 192, 192, 1)",
-//               data: testData.map((entry) => ({
-//                 x: entry.testCreationTableId,
-//                 y: entry.percentage,
-//                 TestName: entry.TestName,
-//               })),
-//             },
-//           ],
-//         },
-//         options: {
-//           responsive: true,
-//           maintainAspectRatio: false,
-//           scales: {
-//             x: {
-//               title: {
-//                 display: true,
-//                 text: "Test Creation Table ID",
-//                 color: "black",
-//               },
-//               grid: {
-//                 display: true,
-//                 color: "rgba(0, 0, 0, 0.1)",
-//               },
-//               ticks: {
-//                 color: "black",
-//               },
-//             },
-//             y: {
-//               title: {
-//                 display: true,
-//                 text: "Percentage",
-//                 color: "black",
-//               },
-//               grid: {
-//                 display: true,
-//                 color: "rgba(0, 0, 0, 0.1)",
-//               },
-//               ticks: {
-//                 color: "black",
-//               },
-//               beginAtZero: true,
-//             },
-//           },
-//           plugins: {
-//             tooltip: {
-//               callbacks: {
-//                 label: function (context) {
-//                   return [
-//                     `Test ID: ${context.label}`,
-//                     `Test Name: ${
-//                       context.dataset.data[context.dataIndex].TestName
-//                     }`,
-//                     `Percentage: ${context.parsed.y}%`,
-//                   ];
-//                 },
-//               },
-//             },
-//           },
-//         },
-//       });
-//     }
-
-//     return () => {
-//       if (chartInstance.current) {
-//         chartInstance.current.destroy();
-//       }
-//     };
-//   }, [testData]);
-
-//   const [greeting, setGreeting] = useState("");
-
-//   useEffect(() => {
-//     // Get current hour
-//     const currentHour = new Date().getHours();
-
-//     // Determine greeting based on time
-//     let newGreeting;
-//     if (currentHour < 12) {
-//       newGreeting = "Good Morning";
-//     } else if (currentHour < 18) {
-//       newGreeting = "Good Afternoon";
-//     } else {
-//       newGreeting = "Good Evening";
-//     }
-
-//     setGreeting(newGreeting);
-//   }, []);
-
-//   const [attemptedTestCount, setAttemptedTestCount] = useState([]);
-//   // console.log("attemptedTestCount", attemptedTestCount);
-//   useEffect(() => {
-//     const fetchAttemptedTestCount = async () => {
-//       try {
-//         const response = await axios.get(
-//           `${BASE_URL}/Myresult/attempted_test_count/${userData.id}`
-//         );
-//         setAttemptedTestCount(response.data);
-//       } catch (error) {
-//         console.error("Error fetching attempted test count:", error);
-//       }
-//     };
-
-//     fetchAttemptedTestCount();
-//   }, [userData.id]);
-
-//   return (
-//     <div>
-//       <div className="dashboard_body_container">
-//         <div className="dashboard_welcome_section">
-//           <div className="greeting_section">
-//             <h2 className="dashboard_greeting_container">
-//               {greeting}, {userData.username}
-//             </h2>
-//             <p className="greeting_sub_text">
-//               "Welcome back, {userData.username}! Your eGradTutor journey to
-//               academic success begins here. Explore, learn, and thrive on your
-//               educational path."
-//             </p>
-//           </div>
-//           <div className="dashboard_welcome_img_section">
-//             <img src={welcome_greeting_img} />
-//           </div>
-//         </div>
-//         <div>
-//           {/* <h2 className="test_performance_heading">Your Test Performance</h2> */}
-//           <div className="testcounts_student_dashbard">
-//             {attemptedTestCount.map((item, index) => (
-//               <ul key={index}>
-//                 {/* <li>user_Id: {item.user_Id}</li> */}
-//                 <li>Total Tests: {item.test_count}</li>
-//                 <li>
-//                   {/* <span><GoIssueClosed /></span>  */}
-//                   Total Attempted Tests:{item.attempted_test_count}
-//                 </li>
-//                 <li>Total Unattempted Tests:{item.unattempted_test_count}</li>
-//               </ul>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
 export const StudentDashbordmycourse = () => {
   const [selectedPortalName, setSelectedPortalName] = useState("");
   const [testDetails, setTestDetails] = useState([]);
@@ -1480,721 +1238,6 @@ export const StudentDashbordmycourse = () => {
   const handleReset = () => {
     setSelectedTypeOfTest("");
   };
-
-  // const openPopup = (testCreationTableId) => {
-  //   const newWinRef = window.open(
-  //     `/Instructions/${testCreationTableId}`,
-  //     "_blank",
-  //     "width=1000,height=1000"
-  //   );
-
-  //   if (newWinRef && !newWinRef.closed) {
-  //     newWinRef.focus();
-  //   }
-  // };
-  // const courseCreationId = courses.courseCreationId;
-  // const openPopup = (testCreationTableId, user_Id, Portale_Id) => {
-  //   const userId = user_Id;
-  //   let param1 = testCreationTableId;
-  //   let param2 = user_Id;
-  //   let param3 = Portale_Id;
-
-  //     try {
-  //       // Example parameters to encrypt (adjust as needed)
-
-  //       // Encrypt parameters
-  //       const encryptedParam1 = await encryptData(param1.toString());
-  //       const encryptedParam2 = await encryptData(param2.toString());
-  //       const encryptedParam3 = await encryptData(param3.toString());
-
-  //       // Generate and store a navigation token in session storage
-  //       const token = new Date().getTime().toString(); // Example token, use a more secure method if needed
-  //       sessionStorage.setItem('navigationToken', token);
-
-  //       // Construct the URL
-  //       const url = `/Instructions/${encodeURIComponent(encryptedParam1)}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(encryptedParam3)}`;
-
-  //       // Open the URL in a new window
-  //       const newWinRef = window.open(
-  //         url,
-  //         '_blank',
-  //         'width=1000,height=1000'
-  //       );
-
-  //       if (newWinRef && !newWinRef.closed) {
-  //         newWinRef.focus();
-  //       }
-  //     } catch (error) {
-  //       console.error('Error encrypting data:', error);
-  //     }
-
-  //   try {
-  //     const response = fetch(
-  //       `http://localhost:5001/QuizPage/clearresponseforPB/${userId}`,
-  //       {
-  //         method: "DELETE",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           // Include any necessary authentication headers
-  //           Authorization: "Bearer yourAccessToken",
-  //         },
-  //         body: JSON.stringify({ userId }),
-  //       }
-  //     );
-
-  //     if (!response.ok) {
-  //       console.error("Failed to delete user data");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error deleting user data:", error);
-  //   }
-  // };
-
-  //main final working
-  //   const openPopup = async (testCreationTableId, user_Id, Portale_Id) => {
-  //     const userId = user_Id;
-  //     let param1 = testCreationTableId;
-  //     let param2 = user_Id;
-  //     let param3 = Portale_Id;
-  //     const screenWidth = window.screen.width;
-  //     const screenHeight = window.screen.height;
-  //     try {
-  //         const encryptedParam1 = await encryptData(param1.toString());
-  //         const encryptedParam2 = await encryptData(param2.toString());
-  //         const encryptedParam3 = await encryptData(param3.toString());
-
-  //         const token = new Date().getTime().toString();
-  //         sessionStorage.setItem('navigationToken', token);
-
-  //         const url = `/Instructions/${encodeURIComponent(encryptedParam1)}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(encryptedParam3)}`;
-
-  //         const newWinRef = window.open(
-  //             url,
-  //             '_blank',
-  //             `width=${screenWidth},height=${screenHeight},fullscreen=yes`
-  //         );
-
-  //         if (newWinRef && !newWinRef.closed) {
-  //             newWinRef.focus();
-
-  //         }
-  //     } catch (error) {
-  //         console.error('Error encrypting data:', error);
-  //     }
-
-  //     try {
-  //         const response = await fetch(
-  //             `http://localhost:5001/QuizPage/clearresponseforPB/${userId}`,
-  //             {
-  //                 method: "DELETE",
-  //                 headers: {
-  //                     "Content-Type": "application/json",
-  //                     Authorization: "Bearer yourAccessToken",
-  //                 },
-  //                 body: JSON.stringify({ userId }),
-  //             }
-  //         );
-
-  //         if (!response.ok) {
-  //             console.error("Failed to delete user data");
-  //         }
-  //     } catch (error) {
-  //         console.error("Error deleting user data:", error);
-  //     }
-  // };
-  //main
-  // const openPopup = async (testCreationTableId, user_Id, Portale_Id) => {
-  //   const userId = user_Id;
-  //   let param1 = testCreationTableId;
-  //   let param2 = user_Id;
-  //   let param3 = Portale_Id;
-  //   const screenWidth = window.screen.width;
-  //   const screenHeight = window.screen.height;
-
-  //   try {
-  //       const encryptedParam1 = await encryptData(param1.toString());
-  //       const encryptedParam2 = await encryptData(param2.toString());
-  //       const encryptedParam3 = await encryptData(param3.toString());
-
-  //       const token = new Date().getTime().toString();
-  //       sessionStorage.setItem('navigationToken', token);
-
-  //       const url = `/Instructions/${encodeURIComponent(encryptedParam1)}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(encryptedParam3)}`;
-
-  //       const newWinRef = window.open(
-  //           url,
-  //           '_blank',
-  //           `width=${screenWidth},height=${screenHeight},fullscreen=yes`
-  //       );
-
-  //       if (newWinRef && !newWinRef.closed) {
-  //           newWinRef.focus();
-  //           // Move and resize the new window to cover the entire screen
-  //           newWinRef.moveTo(0, 0);
-  //           newWinRef.resizeTo(screenWidth, screenHeight);
-
-  //           const requestFullscreen = () => {
-  //               const docElm = newWinRef.document.documentElement;
-  //               if (docElm.requestFullscreen) {
-  //                   docElm.requestFullscreen().catch(err => {
-  //                       console.error("Fullscreen request failed:", err.message);
-  //                   });
-  //               } else if (docElm.mozRequestFullScreen) {
-  //                   docElm.mozRequestFullScreen().catch(err => {
-  //                       console.error("Fullscreen request failed:", err.message);
-  //                   });
-  //               } else if (docElm.webkitRequestFullscreen) {
-  //                   docElm.webkitRequestFullscreen().catch(err => {
-  //                       console.error("Fullscreen request failed:", err.message);
-  //                   });
-  //               } else if (docElm.msRequestFullscreen) {
-  //                   docElm.msRequestFullscreen().catch(err => {
-  //                       console.error("Fullscreen request failed:", err.message);
-  //                   });
-  //               }
-  //           };
-
-  //           const reEnterFullscreen = () => {
-  //               if (!newWinRef.document.fullscreenElement &&
-  //                   !newWinRef.document.webkitFullscreenElement &&
-  //                   !newWinRef.document.mozFullScreenElement &&
-  //                   !newWinRef.document.msFullscreenElement) {
-  //                   requestFullscreen();
-  //               }
-  //           };
-
-  //           // const redirectToBlankPage = () => {
-  //           //     newWinRef.location.href = "about:blank";
-  //           // };
-
-  //           // const detectFocusChange = () => {
-  //           //     if (document.hidden) {
-  //           //         redirectToBlankPage();
-  //           //     }
-  //           // };
-
-  //           newWinRef.addEventListener('load', () => {
-  //               // Request fullscreen initially
-  //               requestFullscreen();
-
-  //               // Request fullscreen on click
-  //               newWinRef.document.body.addEventListener('click', requestFullscreen);
-
-  //               // Monitor focus changes
-  //               // document.addEventListener('visibilitychange', detectFocusChange);
-
-  //               // Disable key shortcuts and text selection
-  //               newWinRef.document.addEventListener('keydown', (event) => {
-  //                   if (event.key === 'Shift') {
-  //                       newWinRef.close();
-  //                   }
-  //               });
-
-  //               // Disable cut, copy, and paste
-  //               ['cut', 'copy', 'paste'].forEach(eventType => {
-  //                   newWinRef.document.addEventListener(eventType, (event) => {
-  //                       event.preventDefault();
-  //                   });
-  //               });
-
-  //               // Disable right-click context menu
-  //               newWinRef.document.addEventListener('contextmenu', (event) => {
-  //                   event.preventDefault();
-  //               });
-
-  //               // Disable text selection and dragging
-  //               newWinRef.document.body.style.userSelect = 'none';
-  //               newWinRef.document.body.style.webkitUserSelect = 'none';
-  //               newWinRef.document.body.style.mozUserSelect = 'none';
-  //               newWinRef.document.body.style.msUserSelect = 'none';
-  //               newWinRef.document.body.style.webkitUserDrag = 'none';
-  //               newWinRef.document.body.draggable = false;
-
-  //               // Disable copy (clipboard) functionality
-  //               newWinRef.document.addEventListener('copy', (event) => {
-  //                   event.preventDefault();
-  //               });
-  //           });
-
-  //           // Monitor fullscreen change events
-  //           newWinRef.document.addEventListener('fullscreenchange', reEnterFullscreen);
-  //           newWinRef.document.addEventListener('webkitfullscreenchange', reEnterFullscreen);
-  //           newWinRef.document.addEventListener('mozfullscreenchange', reEnterFullscreen);
-  //           newWinRef.document.addEventListener('msfullscreenchange', reEnterFullscreen);
-  //       }
-
-  //       // Prevent user from switching to other apps or websites (focus lock)
-  //       const preventFocusLoss = (e) => {
-  //           if (newWinRef && !newWinRef.closed) {
-  //               newWinRef.focus();
-  //           }
-  //       };
-
-  //       document.addEventListener('visibilitychange', preventFocusLoss);
-  //   } catch (error) {
-  //       console.error('Error encrypting data:', error);
-  //   }
-
-  //   try {
-  //       const response = await fetch(
-  //           `http://localhost:5001/QuizPage/clearresponseforPB/${userId}`,
-  //           {
-  //               method: "DELETE",
-  //               headers: {
-  //                   "Content-Type": "application/json",
-  //                   Authorization: "Bearer yourAccessToken",
-  //               },
-  //               body: JSON.stringify({ userId }),
-  //           }
-  //       );
-
-  //       if (!response.ok) {
-  //           console.error("Failed to delete user data");
-  //       }
-  //   } catch (error) {
-  //       console.error("Error deleting user data:", error);
-  //   }
-  // };
-
-  // const openPopup = async (testCreationTableId, user_Id, Portale_Id) => {
-  //   const userId = user_Id;
-  //   let param1 = testCreationTableId;
-  //   let param2 = user_Id;
-  //   let param3 = Portale_Id;
-  //   const screenWidth = window.screen.width;
-  //   const screenHeight = window.screen.height;
-
-  //   try {
-  //       const encryptedParam1 = await encryptData(param1.toString());
-  //       const encryptedParam2 = await encryptData(param2.toString());
-  //       const encryptedParam3 = await encryptData(param3.toString());
-
-  //       const token = new Date().getTime().toString();
-  //       sessionStorage.setItem('navigationToken', token);
-
-  //       const url = `/Instructions/${encodeURIComponent(encryptedParam1)}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(encryptedParam3)}`;
-
-  //       const newWinRef = window.open(
-  //           url,
-  //           '_blank',
-  //           `width=${screenWidth},height=${screenHeight},fullscreen=yes`
-  //       );
-
-  //       if (newWinRef && !newWinRef.closed) {
-  //           newWinRef.focus();
-  //           newWinRef.moveTo(0, 0);
-  //           newWinRef.resizeTo(screenWidth, screenHeight);
-
-  //           const requestFullscreen = () => {
-  //               const docElm = newWinRef.document.documentElement;
-  //               if (docElm.requestFullscreen) {
-  //                   docElm.requestFullscreen().catch(err => {
-  //                       console.error("Fullscreen request failed:", err.message);
-  //                   });
-  //               } else if (docElm.mozRequestFullScreen) {
-  //                   docElm.mozRequestFullScreen().catch(err => {
-  //                       console.error("Fullscreen request failed:", err.message);
-  //                   });
-  //               } else if (docElm.webkitRequestFullscreen) {
-  //                   docElm.webkitRequestFullscreen().catch(err => {
-  //                       console.error("Fullscreen request failed:", err.message);
-  //                   });
-  //               } else if (docElm.msRequestFullscreen) {
-  //                   docElm.msRequestFullscreen().catch(err => {
-  //                       console.error("Fullscreen request failed:", err.message);
-  //                   });
-  //               }
-  //           };
-
-  //           const reEnterFullscreen = () => {
-  //               if (!newWinRef.document.fullscreenElement &&
-  //                   !newWinRef.document.webkitFullscreenElement &&
-  //                   !newWinRef.document.mozFullScreenElement &&
-  //                   !newWinRef.document.msFullscreenElement) {
-  //                   requestFullscreen();
-  //               }
-  //           };
-
-  //           newWinRef.addEventListener('load', () => {
-  //               requestFullscreen();
-
-  //               newWinRef.document.body.addEventListener('click', requestFullscreen);
-
-  //               newWinRef.document.addEventListener('keydown', (event) => {
-  //                   if (event.key === 'Shift') {
-  //                       newWinRef.close();
-  //                   }
-  //               });
-
-  //               ['cut', 'copy', 'paste'].forEach(eventType => {
-  //                   newWinRef.document.addEventListener(eventType, (event) => {
-  //                       event.preventDefault();
-  //                   });
-  //               });
-
-  //               newWinRef.document.addEventListener('contextmenu', (event) => {
-  //                   event.preventDefault();
-  //               });
-
-  //               newWinRef.document.body.style.userSelect = 'none';
-  //               newWinRef.document.body.style.webkitUserSelect = 'none';
-  //               newWinRef.document.body.style.mozUserSelect = 'none';
-  //               newWinRef.document.body.style.msUserSelect = 'none';
-  //               newWinRef.document.body.style.webkitUserDrag = 'none';
-  //               newWinRef.document.body.draggable = false;
-
-  //               newWinRef.document.addEventListener('copy', (event) => {
-  //                   event.preventDefault();
-  //               });
-
-  //               newWinRef.addEventListener('beforeunload', (event) => {
-  //                   const confirmationMessage = "Are you sure you want to leave this page?";
-  //                   event.returnValue = confirmationMessage; // For most browsers
-  //                   return confirmationMessage; // For some older browsers
-  //               });
-  //           });
-
-  //           newWinRef.document.addEventListener('fullscreenchange', reEnterFullscreen);
-  //           newWinRef.document.addEventListener('webkitfullscreenchange', reEnterFullscreen);
-  //           newWinRef.document.addEventListener('mozfullscreenchange', reEnterFullscreen);
-  //           newWinRef.document.addEventListener('msfullscreenchange', reEnterFullscreen);
-  //       }
-
-  //       const preventFocusLoss = (e) => {
-  //           if (newWinRef && !newWinRef.closed) {
-  //               newWinRef.focus();
-  //           }
-  //       };
-
-  //       document.addEventListener('visibilitychange', preventFocusLoss);
-  //   } catch (error) {
-  //       console.error('Error encrypting data:', error);
-  //   }
-
-  //   try {
-  //       const response = await fetch(
-  //           `http://localhost:5001/QuizPage/clearresponseforPB/${userId}`,
-  //           {
-  //               method: "DELETE",
-  //               headers: {
-  //                   "Content-Type": "application/json",
-  //                   Authorization: "Bearer yourAccessToken",
-  //               },
-  //               body: JSON.stringify({ userId }),
-  //           }
-  //       );
-
-  //       if (!response.ok) {
-  //           console.error("Failed to delete user data");
-  //       }
-  //   } catch (error) {
-  //       console.error("Error deleting user data:", error);
-  //   }
-  // };
-
-  // const openPopup = async (testCreationTableId, user_Id, Portale_Id) => {
-  //   const userId = user_Id;
-  //   let param1 = testCreationTableId;
-  //   let param2 = user_Id;
-  //   let param3 = Portale_Id;
-  //   const screenWidth = window.screen.width;
-  //   const screenHeight = window.screen.height;
-
-  //   try {
-  //       const encryptedParam1 = await encryptData(param1.toString());
-  //       const encryptedParam2 = await encryptData(param2.toString());
-  //       const encryptedParam3 = await encryptData(param3.toString());
-
-  //       const token = new Date().getTime().toString();
-  //       sessionStorage.setItem('navigationToken', token);
-
-  //       const url = `/Instructions/${encodeURIComponent(encryptedParam1)}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(encryptedParam3)}`;
-
-  //       const newWinRef = window.open(
-  //           url,
-  //           '_blank',
-  //           `width=${screenWidth},height=${screenHeight},fullscreen=yes`
-  //       );
-
-  //       if (newWinRef && !newWinRef.closed) {
-  //           newWinRef.focus();
-  //           newWinRef.moveTo(0, 0);
-  //           newWinRef.resizeTo(screenWidth, screenHeight);
-
-  //           const requestFullscreen = () => {
-  //               const docElm = newWinRef.document.documentElement;
-  //               if (docElm.requestFullscreen) {
-  //                   docElm.requestFullscreen().catch(err => {
-  //                       console.error("Fullscreen request failed:", err.message);
-  //                   });
-  //               } else if (docElm.mozRequestFullScreen) {
-  //                   docElm.mozRequestFullScreen().catch(err => {
-  //                       console.error("Fullscreen request failed:", err.message);
-  //                   });
-  //               } else if (docElm.webkitRequestFullscreen) {
-  //                   docElm.webkitRequestFullscreen().catch(err => {
-  //                       console.error("Fullscreen request failed:", err.message);
-  //                   });
-  //               } else if (docElm.msRequestFullscreen) {
-  //                   docElm.msRequestFullscreen().catch(err => {
-  //                       console.error("Fullscreen request failed:", err.message);
-  //                   });
-  //               }
-  //           };
-
-  //           const reEnterFullscreen = () => {
-  //               if (!newWinRef.document.fullscreenElement &&
-  //                   !newWinRef.document.webkitFullscreenElement &&
-  //                   !newWinRef.document.mozFullScreenElement &&
-  //                   !newWinRef.document.msFullscreenElement) {
-  //                   requestFullscreen();
-  //               }
-  //           };
-
-  //           newWinRef.addEventListener('load', () => {
-  //               requestFullscreen();
-
-  //               newWinRef.document.body.addEventListener('click', requestFullscreen);
-
-  //               newWinRef.document.addEventListener('keydown', (event) => {
-  //                   if (event.key === 'Shift') {
-  //                       newWinRef.close();
-  //                   }
-  //               });
-
-  //               ['cut', 'copy', 'paste'].forEach(eventType => {
-  //                   newWinRef.document.addEventListener(eventType, (event) => {
-  //                       event.preventDefault();
-  //                   });
-  //               });
-
-  //               newWinRef.document.addEventListener('contextmenu', (event) => {
-  //                   event.preventDefault();
-  //               });
-
-  //               newWinRef.document.body.style.userSelect = 'none';
-  //               newWinRef.document.body.style.webkitUserSelect = 'none';
-  //               newWinRef.document.body.style.mozUserSelect = 'none';
-  //               newWinRef.document.body.style.msUserSelect = 'none';
-  //               newWinRef.document.body.style.webkitUserDrag = 'none';
-  //               newWinRef.document.body.draggable = false;
-
-  //               newWinRef.document.addEventListener('copy', (event) => {
-  //                   event.preventDefault();
-  //               });
-
-  //               newWinRef.addEventListener('beforeunload', (event) => {
-  //                   const confirmationMessage = "Are you sure you want to leave this page?";
-  //                   event.returnValue = confirmationMessage; // For most browsers
-  //                   return confirmationMessage; // For some older browsers
-  //               });
-  //           });
-
-  //           newWinRef.document.addEventListener('fullscreenchange', reEnterFullscreen);
-  //           newWinRef.document.addEventListener('webkitfullscreenchange', reEnterFullscreen);
-  //           newWinRef.document.addEventListener('mozfullscreenchange', reEnterFullscreen);
-  //           newWinRef.document.addEventListener('msfullscreenchange', reEnterFullscreen);
-
-  //           // Continuously monitor and correct the window size and position
-  //           setInterval(() => {
-  //               if (newWinRef.outerWidth !== screenWidth || newWinRef.outerHeight !== screenHeight) {
-  //                   newWinRef.moveTo(0, 0);
-  //                   newWinRef.resizeTo(screenWidth, screenHeight);
-  //               }
-  //               newWinRef.focus();
-  //           }, 1000);
-  //       }
-
-  //       const preventFocusLoss = (e) => {
-  //           if (newWinRef && !newWinRef.closed) {
-  //               newWinRef.focus();
-  //           }
-  //       };
-
-  //       document.addEventListener('visibilitychange', preventFocusLoss);
-  //   } catch (error) {
-  //       console.error('Error encrypting data:', error);
-  //   }
-
-  //   try {
-  //       const response = await fetch(
-  //           `http://localhost:5001/QuizPage/clearresponseforPB/${userId}`,
-  //           {
-  //               method: "DELETE",
-  //               headers: {
-  //                   "Content-Type": "application/json",
-  //                   Authorization: "Bearer yourAccessToken",
-  //               },
-  //               body: JSON.stringify({ userId }),
-  //           }
-  //       );
-
-  //       if (!response.ok) {
-  //           console.error("Failed to delete user data");
-  //       }
-  //   } catch (error) {
-  //       console.error("Error deleting user data:", error);
-  //   }
-  // };
-
-  //main working without servercode for encryptand decrypt
-  // const openPopup = async (testCreationTableId, user_Id, Portale_Id) => {
-  //     const userId = user_Id;
-  //     let param1 = testCreationTableId;
-  //     let param2 = user_Id;
-  //     let param3 = Portale_Id;
-  //     const screenWidth = window.screen.width;
-  //     const screenHeight = window.screen.height;
-
-  //     try {
-  //         const encryptedParam1 = await encryptData(param1.toString());
-  //         const encryptedParam2 = await encryptData(param2.toString());
-  //         const encryptedParam3 = await encryptData(param3.toString());
-
-  //         const token = new Date().getTime().toString();
-  //         sessionStorage.setItem('navigationToken', token);
-
-  //         const url = `/Instructions/${encodeURIComponent(encryptedParam1)}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(encryptedParam3)}`;
-
-  //         const newWinRef = window.open(
-  //             url,
-  //             '_blank',
-  //             `width=${screenWidth},height=${screenHeight},fullscreen=yes`
-  //         );
-
-  //         if (newWinRef && !newWinRef.closed) {
-  //             newWinRef.focus();
-  //             newWinRef.moveTo(0, 0);
-  //             newWinRef.resizeTo(screenWidth, screenHeight);
-
-  //             const requestFullscreen = () => {
-  //                 const docElm = newWinRef.document.documentElement;
-  //                 if (docElm.requestFullscreen) {
-  //                     docElm.requestFullscreen().catch(err => {
-  //                         console.error("Fullscreen request failed:", err.message);
-  //                     });
-  //                 } else if (docElm.mozRequestFullScreen) {
-  //                     docElm.mozRequestFullScreen().catch(err => {
-  //                         console.error("Fullscreen request failed:", err.message);
-  //                     });
-  //                 } else if (docElm.webkitRequestFullscreen) {
-  //                     docElm.webkitRequestFullscreen().catch(err => {
-  //                         console.error("Fullscreen request failed:", err.message);
-  //                     });
-  //                 } else if (docElm.msRequestFullscreen) {
-  //                     docElm.msRequestFullscreen().catch(err => {
-  //                         console.error("Fullscreen request failed:", err.message);
-  //                     });
-  //                 }
-  //             };
-
-  //             const reEnterFullscreen = () => {
-  //                 if (!newWinRef.document.fullscreenElement &&
-  //                     !newWinRef.document.webkitFullscreenElement &&
-  //                     !newWinRef.document.mozFullScreenElement &&
-  //                     !newWinRef.document.msFullscreenElement) {
-  //                     requestFullscreen();
-  //                 }
-  //             };
-
-  //             newWinRef.addEventListener('load', () => {
-  //                 requestFullscreen();
-
-  //                 newWinRef.document.body.addEventListener('click', requestFullscreen);
-
-  //                 newWinRef.document.addEventListener('keydown', (event) => {
-  //                     if (event.key === 'Shift') {
-  //                         newWinRef.close();
-  //                     }
-  //                 });
-
-  //                 ['cut', 'copy', 'paste'].forEach(eventType => {
-  //                     newWinRef.document.addEventListener(eventType, (event) => {
-  //                         event.preventDefault();
-  //                     });
-  //                 });
-
-  //                 newWinRef.document.addEventListener('contextmenu', (event) => {
-  //                     event.preventDefault();
-  //                 });
-
-  //                 newWinRef.document.body.style.userSelect = 'none';
-  //                 newWinRef.document.body.style.webkitUserSelect = 'none';
-  //                 newWinRef.document.body.style.mozUserSelect = 'none';
-  //                 newWinRef.document.body.style.msUserSelect = 'none';
-  //                 newWinRef.document.body.style.webkitUserDrag = 'none';
-  //                 newWinRef.document.body.draggable = false;
-
-  //                 newWinRef.document.addEventListener('copy', (event) => {
-  //                     event.preventDefault();
-  //                 });
-
-  //                 newWinRef.addEventListener('beforeunload', (event) => {
-  //                     const confirmationMessage = "Are you sure you want to leave this page?";
-  //                     event.returnValue = confirmationMessage; // For most browsers
-  //                     return confirmationMessage; // For some older browsers
-  //                 });
-  //             });
-
-  //             newWinRef.document.addEventListener('fullscreenchange', reEnterFullscreen);
-  //             newWinRef.document.addEventListener('webkitfullscreenchange', reEnterFullscreen);
-  //             newWinRef.document.addEventListener('mozfullscreenchange', reEnterFullscreen);
-  //             newWinRef.document.addEventListener('msfullscreenchange', reEnterFullscreen);
-
-  //             // Continuously monitor and correct the window size and position
-  //             setInterval(() => {
-  //                 if (newWinRef.outerWidth !== screenWidth || newWinRef.outerHeight !== screenHeight) {
-  //                     newWinRef.moveTo(0, 0);
-  //                     newWinRef.resizeTo(screenWidth, screenHeight);
-  //                 }
-  //                 newWinRef.focus();
-  //             }, 1000);
-
-  //             // Detect focus change and show a warning if the user switches away
-  //             const showMalpracticeWarning = () => {
-  //                 alert("Warning: You are not allowed to switch applications during the test.");
-  //                 newWinRef.focus();
-  //             };
-
-  //             newWinRef.addEventListener('blur', showMalpracticeWarning);
-  //             document.addEventListener('visibilitychange', () => {
-  //                 if (document.hidden) {
-  //                     showMalpracticeWarning();
-  //                 }
-  //             });
-  //         }
-
-  //         const preventFocusLoss = (e) => {
-  //             if (newWinRef && !newWinRef.closed) {
-  //                 newWinRef.focus();
-  //             }
-  //         };
-
-  //         document.addEventListener('visibilitychange', preventFocusLoss);
-  //     } catch (error) {
-  //         console.error('Error encrypting data:', error);
-  //     }
-
-  //     try {
-  //         const response = await fetch(
-  //             `http://localhost:5001/QuizPage/clearresponseforPB/${userId}`,
-  //             {
-  //                 method: "DELETE",
-  //                 headers: {
-  //                     "Content-Type": "application/json",
-  //                     Authorization: "Bearer yourAccessToken",
-  //                 },
-  //                 body: JSON.stringify({ userId }),
-  //             }
-  //         );
-
-  //         if (!response.ok) {
-  //             console.error("Failed to delete user data");
-  //         }
-  //     } catch (error) {
-  //         console.error("Error deleting user data:", error);
-  //     }
-  // };
 
   const openPopup = async (testCreationTableId, user_Id, Portale_Id) => {
     const userId = user_Id;
@@ -2561,17 +1604,17 @@ export const StudentDashbordmycourse = () => {
   // };
   const handleViewVideo = async (OVL_Linke_Id) => {
     try {
-        const video = videos.find((video) => video.OVL_Linke_Id === OVL_Linke_Id);
-        if (!video) {
-            throw new Error("Video not found");
-        }
+      const video = videos.find((video) => video.OVL_Linke_Id === OVL_Linke_Id);
+      if (!video) {
+        throw new Error("Video not found");
+      }
 
-        setSelectedVideo(video.Drive_Link); // This should be a valid Base64 data URL
-        setIsModalOpen(true);
+      setSelectedVideo(video.Drive_Link); // This should be a valid Base64 data URL
+      setIsModalOpen(true);
     } catch (error) {
-        console.error("Error fetching video:", error);
+      console.error("Error fetching video:", error);
     }
-};
+  };
 
   const handleCloseModal = () => {
     setSelectedVideo(null);
@@ -2748,11 +1791,16 @@ export const StudentDashbordmycourse = () => {
   //   }
   // };
 
-
-
   const renderTestAction = (test) => {
-    const { Portale_Id, test_status, testAttemptStatus, testCreationTableId, user_Id, courseCreationId } = test;
-  
+    const {
+      Portale_Id,
+      test_status,
+      testAttemptStatus,
+      testCreationTableId,
+      user_Id,
+      courseCreationId,
+    } = test;
+
     if (test_status === "Completed") {
       return (
         <Link
@@ -2769,7 +1817,7 @@ export const StudentDashbordmycourse = () => {
         </Link>
       );
     }
-  
+
     if (Portale_Id === 1 && testAttemptStatus === "Attempted") {
       return (
         <span
@@ -2786,7 +1834,7 @@ export const StudentDashbordmycourse = () => {
         </span>
       );
     }
-  
+
     return (
       <Link
         className="test_start_button"
@@ -2800,38 +1848,10 @@ export const StudentDashbordmycourse = () => {
       </Link>
     );
   };
-  
-
-
-
 
   return (
     <>
       <div>
-        {/* buttons */}
-        <>
-          {/* Portal Filter Buttons */}
-          {/* <div>
-          {Array.from(
-            new Set(activeCourses.map((course) => course.portalName))
-          ).map((portalName) => (
-            <button
-              key={portalName}
-              onClick={() => handlePortalFilterChange(portalName)}
-              style={{ margin: "5px" }}
-            >
-              {portalName}
-            </button>
-          ))}
-          <button
-            onClick={() => setSelectedPortal("")}
-            style={{ margin: "5px" }}
-          >
-            All Portals
-          </button>
-        </div> */}
-        </>
-
         {!showtestContainer1 &&
           !showtestContainer2 &&
           !showCompletePackageContainer &&
@@ -2983,86 +2003,6 @@ export const StudentDashbordmycourse = () => {
                   </div>
                 </div>
               </div>
-
-              {/* <div
-          className="before_login_courses_btn_continer_dashbord"
-          id="QuizCourses"
-        >
-          <div className="courseheader_continer">
-            <h2>MY COURSES</h2>
-            <span>(Your purchased courses.)</span>
-            <div className="before_login_courses_btn_continer_dashbord">
-              <div className="card_container_dashbordflow">
-                {activeCourses.length === 0 ? (
-                  <div>
-                    <span>YOU HAVE NO ACTIVE COURSES</span>
-                  </div>
-                ) : (
-                  Object.entries(
-                    activeCourses.reduce((coursesByPortalAndExam, course) => {
-                      const key = `${course.portalName}_${course.examName}`;
-                      if (!coursesByPortalAndExam[key]) {
-                        coursesByPortalAndExam[key] = {
-                          portalName: course.portalName,
-                          examName: course.examName,
-                          portalId: course.portal,
-                          courses: [],
-                        };
-                      }
-                      coursesByPortalAndExam[key].courses.push(course);
-                      return coursesByPortalAndExam;
-                    }, {})
-                  ).map(([, { portalName, examName, portalId, courses }]) => (
-                    <div key={`${portalName}_${examName}`}>
-                      <h2 className="subheading">{portalName}</h2>
-                      <h2 className="subheading">{examName}</h2>
-                      <div className="card_container">
-                        {courses.map((courseExamsDetails) => (
-                          <div
-                            className="before_login_first_card"
-                            key={courseExamsDetails.courseCreationId}
-                          >
-                            <img
-                              src={courseExamsDetails.courseCardImage}
-                              alt={courseExamsDetails.courseName}
-                            />
-                            <h3>{courseExamsDetails.courseName}</h3>
-                            <p>
-                              Duration:{" "}
-                              {formatDate(courseExamsDetails.courseStartDate)}{" "}
-                              to {formatDate(courseExamsDetails.courseEndDate)}
-                            </p>
-                            <div className="before_start_now">
-                              <Link
-                            
-                                onClick={() => {
-                                  if (portalId === 1 || portalId === 2) {
-                                    handletestClick(
-                                      courseExamsDetails.courseCreationId,
-                                      userData.id,
-                                      portalId
-                                    );
-                                  } else if (portalId === 3) {
-                                    handleVideosClick(
-                                      courseExamsDetails.courseCreationId
-                                    );
-                                  }
-                                }}
-                              >
-                                Next {portalId}
-                             
-                              </Link>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-          </div>
-        </div> */}
             </>
           )}
         {showtestContainer1 && (
@@ -3082,23 +2022,6 @@ export const StudentDashbordmycourse = () => {
                     <ul>
                       <div>
                         <div className="testPageHeading">
-                          {/* {mappedData.map((test, index) => (
-                          <div key={index}>
-                            <h3>{test.typeOfTestName}</h3>
-                            <p>Course ID: {test.courseCreationId}</p>
-                            <p>Test ID: {test.testCreationTableId}</p>
-                            
-                            
-                          </div>
-                        ))}
-
-                        {testPageHeading && testPageHeading.length > 0 && (
-                       
-                         <div>
-                           <h1>{testPageHeading[0].Portale_Name}</h1>
-                                  <h2>{testPageHeading[0].courseName}</h2>
-                         </div>
-                        )} */}
                           {testDetails
                             .filter(
                               (test, index, self) =>
@@ -3151,9 +2074,7 @@ export const StudentDashbordmycourse = () => {
                         <div className="test_cards">
                           {filteredTestData.map((test, index) => (
                             <>
-                              <ul
-                                className="testcard_inline"
-                              >
+                              <ul className="testcard_inline">
                                 <li>
                                   <span>
                                     {" "}
@@ -3173,7 +2094,6 @@ export const StudentDashbordmycourse = () => {
                                   )}
                                 </li>
                                 <li>{renderTestAction(test)}</li>
-                            
                               </ul>
                             </>
                           ))}
@@ -3439,841 +2359,10 @@ export const StudentDashbordmycourse = () => {
             </div>
           </div>
         )}
-
-        {showCompletePackageContainer && (
-          <div>
-            <div className="card_container_dashbordflowtest">
-              <div className="test_card_container">
-                <div
-                  className="Go_back_from_test_section"
-                  onClick={handleTypeOfTestClickback}
-                >
-                  Go Back
-                </div>
-                {/* Filter out unique entries based on 'courseName' */}
-                {completePackage.map((courseData, index) => {
-                  const uniqueTests = completePackage.filter(
-                    (data) => data.courseName === courseData.courseName
-                  );
-
-                  return (
-                    <div key={index}>
-                      <h2 className="portal_group_h2">
-                        {courseData.courseName}
-                      </h2>
-                      {uniqueTests.map((testData, index) => (
-                        <div key={index}>
-                          <div className="test_card">
-                            <ul className="testcard_inline">
-                              <li>
-                                <span>
-                                  <svg
-                                    stroke="currentColor"
-                                    fill="currentColor"
-                                    strokeWidth="0"
-                                    viewBox="0 0 512 512"
-                                    height="1em"
-                                    width="1em"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path d="M160 96a96 96 0 1 1 192 0A96 96 0 1 1 160 96zm80 152V512l-48.4-24.2c-20.9-10.4-43.5-17-66.8-19.3l-96-9.6C12.5 457.2 0 443.5 0 427V224c0-17.7 14.3-32 32-32H62.3c63.6 0 125.6 19.6 177.7 56zm32 264V248c52.1-36.4 114.1-56 177.7-56H480c17.7 0 32 14.3 32 32V427c0 16.4-12.5 30.2-28.8 31.8l-96 9.6c-23.2 2.3-45.9 8.9-66.8 19.3L272 512z"></path>
-                                  </svg>
-                                </span>
-                                {testData.TestName}
-                              </li>
-                              <li>Total Marks: {testData.totalMarks} Marks</li>
-                              <li>
-                                Test Duration: {testData.Duration} Minutes
-                              </li>
-                              <li>
-                                <a
-                                  className="test_start_button"
-                                  href="/UgadminHome"
-                                >
-                                  Start Test
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  );
-                })}
-
-                {/* Display unique lecture data */}
-                <div className="OVL_cards">
-                  {completePackage
-                    .filter(
-                      (value, index, self) =>
-                        index ===
-                        self.findIndex(
-                          (t) => t.OVL_Linke_Id === value.OVL_Linke_Id
-                        )
-                    )
-                    .map((video) => (
-                      <div className="OVL_card_data" key={video.OVL_Linke_Id}>
-                        <h2 className="OVL_text">{video.Lectures_name}</h2>
-                        <button
-                          className="view-video-button"
-                          onClick={() => handleViewVideo(video.OVL_Linke_Id)}
-                        >
-                          <i className="fa-solid fa-play"></i>
-                        </button>
-                      </div>
-                    ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* {showCompletePackageContainer && (
-           <div>
-           <div className="card_container_dashbordflowtest">
-             <div className="test_card_container">
-               <div
-                 className="Go_back_from_test_section"
-                 onClick={handleTypeOfTestClickbackcmp}
-               >
-                 Go Back
-               </div>
-               <h1>Complete Package</h1>
-               </div>
-               </div>
-               </div>
-        )} */}
-
-        {/* {showCompletePackageContainer ?(
-           <div>
-           <div className="card_container_dashbordflowtest">
-             <div className="test_card_container">
-               <div
-                 className="Go_back_from_test_section"
-                 onClick={handleTypeOfTestClickback}
-               >
-                 Go Back
-               </div>
-               <h1>Complete Package</h1>
-               </div>
-               </div>
-               </div>
-        ):null} */}
       </div>
     </>
   );
 };
-
-// export const StudentDashbordmycourse = () => {
-//   const [testDetails, setTestDetails] = useState([]);
-//   const [isLoggedIn, setIsLoggedIn] = useState(false);
-//   const [userData, setUserData] = useState({});
-//   const [selectedTypeOfTest, setSelectedTypeOfTest] = useState("");
-//   const [testPageHeading, setTestPageHeading] = useState([]);
-//   const [filteredTestData, setFilteredTestData] = useState([]);
-//   const [purchasedCourses, setPurchasedCourses] = useState([]);
-//   const [showQuizCourses, setShowQuizCourses] = useState(true);
-//   const [showtestContainer1, setShowtestContainer1] = useState(false);
-//   const [showtestContainer2, setShowtestContainer2] = useState(false);
-//   const [mappedData, setMappedData] = useState([]);
-//   useEffect(() => {
-//     const checkLoggedIn = () => {
-//       const loggedIn = localStorage.getItem("isLoggedIn");
-//       if (loggedIn === "true") {
-//         setIsLoggedIn(true);
-//         fetchUserData();
-//       }
-//     };
-//     checkLoggedIn();
-//   }, []);
-
-//   useEffect(() => {
-//     fetchPurchasedCourses();
-//   }, [userData.id]);
-
-//   useEffect(() => {
-//     if (selectedTypeOfTest === "") {
-//       setFilteredTestData(testDetails);
-//     } else {
-//       const filteredData = testDetails.filter(
-//         (test) => test.typeOfTestName === selectedTypeOfTest
-//       );
-//       setFilteredTestData(filteredData);
-//     }
-//   }, [testDetails, selectedTypeOfTest]);
-
-//   const firstTestCreationTableId =
-//     testDetails.length > 0 ? testDetails[0].testCreationTableId : null;
-
-//   // console.log(testDetails);
-//   useEffect(() => {
-//     const fetchTestDetails = async () => {
-//       try {
-//         const response = await fetch(
-//           `${BASE_URL}/TestResultPage/testDetails/${firstTestCreationTableId}`
-//         );
-
-//         if (!response.ok) {
-//           throw new Error("Failed to fetch test details");
-//         }
-
-//         const data = await response.json();
-
-//         setTestPageHeading(data.results);
-//       } catch (error) {
-//         console.log(error);
-//         // setError(error.message);
-//       }
-//     };
-
-//     if (firstTestCreationTableId) {
-//       fetchTestDetails();
-//     }
-//   }, [firstTestCreationTableId]);
-
-//   const fetchUserData = async () => {
-//     try {
-//       const token = localStorage.getItem("token");
-//       const response = await fetch(`${BASE_URL}/ughomepage_banner_login/user`, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-
-//       if (!response.ok) {
-//         localStorage.removeItem("isLoggedIn");
-//         localStorage.removeItem("token");
-//         setIsLoggedIn(false);
-//         Navigate("/uglogin");
-//         return;
-//       }
-
-//       if (response.ok) {
-//         const userData = await response.json();
-//         setUserData(userData);
-//         // ... process userData
-//       }
-//     } catch (error) {
-//       console.error("Error fetching user data:", error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchPurchasedCourses();
-//   }, []);
-
-//   const fetchPurchasedCourses = async () => {
-//     try {
-//       const response = await fetch(
-//         `${BASE_URL}/Exam_Course_Page/purchasedCourses/${userData.id}`
-//       );
-//       const data = await response.json();
-//       setPurchasedCourses(data);
-//       const modifiedData = data.map((course) => ({
-//         // ...course,
-//         portal:
-//           // course.specific_portal || (course.Test_pattern_name ? "OTS" : "OVL"),
-//           course.specific_portal,
-//       }));
-
-//       // console.log("h", modifiedData);
-//     } catch (error) {
-//       console.error("Error fetching purchased courses:", error);
-//     }
-//   };
-//   const handletestClick = async (courseCreationId, user_Id) => {
-//     try {
-//       const response = await axios.get(
-//         `${BASE_URL}/TestPage/feachingOveralltest/${courseCreationId}/${user_Id}`
-//       );
-
-//       setTestDetails(response.data);
-//       setShowQuizCourses(false);
-//       setShowtestContainer1(true);
-//       console.log("OOOOOOOOOOOOTTTTTTTTTTTTSSSSSSSSSSSS");
-//       console.log(
-//         "hiiiiieeeeeeeeeeeeeeeee",
-//         purchasedCourses.Test_pattern_name
-//       );
-//       console.log(response.data);
-//       console.log();
-//     } catch (error) {
-//       console.error("Error fetching test details:", error);
-//     }
-//   };
-//   console.log("HELLOOOOOOOOOO")
-//   console.log(purchasedCourses);
-
-//   // Function to check if a course is within the specified time frame
-//   const isCourseActive = (course) => {
-//     const currentDate = new Date();
-//     const startDate = new Date(course.courseStartDate); // Start date from database
-//     const endDate = new Date(course.courseEndDate); // End date from database
-//     return currentDate >= startDate && currentDate <= endDate;
-//   };
-
-//   // Filter purchased courses based on active status
-//   const activeCourses = purchasedCourses.filter(isCourseActive);
-
-//   // Show the quiz courses if there are active courses
-//   useEffect(() => {
-//     setShowQuizCourses(activeCourses.length > 0);
-//   }, [activeCourses]);
-
-//   const handleTypeOfTestClick = (typeOfTestName) => {
-//     setSelectedTypeOfTest(typeOfTestName);
-//   };
-//   // console.log("hellooooooooooo")
-//   console.log(purchasedCourses);
-//   console.log("activeCourses", activeCourses);
-//   const handleReset = () => {
-//     setSelectedTypeOfTest("");
-//   };
-
-//   const openPopup = (user_Id, testCreationTableId, courseCreationId) => {
-//     const screenWidth = window.screen.width;
-//     const screenHeight = window.screen.height;
-
-//     const newWinRef = window.open(
-//       `/Instructions/${user_Id}/${testCreationTableId}/${courseCreationId}`,
-//       "_blank",
-//       `width=${screenWidth},height=${screenHeight},fullscreen=yes`
-//     );
-
-//     if (newWinRef && !newWinRef.closed) {
-//       newWinRef.focus();
-//     }
-//     console.log(user_Id, testCreationTableId, courseCreationId);
-//   };
-
-//   const handleSaveStartTime = async () => {
-//     try {
-//       const user_Id = userData.id;
-//       let courseCreationId = null;
-//       let testCreationTableId = null;
-
-//       // Check if testDetails is not empty and if courseCreationId property is defined
-//       if (
-//         testDetails.length > 0 &&
-//         testDetails[0].hasOwnProperty("courseCreationId")
-//       ) {
-//         courseCreationId = testDetails[0].courseCreationId;
-//         testCreationTableId = testDetails[0].testCreationTableId;
-//       }
-//       // Get the current date and time in Indian Standard Time (IST)
-//       const studentTestStartTime = new Date().toLocaleString("en-US", {
-//         timeZone: "Asia/Kolkata",
-//       });
-
-//       const data = {
-//         user_Id: user_Id,
-//         courseCreationId: courseCreationId,
-//         testCreationTableId: testCreationTableId,
-//         studentTestStartTime: studentTestStartTime, // Include the current date and time in the data
-//       };
-
-//       const response = await fetch(
-//         `${BASE_URL}/Exam_Course_Page/test_attempt_start_time`,
-//         {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify(data),
-//         }
-//       );
-
-//       if (!response.ok) {
-//         throw new Error("Network response was not ok");
-//       }
-
-//       const responseData = await response.json();
-//       // console.log("Data sent successfully:", responseData);
-//     } catch (error) {
-//       console.error("There was a problem with your fetch operation:", error);
-//     }
-//   };
-
-//   // const handleTypeOfTestClickback = () => {
-//   //   setShowQuizCourses(true);
-//   //   // setShowtestContainer(false);
-//   // };
-//   const handleTypeOfTestClickback = () => {
-//     setShowQuizCourses(true);
-//     // setShowtestContainer(false);
-//     setShowtestContainer1(false);
-//     setShowtestContainer2(false);
-//   };
-//   function getBackgroundColor(type, test) {
-//     switch (type) {
-//       case "Chapter Wise Test":
-//         return "#e6f7e0"; // light green
-//       case "Full Test":
-//         return "#ffebee"; // very light pink
-//       case "Mock Test":
-//         return "#fff9c4"; // very light yellow
-//       case "Part Test":
-//         return "#dcedc8"; // light green
-//       case "Previous Year Test":
-//         return "#f5f5dc"; // beige
-//       case "Subject Wise Test":
-//         return "#e0f7fa"; // light cyan
-//       case "Topic Wise Test":
-//         return "#dcedc8"; // light green (same as Part Test)
-//       default:
-//         return "#f5f5f5"; // light gray
-//     }
-//   }
-//   const getButtonText = (
-//     test_status,
-//     userId,
-//     courseCreationId,
-//     testCreationTableId
-//   ) => {
-//     // Example conditions, you need to replace them with your actual conditions
-//     if (
-//       test_status === "Completed" &&
-//       userId &&
-//       courseCreationId &&
-//       testCreationTableId
-//     ) {
-//       // Check additional conditions if needed
-//       return "View Report";
-//     } else if (
-//       test_status === "incomplete" &&
-//       userId &&
-//       courseCreationId &&
-//       testCreationTableId
-//     ) {
-//       // Check additional conditions if needed
-//       return "Resume";
-//     } else {
-//       // Default condition if no specific conditions are met
-//       return "Start Test";
-//     }
-//   };
-
-//   // Function to format date as dd-mm-yyyy
-//   const formatDate = (dateString) => {
-//     const date = new Date(dateString);
-//     const day = date.getDate().toString().padStart(2, "0");
-//     const month = (date.getMonth() + 1).toString().padStart(2, "0");
-//     const year = date.getFullYear();
-//     return `${day}-${month}-${year}`;
-//   };
-
-//   // const coursesByPortalAndExam = purchasedCourses.reduce((portals, course) => {
-//   //   const portal = course.portal_name || "Unknown Portal"; // Default value
-//   //   const examName = course.examName || "Unknown Exam"; // Default value
-
-//   //   if (!portals[portal]) {
-//   //     portals[portal] = {}; // Initialize portal if not present
-//   //   }
-
-//   //   if (!portals[portal][examName]) {
-//   //     portals[portal][examName] = []; // Initialize exam group if not present
-//   //   }
-
-//   //   portals[portal][examName].push(course); // Group courses by portal and exam name
-//   //   return portals;
-//   // }, {});
-
-//   const [courses, setCourses] = useState([]);
-//   const [isLoading, setIsLoading] = useState(true);
-//   const [videos, setVideos] = useState([]);
-//   const [selectedVideo, setSelectedVideo] = useState(null);
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-//   // const [showtestContainer, setShowtestContainer] = useState(false);
-//   const player = useRef(null);
-//   const { OVL_Course_Id } = useParams();
-
-//   useEffect(() => {
-//     const fetchCourses = async () => {
-//       try {
-//         // Fetch data from your backend API
-//         const response = await fetch(
-//           `${BASE_URL}/OtsvidesUploads/coursesvideos`
-//         );
-//         if (!response.ok) {
-//           throw new Error("Failed to fetch courses");
-//         }
-//         const data = await response.json();
-//         setCourses(data);
-
-//         // setShowtestContainer(true);
-//       } catch (error) {
-//         console.error("Error fetching courses:", error);
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     };
-
-//     fetchCourses();
-//   }, []);
-
-//   const handleVideosClick = async (OVL_Course_Id) => {
-//     try {
-//       const response = await fetch(
-//         `${BASE_URL}/OtsvidesUploads/videos/${OVL_Course_Id}`
-//       );
-//       if (!response.ok) {
-//         throw new Error("Failed to fetch videos");
-//       }
-//       const data = await response.json();
-//       setVideos(data);
-//       console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
-//       console.log(data);
-//       setShowQuizCourses(false);
-//       setShowtestContainer2(true);
-//     } catch (error) {
-//       console.error("Error fetching test details:", error);
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-//   const handleViewVideo = async (OVL_Linke_Id) => {
-//     try {
-//       const video = videos.find((video) => video.OVL_Linke_Id === OVL_Linke_Id);
-//       if (!video) {
-//         throw new Error("Video not found");
-//       }
-//       const proxyUrl = `${BASE_URL}/OtsvidesUploads/proxy/google-drive/${video.Drive_Link}`;
-//       setSelectedVideo(proxyUrl);
-//       setIsModalOpen(true);
-//     } catch (error) {
-//       console.error("Error fetching video:", error);
-//     }
-//   };
-
-//   const handleCloseModal = () => {
-//     setSelectedVideo(null);
-//     setIsModalOpen(false);
-//   };
-
-//   if (isLoading) {
-//     return <div>Loading...</div>;
-//   }
-
-//   return (
-//     <div>
-//       {!showtestContainer1 && !showtestContainer2 && showQuizCourses && (
-//         <div
-//           // style={{background:'red'}}
-//           className="before_login_courses_btn_continer_dashbord"
-//           id="QuizCourses"
-//         >
-//           <div className="courseheader_continer">
-//             <h2>MY COURSES</h2>
-//             <span>(Your purchased courses.)</span>
-//             <div className="before_login_courses_btn_continer_dashbord">
-//               <div className="card_container_dashbordflow">
-//                 {activeCourses.length === 0 ? (
-//                   <div>
-//                     <span>YOU HAVE NO ACTIVE COURSES</span>
-//                   </div>
-//                 ) : (
-
-//                     ([portal, exams]) => (
-//                       <div key={portal} className="portal_group">
-//                         {/* <h2>{portal}</h2> Display portal name */}
-//                         {/* <h2>{portal.portalName}</h2> */}
-//                         {Object.entries(exams).map(([examName, courses]) => (
-//                           <div key={examName} className="exam_group">
-//                               <h2>{portalName}</h2>
-//                             <h2 className="subheading">{examName}</h2>
-//                             <div className="courses_container">
-
-//                               {courses.map((course) => (
-//                                 <div
-//                                   key={
-//                                     course.courseCreationId
-//                                   }
-//                                 >
-//                                   {/* {course.portal === "1" && ( */}
-//                                     <div className="OVL_course_card OVL_continer_data">
-//                                       <img
-//                                         src={course.courseCardImage}
-//                                         alt={course.courseName}
-//                                       />
-//                                       <p>
-//                                         <b>{course.courseName}</b>
-//                                       </p>
-//                                       <p>
-//                                         <b>Duration:</b>
-//                                         {formatDate(course.courseStartDate)}
-//                                         to {formatDate(course.courseEndDate)}
-//                                       </p>
-//                                       <p>
-//                                         <b> Price:</b>₹ {course.totalPrice}
-//                                       </p>
-//                                       <div className="before_start_now">
-//                                         <Link
-//                                           onClick={(e) => {
-//                                             e.preventDefault();
-//                                             handletestClick(
-//                                               course.courseCreationId,
-//                                               userData.id
-//                                             );
-//                                           }}
-//                                         >
-//                                           Go to Test
-//                                         </Link>
-//                                       </div>
-//                                     </div>
-//                                   {/* )} */}
-//                                   {/* {course.portal === "3" && ( */}
-//                                     {/* <div>
-//                                       <div className="OVL_course_card OVL_continer_data">
-//                                         <div>
-//                                           <img
-//                                             src={course.courseCardImage}
-//                                             alt={course.courseName}
-//                                           />
-//                                         </div>
-//                                         <p>
-//                                           <b>{course.courseName}</b>
-//                                         </p>
-//                                         <p>
-//                                           <b>Duration:</b>
-//                                           {formatDate(course.courseStartDate)}
-//                                           to {formatDate(course.courseEndDate)}
-//                                         </p>
-//                                         <p>
-//                                           <b> Price:</b>₹ {course.totalPrice}
-//                                         </p>
-//                                         <div className="OVL_start_button">
-//                                           <Link
-//                                             onClick={() =>
-//                                               handleVideosClick(
-//                                                 course.courseCreationId
-//                                               )
-//                                             }
-//                                           >
-//                                             Start Lecture
-//                                           </Link>
-//                                         </div>
-//                                       </div>
-//                                     </div> */}
-//                                   {/* )} */}
-//                                 </div>
-//                               ))}
-//                             </div>
-//                           </div>
-//                         ))}
-//                       </div>
-//                     )
-
-//                 )}
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-
-//       {showtestContainer1 && (
-//         <div>
-//           <div className="card_container_dashbordflowtest">
-//             <div className="test_card_container">
-//               <div
-//                 className="Go_back_from_test_section"
-//                 onClick={handleTypeOfTestClickback}
-//               >
-//                 Go Back
-//               </div>
-
-//               <div className="test_cards">
-//                 {/* {courses.map((course) => ( */}
-//                 {/* <div key={course.courseCreationId || course.OVL_Course_Id}> */}
-
-//                 {/* {course.portal === "OTS" && ( */}
-//                 <div
-//                   className=" "
-//                   // key={course.courseCreationId}
-//                 >
-//                   {testDetails.length > 0 &&
-//                     testDetails.map((test, testIndex) => (
-//                       <div key={testIndex} className="test_card">
-//                         {/* {test.courseCreationId ===
-//                           course.courseCreationId && */}
-
-//                         <ul
-//                           className="testcard_inline"
-//                           // style={{
-//                           //   backgroundColor: getBackgroundColor(type),
-//                           // }}
-//                         >
-//                           <li>
-//                             <span>
-//                               {" "}
-//                               <FaBookOpenReader />{" "}
-//                             </span>
-//                             {test.TestName}
-//                           </li>
-//                           <li>Total Marks: {test.totalMarks} Marks</li>
-//                           <li>Test Duration: {test.Duration} Minutes</li>
-//                           <li>
-//                             {test.test_end_time && (
-//                               <ul>
-//                                 {" "}
-//                                 <li>{formatDate(test.test_end_time)} </li>
-//                               </ul>
-//                             )}
-//                           </li>
-//                           <li>
-//                             {test.test_end_time ? (
-//                               <Link
-//                                 className=""
-//                                 to={`/UserReport/${userData.id}/${test.testCreationTableId}/${test.courseCreationId}`}
-//                                 style={{
-//                                   backgroundColor: "green",
-//                                   color: "white",
-//                                   padding: "3.9px",
-//                                   textDecoration: "none",
-//                                 }}
-//                               >
-//                                 Result Analysis
-//                                 <span class="material-symbols-outlined">
-//                                   navigate_next
-//                                 </span>
-//                               </Link>
-//                             ) : (
-//                               <Link
-//                                 className="test_start_button"
-//                                 to="#"
-//                                 onClick={() => {
-//                                   openPopup(
-//                                     test.user_Id,
-//                                     test.testCreationTableId,
-//                                     test.courseCreationId
-//                                   );
-//                                   handleSaveStartTime();
-//                                 }}
-//                               >
-//                                 {test.test_status === "incomplete"
-//                                   ? "Resume"
-//                                   : "Start Test"}
-//                               </Link>
-//                             )}
-//                           </li>
-//                         </ul>
-//                         {/* } */}
-//                       </div>
-//                     ))}
-//                 </div>
-//                 {/* )} */}
-//               </div>
-//               {/* ))} */}
-//               {/* </div> */}
-//             </div>
-//           </div>
-//         </div>
-//       )}
-
-//       {showtestContainer2 && (
-//         <div>
-//           <div className="card_container_dashbordflowtest">
-//             <div className="test_card_container">
-//               <div
-//                 className="Go_back_from_test_section"
-//                 onClick={handleTypeOfTestClickback}
-//               >
-//                 Go Back
-//               </div>
-
-//               <div className="test_cards">
-//                 {/* {courses.map((course) => (
-//             <div key={course.courseCreationId || course.OVL_Course_Id}> */}
-
-//                 {/* {course.portal === "OVL" && ( */}
-//                 <div>
-//                   <h2>OVL</h2>
-//                   {/* <h2 className="OVL_subheading">{course.examName}</h2> */}
-//                   <div
-//                   // className="OVL_course_card OVL_continer_data"
-//                   // key={course.OVL_Course_Id}
-//                   >
-//                     {videos.length > 0 && (
-//                       <h2 className="OVL_PageHeading">
-//                         {videos[0].courseName}
-//                       </h2>
-//                     )}
-//                     <div className="OVL_cards">
-//                       {videos.map((video) => (
-//                         <div className="OVL_card_data" key={video.OVL_Linke_Id}>
-//                           <h2 className="OVL_text">{video.Lectures_name}</h2>
-//                           <button
-//                             className="view-video-button"
-//                             onClick={() => handleViewVideo(video.OVL_Linke_Id)}
-//                           >
-//                             <i className="fa-solid fa-play"></i>
-//                           </button>
-//                         </div>
-//                       ))}
-//                     </div>
-//                     {isModalOpen && (
-//                       <div className="modal">
-//                         <div className="ovlcontent">
-//                           <button
-//                             className="OVL_Video_close"
-//                             onClick={handleCloseModal}
-//                           >
-//                             <i className="fa-solid fa-xmark"></i>
-//                           </button>
-//                           <ReactPlayer
-//                             className="OVL_Video"
-//                             url={selectedVideo}
-//                             loop={true}
-//                             playing={true}
-//                             width="1000px"
-//                             height="500px"
-//                             onSeek={(e) => console.log("onSeek", e)}
-//                             config={{
-//                               youtube: {
-//                                 playerVars: {
-//                                   autoplay: 1,
-//                                   modestbranding: 1,
-//                                   rel: 0,
-//                                   showinfo: 0,
-//                                 },
-//                               },
-//                               file: {
-//                                 attributes: {
-//                                   controlsList: "nodownload",
-//                                 },
-//                               },
-//                             }}
-//                             controls={[
-//                               "play-large",
-//                               "restart",
-//                               "rewind",
-//                               "play",
-//                               "fast-forward",
-//                               "progress",
-//                               "current-time",
-//                               "duration",
-//                               "mute",
-//                               "volume",
-//                               "captions",
-//                               "fullscreen",
-//                             ]}
-//                           ></ReactPlayer>
-//                         </div>
-//                       </div>
-//                     )}
-//                   </div>
-//                 </div>
-//                 {/* )} */}
-//               </div>
-//               {/* ))}
-//         </div> */}
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
 
 export const StudentDashbordbuycurses = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -4297,7 +2386,7 @@ export const StudentDashbordbuycurses = () => {
       const token = localStorage.getItem("token");
       if (!token) {
         setIsLoggedIn(false);
-        navigate("/uglogin"); // Navigate to login if no token
+        navigate("/userlogin"); // Navigate to login if no token
         return;
       }
 
@@ -4312,7 +2401,7 @@ export const StudentDashbordbuycurses = () => {
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("token");
         setIsLoggedIn(false);
-        navigate("/uglogin");
+        navigate("/userlogin");
         return;
       }
 
@@ -4320,7 +2409,7 @@ export const StudentDashbordbuycurses = () => {
       setUserData(data);
     } catch (error) {
       console.error("Error fetching user data:", error);
-      navigate("/uglogin"); // Redirect on error
+      navigate("/userlogin"); // Redirect on error
     }
   };
 
@@ -5020,8 +3109,6 @@ export const StudentDashbordmyresult = () => {
     </div>
   );
 };
-
-
 
 // StudentDashbordbookmark ..............................................................
 export const StudentDashbordbookmark = () => {

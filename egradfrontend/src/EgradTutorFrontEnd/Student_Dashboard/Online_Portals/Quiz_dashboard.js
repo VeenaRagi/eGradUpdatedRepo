@@ -19,7 +19,7 @@ const Quiz_dashboard = () => {
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userRole");
-    window.location.href = "/uglogin";
+    window.location.href = "/userlogin";
   };
   const userRole = localStorage.getItem("userRole");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -49,7 +49,7 @@ const Quiz_dashboard = () => {
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("token");
         setIsLoggedIn(false);
-        Navigate("/uglogin"); // Assuming you have the 'navigate' function available
+        Navigate("/userlogin"); // Assuming you have the 'navigate' function available
 
         return;
       }

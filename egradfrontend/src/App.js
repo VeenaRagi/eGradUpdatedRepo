@@ -28,7 +28,7 @@ import Userupdate from "./Login/Userupdate";
 import Userdeatailedpage from "./Login/Userdeatailedpage";
 import QUiZ_ForgotPassword from "./Login/QUiZ_ForgotPassword";
 import QUIZ_ResetPassword from "./Login/QUIZ_ResetPassword";
-import UgadminHome from './Login/UgadminHome.js'
+import UgadminHome from "./Login/UgadminHome.js";
 
 import Student_dashboard from "./EgradTutorFrontEnd/Student_Dashboard/Student_dashboard";
 import Student_profileUpdate from "./EgradTutorFrontEnd/Student_Dashboard/Student_profileUpdate";
@@ -41,9 +41,27 @@ import QuestionBankQuiz from "./EgradTutorFrontEnd/Student_Dashboard/Online_Port
 import TestResultsPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/TestResultsPage";
 import Quiz_dashboard from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/Quiz_dashboard";
 
+
+import ExamUpdataion_admin from './EgradTutorFrontEnd/Admin_Dashboard/ExamUpdataion_admin'
+import UpdatingCourseInAdmin from './EgradTutorFrontEnd/Admin_Dashboard/UpdatingCourseInAdmin'
+import TestUpdateadmin from './EgradTutorFrontEnd/Admin_Dashboard/TestUpdateadmin'
+import TestUpdateForm from './EgradTutorFrontEnd/Admin_Dashboard/TestUpdateForm'
+import Document_ImageInfo from './EgradTutorFrontEnd/Admin_Dashboard/Document_ImageInfo'
+import GettinggInstructions from './EgradTutorFrontEnd/Admin_Dashboard/GettinggInstructions'
+import UpdateInstruction from './EgradTutorFrontEnd/Admin_Dashboard/ExamUpdataion_admin'
+
+
+
+
+
+
+
+
+
+
 const PrivateRoute = ({ element }) => {
   const isAuthenticated = localStorage.getItem("isLoggedIn");
-  return isAuthenticated ? element : <Navigate to="/uglogin" />;
+  return isAuthenticated ? element : <Navigate to="/userlogin" />;
 };
 
 const App = () => {
@@ -191,6 +209,37 @@ const App = () => {
                   element={<PrivateRoute element={<NotFound />} />}
                 />
                 {/* =====================STUDENT DASHBOARD ROUTES END================= */}
+
+                {/* =========================ADMIN DASHBOARD ROUTES START=========================== */}
+                <Route
+                  path="/ExamUpdataion_admin/:examId"
+                  element={<PrivateRoute element={<ExamUpdataion_admin />} />}
+                />
+                <Route
+                  path="/UpdatingCourseInAdmin/:courseCreationId/:portalId"
+                  element={<PrivateRoute element={<UpdatingCourseInAdmin />} />}
+                />
+                <Route
+                  path="/TestUpdateadmin/:testCreationTableId"
+                  element={<PrivateRoute element={<TestUpdateadmin />} />}
+                />
+                <Route
+                  path="/TestUpdateForm/:testCreationTableId/:TestForm_Id"
+                  element={<PrivateRoute element={<TestUpdateForm />} />}
+                />
+                <Route
+                  path="/getSubjectData/:testCreationTableId/:subjectId/:sectionId"
+                  element={<PrivateRoute element={<Document_ImageInfo />} />}
+                />
+                <Route
+                  path="/Instruction/editIns/:instructionId/"
+                  element={<PrivateRoute element={<GettinggInstructions />} />}
+                />
+                <Route
+                  path="/InstructionPage/editIns/:instructionId/:id"
+                  element={<PrivateRoute element={<UpdateInstruction />} />}
+                />
+                {/* =========================ADMIN DASHBOARD ROUTES END=========================== */}
               </Routes>
             </Router>
           )}
