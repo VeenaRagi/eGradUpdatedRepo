@@ -1,11 +1,12 @@
+
 import React, { useEffect, useState } from 'react'
 import BASE_URL from '../../apiConfig';
-import imgOrange from './styles/ThemesScreenShots/orangePreview.png'
-import imgBlue from './styles/ThemesScreenShots/bluePreview.png'
-import imgGreen from './styles/ThemesScreenShots/greenPreview.png'
-import './styles/Themes.css'
+import imgOrange from '../ThemesScreenShots/orangePreview.png'
+import imgBlue from '../ThemesScreenShots/bluePreview.png'
+import imgGreen from '../ThemesScreenShots/greenPreview.png'
+import '../Styles/Themes.css'
 import { IoMdClose } from "react-icons/io";
-import AdminHeader from './AdminHeader';
+
 const ThemesSection = () => {
     const [fetchedClasses, setFetchedClasses] = useState([]);
     const [activeDiv, setActiveDiv] = useState(null);
@@ -23,19 +24,19 @@ const ThemesSection = () => {
         };
         fetchThemeClasses();
     }, []);
-
+ 
     useEffect(() => {
         console.log(fetchedClasses);
     }, [fetchedClasses]);
-
+ 
     const handleDivClick = async (sNo, theme) => {
         try {
             // Open the popup window
             // window.open('http://localhost:3000/oqbHomePage#QuizCourse', '_blank');
-
+ 
             // window.open('http://localhost:3000/orvlHomePage', '_blank');
-
-
+ 
+ 
             const response = await fetch(`${BASE_URL}/themesSection/postThemeFromAdmin`, {
                 method: 'POST',
                 headers: {
@@ -46,7 +47,7 @@ const ThemesSection = () => {
                     theme: theme
                 })
             });
-
+ 
             if (!response.ok) {
                 throw new Error("Network response was not Ok");
             } else {
@@ -59,7 +60,7 @@ const ThemesSection = () => {
             console.log(error, "Error while posting the data");
         }
     };
-
+ 
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -78,7 +79,7 @@ const ThemesSection = () => {
             }
         };
         fetchData();
-
+ 
     }, []);
     const [imgToBeShown, setImgToBeShown] = useState(null)
     const handleImagePreview = (imgFromClick, theme) => {
@@ -87,9 +88,9 @@ const ThemesSection = () => {
         // setActiveDiv(theme);
         setImgPreview({ url: imgFromClick, themeColor: theme });
         setImgToBeShown(imgFromClick);
-
+ 
     }
-
+ 
     const handleClose = () => {
         setImgPreview("");
         setImgToBeShown("")
@@ -100,10 +101,10 @@ const ThemesSection = () => {
         try {
             // Open the popup window
             // window.open('http://localhost:3000/oqbHomePage#QuizCourse', '_blank');
-
+ 
             // window.open('http://localhost:3000/orvlHomePage', '_blank');
-
-
+ 
+ 
             const response = await fetch(`${BASE_URL}/themesSection/postThemeFromAdmin`, {
                 method: 'POST',
                 headers: {
@@ -114,7 +115,7 @@ const ThemesSection = () => {
                     theme: imgPreview.themeColor
                 })
             });
-
+ 
             if (!response.ok) {
                 throw new Error("Network response was not Ok");
             } else {
@@ -128,8 +129,8 @@ const ThemesSection = () => {
         }
         setImgPreview("")
         setImgToBeShown("");
-
-
+ 
+ 
     };
     return (
         // <>
@@ -138,16 +139,16 @@ const ThemesSection = () => {
         //         <div>
         //             <h3 className="textColor">Themes Section</h3>
         //         </div>
-
+ 
         //     </div>
         // </>
         <>
-        <AdminHeader/>
+        {/* <AdminHeader/> */}
             <div className="create_exam_container otsMainPages">
                 <div>
                     <h3 className="textColor">Themes Section</h3>
                 </div>
-
+ 
                 <div className='theme-selector-container'>
                     <div className='theme-selector-flex'>
                         {fetchedClasses.map((fClass) => (
@@ -158,7 +159,7 @@ const ThemesSection = () => {
                                 >
                                     {/* <p>have to show images</p> */}
                                     {fClass.theme_color === 'Theme-2' && <img src={imgOrange} onClick={() => handleImagePreview(imgOrange, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />}
-
+ 
                                     {fClass.theme_color === 'Theme-default' && <img src={imgBlue} onClick={() => handleImagePreview(imgBlue, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />}
                                     {/* {fClass.theme_color === 'theme-purple' && <img src={img} onClick={() => handleImagePreview(img, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />} */}
                                     {fClass.theme_color === 'Theme-1' && <img src={imgGreen} onClick={() => handleImagePreview(imgGreen, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />}
@@ -168,7 +169,7 @@ const ThemesSection = () => {
                                 {fClass.theme_color === activeDiv && <span className="active-indicator"></span>}
                                 {fClass.theme_color === activeDiv && <span className="active-text">Active</span>}
                             </div>
-
+ 
                         ))}
                     </div>
                     {imgToBeShown ? (
@@ -189,5 +190,6 @@ const ThemesSection = () => {
         </>
     )
 }
-
+ 
 export default ThemesSection
+ 
