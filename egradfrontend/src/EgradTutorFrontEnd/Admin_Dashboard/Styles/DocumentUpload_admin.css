@@ -90,3 +90,15 @@
     padding: 50px;
     font-size: 20px;
   }
+
+  @media (max-width:768px){
+    .uploadedDocumentFilds {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input#uploadInputFile_ovl_upload_file {
+      width: 80%;
+      margin:  0 auto;
+    }
+  }
