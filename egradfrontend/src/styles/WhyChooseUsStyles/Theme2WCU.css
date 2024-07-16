@@ -24,6 +24,10 @@ width: 100%;
   width: 100%;
   height: inherit;
 }
+.activeButton {
+  background-color: #47acf0;
+  color: white;
+}
 .tabsDiv{
     /* border: 1px solid black; */
     
