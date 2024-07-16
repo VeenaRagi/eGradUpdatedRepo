@@ -5,7 +5,8 @@ import noimg from "./asserts/NoImages.jpg";
 import "./styles/StudentRegistationPage.css";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import BASE_URL from "../../src/apiConfig";
+import BASE_URL from "../../../apiConfig";
+
 const StudentRegistationPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [formData, setFormData] = useState([]);
