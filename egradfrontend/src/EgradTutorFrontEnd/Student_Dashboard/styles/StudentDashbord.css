@@ -330,6 +330,7 @@
   padding: 1rem 1rem;
   height: auto;
   border-collapse: collapse;
+  border-radius: 10px;
 }
 
 .Student_profileUpdate_editconatiner {
