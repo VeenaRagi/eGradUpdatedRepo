@@ -252,7 +252,7 @@ LEFT JOIN test_creation_table AS tct ON cct.courseCreationId = tct.courseCreatio
 LEFT JOIN topics t ON t.courseCreationId = cct.courseCreationId
 LEFT JOIN ovl_links AS ovl ON cct.courseCreationId = ovl.courseCreationId
 WHERE 
-    sbc.user_Id = ?
+    sbc.user_Id = 2
     AND sbc.payment_status = 1 
 GROUP BY
     cct.courseCreationId;
@@ -560,13 +560,13 @@ router.get("/BuyCourses_OTS", async (req, res) => {
 
 //
 
-router.get("/getregisterid/:decryptedUserIdState", async (req, res) => {
-  const { decryptedUserIdState } = req.params;
+router.get("/getregisterid/:userId", async (req, res) => {
+  const { userId } = req.params;
 
-  console.log("userId:", decryptedUserIdState); // Log the userId to the console
+  console.log("userId:", userId); // Log the userId to the console
 
   try {
-    if (!decryptedUserIdState) {
+    if (!userId) {
       throw new Error("userId is required");
     }
 
@@ -580,7 +580,7 @@ router.get("/getregisterid/:decryptedUserIdState", async (req, res) => {
           LEFT JOIN portales p ON
           p.Portale_Id = cc.Portale_Id
       WHERE l.user_id = ?`,
-      [decryptedUserIdState]
+      [userId]
     );
 
     const organizedData = {};
@@ -589,7 +589,7 @@ router.get("/getregisterid/:decryptedUserIdState", async (req, res) => {
       const id =row.courseCreationId;
       if (!organizedData[id]) {
         organizedData[id] = {
-          user_id: row.decryptedUserIdState,
+          user_id: row.user_Id,
           payu_status: row.payu_status,
           studentregistationId: row.studentregistationId,
           courseName:  row.courseName,
