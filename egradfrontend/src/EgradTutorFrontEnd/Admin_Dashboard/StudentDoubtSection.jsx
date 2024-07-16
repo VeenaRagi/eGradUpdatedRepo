@@ -1,6 +1,7 @@
 import { window } from "d3";
 import React, { useState, useEffect } from "react";
 import BASE_URL from '../../apiConfig'
+import '../Admin_Dashboard/Styles/ResponsiveForAdmin.css'
 const StudentDoubtSection = () => {
   const [doubtData, setDoubtData] = useState([]);
   const [selectedDoubtId, setSelectedDoubtId] = useState(null);
@@ -68,7 +69,7 @@ const handleSendSolution = async (doubtId) => {
 
 
   return (
-    <div>
+    <div className="doubts_section_main_container">
       {/* <h2>Student Doubt Section</h2> */}
       {console.log("doubtData:", doubtData)}
       {doubtData && doubtData.questions && doubtData.questions.length > 0 ? (
@@ -161,7 +162,7 @@ const handleSendSolution = async (doubtId) => {
           </div>
         ))
       ) : (
-        <p>No doubt data available.</p>
+        <p className="no_doubts_section_text_display">No doubt data available.</p>
       )}
     </div>
   );

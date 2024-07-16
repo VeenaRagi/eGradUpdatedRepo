@@ -245,10 +245,7 @@
     justify-content: center;
     gap:10px
 }
-@media  screen and (max-width: 1024px) {
-    .overFlowXScroll{
-        overflow-x: scroll;
-    }
-    
-}
 
+.create_exam_header_SearchBar h3{
+    margin-top: 30px;
+}

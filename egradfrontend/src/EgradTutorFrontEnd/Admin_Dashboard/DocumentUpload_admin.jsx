@@ -96,7 +96,7 @@ const DocumentUpload_admin = () => {
 
   return (
     <div className=" create_exam_container otsMainPages" >
-      <div className="" style={{margin:'10px 0'}}>
+      <div className="" style={{ margin: '10px 0' }}>
         <h2 className="textColor">Document Upload Form </h2>
       </div>
       <form>
@@ -118,7 +118,7 @@ const DocumentUpload_admin = () => {
                 </option>
               ))}
             </select>
-          
+
           </div>
 
           <div className="uploadedDocumentFilds">
@@ -135,7 +135,7 @@ const DocumentUpload_admin = () => {
                 </option>
               ))}
             </select>
-    
+
           </div>
 
           <div className="uploadedDocumentFilds">
@@ -152,13 +152,13 @@ const DocumentUpload_admin = () => {
                 </option>
               ))}
             </select>
-         
+
           </div>
 
           <div className="uploadedDocumentFilds">
             <label htmlFor="">Upload file</label>
             <input type="file" accept=".docx" onChange={handleFileChange} id="uploadInputFile_ovl_upload_file" />
-         
+
           </div>
         </div>
 
@@ -184,7 +184,7 @@ export const UploadedDoc = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [selectAll, setSelectAll] = useState(false);
   const [selectedIds, setSelectedIds] = useState([]);
-  const usersPerPage = 10; 
+  const usersPerPage = 10;
   useEffect(() => {
     fetchData();
   }, []);
@@ -286,21 +286,21 @@ export const UploadedDoc = () => {
     }
     setSelectAll(!selectAll);
   };
-  
+
 
   const handleSingleCheckboxChange = (id) => {
     const selectedIndex = selectedIds.indexOf(id);
     let newSelectedIds = [...selectedIds];
-  
+
     if (selectedIndex === -1) {
       newSelectedIds.push(id);
     } else {
       newSelectedIds.splice(selectedIndex, 1);
     }
-  
+
     setSelectedIds(newSelectedIds);
   };
-  
+
 
   return (
     <div className="documentInfo_container">
@@ -323,13 +323,13 @@ export const UploadedDoc = () => {
           <table className="otc_-table">
             <thead className="otsGEt_-contantHead otc_-table_-header">
               <tr>
-              <th>
-                <input
-                  type="checkbox"
-                  checked={selectAll}
-                  onChange={toggleSelectAll}
-                />
-              </th>
+                <th>
+                  <input
+                    type="checkbox"
+                    checked={selectAll}
+                    onChange={toggleSelectAll}
+                  />
+                </th>
                 <th>S.no</th>
                 <th>Test name</th>
                 <th>document name</th>
@@ -342,23 +342,23 @@ export const UploadedDoc = () => {
                   <td colSpan="6">No Document found.</td>
                 </tr>
               ) : (
-                displayData.map((item,index) => (
+                displayData.map((item, index) => (
                   <tr
                     key={item.document_Id}
                     className={
                       item.document_Id % 2 === 0 ? "evenRow" : "oddRow"
                     }
                   >
-                      <td>
-                  <input
-                    type="checkbox"
-                    checked={selectedIds.includes(item.document_Id)}
-                    onChange={() =>
-                      handleSingleCheckboxChange(item.document_Id)
-                    }
-                  />
-                </td>
-                   <td>{index + 1 + pageNumber * usersPerPage}</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedIds.includes(item.document_Id)}
+                        onChange={() =>
+                          handleSingleCheckboxChange(item.document_Id)
+                        }
+                      />
+                    </td>
+                    <td>{index + 1 + pageNumber * usersPerPage}</td>
                     <td> {item.TestName}</td>
                     <td>{item.documen_name}</td>
                     <td>
@@ -384,21 +384,22 @@ export const UploadedDoc = () => {
             </tbody>
           </table>
           {selectedIds.length > 0 && (
-          <div>
-            <button onClick={handleDeleteSelected}>Delete Selected</button>
-          </div>
-        )}
+            <div>
+              <button onClick={handleDeleteSelected}>Delete Selected</button>
+            </div>
+          )}
           <ReactPaginate
-  previousLabel={<i className="fa-solid fa-angles-left"></i>}
-  nextLabel={<i className="fa-solid fa-angles-right"></i>}
-  pageCount={pageCount}
-  onPageChange={changePage}
-  containerClassName={"paginationBttns"}
-  previousLinkClassName={"previousBttn"}
-  nextLinkClassName={"nextBttn"}
-  disabledClassName={"paginationDisabled"}
-  activeClassName={"paginationActive"}
-/>
+          className="react_paginate_control"
+            previousLabel={<i className="fa-solid fa-angles-left"></i>}
+            nextLabel={<i className="fa-solid fa-angles-right"></i>}
+            pageCount={pageCount}
+            onPageChange={changePage}
+            containerClassName={"paginationBttns"}
+            previousLinkClassName={"previousBttn"}
+            nextLinkClassName={"nextBttn"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+          />
 
         </div>
       </div>
