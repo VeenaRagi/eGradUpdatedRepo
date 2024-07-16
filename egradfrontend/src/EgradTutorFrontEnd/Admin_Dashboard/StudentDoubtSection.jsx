@@ -114,6 +114,7 @@ const handleSendSolution = async (doubtId) => {
               />
             )}
             <button
+            className="send_sol_btnn"
               onClick={() => {
                 if (item.Doubt_Id) {
                   setSelectedDoubtId(item.Doubt_Id); // Set the selected doubtId
