@@ -20,11 +20,11 @@
     background: #00222c;
     padding: 3rem 0;
 }
-
 .Egate_loge_landing img {
     background: #fff;
     box-shadow: -1px 1px 20px 6px #fff;
-    max-width: 350px;
+    width: 350px;
+    height: 220px;
 }
 
 .Egate_landiing_ojnkl {

@@ -190,7 +190,7 @@ img.defaultLogoImg::before {
 }
 h2#white_examName {
     background: #fbfbfb;
-    padding: 18px 8px;
+    padding: 2px 8px;
     border-bottom: 1px solid;
     /* color: var(--whiteThemeYellow) !important; */
     font-family: var(--whiteTheme_font);
