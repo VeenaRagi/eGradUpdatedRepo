@@ -1026,10 +1026,12 @@ export const StudentDashbordmycourse = () => {
   const [testDetails, setTestDetails] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({ id: null });
   const [selectedTypeOfTest, setSelectedTypeOfTest] = useState("");
   const [testPageHeading, setTestPageHeading] = useState([]);
   const [filteredTestData, setFilteredTestData] = useState([]);
-  const [purchasedCourses, setPurchasedCourses] = useState([]);
+  // const [purchasedCourses, setPurchasedCourses] = useState([]);
+  const [purchaseCourses, setPurchaseCourses] = useState([]);
   const [showQuizCourses, setShowQuizCourses] = useState(true);
   // const [showtestContainer, setShowtestContainer] = useState(false);
   const [showtestContainer1, setShowtestContainer1] = useState(false);
@@ -1131,7 +1133,7 @@ export const StudentDashbordmycourse = () => {
     };
     checkLoggedIn();
   }, []);
-  const coursesByPortalAndExam = purchasedCourses.reduce((portals, course) => {
+  const coursesByPortalAndExam = purchaseCourses.reduce((portals, course) => {
     const portal = course.portalName || "Unknown Portal"; // Use portalName instead of portal
     const examName = course.examName || "Unknown Exam"; // Default value
 
@@ -1230,26 +1232,49 @@ export const StudentDashbordmycourse = () => {
   };
 
 
-  useEffect(() => {
-    const fetchPurchasedCourses = async () => {
-      try {
-        const response = await fetch(
-          `${BASE_URL}/Exam_Course_Page/purchasedCourses/${userData.id}`
-        );
+  // useEffect(() => {
+  //   const fetchPurchasedCourses = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${BASE_URL}/Exam_Course_Page/purchasedCourses/${user_Id}`
+  //       );
+  //       const data = await response.json();
+  //       console.log(data);
+  //       console.log(user_Id);
+  //       setPurchasedCourses(data);
+  //     } catch (error) {
+  //       console.error("Error fetching purchased courses:", error);
+  //     }
+  //   };
+  //   fetchPurchasedCourses();
+  // }, []);
+  const fetchPurchaseCourses = async () => {
+    if (!userData.id) {
+      return; // Exit if userData.id is not defined
+    }
+
+    try {
+      const response = await fetch(
+        `${BASE_URL}/Exam_Course_Page/purchasedCourses/${userData.id}`
+      );
+      if (response.ok) {
         const data = await response.json();
-        console.log(data);
-        console.log(userData.id);
-        setPurchasedCourses(data);
-      } catch (error) {
-        console.error("Error fetching purchased courses:", error);
+        setPurchaseCourses(data);
+      } else {
+        console.error("Failed to fetch unPurchased courses");
       }
-    };
-    fetchPurchasedCourses();
-  }, [userData.id]);
+    } catch (error) {
+      console.error("Error fetching purchased courses:", error);
+    }
+  };
+  useEffect(() => {
+    fetchPurchaseCourses();
+  }, [userData.id]); 
 
   console.log("shizukaaaaaaaaaaaaaaaaaa");
   console.log(userData);
   console.log(userData.id);
+  console.log("user_Id",user_Id)
   // Function to check if a course is within the specified time frame
   const isCourseActive = (course) => {
     const currentDate = new Date();
@@ -1259,7 +1284,7 @@ export const StudentDashbordmycourse = () => {
   };
 
   // Filter purchased courses based on active status
-  const activeCourses = purchasedCourses.filter(isCourseActive);
+  const activeCourses = purchaseCourses.filter(isCourseActive);
 
   // Show the quiz courses if there are active courses
   useEffect(() => {
@@ -1781,11 +1806,7 @@ export const StudentDashbordmycourse = () => {
                   </div>
                   <div className="QuizBUy_coursescontainerwithfilteringcontainer">
                     {/* Render courses */}
-                    {filteredCourses.length === 0 ? (
-                      <div>
-                        <span>YOU HAVE NO ACTIVE COURSES</span>
-                      </div>
-                    ) : (
+                    {
                       Object.entries(
                         filteredCourses.reduce(
                           (coursesByPortalAndExam, course) => {
@@ -1895,7 +1916,7 @@ export const StudentDashbordmycourse = () => {
                           </div>
                         )
                       )
-                    )}
+                    }
                   </div>
                 </div>
               </div>
