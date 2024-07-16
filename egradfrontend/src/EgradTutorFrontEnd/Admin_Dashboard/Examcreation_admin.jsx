@@ -314,6 +314,7 @@ function Examcreation_admin() {
         {/* Table of exams */}
         <div className="examCreation_-createdData">
           <h3 className="list_-otsTitels">created exams list</h3>
+          <div className="overFlowXScroll">
           <table className="otc_-table otsAdminTable_Container">
             <thead className="otsGEt_-contantHead otc_-table_-header">
               <tr>
@@ -361,6 +362,7 @@ function Examcreation_admin() {
               )}
             </tbody>
           </table>
+          </div>
           <ReactPaginate
   previousLabel={<i className="fa-solid fa-angles-left"></i>}
   nextLabel={<i className="fa-solid fa-angles-right"></i>}

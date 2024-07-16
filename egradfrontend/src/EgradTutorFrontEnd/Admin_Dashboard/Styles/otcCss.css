@@ -22,7 +22,7 @@ select {
   width: 350px;
   padding: 6px;
   border: none;
-  box-shadow: 1px 4px 11px 0px #1a374d;
+  box-shadow: 1px 1px 3px 0px #1a374d;
 }
 
 /* input {
@@ -31,16 +31,12 @@ select {
     border: none;
     box-shadow: 1px 4px 11px 0px #1A374D;
 } */
-input[type="text"],
-input[type="number"],
-input[type="date"],
-input[type="time"] {
+input[type="text"], input[type="number"], input[type="date"], input[type="time"] {
   width: 350px;
   padding: 6px;
   border: none;
-  box-shadow: 1px 4px 11px 0px #1a374d;
+  box-shadow: 1px 4px 4px 0px #1a374d;
 }
-
 
 .ots_-Form{
   margin-top: 2rem;
@@ -75,6 +71,7 @@ input[type="time"] {
   float: right;
   font-weight: 800;
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 .ots_-createBtn {
   color: white;

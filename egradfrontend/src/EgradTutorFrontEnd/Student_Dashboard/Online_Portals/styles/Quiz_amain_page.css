@@ -24,6 +24,7 @@ background: linear-gradient(to right, #000102 -26%, #053456 24%, #000000 172%)
       /* width: 80%; */
       /* margin: 0 auto; */
       padding: 6px;
+      flex-wrap: wrap;
   }
   .Quiz_admin_page_container {
     display: flex;

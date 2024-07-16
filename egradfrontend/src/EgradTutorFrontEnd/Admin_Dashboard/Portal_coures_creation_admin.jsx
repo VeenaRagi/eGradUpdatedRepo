@@ -1784,6 +1784,7 @@ function Portal_coures_creation_admin() {
           />
         </div>
         <h3 className="list_-otsTitels">created COURSES list</h3>
+        <div className="overFlowXScroll">
         <table className="couresCreation_-table">
           <thead className="otsGEt_-contantHead couresotc_-table">
             <tr>
@@ -1875,6 +1876,7 @@ function Portal_coures_creation_admin() {
             )}
           </tbody>
         </table>
+        </div>
         <ReactPaginate
   previousLabel={<i className="fa-solid fa-angles-left"></i>}
   nextLabel={<i className="fa-solid fa-angles-right"></i>}
