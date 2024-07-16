@@ -53,10 +53,10 @@ textarea#message.ContactUsForMessage.undefined{
     margin-top: 20px;
 }
 
-textarea#message {
+/* textarea#message {
     height: 46px;
     margin-top: 28px;
-}
+} */
 .t1ContactUsFormData button{
     background-color: #b8e2c4;
     color: black;

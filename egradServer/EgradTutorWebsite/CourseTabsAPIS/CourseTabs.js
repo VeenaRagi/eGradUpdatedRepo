@@ -25,14 +25,14 @@ router.get("/getCourseTabNames", async (req, res) => {
 //       "from the course tab form data which is first api "
 //     );
 //     const tabImage = req.file ? req.file.buffer : null;
- 
+
 //     try {
 //       // Check if the entry already exists
 //       const [existingEntries] = await db.query(
 //         `SELECT * FROM course_tab_details WHERE course_portale_id = ? AND course_tab_title_id = ?`,
 //         [coursePortaleId, courseTabId]
 //       );
- 
+
 //       if (existingEntries.length > 0) {
 //         // If entry exists, return the response and stop further execution
 //         return res
@@ -64,7 +64,7 @@ router.get("/getCourseTabNames", async (req, res) => {
 //     }
 //   }
 // );
- 
+
 // router.post(
 //   "/courseTabFormData",
 //   upload.single("courseTabImage"),
@@ -77,14 +77,14 @@ router.get("/getCourseTabNames", async (req, res) => {
 //       "from the course tab form data which is first API"
 //     );
 //     const tabImage = req.file ? req.file.buffer : null;
- 
+
 //     try {
 //       // Check if the entry already exists
 //       const [existingEntries] = await db.query(
 //         `SELECT * FROM course_tab_details WHERE course_portale_id = ? AND course_tab_title_id = ?`,
 //         [coursePortaleId, courseTabId]
 //       );
- 
+
 //       if (existingEntries.length > 0) {
 //         // If entry exists, return the response and stop further execution
 //         return res
@@ -130,19 +130,19 @@ router.get("/getCourseTabNames", async (req, res) => {
 //   try {
 //     // Define the SQL query to select all rows from course_tab_images
 //     const sql = 'SELECT * FROM course_tab_images';
- 
+
 //     // Execute the SQL query
 //     const [rows] = await db.query(sql);
- 
+
 //     // Log the result for debugging purposes
 //     console.log(rows);
- 
+
 //     // Send the result as JSON
 //     res.json(rows);
 //   } catch (error) {
 //     // Log the error for debugging purposes
 //     console.error('Error fetching course tab images:', error);
- 
+
 //     // Send an error response
 //     res.status(500).json({ error: 'An error occurred while retrieving data' });
 //   }
@@ -176,7 +176,7 @@ router.get("/getCourseTabImage", async (req, res) => {
   try {
     const sql = "SELECT * FROM course_tab_images";
     const [rows] = await db.query(sql);
- 
+
     const base64Images = rows.map((row) => {
       if (row.course_tab_image) {
         // Convert buffer to base64 string
@@ -186,7 +186,7 @@ router.get("/getCourseTabImage", async (req, res) => {
       }
       return row;
     });
- 
+
     console.log(base64Images);
     res.json(base64Images);
   } catch (error) {
@@ -194,7 +194,7 @@ router.get("/getCourseTabImage", async (req, res) => {
     res.status(500).json({ error: "An error occurred while retrieving data" });
   }
 });
- 
+
 router.post(
   "/courseTabFormData",
   upload.single("courseTabImage"),
@@ -202,25 +202,58 @@ router.post(
     let response;
     const tabImage = req.file ? req.file.buffer : null;
     const { coursePortaleId, courseTabId, courseTabDescription } = req.body;
+    console.log(courseTabId, "this is the course tab id from the front end");
+    // if (tabImage) {
+    //   const isDuplicate=await db.query("select * from course_tab_images where course_tab_title_id=?",[courseTabId])
+    //   console.log(isDuplicate,"this is the result from the isDuplicate")
+    //   if(isDuplicate.length>0)
+    //   {
+
+    //   }
+    //   response = await db.query(
+    //   //   `INSERT INTO course_tab_images (course_tab_title_id,course_tab_image)
+    //   //    VALUES (?, ?)
+    //   //    ON DUPLICATE KEY UPDATE course_tab_image = VALUES(course_tab_image), course_tab_title_id = VALUES(course_tab_title_id)`,
+    //   //   [courseTabId,tabImage]
+    //   // );
+    //  `INSERT INTO course_tab_images (course_tab_title_id, course_tab_image)
+    //        VALUES (?, ?)
+    //        ON DUPLICATE KEY UPDATE course_tab_image = VALUES(course_tab_image)`,
+    //       [courseTabId, tabImage]
+    //     );
+
+    // }
     if (tabImage) {
-      response = await db.query(
-        `INSERT INTO course_tab_images (course_tab_id, course_tab_image, course_tab_title_id)
-         VALUES (?, ?, ?)
-         ON DUPLICATE KEY UPDATE course_tab_image = VALUES(course_tab_image), course_tab_title_id = VALUES(course_tab_title_id)`,
-        [courseTabId, tabImage, courseTabId]
+      // Check if an image already exists for the given courseTabId
+      const [existingImage] = await db.query(
+        "SELECT * FROM course_tab_images WHERE course_tab_title_id = ?",
+        [courseTabId]
       );
-     
+
+      if (existingImage.length > 0) {
+        // Update the existing record if found
+        await db.query(
+          "UPDATE course_tab_images SET course_tab_image = ? WHERE course_tab_title_id = ?",
+          [tabImage, courseTabId]
+        );
+      } else {
+        // Insert a new record if not found
+        await db.query(
+          "INSERT INTO course_tab_images (course_tab_title_id, course_tab_image) VALUES (?, ?)",
+          [courseTabId, tabImage]
+        );
+      }
     } else {
       response = await db.query(
         "INSERT INTO course_tab_details (course_portale_id, course_tab_title_id, course_tab_text) VALUES (?, ?, ?)",
         [coursePortaleId, courseTabId, courseTabDescription]
       );
     }
-    console.log(response);
+    console.log(response, "This is the response ");
     res.status(200).json({ msg: "Data inserted successfully" });
   }
 );
- 
+
 router.post(
   "/overwriteCourseTabData",
   upload.single("courseTabImage"),
@@ -256,7 +289,7 @@ router.post(
         console.log("without the image in overwrite form ");
         res.join({ msg: "without the image" });
       }
- 
+
       res.status(200).json({ msg: "overwritten successfully" });
     } catch (error) {
       console.log(
@@ -309,7 +342,7 @@ router.post(
 //     }
 //   }
 // );
- 
+
 router.put(
   "/courseTabEditData",
   upload.single("courseTabImage"),
@@ -328,7 +361,7 @@ router.put(
     );
     const tabImage = req.file ? req.file.buffer : null;
     let result;
- 
+
     try {
       if (tabImage) {
         // Update query with image
@@ -352,7 +385,7 @@ router.put(
           ]
         );
       }
- 
+
       if (result.affectedRows > 0) {
         res
           .status(200)
@@ -368,7 +401,7 @@ router.put(
     }
   }
 );
- 
+
 router.get("/getCourseTabButtonDetails/:Portale_Id", async (req, res) => {
   const { Portale_Id } = req.params;
   console.log(Portale_Id, "portal id ");
@@ -393,7 +426,7 @@ router.get("/getCourseTabButtonDetails/:Portale_Id", async (req, res) => {
     console.log(error, "error happened while getting course tab names");
   }
 });
- 
+
 // router.get("/getCourseTabButtonDetails/:Portale_Id", async (req, res) => {
 //   const { Portale_Id } = req.params;
 //   console.log(Portale_Id, "portal id ");
@@ -406,16 +439,16 @@ router.get("/getCourseTabButtonDetails/:Portale_Id", async (req, res) => {
 //       "WHERE c.course_portale_id = ?",
 //       [Portale_Id]
 //     );
- 
+
 //     console.log(rows);
- 
+
 //     // Organize data
 //     const result = rows.reduce((acc, row) => {
 //       // Initialize portal if it doesn't exist
 //       if (!acc[row.Portale_Name]) {
 //         acc[row.Portale_Name] = { Portale_Name: row.Portale_Name, tabs: [] };
 //       }
- 
+
 //       // Find existing tab or create new one
 //       let existingTab = acc[row.Portale_Name].tabs.find(tab => tab.course_tab_title === row.course_tab_title);
 //       if (!existingTab) {
@@ -426,16 +459,16 @@ router.get("/getCourseTabButtonDetails/:Portale_Id", async (req, res) => {
 //         };
 //         acc[row.Portale_Name].tabs.push(existingTab);
 //       }
- 
+
 //       // Add course_tab_text to the existing tab
 //       existingTab.course_tab_text.push(row.course_tab_text);
- 
+
 //       return acc;
 //     }, {});
- 
+
 //     // Convert object to array
 //     const organizedResult = Object.values(result);
- 
+
 //     res.json(organizedResult);
 //   } catch (error) {
 //     console.log(error, "error happened while getting course tab names");
@@ -454,16 +487,16 @@ router.get("/getCourseTabButtonDetails/:Portale_Id", async (req, res) => {
 //         "WHERE c.course_portale_id = ?",
 //       [Portale_Id]
 //     );
- 
+
 //     console.log(rows,"rows from http://localhost:5001/courseTab/getCourseTabButtonDetails/1");
- 
+
 //     // Organize data
 //     const result = rows.reduce((acc, row) => {
 //       // Initialize portal if it doesn't exist
 //       if (!acc[row.Portale_Name]) {
 //         acc[row.Portale_Name] = { Portale_Name: row.Portale_Name, tabs: [] };
 //       }
- 
+
 //       // Find existing tab or create new one
 //       let existingTab = acc[row.Portale_Name].tabs.find(
 //         (tab) => tab.course_tab_title === row.course_tab_title
@@ -475,23 +508,23 @@ router.get("/getCourseTabButtonDetails/:Portale_Id", async (req, res) => {
 //         };
 //         acc[row.Portale_Name].tabs.push(existingTab);
 //       }
- 
+
 //       // Add course_tab_text to the existing tab
 //       existingTab.course_tab_text.push(row.course_tab_text);
- 
+
 //       return acc;
 //     }, {});
- 
+
 //     // Convert object to array
 //     const organizedResult = Object.values(result);
- 
+
 //     res.json(organizedResult);
 //   } catch (error) {
 //     console.log(error, "error happened while getting course tab names");
 //     res.status(500).json({ error: "An error occurred while retrieving data" });
 //   }
 // });
- 
+
 router.delete("/courseTabDelete/:id", async (req, res) => {
   const { id } = req.params;
   console.log(id, "This is the tab id ");
@@ -500,7 +533,7 @@ router.delete("/courseTabDelete/:id", async (req, res) => {
       `delete from course_tab_details where tab_id=?`,
       id
     );
- 
+
     if (result.affectedRows > 0) {
       res
         .status(200)
@@ -516,12 +549,20 @@ router.delete("/courseTabDelete/:id", async (req, res) => {
     });
   }
 });
- 
+
 router.get("/fetchTabDetailsForEdit/:portaleId", async (req, res) => {
   const { portaleId } = req.params;
   console.log(portaleId);
- 
-  const sql = "select * from  course_tab_details where course_portale_id= ?";
+
+  // const sql = "select * from  course_tab_details where course_portale_id= ?";
+  // const sql=`select * from  course_tab_details ctd LEFT JOIN course_tab_titles ctt ON ctt.course_tab_id=ctd.course_tab_title_id AND course_tab_id=?`
+  // const sql='select * from  course_tab_details ctd LEFT JOIN course_tab_titles ctt ON ctd.course_tab_title_id=ctt.course_tab_id AND ctd.course_portale_id=?'
+  const sql = `SELECT * 
+FROM course_tab_details ctd 
+LEFT JOIN course_tab_titles ctt 
+ON ctd.course_tab_title_id = ctt.course_tab_id 
+WHERE ctd.course_portale_id = ?
+`;
   try {
     const [results] = await db.query(sql, [portaleId]);
     const formattedResults = results.map((item) => ({
