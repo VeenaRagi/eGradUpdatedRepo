@@ -32,8 +32,8 @@ import UgadminHome from "./Login/UgadminHome.js";
 
 import Student_dashboard from "./EgradTutorFrontEnd/Student_Dashboard/Student_dashboard";
 import Student_profileUpdate from "./EgradTutorFrontEnd/Student_Dashboard/Student_profileUpdate";
-import StudentRegistationPage from './EgradTutorFrontEnd/Student_Dashboard/Online_Portals/StudentRegistationPage'
-import Payu from './EgradTutorFrontEnd/Student_Dashboard/Payu/Payu.jsx'
+import StudentRegistationPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/StudentRegistationPage";
+import Payu from "./EgradTutorFrontEnd/Student_Dashboard/Payu/Payu.jsx";
 
 import InstructionPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/InstructionPage";
 import General_Intructions_Page from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/General_Intructions_Page";
@@ -42,23 +42,13 @@ import QuestionBankQuiz from "./EgradTutorFrontEnd/Student_Dashboard/Online_Port
 import TestResultsPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/TestResultsPage";
 import Quiz_dashboard from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/Quiz_dashboard";
 
-
-import ExamUpdataion_admin from './EgradTutorFrontEnd/Admin_Dashboard/ExamUpdataion_admin'
-import UpdatingCourseInAdmin from './EgradTutorFrontEnd/Admin_Dashboard/UpdatingCourseInAdmin'
-import TestUpdateadmin from './EgradTutorFrontEnd/Admin_Dashboard/TestUpdateadmin'
-import TestUpdateForm from './EgradTutorFrontEnd/Admin_Dashboard/TestUpdateForm'
-import Document_ImageInfo from './EgradTutorFrontEnd/Admin_Dashboard/Document_ImageInfo'
-import GettinggInstructions from './EgradTutorFrontEnd/Admin_Dashboard/GettinggInstructions'
-import UpdateInstruction from './EgradTutorFrontEnd/Admin_Dashboard/ExamUpdataion_admin'
-
-
-
-
-
-
-
-
-
+import ExamUpdataion_admin from "./EgradTutorFrontEnd/Admin_Dashboard/ExamUpdataion_admin";
+import UpdatingCourseInAdmin from "./EgradTutorFrontEnd/Admin_Dashboard/UpdatingCourseInAdmin";
+import TestUpdateadmin from "./EgradTutorFrontEnd/Admin_Dashboard/TestUpdateadmin";
+import TestUpdateForm from "./EgradTutorFrontEnd/Admin_Dashboard/TestUpdateForm";
+import Document_ImageInfo from "./EgradTutorFrontEnd/Admin_Dashboard/Document_ImageInfo";
+import GettinggInstructions from "./EgradTutorFrontEnd/Admin_Dashboard/GettinggInstructions";
+import UpdateInstruction from "./EgradTutorFrontEnd/Admin_Dashboard/ExamUpdataion_admin";
 
 const PrivateRoute = ({ element }) => {
   const isAuthenticated = localStorage.getItem("isLoggedIn");
@@ -67,7 +57,6 @@ const PrivateRoute = ({ element }) => {
 
 const App = () => {
   const [isEditMode, setIsEditMode] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const checkServerStatus = async () => {
@@ -83,6 +72,10 @@ const App = () => {
     checkServerStatus();
   }, []);
 
+ 
+  const userRole = localStorage.getItem("userRole");
+
+ 
   const toggleEditMode = () => {
     setIsEditMode(!isEditMode);
   };
@@ -91,10 +84,12 @@ const App = () => {
     <State>
       <ThemeProvider>
         <div>
-          {isAdmin && (
-            <button onClick={toggleEditMode}>
-              {isEditMode ? "Disable Edit" : "Enable Edit"}
-            </button>
+          {userRole === "admin" && (
+            <div>
+              <button onClick={toggleEditMode}>
+                {isEditMode ? "Disable Edit" : "Enable Edit"}
+              </button>
+            </div>
           )}
           {/* <ScrollToTop /> */}
           {serverError ? (
@@ -162,11 +157,11 @@ const App = () => {
                   path="/UgadminHome"
                   element={<PrivateRoute element={<UgadminHome />} />}
                 />
-                 <Route
-            path="/coursedataSRP/:courseCreationId"
-            element={<StudentRegistationPage />}
-          />
-          <Route path="/PayU/:courseCreationId" element={<Payu />} />
+                <Route
+                  path="/coursedataSRP/:courseCreationId"
+                  element={<StudentRegistationPage />}
+                />
+                <Route path="/PayU/:courseCreationId" element={<Payu />} />
                 {/* ==================LOGIN SYSTEM ROUTES END================== */}
 
                 {/* =====================STUDENT DASHBOARD ROUTES START================= */}

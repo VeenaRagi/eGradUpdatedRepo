@@ -9,8 +9,8 @@
     box-shadow: 1px 2px 5px 0px #97d1ff;
     border-radius: 23px;
     background: white;
+    margin-bottom: 1rem;
 }
-
 .create_exam_header_SearchBar .Adminsearchbaricon{
     margin: 1rem 0 1rem 1rem;
 }

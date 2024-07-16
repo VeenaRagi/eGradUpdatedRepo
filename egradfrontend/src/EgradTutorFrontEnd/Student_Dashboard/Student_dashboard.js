@@ -444,6 +444,23 @@ export const StudentDashbordheader = () => {
     // Open the desired URL in a new window
     // window.open("http://localhost:3000/student_dashboard");
   };
+  const [error, setError] = useState(false);
+  const [image, setImage] = useState(null);
+
+
+  const fetchImage = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/Logo/image`, {
+        responseType: "arraybuffer",
+      });
+      const imageBlob = new Blob([response.data], { type: "image/png" });
+      const imageUrl = URL.createObjectURL(imageBlob);
+      setImage(imageUrl);
+    } catch (error) {
+      console.error("Error fetching image:", error);
+      setError(true); // Set error state to true on failure
+    }
+  };
 
   return (
     <div>
@@ -451,8 +468,28 @@ export const StudentDashbordheader = () => {
         {/* {nav.map((nav, index) => { */}
         {/* return ( */}
         <div className="Quiz_main_page_navbar">
-          <div className="Quizzlogo">{/* <img src={nav.logo} alt="" /> */}</div>
-
+          <div className="Quizzlogo"></div>
+          {error ? (
+                userRole === "user" ? (
+                  <p>
+                    Unable to load image at the moment. Please try again later.
+                  </p>
+                ) : userRole === "admin" ? (
+                  <p>There is no data available. Please add the data.</p>
+                ) : (
+                  <p>Unable to load image at the moment.</p>
+                )
+              ) : (
+                image && (
+                  <Link to="/">
+                    <img
+                      src={image}
+                      // className={`${themeDetails.themeLogoImg}`}
+                      alt="Current"
+                    />
+                  </Link>
+                )
+              )}
           <div
             className={
               !showQuizmobilemenu
@@ -1183,7 +1220,7 @@ export const StudentDashbordmycourse = () => {
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("token");
         setIsLoggedIn(false);
-        Navigate("/uglogin");
+        Navigate("/userlogin");
         return;
       }
 
