@@ -9,18 +9,16 @@
     /* padding: 19px; */
     width: 80%;
 }
-
-
 .menu-link.mobileMenuLink.themeUgDivLinksOfHeaderDefault {
     align-items: center;
     animation: mobile_menu .4s linear alternate forwards;
     background: #00000067;
     display: flex;
-    height: 88%;
+    height: auto;
     /* justify-content: center; */
     position: absolute;
     right: 0;
-    top: 0;
+    top: 60px;
     width: 50%;
 }
 
@@ -317,6 +315,7 @@ li.defaultFeatures {
     font-size: 15px;
     font-weight: 500;
     font-size: 18px;
+    list-style: disc;
 }
 h3.undefined {
     font-family: Roboto,sans-serif;
@@ -675,8 +674,8 @@ ul.defaultCoursesUl li:hover {
     align-items: center;
     background: transparent;
     position: relative;
-    color:white;
-    font-size:11px;
+    color: white;
+    font-size: 20px;
 }
 }
 @media (max-width:1114px) {
