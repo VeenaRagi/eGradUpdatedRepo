@@ -682,6 +682,12 @@ fieldset > legend {
     transform: scale(0.8);
   }
 }
+@media (max-width: 1003px) {
+  .left-nav-bar ul li a p {
+    /* font-size: 11px; */
+    margin: 0;
+}
+}
 @media (max-width: 1000px) {
   .mobile_menu {
     position: absolute;
@@ -884,6 +890,10 @@ fieldset > legend {
   .courseupdate_frominput_container input {
     height: 30px;
     font-size: 0.6rem;
+  }
+
+  .Exam_portal_admin_integration_container{
+    background: linear-gradient(to right, #000102 -26%, #053456 24%, #000000 172%);
   }
 }
 
