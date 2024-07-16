@@ -1538,7 +1538,8 @@ p:nth-child(1){
   font-size: 20px;
   font-weight: 600;
 }
-p.no_tests_message {
+
+.no_tests_message {
   background: #e3ebe373;
   height: 3rem;
   width: 100%;
