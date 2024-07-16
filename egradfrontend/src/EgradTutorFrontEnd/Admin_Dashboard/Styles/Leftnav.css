@@ -28,6 +28,9 @@ tr th{
 
     /* border: 1px solid; */
 }
+.overFlowXScroll{
+    overflow-x: scroll;
+}
 
 .admin_S_R_INfo{
     position: relative;
