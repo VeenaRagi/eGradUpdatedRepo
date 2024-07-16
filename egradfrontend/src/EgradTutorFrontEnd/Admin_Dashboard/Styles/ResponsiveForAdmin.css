@@ -97,3 +97,171 @@ margin: 0 auto;
     font-size: 20px;
     padding: 100px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Main container for doubts section */
+.doubts_section_main_container {
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 580px;
+  }
+
+  .doubtDatacontainer .resultSolutionsQ{
+    width: auto;
+  }
+  
+
+  .doubtDatacontainer {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+  }
+  
+  .doubtDatacontainerName {
+    margin-bottom: 1rem;
+  }
+  
+  .doubtDatacontainerName p {
+    margin: 0.5rem 0;
+    color: #333;
+    font-size: 0.9rem;
+  }
+  
+  .dount-img {
+    width: 100%;
+    max-width: 400px; 
+    height: auto;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+  }
+  
+
+  .doubtDatacontainer .resultSolutionsQ {
+    margin-bottom: 1rem;
+  }
+  
+  /* Styling for question image */
+  .doubtDatacontainer .resultSolutionsQ img {
+    width: 100%;
+    max-width: 400px; /* Adjust the size as needed */
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  /* Styling for option list */
+  .resultSolutionsQ ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .doubtDatacontainer .resultSolutionsQ li {
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-size: 0.9rem;
+  }
+  
+  /* Styling for option images */
+  .resultSolutionsQ img {
+    max-width: 100px; /* Adjust the size as needed */
+    height: auto;
+    margin-left: 0.5rem;
+    border-radius: 4px;
+  }
+  
+  /* Styling for answer image */
+  .resultSolutionsQ img {
+    max-width: 400px; /* Adjust the size as needed */
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  /* Styling for buttons */
+.send_sol_btnn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    width: 200px;
+    transition: background-color 0.3s;
+  }
+  
+  /* Hover effect for buttons */
+.send_sol_btnn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Popup styling */
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .Challenge_Popup {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 400px; /* Adjust width as needed */
+    max-width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .Challenge_Popup label {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  .Challenge_Popup input[type="text"],
+  .Challenge_Popup input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+  
+  .Challenge_Popup .handleSend_Solution button {
+    margin-right: 0.5rem;
+  }
+  
+  /* No doubts message styling */
+  .no_doubts_section_text_display {
+    color: #666;
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 2rem;
+  }
+  

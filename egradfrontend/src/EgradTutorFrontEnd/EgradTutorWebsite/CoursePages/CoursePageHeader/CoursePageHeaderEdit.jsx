@@ -112,7 +112,8 @@ const CoursePageHeaderEdit = ({type}) => {
     <div>
     {isPopupOpen && (
       <>
-    <div>
+        <div className="UploadPopups_Container">
+
     {type === "HeaderMenu" && (
      <div className="Blur_Effect_Mode">
       <div className="handleCloseBtn">
