@@ -16,8 +16,8 @@ const WhychooseUsEdit = ({ type }) => {
   const [tabEditDetails, setTabEditDetails] = useState([]);
   const [courseTabButtonNames, setCourseTabButtonNames] = useState([]);
   // for editing the existing data
-  const[isEditFlag,setIsEditFlag]=useState(false);
-  const[editIdForTabs,setEditIdForTabs]=useState(false)
+  const [isEditFlag, setIsEditFlag] = useState(false);
+  const [editIdForTabs, setEditIdForTabs] = useState(false)
   const [courseTabTitlesData, setCourseTabTitlesData] = useState([]);
   const getCourseTabButtonNames = async () => {
     try {
@@ -40,7 +40,7 @@ const WhychooseUsEdit = ({ type }) => {
     // courseTabTitle: "",
     courseTabDescription: "",
     courseTabImage: null,
-    courseTabUniqueId:""
+    courseTabUniqueId: ""
 
   })
   const [portales, setPortales] = useState([])
@@ -90,7 +90,7 @@ const WhychooseUsEdit = ({ type }) => {
       ...formData,
       [name]: value,
     });
-    console.log(formData,"this isfrommmmmmm")
+    console.log(formData, "this isfrommmmmmm")
   };
 
   const handleFileChange = (e) => {
@@ -143,8 +143,8 @@ const WhychooseUsEdit = ({ type }) => {
       );
     }
   };
-  const {Portale_Id}=useParams()
-  console.log(Portale_Id,"portaleIdddddddddd")
+  const { Portale_Id } = useParams()
+  // console.log(Portale_Id, "portaleIdddddddddd")
   const handleEdit = (item) => {
     setFormData({
       title: item.WhyChooseUsTitle,
@@ -182,49 +182,7 @@ const WhychooseUsEdit = ({ type }) => {
     }
   };
 
-  // const handleTabDataSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //     formData.append('coursePortaleId', tabsData.coursePortaleId);
-  //     formData.append('courseTabId', tabsData.courseTabId);
-  //     formData.append('courseTabDescription', tabsData.courseTabDescription);
-  //     formData.append('courseTabImage', tabsData.courseTabImage);
-  //   if(isEditFlag){
-  //     try {
-  //      const response= await axios.put(`${BASE_URL}/courseTab/courseTabEditData`,formData,{
-  //       headers:{
-  //         'Content-Type':'multipart/form-data',
-  //       },
-  //       method:'PUT'
-  //      })
-  //      console.log(response)
-  //     } catch (error) {
-  //       console.log("error while editing the data into the table at front end")
-  //     }
-  //   }
-  //   else{
-  //   // first when submit is clicked
-  //   try {
-      
-  //     const response = await axios.post(`${BASE_URL}/courseTab/courseTabFormData`, formData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data'
-  //       }
-  //     });
-  //     if (response.data.exists) {
-  //       if (window.confirm("Data already exists.Do you want to over write it?")) {
-  //         handleOverwriteSubmit();
-  //       }
-  //       else {
 
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error, "happened while posting the tabs data");
-  //   }
-  // }
-  // };
-  
   const handleTabDataSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -232,8 +190,8 @@ const WhychooseUsEdit = ({ type }) => {
     formData.append('courseTabId', tabsData.courseTabId);
     formData.append('courseTabDescription', tabsData.courseTabDescription);
     formData.append('courseTabImage', tabsData.courseTabImage);
-    formData.append("courseTabUniqueId",tabsData.courseTabUniqueId)
-  
+    formData.append("courseTabUniqueId", tabsData.courseTabUniqueId)
+
     if (isEditFlag) {
       try {
         const response = await axios.put(`${BASE_URL}/courseTab/courseTabEditData`, formData, {
@@ -241,7 +199,7 @@ const WhychooseUsEdit = ({ type }) => {
             'Content-Type': 'multipart/form-data',
           },
         });
-  
+
         if (response.data.success) {
           alert(response.data.message || "Tab updated successfully");
         } else {
@@ -251,41 +209,22 @@ const WhychooseUsEdit = ({ type }) => {
         console.log("Error while editing the data into the table at front end", error);
         alert("An error occurred while updating the tab");
       }
-    } 
+    }
     else {
       try {
-        console.log(formData,"this is the data we are senidnf")
+        console.log(formData, "this is the data we are senidnf")
         const response = await axios.post(`${BASE_URL}/courseTab/courseTabFormData`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
-        console.log(response,"this is the response from handleDataSubmit");
+        console.log(response, "this is the response from handleDataSubmit");
       } catch (error) {
         console.log(error, "Error happened while posting the tabs data");
         alert("An error occurred while inserting the tab data");
       }
     }
   };
-  
-
-
-  // const handleOverwriteSubmit = async () => {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append('coursePortaleId', tabsData.coursePortaleId);
-  //     formData.append('courseTabId', tabsData.courseTabId);
-  //     formData.append('courseTabDescription', tabsData.courseTabDescription);
-  //     formData.append('courseTabImage', tabsData.courseTabImage);
-
-  //     const response = await axios.post(`${BASE_URL}/courseTab/overwriteCourseTabData`, formData);
-  //     if (response.status === 200) {
-  //       alert("Info overwritten successfully");
-  //     }
-  //   } catch (error) {
-  //     console.log("Error happened while overwriting the tabs data", error);
-  //   }
-  // }
 
   const handleChangeTabData = (e) => {
     console.log(tabsData);
@@ -320,43 +259,44 @@ const WhychooseUsEdit = ({ type }) => {
   const handlePreFillDropDown = (objPre) => {
     console.log(objPre)
     setTabsData(
-     {coursePortaleId:objPre.course_portale_id,
-      courseTabId:objPre.course_tab_title_id,
-      courseTabDescription:objPre.course_tab_text,
-      courseTabUniqueId:objPre.tab_id
-      // courseTabImage:objPre.course_tab_image,
-    }
+      {
+        coursePortaleId: objPre.course_portale_id,
+        courseTabId: objPre.course_tab_title_id,
+        courseTabDescription: objPre.course_tab_text,
+        courseTabUniqueId: objPre.tab_id
+        // courseTabImage:objPre.course_tab_image,
+      }
     )
     setIsEditFlag(true);
-    console.log(isEditFlag,"isEditiing flag from the handle pre fill dropdown")
+    console.log(isEditFlag, "isEditiing flag from the handle pre fill dropdown")
 
   }
-const handleDeleteTab=async(objPre)=>{
-  console.log(objPre,"from the delete function");
-  const tabId=objPre.tab_id;
-  console.log(tabId);
-  const confirmDelete=window.confirm("Are you sure you want to delete this tab?");
-  if(!confirmDelete){
+  const handleDeleteTab = async (objPre) => {
+    console.log(objPre, "from the delete function");
+    const tabId = objPre.tab_id;
+    console.log(tabId);
+    const confirmDelete = window.confirm("Are you sure you want to delete this tab?");
+    if (!confirmDelete) {
       return;
-  }
-  try {
-    const response= await axios.delete(`${BASE_URL}/courseTab/courseTabDelete/${tabId}`)
-    console.log(response);
-    if(response.data.message){
-      alert(response.data.message);
     }
-    else{
-      alert(response.data.message);
+    try {
+      const response = await axios.delete(`${BASE_URL}/courseTab/courseTabDelete/${tabId}`)
+      console.log(response);
+      if (response.data.message) {
+        alert(response.data.message);
+      }
+      else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.log(error, "Error while deleting the course tab")
+      alert("An error occurred while deleting the tab");
     }
-  } catch (error) {
-    console.log(error,"Error while deleting the course tab")
-    alert("An error occurred while deleting the tab");
   }
-}
   return (
     <div>
       {type === "WhyChooseUs" && (
-     <div className="UploadPopups_Container">
+        <div className="UploadPopups_Container">
           {" "}
           <form onSubmit={handleSubmit}>
             <div>
@@ -434,7 +374,7 @@ const handleDeleteTab=async(objPre)=>{
         </div>
       )}
       {type === 'tabButtonForm' && (
-     <div className="UploadPopups_Container">
+        <div className="UploadPopups_Container">
           <form action="" onSubmit={handleTabDataSubmit}>
             <div>
               <label htmlFor="">Select a Portale: </label>
@@ -473,7 +413,7 @@ const handleDeleteTab=async(objPre)=>{
                 </div>
               )}
               {/* {tabsData.courseTabImage && ( */}
-                <button type='submit' >Submit</button>
+              <button type='submit' >Submit</button>
               {/* )} */}
 
             </div>
@@ -482,12 +422,17 @@ const handleDeleteTab=async(objPre)=>{
             <div>
               <div>
                 {tabEditDetails.map(objPre => (
-                  <div  className = "ploadPopups_Container" key={objPre.id}>
-                    <button className = "Edit_button" type="button" onClick={() => handlePreFillDropDown(objPre)}><CiEdit /></button>
-                    <button className = "Delete_button" type="button" onClick={()=>handleDeleteTab(objPre)}><RiDeleteBin6Line /></button>
+                  <div className="ploadPopups_Container" key={objPre.id}>
+                    {/* <p>{objPre.course_tab_title}</p> */}
+
+                    <h2>Tab Name:{objPre.course_tab_title} </h2>
+
                     <div className="why-chooseUs_image_Container">
-                      {/* <img src={`data:image/png;base64,${objPre.course_tab_image}`} alt="nopeeeeee" /> */}
-                    <span>{objPre.course_tab_text}</span>
+                      <span>{objPre.course_tab_text}</span>
+                      <div>
+                        <button className="Edit_button" type="button" onClick={() => handlePreFillDropDown(objPre)}><CiEdit /></button>
+                        <button className="Delete_button" type="button" onClick={() => handleDeleteTab(objPre)}><RiDeleteBin6Line /></button>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -501,3 +446,4 @@ const handleDeleteTab=async(objPre)=>{
 };
 
 export default WhychooseUsEdit;
+// edit
