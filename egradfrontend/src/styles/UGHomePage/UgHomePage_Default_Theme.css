@@ -156,8 +156,9 @@ ul.themeUgHeaderUlDefault {
 }
 h2#EXPLORE_Exam_Heading {
     color: #00a3ff;
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin: 2rem auto;
+    font-weight: bold;
 }
 .NewExploreExams_Sub_Container.themeExploreExamsSubContainerDefault {
     align-items: center;
@@ -167,6 +168,7 @@ h2#EXPLORE_Exam_Heading {
     justify-content: center;
     margin: 0 auto;
     width: 95%;
+    font-weight: bold;
 }
 .NewExploreExams_ExamCard_Container.NewExploreExams_ExamCard_ContainerDefault {
     grid-column-gap: 7.8rem;
@@ -200,6 +202,12 @@ h2#EXPLORE_Exam_Heading {
     height: 280px;
 }
 
+.NewExploreExams_ExamName_Container.NewExploreExams_ExamName_ContainerDefault:hover{
+        -webkit-transform: scale(1.09);
+        transform: scale(1.09);
+        transition: .3s ease-in-out;
+}
+
 .NewExploreExams_PortalNames_Container.NewExploreExams_PortalNames_ContainerDefault {
     padding: 20px;
     text-align: center;
@@ -227,7 +235,9 @@ li.defaultLinkToSpecificExam a{
     color: rgb(48, 4, 129);
     font-weight: bold;
     text-decoration: underline;
+    text-decoration: underline; /* This is redundant */
 }
+
  
 /* OUR COURSES CSS PART */
  
@@ -238,9 +248,10 @@ li.defaultLinkToSpecificExam a{
 
 h2#Our_Courses_heading {
     color: #00a3ff;
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin: 1rem auto;
     text-align: center;
+    font-weight: bold;
 }
 .defaultCoursesSubContainer {
     grid-gap: 2rem;

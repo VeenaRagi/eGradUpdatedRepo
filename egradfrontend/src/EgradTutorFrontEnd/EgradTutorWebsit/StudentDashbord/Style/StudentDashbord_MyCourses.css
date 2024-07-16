@@ -55,6 +55,14 @@ li {
 
 /* --------------------- quiz buycourses----------- */
  
+.OVL_Video {
+  display: block;
+  width: 1000px;
+  height: 500px;
+}
+
+
+
 .QuizBUy_courses {
   width: 100%;
 }
