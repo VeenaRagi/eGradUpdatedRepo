@@ -789,8 +789,9 @@ ul.defaultCoursesUl li:hover {
         gap: 6rem;
     }
     .AboutUs1stContentContainer.AboutUs1stContentContainerDefault .AboutUsImgDataContentContainer.AboutUsImgDataContentContainerDefault img {
-        width: 345px;
+        width: 280px;
         border-radius: 15px;
+        height: 280px;
     }
     .AboutUs1stContentContainer.AboutUs1stContentContainerDefault p {
         text-align: left;

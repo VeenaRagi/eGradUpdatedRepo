@@ -390,7 +390,7 @@ a {
     }
 
     .Footer_Links_Content.themeFooterLinksContentDefault ul li a {
-        font-size: 15px;
+        font-size: 18px;
     }
 
     .themeFooterContactDataDefault h2 {
@@ -446,10 +446,13 @@ a {
 /* Media query for maximum screen width of 415px */
 @media (max-width: 415px) {
     .EGATE_elandUl-pg_Default {
-        width: 385px !important;
+        width: 313px !important;
         box-shadow: 0 0 10px #00222c !important;
         padding: 1rem !important;
         height: 400px;
+    }
+    .Newlandingpage_branch_box.EGATE_elandUl-pg_Default .ugAndPgButtonsDefault a {
+        font-size: 19px !important;
     }
 }
 
