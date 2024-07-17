@@ -141,6 +141,14 @@
     color: #008000e7;
 }
 
+.Ug_header_logoIMG.t1UgHeaderLogoImg {
+    /* height: 200px; */
+    width: 250px;
+}
+
+.t1UgHeaderLogoImg img{
+width: 100%;
+}
 
 .t1ExamPageHeaderContainer a img {
     height: 140px;
