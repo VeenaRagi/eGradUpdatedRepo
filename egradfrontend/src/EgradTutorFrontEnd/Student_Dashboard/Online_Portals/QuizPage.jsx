@@ -70,18 +70,18 @@ const QuizPage = () => {
     setSidebarVisible(!isSidebarVisible);
   };
 
-  // const handleContextMenu = (e) => {
-  //   e.preventDefault();
-  // };
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+  };
 
-  // //mouseclick disabling
-  // useEffect(() => {
-  //   document.addEventListener('contextmenu', handleContextMenu);
+  //mouseclick disabling
+  useEffect(() => {
+    document.addEventListener('contextmenu', handleContextMenu);
 
-  //   return () => {
-  //     document.removeEventListener('contextmenu', handleContextMenu);
-  //   };
-  // }, []);
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+    };
+  }, []);
 
   //keyboard disabling
   useEffect(() => {
