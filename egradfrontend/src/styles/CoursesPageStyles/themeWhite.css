@@ -582,9 +582,17 @@ h2.whiteContant {
         font-size: 25px;
         font-weight: 600;
     }
+
+    .mobileMenuLink {
+        display: block;
+    }
 }
 
 @media(max-width:1280px) {
+
+    .mobileMenuLink {
+        display: none;
+    }
   .navbar-inverse .navbar-nav>li>a {
     color: white !important;
     text-transform: uppercase !important;
@@ -690,6 +698,126 @@ ul.courseHeaderUl span:hover {
         padding: 1rem;
     }
 }
+
+
+
+
+
+
+/* General styles for the main container */
+.CoursePage_header_Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 1rem; */
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Logo container */
+  .logo_Img_container {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Logo image */
+  .logo_Img_container img {
+    max-width: 340px;
+    height: auto;
+}
+  
+  /* Navigation links container */
+  .menu-link {
+    display: flex;
+    align-items: center;
+  }
+  
+  .courseHeaderUl {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .courseHeaderUl li {
+    margin-left: 1rem;
+  }
+  
+  .courseHeaderUl li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* Hamburger menu */
+  .hamburgerMenu {
+    display: none;
+    cursor: pointer;
+    font-size: 2rem;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .menu-link {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .menu-link.mobileMenuLink {
+      display: flex;
+    }
+  
+    .hamburgerMenu {
+      display: block;
+    }
+  }
+  
+  /* Adjusting for screen widths between 768px and 1000px */
+  @media (min-width: 768px) and (max-width: 1000px) {
+    .t1CoursePageHeaderContainer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 90%;
+   margin: 0 auto;
+   box-shadow: none;
+   background-color: #f9f9f9;
+
+    }
+  
+    .courseHMenu {
+      display: block;
+    }
+  
+    .menu-link {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .menu-link.mobileMenuLink {
+      display: flex;
+    }
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

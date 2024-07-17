@@ -29,13 +29,21 @@
 .t1ContactUsDataContainer svg{
     margin: 10px;
 }
+.t1ContactUsFormData input{
+    width: 340px;
+    box-shadow: 1px 2px 4px 0px #1a374d;
+    border-radius: 10px;
+    }
+    
+.t1ContactUsFormData select{
+width: 340px;
+border-radius: 10px;
+}
 
-/* input[type="text"], input[type="date"], input[type="email"], input[type="number"], select, textarea {
-    margin-top: 5px;
-    width: 349px;
-    height: 51px;
-    border-radius: 8px;
-} */
+.t1ContactUsFormData textarea{
+    width: 340px;
+    border-radius: 10px;
+    }
 .t1CUForm input[type="text"],.t1CUForm  input[type="date"],.t1CUForm  input[type="email"],.t1CUForm  input[type="number"], .t1CUForm select,.t1CUForm  textarea {
     margin-top: 5px;
     width: 349px;
