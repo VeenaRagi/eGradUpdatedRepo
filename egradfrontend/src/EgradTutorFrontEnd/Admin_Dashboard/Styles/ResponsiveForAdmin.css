@@ -264,4 +264,8 @@ margin: 0 auto;
     font-size: 1rem;
     margin-top: 2rem;
   }
-  
+  .sendSolnButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
