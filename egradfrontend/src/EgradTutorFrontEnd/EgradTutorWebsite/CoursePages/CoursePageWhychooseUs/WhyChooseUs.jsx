@@ -59,21 +59,48 @@ const[activeTab,setActiveTab]=useState(null)
 
 
   // Default tab displaying
+  // useEffect(() => {
+  //   if (courseTabButtonNames.length > 0) {
+  //     console.log(courseTabButtonNames, "buttton names")
+  //   }
+  //   const defaultTab = courseTabButtonNames.find(tab => tab.course_tab_title_id === 1);
+
+  //   if (defaultTab) {
+  //     setSelectedTabId(defaultTab.course_tab_title_id);
+  //     setSelectedTabContent(defaultTab);
+  //     // setActiveTab()
+  //     console.log(selectedTabContent, selectedTabId)
+  //   } else {
+  //     console.error("Tab with course_tab_title_id 1 not found");
+  //   }
+  // }, [courseTabButtonNames]);
+
   useEffect(() => {
     if (courseTabButtonNames.length > 0) {
-      console.log(courseTabButtonNames, "buttton names")
-    }
-    const defaultTab = courseTabButtonNames.find(tab => tab.course_tab_title_id === 1);
-
-    if (defaultTab) {
-      setSelectedTabId(defaultTab.course_tab_title_id);
-      setSelectedTabContent(defaultTab);
-      // setActiveTab()
-      console.log(selectedTabContent, selectedTabId)
-    } else {
-      console.error("Tab with course_tab_title_id 1 not found");
+      console.log(courseTabButtonNames, "button names");
+  
+      const findDefaultTab = (idList) => {
+        for (let id of idList) {
+          const tab = courseTabButtonNames.find(tab => tab.course_tab_title_id === id);
+          if (tab) {
+            return tab;
+          }
+        }
+        return null;
+      };
+  
+      const defaultTab = findDefaultTab([1, 2, 3]);
+  
+      if (defaultTab) {
+        setSelectedTabId(defaultTab.course_tab_title_id);
+        setSelectedTabContent(defaultTab);
+        console.log(defaultTab, defaultTab.course_tab_title_id);
+      } else {
+        console.error("No tab found with course_tab_title_id 1, 2, or 3");
+      }
     }
   }, [courseTabButtonNames]);
+  
 
   const themeColor = themeFromContext[0]?.current_theme;
   const themeDetails = JSONClasses[themeColor] || [];
