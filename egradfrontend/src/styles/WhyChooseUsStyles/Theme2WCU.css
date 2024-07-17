@@ -117,7 +117,7 @@ img.defaultLogoImg::before {
     align-items: center;
     width: 80%;
     padding: 5px 0;
-    gap: 3rem;
+    gap: 2rem;
     font-weight: 500;
     margin: auto;
     font-size: 18px;
@@ -181,6 +181,10 @@ h2.orangeContant {
   flex-direction: column;
   justify-content: center;
   align-items: center; */
+}
+.logoImgContainer.t2LogoOfCourseP a img{
+width: 80%;
+margin: auto;
 }
 @media (max-width: 425px) {
   .t2TabButtonUl li div button  {
