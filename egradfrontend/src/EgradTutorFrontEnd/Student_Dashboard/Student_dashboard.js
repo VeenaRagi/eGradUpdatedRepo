@@ -541,9 +541,10 @@ export const StudentDashbordheader = () => {
                   {userRole === "viewer" && (
                     <>
                       <div className="dashbordheder_container">
-                        <HashLink to="/home#contact" className="Quiz__home">
+                      <HashLink to="/ContactUs" className="Quiz__home"/>
+                        {/* <HashLink to="/home#contact" className="Quiz__home">
                           Contact Us
-                        </HashLink>
+                        </HashLink> */}
                         {/* <a
                               href="/home#contact"
                               className="Quiz__home"
