@@ -642,7 +642,7 @@ ul.courseHeaderUl.undefined {
 
 ul.courseHeaderUl.undefined span {
     COLOR: WHITE;
-    FONT-WEIGHT: 500;
+    FONT-WEIGHT:bold;
     font-size: 20px;
     text-transform: uppercase !important;
     cursor: pointer;

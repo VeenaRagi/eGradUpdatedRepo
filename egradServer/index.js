@@ -110,6 +110,9 @@ app.use('/EncrypDecryp', EncrypDecryp);
 
 
 //***************************************************************OTS_QUIZ APP ******************************/
+const Dashboard = require("./OTS_Quiz_Admin/Dashbord");
+app.use("/Dashboard", Dashboard);
+
 const CoursePage =require("./OTS_QuizApp/CoursePage");
 app.use('/CoursePage',CoursePage)
 
