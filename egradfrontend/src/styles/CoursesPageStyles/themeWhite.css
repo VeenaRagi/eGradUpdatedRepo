@@ -812,10 +812,15 @@ ul.courseHeaderUl span:hover {
     .menu-link.mobileMenuLink.t2UgDivLinksOfHeader {
         display: flex;
         position: absolute;
-        top: 5%;
+        top: 1%;
         width: 35%;
         border-radius: 20px;
         right: 55px;
+        /* background-color: white; */
+        z-index: 2;
+    }
+    .menu-link.mobileMenuLink.CoursePageItemsContainer.t2CoursePageHeaderContainer{
+        
     }
   }
   
