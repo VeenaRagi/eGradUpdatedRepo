@@ -226,7 +226,7 @@ p#more_info {
 }
 .portal_names.defaultPortalNames {
     margin-right: 15px;
-    height: 200px;
+    /* height: 200px; */
     width: 389px;
 }
 .exam_courses_sub_container.defaultExamCoursesSubContainer {
@@ -331,7 +331,7 @@ p#more_info {
         height: 130vh;
     }
     .portal_names.defaultPortalNames li {
-        height: 235px;
+        /* height: 235px; */
         width: 351px;
         /* margin-bottom: 40px; */
     }

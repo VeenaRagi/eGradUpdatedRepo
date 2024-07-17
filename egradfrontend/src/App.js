@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -18,7 +19,7 @@ import ThemesSection from "./ThemesFolder/ThemesSection/ThemesSection";
 import BASE_URL from "./apiConfig.js";
 import NotFound from "./NotFound.jsx";
 import axios from "axios";
-
+ 
 import { State } from "./EgradTutorFrontEnd/context/State";
 import Login from "./Login/Login";
 import Register from "./Login/Register";
@@ -29,12 +30,12 @@ import Userdeatailedpage from "./Login/Userdeatailedpage";
 import QUiZ_ForgotPassword from "./Login/QUiZ_ForgotPassword";
 import QUIZ_ResetPassword from "./Login/QUIZ_ResetPassword";
 import UgadminHome from "./Login/UgadminHome.js";
-
+ 
 import Student_dashboard from "./EgradTutorFrontEnd/Student_Dashboard/Student_dashboard";
 import Student_profileUpdate from "./EgradTutorFrontEnd/Student_Dashboard/Student_profileUpdate";
 import StudentRegistationPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/StudentRegistationPage";
 import Payu from "./EgradTutorFrontEnd/Student_Dashboard/Payu/Payu.jsx";
-
+ 
 import InstructionPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/InstructionPage";
 import General_Intructions_Page from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/General_Intructions_Page";
 import QuizPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/QuizPage";
@@ -49,32 +50,32 @@ import TestUpdateForm from "./EgradTutorFrontEnd/Admin_Dashboard/TestUpdateForm"
 import Document_ImageInfo from "./EgradTutorFrontEnd/Admin_Dashboard/Document_ImageInfo";
 import GettinggInstructions from "./EgradTutorFrontEnd/Admin_Dashboard/GettinggInstructions";
 import UpdateInstruction from "./EgradTutorFrontEnd/Admin_Dashboard/ExamUpdataion_admin";
-
+ 
 const PrivateRoute = ({ element }) => {
   const isAuthenticated = localStorage.getItem("isLoggedIn");
   return isAuthenticated ? element : <Navigate to="/userlogin" />;
 };
-
+ 
 const App = () => {
   const [isEditMode, setIsEditMode] = useState(false);
-
+ 
   useEffect(() => {
     const checkServerStatus = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/api/server/status`);
-
+ 
         setServerError(false);
       } catch (error) {
         setServerError(true);
       }
     };
-
+ 
     checkServerStatus();
   }, []);
-
+ 
  
   const userRole = localStorage.getItem("userRole");
-
+ 
  
   const toggleEditMode = () => {
     setIsEditMode(!isEditMode);
@@ -120,10 +121,10 @@ const App = () => {
                 <Route path="/ContactUs" element={<ContactUs />} />
                 <Route path="/Faq" element={<FAQ />} />
                 <Route path="/linkpage/:Link_Id" element={<LinkPage />} />
-
+ 
                 <Route path="/Error" element={<NotFound />} />
                 <Route path="/WebsiteAdmin" element={<ThemesSection />} />
-
+ 
                 {/* ==================LOGIN SYSTEM ROUTES START================== */}
                 <Route path="/Register" element={<Register />} />
                 <Route path="/Register" element={<Register />} />
@@ -144,7 +145,7 @@ const App = () => {
                   path="/userdetails"
                   element={<PrivateRoute element={<Userdeatailedpage />} />}
                 />
-
+ 
                 <Route
                   path="/OTS_ForgotPassword"
                   element={<QUiZ_ForgotPassword />}
@@ -163,7 +164,7 @@ const App = () => {
                 />
                 <Route path="/PayU/:courseCreationId" element={<Payu />} />
                 {/* ==================LOGIN SYSTEM ROUTES END================== */}
-
+ 
                 {/* =====================STUDENT DASHBOARD ROUTES START================= */}
                 <Route
                   path="/Quiz_dashboard"
@@ -185,7 +186,7 @@ const App = () => {
                   path="/Instructions/:param1/:param2/:param3"
                   element={<PrivateRoute element={<InstructionPage />} />}
                 />
-
+ 
                 <Route
                   path="/General_intructions_page/:param1/:param2/:param3"
                   element={
@@ -196,7 +197,7 @@ const App = () => {
                   path="/QuizPage/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<QuizPage seconds={20} />} />}
                 />
-
+ 
                 <Route
                   path="/QuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<QuestionBankQuiz />} />}
@@ -214,7 +215,7 @@ const App = () => {
                   element={<PrivateRoute element={<NotFound />} />}
                 />
                 {/* =====================STUDENT DASHBOARD ROUTES END================= */}
-
+ 
                 {/* =========================ADMIN DASHBOARD ROUTES START=========================== */}
                 <Route
                   path="/ExamUpdataion_admin/:examId"
@@ -253,5 +254,7 @@ const App = () => {
     </State>
   );
 };
-
+ 
 export default App;
+ 
+ 

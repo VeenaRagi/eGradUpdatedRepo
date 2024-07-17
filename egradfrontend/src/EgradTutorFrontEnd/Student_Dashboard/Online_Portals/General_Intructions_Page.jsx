@@ -197,15 +197,18 @@ const General_intructions_page_container = () => {
   return (
     <>
       {/* <Header /> */}
-      
+
       <div className="Instructions_container">
-      <div className="Quiz_header">
-        <div className="Q_logo">
-          <img src={image} className="" alt="Current" />
+        <div className="Quiz_header">
+          <div className="Q_logo">
+            <img src={image} alt="Current" />
+          </div>
+
+          <h1 className="general_instruction_page_heading">
+            General Instructions
+          </h1>
         </div>
-        <h1>General Instructions</h1>
-      </div>
-       
+
         <ul className="Instructions_points">
           {instructionsData.map((instruction, index) => (
             <React.Fragment key={index}>
