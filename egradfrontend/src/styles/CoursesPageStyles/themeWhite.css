@@ -707,7 +707,7 @@ ul.courseHeaderUl span:hover {
 /* General styles for the main container */
 .CoursePage_header_Container {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: space-between;
     align-items: center;
     /* padding: 1rem; */
