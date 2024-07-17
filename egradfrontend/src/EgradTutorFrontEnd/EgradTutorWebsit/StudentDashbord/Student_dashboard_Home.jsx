@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import BASE_URL from '../../../apiConfig';
 import axios from 'axios';
 import '../../EgradTutorWebsit/StudentDashbord/Style/Student_dashboard.css'
-import welcome_greeting_img from '../../../styles/Girl.png'
+import welcome_greeting_img from './Images/welcome_greeting_img.png'
 import { useLocation, useNavigate } from 'react-router-dom';
 // import welcome_greeting_img from './Images/welcome_greeting_img.png'
 // import welcome_greeting_img from './Images/welcome_greeting_img.png'

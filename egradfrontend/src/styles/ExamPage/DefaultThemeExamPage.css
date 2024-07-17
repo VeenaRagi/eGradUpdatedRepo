@@ -287,7 +287,9 @@ p#more_info {
         border-radius: 5px;
         width: 181px !important;
     }
-
+    .exampage_heading.JEEHeading.themeExamPageHeaderHeading h1 {
+        font-size: 20px;
+    }
     .exampage_heading.themeExamPageHeaderHeading p {
         color: #070606;
         font-size: 20px;
@@ -331,8 +333,8 @@ p#more_info {
         height: 130vh;
     }
     .portal_names.defaultPortalNames li {
-        height: 235px;
-        width: 351px;
+        /* height: 235px; */
+        /* width: 351px; */
         /* margin-bottom: 40px; */
     }
     .portal_names.defaultPortalNames h2 {
