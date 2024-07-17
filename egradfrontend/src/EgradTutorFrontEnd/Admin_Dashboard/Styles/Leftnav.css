@@ -9,8 +9,9 @@
 .whiteMenu {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
     margin-top: 5px;
+    margin-left: 11px;
 }
 .LeftnavLinks{
     display: flex;
@@ -74,3 +75,12 @@ tr th{
     gap: 0.5rem;
     transition: 0.5s ease-in-out;
 }
+@media (max-width: 768px) {
+    .whiteMenu {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-top: 5px;
+    }
+  }
+  
