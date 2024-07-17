@@ -896,7 +896,25 @@ form.ContactUsFormData.ContactUsFormDataDefault{
     grid-template-columns: repeat(auto-fit,minmax(350px,1fr));
     justify-content: center;
 }
-form.ContactUsFormData.ContactUsFormDataDefault #firstName, #lastName, #email, #category,#message {
+form.ContactUsFormData.ContactUsFormDataDefault #firstName,.ContactUsFormDataDefault #lastName {
+    border: 1px solid #000;
+    border-radius: 10px;
+    height: 50px;
+    outline: none;
+    padding: .1rem .5rem;
+    /* text-transform: uppercase; */
+    width: 90%;
+}
+form.ContactUsFormData.ContactUsFormDataDefault #email {
+    border: 1px solid #000;
+    border-radius: 10px;
+    height: 50px;
+    outline: none;
+    padding: .1rem .5rem;
+    /* text-transform: uppercase; */
+    width: 90%;
+}
+form.ContactUsFormData.ContactUsFormDataDefault #message {
     border: 1px solid #000;
     border-radius: 10px;
     height: 50px;
@@ -906,6 +924,13 @@ form.ContactUsFormData.ContactUsFormDataDefault #firstName, #lastName, #email, #
     width: 90%;
 }
 form.ContactUsFormData.ContactUsFormDataDefault #category {
+    border: 1px solid #000;
+    border-radius: 10px;
+    height: 50px;
+    outline: none;
+    padding: .1rem .5rem;
+    /* text-transform: uppercase; */
+    width: 90%;
     margin-bottom: 20px;
     margin-left: 0px;
 }
