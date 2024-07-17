@@ -379,7 +379,7 @@ const App = () => {
                   element={<AboutUs isEditMode={isEditMode} />}
                 />
                 <Route path="/ContactUs" element={<ContactUs />} />
-                <Route path="/Faq" element={<FAQ />} />
+                <Route path="/Faq" element={<FAQ isEditMode={isEditMode} />} />
                 <Route path="/linkpage/:Link_Id" element={<LinkPage />} />
  
                 <Route path="/Error" element={<NotFound />} />

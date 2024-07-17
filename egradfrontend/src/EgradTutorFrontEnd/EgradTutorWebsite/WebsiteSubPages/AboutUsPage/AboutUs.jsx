@@ -11,6 +11,7 @@ import capImg from "../../../../styles/AboutUsCapImg.png";
 import ExamPageHeader from "../../ExamHomePage/ExamHomepageHeader/ExamPageHeader";
 import "../../../../styles/AboutUs/Theme1AboutUs.css";
 import "../../../../styles/AboutUs/Theme2AboutUs.css";
+import '../../../../styles/ContactUs/Theme2ContactUs.css'
 import { IoHome } from "react-icons/io5";
 import Our_Vision_Img from "../../../../styles/Our_Mission_img.a4171ae2dd49cdc24875.png";
 import aboutUsAP from "../../../../styles/AboutUSPic-removebg-preview.png";

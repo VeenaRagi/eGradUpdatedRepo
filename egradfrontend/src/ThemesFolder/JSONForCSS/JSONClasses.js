@@ -712,7 +712,7 @@ themeMainFooterContainer:"t1MainFooterContainer",
     themeTabContentSplittedText:"t2TabContentSplittedText",
     themeCardsToBeFlexed:"t2CardsToBeFlexed",
     themeTabContentSplittedTextInDiv:"t2TabContentSplittedTextInDiv",
-    
+    themeContactUsImgContainer:"t2ContactUsImgContainer",
     
   },
 };

@@ -5,6 +5,9 @@
 .t2CULogoContainer img{
 width: 100%;
 }
+.contactUsImgDiv img{
+    width: 100%;
+}
 form.ContactUsFormData.t2CUForm {
     padding: 0 1rem;
 }
@@ -104,6 +107,65 @@ form.ContactUsFormData.t2CUForm button:hover{
     align-items: center;
     justify-self: center;
     padding-bottom: 10px;
+}
+
+/* header */
+.t2ContactUsImgContainer a img{
+    width: 100%;
+}
+/* .contactUsImgContainer.t2ContactUsImgContainer {
+    width: 200px;
+} */
+.contactUsImgContainer.t2ContactUsImgContainer {
+    /* width: 200px; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.contactUsHeaderContainer{
+    width: 80%;
+    margin: auto;
+}
+.contactUsHeaderParentContainer {
+    width: 100%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 1rem 0 ;
+    margin-bottom: 20px;
+}
+
+.contactUsImgDiv{
+    /* height: 200px; */
+    width: 200px;
+}
+.contactUsHomeDiv a{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    /* background-color: #0a9396; */
+}
+.contactUsHomeDiv {
+    background-color: #0a9396;
+    padding: 7px;
+    border-radius: 10px;
+}
+@media (max-width: 425px){
+    .contactUsHeaderContainer{
+        width: 95%;
+    }
+    .contactUsImgDiv {
+        /* height: 200px; */
+        width: 170px;
+    }
+    .contactUsImgContainer.t2ContactUsImgContainer {
+        padding: 0 10px;
+    }
+    .contactUsHomeDiv {
+        padding: 3px;
+    }
+    
 }
 @media (min-width: 1880px) and (max-width: 2560px) {
     .t2FormNdCardPC {

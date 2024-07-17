@@ -199,7 +199,8 @@ const ContactUs = ({ userRole }) => {
                         ))}
                       </select>
                       <label htmlFor="message"></label>
-                      <textarea id="message" name="Message" value={formData.Message} onChange={handleChange} placeholder="Message" className={`ContactUsForMessage `} required></textarea>
+                      <textarea id="message" name="Message" value={formData.Message} onChange={handleChange} placeholder="Message" className={`ContactUsForMessage `}
+                      rows={5} required></textarea>
                       <div className={`${themeDetails.themeCUSubmitButtonDiv}`}>
                         <button type="submit">Submit</button>
                       </div>

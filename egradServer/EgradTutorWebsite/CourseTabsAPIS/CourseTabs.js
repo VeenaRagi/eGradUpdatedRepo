@@ -328,6 +328,91 @@ router.post(
 //   }
 // );
 
+// router.put(
+//   "/courseTabEditData",
+//   upload.single("courseTabImage"),
+//   async (req, res) => {
+//     const {
+//       coursePortaleId,
+//       courseTabId,
+//       courseTabDescription,
+//       courseTabUniqueId,
+//     } = req.body;
+//     console.log(
+//       coursePortaleId,
+//       courseTabDescription,
+//       courseTabId,
+//       courseTabUniqueId
+//     );
+//     const tabImage = req.file ? req.file.buffer : null;
+//     let result;
+
+//     try {
+//       // if (tabImage) {
+//       //   // Update query with image
+//       //   [result] = await db.query(
+//       //     `INSERT INTO course_tab_images (course_tab_id, course_tab_image)
+//       //      VALUES (?, ?)
+//       //      ON DUPLICATE KEY UPDATE course_tab_image = VALUES(course_tab_image)`,
+//       //     [courseTabId, tabImage]
+//       //   );
+//       // } else {
+//       //   // Update query without image
+//       //   [result] = await db.query(
+//       //     `UPDATE course_tab_details
+//       //      SET course_tab_text = ?
+//       //      WHERE course_portale_id = ? AND course_tab_title_id = ? AND tab_id=?`,
+//       //     [
+//       //       courseTabDescription,
+//       //       coursePortaleId,
+//       //       courseTabId,
+//       //       courseTabUniqueId,
+//       //     ]
+//       //   );
+//       // }
+//       if (tabImage) {
+//         // Check if an image already exists for the given courseTabId
+//         const [existingImage] = await db.query(
+//           "SELECT * FROM course_tab_images WHERE course_tab_title_id = ?",
+//           [courseTabId]
+//         );
+  
+//         if (existingImage.length > 0) {
+//           // Update the existing record if found
+//           await db.query(
+//             "UPDATE course_tab_images SET course_tab_image = ? WHERE course_tab_title_id = ?",
+//             [tabImage, courseTabId]
+//           );
+//         } else {
+//           // Insert a new record if not found
+//           await db.query(
+//             "INSERT INTO course_tab_images (course_tab_title_id, course_tab_image) VALUES (?, ?)",
+//             [courseTabId, tabImage]
+//           );
+//         }
+//         response = await db.query(
+//           "INSERT INTO course_tab_details (course_portale_id, course_tab_title_id, course_tab_text) VALUES (?, ?, ?)",
+//           [coursePortaleId, courseTabId, courseTabDescription]
+//         );
+//       console.log(response, "This is the response ");
+//       }
+
+//       if (response.affectedRows > 0) {
+//         res
+//           .status(200)
+//           .json({ success: true, message: "Tab updated successfully" });
+//       } else {
+//         res.status(404).json({ success: false, message: "Tab not found" });
+//       }
+//     } catch (error) {
+//       console.error("Error updating course tab details:", error);
+//       res.status(500).json({
+//         error: "An error occurred while updating the course tab details",
+//       });
+//     }
+//   }
+// );
+
 router.put(
   "/courseTabEditData",
   upload.single("courseTabImage"),
@@ -346,30 +431,42 @@ router.put(
     );
     const tabImage = req.file ? req.file.buffer : null;
     let result;
-
+    
     try {
+      // Update or insert the course tab image if provided
       if (tabImage) {
-        // Update query with image
-        [result] = await db.query(
-          `INSERT INTO course_tab_images (course_tab_id, course_tab_image)
-           VALUES (?, ?)
-           ON DUPLICATE KEY UPDATE course_tab_image = VALUES(course_tab_image)`,
-          [courseTabId, tabImage]
+        const [existingImage] = await db.query(
+          "SELECT * FROM course_tab_images WHERE course_tab_title_id = ?",
+          [courseTabId]
         );
-      } else {
-        // Update query without image
-        [result] = await db.query(
-          `UPDATE course_tab_details
-           SET course_tab_text = ?
-           WHERE course_portale_id = ? AND course_tab_title_id = ? AND tab_id=?`,
-          [
-            courseTabDescription,
-            coursePortaleId,
-            courseTabId,
-            courseTabUniqueId,
-          ]
-        );
+
+        if (existingImage.length > 0) {
+          // Update the existing record if found
+          await db.query(
+            "UPDATE course_tab_images SET course_tab_image = ? WHERE course_tab_title_id = ?",
+            [tabImage, courseTabId]
+          );
+        } else {
+          // Insert a new record if not found
+          await db.query(
+            "INSERT INTO course_tab_images (course_tab_title_id, course_tab_image) VALUES (?, ?)",
+            [courseTabId, tabImage]
+          );
+        }
       }
+
+      // Update the course tab details
+      [result] = await db.query(
+        `UPDATE course_tab_details
+         SET course_tab_text = ?
+         WHERE course_portale_id = ? AND course_tab_title_id = ? AND tab_id=?`,
+        [
+          courseTabDescription,
+          coursePortaleId,
+          courseTabId,
+          courseTabUniqueId,
+        ]
+      );
 
       if (result.affectedRows > 0) {
         res
