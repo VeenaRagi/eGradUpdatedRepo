@@ -199,7 +199,7 @@ function Examcreation_admin() {
               <form onSubmit={handleSubmit}>
                 <div className="examForm_Contant-container ">
                 <div onClick={() => {setFormOpen(false); resetForm();}}>
-                    <button className="ots_btnClose" style={{background:'#ff8080',color:'#fff'}}>
+                    <button className="ots_btnClose" style={{background:'#ff8080',color:'#fff',marginTop:"10px"}}>
                      Close
                       {/* <i class="fa-regular fa-circle-xmark "></i> */}
                     </button>

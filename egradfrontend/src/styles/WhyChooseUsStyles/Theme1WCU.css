@@ -176,10 +176,9 @@
     justify-content: center;
 }
 .t1SelectedTabContentDiv {
-    width: 85%;
+    width: 65%;
     box-shadow: rgb(185 226 198 / 1%) 59px 54px 55px, rgb(185 226 198) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 2px 3px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-
 
 
 
@@ -215,10 +214,20 @@
 }
 
 .t1TabContentSplittedText {
-    padding: 20px;
+    padding: 40px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 20px;
+}
+
+.themeTabContentSplittedTextBoxpara {
+    border: 1px solid gray;
+    gap: 21px;
+    display: flex;
+    border-radius: 10px;
+    padding: 10px;
+    width: 250px;
 }
 
 .t1TabContentSplittedTextInDiv {

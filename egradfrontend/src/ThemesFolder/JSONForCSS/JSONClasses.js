@@ -503,6 +503,8 @@ themeMainFooterContainer:"t1MainFooterContainer",
     themeBuyButtonInCP:"t1BuyButtonInCP",
     themeTabContentSplittedText:"t1TabContentSplittedText",
     themeTabContentSplittedTextInDiv:"t1TabContentSplittedTextInDiv",
+    themeTabContentSplittedTextBox:"themeTabContentSplittedTextBox",
+    themeTabContentSplittedTextBox:"themeTabContentSplittedTextBoxpara",
 
   },
   "Theme-2": {
@@ -710,7 +712,7 @@ themeMainFooterContainer:"t1MainFooterContainer",
     themeTabContentSplittedText:"t2TabContentSplittedText",
     themeCardsToBeFlexed:"t2CardsToBeFlexed",
     themeTabContentSplittedTextInDiv:"t2TabContentSplittedTextInDiv",
-    
+    themeContactUsImgContainer:"t2ContactUsImgContainer",
     
   },
 };

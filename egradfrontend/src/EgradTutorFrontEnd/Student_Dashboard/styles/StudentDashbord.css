@@ -1114,9 +1114,9 @@
   }
 }
 
-input#email {
+/* input#email {
   width: 40%;
-}
+}  */
 
 
 .user_update_pswd_cntner {
@@ -1231,10 +1231,18 @@ form.Student_profileUpdate_editsubconatiner_from {
 
 }
 
-@media (max-width:768px){
+@media (max-width:500px){
   .studentUpdateProfileParentContainer {
-width:330px;
-  }
+    width:350px;
+      }
+
+      .Student_profileUpdate_editsubconatiner_from_choss_img_cinatiner div input{
+        font-size: 20px;
+      }
+}
+
+@media (max-width:768px){
+ 
   .Student_profileUpdate_editsubconatiner_from div{
     display: flex;
     flex-direction: row;
@@ -1243,10 +1251,10 @@ width:330px;
     width: 200px;
     gap: 30px;
   }
-  .Student_profileUpdate_editsubconatiner_from_choss_img_cinatiner .form-label div{
-    display: flex;
-    flex-direction: column;
-  }
+ .Student_profileUpdate_editsubconatiner_from_choss_img_cinatiner div{
+  display: flex;
+  flex-direction: column;
+ }
 
   
 }

@@ -134,11 +134,18 @@ const FAQ = ({ isEditMode, userRole }) => {
 
         <div className={`FaqSubContainer ${themeDetails.FaqSubContainer}`}>
           <h1>FREQUENTLY ASKED QUESTIONS</h1>
+
+          
           {isEditMode && (
+            <div>
           <button onClick={() => setShowFaqForm(!showFaqForm)}>
             {showFaqForm ? "Close FAQ Form" : "Add FAQ"}
           </button>
+          {showFaqForm && (<FAQEdit type="FAQEdit" />  )}
+          </div>
              )}
+
+
           {/* <button onClick={openAddForm} className="add-clicked"><FaRegPenToSquare /></button> */}
 
           <div className={`FaqDataContainer ${themeDetails.FaqDataContainer}`}>

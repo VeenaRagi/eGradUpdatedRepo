@@ -7,8 +7,8 @@
     justify-content: center;
     position: relative;
     /* background: linear-gradient(45deg, #0a9396, #005f73, #003d4e); */
-    padding: 2rem;
-    /* gap: 5rem; */
+    padding: 4rem;
+    gap: 5rem;
     /* color: white; */
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
@@ -29,8 +29,11 @@
 
 }
 .t2AUCapImgDiv img{
-height: inherit;
-width: 400px;
+/* height: inherit; */
+width: 100%;
+}
+.t2AUCapImgDiv {
+    width: 800px;
 }
 .AboutUs1stContentContainer.t2AUContentContainer {
     border-left: 2px solid black;
@@ -127,7 +130,7 @@ span.t2SpanLines {
     }
     .t2AUCapImgDiv img {
         height: inherit;
-        width: 250px;
+        width: 150px;
     }
     .AboutUsImgDataContentContainer.t2AUImgDataContentContainer p {
         font-family: "LXGW WenKai TC", cursive;
