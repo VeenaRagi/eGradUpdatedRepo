@@ -8,6 +8,8 @@
   display: none;
 }
 
+
+
 .table {
   text-align: center;
 }
@@ -298,9 +300,16 @@
 
 
 /* ********* Register students info.jsx CSS********* */
-.admin_account_info_container h1 {
+
+.admin_account_info_container .no_data_info_for_admin_account_info_header{
   text-align: center;
   padding: 20px;
+}
+
+.admin_account_info_container .no_data_info_for_admin_account_info_para {
+  text-align: center;
+  padding: 20px;
+  color: rgba(255, 0, 0, 0.671);
 }
 
 .admin_ul_container {

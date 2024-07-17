@@ -99,7 +99,7 @@ const DocumentUpload_admin = () => {
       <div className="" >
         <h2 className="textColor">Document Upload Form </h2>
       </div>
-      <form>
+      <form className="admin_document_upload_formm">
         <div className="uploadedDocument_container examSubjects_-contant ">
           <div className="uploadedDocumentFilds  ">
             <label htmlFor="testSelect">Select Test:</label>
