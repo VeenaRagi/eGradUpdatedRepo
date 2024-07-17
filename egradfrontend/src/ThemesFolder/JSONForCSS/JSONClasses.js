@@ -684,6 +684,8 @@ themeMainFooterContainer:"t1MainFooterContainer",
     // course page classes
     // course page header classes
     themeCoursePageHeaderContainer: "t2CoursePageHeaderContainer",
+    CoursePageHeaderContainer:"t2CoursePageHeaderContainer",
+
     themeCPHeaderUl: "t2CPHeaderUl",
     ribbonInCP:"ribbonInCP",
     buttonInCP:"buttonInCP",
