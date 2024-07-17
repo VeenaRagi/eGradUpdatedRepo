@@ -1,6 +1,6 @@
-
 .t1CoursePageHeaderContainer .t1CoursePageHeaderContainer {
-    background-color:#bae2c6 ;
+    background-color: #bae2c6;
+    width: 100%;
 }
 
 
@@ -11,7 +11,8 @@
     margin: 0 auto;
     cursor: pointer;
 }
-.t1CoursePageHeaderContainer .t1CPHeaderUl li span:hover{
+
+.t1CoursePageHeaderContainer .t1CPHeaderUl li span:hover {
     color: rgb(36, 80, 175);
 }
 
@@ -41,25 +42,29 @@
 
 @keyframes underlineFromRight {
     0% {
-      background-size: 0 1px;
-      color: initial;
+        background-size: 0 1px;
+        color: initial;
     }
+
     50% {
-      color: rgb(4, 48, 26); /* First mixed color */
+        color: rgb(4, 48, 26);
+        /* First mixed color */
     }
+
     100% {
-      background-size: 100% 1px;
-      color: rgb(4, 48, 26); /* Final color */
+        background-size: 100% 1px;
+        color: rgb(4, 48, 26);
+        /* Final color */
     }
-  }
-  
-  .t1CPHeaderUl li a {
+}
+
+.t1CPHeaderUl li a {
     position: relative;
     color: initial;
     text-decoration: none;
-  }
-  
-  .t1CPHeaderUl li a::before {
+}
+
+.t1CPHeaderUl li a::before {
     content: '';
     position: absolute;
     bottom: -1px;
@@ -70,16 +75,16 @@
     background-size: 0 1px;
     background-repeat: no-repeat;
     transition: background-size 0.5s ease-in-out;
-  }
-  
-  .t1CPHeaderUl li a:hover::before {
+}
+
+.t1CPHeaderUl li a:hover::before {
     background-size: 100% 1px;
-  }
-  
-  .t1CPHeaderUl li a:hover {
+}
+
+.t1CPHeaderUl li a:hover {
     animation: underlineFromRight 0.5s forwards;
-  }
-  
+}
+
 
 .t1_COURSES {
     display: flex;
@@ -104,7 +109,7 @@
     -webkit-background-clip: text;
 }
 
-.t1HeadingInCp h2{
+.t1HeadingInCp h2 {
     font-size: 50px;
 }
 
@@ -175,6 +180,7 @@
     /* align-items: center; */
     justify-content: center;
 }
+
 .t1SelectedTabContentDiv {
     width: 65%;
     box-shadow: rgb(185 226 198 / 1%) 59px 54px 55px, rgb(185 226 198) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 2px 3px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -242,12 +248,20 @@
 .t1TabContentSplittedTextInDiv p {
     padding: 10px;
 }
-@media (min-width: 924px) and (max-width:1000px){
-    .CoursePage_header_Container.t1CoursePageHeaderContainer {
+
+
+/* @media (min-width: 924px) and (max-width:1000px){
+    .t1CoursePageHeaderContainer .t1CPHeaderUl {
         display: flex;
-        justify-content: space-evenly;
+        flex-direction: column;
     }
-}
+
+
+    .t1CoursePageHeaderContainer .t1CoursePageHeaderContainer {
+        background-color: #bae2c6;
+        width: 300px;
+    }
+} */
 
 ul.tabButtonUl.t1TabButtonUl button {
     padding: 0.5rem 1rem;
@@ -260,14 +274,15 @@ ul.tabButtonUl.t1TabButtonUl button {
     transition: 0.2s ease-in-out;
     width: 210px;
     background-color: #bae2c6;
-    color:black;
-    font-weight:bold;
+    color: black;
+    font-weight: bold;
 }
 
 
 ul.tabButtonUl.t1TabButtonUl button:hover {
     background-color: #aaf1bf;
 }
+
 @media (max-width:600px) {
 
     .t1CoursePageHeaderContainer .t1CPHeaderUl {
@@ -295,19 +310,47 @@ ul.tabButtonUl.t1TabButtonUl button:hover {
 
 
 
-@media screen and (max-width: 924px) {
-    .courseHMenu{
+@media screen and (max-width: 1000px) {
+
+    .t1CoursePageHeaderContainer .t1CPHeaderUl {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .t1CoursePageHeaderContainer .t1CoursePageHeaderContainer {
+        background-color: #bae2c6;
+        width: 300px;
+        top: 100px;
+    }
+
+    .courseHMenu {
         display: flex;
         justify-content: center;
         flex-direction: column;
+        z-index: 1;
+        padding-right: 2rem;
+    }
+    .CoursePage_header_Container{
+        display: flex;
+    }
+    .t1TabButtonUl{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .t1CoursePageHeaderContainer .t1CPHeaderUl {
         display: flex;
         flex-direction: column;
-    
+
     }
-  
+    /* .t1TabsSubContainer{
+flex-direction: column;
+    } */
+    .t1SelectedTabContentDiv{
+        width: 100%;
+    }
 }
 
 @media (max-width: 568px) {
@@ -316,13 +359,16 @@ ul.tabButtonUl.t1TabButtonUl button:hover {
         flex-direction: row;
         justify-content: space-between;
     }
+
     .t1CoursePageHeaderContainer .hamburgerMenu.courseHMenu {
-color: black !important;
-/* width: 200px; */
+        color: black !important;
+        /* width: 200px; */
     }
+
     .t1CoursePageHeaderContainer .mobileMenuLink {
         position: absolute;
         display: flex;
+        width: 200px;
         top: 16%;
         border-radius: 20px;
         right: 3%;
@@ -334,7 +380,7 @@ color: black !important;
         box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     }
 
-    .t1SelectedTabContentDiv{
+    .t1SelectedTabContentDiv {
         width: 100%;
     }
 

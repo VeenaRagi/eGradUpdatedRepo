@@ -315,7 +315,7 @@ li.t2CourseLi {
 }
 /* 660 */
 
-@media screen and (max-width: 812px){
+@media screen and (max-width: 850px){
     li.t2CourseLi {
         display: flex;
         align-items: center;

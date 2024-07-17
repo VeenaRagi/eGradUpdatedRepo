@@ -57,12 +57,12 @@ ul.tabButtonUl.themeTabButtonUlDefault {
 @media(max-width:600px) {
     ul.tabButtonUl.themeTabButtonUlDefault {
         display: flex;
-        gap: 2rem;
+        gap: 1rem;
         justify-content: center;
         background: #80808008;
         padding: 0.5rem;
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
-        flex-direction: column;
+        /* flex-direction: column; */
     }
     ul.tabButtonUl.themeTabButtonUlDefault button {
         background: var(--whiteThemeLogo);
@@ -90,22 +90,52 @@ ul.tabButtonUl.themeTabButtonUlDefault {
         margin-bottom: 2rem;
     }
     .themeTabDetailsSubDivDefault {
-        text-align: left;
+        /* text-align: left; */
         background: #80808008;
-        width: 109%;
+        width: 85%;
         margin: 20px;
         display: flex;
-        align-items: center;
-        box-shadow: 5px 5px 5px 0px rgba(16, 141, 193, 0.3);
+        /* align-items: center; */
+        /* box-shadow: 5px 5px 5px 0px rgba(16, 141, 193, 0.3); */
         height: auto;
         margin: 10px;
+        padding: 0.5rem;
     }
     .themeTabImageDivDefault img {
         width: 135px;
     }
     .defaultTabContentSplittedText {
-        margin-left: 4rem;
+        margin-left: 1rem;
         text-align: left;
     }
+    .themeTabImageDivDefault .whyChooseUsImg {
+        height: 250px;
+        /* width: 250px; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .defaultTabContentSplittedText {
+        margin-left: 1rem;
+        text-align: left;
+        list-style: disc;
+    }
 
+}
+
+@media(max-width:835px) {
+    .themeTabDetailsSubDivDefault {
+        text-align: center;
+        background: #80808008;
+        width: 90%;
+        margin: 20px;
+        display: flex;
+        align-items: center;
+        box-shadow: 5px 5px 5px 0px rgba(16, 141, 193, 0.3);
+        height: auto;
+        margin: 2rem;
+    }
+    .themeTabsSubContainerDefault {
+        height: auto;
+    }
 }

@@ -29,11 +29,11 @@
 .t1ContactUsDataContainer svg{
     margin: 10px;
 }
-.t1ContactUsFormData input{
+/* .t1ContactUsFormData input{
     width: 340px;
     box-shadow: 1px 2px 4px 0px #1a374d;
     border-radius: 10px;
-    }
+    } */
     
 .t1ContactUsFormData select{
 width: 340px;
@@ -70,11 +70,11 @@ textarea#message.ContactUsForMessage.undefined{
     color: black;
 }
 
-.t1ContactUsFormData input{
+/* .t1ContactUsFormData input{
     width: 350px;
     height: 50px;
     border-radius: 8px;
-}
+} */
 
 .t1ContactUsFormData button:hover{
     background: #504e4f;   
