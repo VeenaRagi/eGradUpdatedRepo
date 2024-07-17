@@ -704,28 +704,6 @@ ul.courseHeaderUl span:hover {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* General styles for the main container */
 .CoursePage_header_Container {
     display: flex;
@@ -802,7 +780,11 @@ ul.courseHeaderUl span:hover {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-   
+      width: 90%;
+   margin: 0 auto;
+   box-shadow: none;
+   background-color: #f9f9f9;
+
     }
   
     .courseHMenu {
