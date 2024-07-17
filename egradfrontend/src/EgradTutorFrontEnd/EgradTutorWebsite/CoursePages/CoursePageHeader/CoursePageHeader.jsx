@@ -84,7 +84,9 @@ const CoursePageHeader = ({ isEditMode, userRole}) => {
     <div className={`CoursePage_header_Container ${themeDetails.CoursePageHeaderContainer}`}>
       
       <div className={`logo_Img_container ${themeDetails.themeLogoImgC}`}>
-      <div className={`logoImgContainer ${themeDetails.themeLogoOfCourseP}`}
+      <div 
+        className={`logoImgContainer ${themeDetails.logoC}`}
+        
         >
        {image ? (
         <Link to="/">
@@ -101,7 +103,7 @@ const CoursePageHeader = ({ isEditMode, userRole}) => {
       ) : (
         <p>No image available. Please contact support if this issue persists.</p>
       )}
-        </div>
+       </div>
       </div>
       <div>
         {isEditMode && (
