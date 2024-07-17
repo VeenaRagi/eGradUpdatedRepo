@@ -217,7 +217,7 @@ h2#EXPLORE_Exam_Heading {
     font-family: Noto Sans Display,sans-serif;
     font-weight: 700;
     padding: .3rem .5rem;
-    font-size:1.3rem;
+font-size: 14px;
 }
 .NewExploreExams_PortalNames_Container.NewExploreExams_PortalNames_ContainerDefault li a {
     color: black;
