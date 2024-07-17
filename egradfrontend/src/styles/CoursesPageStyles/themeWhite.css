@@ -557,7 +557,7 @@ h2.whiteContant {
     .CoursePage_header_Container.CoursePageHeaderContainerDefault {
         display: flex;
         justify-content: space-between;
-        gap: 2rem;
+        gap: 4rem;
     }
     .themeTabDetailsSubDivDefault {
         /* text-align: center; */
@@ -618,7 +618,9 @@ ul.courseHeaderUl.undefined {
     /* flex-direction: column; */
 }
 .menu-link.CoursePageItemsContainer.undefined {
-    background-color:transparent;
+    background-color: #00000033;
+    width: 25%;
+    top: 100px;
 }
 .mobileMenuLink li {
     width: 100%;
@@ -661,6 +663,7 @@ ul.courseHeaderUl span:hover {
 @media (max-width: 600px) {
     .menu-link.CoursePageItemsContainer.undefined {
         background-color: #53505054 !important;
+        width: 50%;
     }
     ul.courseHeaderUl.undefined span {
         color: white !important;
