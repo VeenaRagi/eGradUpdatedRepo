@@ -52,7 +52,7 @@ const ContactUs = ({ userRole }) => {
         // Handle error state
       }
     };
- 
+
     fetchData();
   }, []);
 
@@ -126,44 +126,47 @@ const ContactUs = ({ userRole }) => {
   console.log(themeColor, "this is the theme json classesssssss")
   const themeDetails = JSONClasses[themeColor] || []
   console.log(themeDetails, "mapppping from json....")
-// for refreshing page when admin selects a theme
-const refreshChannel = new BroadcastChannel("refresh_channel");
-refreshChannel.onmessage = function (event) {
-  if (event.data === "refresh_page") {
-    window.location.reload(); // Reload the page
-  }
-};
+  // for refreshing page when admin selects a theme
+  const refreshChannel = new BroadcastChannel("refresh_channel");
+  refreshChannel.onmessage = function (event) {
+    if (event.data === "refresh_page") {
+      window.location.reload(); // Reload the page
+    }
+  };
   return (
     <>
       {themeColor === 'Theme-2' &&
         <div className={`ContactUsMainContainer ${themeDetails.themeContactUsMainContainer}`}>
-          <div
-            className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`}
-          >
-            {image ? (
-            <Link to={`/`}>
-                <img src={image} alt="Current" />
-              </Link>
-            ) : userRole === "user" ? (
-              <p>
-                Unable to load the image at the moment. Please try again later.
-              </p>
-            ) : userRole === "admin" ? (
-              <p>No image available. Please upload the necessary image.</p>
-            ) : (
-              <p>
-                Unable to load the image. Please contact support if this issue
-                persists.
-              </p>
-            )}
-
-            <span>
-              <Link to={`/`}>
-                <IoHome />
-                Home
-              </Link>
-            </span>
-            
+          <div className="contactUsHeaderParentContainer">
+            <div className="contactUsHeaderContainer">
+              <div className={`contactUsImgContainer ${themeDetails.themeContactUsImgContainer}`}
+              >
+                <div className="contactUsImgDiv">
+                  {image ? (
+                    <Link to={`/`}>
+                      <img src={image} alt="Current" />
+                    </Link>
+                  ) : userRole === "user" ? (
+                    <p>
+                      Unable to load the image at the moment. Please try again later.
+                    </p>
+                  ) : userRole === "admin" ? (
+                    <p>No image available. Please upload the necessary image.</p>
+                  ) : (
+                    <p>
+                      Unable to load the image. Please contact support if this issue
+                      persists.
+                    </p>
+                  )}
+                </div>
+                <div className="contactUsHomeDiv">
+                  <Link to={`/`}>
+                    <IoHome />
+                    Home
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
           <div className={`ContactUsContentDataContainer ${themeDetails.themeCUParentContainer}`}>
             <div className="t2FormAndContactContainer">
@@ -196,9 +199,8 @@ refreshChannel.onmessage = function (event) {
                         ))}
                       </select>
                       <label htmlFor="message"></label>
-                      <textarea id="message" name="Message" value={formData.Message} onChange={handleChange} placeholder="Message" className={`ContactUsForMessage `} 
-                      rows="5"
-                      required></textarea>
+                      <textarea id="message" name="Message" value={formData.Message} onChange={handleChange} placeholder="Message" className={`ContactUsForMessage `}
+                      rows={5} required></textarea>
                       <div className={`${themeDetails.themeCUSubmitButtonDiv}`}>
                         <button type="submit">Submit</button>
                       </div>
@@ -247,7 +249,7 @@ refreshChannel.onmessage = function (event) {
                 Home
               </Link>
             </span>
-            
+
           </div>
 
           <div className={`ContactUsMainContainer ${themeDetails.themeContactUsSubbMainContainer}`}>
@@ -265,27 +267,27 @@ refreshChannel.onmessage = function (event) {
 
               <div className={` ${themeDetails.themeContactUsFormAndAdressContainer}`}>
                 <div className={`ContactUsContentContainer ${themeDetails.themeContactUsContentContainer}`}>
-                {landingFooterData.length > 0 ? (
-        landingFooterData.map(item => (
-          <div key={item.Content_id} className={`ContactUsDataContainer ${themeDetails.themeContactUsDataContainer}`}>
-            {item.Content_id === 1 ? (
-              <h2>ADDRESS
-                <span><FaAddressCard /></span>
-              </h2>
-            ) : (
-              <p>
-                <span><BsArrowUpRightCircleFill /></span>{item.content_name}
-              </p>
-            )}
-          </div>
-        ))
-      ) : userRole === 'user' ? (
-        <p>No contact information is available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>No contact information found. Please add or update the contact details.</p>
-      ) : (
-        <p>No contact information available. Please contact support if this issue persists.</p>
-      )}
+                  {landingFooterData.length > 0 ? (
+                    landingFooterData.map(item => (
+                      <div key={item.Content_id} className={`ContactUsDataContainer ${themeDetails.themeContactUsDataContainer}`}>
+                        {item.Content_id === 1 ? (
+                          <h2>ADDRESS
+                            <span><FaAddressCard /></span>
+                          </h2>
+                        ) : (
+                          <p>
+                            <span><BsArrowUpRightCircleFill /></span>{item.content_name}
+                          </p>
+                        )}
+                      </div>
+                    ))
+                  ) : userRole === 'user' ? (
+                    <p>No contact information is available at the moment. Please check back later.</p>
+                  ) : userRole === 'admin' ? (
+                    <p>No contact information found. Please add or update the contact details.</p>
+                  ) : (
+                    <p>No contact information available. Please contact support if this issue persists.</p>
+                  )}
                 </div>
 
                 <div className={`ContactUsFormContainer ${themeDetails.themeContactUsFormContainer}`}>
@@ -326,15 +328,15 @@ refreshChannel.onmessage = function (event) {
 
 
           <div className={`AboutUsImgContainer ${themeDetails.AboutUsImgContainer}`} >
-          {image ? (
-        <img src={image} alt="Current" />
-      ) : userRole === 'user' ? (
-        <p>Unable to load image at the moment. Please try again later.</p>
-      ) : userRole === 'admin' ? (
-        <p>No image is available. Please upload the necessary image.</p>
-      ) : (
-        <p>Unable to load image. Please contact support if this issue persists.</p>
-      )}
+            {image ? (
+              <img src={image} alt="Current" />
+            ) : userRole === 'user' ? (
+              <p>Unable to load image at the moment. Please try again later.</p>
+            ) : userRole === 'admin' ? (
+              <p>No image is available. Please upload the necessary image.</p>
+            ) : (
+              <p>Unable to load image. Please contact support if this issue persists.</p>
+            )}
 
             <span>
               <Link to={`/`}><IoHome />Home</Link>
@@ -344,44 +346,44 @@ refreshChannel.onmessage = function (event) {
           <div className={`ContactUsContentDataContainer ${themeDetails.ContactUsContentDataContainer}`}>
 
 
-          <div className={`ContactUsMapContainer ${themeDetails.ContactUsMapContainer}`}>
-      {Contact_Map_Data.length > 0 ? (
-        Contact_Map_Data.map((Contact_data, index) => (
-          <div className={`ContactUsMapData ${themeDetails.ContactUsMapData}`} key={index}>
-            <iframe
-              src={Contact_data.map}
-              frameBorder="0"
-              title={`Map ${index}`} // Adding a title for accessibility
-            ></iframe>
-          </div>
-        ))
-      ) : userRole === 'user' ? (
-        <p>No maps are available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>There are no maps available. Please add the necessary map data.</p>
-      ) : (
-        <p>No maps are available. Please contact support if this issue persists.</p>
-      )}
-    </div>
+            <div className={`ContactUsMapContainer ${themeDetails.ContactUsMapContainer}`}>
+              {Contact_Map_Data.length > 0 ? (
+                Contact_Map_Data.map((Contact_data, index) => (
+                  <div className={`ContactUsMapData ${themeDetails.ContactUsMapData}`} key={index}>
+                    <iframe
+                      src={Contact_data.map}
+                      frameBorder="0"
+                      title={`Map ${index}`} // Adding a title for accessibility
+                    ></iframe>
+                  </div>
+                ))
+              ) : userRole === 'user' ? (
+                <p>No maps are available at the moment. Please check back later.</p>
+              ) : userRole === 'admin' ? (
+                <p>There are no maps available. Please add the necessary map data.</p>
+              ) : (
+                <p>No maps are available. Please contact support if this issue persists.</p>
+              )}
+            </div>
 
             <div className={`ContactUsContentContainer ${themeDetails.ContactUsContentContainer}`}>
-            {landingFooterData.length > 0 ? (
-        landingFooterData.map(item => (
-          <div key={item.Content_id} className={`ContactUsDataContainer ${themeDetails.ContactUsDataContainer}`}>
-            {item.Content_id === 1 ? (
-              <h2>ADDRESS</h2>
-            ) : (
-              <p>{item.content_name}</p>
-            )}
-          </div>
-        ))
-      ) : userRole === 'user' ? (
-        <p>No content available at the moment. Please check back later.</p>
-      ) : userRole === 'admin' ? (
-        <p>Content is missing. Please update the details.</p>
-      ) : (
-        <p>No content available. Please contact support if this issue persists.</p>
-      )}
+              {landingFooterData.length > 0 ? (
+                landingFooterData.map(item => (
+                  <div key={item.Content_id} className={`ContactUsDataContainer ${themeDetails.ContactUsDataContainer}`}>
+                    {item.Content_id === 1 ? (
+                      <h2>ADDRESS</h2>
+                    ) : (
+                      <p>{item.content_name}</p>
+                    )}
+                  </div>
+                ))
+              ) : userRole === 'user' ? (
+                <p>No content available at the moment. Please check back later.</p>
+              ) : userRole === 'admin' ? (
+                <p>Content is missing. Please update the details.</p>
+              ) : (
+                <p>No content available. Please contact support if this issue persists.</p>
+              )}
             </div>
 
 
