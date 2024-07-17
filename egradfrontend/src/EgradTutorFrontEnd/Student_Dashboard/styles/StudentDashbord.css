@@ -79,6 +79,19 @@
   margin-top: 10px;
 } */
 
+.OVL_card_data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+  background-color: #80808073;
+}
+
+.progress-button-container{
+  padding-right: 20px;
+  margin-top: 10px;
+}
 
 
 /* ************** FOR ONLINE VIDEO CLASS RIGHT CLICK DISABLE FUNCTIONALITY ********************/

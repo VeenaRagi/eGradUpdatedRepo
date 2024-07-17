@@ -18,7 +18,7 @@ import BASE_URL from "../../apiConfig";
 import { encryptData } from "./utils/crypto";
 import Control from "./Control";
 import "./styles/ComPackC.css";
-
+import ProgressPieChart from "./ProgressPieChart";
 // import {
 //   CircularGaugeComponent,
 //   AxesDirective,
@@ -1061,56 +1061,87 @@ export const StudentDashbordmycourse = () => {
   const { user_Id, testCreationTableId, Portale_Id } = useParams();
   const [selectedPortal, setSelectedPortal] = useState("");
 
-  // ************** FOR ONLINE VIDEO CLASS RIGHT CLICK DISABLE FUNCTIONALITY ********************//
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const playerRef = useRef(null);
-  const [state, setState] = useState({ playing: true });
-  // const { playing } = state;
+  // // ************** FOR ONLINE VIDEO CLASS RIGHT CLICK DISABLE FUNCTIONALITY ********************//
+   // =======================OVL START====================
+   const [videos, setVideos] = useState([]);
+   const [selectedVideo, setSelectedVideo] = useState(null);
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const [isFullscreen, setIsFullscreen] = useState(false);
+   const playerRef = useRef(null);
+   const [playing, setPlaying] = useState(true);
+   const [seeking, setSeeking] = useState(false);
+   const [played, setPlayed] = useState(0);
+   const [duration, setDuration] = useState(0);
+ 
+ 
+   // const [courses, setCourses] = useState([]);
+   const [initialPlayTime, setInitialPlayTime] = useState(0);
+   const [videoProgress, setVideoProgress] = useState({ watched: 0, total: 0 });
+   useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/OtsvidesUploads/videos`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch videos');
+        }
+        const data = await response.json();
+        setVideos(data);
+      } catch (error) {
+        console.error('Error fetching videos:', error);
+      }
+    };
 
-  const [playing, setPlaying] = useState(true);
-  const [played, setPlayed] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [seeking, setSeeking] = useState(false);
+    fetchVideos();
+  }, []);
+  // const [isFullscreen, setIsFullscreen] = useState(false);
+  // const playerRef = useRef(null);
+  // const [state, setState] = useState({ playing: true });
+  // // const { playing } = state;
 
-  const handlePlayPause = () => {
-    setPlaying(!playing);
-  };
+  // const [playing, setPlaying] = useState(true);
+  // const [played, setPlayed] = useState(0);
+  // const [duration, setDuration] = useState(0);
+  // const [seeking, setSeeking] = useState(false);
 
-  const handleRewind = () => {
-    if (playerRef.current) {
-      const currentTime = playerRef.current.getCurrentTime();
-      playerRef.current.seekTo(Math.max(currentTime - 10, 0), "seconds"); // Prevent negative time
-    }
-  };
+  // const handlePlayPause = () => {
+  //   setPlaying(!playing);
+  // };
 
-  const handleFastForward = () => {
-    if (playerRef.current) {
-      const currentTime = playerRef.current.getCurrentTime();
-      playerRef.current.seekTo(Math.min(currentTime + 10, duration), "seconds"); // Prevent exceeding duration
-    }
-  };
-  const handleProgress = (state) => {
-    if (!seeking) {
-      setPlayed(state.played * 100);
-    }
-  };
+  // const handleRewind = () => {
+  //   if (playerRef.current) {
+  //     const currentTime = playerRef.current.getCurrentTime();
+  //     playerRef.current.seekTo(Math.max(currentTime - 10, 0), "seconds"); // Prevent negative time
+  //   }
+  // };
 
-  const handleDuration = (duration) => {
-    setDuration(duration);
-  };
+  // const handleFastForward = () => {
+  //   if (playerRef.current) {
+  //     const currentTime = playerRef.current.getCurrentTime();
+  //     playerRef.current.seekTo(Math.min(currentTime + 10, duration), "seconds"); // Prevent exceeding duration
+  //   }
+  // };
+  // const handleProgress = (state) => {
+  //   if (!seeking) {
+  //     setPlayed(state.played * 100);
+  //   }
+  // };
 
-  const handleSeekChange = (e) => {
-    setPlayed(parseFloat(e.target.value));
-  };
+  // const handleDuration = (duration) => {
+  //   setDuration(duration);
+  // };
 
-  const handleSeekMouseDown = () => {
-    setSeeking(true);
-  };
+  // const handleSeekChange = (e) => {
+  //   setPlayed(parseFloat(e.target.value));
+  // };
 
-  const handleSeekMouseUp = (e) => {
-    setSeeking(false);
-    playerRef.current.seekTo(parseFloat(e.target.value) / 100);
-  };
+  // const handleSeekMouseDown = () => {
+  //   setSeeking(true);
+  // };
+
+  // const handleSeekMouseUp = (e) => {
+  //   setSeeking(false);
+  //   playerRef.current.seekTo(parseFloat(e.target.value) / 100);
+  // };
 
   const handleFullscreenChange = () => {
     if (document.fullscreenElement) {
@@ -1612,9 +1643,9 @@ export const StudentDashbordmycourse = () => {
   };
   const [courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [videos, setVideos] = useState([]);
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [videos, setVideos] = useState([]);
+  // const [selectedVideo, setSelectedVideo] = useState(null);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   // const [showtestContainer, setShowtestContainer] = useState(false);
   const player = useRef(null);
   const { OVL_Course_Id } = useParams();
@@ -1642,26 +1673,26 @@ export const StudentDashbordmycourse = () => {
     fetchCourses();
   }, []);
 
-  const handleVideosClick = async (OVL_Course_Id) => {
-    try {
-      const response = await fetch(
-        `${BASE_URL}/OtsvidesUploads/videos/${OVL_Course_Id}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch videos");
-      }
-      const data = await response.json();
-      setVideos(data);
-      console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
-      console.log(data);
-      setShowQuizCourses(false);
-      setShowtestContainer2(true);
-    } catch (error) {
-      console.error("Error fetching test details:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const handleVideosClick = async (OVL_Course_Id) => {
+  //   try {
+  //     const response = await fetch(
+  //       `${BASE_URL}/OtsvidesUploads/videos/${OVL_Course_Id}`
+  //     );
+  //     if (!response.ok) {
+  //       throw new Error("Failed to fetch videos");
+  //     }
+  //     const data = await response.json();
+  //     setVideos(data);
+  //     console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
+  //     console.log(data);
+  //     setShowQuizCourses(false);
+  //     setShowtestContainer2(true);
+  //   } catch (error) {
+  //     console.error("Error fetching test details:", error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   // const handleViewVideo = async (OVL_Linke_Id) => {
   //   try {
@@ -1676,24 +1707,24 @@ export const StudentDashbordmycourse = () => {
   //     console.error("Error fetching video:", error);
   //   }
   // };
-  const handleViewVideo = async (OVL_Linke_Id) => {
-    try {
-      const video = videos.find((video) => video.OVL_Linke_Id === OVL_Linke_Id);
-      if (!video) {
-        throw new Error("Video not found");
-      }
+  // const handleViewVideo = async (OVL_Linke_Id) => {
+  //   try {
+  //     const video = videos.find((video) => video.OVL_Linke_Id === OVL_Linke_Id);
+  //     if (!video) {
+  //       throw new Error("Video not found");
+  //     }
 
-      setSelectedVideo(video.Drive_Link); // This should be a valid Base64 data URL
-      setIsModalOpen(true);
-    } catch (error) {
-      console.error("Error fetching video:", error);
-    }
-  };
+  //     setSelectedVideo(video.Drive_Link); // This should be a valid Base64 data URL
+  //     setIsModalOpen(true);
+  //   } catch (error) {
+  //     console.error("Error fetching video:", error);
+  //   }
+  // };
 
-  const handleCloseModal = () => {
-    setSelectedVideo(null);
-    setIsModalOpen(false);
-  };
+  // const handleCloseModal = () => {
+  //   setSelectedVideo(null);
+  //   setIsModalOpen(false);
+  // };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -1787,6 +1818,100 @@ export const StudentDashbordmycourse = () => {
       </Link>
     );
   };
+
+
+
+
+
+   
+  
+
+  
+    const handleViewVideo = async (OVL_Linke_Id) => {
+      try {
+        const video = videos.find(video => video.OVL_Linke_Id === OVL_Linke_Id);
+        if (!video) {
+          throw new Error('Video not found');
+        }
+        const savedProgress = localStorage.getItem(`video-progress-${video.OVL_Linke_Id}`);
+        const initialPlayTime = savedProgress ? JSON.parse(savedProgress).playedSeconds : 0;
+        setSelectedVideo(video.Drive_Link); // Ensure this is a valid Base64 data URL
+        setInitialPlayTime(initialPlayTime);
+        setIsModalOpen(true);
+      } catch (error) {
+        console.error('Error fetching video:', error);
+      }
+    };
+  
+  
+    const handleVideosClick = async (OVL_Course_Id) => {
+      try {
+        const response = await fetch(
+          `${BASE_URL}/OtsvidesUploads/videos/${OVL_Course_Id}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch videos");
+        }
+        const data = await response.json();
+        setVideos(data);
+        console.log("OVOOOOOOOOOVVVVVVVVVVVVLLLLLLLLLLLLLLLLLLLLLL");
+        console.log(data);
+        setShowQuizCourses(false);
+        setShowtestContainer2(true);
+      } catch (error) {
+        console.error("Error fetching test details:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    
+  
+    const handleCloseModal = () => {
+      setSelectedVideo(null);
+      setIsModalOpen(false);
+    };
+  
+    const handleProgress = (progress) => {
+      // Save the current playback position to local storage
+      // localStorage.setItem(`video-progress-${selectedVideo}`, JSON.stringify(progress));
+    };
+  
+  
+    const handleDuration = (duration) => {
+      setDuration(duration);
+    };
+  
+  
+  
+  
+    // const handleFullscreenChange = () => {
+    //   if (document.fullscreenElement) {
+    //     setIsFullscreen(true);
+    //   } else {
+    //     setIsFullscreen(false);
+    //   }
+    // };
+  
+    // useEffect(() => {
+    //   document.addEventListener("fullscreenchange", handleFullscreenChange);
+  
+    //   const preventRightClick = (e) => {
+    //     if (isFullscreen) {
+    //       e.preventDefault();
+    //     }
+    //   };
+  
+    //   // Attach event listener to prevent right-click
+    //   document.addEventListener("contextmenu", preventRightClick);
+  
+    //   return () => {
+    //     document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    //     document.removeEventListener("contextmenu", preventRightClick);
+    //   };
+    // }, [isFullscreen]);
+  
+    // =======================OVL END====================
 
   return (
     <>
@@ -2107,126 +2232,110 @@ export const StudentDashbordmycourse = () => {
           </div>
         )}
         {showtestContainer2 && (
-          <div>
-            <div className="card_container_dashbordflowtest">
-              <div className="test_card_container">
-                <div
-                  className="Go_back_from_test_section"
-                  onClick={handleTypeOfTestClickback}
-                >
-                  Go Back
-                </div>
+        <div>
+          <div className="card_container_dashbordflowtest">
+            <div className="test_card_container">
+              <div
+                className="Go_back_from_test_section"
+                onClick={handleTypeOfTestClickback}
+              >
+                Go Back
+              </div>
 
-                <div className="test_cards">
-                  {/* {courses.map((course) => (
-            <div key={course.courseCreationId || course.OVL_Course_Id}> */}
+              <div className="test_cards">
+                {/* {courses.map((course) => (
+          <div key={course.courseCreationId || course.OVL_Course_Id}> */}
 
-                  {/* {course.portal === "OVL" && ( */}
-                  <div>
-                    <h2>OVL 2</h2>
-                    {/* <h2 className="OVL_subheading">{course.examName}</h2> */}
-                    <div
-                    // className="OVL_course_card OVL_continer_data"
-                    // key={course.OVL_Course_Id}
-                    >
-                      {videos.length > 0 && (
-                        <h2 className="OVL_PageHeading">
-                          {videos[0].OVL_Course_Name}
-                        </h2>
-                      )}
-                      <div className="OVL_cards">
-                        {videos.map((video) => (
-                          <div
-                            className="OVL_card_data"
-                            key={video.OVL_Linke_Id}
+                {/* {course.portal === "OVL" && ( */}
+                <div>
+                  <h2>OVL 2</h2>
+                  {/* <h2 className="OVL_subheading">{course.examName}</h2> */}
+                  <div
+                  // className="OVL_course_card OVL_continer_data"
+                  // key={course.OVL_Course_Id}
+                  >
+                    {videos.length > 0 && (
+                      <h2 className="OVL_PageHeading">
+                        {videos[0].OVL_Course_Name}
+                      </h2>
+                    )}
+                    <div className="OVL_cards">
+                      {/* {videos.map((video) => (
+                        <div
+                          className="OVL_card_data"
+                          key={video.OVL_Linke_Id}
+                        >
+                          <h2 className="OVL_text">{video.Lectures_name}</h2>
+                          <button
+                            className="view-video-button"
+                            onClick={() =>{
+                              handleViewVideo(video.OVL_Linke_Id)
+                              console.log(video.OVL_Linke_Id)
+                            }
+                             
+                            }
                           >
-                            <h2 className="OVL_text">{video.Lectures_name}</h2>
-                            <button
-                              className="view-video-button"
-                              onClick={() =>
-                                handleViewVideo(video.OVL_Linke_Id)
-                              }
-                            >
-                              <i className="fa-solid fa-play"></i>
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                      {isModalOpen && (
-                        <div className="modal">
-                          <div className="ovlcontent">
-                            <button
-                              className="OVL_Video_close"
-                              onClick={handleCloseModal}
-                            >
-                              <i className="fa-solid fa-xmark"></i>
-                            </button>
-                            <div
-                              className={`video-container ${
-                                isFullscreen ? "disable-right-click" : ""
-                              }`}
-                            >
-                              <ReactPlayer
-                                className="OVL_Video"
-                                ref={playerRef}
-                                url={selectedVideo}
-                                loop={true}
-                                playing={playing}
-                                muted={true}
-                                width="1000px"
-                                height="500px"
-                                controls={true}
-                                onProgress={handleProgress}
-                                onDuration={handleDuration}
-                                config={{
-                                  youtube: {
-                                    playerVars: {
-                                      autoplay: 1,
-                                      modestbranding: 1,
-                                      rel: 0,
-                                      showinfo: 0,
-                                    },
-                                  },
-                                  vimeo: {
-                                    playerOptions: {
-                                      controls: true,
-                                      autoplay: 1,
-                                    },
-                                  },
-                                  file: {
-                                    attributes: {
-                                      controlsList: "nodownload",
-                                    },
-                                  },
-                                }}
-                                onError={(e) =>
-                                  console.error("Video Error:", e)
-                                }
-                              />
-                              <Control
-                                onPlayPause={handlePlayPause}
-                                playing={playing}
-                                onRewind={handleRewind}
-                                onFastForward={handleFastForward}
-                                played={played}
-                                onSeek={handleSeekChange}
-                                onSeekMouseDown={handleSeekMouseDown}
-                                onSeekMouseUp={handleSeekMouseUp}
-                              />
-                            </div>
+                            <i className="fa-solid fa-play"></i>
+                          </button>
+                          <div>
+                            <ProgressPieChart videoProgress={videoProgress} />
                           </div>
                         </div>
-                      )}
+                      ))} */}
+
+                      {videos.map((video) => (
+                        <div className="OVL_card_data" key={video.OVL_Linke_Id}>
+                          <h2 className="OVL_text">{video.Lectures_name}</h2>
+                          {/* <React.Fragment key={video.OVL_Linke_Id}> */}
+                          <ProgressPieChart className="pie_button"
+                            videoProgress={videoProgress}
+                            onClick={() => {
+                              handleViewVideo(video.OVL_Linke_Id);
+                              console.log(video.OVL_Linke_Id);
+                            }}
+                          />
+                          {/* </React.Fragment> */}
+                        </div>
+                      ))}
                     </div>
+                    {isModalOpen && (
+                      <div className="video-modal">
+                        <button onClick={handleCloseModal}>Close</button>
+                        <div className="video-container">
+                          <ReactPlayer
+                            className="OVL_Video"
+                            ref={playerRef}
+                            url={selectedVideo}
+                            loop={true}
+                            playing={playing}
+                            muted={true}
+                            width="1000px"
+                            height="500px"
+                            controls={true}
+                            onProgress={handleProgress}
+                            played={initialPlayTime}
+                            config={{
+                              file: {
+                                attributes: {
+                                  controlsList: "nodownload",
+                                },
+                              },
+                            }}
+                            onError={(e) => console.error('Video Error:', e)}
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  {/* )} */}
                 </div>
-                {/* ))}
-        </div> */}
+                {/* )} */}
               </div>
+              {/* ))}
+      </div> */}
             </div>
           </div>
-        )}
+        </div>
+      )}
         {/* //main */}
         {showCompletePackageContainer && (
           <div>
