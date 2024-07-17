@@ -700,13 +700,16 @@ ul.courseHeaderUl span:hover {
 }
 
 
-
+.logoContainerInCourse{
+    width: 80%;
+    margin: auto;
+}
 
 
 
 /* General styles for the main container */
 .CoursePage_header_Container {
-    display: flex;
+    /* display: flex; */
     /* flex-direction: column; */
     justify-content: space-between;
     align-items: center;
@@ -759,11 +762,11 @@ ul.courseHeaderUl span:hover {
   
   /* Responsive styles */
   @media (max-width: 768px) {
-    .menu-link {
+    /* .menu-link {
       display: none;
       flex-direction: column;
       width: 100%;
-    }
+    } */
   
     .menu-link.mobileMenuLink {
       display: flex;
@@ -798,7 +801,12 @@ ul.courseHeaderUl span:hover {
     }
   
     .menu-link.mobileMenuLink {
-      display: flex;
+        display: flex;
+        position: absolute;
+        top: 1px;
+        width: 20%;
+        border-radius: 20px;
+        right: 0;
     }
   }
   

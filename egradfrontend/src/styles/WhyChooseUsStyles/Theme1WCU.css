@@ -328,8 +328,12 @@ ul.tabButtonUl.t1TabButtonUl button:hover {
         display: flex;
         justify-content: center;
         flex-direction: column;
+        z-index: 1;
+        padding-right: 2rem;
     }
-
+    .CoursePage_header_Container{
+        display: flex;
+    }
     .t1TabButtonUl{
         display: flex;
         justify-content: center;
