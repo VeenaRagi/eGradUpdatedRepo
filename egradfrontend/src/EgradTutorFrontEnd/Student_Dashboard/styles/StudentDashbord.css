@@ -1231,10 +1231,18 @@ form.Student_profileUpdate_editsubconatiner_from {
 
 }
 
-@media (max-width:768px){
+@media (max-width:500px){
   .studentUpdateProfileParentContainer {
-/* width:350px; */
-  }
+    width:350px;
+      }
+
+      .Student_profileUpdate_editsubconatiner_from_choss_img_cinatiner div input{
+        font-size: 20px;
+      }
+}
+
+@media (max-width:768px){
+ 
   .Student_profileUpdate_editsubconatiner_from div{
     display: flex;
     flex-direction: row;
