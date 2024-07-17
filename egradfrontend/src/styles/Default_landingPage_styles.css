@@ -88,6 +88,9 @@
     font-size:20px;
     /* border:2px; */
 }
+.Pg_buttonn_Default_Cards ul li:hover{
+    background-color: #80808021;
+}
 
 .Pg_buttonn_Default_Cards ul li :hover{
     background: #80808014;
