@@ -39,6 +39,11 @@
     padding: 10px;
     transition: all 1s;
 }
+.FaqData.FaqDataDefault div {
+    font-size:1rem;
+    font-weight: bold;
+    font-family: Roboto,sans-serif;
+}
 
 @media(max-width:835px) {
     .FaqSubContainer.FaqSubContainerDefault {
