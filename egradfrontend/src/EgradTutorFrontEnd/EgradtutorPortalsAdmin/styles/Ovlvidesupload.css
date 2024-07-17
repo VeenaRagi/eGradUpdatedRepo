@@ -89,3 +89,16 @@ padding: 20px
     overflow-x: scroll;
   }
 }
+
+@media (max-width:600px){
+  .uploadedDocumentFilds {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex-direction: column;
+    text-align: start;
+  }
+.ovl_upload_file input{
+  width: 200px;
+}
+  
+}
