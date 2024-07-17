@@ -179,8 +179,8 @@ const[activeTab,setActiveTab]=useState(null)
                       {selectedTabData && (
                         <>
                           {selectedTabData.map((tab, index) => (
-                            <div key={index}>
-                              <p>{tab.course_tab_text}</p>
+                            <div className={`${themeDetails.themeTabContentSplittedTextBox}`} key={index}>
+                              <p className={`${themeDetails.themeTabContentSplittedTextBoxpara}`}>{tab.course_tab_text}</p>
                             </div>
                           ))}
                         </>
