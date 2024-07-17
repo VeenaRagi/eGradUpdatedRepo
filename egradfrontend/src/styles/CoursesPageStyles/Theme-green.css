@@ -299,7 +299,7 @@ footer.greenthemefooter div {
   width: 400px;
   height: 125px;
   width: 80%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 img.t1LogoImg {
   height: 100%;
