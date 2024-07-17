@@ -21,8 +21,12 @@
     top: 60px;
     width: 50%;
 }
-
-
+.Ug_header_logoIMG.themeUgHeaderLogoImgDefault{
+    width:240px;
+}
+.Ug_header_logoIMG.themeUgHeaderLogoImgDefault img {
+    width:100%;
+}
  
 .themeUgDivLinksOfHeaderDefault {
     display: flex;
