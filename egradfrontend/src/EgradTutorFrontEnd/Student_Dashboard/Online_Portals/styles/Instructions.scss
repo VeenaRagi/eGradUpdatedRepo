@@ -347,9 +347,20 @@
 
 
 .general_instruction_page_heading{
-
+text-align: start;
     color: white;
-
+margin: 0;
+}
+ul.Instructions_points {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+li.Instructions_points_list {
+    padding: 0 2rem;
+    list-style: inside;
 }
 
 .Q_container {
@@ -763,6 +774,7 @@
     color: #ffffff;
 
     font-size: 1.5rem;
+    gap: 1rem;
 
     display: flex;
 
@@ -817,7 +829,7 @@
     align-items: center;
 
     border-radius: 10px;
-
+    gap: 1rem;
     font-weight: 700;
 
 }
@@ -825,22 +837,18 @@
 
 
 
-
 .gn_checkbox {
 
     display: flex;
-
     align-items: center;
-
     gap: 1rem;
-
     width: 95%;
-
     margin: 0 auto;
-
     font-size: 18px;
-
-    margin: 0.5rem ;
+    margin: 0.5rem;
+    padding: 0 3rem;
+    font-weight: 600;
+    font-size: 20px;
 
     p{
 
@@ -852,20 +860,12 @@
 
 }
 
-
-
 .gn_checkbox b {
-
-    font-weight: 500;
-
-    // color: #0741ff;
-
-    // text-decoration: underline;
-
+    font-weight: 700;
     cursor: pointer;
-
+    color: #0000ffa1;
+    text-decoration: underline;
 }
-
 
 
 .gn_checkbox .checkbox {
