@@ -82,7 +82,7 @@ const CoursePageHeader = ({ isEditMode, userRole}) => {
   const themeDetails = JSONClasses[themeColor] || [];
   return (
     <div className={`CoursePage_header_Container ${themeDetails.CoursePageHeaderContainer}`}>
-      <div className="logoContainerInCourse">
+      
       <div className={`logo_Img_container ${themeDetails.themeLogoImgC}`}>
        {image ? (
         <Link to="/">
@@ -103,7 +103,6 @@ const CoursePageHeader = ({ isEditMode, userRole}) => {
         className={`logoImgContainer ${themeDetails.logoC}`}
         
         ></div>
-      </div>
       </div>
       <div>
         {isEditMode && (

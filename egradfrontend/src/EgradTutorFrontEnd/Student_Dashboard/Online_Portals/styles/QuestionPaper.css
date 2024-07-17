@@ -20,30 +20,27 @@
     overflow-y: auto;
     position: relative;
   }
-  
-  .close-popupQuestionPaper {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #f44336;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 18px;
-    line-height: 30px;
-    text-align: center;
-    cursor: pointer;
-  }
-  
-  .close-popupQuestionPaper:hover {
-    background: #d32f2f;
-  }
-  
   .question-containerQuestionPaper {
     margin-bottom: 20px;
-  }
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    border-bottom: 1px solid;
+    padding: 1rem;
+}
+p.questionPaper_header_testName {
+    font-size: 23px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+button.close-popupQuestionPaper {
+    background-color: #2ca34f;
+    color: white;
+}
+.questionAndQNumber{
+    display: flex;
+    gap: 1rem;
+}
   
   .question-dividerQuestionPaper {
     border: 0;
