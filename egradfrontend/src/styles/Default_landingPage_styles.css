@@ -741,6 +741,7 @@ button:hover {
     border-radius: 8px;
     position: relative;
     /* margin-top: 160px; */
+    width: auto;
 }
   
   .close-button {

@@ -283,6 +283,10 @@ p#more_info {
         padding: 10px;
         height: 100px;
     }
+
+    .exampage_heading.JEEHeading.themeExamPageHeaderHeading h1 {
+        font-size: 20px;
+    }
     .Ug_examsPage_Container.themeExamPageHeaderContainer img {
         border-radius: 5px;
         width: 181px !important;
@@ -308,9 +312,9 @@ p#more_info {
         padding: 0rem 1rem;
     }
     .exam_courses_sub_container.defaultExamCoursesSubContainer ul {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-evenly !important;
     }
     .portal_names.defaultPortalNames li {
         height: 320px;
@@ -328,11 +332,11 @@ p#more_info {
          height:80%;
     }
     .exam_courses_sub_container.defaultExamCoursesSubContainer {
-        height: 130vh;
+        height:auto;
     }
     .portal_names.defaultPortalNames li {
         /* height: 235px; */
-        width: 351px;
+        width: 310px;
         /* margin-bottom: 40px; */
     }
     .portal_names.defaultPortalNames h2 {
@@ -476,5 +480,20 @@ p#more_info {
   h2 {
     text-align: center;
     margin-bottom: 20px;
+  }
+
+  @media(max-width:835px) {
+    .exam_courses_sub_container.defaultExamCoursesSubContainer ul {
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    .exam_courses_sub_container.defaultExamCoursesSubContainer {
+        height: auto;
+    }
+    .defaultExamCoursesContainer {
+        padding-right: 2rem;
+    }
   }
   
