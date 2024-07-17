@@ -231,7 +231,7 @@ const QuizPage = () => {
   //     };
   // }, [navigate]);
 
-  const [showMalPractisePopup, setShowMalPractisePopup] = useState(false);
+  // const [showMalPractisePopup, setShowMalPractisePopup] = useState(false);
   const [showButtonNo, setShowButtonNo] = useState(false);
 
   const quizRef = useRef(null);
@@ -252,7 +252,7 @@ const QuizPage = () => {
   const handleVisibilityChange = () => {
     if (document.hidden) {
       console.log("Page is now hidden");
-      setShowMalPractisePopup(true);
+      // setShowMalPractisePopup(true);
     } else {
       console.log("Page is now visible");
     }
@@ -261,7 +261,7 @@ const QuizPage = () => {
 
   const handleBlur = () => {
     console.log("Window is not focused");
-    setShowMalPractisePopup(true);
+    // setShowMalPractisePopup(true);
   };
 
   const handleFocus = () => {
@@ -284,7 +284,7 @@ const QuizPage = () => {
   const handleBeforeUnload = (event) => {
     const confirmationMessage = "Are you sure you want to leave this page?";
     event.returnValue = confirmationMessage; // For most browsers
-    setShowMalPractisePopup(true);
+    // setShowMalPractisePopup(true);
     // setAttemptedToClose(true);
     return confirmationMessage; // For some older browsers
   };
@@ -308,7 +308,7 @@ const QuizPage = () => {
 
     if (isShiftPressed && isMetaPressed) {
       event.preventDefault();
-      setShowMalPractisePopup(true);
+      // setShowMalPractisePopup(true);
     }
   };
 
@@ -356,86 +356,86 @@ const QuizPage = () => {
     };
   });
 
-  const handleMalPractiseSubmit = async () => {
-    console.log("Handling malpractice submit");
-    try {
-      // window.alert(
-      //   "Your Test has been Submitted!! Click Ok to See Result.",
-      //   calculateResult()
-      // );
-      setShowButtonNo(false);
-      setShowExamSumary(true);
-      setShowMalPractisePopup(false);
-      calculateResult();
-      const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
-      const counts = calculateQuestionCounts();
-      setAnsweredCount(counts.answered);
-      setNotAnsweredCount(counts.notAnswered);
-      setMarkedForReviewCount(counts.markedForReview);
-      setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
-      setVisitedCount(counts.VisitedCount);
+  // const handleMalPractiseSubmit = async () => {
+  //   console.log("Handling malpractice submit");
+  //   try {
+  //     // window.alert(
+  //     //   "Your Test has been Submitted!! Click Ok to See Result.",
+  //     //   calculateResult()
+  //     // );
+  //     setShowButtonNo(false);
+  //     setShowExamSumary(true);
+  //     setShowMalPractisePopup(false);
+  //     calculateResult();
+  //     const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
+  //     const counts = calculateQuestionCounts();
+  //     setAnsweredCount(counts.answered);
+  //     setNotAnsweredCount(counts.notAnswered);
+  //     setMarkedForReviewCount(counts.markedForReview);
+  //     setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
+  //     setVisitedCount(counts.VisitedCount);
 
-      // Assuming you have these variables in your component's state
-      const currentQuestion = questionData.questions[currentQuestionIndex];
-      const questionId = currentQuestion.question_id;
+  //     // Assuming you have these variables in your component's state
+  //     const currentQuestion = questionData.questions[currentQuestionIndex];
+  //     const questionId = currentQuestion.question_id;
 
-      // Format time
-      const formattedTime = WformatTime(wtimer);
-      const response = await fetch(`${BASE_URL}/QuizPage/saveExamSummary`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: decryptedParam2,
-          totalUnattempted: notAnsweredCount,
-          totalAnswered: answeredCount,
-          NotVisitedb: NotVisitedb,
-          testCreationTableId: decryptedParam1,
-        }),
-      });
-      const result = await response.json();
-      console.log("Exam summary saved:", result);
-      try {
-        // Make a POST request to your server to submit time left
-        const response = await fetch(`${BASE_URL}/QuizPage/submitTimeLeft`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+  //     // Format time
+  //     const formattedTime = WformatTime(wtimer);
+  //     const response = await fetch(`${BASE_URL}/QuizPage/saveExamSummary`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         userId: decryptedParam2,
+  //         totalUnattempted: notAnsweredCount,
+  //         totalAnswered: answeredCount,
+  //         NotVisitedb: NotVisitedb,
+  //         testCreationTableId: decryptedParam1,
+  //       }),
+  //     });
+  //     const result = await response.json();
+  //     console.log("Exam summary saved:", result);
+  //     try {
+  //       // Make a POST request to your server to submit time left
+  //       const response = await fetch(`${BASE_URL}/QuizPage/submitTimeLeft`, {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
 
-          body: JSON.stringify({
-            userId: decryptedParam2,
-            testCreationTableId: decryptedParam1,
-            timeLeft: formattedTime,
-          }),
-        });
+  //         body: JSON.stringify({
+  //           userId: decryptedParam2,
+  //           testCreationTableId: decryptedParam1,
+  //           timeLeft: formattedTime,
+  //         }),
+  //       });
 
-        const result = await response.json();
+  //       const result = await response.json();
 
-        console.log("Time left submission result:", result);
-      } catch (error) {
-        console.error("Error submitting time left:", error);
-      } finally {
-        // Ensure that the questionId is correctly obtained
-        if (questionId) {
-          // Clear local storage data for the current question
-          try {
-            console.log(
-              "Removing from local storage for questionId:",
-              questionId
-            );
-            localStorage.removeItem(`calculatorValue_${questionId}`);
-            console.log("Item removed successfully.");
-          } catch (error) {
-            console.error("Error removing item from local storage:", error);
-          }
-        }
-      }
-    } catch (error) {
-      console.error("Error in handleSubmit:", error);
-    }
-  };
+  //       console.log("Time left submission result:", result);
+  //     } catch (error) {
+  //       console.error("Error submitting time left:", error);
+  //     } finally {
+  //       // Ensure that the questionId is correctly obtained
+  //       if (questionId) {
+  //         // Clear local storage data for the current question
+  //         try {
+  //           console.log(
+  //             "Removing from local storage for questionId:",
+  //             questionId
+  //           );
+  //           localStorage.removeItem(`calculatorValue_${questionId}`);
+  //           console.log("Item removed successfully.");
+  //         } catch (error) {
+  //           console.error("Error removing item from local storage:", error);
+  //         }
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Error in handleSubmit:", error);
+  //   }
+  // };
 
   // const [showMalPractisePopup, setShowMalPractisePopup] = useState(false);
   // const quizRef = useRef(null);
@@ -2884,7 +2884,7 @@ const QuizPage = () => {
         </div>
       )} */}
 
-      {showMalPractisePopup && (
+      {/* {showMalPractisePopup && (
         <div className="popup">
           <div className="popup-content">
             <h2>Malpractice Attempt</h2>
@@ -2903,7 +2903,7 @@ const QuizPage = () => {
             </button>
           </div>
         </div>
-      )}
+      )} */}
       <div className="quiz_exam_interface_header quiz_exam_interface_header_q_if_H">
         <div className="quiz_exam_interface_header_LOGO ">
           {/* <img src={logo} alt="" /> */}
