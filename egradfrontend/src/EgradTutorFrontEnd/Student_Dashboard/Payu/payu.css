@@ -159,3 +159,24 @@ button{
      
     }
 }
+
+.test_card_subcontainer {
+  margin-top: 50px;
+}
+
+.testpage_menu_reset_btn{
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  padding: 10px;
+}
+
+.testpage_menu_reset_btn button{
+margin-left: 10px;
+background-color: gray;
+color: white;
+}
+
+.testpage_menu_reset_btn button:hover{
+  background-color: rgba(255, 0, 0, 0.404);
+}
