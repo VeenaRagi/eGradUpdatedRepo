@@ -80,8 +80,25 @@
     gap: 20px;
     padding: 30px;
 }
+
+.videoLink_table_main_container .vlTable{
+padding: 20px
+}
 @media (max-width: 1575px) {
   .overFlowX{
     overflow-x: scroll;
   }
+}
+
+@media (max-width:600px){
+  .uploadedDocumentFilds {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex-direction: column;
+    text-align: start;
+  }
+.ovl_upload_file input{
+  width: 200px;
+}
+  
 }

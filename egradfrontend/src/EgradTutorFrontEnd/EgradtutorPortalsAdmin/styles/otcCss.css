@@ -73,8 +73,9 @@ input[type="time"] {
   border-radius: 5px;
   box-shadow: 4px 6px 12px 0px #000000;
   float: right;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  /* margin-top: 30px;
+  margin-bottom: 20px; */
+  margin: 20px;
 }
 .ots_-createBtn {
   color: white;
@@ -238,7 +239,7 @@ border: none !important;
   font-size: 17px;
   color: #37556c;
   /* background: #37556c; */
-  padding: 5px;
+  padding: 20px;
   margin-bottom: 5px;
   text-transform: uppercase;
   text-align: center;
