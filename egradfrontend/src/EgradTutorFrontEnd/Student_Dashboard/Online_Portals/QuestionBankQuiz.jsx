@@ -3993,8 +3993,228 @@ const QuestionBankQuiz = () => {
     }
   });
 
+    //mouseclick disabling start
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+  };
+
+
+  useEffect(() => {
+    document.addEventListener('contextmenu', handleContextMenu);
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+    };
+  }, []);
+    //mouseclick disabling end
+
+  //keyboard disabling start
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      event.preventDefault(); // Prevent default keyboard action
+      event.stopPropagation(); // Stop event propagation
+      // Optionally, you can add custom logic here to handle keydown events.
+    };
+
+    // Attach event listener to intercept keydown events
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup function to remove event listener when component unmounts
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []); // Empty dependency array ensures the effect runs only once
+ //keyboard disabling end
+
+  const [showMalPractisePopup, setShowMalPractisePopup] = useState(false);
+  const [showButtonNo, setShowButtonNo] = useState(false);
+
+  const quizRef = useRef(null);
+
+  const enterFullscreen = () => {
+    const element = quizRef.current;
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    }
+  };
+
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+      console.log("Page is now hidden");
+      setShowMalPractisePopup(true);
+    } else {
+      console.log("Page is now visible");
+    }
+  };
+
+
+  const handleBlur = () => {
+    console.log("Window is not focused");
+    setShowMalPractisePopup(true);
+  };
+
+  const handleFocus = () => {
+    console.log("Window is focused");
+  };
+  const handleBeforeUnload = (event) => {
+    const confirmationMessage = "Are you sure you want to leave this page?";
+    event.returnValue = confirmationMessage; // For most browsers
+    setShowMalPractisePopup(true);
+    // setAttemptedToClose(true);
+    return confirmationMessage; // For some older browsers
+  };
+  const [isShiftPressed, setIsShiftPressed] = useState(false);
+  const [isMetaPressed, setIsMetaPressed] = useState(false);
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Shift") {
+      event.preventDefault();
+      setIsShiftPressed(true);
+    }
+    if (event.key === "Meta" || event.key === "Win") {
+      event.preventDefault();
+      setIsMetaPressed(true);
+    }
+    if (event.key === "s" && isShiftPressed && isMetaPressed) {
+      event.preventDefault();
+      window.history.back();
+      window.close();
+    }
+
+    if (isShiftPressed && isMetaPressed) {
+      event.preventDefault();
+      setShowMalPractisePopup(true);
+    }
+  };
+
+  const handleKeyUp = (event) => {
+    if (event.key === "Shift") {
+      event.preventDefault();
+      setIsShiftPressed(false);
+    }
+    if (event.key === "Meta" || event.key === "Win") {
+      event.preventDefault();
+      setIsMetaPressed(false);
+    }
+  };
+
+  useEffect(() => {
+    if ("hidden" in document) {
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+
+      window.addEventListener("focus", handleFocus);
+      window.addEventListener("blur", handleBlur);
+
+
+      document.addEventListener("keydown", handleKeyDown);
+      document.addEventListener("keyup", handleKeyUp);
+    } else {
+      console.log("Page Visibility API is not supported");
+    }
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+
+      window.removeEventListener("focus", handleFocus);
+      window.removeEventListener("blur", handleBlur);
+
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [isShiftPressed, isMetaPressed]);
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  });
+
+  const [error, setError] = useState(false);
+  const [image, setImage] = useState(null);
+
+  const fetchImage = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/Logo/image`, {
+        responseType: "arraybuffer",
+      });
+      const imageBlob = new Blob([response.data], { type: "image/png" });
+      const imageUrl = URL.createObjectURL(imageBlob);
+      setImage(imageUrl);
+    } catch (error) {
+      console.error("Error fetching image:", error);
+      setError(true); // Set error state to true on failure
+    }
+  };
+
+  useEffect(() => {
+    fetchImage();
+  }, []);
+
+  
+
+  async function handleMalPractiseSubmit(userId) {
+    try {
+      const response = await fetch(
+        `http://localhost:5001/QuizPage/clearresponseforPB/${decryptedParam2}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            // Include any necessary authentication headers
+            Authorization: "Bearer yourAccessToken",
+          },
+          body: JSON.stringify({ decryptedParam2 }),
+        }
+      );
+
+      if (!response.ok) {
+        console.error("Failed to delete user data");
+      } else {
+        console.log("User data deleted successfully");
+      }
+
+      // Close the window
+      window.close();
+    } catch (error) {
+      console.error("Error deleting user data:", error);
+    }
+  }
+  
   return (
-    <div className="QuestionPaper_-container">
+    <div className="QuestionPaper_-container" ref={quizRef}
+    onClick={enterFullscreen}
+    style={{ backgroundColor: "white" }}>
+       {showMalPractisePopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <h2>Malpractice Attempt</h2>
+            <p>
+              "As per our examination rules, your test has been automatically
+              submitted as a result of a detected violation. Switching tabs
+              during the quiz is strictly prohibited."
+            </p>
+
+            <button
+              // onClick={handleMalPractiseSubmit}
+              onClick={() => {
+                handleMalPractiseSubmit(decryptedParam2);
+              }}
+              style={{ color: "red" }}
+              target="_blank"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
       <>
         {showPopupallpb ? (
           <div className="popup">
@@ -4031,6 +4251,7 @@ const QuestionBankQuiz = () => {
       <div className="quiz_exam_interface_header quiz_exam_interface_header_q_if_H">
         <div className="quiz_exam_interface_header_LOGO ">
           {/* <img src={logo} alt="" /> */}
+          <img src={image} alt="Current" />
         </div>
         <p
           className="testname_heading_quizPage"

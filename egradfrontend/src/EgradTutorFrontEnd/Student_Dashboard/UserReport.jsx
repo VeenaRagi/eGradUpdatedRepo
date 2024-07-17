@@ -1488,17 +1488,17 @@ export const UserReport = () => {
                                 </p>
                               </li>
                             ) : (
-                              <p>No data available.</p>
-                              // <li>
-                              //   <p> Marks: 0</p>
-                              //   <p>
-                              //     {" "}
-                              //     Negative Marks: <b>0</b>
-                              //   </p>
-                              //   <p>
-                              //     Obtained Total Marks: <b>0</b>
-                              //   </p>
-                              // </li>
+                              // <p>No data available.</p>
+                              <li>
+                                <p> Marks: 0</p>
+                                <p>
+                                  {" "}
+                                  Negative Marks: <b>0</b>
+                                </p>
+                                <p>
+                                  Obtained Total Marks: <b>0</b>
+                                </p>
+                              </li>
                             )}
 
                             <li>
