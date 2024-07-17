@@ -21,8 +21,12 @@
     top: 60px;
     width: 50%;
 }
-
-
+.Ug_header_logoIMG.themeUgHeaderLogoImgDefault{
+    width:240px;
+}
+.Ug_header_logoIMG.themeUgHeaderLogoImgDefault img {
+    width:100%;
+}
  
 .themeUgDivLinksOfHeaderDefault {
     display: flex;
@@ -408,12 +412,14 @@ ul.defaultCoursesUl li:hover {
 @media (max-width: 376px) {
     li.themeUgHeaderLiDefault {
       color: #fff;
-      font-size: 12px !important;
+      font-size: 10px !important;
       font-weight: 500;
       text-align: center;
     }
 
-
+    .Footer_Sub_Container.themeFooterSubContainerDefault {
+        padding: 2rem 1rem 0;
+    }
     .menu-link.mobileMenuLink.themeUgDivLinksOfHeaderDefault {
         align-items: center;
         animation: mobile_menu .4s linear alternate forwards;
