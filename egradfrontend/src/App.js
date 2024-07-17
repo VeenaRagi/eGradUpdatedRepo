@@ -147,7 +147,7 @@ function App({decryptedUserIdState,usersData}) {
                 element={<AboutUs isEditMode={isEditMode} />}
               />
               <Route path="/ContactUs" element={<ContactUs />} />
-              <Route path="/Faq" element={<FAQ />} />
+              <Route path="/Faq" element={<FAQ  isEditMode={isEditMode}/>} />
               <Route path="/linkpage/:Link_Id" element={<LinkPage />} />
 
               {/* --------------------Student_dashboard_INTERFACE_ROUTES_START-------------------- */}

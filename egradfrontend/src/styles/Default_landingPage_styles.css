@@ -89,7 +89,13 @@
     /* border:2px; */
 }
 
-.Pg_buttonn_Default_Cards ul li :hover{
+.Pg_buttonn_Default_Cards ul li:hover {
+    /* background-color: 0 0 1px rgb(240, 237, 237) !important; */
+    /* border: 2px; */
+    background-color: #8080801c;
+}
+
+.Pg_buttonn_Default_Cards li :hover{
     background: #80808014;
 }
 
@@ -283,8 +289,8 @@ a {
     font-size: 18px;
 }
 
-.Footer_Links_Content.themeFooterLinksContentDefault ul li a:hover{
-    color: rgb(42, 19, 168) !important;
+.Footer_Links_Content.themeFooterLinksContentDefault ul li a:hover {
+    color: #00a3ff !important;
 }
 
 .themeFooterContactDataDefault h2 {
