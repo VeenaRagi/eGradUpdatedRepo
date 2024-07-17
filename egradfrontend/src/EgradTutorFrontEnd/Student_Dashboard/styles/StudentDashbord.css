@@ -84,6 +84,8 @@
   flex-direction: row;
   justify-content: space-between;
   width: 90%;
+  align-items: center;
+  text-align: center;
   margin: 0 auto;
   background-color: #80808073;
 }
@@ -428,6 +430,12 @@
   grid-template-columns: 200px 1fr;
   text-align: justify;
   margin-left: 0.6rem;
+}
+
+.OVL_card_data .OVL_text{
+  font-size: 22px;
+  /* margin-top: 6px; */
+  padding: 10px;
 }
 
 /* .full-name_email .Student_profileUpdate_editsubconatiner_from div input {
@@ -1357,6 +1365,58 @@ form.Student_profileUpdate_editsubconatiner_from {
 
 
 
+/* Styling for the video modal overlay */
+.video-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark background with opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensures the modal appears above other content */
+}
+
+/* Container for the video player */
+.video-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  /* padding: 20px; */
+  max-width: 90%;
+  max-height: 90%;
+  width: 1000px; /* Adjust width as needed */
+  height: 500px; /* Adjust height as needed */
+  position: relative; /* Position relative for close button */
+}
+
+/* Close button styling */
+.video-modal button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff4d4d; /* Red background color */
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 1001; /* Ensures the close button is above the video */
+}
+
+/* Ensure the video player takes up its container */
+.OVL_Video {
+  width: 100%;
+  height: 100%;
+}
+
+
+.view-video-button:hover{
+  background-color: rgb(33, 30, 192);
+  color: white;
+}
 
 
 
