@@ -46,7 +46,7 @@
 .dbq_options {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
     margin: 10px 0;
 }
 .dbq_Answer_sh {
@@ -71,3 +71,10 @@
 .qbm_Image{
     max-width: 100%;
 }
+
+@media (max-width:650px){
+    .qbm_Image{
+        width:260px ;
+    }
+
+   }
