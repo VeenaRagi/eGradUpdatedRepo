@@ -715,7 +715,7 @@ themeMainFooterContainer:"t1MainFooterContainer",
     themeCardsToBeFlexed:"t2CardsToBeFlexed",
     themeTabContentSplittedTextInDiv:"t2TabContentSplittedTextInDiv",
     themeContactUsImgContainer:"t2ContactUsImgContainer",
-    
+    themeLogoOfCourseP:"t2LogoOfCourseP"
   },
 };
 

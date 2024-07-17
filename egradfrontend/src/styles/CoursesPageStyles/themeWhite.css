@@ -732,7 +732,7 @@ ul.courseHeaderUl span:hover {
   
   /* Navigation links container */
   .menu-link {
-    display: flex;
+    /* display: flex; */
     align-items: center;
   }
   
@@ -755,13 +755,13 @@ ul.courseHeaderUl span:hover {
   
   /* Hamburger menu */
   .hamburgerMenu {
-    display: none;
+    /* display: none; */
     cursor: pointer;
     font-size: 2rem;
   }
   
   /* Responsive styles */
-  @media (max-width: 768px) {
+  @media (max-width: 1000px) {
     /* .menu-link {
       display: none;
       flex-direction: column;
@@ -772,9 +772,9 @@ ul.courseHeaderUl span:hover {
       display: flex;
     }
   
-    .hamburgerMenu {
+    /* .hamburgerMenu {
       display: block;
-    }
+    } */
   }
   
   /* Adjusting for screen widths between 768px and 1000px */
@@ -803,10 +803,19 @@ ul.courseHeaderUl span:hover {
     .menu-link.mobileMenuLink {
         display: flex;
         position: absolute;
-        top: 1px;
+        top: 4%;
         width: 20%;
         border-radius: 20px;
         right: 0;
+        z-index: 1;
+    }
+    .menu-link.mobileMenuLink.t2UgDivLinksOfHeader {
+        display: flex;
+        position: absolute;
+        top: 5%;
+        width: 35%;
+        border-radius: 20px;
+        right: 55px;
     }
   }
   
