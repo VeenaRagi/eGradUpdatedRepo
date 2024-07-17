@@ -150,7 +150,7 @@ const FAQEdit = ({type}) => {
   };
 
   return (
-    <div className="UploadPopups_Container">
+    <>    {type === "FAQEdit" && ( <div className="UploadPopups_Container">
 
       <div>
         {/* {image ? <img src={image} alt="Current" /> : <p>No image available</p>} */}
@@ -244,7 +244,9 @@ const FAQEdit = ({type}) => {
       <div>
         {/* <FooterMain_Page /> */}
       </div>
-    </div>
+    </div>)}</>
+
+   
   );
 };
 

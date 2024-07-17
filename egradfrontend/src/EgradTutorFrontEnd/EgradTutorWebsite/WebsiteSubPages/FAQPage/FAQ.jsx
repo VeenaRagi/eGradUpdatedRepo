@@ -141,6 +141,7 @@ const FAQ = ({ isEditMode, userRole }) => {
           <button onClick={() => setShowFaqForm(!showFaqForm)}>
             {showFaqForm ? "Close FAQ Form" : "Add FAQ"}
           </button>
+          {showFaqForm && (<FAQEdit type="FAQEdit" />  )}
           </div>
              )}
 
