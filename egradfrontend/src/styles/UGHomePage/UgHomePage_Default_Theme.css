@@ -777,6 +777,9 @@ ul.defaultCoursesUl li:hover {
         border-radius: 5px;
         width: 185px;
       }
+      .menu-link.mobileMenuLink.themeUgDivLinksOfHeaderDefault a {
+        font-size: 11px;
+    }
       .AboutUsImgDataContentContainer.AboutUsImgDataContentContainerDefault img {
         width: 343px; 
       }
@@ -967,6 +970,11 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
     color:#000;
     font-size:1.5rem;
     font-weight:bold;
+}
+
+.AboutUsImgContainer.AboutUsImgContainerDefault span:hover {
+    text-decoration: underline;
+    text-decoration-color: #00a3ff;
 }
 .AboutUsImgContainer.AboutUsImgContainerDefault a {
     color:#000;
