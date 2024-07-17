@@ -2000,7 +2000,7 @@ export const StudentDashbordmycourse = () => {
 
                   <div>
                     {selectedTypeOfTest ? (
-                      <div className="by_selected_type">
+                      <div    className="default_test_cards">
                         <div className="testPageHeading">
                           <h4>{selectedTypeOfTest}</h4>
                         </div>

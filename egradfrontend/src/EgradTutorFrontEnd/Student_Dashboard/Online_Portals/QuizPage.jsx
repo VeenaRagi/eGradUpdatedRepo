@@ -2831,6 +2831,28 @@ const QuizPage = () => {
   // console.log(Portale_Id, testCreationTableId, user_Id)
   //   }
 
+  const [error, setError] = useState(false);
+  const [image, setImage] = useState(null);
+
+  const fetchImage = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/Logo/image`, {
+        responseType: "arraybuffer",
+      });
+      const imageBlob = new Blob([response.data], { type: "image/png" });
+      const imageUrl = URL.createObjectURL(imageBlob);
+      setImage(imageUrl);
+    } catch (error) {
+      console.error("Error fetching image:", error);
+      setError(true); // Set error state to true on failure
+    }
+  };
+
+  useEffect(() => {
+    fetchImage();
+  }, []);
+
+  
   return (
     // <div className="QuestionPaper_-container"  ref={quizRef}
     // onClick={enterFullscreen}  style={{ backgroundColor: 'white', }}>
@@ -2885,6 +2907,7 @@ const QuizPage = () => {
       <div className="quiz_exam_interface_header quiz_exam_interface_header_q_if_H">
         <div className="quiz_exam_interface_header_LOGO ">
           {/* <img src={logo} alt="" /> */}
+          <img src={image} alt="Current" />
         </div>
         <p className="testname_heading_quizPage" key={testName.decryptedParam1}>
           {testName}
@@ -3846,7 +3869,6 @@ const QuizPage = () => {
           <div className="quizPagewatermark">
             <div className="result">
               <h3 id="result_header">Exam Summary</h3>
-              <div className="result_page_links"></div>
 
               <div className="Exam_summary_table">
                 <table id="customers">
