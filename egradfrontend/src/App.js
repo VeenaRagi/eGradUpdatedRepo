@@ -1,4 +1,3 @@
-
 // import React, { useState, useEffect } from "react";
 // import {
 //   BrowserRouter as Router,
@@ -19,7 +18,7 @@
 // import BASE_URL from "./apiConfig.js";
 // import NotFound from "./NotFound.jsx";
 // import axios from "axios";
- 
+
 // import { State } from "./EgradTutorFrontEnd/context/State";
 // import Login from "./Login/Login";
 // import Register from "./Login/Register";
@@ -30,12 +29,12 @@
 // import QUiZ_ForgotPassword from "./Login/QUiZ_ForgotPassword";
 // import QUIZ_ResetPassword from "./Login/QUIZ_ResetPassword";
 // import UgadminHome from "./Login/UgadminHome.js";
- 
+
 // import Student_dashboard from "./EgradTutorFrontEnd/Student_Dashboard/Student_dashboard";
 // import Student_profileUpdate from "./EgradTutorFrontEnd/Student_Dashboard/Student_profileUpdate";
 // import StudentRegistationPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/StudentRegistationPage";
 // import Payu from "./EgradTutorFrontEnd/Student_Dashboard/Payu/Payu.jsx";
- 
+
 // import InstructionPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/InstructionPage";
 // import General_Intructions_Page from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/General_Intructions_Page";
 // import QuizPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/QuizPage";
@@ -50,33 +49,31 @@
 // import Document_ImageInfo from "./EgradTutorFrontEnd/Admin_Dashboard/Document_ImageInfo";
 // import GettinggInstructions from "./EgradTutorFrontEnd/Admin_Dashboard/GettinggInstructions";
 // import UpdateInstruction from "./EgradTutorFrontEnd/Admin_Dashboard/ExamUpdataion_admin";
- 
+
 // const PrivateRoute = ({ element }) => {
 //   const isAuthenticated = localStorage.getItem("isLoggedIn");
 //   return isAuthenticated ? element : <Navigate to="/userlogin" />;
 // };
- 
+
 // const App = () => {
 //   const [isEditMode, setIsEditMode] = useState(false);
- 
+
 //   useEffect(() => {
 //     const checkServerStatus = async () => {
 //       try {
 //         const response = await axios.get(`${BASE_URL}/api/server/status`);
- 
+
 //         setServerError(false);
 //       } catch (error) {
 //         setServerError(true);
 //       }
 //     };
- 
+
 //     checkServerStatus();
 //   }, []);
- 
- 
+
 //   const userRole = localStorage.getItem("userRole");
- 
- 
+
 //   const toggleEditMode = () => {
 //     setIsEditMode(!isEditMode);
 //   };
@@ -121,10 +118,10 @@
 //                 <Route path="/ContactUs" element={<ContactUs />} />
 //                 <Route path="/Faq" element={<FAQ />} />
 //                 <Route path="/linkpage/:Link_Id" element={<LinkPage />} />
- 
+
 //                 <Route path="/Error" element={<NotFound />} />
 //                 <Route path="/WebsiteAdmin" element={<ThemesSection />} />
- 
+
 //                 {/* ==================LOGIN SYSTEM ROUTES START================== */}
 //                 <Route path="/Register" element={<Register />} />
 //                 <Route path="/Register" element={<Register />} />
@@ -145,7 +142,7 @@
 //                   path="/userdetails"
 //                   element={<PrivateRoute element={<Userdeatailedpage />} />}
 //                 />
- 
+
 //                 <Route
 //                   path="/OTS_ForgotPassword"
 //                   element={<QUiZ_ForgotPassword />}
@@ -164,7 +161,7 @@
 //                 />
 //                 <Route path="/PayU/:courseCreationId" element={<Payu />} />
 //                 {/* ==================LOGIN SYSTEM ROUTES END================== */}
- 
+
 //                 {/* =====================STUDENT DASHBOARD ROUTES START================= */}
 //                 <Route
 //                   path="/Quiz_dashboard"
@@ -186,7 +183,7 @@
 //                   path="/Instructions/:param1/:param2/:param3"
 //                   element={<PrivateRoute element={<InstructionPage />} />}
 //                 />
- 
+
 //                 <Route
 //                   path="/General_intructions_page/:param1/:param2/:param3"
 //                   element={
@@ -197,7 +194,7 @@
 //                   path="/QuizPage/questionOptions/:param1/:param2"
 //                   element={<PrivateRoute element={<QuizPage seconds={20} />} />}
 //                 />
- 
+
 //                 <Route
 //                   path="/QuestionBankQuiz/questionOptions/:param1/:param2"
 //                   element={<PrivateRoute element={<QuestionBankQuiz />} />}
@@ -215,7 +212,7 @@
 //                   element={<PrivateRoute element={<NotFound />} />}
 //                 />
 //                 {/* =====================STUDENT DASHBOARD ROUTES END================= */}
- 
+
 //                 {/* =========================ADMIN DASHBOARD ROUTES START=========================== */}
 //                 <Route
 //                   path="/ExamUpdataion_admin/:examId"
@@ -254,10 +251,8 @@
 //     </State>
 //   );
 // };
- 
+
 // export default App;
- 
- 
 
 import React, { useState, useEffect } from "react";
 import {
@@ -279,7 +274,7 @@ import ThemesSection from "./ThemesFolder/ThemesSection/ThemesSection";
 import BASE_URL from "./apiConfig.js";
 import NotFound from "./NotFound.jsx";
 import axios from "axios";
- 
+
 import { State } from "./EgradTutorFrontEnd/context/State";
 import Login from "./Login/Login";
 import Register from "./Login/Register";
@@ -290,19 +285,20 @@ import Userdeatailedpage from "./Login/Userdeatailedpage";
 import QUiZ_ForgotPassword from "./Login/QUiZ_ForgotPassword";
 import QUIZ_ResetPassword from "./Login/QUIZ_ResetPassword";
 import UgadminHome from "./Login/UgadminHome.js";
- 
+
 import Student_dashboard from "./EgradTutorFrontEnd/Student_Dashboard/Student_dashboard";
 import Student_profileUpdate from "./EgradTutorFrontEnd/Student_Dashboard/Student_profileUpdate";
 import StudentRegistationPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/StudentRegistationPage";
 import Payu from "./EgradTutorFrontEnd/Student_Dashboard/Payu/Payu.jsx";
- 
+
 import InstructionPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/InstructionPage";
 import General_Intructions_Page from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/General_Intructions_Page";
 import QuizPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/QuizPage";
+import QuestionPaper from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/QuestionPaper";
 import QuestionBankQuiz from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/QuestionBankQuiz";
 import TestResultsPage from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/TestResultsPage";
 import Quiz_dashboard from "./EgradTutorFrontEnd/Student_Dashboard/Online_Portals/Quiz_dashboard";
-import {UserReport} from './EgradTutorFrontEnd/Student_Dashboard/UserReport'
+import { UserReport } from "./EgradTutorFrontEnd/Student_Dashboard/UserReport";
 import ExamUpdataion_admin from "./EgradTutorFrontEnd/Admin_Dashboard/ExamUpdataion_admin";
 import UpdatingCourseInAdmin from "./EgradTutorFrontEnd/Admin_Dashboard/UpdatingCourseInAdmin";
 import TestUpdateadmin from "./EgradTutorFrontEnd/Admin_Dashboard/TestUpdateadmin";
@@ -310,33 +306,31 @@ import TestUpdateForm from "./EgradTutorFrontEnd/Admin_Dashboard/TestUpdateForm"
 import Document_ImageInfo from "./EgradTutorFrontEnd/Admin_Dashboard/Document_ImageInfo";
 import GettinggInstructions from "./EgradTutorFrontEnd/Admin_Dashboard/GettinggInstructions";
 import UpdateInstruction from "./EgradTutorFrontEnd/Admin_Dashboard/ExamUpdataion_admin";
- 
+
 const PrivateRoute = ({ element }) => {
   const isAuthenticated = localStorage.getItem("isLoggedIn");
   return isAuthenticated ? element : <Navigate to="/userlogin" />;
 };
- 
+
 const App = () => {
   const [isEditMode, setIsEditMode] = useState(false);
- 
+
   useEffect(() => {
     const checkServerStatus = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/api/server/status`);
- 
+
         setServerError(false);
       } catch (error) {
         setServerError(true);
       }
     };
- 
+
     checkServerStatus();
   }, []);
- 
- 
+
   const userRole = localStorage.getItem("userRole");
- 
- 
+
   const toggleEditMode = () => {
     setIsEditMode(!isEditMode);
   };
@@ -381,10 +375,10 @@ const App = () => {
                 <Route path="/ContactUs" element={<ContactUs />} />
                 <Route path="/Faq" element={<FAQ />} />
                 <Route path="/linkpage/:Link_Id" element={<LinkPage />} />
- 
+
                 <Route path="/Error" element={<NotFound />} />
                 <Route path="/WebsiteAdmin" element={<ThemesSection />} />
- 
+
                 {/* ==================LOGIN SYSTEM ROUTES START================== */}
                 <Route path="/Register" element={<Register />} />
                 <Route path="/Register" element={<Register />} />
@@ -405,7 +399,7 @@ const App = () => {
                   path="/userdetails"
                   element={<PrivateRoute element={<Userdeatailedpage />} />}
                 />
- 
+
                 <Route
                   path="/OTS_ForgotPassword"
                   element={<QUiZ_ForgotPassword />}
@@ -424,7 +418,7 @@ const App = () => {
                 />
                 <Route path="/PayU/:courseCreationId" element={<Payu />} />
                 {/* ==================LOGIN SYSTEM ROUTES END================== */}
- 
+
                 {/* =====================STUDENT DASHBOARD ROUTES START================= */}
                 <Route
                   path="/Quiz_dashboard"
@@ -446,7 +440,7 @@ const App = () => {
                   path="/Instructions/:param1/:param2/:param3"
                   element={<PrivateRoute element={<InstructionPage />} />}
                 />
- 
+
                 <Route
                   path="/General_intructions_page/:param1/:param2/:param3"
                   element={
@@ -457,7 +451,7 @@ const App = () => {
                   path="/QuizPage/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<QuizPage seconds={20} />} />}
                 />
- 
+
                 <Route
                   path="/QuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<QuestionBankQuiz />} />}
@@ -466,16 +460,18 @@ const App = () => {
                   path="/TestResultsPage/:param1/:param2"
                   element={<PrivateRoute element={<TestResultsPage />} />}
                 />
-                  <Route
-            path="/UserReport/:id/:testCreationTableId/:courseCreationId"
-            element={<PrivateRoute element={<UserReport />} />}
-          />
+                <Route
+                  path="/UserReport/:id/:testCreationTableId/:courseCreationId"
+                  element={<PrivateRoute element={<UserReport />} />}
+                />
+                <Route  path="/QuestionPaper/:param1"
+                  element={<PrivateRoute element={<QuestionPaper/>} />}/>
                 <Route
                   path="/Error"
                   element={<PrivateRoute element={<NotFound />} />}
                 />
                 {/* =====================STUDENT DASHBOARD ROUTES END================= */}
- 
+
                 {/* =========================ADMIN DASHBOARD ROUTES START=========================== */}
                 <Route
                   path="/ExamUpdataion_admin/:examId"
@@ -514,7 +510,5 @@ const App = () => {
     </State>
   );
 };
- 
+
 export default App;
- 
- 

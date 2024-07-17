@@ -1,11 +1,12 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import {useNavigate, useParams } from "react-router-dom";
+import {Link, useNavigate, useParams } from "react-router-dom";
 import "./styles/RightSidebar.css";
 // import axios from "axios";
 import BASE_URL from "../../../apiConfig";
 import { decryptData, encryptData } from "../utils/crypto"; 
+import QuestionPaper from "./QuestionPaper";
 
 
 // This component manages the functionality of buttons in the right sidebar
@@ -384,6 +385,32 @@ const ButtonsFunctionality = ({
 
   // Fetch test name based on testCreationTableId
 
+
+  // const openQuestionPaper = async () => {
+  //   try {
+  //     const encryptedParam1 = await encryptData(decryptedParam1.toString());
+  //     const encryptedParam2 = await encryptData(decryptedParam2.toString());
+
+  //     const token = new Date().getTime().toString();
+  //     sessionStorage.setItem("navigationToken", token);
+   
+  //     const url = `/QuestionPaper/${encodeURIComponent(
+  //       encryptedParam1
+  //     )}`;
+
+  //     navigate(url);
+  //   } catch (error) {
+  //     console.error("Error encrypting data:", error);
+  //   }
+  // };
+  const [showPopup, setShowPopup] = useState(false);
+  const openQuestionPaper = () => {
+    setShowPopup(true);
+  };
+
+  const closeQuestionPaper = () => {
+    setShowPopup(false);
+  };
   return (
     <>
       <div className="right-side-bar">
@@ -453,6 +480,16 @@ const ButtonsFunctionality = ({
             </div>{" "}
           </div>
         </div>
+        <div>
+          {/* <Link to={`/QuestionPaper/${decryptedParam1}/${decryptedParam2}`}>Question Paper</Link> */}
+          <button
+              className="question_paper_btn"
+              onClick={openQuestionPaper}
+            >
+              Question Paper
+            </button>
+        </div>
+        {showPopup && <QuestionPaper onClose={closeQuestionPaper} />}
       </div>
     </>
   );
