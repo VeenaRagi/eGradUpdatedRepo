@@ -16,8 +16,16 @@
     border-radius: 10px;
 
 }
-.uploadedDocument_container {
+/* .uploadedDocument_container {
   display: flex;
+  gap: 1rem;
+  padding: 1rem 0px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+} */
+.uploadedDocument_container {
+  display: grid;
+  /* grid-template-columns: 1fr 1fr; */
   gap: 1rem;
   /* padding: 1rem 0px; */
   flex-wrap: wrap;
@@ -50,7 +58,10 @@
   border: none;
   box-shadow: 1px 1px 4px 0px #1A374D;
 }
+.uploadedDocumentFilds input[type=file] {
+  width: 270px;
 
+}
   .uploadedDocumentFilds button{
     width: 100px;
     padding: 6px;
@@ -91,13 +102,16 @@
     font-size: 20px;
   }
 
-  @media (max-width:768px){
+  @media (max-width:1460px){
     .uploadedDocumentFilds {
-      display: flex;
+      display: grid;
       flex-direction: column;
       padding-left: 20px;
-      
-    }
+      grid-template-columns: 1fr 1fr;
+      justify-items: center;
+      width: 80%;
+      margin: auto;
+  }
 
     .uploadedDocumentFilds label{
       text-align: start;
@@ -106,13 +120,16 @@
     }
 
     input#uploadInputFile_ovl_upload_file {
-      width: 90%;
+      /* width: 90%; */
       margin:  0 auto;
       text-align: start;
     }
 
     .ovl_upload_file{
-      padding-left: 20px;
+      /* padding-left: 20px; */
+    }
+    .uploadedDocumentFilds input{
+      width: 270px;
     }
   }
 
@@ -123,4 +140,15 @@
       justify-content: space-evenly;
       align-items: center;
     }
+  }
+  @media (max-width:1460px){
+    .uploadedDocumentFilds {
+      display: grid;
+      flex-direction: column;
+      padding-left: 20px;
+      grid-template-columns: 1fr 1fr;
+      justify-items: center;
+      width: 100%;
+      margin: auto;
+  }
   }
