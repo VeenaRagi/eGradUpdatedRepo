@@ -541,9 +541,10 @@ export const StudentDashbordheader = () => {
                   {userRole === "viewer" && (
                     <>
                       <div className="dashbordheder_container">
-                        <HashLink to="/home#contact" className="Quiz__home">
+                      <HashLink to="/ContactUs" className="Quiz__home"/>
+                        {/* <HashLink to="/home#contact" className="Quiz__home">
                           Contact Us
-                        </HashLink>
+                        </HashLink> */}
                         {/* <a
                               href="/home#contact"
                               className="Quiz__home"
@@ -2000,7 +2001,7 @@ export const StudentDashbordmycourse = () => {
 
                   <div>
                     {selectedTypeOfTest ? (
-                      <div className="by_selected_type">
+                      <div    className="default_test_cards">
                         <div className="testPageHeading">
                           <h4>{selectedTypeOfTest}</h4>
                         </div>

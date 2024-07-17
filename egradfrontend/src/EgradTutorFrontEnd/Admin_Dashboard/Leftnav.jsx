@@ -118,7 +118,9 @@ const Leftnav = () => {
           }
           onClick={() => setshowMenu(!showMenu)}
         >
-          <div className="quz_menu ">
+          {/* <div className="quz_menu whiteMenu"> */}
+          <div className={showMenu?"quz_menu":"whiteMenu"}>
+
             <div className="lines"></div>
             <div className="lines"></div>
             <div className="lines"></div>

@@ -101,7 +101,7 @@ const Quiz_dashboard = () => {
               >
                 <ul>
                   <button style={{ background: "none" }}>
-                    <Link to="/Exam_portal_home_page" className="Quiz__home">
+                    <Link to="/" className="Quiz__home">
                       Home
                     </Link>
                   </button>

@@ -113,6 +113,7 @@ const handleSendSolution = async (doubtId) => {
                 alt=""
               />
             )}
+            <div className="sendSolnButton">
             <button
             className="send_sol_btnn"
               onClick={() => {
@@ -126,6 +127,7 @@ const handleSendSolution = async (doubtId) => {
             >
               Send Solution
             </button>
+            </div>
 
             {isPopupOpen && (
               <div className="popup ">
@@ -159,7 +161,7 @@ const handleSendSolution = async (doubtId) => {
                 </div>
               </div>
             )}
-            <hr />
+            {/* <hr /> */}
           </div>
         ))
       ) : (

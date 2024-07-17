@@ -999,7 +999,8 @@ i#footerIcons:hover {
   }
   .quz_menu {
     display: flex;
-  }
+    margin-top: 3px;
+}
   .Quiz_main_page_navbar .Quiz_main_page_navbar_SUBpart ul {
     gap: 1rem;
     width: 200px;
