@@ -715,6 +715,92 @@ router.get("/questionOptions/:testCreationTableId/:userId", async (req, res) => 
   }
 });
 
+
+router.get("/questionpaper/:testCreationTableId", async (req, res) => {
+  const { testCreationTableId } = req.params;
+  try {
+    const [rows] = await db.query(
+      `SELECT
+      q.question_id,
+      q.questionImgName,
+      si.sort_id,
+      si.sortid_text,
+      doc.documen_name,
+      doc.sectionId,
+      doc.subjectId,
+      doc.testCreationTableId,
+      p.paragraphImg,
+      p.paragraph_Id,
+      pq.paragraphQNo_Id,
+      pq.paragraphQNo,
+      tct.TestName
+  FROM
+      questions q
+  LEFT OUTER JOIN sortid si ON
+      q.question_id = si.question_id
+  LEFT OUTER JOIN paragraphqno pq ON
+      q.question_id = pq.question_id
+  LEFT OUTER JOIN paragraph p ON
+      pq.paragraph_Id = p.paragraph_Id
+  LEFT OUTER JOIN ots_document doc ON
+      q.document_Id = doc.document_Id
+  LEFT OUTER JOIN test_creation_table tct ON
+      doc.testCreationTableId = tct.testCreationTableId
+  WHERE
+      doc.testCreationTableId = ?
+  ORDER BY
+      q.question_id ASC`,
+      [testCreationTableId]
+    );
+
+    if (rows.length > 0) {
+      const questionData = {
+        questions: [],
+      };
+
+      // Organize data into an array of questions
+      rows.forEach((row) => {
+        let existingQuestion = questionData.questions.find(
+          (q) => q.question_id === row.question_id
+        );
+
+        if (!existingQuestion) {
+          // Question doesn't exist, create a new question
+          existingQuestion = {
+            TestName: row.TestName,
+            question_id: row.question_id,
+            questionImgName: row.questionImgName,
+            documen_name: row.documen_name,
+            subjectId: row.subjectId,
+            sectionId: row.sectionId,
+            sortid: row.sort_id ? {
+              sort_id: row.sort_id,
+              sortid_text: row.sortid_text,
+            } : null,
+            paragraph: row.paragraph_Id ? {
+              paragraph_Id: row.paragraph_Id,
+              paragraphImg: row.paragraphImg,
+            } : null,
+            paragraphqno: row.paragraphQNo ? {
+              paragraphQNo_Id: row.paragraphQNo_Id,
+              paragraphQNo: row.paragraphQNo,
+            } : null,
+          };
+
+          questionData.questions.push(existingQuestion);
+        }
+      });
+
+      res.json(questionData);
+    } else {
+      res.status(404).json({ error: "No data found" });
+    }
+  } catch (error) {
+    console.error("Error fetching question data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 router.get("/questionOptionsForPB/:testCreationTableId/:userId", async (req, res) => {
   const { testCreationTableId, userId } = req.params;
   try {

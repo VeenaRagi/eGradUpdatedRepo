@@ -3866,88 +3866,99 @@ const QuizPage = () => {
             </div>
           </div>
         ) : (
-          <div className="quizPagewatermark">
-            <div className="result">
-              <h3 id="result_header">Exam Summary</h3>
+          <div>
+          <div className="examSummary_quizPagewatermark">
+            <h3 className="Exam_summary_heading">Exam Summary</h3>
 
-              <div className="Exam_summary_table">
-                <table id="customers">
-                  <tr>
-                    <td>Total Questions</td>
-                    <td>Answered Questions</td>
-                    <td>Not Answered Questions</td>
-                    <td>Not Visited Count</td>
-                    <td>Marked for Review Questions</td>
-                    <td>Answered & Marked for Review Questions</td>
-                  </tr>
-                  <tr>
-                    <td>{questionData.questions.length}</td>
-                    <td>{answeredCount}</td>
-                    <td>{notAnsweredCount}</td>
-                    <td>{NotVisitedb}</td>
-                    <td>{markedForReviewCount}</td>
-                    <td>{answeredmarkedForReviewCount}</td>
-                  </tr>
-                </table>
-              </div>
-              <div></div>
-              <div>
-                {/* {showButtonNo && (
+            <div className="Exam_summary_table">
+              <table id="customers" className="exam_summary_table">
+                <tr className="exam_summary_table_tr">
+                  <td>Total Questions</td>
+                  <td>Answered Questions</td>
+                  <td>Not Answered Questions</td>
+                  <td>Not Visited Count</td>
+                  <td>Marked for Review Questions</td>
+                  <td>Answered & Marked for Review Questions</td>
+                </tr>
+                <tr>
+                  <td>{questionData.questions.length}</td>
+                  <td>{answeredCount}</td>
+                  <td>{notAnsweredCount}</td>
+                  <td>{NotVisitedb}</td>
+                  <td>{markedForReviewCount}</td>
+                  <td>{answeredmarkedForReviewCount}</td>
+                </tr>
+              </table>
+            </div>
+            {/* <h1>hellooooo</h1>
+          {userData.users && userData.users.length > 0 && (
+            <ul>
+              {userData.users.map((user) => (
+                <div className="greeting_section">
+                  <h2 className="dashboard_greeting_container">
+                    {user.username}
+                  </h2>
+                </div>
+              ))}
+            </ul>
+          )} */}
+            <div>
+              {/* {showButtonNo && (
               <h2 className="Exam_summary_question_tag">
                 Are you sure you want to submit ? <br />
                 No changes will be allowed after submission.
               </h2>
             )} */}
-                {showButtonNo === false ? (
-                  <h2 className="Exam_summary_question_tag">
-                    Please press okay to view your result.
-                  </h2>
-                ) : (
-                  <h2 className="Exam_summary_question_tag">
-                    Are you sure you want to submit ? <br />
-                    No changes will be allowed after submission.
-                  </h2>
-                )}
+              {showButtonNo === false ? (
+                <h2 className="Exam_summary_question_tag">
+                  Please press okay to view your result.
+                </h2>
+              ) : (
+                <h2 className="Exam_summary_question_tag">
+                  Are you sure you want to submit ? <br />
+                  No changes will be allowed after submission.
+                </h2>
+              )}
 
-                <div className="Exam_summary_btns">
-                  {showButtonNo === false ? (
-                    <Tooltip title="Yes" arrow>
-                      <>
-                        <Link
-                          className="es_btn"
-                          // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
-                          // to='/Submit_Page'
-                          onClick={handleYes}
-                        >
-                          Okay
-                        </Link>
-                      </>
-                    </Tooltip>
-                  ) : (
-                    <Tooltip title="Yes" arrow>
-                      <>
-                        <Link
-                          className="es_btn"
-                          // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
-                          // to='/Submit_Page'
-                          onClick={handleYes}
-                        >
-                          Yes
-                        </Link>
-                      </>
-                    </Tooltip>
-                  )}
-                  {showButtonNo && (
-                    <Tooltip title="No" arrow>
-                      <button className="es_btn" onClick={handleNo}>
-                        NO
-                      </button>
-                    </Tooltip>
-                  )}
-                </div>
+              <div className="Exam_summary_btns">
+                {showButtonNo === false ? (
+                  // <Tooltip title="Yes" arrow>
+                  <>
+                    <Link
+                      className="es_btn"
+                      // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
+                      // to='/Submit_Page'
+                      onClick={handleYes}
+                    >
+                      Okay
+                    </Link>
+                  </>
+                ) : (
+                  // {/* </Tooltip> */}
+                  // <Tooltip title="Yes" arrow>
+                  <>
+                    <Link
+                      className="es_btn"
+                      // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
+                      // to='/Submit_Page'
+                      onClick={handleYes}
+                    >
+                      Yes
+                    </Link>
+                  </>
+                  // {/* </Tooltip> */}
+                )}
+                {showButtonNo && (
+                  // <Tooltip title="No" arrow>
+                  <button className="No_btn" onClick={handleNo}>
+                    NO
+                  </button>
+                  // {/* </Tooltip> */}
+                )}
               </div>
             </div>
           </div>
+        </div>
         )}
      
     </div>

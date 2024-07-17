@@ -47,6 +47,7 @@ img.t1LogoImg {
 
 .landing_img_div.t1LCapImgDiv {
     display: flex;
+    height: 240px;
 }
 
 .t1LandingParentContainer {

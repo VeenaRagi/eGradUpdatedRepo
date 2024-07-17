@@ -536,9 +536,24 @@ height: 950px; */
 .Exam_summary_table {
   margin: 0px 300px 0px;
 }
+.Exam_summary_btns{
+
+  .No_btn {
+    background-color: #0394fc;
+    padding: 10px;
+    color: white;
+    border-radius: 2px;
+    font-weight: 700;
+    /* margin: 0px 45px 0px; */
+    /* background: "blue",  */
+    /* fontWeight: "bold",  */
+    /* padding: "10px" */
+  }
+
+}
 
 .Exam_summary_btns {
-  margin: 0px 850px 0px;
+  margin: 0px 950px 0px;
   display: flex;
   gap: 3rem;
 }
@@ -548,6 +563,7 @@ height: 950px; */
   color: white;
   border-radius: 2px;
   font-weight: 700;
+  margin: 0px 10px 0px;
   /* background: "blue",  */
   /* fontWeight: "bold",  */
   /* padding: "10px" */
@@ -1018,7 +1034,6 @@ body.popup-open .popup {
 }
 
 
-
 .examSummary_quizPagewatermark {
   background-image: url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png'), url('../asserts/waterMarkLogo.png');
   background-repeat: no-repeat;
@@ -1056,6 +1071,12 @@ body.popup-open .popup {
   background-attachment: fixed; /* Ensures watermark stays fixed during scrolling */
   padding: 2rem; /* Adds some padding around the content */
 }
+
+.Exam_summary_heading{
+  text-align: center;
+    font-size: 50px;
+}
+
 
 .Exam_summary_table {
   width: 65%;
