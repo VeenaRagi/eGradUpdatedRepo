@@ -564,6 +564,9 @@ ul.defaultCoursesUl li:hover {
         margin: 0 auto;
         width: 65%;
     }
+    .menu-link.themeUgDivLinksOfHeaderDefault {
+        display: none;
+    }
  
     .NewExploreExams_ExamCard_MainContainer.NewExploreExams_ExamCard_ContainerDefault {
         display: flex;
@@ -656,20 +659,19 @@ ul.defaultCoursesUl li:hover {
 }
 @media (max-width:1280px) {
 
-.themeUgDivLinksOfHeaderDefault a {
+/* .themeUgDivLinksOfHeaderDefault a {
     align-items: center;
     background: #01c3ff;
     border-radius: 0 20px;
     box-shadow: 0 0 5px 3px rgba(0, 0, 0, .2);
     display: flex;
     justify-content: center;
-    /* width: 120px; */
     padding: 5px;
     color: white;
     font-weight: bold;
     text-decoration: none;
     font-size: 13px;
-}
+} */
 .menu-link.mobileMenuLink.themeUgDivLinksOfHeaderDefault a {
     align-items: center;
     background: transparent;

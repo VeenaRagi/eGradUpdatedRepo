@@ -181,7 +181,7 @@ li.t2LinkToSpecificExam {
     display: none;
     font-size: 40px;
 }
-@media screen and (max-width: 924px){
+@media screen and (max-width: 1000px){
     .hamburgerMenu{
         display: flex;
         position: relative;
@@ -211,19 +211,24 @@ li.t2LinkToSpecificExam {
         box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     }
     .mobileMenuLink.t2UgDivLinksOfHeader a {
-        padding: 5px 10px;
+        /* padding: 5px 10px; */
         font-weight: 600;
-        border-radius: 20px;
-        /* background: linear-gradient(45deg, #0a9396, #005f73, #003d4e); */
+        /* border-radius: 20px; */
         background: transparent;
+        font-family: unset;
+        /* background: linear-gradient(45deg, #0a9396, #005f73, #003d4e); */
+        /* background: transparent; */
         color: black;
         /* border-bottom: 1px solid black; */
         width: 100%;
-        text-decoration: none;
-        transition: 0.3s ease-in-out;
-        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        display: flex;
+        /* text-decoration: none; */
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid;
+        /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; */
         /* border: 1px solid red; */
-        transition: transform 0.3s ease-in-out;
+        /* transition: transform 0.3s ease-in-out; */
     }
     .mobileMenuLink.t2UgDivLinksOfHeader a:hover{
         transform: scale(1.05);
