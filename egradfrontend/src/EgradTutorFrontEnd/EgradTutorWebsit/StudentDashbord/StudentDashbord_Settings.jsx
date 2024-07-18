@@ -10,19 +10,51 @@ const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [errorsOfForm, setErrorsOfForm] = useState("");
   const [showChangePasswordForm, setShowPasswordForm] = useState(false)
-  const[userNameFromContext,setUserNameFromContext]=useState("")
+  const [userNameFromContext, setUserNameFromContext] = useState("");
+  const [userDetailsForEdit, setUserDetailsForEdit] = useState([])
+  const [regIdOfUser, setRegIdOfUser] = useState(null)
   const [tiAuth] = useTIAuth();
+const[updateUserName,setUpdateUserName]=useState("");
+const[updateUserNumber,setUpdateUserNumber]=useState("");
+  // useEffect for getting the role
+  // useEffect(()=>{
+  //   const { userData } = tiAuth;
+  //   if (!userData) {
+  //     return <div>Loading...</div>;
+  //   }
+  //  const userName = userData.users[0].username;
+  //  console.log(userData.users[0].studentregistationId,"This is the user's dasta  ")
+  //  setUserNameFromContext(userName)
+  //  setRegIdOfUser(userData.users[0].studentregistationId);
+  //  console.log(regIdOfUser,"This is the userData.users[0].studentregistationId")
+  // console.log(userName,"ddddddddddddddddddddddddddddddddddddddd")
+  // })
 
-// useEffect for getting the role
-useEffect(()=>{
-  const { userData } = tiAuth;
-  if (!userData) {
-    return <div>Loading...</div>;
-  }
- const userName = userData.users[0].username;
- setUserNameFromContext(userName)
-console.log(userName,"ddddddddddddddddddddddddddddddddddddddd")
-})
+  useEffect(() => {
+    const { userData } = tiAuth;
+    if (userData) {
+      const userName = userData.users[0].username;
+      const studentRegId = userData.users[0].studentregistationId;
+
+      setUserNameFromContext(userName);
+      // setRegIdOfUser(studentRegId);
+
+      console.log(studentRegId, "This is the user's data");
+      console.log(userName, "User Name");
+    }
+  }, [tiAuth]);
+  useEffect(() => {
+    const { userData } = tiAuth;
+    if (userData) {
+      // const studentRegId = userData.users[0].studentregistationId;
+      const studentRegId = userData.users[0].studentregistationId;
+      setRegIdOfUser(studentRegId);
+      console.log(regIdOfUser, "From seperate useeffect")
+    }
+  }, []);
+  useEffect(() => {
+    console.log(regIdOfUser, "From separate useEffect");
+  }, [regIdOfUser]);
   const handleChangePassword = async (decryptedUserId) => {
     console.log(decryptedUserId, "this is decryptedUserId from handleChangePassword");
     //  i need to send otp to the user reg email if he selects yes from the alert
@@ -73,7 +105,56 @@ console.log(userName,"ddddddddddddddddddddddddddddddddddddddd")
   const handleClose = () => {
     setShowPasswordForm(false)
   }
+  useEffect(() => {
+    const fetchStudentDetailsForUpdate = async () => {
+      const response = await axios.get(`${BASE_URL}/studentSettings/fetchStudentDetailsForEdit/${regIdOfUser}`);
+      console.log(response, "22222222222");
+      setUserDetailsForEdit(response.data);
+      setUpdateUserName(response.data[0].candidateName)
+      setUpdateUserNumber(response.data[0].contactNo)
+      console.log(userDetailsForEdit, "setUserDetailsForEditvvvvvvvvvvvvv");
 
+
+    }
+    if (regIdOfUser) {
+      fetchStudentDetailsForUpdate();
+    }
+  }, [regIdOfUser])
+
+  useEffect(() => {
+    console.log(userDetailsForEdit, "this is from the usee effect")
+  }, [userDetailsForEdit])
+const handleUpdateStudentData=async(e)=>{
+  // have to post the data 
+  e.preventDefault();
+  try {
+    const response=await axios.post(`${BASE_URL}/studentSettings/studentNameNumberUpdate/${regIdOfUser}`,{
+      userName:updateUserName,
+      userNumber:updateUserNumber
+    });
+    console.log(response.data,"response form the backend");
+    if(response.status===200){
+      alert(response.data.message)
+    }
+    else{
+      alert(response.data.error)
+    }
+
+  } catch (error) {
+    console.log(error)
+  }
+  // alert it back
+
+}
+const handleUseNameChange=(e)=>{
+  setUpdateUserName(prev=>e.target.value)
+  console.log(updateUserName)
+}
+
+const handleUserNumberChange=(e)=>{
+  setUpdateUserNumber(prev=>e.target.value)
+  console.log(updateUserNumber)
+}
 
   return (
     <div className="dashboard_settings">
@@ -91,7 +172,7 @@ console.log(userName,"ddddddddddddddddddddddddddddddddddddddd")
           {/* <img src={`${BASE_URL}/uploads/studentinfoimeages/${img}`} alt="nnnnnnnn" /> */}
         </ul>
       )}
-      
+
       {showChangePasswordForm ? (
         <div className="change-password-container">
           <form className="change-password-form" onSubmit={(e) => handleChangePasswordSubmit(e)}>
@@ -135,9 +216,27 @@ console.log(userName,"ddddddddddddddddddddddddddddddddddddddd")
       ) : (
         <button onClick={() => handleChangePassword(decryptedUserIdState)}>Change Password ?</button>
       )}
-      <h1>This is the username from the context globally so that every component can access..........</h1>
+      <h3>This is the username from the context globally so that every component can access..........</h3>
       <p>{userNameFromContext}</p>
-
+      <div>
+        <div>
+          {userDetailsForEdit.map((student, index) => (
+            <div key={index} className="student-details">
+              <h2>{student.candidateName}</h2>
+              <p>Date of Birth: {student.dateOfBirth}</p>
+              <p>Gender: {student.Gender}</p>
+              <p>Category: {student.Category}</p>
+              <p>Email: {student.emailId}</p>
+              {/* Render other details as needed */}
+            </div>
+          ))}
+        </div>
+      </div>
+      <form action="" onSubmit={handleUpdateStudentData}>
+        <input type="text" value={updateUserName} onChange={handleUseNameChange}/>
+        <input type="number" value={updateUserNumber} onChange={handleUserNumberChange}/>
+        <button type='submit'>Submit</button>
+      </form>
 
     </div>
   )
