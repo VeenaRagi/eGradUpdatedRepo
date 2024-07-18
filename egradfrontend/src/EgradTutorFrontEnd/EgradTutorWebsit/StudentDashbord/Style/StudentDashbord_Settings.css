@@ -10,6 +10,10 @@
   max-width: 600px;
   margin: 50px auto;
 }
+form.studentNameUpdateForm {
+  border: 1px solid;
+  padding: 1rem 2rem;
+}
 
 /* Form styling */
 .change-password-form {
@@ -47,7 +51,10 @@
   color: red;
   margin-bottom: 15px;
 }
-
+.studentNameUpdateForm{
+  display: flex;
+  flex-direction: column;
+}
 
 .change-password-form button {
   background-color: #007bff;

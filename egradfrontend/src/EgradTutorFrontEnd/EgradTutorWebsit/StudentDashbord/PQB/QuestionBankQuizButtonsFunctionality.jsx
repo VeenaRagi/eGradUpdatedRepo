@@ -23,6 +23,7 @@ const QuestionBankQuizButtonsFunctionality = ({
   option,
   setButtonText,
   activeIndex,
+  userData
 }) => {
   const navigate = useNavigate();
   const { param1, param2 } = useParams();
@@ -145,34 +146,34 @@ const QuestionBankQuizButtonsFunctionality = ({
     : null;
 
   // Fetch user data
-  const [userData, setUserData] = useState({});
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          `${BASE_URL}/ughomepage_banner_login/user`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Attach token to headers for authentication
-            },
-          }
-        );
+  // const [userData, setUserData] = useState({});
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       const response = await fetch(
+  //         `${BASE_URL}/ughomepage_banner_login/user`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`, // Attach token to headers for authentication
+  //           },
+  //         }
+  //       );
 
-        if (response.ok) {
-          const userData = await response.json();
-          setUserData(userData);
-          // console.log(userData);
-        } else {
-          // Handle errors, e.g., if user data fetch fails
-        }
-      } catch (error) {
-        // Handle other errors
-      }
-    };
+  //       if (response.ok) {
+  //         const userData = await response.json();
+  //         setUserData(userData);
+  //         // console.log(userData);
+  //       } else {
+  //         // Handle errors, e.g., if user data fetch fails
+  //       }
+  //     } catch (error) {
+  //       // Handle other errors
+  //     }
+  //   };
 
-    fetchUserData();
-  }, []);
+  //   fetchUserData();
+  // }, []);
 
   const [questionData1, setQuestionData1] = useState({ questions: [] });
   useEffect(() => {
@@ -335,18 +336,36 @@ const QuestionBankQuizButtonsFunctionality = ({
       clearInterval(interval);
     };
   }, [wtimer]);
-
+console.log("helloooooooooooooooooooHELLOOOOOOOOOOOOO")
+  console.log(userData)
+  console.log(decryptedParam2)
   return (
     <>
       <div className="right-side-bar">
         <div className="rightSidebar-topHeader">
-          <img
+          {/* <img
             title={userData.username}
             src={userData.imageData}
             alt={`Image ${userData.user_Id}`}
           />
           <p>Candidate Name: {userData.username}</p>
-          <p key={testName.testCreationTableId}>Test Name: {testName}</p>
+          <p key={testName.testCreationTableId}>Test Name: {testName}</p> */}
+           {userData.users && userData.users.length > 0 && (
+            <ul>
+              {userData.users.map((user) => (
+                <div>
+                     <img
+                   title={user.username}
+                   // title={userNameFromContext}
+                   src={`${BASE_URL}/uploads/studentinfoimeages/${user.UplodadPhto}`}
+                      alt={`no img${user.UplodadPhto}`}
+                 />
+                 <p>Candidate Name: {user.username}</p>
+                </div>
+              ))}
+               <p key={testName.testCreationTableId}>Test Name: {testName}</p> 
+            </ul>
+          )}
         </div>
 
         <div className="buttons_container">
