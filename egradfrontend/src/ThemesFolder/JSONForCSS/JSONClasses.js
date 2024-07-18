@@ -504,7 +504,7 @@ themeMainFooterContainer:"t1MainFooterContainer",
     themeTabContentSplittedText:"t1TabContentSplittedText",
     themeTabContentSplittedTextInDiv:"t1TabContentSplittedTextInDiv",
     themeWCUImg:"t1WCUImg",
-    
+
   },
   "Theme-2": {
     id: "themeTwoId",
@@ -712,7 +712,14 @@ themeMainFooterContainer:"t1MainFooterContainer",
     themeTabContentSplittedText:"t2TabContentSplittedText",
     themeCardsToBeFlexed:"t2CardsToBeFlexed",
     themeTabContentSplittedTextInDiv:"t2TabContentSplittedTextInDiv",
-    
+     // for responsivenss
+    themeCourseNavHeader:"t2CourseNavHeader",
+    // themeCoursePageHeaderPContainer:"t2CoursePageHeaderPContainer",
+    // themeCourseHeaderLogoImgC:'t2CourseHeaderLogoImgC',
+    themeCPLogoImgC:"t2CPLogoImgC",
+    themeCPLogoSubContainer:"t2CPLogoSubContainer",
+    themeulCPDiv:"t2ulCPDiv"
+ 
     
   },
 };
