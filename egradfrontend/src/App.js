@@ -40,6 +40,7 @@ import ThemesSection from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/ThemesSec
 import Leftnav from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/Leftnav.jsx";
 import AdminProfile from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/AdminProfile.jsx";
 import axios from "axios";
+// Test
 import { UserProvider } from './UserContext';
 
 
@@ -169,10 +170,15 @@ function App({decryptedUserIdState,usersData}) {
               <Route path="/Instruction/editIns/:instructionId/" element={<GettingInstructions />} />
 
               <Route path="/InstructionPage/editIns/:instructionId/:id" element={<UpdateInstruction />} />
-              <Route
+              {/* <Route
                 path="/TestUpdateadmin/:testCreationTableId"
                 element={<TestUpdateadmin />}
-              />
+              /> */}
+              
+              <Route
+            path="/TestUpdateForm/:testCreationTableId/:TestForm_Id"
+            element={<TestUpdateadmin />}
+          />
 
 
               <Route

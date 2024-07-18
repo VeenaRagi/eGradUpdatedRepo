@@ -146,6 +146,8 @@ app.use("/TestActivationPage", TestActivationPage);
 const DoubtSection =require('./eGradTutorStudentDashboard/DoubtSection')
 app.use("/DoubtSection",DoubtSection)
 
+const Bookmark =require('./eGradTutorStudentDashboard/Bookmark')
+app.use("/Bookmark",Bookmark)
 
 const Portal_coures_creation_admin=require('./OTS_Quiz_Admin/Portal_coures_creation_admin')
 app.use('/Portal_coures_creation_admin',Portal_coures_creation_admin)

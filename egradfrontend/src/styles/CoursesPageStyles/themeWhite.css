@@ -524,7 +524,7 @@ h2.whiteContant {
 .themeTabDetailsSubDivDefault {
     text-align: center;
     background: #f3ecec;
-    width: 500px;
+    /* width: 500px; */
     margin: 20px;
     display: flex;
     justify-content: center;

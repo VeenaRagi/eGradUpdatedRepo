@@ -253,6 +253,15 @@ themeMainFooterContainer:"t1MainFooterContainer",
     themeBuyButtonInCP:"defaultBuyButtonInCP",
     themeTabContentSplittedText:"defaultTabContentSplittedText",
 
+    
+    themeCourseNavHeader:"DefaultCourseNavHeader",
+    // themeCoursePageHeaderPContainer:"t2CoursePageHeaderPContainer",
+    // themeCourseHeaderLogoImgC:'t2CourseHeaderLogoImgC',
+    themeCPLogoImgC:"DefaultCPLogoImgC",
+    themeCPLogoSubContainer:"DefaultCPLogoSubContainer",
+    themeulCPDiv:"DefaultulCPDiv"
+
+
   },
 
   "Theme-1": {
@@ -503,6 +512,15 @@ themeMainFooterContainer:"t1MainFooterContainer",
     themeBuyButtonInCP:"t1BuyButtonInCP",
     themeTabContentSplittedText:"t1TabContentSplittedText",
     themeTabContentSplittedTextInDiv:"t1TabContentSplittedTextInDiv",
+    themeWCUImg:"t1WCUImg",
+
+
+    themeCourseNavHeader:"t1CourseNavHeader",
+    // themeCoursePageHeaderPContainer:"t2CoursePageHeaderPContainer",
+    // themeCourseHeaderLogoImgC:'t2CourseHeaderLogoImgC',
+    themeCPLogoImgC:"t1CPLogoImgC",
+    themeCPLogoSubContainer:"t1CPLogoSubContainer",
+    themeulCPDiv:"t1ulCPDiv"
 
   },
   "Theme-2": {
@@ -711,7 +729,14 @@ themeMainFooterContainer:"t1MainFooterContainer",
     themeTabContentSplittedText:"t2TabContentSplittedText",
     themeCardsToBeFlexed:"t2CardsToBeFlexed",
     themeTabContentSplittedTextInDiv:"t2TabContentSplittedTextInDiv",
-    
+     // for responsivenss
+    themeCourseNavHeader:"t2CourseNavHeader",
+    // themeCoursePageHeaderPContainer:"t2CoursePageHeaderPContainer",
+    // themeCourseHeaderLogoImgC:'t2CourseHeaderLogoImgC',
+    themeCPLogoImgC:"t2CPLogoImgC",
+    themeCPLogoSubContainer:"t2CPLogoSubContainer",
+    themeulCPDiv:"t2ulCPDiv"
+ 
     
   },
 };
