@@ -16,6 +16,7 @@ const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
   const [tiAuth] = useTIAuth();
   const [updateUserName, setUpdateUserName] = useState("");
   const [updateUserNumber, setUpdateUserNumber] = useState("");
+  const[userEmailDisable,setUserEmailDisable]=useState("")
   // useEffect for getting the role
   // useEffect(()=>{
   //   const { userData } = tiAuth;
@@ -73,7 +74,7 @@ const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
   
 useEffect(()=>{
   initializeUserData();
-  
+
 })
 
 
@@ -139,6 +140,7 @@ useEffect(()=>{
       setUserDetailsForEdit(response.data);
       setUpdateUserName(response.data[0].candidateName)
       setUpdateUserNumber(response.data[0].contactNo)
+      setUserEmailDisable(response.data[0].confirmEmailId)
       console.log(userDetailsForEdit, "setUserDetailsForEditvvvvvvvvvvvvv");
     }
     if (regIdOfUser) {
@@ -261,6 +263,10 @@ useEffect(()=>{
         <div>
           <label htmlFor="">Update Your Name:</label>
           <input type="text" value={updateUserName} onChange={handleUseNameChange} />
+        </div>
+        <div>
+          <label htmlFor="">Email</label>
+          <input type="email" disabled  value={userEmailDisable}/>
         </div>
         <div>
           <label htmlFor="">Update Your Number</label>
