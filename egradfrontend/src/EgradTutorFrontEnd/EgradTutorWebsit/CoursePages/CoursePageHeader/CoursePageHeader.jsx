@@ -8,6 +8,7 @@ import { ThemeContext } from "../../../../ThemesFolder/ThemeContext/Context.js";
 import CoursePageHeaderEdit from "./CoursePageHeaderEdit.jsx";
 import '../../../../styles/CoursePage/CoursePageDefault.css'
 import '../../../../styles/CoursesPageStyles/themeWhite.css';
+import '../../../../styles/CoursesPageStyles/Theme-green.css';
 import { RiLoginBoxLine } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
 import '../../../../styles/WhyChooseUsStyles/Theme2WCU.css'
