@@ -39,6 +39,8 @@ ul.tabButtonUl.themeTabButtonUlDefault {
     margin-left: 15rem;
     text-align: left;
     list-style: disc;
+    display: flex;
+    gap: 10px;
 }
 .themeTabImageDivDefault {
     display: flex;
@@ -53,6 +55,13 @@ ul.tabButtonUl.themeTabButtonUlDefault {
     height: 45vh;
     margin-bottom: 2rem;
 }
+
+.defaultTabContentSplittedText div{
+    margin-left: 4rem;
+    text-align: left;
+    border: 1px solid gray;
+}
+
 
 @media(max-width:600px) {
     ul.tabButtonUl.themeTabButtonUlDefault {

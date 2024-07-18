@@ -253,6 +253,15 @@ themeMainFooterContainer:"t1MainFooterContainer",
     themeBuyButtonInCP:"defaultBuyButtonInCP",
     themeTabContentSplittedText:"defaultTabContentSplittedText",
 
+    
+    themeCourseNavHeader:"DefaultCourseNavHeader",
+    // themeCoursePageHeaderPContainer:"t2CoursePageHeaderPContainer",
+    // themeCourseHeaderLogoImgC:'t2CourseHeaderLogoImgC',
+    themeCPLogoImgC:"DefaultCPLogoImgC",
+    themeCPLogoSubContainer:"DefaultCPLogoSubContainer",
+    themeulCPDiv:"DefaultulCPDiv"
+
+
   },
 
   "Theme-1": {
@@ -504,6 +513,14 @@ themeMainFooterContainer:"t1MainFooterContainer",
     themeTabContentSplittedText:"t1TabContentSplittedText",
     themeTabContentSplittedTextInDiv:"t1TabContentSplittedTextInDiv",
     themeWCUImg:"t1WCUImg",
+
+
+    themeCourseNavHeader:"t1CourseNavHeader",
+    // themeCoursePageHeaderPContainer:"t2CoursePageHeaderPContainer",
+    // themeCourseHeaderLogoImgC:'t2CourseHeaderLogoImgC',
+    themeCPLogoImgC:"t1CPLogoImgC",
+    themeCPLogoSubContainer:"t1CPLogoSubContainer",
+    themeulCPDiv:"t1ulCPDiv"
 
   },
   "Theme-2": {
