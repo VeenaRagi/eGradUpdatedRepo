@@ -494,6 +494,7 @@ ul.courseHeaderUl.undefined a {
     color: white;
     font-size: 20px;
     text-transform: uppercase !important;
+    font-weight: bold;
 }
 h2.whiteContant {
     color: #108dc1;
@@ -629,12 +630,11 @@ ul.courseHeaderUl.undefined {
 
 
 
-
 }
 
 ul.courseHeaderUl.undefined span {
     COLOR: WHITE;
-    FONT-WEIGHT: 500;
+    FONT-WEIGHT: bold;
     font-size: 20px;
     text-transform: uppercase !important;
     cursor: pointer;
@@ -683,7 +683,7 @@ ul.courseHeaderUl span:hover {
     h2.whiteContant {
         color: #108dc1;
         text-align: center;
-        font-size: 30px;
+        font-size: 25px;
         background: #e6ebed;
         box-shadow: 5px 5px 5px 0px rgba(16, 141, 193, 0.3);
         height: 10vh;

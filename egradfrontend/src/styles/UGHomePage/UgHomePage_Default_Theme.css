@@ -1,4 +1,3 @@
-
 .\"Ug_header_Container.themeUgHeaderContainerDefault {
     display: flex;
     align-items: center;
@@ -16,23 +15,23 @@
     animation: mobile_menu .4s linear alternate forwards;
     background: #00000067;
     display: flex;
-    height: 88%;
-    /* justify-content: center; */
+    height: 65%;
+    justify-content: space-evenly;
     position: absolute;
     right: 0;
-    top: 0;
+    top: 118px;
     width: 50%;
 }
 
 
- 
+
 .themeUgDivLinksOfHeaderDefault {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 2rem;
 }
- 
+
 .themeUgDivLinksOfHeaderDefault a {
     align-items: center;
     background: #01c3ff;
@@ -40,21 +39,21 @@
     box-shadow: 0 0 5px 3px rgba(0, 0, 0, .2);
     display: flex;
     justify-content: center;
-  height: 45px;
+    height: 45px;
     padding: 5px;
     color: white;
     font-weight: bold;
     text-decoration: none;
 }
 
-.themeUgDivLinksOfHeaderDefault a:hover{
-color: black;
+.themeUgDivLinksOfHeaderDefault a:hover {
+    color: black;
 }
 
 .ug_container.themeUgHContainerDefault {
     align-items: center;
     background-color: #000;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,.5);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, .5);
     display: block;
     display: flex;
     justify-content: space-between;
@@ -63,19 +62,20 @@ color: black;
     padding: -30.5rem 0;
     height: 60px;
 }
- 
+
 ul.themeUgHeaderUlDefault {
     display: flex;
     gap: 1.5rem;
     flex-direction: row;
 }
+
 li.themeUgHeaderLiDefault {
     color: #fff;
     position: relative;
     font-size: 1.5rem;
     font-weight: 500;
 }
- 
+
 li.themeUgHeaderLiDefault:hover {
     -webkit-animation: navhover .5s alternate forwards;
     animation: navhover .5s alternate forwards;
@@ -84,32 +84,37 @@ li.themeUgHeaderLiDefault:hover {
     text-decoration: underline;
     text-decoration-color: #099bdf;
 }
+
 .navItemsContainer.themeUgNavContainerDefault {
     /* width: 80%; */
     margin-left: 164px;
 }
+
 ul.themeUgHeaderUlDefault {
     display: flex;
     gap: 1rem;
     flex-direction: row;
 }
+
 .themeMarqDataDefault {
     background-color: white;
     box-shadow: rgb(117, 117, 117) 0 0 5px;
     padding: 15px;
     margin-top: 19px;
 }
-.themeMarqDataDefault  span{
-        color: black;
-        font-weight: 400;
+
+.themeMarqDataDefault span {
+    color: black;
+    font-weight: 400;
 }
- 
+
 .defaultCoursesSubContainer h2 {
     color: #00a3ff;
     font-size: 2rem;
     margin: 1rem auto;
     text-align: center;
 }
+
 /* .defaultCoursesUl {
     grid-gap: 2rem;
     display: grid;
@@ -117,49 +122,53 @@ ul.themeUgHeaderUlDefault {
     margin: .5rem auto;
     width: 80%;
 } */
- 
- 
- 
- 
+
+
+
+
 .themeCoursesBoxContainerDefault {
-        grid-gap: 2rem;
-        align-items: center;
-        background: #e2f7fb;
-        border: 2px solid#000;
-        display: grid;
-        gap: 2rem;
-        grid-template-columns: 35% 30% 25%;
-        justify-content: space-around;
-        margin: 0 auto;
-        padding: .8rem;
-        grid-gap: 2rem;
-        display: grid;
-        gap: 2rem;
-        margin: .5rem auto;
-        width: 80%;
+    grid-gap: 2rem;
+    align-items: center;
+    background: #e2f7fb;
+    border: 2px solid#000;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 35% 30% 25%;
+    justify-content: space-around;
+    margin: 0 auto;
+    padding: .8rem;
+    grid-gap: 2rem;
+    display: grid;
+    gap: 2rem;
+    margin: .5rem auto;
+    width: 80%;
 }
+
 .themeCoursesBoxContainerDefault :hover {
     -webkit-animation: UG_course 3s infinite alternate;
     animation: UG_course 3s infinite alternate;
 }
+
 .PortalName_ImageContainerDefault {
     display: flex;
     flex-direction: column;
 }
- 
+
 /* EXPLORE EXAMS CSS */
 .NewExploreExams_Main_Container.themeExploreExamsMainContainerDefault {
-        background: #e2f7fb;
-        padding: 20px 0;
-        text-align: center;
-        width: 100%;
+    background: #e2f7fb;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
 }
+
 h2#EXPLORE_Exam_Heading {
     color: #00a3ff;
     font-size: 2rem;
     margin: 2rem auto;
     font-weight: bold;
 }
+
 .NewExploreExams_Sub_Container.themeExploreExamsSubContainerDefault {
     align-items: center;
     display: flex;
@@ -170,77 +179,86 @@ h2#EXPLORE_Exam_Heading {
     width: 95%;
     font-weight: bold;
 }
+
 .NewExploreExams_ExamCard_Container.NewExploreExams_ExamCard_ContainerDefault {
     grid-column-gap: 7.8rem;
     grid-row-gap: 3rem;
     -webkit-column-gap: 7.8rem;
     column-gap: 7.8rem;
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     padding: 0 2rem;
     row-gap: 3rem;
 }
+
 .exam_box_left img {
     width: 100%;
 }
+
 .NewExploreExams_ExamCard_MainContainer.NewExploreExams_ExamCard_ContainerDefault {
     display: flex;
     justify-content: space-evenly;
 }
+
 .NewExploreExams_ExamName_Container.NewExploreExams_ExamName_ContainerDefault {
     background: #279eff69;
     background: #fff;
     border-radius: 13px;
-    box-shadow: 0 0 5px rgba(0,0,0,.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, .5);
     display: flex;
     flex-direction: column;
     gap: .8rem;
-       padding: 1.5rem;
+    padding: 1.5rem;
     text-align: center;
     text-transform: capitalize;
     width: 256px;
     height: 280px;
 }
 
-.NewExploreExams_ExamName_Container.NewExploreExams_ExamName_ContainerDefault:hover{
-        -webkit-transform: scale(1.09);
-        transform: scale(1.09);
-        transition: .3s ease-in-out;
+.NewExploreExams_ExamName_Container.NewExploreExams_ExamName_ContainerDefault:hover {
+    -webkit-transform: scale(1.09);
+    transform: scale(1.09);
+    transition: .3s ease-in-out;
 }
 
 .NewExploreExams_PortalNames_Container.NewExploreExams_PortalNames_ContainerDefault {
     padding: 20px;
     text-align: center;
 }
-.NewExploreExams_EachCard_Container.NewExploreExams_EachCard_ContainerDefault ul li.defaultLinkToSpecificExam{
+
+.NewExploreExams_EachCard_Container.NewExploreExams_EachCard_ContainerDefault ul li.defaultLinkToSpecificExam {
     background: #3ad4ba;
     border-radius: 13px;
     color: #070707 !important;
-    font-family: Noto Sans Display,sans-serif;
+    font-family: Noto Sans Display, sans-serif;
     font-weight: 700;
     padding: .3rem .5rem;
-    font-size:1rem;
+    font-size: 1rem;
 }
+
 .NewExploreExams_PortalNames_Container.NewExploreExams_PortalNames_ContainerDefault li a {
     color: black;
     line-height: 2.2rem;
     font-size: 15px;
     font-weight: 500;
 }
-li.defaultLinkToSpecificExam a{
-    color:white;
-    font-weight:bold;
+
+li.defaultLinkToSpecificExam a {
+    color: white;
+    font-weight: bold;
 }
+
 .NewExploreExams_PortalNames_Container.NewExploreExams_PortalNames_ContainerDefault li a:hover {
     color: rgb(48, 4, 129);
     font-weight: bold;
     text-decoration: underline;
-    text-decoration: underline; /* This is redundant */
+    text-decoration: underline;
+    /* This is redundant */
 }
 
- 
+
 /* OUR COURSES CSS PART */
- 
+
 .defaultCoursesHeadding {
     background: #fff;
     padding: .5rem 0;
@@ -253,6 +271,7 @@ h2#Our_Courses_heading {
     text-align: center;
     font-weight: bold;
 }
+
 .defaultCoursesSubContainer {
     grid-gap: 2rem;
     display: grid;
@@ -260,10 +279,12 @@ h2#Our_Courses_heading {
     margin: .5rem auto;
     width: 80%;
 }
+
 .defaultCoursesSubContainer .ul.defaultCoursesUl li {
     grid-gap: 2rem;
     background: #e2f7fb;
-    border: 2px solid #000; /* Corrected border syntax */
+    border: 2px solid #000;
+    /* Corrected border syntax */
     gap: 2rem;
     grid-template-columns: 35% 30% 25%;
     justify-content: space-around;
@@ -272,25 +293,27 @@ h2#Our_Courses_heading {
     width: 95%;
     margin-bottom: 15px;
 }
- 
- 
- 
- 
- 
+
+
+
+
+
 li.defaultCourseLi {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background: #e2f7fb;
     margin: 15px;
-    border: 1px solid black; /* Updated border property */
-    padding:20px;
+    border: 1px solid black;
+    /* Updated border property */
+    padding: 20px;
 }
- 
-.themeCoursePortalNameImageContainerDefault{
-        display: flex;
-        flex-direction: column;
+
+.themeCoursePortalNameImageContainerDefault {
+    display: flex;
+    flex-direction: column;
 }
+
 strong.defaultPortalName {
     background: #2d6891;
     color: #fff;
@@ -301,12 +324,13 @@ strong.defaultPortalName {
     width: 165%;
     display: block;
 }
+
 .defaultFeatureImgC img {
     height: 250px;
     width: 250px;
     padding: 20px;
 }
- 
+
 .defaultFeaturesContainer {
     padding-top: 4.6rem;
     text-align: justify;
@@ -319,30 +343,34 @@ li.defaultFeatures {
     font-size: 18px;
     list-style: disc;
 }
+
 h3.undefined {
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
 }
-.DefaultthemeArrowWithFeatures li.DefaultthemeFeatures{
+
+.DefaultthemeArrowWithFeatures li.DefaultthemeFeatures {
     list-style: disc;
     margin-left: 22px;
 }
+
 .defaultExamsNames {
     /* height: 20px; */
     display: grid;
     flex-wrap: wrap;
     gap: 0.8rem;
-    grid-template-columns: repeat(1fr,1fr);
+    grid-template-columns: repeat(1fr, 1fr);
     justify-content: center;
     margin-right: 90px;
     margin-top: 75px;
 }
+
 .defaultExamsNames a {
     background: #2d6891;
     border-radius: 10px;
     color: #fff;
-    font-family: Noto Sans Display,sans-serif;
+    font-family: Noto Sans Display, sans-serif;
     font-weight: 700;
-    padding: 0.5rem;
+    padding: 15px;
     text-align: center;
     /* text-transform: uppercase; */
     text-decoration: none;
@@ -350,7 +378,7 @@ h3.undefined {
     font-size: 13px;
     height: 50px;
 }
- 
+
 ul.defaultCoursesUl li:hover {
     background-color: white;
     box-shadow: black 0 0 5px;
@@ -362,8 +390,9 @@ ul.defaultCoursesUl li:hover {
         border-radius: 5px;
         width: 170px;
     }
+
     .ContactUsContentContainer.ContactUsContentContainerDefault {
-        box-shadow: 0 0 10px rgba(0,0,0,.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .5);
         display: flex;
         flex-direction: column;
         height: auto;
@@ -371,22 +400,25 @@ ul.defaultCoursesUl li:hover {
         width: 18rem;
         text-align: left;
     }
+
     .NewExploreExams_EachCard_Container.NewExploreExams_EachCard_ContainerDefault ul li.defaultLinkToSpecificExam {
-       
-        padding:0px;
-        
+
+        padding: 0px;
+
     }
+
     .NewExploreExams_PortalNames_Container.NewExploreExams_PortalNames_ContainerDefault li a {
         color: black;
         line-height: 2.2rem;
         font-size: 13px;
         font-weight: 500;
     }
+
     .NewExploreExams_ExamName_Container.NewExploreExams_ExamName_ContainerDefault {
         background: #279eff69;
         background: #fff;
         border-radius: 13px;
-        box-shadow: 0 0 5px rgba(0,0,0,.5);
+        box-shadow: 0 0 5px rgba(0, 0, 0, .5);
         display: flex;
         flex-direction: column;
         gap: .8rem;
@@ -401,18 +433,19 @@ ul.defaultCoursesUl li:hover {
 }
 
 @media (max-width: 391px) {
-  .AboutUsImgContainer.AboutUsImgContainerDefault span {
-    color: #000;
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
+    .AboutUsImgContainer.AboutUsImgContainerDefault span {
+        color: #000;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
 }
+
 @media (max-width: 376px) {
     li.themeUgHeaderLiDefault {
-      color: #fff;
-      font-size: 12px !important;
-      font-weight: 500;
-      text-align: center;
+        color: #fff;
+        font-size: 12px !important;
+        font-weight: 500;
+        text-align: center;
     }
 
 
@@ -428,8 +461,9 @@ ul.defaultCoursesUl li:hover {
         top: 0;
         width: 50%;
     }
-  }
-@media (max-width: 600px) {
+}
+
+@media(max-width: 601px) {
 
 
     .Ug_header_logoIMG img {
@@ -440,20 +474,34 @@ ul.defaultCoursesUl li:hover {
         height: auto;
         top: 102px;
     }
-  
+
+    .themeUgDivLinksOfHeaderDefault a {
+        align-items: center;
+        background: #01c3ff;
+        border-radius: none;
+        box-shadow: none;
+        display: flex;
+        justify-content: center;
+        height: 45px;
+        padding: 5px;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+    }
 
 
     .navItemsContainer.themeUgNavContainerDefault {
         width: 95%;
-        margin-left:0px;
+        margin-left: 0px;
     }
+
     li.themeUgHeaderLiDefault {
         color: #fff;
         font-size: 12px;
         font-weight: 500;
         text-align: center;
     }
-   
+
     #EXPLORE_Exam_Heading {
         color: #00a3ff;
         text-align: center;
@@ -461,22 +509,24 @@ ul.defaultCoursesUl li:hover {
         margin: 2rem auto;
         color: #1ba2d9;
     }
+
     .NewExploreExams_ExamCard_MainContainer.NewExploreExams_ExamCard_ContainerDefault {
         align-items: center;
         display: flex;
-      flex-direction: column;
+        flex-direction: column;
         justify-content: center;
         margin: 0 auto;
         width: 65%;
     }
 
     .NewExploreExams_ExamCard_Container.NewExploreExams_ExamCard_ContainerDefault {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      align-items: center;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
     }
+
     .NewExploreExams_ExamCard_Container.NewExploreExams_ExamCard_ContainerDefault {
         display: flex;
         align-items: center;
@@ -484,34 +534,41 @@ ul.defaultCoursesUl li:hover {
         flex-direction: column;
         justify-content: center;
     }
-    .themeNewExploreExams_Exam_Container  li a {
+
+    .themeNewExploreExams_Exam_Container li a {
         background-color: red !important;
-        color:green;
+        color: green;
 
     }
-    .NewExploreExams_Image.themeNewExploreExams_ImageDefault img{
-        width:100px;
+
+    .NewExploreExams_Image.themeNewExploreExams_ImageDefault img {
+        width: 100px;
     }
+
     .NewExploreExams_Image.themeNewExploreExams_ImageDefault img {
         width: 289px;
         margin-top: 20px;
     }
+
     li.defaultCourseLi {
         display: flex;
         flex-direction: column;
-     height: auto;
+        height: auto;
         background: #e3f2fd;
         margin: 15px;
         border: 1px solid black;
         padding: 20px;
     }
+
     .defaultCoursesSubContainer ul.defaultCoursesUl {
         padding-left: 0px;
     }
+
     .defaultFeatureImgC img {
         height: 220px;
         width: 220px;
     }
+
     strong.defaultPortalName {
         background: #2d6891;
         color: #fff;
@@ -522,14 +579,17 @@ ul.defaultCoursesUl li:hover {
         width: 80%;
         display: block;
     }
+
     .defaultFeaturesContainer {
         /* line-height: 32px; */
-        padding-top:0px;
+        padding-top: 0px;
         text-align: justify;
     }
+
     .defaultExamsNames {
         margin-top: 2.5rem;
     }
+
     .defaultCoursesSubContainer {
         grid-gap: 2rem;
         /* display: grid; */
@@ -537,12 +597,14 @@ ul.defaultCoursesUl li:hover {
         /* margin: .5rem auto; */
         width: 100%;
     }
+
     h2#EXPLORE_Exam_Heading {
         font-weight: bold;
         color: #00a3ff;
         font-size: 1.5rem;
         margin: 2rem auto;
     }
+
     ul.themeUgHeaderUlDefault {
         display: flex;
         /* gap: 1.5rem; */
@@ -551,11 +613,19 @@ ul.defaultCoursesUl li:hover {
     }
 
 }
- 
+
+@media (max-width: 600px) {
+    .menu-link.mobileMenuLink.themeUgDivLinksOfHeaderDefault a {
+        font-size: 10px;
+    }
+}
+
+
 @media (max-width:884px) {
     .NewExploreExams_Image.themeNewExploreExams_ImageDefault img {
         margin-left: 20px;
     }
+
     .NewExploreExams_ExamCard_MainContainer.NewExploreExams_ExamCard_ContainerDefault {
         align-items: center;
         /* display: flex; */
@@ -566,25 +636,30 @@ ul.defaultCoursesUl li:hover {
         margin: 0 auto;
         width: 65%;
     }
- 
+
     .NewExploreExams_ExamCard_MainContainer.NewExploreExams_ExamCard_ContainerDefault {
         display: flex;
         flex-direction: column;
         /* justify-content: space-evenly; */
     }
+
     .defaultCoursesSubContainer {
         grid-gap: 2rem;
         display: grid;
         gap: 2rem;
-        margin:0px;
+        margin: 0px;
         width: 5%;
     }
+
     li.defaultCourseLi {
         width: 92vw;
     }
+
     li.defaultCourseLi {
         padding: 6px;
+        text-align: center;
     }
+
     strong.defaultPortalName {
         background: #2d6891;
         color: #fff;
@@ -595,17 +670,19 @@ ul.defaultCoursesUl li:hover {
         width: 88%;
         display: block;
     }
+
     .defaultExamsNames {
         /* height: 20px; */
         display: grid;
         flex-wrap: wrap;
         gap: 0.8rem;
-        grid-template-columns: repeat(1fr,1fr);
+        grid-template-columns: repeat(1fr, 1fr);
         justify-content: center;
         margin-right: 0px;
         margin-top: 56px;
         margin-left: 20px;
     }
+
     .defaultFeaturesContainer {
         /* line-height: 32px; */
         padding-top: 4.6rem;
@@ -613,13 +690,14 @@ ul.defaultCoursesUl li:hover {
         font-weight: 500;
         margin-left: 18px;
     }
+
     .defaultExamsNames a {
         background: #2d6891;
         border-radius: 10px;
         color: #fff;
-        font-family: Noto Sans Display,sans-serif;
+        font-family: Noto Sans Display, sans-serif;
         font-weight: 700;
-        padding: 0.3rem;
+        padding: 15px;
         text-align: center;
         /* text-transform: uppercase; */
         text-decoration: none;
@@ -627,28 +705,32 @@ ul.defaultCoursesUl li:hover {
         font-size: 13px;
         height: 50px;
     }
+
     .Footer_Sub_Container.themeFooterSubContainerDefault {
         padding: 2rem 3rem 0;
     }
-    
+
 }
 
 
 
 @media (max-width: 1114px) {
     .NewExploreExams_ExamCard_MainContainer.NewExploreExams_ExamCard_ContainerDefault {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
     }
+
     .themeUgDivLinksOfHeaderDefault {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem; /* Ensure the unit is specified */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        /* Ensure the unit is specified */
     }
-  }
-  ul.themeUgHeaderUlDefault {
+}
+
+ul.themeUgHeaderUlDefault {
     display: flex;
     gap: 1.5rem;
     padding-left: 0px;
@@ -656,58 +738,62 @@ ul.defaultCoursesUl li:hover {
     padding-top: 18px;
     cursor: pointer;
 }
+
 @media (max-width:1280px) {
 
-.themeUgDivLinksOfHeaderDefault a {
-    align-items: center;
-    background: #01c3ff;
-    border-radius: 0 20px;
-    box-shadow: 0 0 5px 3px rgba(0, 0, 0, .2);
-    display: flex;
-    justify-content: center;
-    /* width: 120px; */
-    padding: 5px;
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 13px;
-}
-.menu-link.mobileMenuLink.themeUgDivLinksOfHeaderDefault a {
-    align-items: center;
-    background: transparent;
-    position: relative;
-    color:white;
-    font-size:11px;
-}
-}
-@media (max-width:1114px) {
-
+    .themeUgDivLinksOfHeaderDefault a {
+        align-items: center;
+        background: #01c3ff;
+        border-radius: 0 20px;
+        box-shadow: 0 0 5px 3px rgba(0, 0, 0, .2);
+        display: flex;
+        justify-content: center;
+        /* width: 120px; */
+        padding: 5px;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 13px;
     }
+
+    .menu-link.mobileMenuLink.themeUgDivLinksOfHeaderDefault a {
+        align-items: center;
+        background: transparent;
+        position: relative;
+        color: white;
+        font-size: 18px;
+    }
+}
+
+@media (max-width:1114px) {}
 
 /* About Us Styles */
 
-.AboutUsImgContainerDefault{
-        width: 80%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        margin: 0 auto;
-        padding: 10px;
-        height: 100px;
-        padding-top: 3rem;
+.AboutUsImgContainerDefault {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px;
+    height: 100px;
+    padding-top: 3rem;
 }
+
 .AboutUsImgContainerDefault img {
     border-radius: 5px;
     width: 330px;
 }
-.AboutUsContentMainContainer.AboutUsContentMainContainerDefault{
-        margin: 0 auto;
-        text-align: center;
-        width: 100%;
-            background: #e2f7fb;
-           
+
+.AboutUsContentMainContainer.AboutUsContentMainContainerDefault {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    background: #e2f7fb;
+
 }
+
 .AboutUsContentSubContainerDefault {
     padding: 3rem 10rem;
     display: flex;
@@ -721,9 +807,9 @@ ul.defaultCoursesUl li:hover {
     display: flex;
     flex-direction: column;
 
-    justify-content:center;
+    justify-content: center;
     max-width: 48%;
-    gap:5rem;
+    gap: 5rem;
 }
 
 .AboutUs1stContentContainer.AboutUs1stContentContainerDefault p {
@@ -732,29 +818,33 @@ ul.defaultCoursesUl li:hover {
     font-size: 18px;
 
 }
+
 .AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault {
     background: #fff;
-    box-shadow: 0 0 5px rgba(0,0,0,.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, .5);
     width: 500px;
-    padding:20px;
+    padding: 20px;
     margin-bottom: 2rem;
 }
+
 .AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault h2 {
     color: #00a3ff;
-    font-size:29px;
+    font-size: 29px;
     padding-bottom: 5px;
 }
+
 .AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault p {
     color: black;
     text-align: left;
-    font-size:18px;
+    font-size: 18px;
 }
 
-.AboutUsContentMainContainer.AboutUsContentMainContainerDefault h1{
+.AboutUsContentMainContainer.AboutUsContentMainContainerDefault h1 {
     color: #00a3ff;
     font-size: 3rem;
     margin: 2rem auto;
 }
+
 .AboutUsImgDataContentContainer.AboutUsImgDataContentContainerDefault img {
     width: 445px;
     border-radius: 15px;
@@ -762,11 +852,13 @@ ul.defaultCoursesUl li:hover {
     background-color: white;
     height: 300px;
 }
+
 .AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault img {
-    width:100px;
+    width: 100px;
 }
+
 .AboutUs_Main_Container.AboutUsMainContainerDefault .AboutUsImgContainer.AboutUsImgContainerDefault span {
-    color:rgb(97, 3, 3) !important;
+    color: rgb(97, 3, 3) !important;
     font-size: 1.5rem;
     font-weight: bold;
 
@@ -778,34 +870,39 @@ ul.defaultCoursesUl li:hover {
     .AboutUsImgContainerDefault img {
         border-radius: 5px;
         width: 185px;
-      }
-      .AboutUsImgDataContentContainer.AboutUsImgDataContentContainerDefault img {
-        width: 343px; 
-      }
-      .AboutUsContentSubContainerDefault {
+    }
+
+    .AboutUsImgDataContentContainer.AboutUsImgDataContentContainerDefault img {
+        width: 343px;
+    }
+
+    .AboutUsContentSubContainerDefault {
         padding: 0.5rem 10rem;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 6rem;
     }
+
     .AboutUs1stContentContainer.AboutUs1stContentContainerDefault .AboutUsImgDataContentContainer.AboutUsImgDataContentContainerDefault img {
         width: 280px;
         border-radius: 15px;
         height: 280px;
     }
+
     .AboutUs1stContentContainer.AboutUs1stContentContainerDefault p {
         text-align: left;
         font-size: 18px;
     }
+
     .AboutUs_VisionContent_Container.AboutUsVisionContentContainerDefault .AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault {
         background: #fff;
-        box-shadow: 0 0 5px rgba(0,0,0,.5);
+        box-shadow: 0 0 5px rgba(0, 0, 0, .5);
         width: 375px;
         padding: 20px;
         margin-bottom: 2rem;
     }
-  
+
 }
 
 
@@ -816,6 +913,7 @@ ul.defaultCoursesUl li:hover {
         border-radius: 5px;
         width: 275px;
     }
+
     .AboutUsImgContainerDefault {
         width: 80%;
         display: flex;
@@ -826,38 +924,45 @@ ul.defaultCoursesUl li:hover {
         padding: 10px;
         height: 50px;
     }
+
     .AboutUsImgContainerDefault {
-      
+
         padding-top: 40px;
-       
+
     }
+
     .AboutUsContentMainContainer.AboutUsContentMainContainerDefault h1 {
         font-size: 2.5rem;
     }
-    .AboutUsContentSubContainerDefault{
+
+    .AboutUsContentSubContainerDefault {
         display: flex;
         flex-direction: column;
     }
+
     .AboutUsImgDataContentContainer.AboutUsImgDataContentContainerDefault img {
         width: 490px;
         border-radius: 15px;
         /* margin-bottom: 20px; */
         /* margin-top: 0px; */
     }
+
     .AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault {
         background: #fff;
-        box-shadow: 0 0 5px rgba(0,0,0,.5);
+        box-shadow: 0 0 5px rgba(0, 0, 0, .5);
         width: 359px;
         padding: 20px;
         margin-bottom: 2rem;
     }
+
     .AboutUs1stContentContainer.AboutUs1stContentContainerDefault p {
         text-align: left;
         font-size: 20px;
     }
+
     .AboutUsImgVisionDataContentContainer.AboutUsImgDataContentContainerDefault {
         background: #fff;
-        box-shadow: 0 0 5px rgba(0,0,0,.5);
+        box-shadow: 0 0 5px rgba(0, 0, 0, .5);
         width: 555px;
         padding: 20px;
         margin-bottom: 2rem;
@@ -869,6 +974,7 @@ ul.defaultCoursesUl li:hover {
     padding: 8rem 0;
     width: 100%;
 }
+
 .ContactUsContentDataContainer.ContactUsContentDataContainerDefault {
     /* align-items: center; */
     display: flex;
@@ -878,8 +984,9 @@ ul.defaultCoursesUl li:hover {
     margin-bottom: 2rem;
     padding: 3rem 0;
 }
+
 .ContactUsContentContainer.ContactUsContentContainerDefault {
-    box-shadow: 0 0 10px rgba(0,0,0,.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
     display: flex;
     flex-direction: column;
     height: 25rem;
@@ -887,19 +994,26 @@ ul.defaultCoursesUl li:hover {
     width: 25rem;
     text-align: left;
 }
- .ContactUsMapData.ContactUsMapDataDefault iframe{
+
+.ContactUsMapData.ContactUsMapDataDefault iframe {
     height: 25rem;
     width: 25rem;
 }
-form.ContactUsFormData.ContactUsFormDataDefault{
+
+form.ContactUsFormData.ContactUsFormDataDefault {
     /* grid-gap: 1rem; */
     align-items: center;
     display: grid;
     gap: rem;
-    grid-template-columns: repeat(auto-fit,minmax(350px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     justify-content: center;
 }
-form.ContactUsFormData.ContactUsFormDataDefault #firstName, #lastName, #email, #category,#message {
+
+form.ContactUsFormData.ContactUsFormDataDefault #firstName,
+#lastName,
+#email,
+#category,
+#message {
     border: 1px solid #000;
     border-radius: 10px;
     height: 50px;
@@ -908,10 +1022,12 @@ form.ContactUsFormData.ContactUsFormDataDefault #firstName, #lastName, #email, #
     /* text-transform: uppercase; */
     width: 90%;
 }
+
 form.ContactUsFormData.ContactUsFormDataDefault #category {
     margin-bottom: 20px;
     margin-left: 0px;
 }
+
 form.ContactUsFormData.ContactUsFormDataDefault button {
     background: #279eff;
     border: 0;
@@ -925,6 +1041,7 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
     transition: all .5s;
     width: 100px;
 }
+
 .ContactUsMainContainer.themeContactUsMainContainerDefault h1 {
     color: #00a3ff;
     font-size: 2.5rem;
@@ -932,30 +1049,36 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
     text-align: center;
     font-weight: bold;
 }
+
 .ContactUsDataContainer.ContactUsDataContainerDefault h2 {
     color: #01c3ff;
     font-size: 2rem;
     text-align: center;
 }
+
 .ContactUsDataContainer.ContactUsDataContainerDefault p {
     font-size: 20px;
     padding: 7px 0px;
 }
+
 .AboutUsImgContainer.AboutUsImgContainerDefault span {
-    color:#000;
-    font-size:1.5rem;
-    font-weight:bold;
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
+
 .AboutUsImgContainer.AboutUsImgContainerDefault a {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        gap: 0.5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 0.5rem;
 }
+
 .AboutUsImgContainer.AboutUsImgContainerDefault a:hover {
     text-decoration: underline !important;
     text-decoration-color: #00a3ff !important;
 }
+
 /* Responsive for Contact Us Page */
 
 @media (max-width: 601px) {
@@ -963,6 +1086,7 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
         border-radius: 5px;
         width: 195px;
     }
+
     .ContactUsMainContainer.themeContactUsMainContainerDefault h1 {
         color: #00a3ff;
         font-size: 1.5rem;
@@ -970,16 +1094,19 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
         text-align: center;
         font-weight: bold;
     }
+
     .ContactUsContentDataContainer.ContactUsContentDataContainerDefault {
         padding: 0rem 0;
-    
+
     }
+
     .ContactUsMapData.ContactUsMapDataDefault iframe {
         height: 18rem;
         width: 18rem;
     }
+
     .ContactUsContentContainer.ContactUsContentContainerDefault {
-        box-shadow: 0 0 10px rgba(0,0,0,.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .5);
         display: flex;
         flex-direction: column;
         height: 26rem;
@@ -987,6 +1114,7 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
         width: 18rem;
         text-align: left;
     }
+
     .themeFooterSMIconsDefault {
         display: flex;
         margin-right: 0rem;
@@ -994,9 +1122,10 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
         /* justify-content: flex-end; */
     }
 }
+
 .AboutUsImgContainer.AboutUsImgContainerDefault a {
     color: #000 !important;
-    font-size: 1.5rem !important; 
+    font-size: 1.5rem !important;
     font-weight: bold !important;
 }
 
@@ -1009,13 +1138,15 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
         justify-content: center;
     }
 }
-@media (max-width:834px){
+
+@media (max-width:834px) {
     .ContactUsMapData.ContactUsMapDataDefault iframe {
         height: 25rem;
         width: 23rem;
     }
+
     .ContactUsContentContainer.ContactUsContentContainerDefault {
-        box-shadow: 0 0 10px rgba(0,0,0,.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .5);
         display: flex;
         flex-direction: column;
         height: 25rem;
@@ -1053,10 +1184,11 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
     /* margin-right: 20rem; */
     /* margin-left: 54px; */
 }
+
 .themeFooterSMIconsDefault a {
     color: white;
     font-size: 2rem;
-    margin-right:1.8rem;
+    margin-right: 1.8rem;
     margin-left: 1.8rem;
     margin-bottom: 10px;
 }
@@ -1065,6 +1197,7 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
 .themeFooterSMIconsDefault a svg:hover {
     color: #00a3ff;
 }
+
 /* responsive */
 @media(max-width:430px) {
     .LinkPage_footer-content__EHAOJ {
@@ -1086,6 +1219,7 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
         box-shadow: 1px 1px 10px black;
         padding: 1rem;
     }
+
     .LinkPage_footer-content__EHAOJ p {
         color: #333;
         font-size: 13px;
@@ -1096,40 +1230,50 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
 /* ug home page popups realted styles */
 
 .Portal_Names {
-    align-items:start; /* Center items vertically */
-    gap: 10px; /* Space between input and label */
-    margin-bottom: 8px; /* Space below each item */
-  }
-  
-  .Portal_Names label {
-   
-    font-size: 16px; /* Adjust font size as needed */
-   
-  }
-  .about_egt_form form {
+    align-items: start;
+    /* Center items vertically */
+    gap: 10px;
+    /* Space between input and label */
+    margin-bottom: 8px;
+    /* Space below each item */
+}
+
+.Portal_Names label {
+
+    font-size: 16px;
+    /* Adjust font size as needed */
+
+}
+
+.about_egt_form form {
     display: flex;
     flex-direction: column;
-  }
-  .about_egt_form form textarea {
-    height:100px;
-  }
-  .about_egt_form form button {
-    width:150px;
+}
+
+.about_egt_form form textarea {
+    height: 100px;
+}
+
+.about_egt_form form button {
+    width: 150px;
     margin-top: 10px;
-  }
-  .new_landingfooter_conatinerfristpopupbtncontiner h2 {
-font-size: 10px;
-  }
-  .new_landingfooter_conatinerfristpopupbtncontiner p{
+}
+
+.new_landingfooter_conatinerfristpopupbtncontiner h2 {
+    font-size: 10px;
+}
+
+.new_landingfooter_conatinerfristpopupbtncontiner p {
     font-size: 10px;
 
-  }
-  .new_landingfooter_conatinerfristpopupbtncontiner img {
+}
+
+.new_landingfooter_conatinerfristpopupbtncontiner img {
     font-size: 10px;
 
-  }
+}
 
-  @media(max-width:400px) {
+@media(max-width:400px) {
     .themeFooterSMIconsDefault {
         display: flex;
         justify-content: start;
@@ -1137,6 +1281,7 @@ font-size: 10px;
         align-items: center;
         text-align: center;
     }
+
     .themeFooterSMIconsDefault a {
         color: white;
         font-size: 1.5rem;
@@ -1144,11 +1289,11 @@ font-size: 10px;
         /* margin-left: 1.8rem; */
         margin-bottom: 10px;
     }
-  }
+}
 
-  @media (max-width: 400px) {
+@media (max-width: 400px) {
     .Ug_header_logoIMG.themeUgHeaderLogoImgDefault .Ug_header_logoIMG img {
-      width: 208px;
+        width: 208px;
     }
 
     .FaqDataContainer.FaqDataContainerDefault {
@@ -1156,39 +1301,45 @@ font-size: 10px;
         grid-template-columns: repeat(1, 1fr);
         gap: 0;
     }
-  }
-  
-  .Footer_Links_Content.themeFooterLinksContentDefault {
-    display: flex;
-    flex-wrap: wrap; /* Allows items to wrap to the next line */
-    gap: 10px; /* Adjust the gap between items as needed */
-  }
-  
-  .Footer_Links_Content.themeFooterLinksContentDefault .item {
-    flex: 1 1 auto; /* Items will grow and shrink to fit available space */
-    min-width: 200px; /* Minimum width to ensure items don't get too small */
-    margin: 5px; /* Adjust the margin as needed */
-    box-sizing: border-box; /* Ensures padding and border are included in the width */
-  }
+}
 
-  @media (max-width:800px) {
+.Footer_Links_Content.themeFooterLinksContentDefault {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allows items to wrap to the next line */
+    gap: 10px;
+    /* Adjust the gap between items as needed */
+}
+
+.Footer_Links_Content.themeFooterLinksContentDefault .item {
+    flex: 1 1 auto;
+    /* Items will grow and shrink to fit available space */
+    min-width: 200px;
+    /* Minimum width to ensure items don't get too small */
+    margin: 5px;
+    /* Adjust the margin as needed */
+    box-sizing: border-box;
+    /* Ensures padding and border are included in the width */
+}
+
+@media (max-width:800px) {
     .Footer_Contact_Us_Content.themeFooterContactUsContentDefault {
         margin-left: 1rem;
-    }  
-  }
+    }
+}
 
 
-  .themeFooterSMIconsDefault {
+.themeFooterSMIconsDefault {
     display: flex;
     margin-right: 20rem;
     justify-content: flex-end;
 }
 
-@media(max-width:601px){
+@media(max-width:601px) {
     .themeFooterSMIconsDefault {
         display: flex;
         margin-right: 0rem;
         justify-content: flex-start;
     }
-    
+
 }

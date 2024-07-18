@@ -79,9 +79,9 @@ const AccountInfo = () => {
 
   return (
     <div className='admin_account_info_container'>
-      <h1>Account Information</h1>
+      <h1 className='no_data_info_for_admin_account_info_header'>Account Information</h1>
       {userData.length === 0 ? (
-        <p>No user data available</p>
+        <p className='no_data_info_for_admin_account_info_para'>No user data available</p>
       ) : (
         <div className='tttttttttt'>
           <ul className='admin_ul_container'>

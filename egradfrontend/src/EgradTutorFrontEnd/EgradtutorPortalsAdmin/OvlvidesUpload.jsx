@@ -239,7 +239,7 @@ function OvlvidesUpload() {
       </div>
 
 
-      <div>
+      <div className="videoLink_table_main_container">
         <div className="create_exam_header_SearchBar">
           <FaSearch className="Adminsearchbaricon" />
           <input

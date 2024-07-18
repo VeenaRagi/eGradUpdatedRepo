@@ -65,13 +65,14 @@
   }
   .instruction_input_contant {
     display: flex;
-    padding: 1rem 0;
+    padding: 1rem 1rem;
     gap: 10px;
     justify-content: space-between;
     align-items: center;
-    /* background: #c9d4dd; */
+    background: #e0d7d7;
     margin-top: 3rem;
     flex-wrap: wrap;
+    box-shadow: 0px 0px 10px rgba(155, 162, 168, 0.822);
 }
 .inst {
   display: flex;

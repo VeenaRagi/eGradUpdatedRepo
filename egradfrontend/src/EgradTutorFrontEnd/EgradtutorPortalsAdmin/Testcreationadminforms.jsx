@@ -6,6 +6,7 @@ import { useNavigate, Link, navigate } from "react-router-dom";
 import moment from "moment";
 import { FaSearch } from "react-icons/fa";
 import { useParams } from "react-router-dom";
+
 function Testcreationadminforms() {
   const [testform, setTestform] = useState([]);
   const [testformId, setTestformId] = useState(null);
@@ -46,7 +47,7 @@ function Testcreationadminforms() {
   // const [selectedtestpattern, setSelectedtestpattern] = useState("");
   const [selectedTestPattern, setSelectedTestPattern] = useState('');
   const [pageNumber, setPageNumber] = useState(0);
-  const usersPerPage = 10; 
+  const usersPerPage = 10;
   const [sectionsData, setSectionsData] = useState([
     {
       selectedSubjects: "",
@@ -333,7 +334,7 @@ function Testcreationadminforms() {
             selectedCompleteCourse,
             startDate,
             startTime,
-            endDate, 
+            endDate,
             endTime,
             duration,
             totalQuestions,
@@ -478,19 +479,19 @@ function Testcreationadminforms() {
         testData.find(
           (test) => test.testCreationTableId === testCreationTableId
         ).testStartDate +
-          "T" +
-          testData.find(
-            (test) => test.testCreationTableId === testCreationTableId
-          ).testStartTime
+        "T" +
+        testData.find(
+          (test) => test.testCreationTableId === testCreationTableId
+        ).testStartTime
       );
       const endTime = new Date(
         testData.find(
           (test) => test.testCreationTableId === testCreationTableId
         ).testEndDate +
-          "T" +
-          testData.find(
-            (test) => test.testCreationTableId === testCreationTableId
-          ).testEndTime
+        "T" +
+        testData.find(
+          (test) => test.testCreationTableId === testCreationTableId
+        ).testEndTime
       );
       const TotalQuestions = testData.find(
         (test) => test.testCreationTableId === testCreationTableId
@@ -576,7 +577,7 @@ function Testcreationadminforms() {
 
     fetchtestpattern();
   }, []);
-  
+
   const pageCount = Math.ceil(filteredTest.length / usersPerPage);
   const pagesVisited = pageNumber * usersPerPage;
   const displayData = filteredTest.slice(pagesVisited, pagesVisited + usersPerPage);
@@ -610,634 +611,638 @@ function Testcreationadminforms() {
         </div>
       )}
       {activeForm === "form1" && (
-        <form onSubmit={(e) => handleSubmit(e, selectedFormId)}>
-          <h2 className="ots_courseTitle_text">TEST CREATION FORM</h2>
-          <div className="otsCloseBtn_Mar">
-            <button
-              type="button"
-              className="ots_btnClose"
-              onClick={handleCloseForm}
-            >
-              Close <i className="fa-regular fa-circle-xmark "></i>
-            </button>
-          </div>
+        <div className="overlay">
+          <form className="admin_form_test_creation_page" onSubmit={(e) => handleSubmit(e, selectedFormId)}>
+            <h2 className="ots_courseTitle_text">TEST CREATION FORM</h2>
+            <div className="otsCloseBtn_Mar">
+              <button
+                type="button"
+                className="ots_btnClose"
+                onClick={handleCloseForm}
+              >
+                Close <i className="fa-regular fa-circle-xmark "></i>
+              </button>
+            </div>
 
-          <div className="testCreation_-contant ">
-            <div className="testCreation_-contant_-flexCOntant examSubjects_-contant">
-              <div className="testCreation_-list">
-                {/* <h1>TestForm_Id: {selectedFormId}</h1> */}
-                <label>Test Name:</label>
-                <input
-                  type="text"
-                  value={testName}
-                  onChange={handleInputChange}
-                />
-                {formErrors.testName && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.testName}
-                  </span>
-                )}
-              </div>
-              <div className="testCreation_-list">
-                <label>Select Course:</label>
-                <select value={selectedCourse} onChange={handleSelectChange}>
-                  <option value="" disabled>
-                    Select a course
-                  </option>
-                  {courses.map((course) => (
-                    <option
-                      key={course.courseCreationId}
-                      value={course.courseCreationId}
-                    >
-                      {course.courseName}
+            <div className="testCreation_-contant ">
+              <div className="testCreation_-contant_-flexCOntant examSubjects_-contant">
+                <div className="testCreation_-list">
+                  {/* <h1>TestForm_Id: {selectedFormId}</h1> */}
+                  <label>Test Name:</label>
+                  <input
+                    type="text"
+                    value={testName}
+                    onChange={handleInputChange}
+                  />
+                  {formErrors.testName && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.testName}
+                    </span>
+                  )}
+                </div>
+                <div className="testCreation_-list">
+                  <label>Select Course:</label>
+                  <select value={selectedCourse} onChange={handleSelectChange}>
+                    <option value="" disabled>
+                      Select a course
                     </option>
-                  ))}
-                </select>
-                {formErrors.selectedCourse && (
-                  <span className="error-message">
-                    {formErrors.selectedCourse}
-                  </span>
-                )}
+                    {courses.map((course) => (
+                      <option
+                        key={course.courseCreationId}
+                        value={course.courseCreationId}
+                      >
+                        {course.courseName}
+                      </option>
+                    ))}
+                  </select>
+                  {formErrors.selectedCourse && (
+                    <span className="error-message">
+                      {formErrors.selectedCourse}
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
 
-            <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
-              <div className="testCreation_-list">
-                <label>Type of Tests:</label>
-                <select
-                  value={selectedtypeOfTest}
-                  onChange={handleSelectTypeOfTest}
-                >
-                  <option value="" disabled>
-                    Select a type of test
-                  </option>
-                  {typeOfTests.map((typeOfTest) => (
-                    <option
-                      key={typeOfTest.TypeOfTestId}
-                      value={typeOfTest.TypeOfTestId}
-                    >
-                      {typeOfTest.TypeOfTestName}
+              <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label>Type of Tests:</label>
+                  <select
+                    value={selectedtypeOfTest}
+                    onChange={handleSelectTypeOfTest}
+                  >
+                    <option value="" disabled>
+                      Select a type of test
                     </option>
-                  ))}
-                </select>
-                {formErrors.selectedtypeOfTest && (
-                  <span className="error-message">
-                    {formErrors.selectedtypeOfTest}
-                  </span>
-                )}
-              </div>
-              <div className="testCreation_-list">
-                <label>Select Option Pattern:</label>
-                <select value={selectedoptions} onChange={handleSelectOption}>
-                  <option value="" disabled>
-                    Select a Pattern
-                  </option>
-                  {options.map((options) => (
-                    <option
-                      key={options.opt_pattern_id}
-                      value={options.opt_pattern_id}
-                    >
-                      {options.opt_pattern_name}
+                    {typeOfTests.map((typeOfTest) => (
+                      <option
+                        key={typeOfTest.TypeOfTestId}
+                        value={typeOfTest.TypeOfTestId}
+                      >
+                        {typeOfTest.TypeOfTestName}
+                      </option>
+                    ))}
+                  </select>
+                  {formErrors.selectedtypeOfTest && (
+                    <span className="error-message">
+                      {formErrors.selectedtypeOfTest}
+                    </span>
+                  )}
+                </div>
+                <div className="testCreation_-list">
+                  <label>Select Option Pattern:</label>
+                  <select value={selectedoptions} onChange={handleSelectOption}>
+                    <option value="" disabled>
+                      Select a Pattern
                     </option>
-                  ))}
-                </select>
-                {formErrors.selectedoptions && (
-                  <span className="error-message">
-                    {formErrors.selectedoptions}
-                  </span>
-                )}
+                    {options.map((options) => (
+                      <option
+                        key={options.opt_pattern_id}
+                        value={options.opt_pattern_id}
+                      >
+                        {options.opt_pattern_name}
+                      </option>
+                    ))}
+                  </select>
+                  {formErrors.selectedoptions && (
+                    <span className="error-message">
+                      {formErrors.selectedoptions}
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
 
-            <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant ">
-              <div className="testCreation_-list">
-                <label>Test Start Date:</label>
-                <input
-                  type="date"
-                  value={startDate}
-                  onChange={handleStartDateChange}
-                />
-                {formErrors.startDate && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.startDate}
-                  </span>
-                )}
+              <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant ">
+                <div className="testCreation_-list">
+                  <label>Test Start Date:</label>
+                  <input
+                    type="date"
+                    value={startDate}
+                    onChange={handleStartDateChange}
+                  />
+                  {formErrors.startDate && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.startDate}
+                    </span>
+                  )}
+                </div>
+                <div className="testCreation_-list">
+                  <label>Start Time:</label>
+                  <input
+                    type="time"
+                    value={startTime}
+                    onChange={handleStartTimeChange}
+                  />
+                  {formErrors.startTime && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.startTime}
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className="testCreation_-list">
-                <label>Start Time:</label>
-                <input
-                  type="time"
-                  value={startTime}
-                  onChange={handleStartTimeChange}
-                />
-                {formErrors.startTime && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.startTime}
-                  </span>
-                )}
-              </div>
-            </div>
 
-            <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
-              <div className="testCreation_-list">
-                <label>Test End Date:</label>
-                <input
-                  type="date"
-                  value={endDate}
-                  onChange={handleEndDateChange}
-                />
-                {formErrors.endDate && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.endDate}
-                  </span>
-                )}
+              <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label>Test End Date:</label>
+                  <input
+                    type="date"
+                    value={endDate}
+                    onChange={handleEndDateChange}
+                  />
+                  {formErrors.endDate && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.endDate}
+                    </span>
+                  )}
+                </div>
+                <div className="testCreation_-list">
+                  <label>End Time:</label>
+                  <input
+                    type="time"
+                    value={endTime}
+                    onChange={handleEndTimeChange}
+                  />
+                  {formErrors.endTime && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.endTime}
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className="testCreation_-list">
-                <label>End Time:</label>
-                <input
-                  type="time"
-                  value={endTime}
-                  onChange={handleEndTimeChange}
-                />
-                {formErrors.endTime && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.endTime}
-                  </span>
-                )}
-              </div>
-            </div>
 
-            <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
-              <div className="testCreation_-list">
-                <label>Instructions:</label>
-                <select
-                  value={selectedInstruction}
-                  onChange={handleInstructionChange}
-                >
-                  <option value="" disabled>
-                    Select an instruction
-                  </option>
-                  {instructionsData.map((instruction) => (
-                    <option
-                      key={instruction.instructionId}
-                      value={instruction.instructionId}
-                    >
-                      {instruction.instructionHeading}
+              <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label>Instructions:</label>
+                  <select
+                    value={selectedInstruction}
+                    onChange={handleInstructionChange}
+                  >
+                    <option value="" disabled>
+                      Select an instruction
                     </option>
-                  ))}
-                </select>
-                {formErrors.selectedInstruction && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.selectedInstruction}
-                  </span>
-                )}
+                    {instructionsData.map((instruction) => (
+                      <option
+                        key={instruction.instructionId}
+                        value={instruction.instructionId}
+                      >
+                        {instruction.instructionHeading}
+                      </option>
+                    ))}
+                  </select>
+                  {formErrors.selectedInstruction && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.selectedInstruction}
+                    </span>
+                  )}
+                </div>
+                <div className="testCreation_-list">
+                  <label>Total Marks:</label>
+                  <input
+                    type="number"
+                    value={totalMarks}
+                    onChange={handleTotalMarksChange}
+                    min="1"
+                  />
+                  {formErrors.totalMarks && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.totalMarks}
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className="testCreation_-list">
-                <label>Total Marks:</label>
-                <input
-                  type="number"
-                  value={totalMarks}
-                  onChange={handleTotalMarksChange}
-                  min="1"
-                />
-                {formErrors.totalMarks && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.totalMarks}
-                  </span>
-                )}
-              </div>
-            </div>
 
-            <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
-              <div className="testCreation_-list">
-                <label>Duration (in minutes):</label>
-                <input
-                  type="number"
-                  value={duration}
-                  onChange={handleDurationChange}
-                  min="1"
-                />
+              <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label>Duration (in minutes):</label>
+                  <input
+                    type="number"
+                    value={duration}
+                    onChange={handleDurationChange}
+                    min="1"
+                  />
+                </div>
+                <div className="testCreation_-list">
+                  <label>Total Questions:</label>
+                  <input
+                    type="number"
+                    value={totalQuestions}
+                    onChange={handleTotalQuestionsChange}
+                    min="1"
+                  />
+                  {formErrors.totalQuestions && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.totalQuestions}
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className="testCreation_-list">
-                <label>Total Questions:</label>
-                <input
-                  type="number"
-                  value={totalQuestions}
-                  onChange={handleTotalQuestionsChange}
-                  min="1"
-                />
-                {formErrors.totalQuestions && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.totalQuestions}
-                  </span>
-                )}
+              <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant"></div>
+              <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
+                <div className="testCreation_-list">
+                  {/* <label>SECTION</label> */}
+                  <label>Any sections in the test click here</label>
+                  <input
+                    className="inputLable"
+                    type="checkbox"
+                    checked={showTotalSections}
+                    onChange={handleShowTotalSectionsChange}
+                  />
+                </div>
+                <div></div>
               </div>
-            </div>
-            <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant"></div>
-            <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
-              <div className="testCreation_-list">
-                {/* <label>SECTION</label> */}
-                <label>Any sections in the test click here</label>
-                <input
-                  className="inputLable"
-                  type="checkbox"
-                  checked={showTotalSections}
-                  onChange={handleShowTotalSectionsChange}
-                />
-              </div>
-              <div></div>
-            </div>
-            <div>
-              {showTotalSections && (
-                <div>
-                  <label>
-                    <input
-                      className="inputLable"
-                      type="checkbox"
-                      checked={QuestionLimitChecked}
-                      onChange={handleQuestionLimitChange}
-                    />
-                    Question Limit:
-                  </label>
+              <div>
+                {showTotalSections && (
+                  <div>
+                    <label>
+                      <input
+                        className="inputLable"
+                        type="checkbox"
+                        checked={QuestionLimitChecked}
+                        onChange={handleQuestionLimitChange}
+                      />
+                      Question Limit:
+                    </label>
 
-                  <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant ">
-                    <table style={{ textAlign: "justify" }}>
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Subjects:</th>
-                          <th>Section</th>
-                          <th>No of Question</th>
-                          {QuestionLimitChecked && <th>Question Limit</th>}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {Array.from(
-                          { length: numberOfSections },
-                          (_, index) => (
-                            <tr key={index}>
-                              <td>{index + 1}</td>
-                              <td>
-                                <div>
-                                  <select
-                                    value={
-                                      sectionsData[index]?.selectedSubjects ||
-                                      ""
-                                    }
-                                    onChange={(e) =>
-                                      handleSectionChange(
-                                        e,
-                                        index,
-                                        "selectedSubjects"
-                                      )
-                                    }
-                                  >
-                                    <option value="" disabled>
-                                      Select a Subject
-                                    </option>
-                                    {subjects.map((Subject) => (
-                                      <option
-                                        key={Subject.subjectId}
-                                        value={Subject.subjectId}
-                                      >
-                                        {Subject.subjectName}
+                    <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant ">
+                      <table style={{ textAlign: "justify" }}>
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Subjects:</th>
+                            <th>Section</th>
+                            <th>No of Question</th>
+                            {QuestionLimitChecked && <th>Question Limit</th>}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {Array.from(
+                            { length: numberOfSections },
+                            (_, index) => (
+                              <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>
+                                  <div>
+                                    <select
+                                      value={
+                                        sectionsData[index]?.selectedSubjects ||
+                                        ""
+                                      }
+                                      onChange={(e) =>
+                                        handleSectionChange(
+                                          e,
+                                          index,
+                                          "selectedSubjects"
+                                        )
+                                      }
+                                    >
+                                      <option value="" disabled>
+                                        Select a Subject
                                       </option>
-                                    ))}
-                                  </select>
-                                </div>
-                              </td>
-                              <td>
-                                <input
-                                  type="text"
-                                  value={sectionsData[index]?.sectionName || ""}
-                                  onChange={(e) =>
-                                    handleSectionChange(e, index, "sectionName")
-                                  }
-                                />
-                              </td>
-                              <td>
-                                <input
-                                  type="number"
-                                  value={
-                                    sectionsData[index]?.noOfQuestions || ""
-                                  }
-                                  onChange={(e) =>
-                                    handleSectionChange(
-                                      e,
-                                      index,
-                                      "noOfQuestions"
-                                    )
-                                  }
-                                />
-                              </td>
-                              {QuestionLimitChecked && (
+                                      {subjects.map((Subject) => (
+                                        <option
+                                          key={Subject.subjectId}
+                                          value={Subject.subjectId}
+                                        >
+                                          {Subject.subjectName}
+                                        </option>
+                                      ))}
+                                    </select>
+                                  </div>
+                                </td>
+                                <td>
+                                  <input
+                                    type="text"
+                                    value={sectionsData[index]?.sectionName || ""}
+                                    onChange={(e) =>
+                                      handleSectionChange(e, index, "sectionName")
+                                    }
+                                  />
+                                </td>
                                 <td>
                                   <input
                                     type="number"
                                     value={
-                                      sectionsData[index]?.QuestionLimit || ""
+                                      sectionsData[index]?.noOfQuestions || ""
                                     }
                                     onChange={(e) =>
                                       handleSectionChange(
                                         e,
                                         index,
-                                        "QuestionLimit"
+                                        "noOfQuestions"
                                       )
                                     }
                                   />
                                 </td>
-                              )}
-                            </tr>
-                          )
-                        )}
-                      </tbody>
-                    </table>
+                                {QuestionLimitChecked && (
+                                  <td>
+                                    <input
+                                      type="number"
+                                      value={
+                                        sectionsData[index]?.QuestionLimit || ""
+                                      }
+                                      onChange={(e) =>
+                                        handleSectionChange(
+                                          e,
+                                          index,
+                                          "QuestionLimit"
+                                        )
+                                      }
+                                    />
+                                  </td>
+                                )}
+                              </tr>
+                            )
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                    <button
+                      className="instructionBTN"
+                      type="button"
+                      onClick={addSection}
+                    >
+                      +
+                    </button>
+                    <button
+                      className="instructionBTN"
+                      type="button"
+                      onClick={removeSection}
+                    >
+                      -
+                    </button>
                   </div>
-                  <button
-                    className="instructionBTN"
-                    type="button"
-                    onClick={addSection}
-                  >
-                    +
-                  </button>
-                  <button
-                    className="instructionBTN"
-                    type="button"
-                    onClick={removeSection}
-                  >
-                    -
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="ccform_btnbs">
-            <button className="ots_-createBtn" type="submit">
-              Submit OTS AND PQB
-            </button>
-          </div>
-        </form>
-      )}
-
-      {activeForm === "form2" && (
-        <form onSubmit={handleSubmitcp}>
-          <h2 className="ots_courseTitle_text">
-            COMPLETE PACKAGE TEST CREATION FORM
-          </h2>
-          <div className="otsCloseBtn_Mar">
-            <button
-              type="button"
-              className="ots_btnClose"
-              onClick={handleCloseForm}
-            >
-              Close <i className="fa-regular fa-circle-xmark "></i>
-            </button>
-          </div>
-          <div className="testCreation_-contant ">
-            <div className="testCreation_-contant_-flexCOntant examSubjects_-contant">
-            <div className="testCreation_-list">
-                <label>Test Pattern:</label>
-                <select
-                  value={selectedTestPattern}
-                  onChange={handleSelectTestPattern}
-                >
-                  <option value="" disabled>
-                    Select a Test Pattern
-                  </option>
-                  {testpattern.map((type) => (
-                    <option
-                      key={type.Test_Pattern_Id}
-                      value={type.Test_Pattern_Id}
-                    >
-                      {type.Test_pattern_name}
-                    </option>
-                  ))}
-                </select>
-                {formErrors.selectedTestPattern && (
-                  <span className="error-message">
-                    {formErrors.selectedTestPattern}
-                  </span>
                 )}
               </div>
-            </div>
-          </div>
-          <div className="testCreation_-contant ">
-            <div className="testCreation_-contant_-flexCOntant examSubjects_-contant">
-              <div className="testCreation_-list">
-                {/* <h1>TestForm_Id: {selectedFormId}</h1> */}
-                <label>Test Name:</label>
-                <input
-                  type="text"
-                  value={testName}
-                  onChange={handleInputChange}
-                />
-                {formErrors.testName && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.testName}
-                  </span>
-                )}
-              </div>
-
-              <div className="testCreation_-list">
-                <label>Select Course:</label>
-                <select
-                  value={selectedCompleteCourse}
-                  onChange={handleSelectCompleteChange}
-                >
-                  <option value="" disabled>
-                    Select a course
-                  </option>
-                  {completeCourses.map((course) => (
-                    <option
-                      key={course.courseCreationId}
-                      value={course.courseCreationId}
-                    >
-                      {course.courseName}
-                    </option>
-                  ))}
-                </select>
-                {formErrors.selectedCompleteCourse && (
-                  <span className="error-message">
-                    {formErrors.selectedCompleteCourse}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant ">
-              <div className="testCreation_-list">
-                <label>Test Start Date:</label>
-                <input
-                  type="date"
-                  value={startDate}
-                  onChange={handleStartDateChange}
-                />
-                {formErrors.startDate && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.startDate}
-                  </span>
-                )}
-              </div>
-              <div className="testCreation_-list">
-                <label>Start Time:</label>
-                <input
-                  type="time"
-                  value={startTime}
-                  onChange={handleStartTimeChange}
-                />
-                {formErrors.startTime && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.startTime}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
-              <div className="testCreation_-list">
-                <label>Test End Date:</label>
-                <input
-                  type="date"
-                  value={endDate}
-                  onChange={handleEndDateChange}
-                />
-                {formErrors.endDate && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.endDate}
-                  </span>
-                )}
-              </div>
-              <div className="testCreation_-list">
-                <label>End Time:</label>
-                <input
-                  type="time"
-                  value={endTime}
-                  onChange={handleEndTimeChange}
-                />
-                {formErrors.endTime && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.endTime}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
-              <div className="testCreation_-list">
-                <label>Instructions:</label>
-                <select
-                  value={selectedInstruction}
-                  onChange={handleInstructionChange}
-                >
-                  <option value="" disabled>
-                    Select an instruction
-                  </option>
-                  {instructionsData.map((instruction) => (
-                    <option
-                      key={instruction.instructionId}
-                      value={instruction.instructionId}
-                    >
-                      {instruction.instructionHeading}
-                    </option>
-                  ))}
-                </select>
-                {formErrors.selectedInstruction && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.selectedInstruction}
-                  </span>
-                )}
-              </div>
-              <div className="testCreation_-list">
-                <label>Select Option Pattern:</label>
-                <select value={selectedoptions} onChange={handleSelectOption}>
-                  <option value="" disabled>
-                    Select a Pattern
-                  </option>
-                  {options.map((options) => (
-                    <option
-                      key={options.opt_pattern_id}
-                      value={options.opt_pattern_id}
-                    >
-                      {options.opt_pattern_name}
-                    </option>
-                  ))}
-                </select>
-                {formErrors.selectedoptions && (
-                  <span className="error-message">
-                    {formErrors.selectedoptions}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
-              <div className="testCreation_-list">
-                <label>Duration (in minutes):</label>
-                <input
-                  type="number"
-                  value={duration}
-                  onChange={handleDurationChange}
-                  min="1"
-                />
-              </div>
-              <div className="testCreation_-list">
-                <label>Total Marks:</label>
-                <input
-                  type="number"
-                  value={totalMarks}
-                  onChange={handleTotalMarksChange}
-                  min="1"
-                />
-                {formErrors.totalMarks && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.totalMarks}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
-              <div className="testCreation_-list">
-                <label>Total Questions:</label>
-                <input
-                  type="number"
-                  value={totalQuestions}
-                  onChange={handleTotalQuestionsChange}
-                  min="1"
-                />
-                {formErrors.totalQuestions && (
-                  <span className="error-message">
-                    <i className="fa-solid fa-circle"></i>
-                    {formErrors.totalQuestions}
-                  </span>
-                )}
-              </div>
-              <div className="testCreation_-list"></div>
             </div>
 
             <div className="ccform_btnbs">
               <button className="ots_-createBtn" type="submit">
-                Submit
+                Submit OTS AND PQB
               </button>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
+      )}
+
+      {activeForm === "form2" && (
+        <div className="overlay">
+          <form className="admin_form_test_creation_page" onSubmit={handleSubmitcp}>
+            <h2 className="ots_courseTitle_text">
+              COMPLETE PACKAGE TEST CREATION FORM
+            </h2>
+            <div className="otsCloseBtn_Mar">
+              <button
+                type="button"
+                className="ots_btnClose"
+                onClick={handleCloseForm}
+              >
+                Close <i className="fa-regular fa-circle-xmark "></i>
+              </button>
+            </div>
+            <div className="testCreation_-contant ">
+              <div className="testCreation_-contant_-flexCOntant examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label>Test Pattern:</label>
+                  <select
+                    value={selectedTestPattern}
+                    onChange={handleSelectTestPattern}
+                  >
+                    <option value="" disabled>
+                      Select a Test Pattern
+                    </option>
+                    {testpattern.map((type) => (
+                      <option
+                        key={type.Test_Pattern_Id}
+                        value={type.Test_Pattern_Id}
+                      >
+                        {type.Test_pattern_name}
+                      </option>
+                    ))}
+                  </select>
+                  {formErrors.selectedTestPattern && (
+                    <span className="error-message">
+                      {formErrors.selectedTestPattern}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="testCreation_-contant ">
+              <div className="testCreation_-contant_-flexCOntant examSubjects_-contant">
+                <div className="testCreation_-list">
+                  {/* <h1>TestForm_Id: {selectedFormId}</h1> */}
+                  <label>Test Name:</label>
+                  <input
+                    type="text"
+                    value={testName}
+                    onChange={handleInputChange}
+                  />
+                  {formErrors.testName && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.testName}
+                    </span>
+                  )}
+                </div>
+
+                <div className="testCreation_-list">
+                  <label>Select Course:</label>
+                  <select
+                    value={selectedCompleteCourse}
+                    onChange={handleSelectCompleteChange}
+                  >
+                    <option value="" disabled>
+                      Select a course
+                    </option>
+                    {completeCourses.map((course) => (
+                      <option
+                        key={course.courseCreationId}
+                        value={course.courseCreationId}
+                      >
+                        {course.courseName}
+                      </option>
+                    ))}
+                  </select>
+                  {formErrors.selectedCompleteCourse && (
+                    <span className="error-message">
+                      {formErrors.selectedCompleteCourse}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant ">
+                <div className="testCreation_-list">
+                  <label>Test Start Date:</label>
+                  <input
+                    type="date"
+                    value={startDate}
+                    onChange={handleStartDateChange}
+                  />
+                  {formErrors.startDate && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.startDate}
+                    </span>
+                  )}
+                </div>
+                <div className="testCreation_-list">
+                  <label>Start Time:</label>
+                  <input
+                    type="time"
+                    value={startTime}
+                    onChange={handleStartTimeChange}
+                  />
+                  {formErrors.startTime && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.startTime}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label>Test End Date:</label>
+                  <input
+                    type="date"
+                    value={endDate}
+                    onChange={handleEndDateChange}
+                  />
+                  {formErrors.endDate && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.endDate}
+                    </span>
+                  )}
+                </div>
+                <div className="testCreation_-list">
+                  <label>End Time:</label>
+                  <input
+                    type="time"
+                    value={endTime}
+                    onChange={handleEndTimeChange}
+                  />
+                  {formErrors.endTime && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.endTime}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label>Instructions:</label>
+                  <select
+                    value={selectedInstruction}
+                    onChange={handleInstructionChange}
+                  >
+                    <option value="" disabled>
+                      Select an instruction
+                    </option>
+                    {instructionsData.map((instruction) => (
+                      <option
+                        key={instruction.instructionId}
+                        value={instruction.instructionId}
+                      >
+                        {instruction.instructionHeading}
+                      </option>
+                    ))}
+                  </select>
+                  {formErrors.selectedInstruction && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.selectedInstruction}
+                    </span>
+                  )}
+                </div>
+                <div className="testCreation_-list">
+                  <label>Select Option Pattern:</label>
+                  <select value={selectedoptions} onChange={handleSelectOption}>
+                    <option value="" disabled>
+                      Select a Pattern
+                    </option>
+                    {options.map((options) => (
+                      <option
+                        key={options.opt_pattern_id}
+                        value={options.opt_pattern_id}
+                      >
+                        {options.opt_pattern_name}
+                      </option>
+                    ))}
+                  </select>
+                  {formErrors.selectedoptions && (
+                    <span className="error-message">
+                      {formErrors.selectedoptions}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label>Duration (in minutes):</label>
+                  <input
+                    type="number"
+                    value={duration}
+                    onChange={handleDurationChange}
+                    min="1"
+                  />
+                </div>
+                <div className="testCreation_-list">
+                  <label>Total Marks:</label>
+                  <input
+                    type="number"
+                    value={totalMarks}
+                    onChange={handleTotalMarksChange}
+                    min="1"
+                  />
+                  {formErrors.totalMarks && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.totalMarks}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="testCreation_-contant_-flexCOntant  examSubjects_-contant">
+                <div className="testCreation_-list">
+                  <label>Total Questions:</label>
+                  <input
+                    type="number"
+                    value={totalQuestions}
+                    onChange={handleTotalQuestionsChange}
+                    min="1"
+                  />
+                  {formErrors.totalQuestions && (
+                    <span className="error-message">
+                      <i className="fa-solid fa-circle"></i>
+                      {formErrors.totalQuestions}
+                    </span>
+                  )}
+                </div>
+                <div className="testCreation_-list"></div>
+              </div>
+
+              <div className="ccform_btnbs">
+                <button className="ots_-createBtn" type="submit">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
       )}
       <div className="create_exam_header_SearchBar">
         {/* Search bar */}
@@ -1315,11 +1320,10 @@ function Testcreationadminforms() {
                   </td>
                   <td>
                     <button
-                      className={`ActivateTestButton ${
-                        activatedTests.includes(test.testCreationTableId)
+                      className={`ActivateTestButton ${activatedTests.includes(test.testCreationTableId)
                           ? "activated"
                           : "deactivated"
-                      }`}
+                        }`}
                       onClick={() =>
                         handleActivationToggle(test.testCreationTableId)
                       }
@@ -1335,16 +1339,16 @@ function Testcreationadminforms() {
           </tbody>
         </table>
         <ReactPaginate
-  previousLabel={<i className="fa-solid fa-angles-left"></i>}
-  nextLabel={<i className="fa-solid fa-angles-right"></i>}
-  pageCount={pageCount}
-  onPageChange={changePage}
-  containerClassName={"paginationBttns"}
-  previousLinkClassName={"previousBttn"}
-  nextLinkClassName={"nextBttn"}
-  disabledClassName={"paginationDisabled"}
-  activeClassName={"paginationActive"}
-/>
+          previousLabel={<i className="fa-solid fa-angles-left"></i>}
+          nextLabel={<i className="fa-solid fa-angles-right"></i>}
+          pageCount={pageCount}
+          onPageChange={changePage}
+          containerClassName={"paginationBttns"}
+          previousLinkClassName={"previousBttn"}
+          nextLinkClassName={"nextBttn"}
+          disabledClassName={"paginationDisabled"}
+          activeClassName={"paginationActive"}
+        />
       </div>
     </div>
   );
