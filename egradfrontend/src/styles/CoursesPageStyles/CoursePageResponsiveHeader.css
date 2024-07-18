@@ -1,0 +1,103 @@
+.navButton{
+    /* background-color: rgba(255, 0, 0, 0.788); */
+    display: none;
+}
+.navBarHeaderWithLogoContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+
+/* image and navlinks */
+.t2CPLogoImgC {
+    /* width: 250px; */
+    margin-top: 10px;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.t2CPLogoSubContainer {
+    width: 250px;
+    /* margin: auto; */
+    align-items: start;
+    display: flex;
+    justify-content: start;
+}
+.t2CPLogoImgC img{
+    width: 100%;
+}
+.t2CourseNavHeader {
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* ul items css */
+ul.ulDiv {
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    border: 1px solid;
+    padding: 1rem;
+    background-color: #274c61;
+    color: white;
+    font-size: 20px;
+    padding-left: 4rem;
+    cursor: pointer;
+}
+
+
+
+/*image and navlinks  complete */
+/* @media screen and(max-width:1024px) { */
+@media screen and (max-width:1024px) {
+    .navButton{
+        display: flex;
+        opacity: 1;
+    }
+    .t2CourseNavHeader {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        align-items: center;
+        gap: 0rem;
+    }
+    .t2CourseNavHeader {
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    }
+    /* .t2CourseNavHeader {
+        box-shadow: unset;
+    } */
+    nav.navDiv.responsiveCourseNav {
+        position: absolute;
+        top: 2%;
+        right: 8%;
+        /* transition: 1s; */
+        transform: translateY(-100vh);
+        display: flex;
+        flex-direction: column;
+        background-color: #264c61;
+        color: white;
+    }
+    button.navButton {
+        position: relative;
+        font-size: 1.8rem;
+    }
+    ul.ulDiv.t2ulCPDiv {
+        display: flex;
+        gap: 2rem;
+        margin: 0;
+        border: 1px solid;
+        padding-top: 4rem;
+        padding: 4rem 2rem 2rem 2rem;
+        flex-direction: column;
+        position: absolute;
+        top: 1%;
+        right: 7%;
+        background-color: #274c61;
+        color: white;
+        border-radius: 10px;
+    }
+}
