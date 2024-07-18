@@ -23,9 +23,9 @@
     height: 10vh;
         padding: 3rem 4rem;
 }
-.logo_Img_container.themeLogoImgCDefault img {
+/* .logo_Img_container.themeLogoImgCDefault img {
     width:225px;
-}
+} */
 .themeCourseAmountSpanDefault {
     border-bottom-left-radius: 10px;
     /* background-color: #ebcece; */
@@ -36,9 +36,9 @@
     font-weight: bold;
 }
  
-
-
-
+ 
+ 
+ 
 img.defaultLogoImg::before {
     left: auto;
     right: 0;
@@ -162,7 +162,7 @@ img.defaultLogoImg::before {
         background: none;
         text-align: start;
         color: var(--whiteThemeLogo) !important;
-        font-family: var(--whiteTheme_font);
+        /* font-family: var(--whiteTheme_font); */
     }
 }
 .white_examName {
@@ -190,7 +190,7 @@ img.defaultLogoImg::before {
 }
 h2#white_examName {
     background: #fbfbfb;
-    padding: 18px 8px;
+    padding: 2px 8px;
     border-bottom: 1px solid;
     /* color: var(--whiteThemeYellow) !important; */
     font-family: var(--whiteTheme_font);
@@ -251,7 +251,7 @@ h2#white_examName {
         width: -moz-fit-content;
     }
 }
-
+ 
  
 .whiteCard:hover .whiteCardBody{
     /* border: 1px solid var(--whiteThemeLogo); */
@@ -471,18 +471,18 @@ h2#white_examName {
   li.whyChooseUsLi {
     background-color: #52a8bd;
 }
-
-
+ 
+ 
 /* NEW CSS */
 .themeTabsSubContainerDefault {
     padding: 0 6rem;
 }
-
-
+ 
+ 
 .CoursePage_header_Container.CoursePageHeaderContainerDefault {
     padding: 3rem 7rem;
 }
-
+ 
 ul.courseHeaderUl.undefined {
     display: flex;
     gap: 3rem;
@@ -494,7 +494,6 @@ ul.courseHeaderUl.undefined a {
     color: white;
     font-size: 20px;
     text-transform: uppercase !important;
-    font-weight: bold;
 }
 h2.whiteContant {
     color: #108dc1;
@@ -508,13 +507,13 @@ h2.whiteContant {
 .themeBuyCourseSpanDefault {
     text-align: center;
     padding: 20px;
-    
+   
 }
 .themeBuyCourseSpanDefault span {
     color: black;
     font-weight: bold;
     font-size: 18px;
-  
+ 
 }
 .themeTabsChangeDefault {
     text-align: center;
@@ -543,22 +542,22 @@ h2.whiteContant {
         display: flex;
         flex-direction: column;
     }
-
+ 
     .themeTabDetailsSubDivDefault {
         width: 351px;
     }
     img {
-        width: 190px;
+        width: 140px;
     }
     .defaultTabContentSplittedText p {
         font-weight: bold;
         color: black;
-        font-size: 13px;
+        font-size: 10px;
     }
     .CoursePage_header_Container.CoursePageHeaderContainerDefault {
         display: flex;
         justify-content: space-between;
-        gap: 2rem;
+        gap: 4rem;
     }
     .themeTabDetailsSubDivDefault {
         /* text-align: center; */
@@ -571,7 +570,7 @@ h2.whiteContant {
         box-shadow: 5px 5px 5px 0px rgba(16, 141, 193, 0.3);
     }
 }
-
+ 
 @media(max-width:900px) {
     ul.courseHeaderUl.undefined {
         display: flex;
@@ -583,9 +582,17 @@ h2.whiteContant {
         font-size: 25px;
         font-weight: 600;
     }
+ 
+    .mobileMenuLink {
+        display: block;
+    }
 }
-
+ 
 @media(max-width:1280px) {
+ 
+    .mobileMenuLink {
+        display: none;
+    }
   .navbar-inverse .navbar-nav>li>a {
     color: white !important;
     text-transform: uppercase !important;
@@ -611,7 +618,9 @@ ul.courseHeaderUl.undefined {
     /* flex-direction: column; */
 }
 .menu-link.CoursePageItemsContainer.undefined {
-    background-color:transparent;
+    background-color: #00000033;
+    width: 25%;
+    top: 100px;
 }
 .mobileMenuLink li {
     width: 100%;
@@ -625,34 +634,36 @@ ul.courseHeaderUl.undefined {
     height: 10vh;
     padding: 3rem 2rem;
 }
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
 }
-
+ 
 ul.courseHeaderUl.undefined span {
     COLOR: WHITE;
-    FONT-WEIGHT: bold;
+    FONT-WEIGHT:bold;
     font-size: 20px;
     text-transform: uppercase !important;
     cursor: pointer;
 }
-
+ 
 ul.courseHeaderUl span:hover {
     color: black;
   }
-  
-
+ 
+ 
 .before_start_now.defaultBuyButtonInCP a {
     color: white;
 }
-
-
+ 
+ 
 @media (max-width: 600px) {
     .menu-link.CoursePageItemsContainer.undefined {
         background-color: #53505054 !important;
+        width: 50%;
     }
     ul.courseHeaderUl.undefined span {
         color: white !important;
@@ -679,19 +690,139 @@ ul.courseHeaderUl span:hover {
         height: 10vh;
         padding: 3rem 2rem;
     }
-
+ 
     h2.whiteContant {
         color: #108dc1;
         text-align: center;
-        font-size: 25px;
+        font-size: 30px;
         background: #e6ebed;
         box-shadow: 5px 5px 5px 0px rgba(16, 141, 193, 0.3);
         height: 10vh;
         padding: 1rem;
     }
 }
-
-
-
-
-
+ 
+ 
+.logoContainerInCourse{
+    width: 80%;
+    margin: auto;
+}
+ 
+ 
+ 
+/* General styles for the main container */
+.CoursePage_header_Container {
+    /* display: flex; */
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 1rem; */
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+ 
+  /* Logo container */
+  .logo_Img_container {
+    display: flex;
+    align-items: center;
+  }
+ 
+  /* Logo image */
+  .logo_Img_container img {
+    max-width: 240px;
+    height: auto;
+}
+ 
+  /* Navigation links container */
+  .menu-link {
+    /* display: flex; */
+    align-items: center;
+  }
+ 
+  .courseHeaderUl {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+ 
+  .courseHeaderUl li {
+    margin-left: 1rem;
+  }
+ 
+  .courseHeaderUl li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+ 
+  /* Hamburger menu */
+  .hamburgerMenu {
+    /* display: none; */
+    cursor: pointer;
+    font-size: 2rem;
+  }
+ 
+  /* Responsive styles */
+  @media (max-width: 1000px) {
+    /* .menu-link {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+    } */
+ 
+    .menu-link.mobileMenuLink {
+      display: flex;
+    }
+ 
+    /* .hamburgerMenu {
+      display: block;
+    } */
+  }
+ 
+  /* Adjusting for screen widths between 768px and 1000px */
+  @media (min-width: 768px) and (max-width: 1000px) {
+    .t1CoursePageHeaderContainer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 90%;
+   margin: 0 auto;
+   box-shadow: none;
+   background-color: #f9f9f9;
+ 
+    }
+ 
+    .courseHMenu {
+      display: block;
+    }
+ 
+    .menu-link {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+    }
+ 
+    .menu-link.mobileMenuLink {
+        display: flex;
+        position: absolute;
+        top: 4%;
+        width: 20%;
+        border-radius: 20px;
+        right: 0;
+        z-index: 1;
+    }
+    .menu-link.mobileMenuLink.t2UgDivLinksOfHeader {
+        display: flex;
+        position: absolute;
+        top: 1%;
+        width: 35%;
+        border-radius: 20px;
+        right: 55px;
+        /* background-color: white; */
+        z-index: 2;
+    }
+    .menu-link.mobileMenuLink.CoursePageItemsContainer.t2CoursePageHeaderContainer{
+       
+    }
+  }
