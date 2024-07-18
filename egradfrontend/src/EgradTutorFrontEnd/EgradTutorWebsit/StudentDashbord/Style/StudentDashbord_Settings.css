@@ -47,7 +47,10 @@
   color: red;
   margin-bottom: 15px;
 }
-
+.studentNameUpdateForm{
+  display: flex;
+  flex-direction: column;
+}
 
 .change-password-form button {
   background-color: #007bff;

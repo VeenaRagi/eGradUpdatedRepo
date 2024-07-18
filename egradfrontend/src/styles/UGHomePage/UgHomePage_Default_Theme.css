@@ -428,7 +428,7 @@ ul.defaultCoursesUl li:hover {
         text-align: center;
         text-transform: capitalize;
         width: 246px;
-        height: 206px;
+        height:245px;
     }
 }
 
@@ -776,8 +776,8 @@ ul.themeUgHeaderUlDefault {
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    padding: 10px;
-    height: 100px;
+    /* padding: 10px;
+    height: 100px; */
     padding-top: 3rem;
 }
 
@@ -1342,4 +1342,16 @@ form.ContactUsFormData.ContactUsFormDataDefault button {
         justify-content: flex-start;
     }
 
+}
+
+
+@media only screen and (max-width: 425px) {
+    .menu-link.mobileMenuLink.themeUgDivLinksOfHeaderDefault a {
+        font-size: 10px;
+  }
+}
+  @media only screen and (max-width: 390px) {
+    .menu-link.mobileMenuLink.themeUgDivLinksOfHeaderDefault a {
+        font-size: 10px;
+    }
 }
