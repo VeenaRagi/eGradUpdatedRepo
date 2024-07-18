@@ -226,7 +226,7 @@ p#more_info {
 }
 .portal_names.defaultPortalNames {
     margin-right: 15px;
-    height: 200px;
+    /* height: 200px; */
     width: 389px;
 }
 .exam_courses_sub_container.defaultExamCoursesSubContainer {
@@ -313,6 +313,7 @@ p#more_info {
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
+        padding: 1rem;
     }
     .portal_names.defaultPortalNames li {
         height: 320px;
@@ -330,7 +331,7 @@ p#more_info {
          height:80%;
     }
     .exam_courses_sub_container.defaultExamCoursesSubContainer {
-        height: 130vh;
+        height:auto;
     }
     .portal_names.defaultPortalNames li {
         /* height: 235px; */
@@ -347,6 +348,15 @@ p#more_info {
     .defaultExamPortalImgDivInCard img {
         height: 200px;
         width: 200px;
+    }
+    .Ug_examsPage_Container.themeExamPageHeaderContainer a {
+        gap: 0rem;
+    }
+    .exam_info_divs.defaultExamInfoDivs  h3#info_title {
+        background: #d9d9ff;
+        font-size: 15px;
+        padding: 10px 20px;
+        margin-bottom: 32px;
     }
 }
 @media (max-width: 1280px) {
