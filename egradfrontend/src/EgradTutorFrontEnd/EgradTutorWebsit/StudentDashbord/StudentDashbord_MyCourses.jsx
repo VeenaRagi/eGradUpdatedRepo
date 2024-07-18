@@ -612,7 +612,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
                 <div className="QuizBUy_coursescontainerwithfilteringcontainer">
                   {/* Render courses */}
                   {filteredCourses.length === 0 ? (
-                    <div>
+                    <div className="NoActiveCourses_MyCourseTab">
                       <span>YOU HAVE NO ACTIVE COURSES</span>
                     </div>
                   ) : (
