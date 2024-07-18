@@ -246,6 +246,14 @@ li {
   }
 }
 
+.NoActiveCourses_MyCourseTab{
+  background-color: #e9f2ee;
+  margin: auto 2rem;
+   padding: 5px;
+ text-align: center;
+font-weight: bold;
+}
+
 .card_container_dashbordflowtest {
   background: rgb(0 153 255 / 4%);
   min-height: 93vh;
@@ -411,7 +419,8 @@ li {
 }
 
 .default_test_cards .test_cards .test_card .testcard_inline{
-height: 50px;
+height: 100px;
+gap: 4rem;
 /* width:90%; */
 padding: 10px;
 margin: 0 auto;

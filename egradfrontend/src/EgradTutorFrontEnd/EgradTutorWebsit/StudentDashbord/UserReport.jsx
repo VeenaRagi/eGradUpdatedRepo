@@ -812,6 +812,8 @@ const user_Id = decryptedUserIdState;
         bookmark.user_Id === question.user_Id
     );
   };
+console.log("jhopeeeeeeeeeeeeeeeee")
+  console.log(user_Id);
 
   useEffect(() => {
     fetchInitialBookmarks();
