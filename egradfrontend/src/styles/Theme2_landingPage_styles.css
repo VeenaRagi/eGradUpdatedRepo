@@ -325,11 +325,12 @@ color: black;
 
 /*  img in landing page */
 .landing_img_div.t2LCapImgDiv {
-    width: 597px;
-    height: 359px;
+    width: 320px;
+    /* height: 358px; */
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 20px;
 }
 @media screen and (max-width: 955px) {
     .landing_img_div.t2LCapImgDiv {

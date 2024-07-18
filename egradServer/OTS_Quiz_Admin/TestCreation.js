@@ -156,7 +156,7 @@ router.post("/create_test_form1", async (req, res) => {
           return sectionResult;
         })
       );
-
+      console.log(results,"ppppppppppppppppppppppppppppppppp")
       res.json({
         success: true,
         testCreationTableId,
@@ -164,6 +164,7 @@ router.post("/create_test_form1", async (req, res) => {
         message: "Test created successfully",
       });
     } else {
+      console.log(result,"result objjjjjjjj ")
       res.status(400).json({ success: false, error: "Unable to create test" });
     }
   } catch (error) {
@@ -589,7 +590,7 @@ router.put("/test-update/:testCreationTableId/:TestForm_Id", async (req, res) =>
       sectionId,
     ]);
 
-    res.json({ message: "Test and section updated successfully" });
+    res.status(200).json({ message: "Test and section updated successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

@@ -295,6 +295,13 @@ function Testcreationadminforms() {
       );
 
       const data = await response.json();
+      if(data.success){
+        alert(data.message)
+        window.location.href('/Adminpage')
+      }
+      else{
+        alert(data.error)
+      }
       console.log(data);
       setIsFormVisible(false);
       fetchTestData();
