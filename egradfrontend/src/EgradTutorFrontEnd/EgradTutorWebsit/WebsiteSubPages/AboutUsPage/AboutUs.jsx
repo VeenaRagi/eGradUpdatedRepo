@@ -91,7 +91,7 @@ const AboutUs = ({ isEditMode, userRole }) => {
   console.log(themeDetails, "mapppping from json....");
 
   return (
-    <div className="overlay">
+    <div >
       {themeColor === "Theme-2" && (
         <div
           className={`AboutUs_Main_Container ${themeDetails.themeAboutUsMainContainer}`}
