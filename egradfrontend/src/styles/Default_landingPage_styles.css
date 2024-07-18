@@ -255,7 +255,7 @@ a {
 
 .Footer_FirstContent.themeFooterFirstContentDefault h2 {
     color: #279eff;
-    font-size: 30px;
+    font-size: 1.5rem;
     font-weight: 700;
     text-align: start;
     padding-bottom: 1rem;
@@ -265,7 +265,7 @@ a {
     line-height: 2rem;
     text-align: justify;
     color: white !important;
-    font-size: 18px;
+    font-size:1rem;
 }
 
 .NewExploreExams_Image.themeNewExploreExams_ImageDefault img {
@@ -281,12 +281,12 @@ a {
     color: white !important;
     margin-right: 10px;
     text-decoration: underline !important;
-    font-size:18px;
+    font-size:1rem;
 }
 .Footer_Contact_Us_Content.themeFooterContactUsContentDefault p {
     color: white;
     line-height: 2rem;
-    font-size: 18px;
+    font-size: 1rem;
 }
 
 .Footer_Links_Content.themeFooterLinksContentDefault ul li a:hover {
@@ -295,7 +295,7 @@ a {
 
 .themeFooterContactDataDefault h2 {
     color: #279eff;
-    font-size:30px;
+    font-size:1.5rem;
     text-align: start;
     font-weight: 700;
     padding-bottom: 1rem;
@@ -308,7 +308,7 @@ a {
     padding-top: 10px;
     padding-bottom: 10px;
     color: rgb(255, 255, 255);
-    font-size: 18px;
+    font-size:1rem;
 }
 
 .logo_Img_container.themeLogoImgCDefault img {
