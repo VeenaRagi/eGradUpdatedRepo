@@ -19,7 +19,7 @@
 .testCreation_-contant_-flexCOntant {
   display: grid;
 
-  gap: 6rem;
+  gap: 4rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 

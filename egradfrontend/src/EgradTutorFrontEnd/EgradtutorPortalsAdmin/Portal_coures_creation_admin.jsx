@@ -868,17 +868,18 @@ function Portal_coures_creation_admin() {
           </ul>
 
           {/* Close button to hide the list */}
-          <button
+          {/* <button
             className="courseOtsPqbOvl_CloseBtns"
             onClick={handleShowPortalButtons}
           >
-            {/* <i className="fa-solid fa-times"></i> */}
-          </button>
+            <i className="fa-solid fa-times"></i>
+          </button> */}
         </div>
       )}
 
       {/* ots */}
       {activeForm === "form1" && (
+           <div className="overlay">
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
           <form onSubmit={handleSubmitots} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
@@ -1127,9 +1128,11 @@ function Portal_coures_creation_admin() {
             </div>
           </form>
         </div>
+        </div>
       )}
       {/* pqb */}
       {activeForm === "form2" && (
+           <div className="overlay">
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
           <form onSubmit={handleSubmitpqb} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
@@ -1381,9 +1384,11 @@ function Portal_coures_creation_admin() {
             </div>
           </form>
         </div>
+        </div>
       )}
       {/* ovl */}
       {activeForm === "form3" && (
+           <div className="overlay">
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
           <form onSubmit={OVLhandleSubmit} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
@@ -1567,6 +1572,7 @@ function Portal_coures_creation_admin() {
               </div>
             </div>
           </form>
+        </div>
         </div>
       )}
       {activeForm === "form4" && (
