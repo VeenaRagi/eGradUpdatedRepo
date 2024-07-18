@@ -14,8 +14,8 @@ const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
   const [userDetailsForEdit, setUserDetailsForEdit] = useState([])
   const [regIdOfUser, setRegIdOfUser] = useState(null)
   const [tiAuth] = useTIAuth();
-const[updateUserName,setUpdateUserName]=useState("");
-const[updateUserNumber,setUpdateUserNumber]=useState("");
+  const [updateUserName, setUpdateUserName] = useState("");
+  const [updateUserNumber, setUpdateUserNumber] = useState("");
   // useEffect for getting the role
   // useEffect(()=>{
   //   const { userData } = tiAuth;
@@ -30,31 +30,58 @@ const[updateUserNumber,setUpdateUserNumber]=useState("");
   // console.log(userName,"ddddddddddddddddddddddddddddddddddddddd")
   // })
 
-  useEffect(() => {
-    const { userData } = tiAuth;
-    if (userData) {
-      const userName = userData.users[0].username;
-      const studentRegId = userData.users[0].studentregistationId;
+  // useEffect(() => {
+  //   const { userData } = tiAuth;
+  //   if (userData) {
+  //     const userName = userData.users[0].username;
+  //     const studentRegId = userData.users[0].studentregistationId;
 
-      setUserNameFromContext(userName);
-      // setRegIdOfUser(studentRegId);
+  //     setUserNameFromContext(userName);
+  //     // setRegIdOfUser(studentRegId);
 
-      console.log(studentRegId, "This is the user's data");
-      console.log(userName, "User Name");
-    }
-  }, [tiAuth]);
-  useEffect(() => {
-    const { userData } = tiAuth;
-    if (userData) {
-      // const studentRegId = userData.users[0].studentregistationId;
-      const studentRegId = userData.users[0].studentregistationId;
-      setRegIdOfUser(studentRegId);
-      console.log(regIdOfUser, "From seperate useeffect")
-    }
-  }, []);
+  //     console.log(studentRegId, "This is the user's data");
+  //     console.log(userName, "User Name");
+  //   }
+  // }, [tiAuth]);
+  // useEffect(() => {
+  //   const { userData } = tiAuth;
+  //   if (userData) {
+  //     // const studentRegId = userData.users[0].studentregistationId;
+  //     const studentRegId = userData.users[0].studentregistationId;
+  //     setRegIdOfUser(studentRegId);
+  //     console.log(regIdOfUser, "From seperate useeffect")
+  //   }
+  // }, []);
+  
+    const initializeUserData = () => {
+      const { userData } = tiAuth;
+      if (userData && userData.users && userData.users.length > 0) {
+        const userName = userData.users[0].username;
+        const studentRegId = userData.users[0].studentregistationId;
+        setUserNameFromContext(userName);
+        setRegIdOfUser(studentRegId);
+        console.log(studentRegId, "This is the user's data");
+        console.log(userName, "User Name");
+      } else {
+        console.log("userData or userData.users is undefined or empty");
+        // Handle the case where userData or userData.users is not available
+        // For example, show a loading indicator or handle the absence of data
+      }
+    };
+    // initializeUserData(); // Initialize on component mount
+    // Optionally, return a cleanup function if needed
+  
+useEffect(()=>{
+  initializeUserData();
+  
+})
+
+
   useEffect(() => {
     console.log(regIdOfUser, "From separate useEffect");
   }, [regIdOfUser]);
+
+
   const handleChangePassword = async (decryptedUserId) => {
     console.log(decryptedUserId, "this is decryptedUserId from handleChangePassword");
     //  i need to send otp to the user reg email if he selects yes from the alert
@@ -113,8 +140,6 @@ const[updateUserNumber,setUpdateUserNumber]=useState("");
       setUpdateUserName(response.data[0].candidateName)
       setUpdateUserNumber(response.data[0].contactNo)
       console.log(userDetailsForEdit, "setUserDetailsForEditvvvvvvvvvvvvv");
-
-
     }
     if (regIdOfUser) {
       fetchStudentDetailsForUpdate();
@@ -124,37 +149,37 @@ const[updateUserNumber,setUpdateUserNumber]=useState("");
   useEffect(() => {
     console.log(userDetailsForEdit, "this is from the usee effect")
   }, [userDetailsForEdit])
-const handleUpdateStudentData=async(e)=>{
-  // have to post the data 
-  e.preventDefault();
-  try {
-    const response=await axios.post(`${BASE_URL}/studentSettings/studentNameNumberUpdate/${regIdOfUser}`,{
-      userName:updateUserName,
-      userNumber:updateUserNumber
-    });
-    console.log(response.data,"response form the backend");
-    if(response.status===200){
-      alert(response.data.message)
-    }
-    else{
-      alert(response.data.error)
-    }
+  const handleUpdateStudentData = async (e) => {
+    // have to post the data 
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${BASE_URL}/studentSettings/studentNameNumberUpdate/${regIdOfUser}`, {
+        userName: updateUserName,
+        userNumber: updateUserNumber
+      });
+      console.log(response.data, "response form the backend");
+      if (response.status === 200) {
+        alert(response.data.message)
+      }
+      else {
+        alert(response.data.error)
+      }
 
-  } catch (error) {
-    console.log(error)
+    } catch (error) {
+      console.log(error)
+    }
+    // alert it back
+
   }
-  // alert it back
+  const handleUseNameChange = (e) => {
+    setUpdateUserName(prev => e.target.value)
+    console.log(updateUserName)
+  }
 
-}
-const handleUseNameChange=(e)=>{
-  setUpdateUserName(prev=>e.target.value)
-  console.log(updateUserName)
-}
-
-const handleUserNumberChange=(e)=>{
-  setUpdateUserNumber(prev=>e.target.value)
-  console.log(updateUserNumber)
-}
+  const handleUserNumberChange = (e) => {
+    setUpdateUserNumber(prev => e.target.value)
+    console.log(updateUserNumber)
+  }
 
   return (
     <div className="dashboard_settings">
@@ -232,9 +257,15 @@ const handleUserNumberChange=(e)=>{
           ))}
         </div>
       </div>
-      <form action="" onSubmit={handleUpdateStudentData}>
-        <input type="text" value={updateUserName} onChange={handleUseNameChange}/>
-        <input type="number" value={updateUserNumber} onChange={handleUserNumberChange}/>
+      <form action="" className='studentNameUpdateForm' onSubmit={handleUpdateStudentData}>
+        <div>
+          <label htmlFor="">Update Your Name:</label>
+          <input type="text" value={updateUserName} onChange={handleUseNameChange} />
+        </div>
+        <div>
+          <label htmlFor="">Update Your Number</label>
+          <input type="number" value={updateUserNumber} onChange={handleUserNumberChange} />
+        </div>
         <button type='submit'>Submit</button>
       </form>
 
