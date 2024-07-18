@@ -159,7 +159,7 @@ const[activeTab,setActiveTab]=useState(null)
                       images.map((image) => (
                         image.course_tab_title_id === selectedTabData?.[0]?.course_tab_id && (
                           <div key={image.course_tab_id}>
-                            <div className='whyChooseUsImg'>
+                            <div className={`whyChooseUsImg ${themeDetails.themeWCUImg}`}>
                               {image.course_tab_image ? (
                                 <img src={image.course_tab_image} alt={`Course Tab ${image.course_tab_id}`} />
                               ) : (
