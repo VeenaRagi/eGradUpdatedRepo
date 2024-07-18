@@ -9,7 +9,6 @@ import { FaBookOpenReader } from "react-icons/fa6";
 import ReactPlayer from "react-player";
 import ProgressPieChart from "../ProgressPieChart ";
 
-
 const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   const [showQuizCourses, setShowQuizCourses] = useState(true);
   const [showtestContainer1, setShowtestContainer1] = useState(false);
@@ -346,6 +345,18 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   };
   // Render logic for displaying fetched data
 
+  // //mouseclick disabling
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+  };
+  useEffect(() => {
+    document.addEventListener("contextmenu", handleContextMenu);
+
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
+
   const handleTypeOfTestClickback = () => {
     setShowQuizCourses(true);
     // setShowtestContainer(false);
@@ -387,12 +398,12 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
         <span
           className="span_style_attempt_status"
 
-        // style={{
-        //   backgroundColor: "red",
-        //   color: "white",
-        //   padding: "2.9px",
-        //   textDecoration: "none",
-        // }}
+          // style={{
+          //   backgroundColor: "red",
+          //   color: "white",
+          //   padding: "2.9px",
+          //   textDecoration: "none",
+          // }}
         >
           Attempted
         </span>
@@ -453,7 +464,6 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     }
   }, [testDetails, selectedTypeOfTest]);
 
-
   // =======================OVL START====================
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -465,7 +475,6 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   const [played, setPlayed] = useState(0);
   const [duration, setDuration] = useState(0);
 
-
   const [courses, setCourses] = useState([]);
   const [initialPlayTime, setInitialPlayTime] = useState(0);
 
@@ -474,12 +483,12 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
       try {
         const response = await fetch(`${BASE_URL}/OtsvidesUploads/videos`);
         if (!response.ok) {
-          throw new Error('Failed to fetch videos');
+          throw new Error("Failed to fetch videos");
         }
         const data = await response.json();
         setVideos(data);
       } catch (error) {
-        console.error('Error fetching videos:', error);
+        console.error("Error fetching videos:", error);
       }
     };
 
@@ -488,20 +497,23 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
 
   const handleViewVideo = async (OVL_Linke_Id) => {
     try {
-      const video = videos.find(video => video.OVL_Linke_Id === OVL_Linke_Id);
+      const video = videos.find((video) => video.OVL_Linke_Id === OVL_Linke_Id);
       if (!video) {
-        throw new Error('Video not found');
+        throw new Error("Video not found");
       }
-      const savedProgress = localStorage.getItem(`video-progress-${video.OVL_Linke_Id}`);
-      const initialPlayTime = savedProgress ? JSON.parse(savedProgress).playedSeconds : 0;
+      const savedProgress = localStorage.getItem(
+        `video-progress-${video.OVL_Linke_Id}`
+      );
+      const initialPlayTime = savedProgress
+        ? JSON.parse(savedProgress).playedSeconds
+        : 0;
       setSelectedVideo(video.Drive_Link); // Ensure this is a valid Base64 data URL
       setInitialPlayTime(initialPlayTime);
       setIsModalOpen(true);
     } catch (error) {
-      console.error('Error fetching video:', error);
+      console.error("Error fetching video:", error);
     }
   };
-
 
   const handleVideosClick = async (OVL_Course_Id) => {
     try {
@@ -524,7 +536,6 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     }
   };
 
-
   const handleCloseModal = () => {
     setSelectedVideo(null);
     setIsModalOpen(false);
@@ -535,13 +546,9 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     // localStorage.setItem(`video-progress-${selectedVideo}`, JSON.stringify(progress));
   };
 
-
   const handleDuration = (duration) => {
     setDuration(duration);
   };
-
-
-
 
   const handleFullscreenChange = () => {
     if (document.fullscreenElement) {
@@ -570,10 +577,6 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   }, [isFullscreen]);
 
   // =======================OVL END====================
-
-
-
-
 
   return (
     <div>
@@ -673,10 +676,10 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
                                   {portalId === 1 || portalId === 2
                                     ? courseExamsDetails.totalTests
                                     : portalId === 3
-                                      ? courseExamsDetails.totalLectures
-                                      : portalId === 4
-                                        ? courseExamsDetails.topicName
-                                        : null}
+                                    ? courseExamsDetails.totalLectures
+                                    : portalId === 4
+                                    ? courseExamsDetails.topicName
+                                    : null}
                                 </p>
 
                                 <div className="QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoeprice QuizBUy_coursescontainerwithfilteringcoursebox_info_buynoepricemycourses">
@@ -688,8 +691,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
                                           user_Id,
                                           portalId
                                         );
-                                      }
-                                      else if (portalId === 3) {
+                                      } else if (portalId === 3) {
                                         handleVideosClick(
                                           courseExamsDetails.courseCreationId
                                         );
@@ -706,10 +708,10 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
                                     {portalId === 1 || portalId === 2
                                       ? "Go to Test"
                                       : portalId === 3
-                                        ? "Start Lecture"
-                                        : portalId === 4
-                                          ? "Open Complete Package"
-                                          : null}
+                                      ? "Start Lecture"
+                                      : portalId === 4
+                                      ? "Open Complete Package"
+                                      : null}
                                   </Link>
                                 </div>
                               </div>
@@ -950,7 +952,8 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
                         <div className="OVL_card_data" key={video.OVL_Linke_Id}>
                           <h2 className="OVL_text">{video.Lectures_name}</h2>
                           {/* <React.Fragment key={video.OVL_Linke_Id}> */}
-                          <ProgressPieChart className="pie_button"
+                          <ProgressPieChart
+                            className="pie_button"
                             videoProgress={videoProgress}
                             onClick={() => {
                               handleViewVideo(video.OVL_Linke_Id);
@@ -984,7 +987,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
                                 },
                               },
                             }}
-                            onError={(e) => console.error('Video Error:', e)}
+                            onError={(e) => console.error("Video Error:", e)}
                           />
                         </div>
                       </div>

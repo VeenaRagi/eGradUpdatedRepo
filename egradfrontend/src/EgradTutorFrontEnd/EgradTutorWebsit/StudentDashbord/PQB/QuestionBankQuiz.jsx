@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import QuestionBankQuizButtonsFunctionality from "./QuestionBankQuizButtonsFunctionality";
 import Tooltip from "@mui/material/Tooltip";
@@ -14,6 +14,8 @@ import { IoReloadCircle } from "react-icons/io5";
 import { decryptData, encryptData } from "../utils/crypto";
 
 const QuestionBankQuiz = () => {
+  const location = useLocation();
+  const { userData } = location.state || {};
   const navigate = useNavigate();
 
   const { param1, param2 } = useParams();
@@ -63,7 +65,7 @@ const QuestionBankQuiz = () => {
   console.log("decryptedParam1", decryptedParam1);
   console.log("decryptedParam2", decryptedParam2);
 
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
   const [testData, setTestData] = useState([]);
   const { courseCreationId } = useParams();
   const [testDetails, setTestDetails] = useState([]);
@@ -128,7 +130,6 @@ const QuestionBankQuiz = () => {
     }
   }
 
-
   const [image, setImage] = useState(null);
   const fetchImage = async () => {
     try {
@@ -145,7 +146,162 @@ const QuestionBankQuiz = () => {
   useEffect(() => {
     fetchImage();
   }, []);
-  
+
+  //keyboard disabling
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      event.preventDefault(); // Prevent default keyboard action
+      event.stopPropagation(); // Stop event propagation
+      // Optionally, you can add custom logic here to handle keydown events.
+    };
+
+    // Attach event listener to intercept keydown events
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup function to remove event listener when component unmounts
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []); // Empty dependency array ensures the effect runs only once
+
+  const [showMalPractisePopup, setShowMalPractisePopup] = useState(false);
+  const [showButtonNo, setShowButtonNo] = useState(false);
+
+  const quizRef = useRef(null);
+
+  const enterFullscreen = () => {
+    const element = quizRef.current;
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    }
+  };
+
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+      console.log("Page is now hidden");
+      setShowMalPractisePopup(true);
+    } else {
+      console.log("Page is now visible");
+    }
+  };
+
+  const handleBlur = () => {
+    console.log("Window is not focused");
+    setShowMalPractisePopup(true);
+  };
+
+  const handleFocus = () => {
+    console.log("Window is focused");
+  };
+
+  const handleBeforeUnload = (event) => {
+    const confirmationMessage = "Are you sure you want to leave this page?";
+    event.returnValue = confirmationMessage; // For most browsers
+    setShowMalPractisePopup(true);
+    // setAttemptedToClose(true);
+    return confirmationMessage; // For some older browsers
+  };
+  const [isShiftPressed, setIsShiftPressed] = useState(false);
+  const [isMetaPressed, setIsMetaPressed] = useState(false);
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Shift") {
+      event.preventDefault();
+      setIsShiftPressed(true);
+    }
+    if (event.key === "Meta" || event.key === "Win") {
+      event.preventDefault();
+      setIsMetaPressed(true);
+    }
+    if (event.key === "s" && isShiftPressed && isMetaPressed) {
+      event.preventDefault();
+      window.history.back();
+      window.close();
+    }
+
+    if (isShiftPressed && isMetaPressed) {
+      event.preventDefault();
+      setShowMalPractisePopup(true);
+    }
+  };
+
+  const handleKeyUp = (event) => {
+    if (event.key === "Shift") {
+      event.preventDefault();
+      setIsShiftPressed(false);
+    }
+    if (event.key === "Meta" || event.key === "Win") {
+      event.preventDefault();
+      setIsMetaPressed(false);
+    }
+  };
+
+  useEffect(() => {
+    if ("hidden" in document) {
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+
+      window.addEventListener("focus", handleFocus);
+      window.addEventListener("blur", handleBlur);
+
+      document.addEventListener("keydown", handleKeyDown);
+      document.addEventListener("keyup", handleKeyUp);
+    } else {
+      console.log("Page Visibility API is not supported");
+    }
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+
+      window.removeEventListener("focus", handleFocus);
+      window.removeEventListener("blur", handleBlur);
+
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [isShiftPressed, isMetaPressed]);
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  });
+
+  async function handleMalPractiseSubmit(userId) {
+    try {
+      const response = await fetch(
+        `http://localhost:5001/QuizPage/clearresponseforPB/${decryptedParam2}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            // Include any necessary authentication headers
+            Authorization: "Bearer yourAccessToken",
+          },
+          body: JSON.stringify({ decryptedParam2 }),
+        }
+      );
+
+      if (!response.ok) {
+        console.error("Failed to delete user data");
+      } else {
+        console.log("User data deleted successfully");
+      }
+
+      // Close the window
+      window.close();
+    } catch (error) {
+      console.error("Error deleting user data:", error);
+    }
+  }
+
   // const [testDetails, setTestDetails] = useState(null);
   useEffect(() => {
     const fetchTestDetails = async () => {
@@ -1646,33 +1802,33 @@ const QuestionBankQuiz = () => {
   //end Subjects fetching use effect code
 
   //users fetching use effect code
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          `${BASE_URL}/ughomepage_banner_login/user1`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Attach token to headers for authentication
-            },
-          }
-        );
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       const response = await fetch(
+  //         `${BASE_URL}/ughomepage_banner_login/user1`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`, // Attach token to headers for authentication
+  //           },
+  //         }
+  //       );
 
-        if (response.ok) {
-          const userData = await response.json();
-          setUserData(userData);
-          // console.log(userData);
-        } else {
-          // Handle errors, e.g., if user data fetch fails
-        }
-      } catch (error) {
-        // Handle other errors
-      }
-    };
+  //       if (response.ok) {
+  //         const userData = await response.json();
+  //         setUserData(userData);
+  //         // console.log(userData);
+  //       } else {
+  //         // Handle errors, e.g., if user data fetch fails
+  //       }
+  //     } catch (error) {
+  //       // Handle other errors
+  //     }
+  //   };
 
-    fetchUserData();
-  }, []);
+  //   fetchUserData();
+  // }, []);
   //end users fetching use effect code
 
   //counts use effect code
@@ -1716,33 +1872,33 @@ const QuestionBankQuiz = () => {
 
   // const [userData, setUserData] = useState({});
   // user data
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          `${BASE_URL}/ughomepage_banner_login/user`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Attach token to headers for authentication
-            },
-          }
-        );
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       const response = await fetch(
+  //         `${BASE_URL}/ughomepage_banner_login/user`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`, // Attach token to headers for authentication
+  //           },
+  //         }
+  //       );
 
-        if (response.ok) {
-          const userData = await response.json();
-          setUserData(userData);
-          // console.log(userData);
-        } else {
-          // Handle errors, e.g., if user data fetch fails
-        }
-      } catch (error) {
-        // Handle other errors
-      }
-    };
+  //       if (response.ok) {
+  //         const userData = await response.json();
+  //         setUserData(userData);
+  //         // console.log(userData);
+  //       } else {
+  //         // Handle errors, e.g., if user data fetch fails
+  //       }
+  //     } catch (error) {
+  //       // Handle other errors
+  //     }
+  //   };
 
-    fetchUserData();
-  }, []);
+  //   fetchUserData();
+  // }, []);
 
   const [originalStatuses, setOriginalStatuses] = useState(
     Array(questionData.questions.length).fill("notVisited")
@@ -2007,7 +2163,7 @@ const QuestionBankQuiz = () => {
 
       if (response_user.ok) {
         const userData = await response_user.json();
-        setUserData(userData);
+        // setUserData(userData);
 
         // Ensure userId is defined
         const userId = decryptedParam2;
@@ -2991,7 +3147,35 @@ const QuestionBankQuiz = () => {
   });
 
   return (
-    <div className="QuestionPaper_-container">
+    <div
+      className="QuestionPaper_-container"
+      ref={quizRef}
+      onClick={enterFullscreen}
+      style={{ backgroundColor: "white" }}
+    >
+      {showMalPractisePopup && (
+        <div className="MalPracticePopup">
+          <div className="malpractice_popup_content">
+            <h2>Malpractice Attempt</h2>
+            <p>
+              "As per our examination rules, your test has been automatically
+              submitted as a result of a detected violation. Switching tabs
+              during the quiz is strictly prohibited."
+            </p>
+
+            <button
+              // onClick={handleMalPractiseSubmit}
+              onClick={() => {
+                handleMalPractiseSubmit(decryptedParam2);
+              }}
+              style={{ color: "red" }}
+              target="_blank"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
       <>
         {showPopupallpb ? (
           <div className="popup">
@@ -3257,7 +3441,6 @@ const QuestionBankQuiz = () => {
                                                     );
                                                   }
                                                 )}
-
                                               </div>
                                               <div>
                                                 <input
@@ -4441,6 +4624,7 @@ const QuestionBankQuiz = () => {
                   option={option}
                   setButtonText={setButtonText}
                   activeIndex={activeIndex}
+                  userData={userData}
                 />
               </div>
             </div>

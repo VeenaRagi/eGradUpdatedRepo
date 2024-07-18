@@ -13,12 +13,11 @@ import { BiMenuAltLeft } from "react-icons/bi";
 import BASE_URL from "../../../../apiConfig";
 import { decryptData, encryptData } from "../utils/crypto";
 import "../Style/Watermark.css";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 const QuizPage = () => {
-
   const location = useLocation();
-  const { userData } = location.state || {}; 
+  const { userData } = location.state || {};
 
   const navigate = useNavigate();
 
@@ -90,11 +89,13 @@ const QuizPage = () => {
   useEffect(() => {
     fetchImage();
   }, []);
-  // const handleContextMenu = (e) => {
-  //   e.preventDefault();
-  // };
+ 
 
   // //mouseclick disabling
+   // const handleContextMenu = (e) => {
+  //   e.preventDefault();
+  // };
+  
   // useEffect(() => {
   //   document.addEventListener('contextmenu', handleContextMenu);
 
@@ -3860,7 +3861,7 @@ const QuizPage = () => {
                   seconds={600}
                   onUpdateOption={handleUpdateOption}
                   option={option}
-                  userData={userData} 
+                  userData={userData}
                 />
               </div>
             </div>
