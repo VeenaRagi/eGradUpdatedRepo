@@ -503,7 +503,8 @@ themeMainFooterContainer:"t1MainFooterContainer",
     themeBuyButtonInCP:"t1BuyButtonInCP",
     themeTabContentSplittedText:"t1TabContentSplittedText",
     themeTabContentSplittedTextInDiv:"t1TabContentSplittedTextInDiv",
-
+    themeWCUImg:"t1WCUImg",
+    
   },
   "Theme-2": {
     id: "themeTwoId",

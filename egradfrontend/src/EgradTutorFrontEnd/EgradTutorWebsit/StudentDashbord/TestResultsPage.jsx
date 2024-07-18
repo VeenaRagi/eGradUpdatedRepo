@@ -539,42 +539,7 @@ console.log("11111111111111111111111111111111111111")
   };
 
 
-  const [userIdLink,setUserIdLink]= useState("")
 
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  // useEffect(() => {
-  //   const checkLoggedIn = () => {
-  //     const isLoggedInObjFromLS = localStorage.getItem("tiAuth");
-  //     console.log(isLoggedInObjFromLS,"ggggggggggggggggggggggggggggg");
-
-  //     if (isLoggedInObjFromLS) {
-  //       try {
-  //         const tiAuth = JSON.parse(isLoggedInObjFromLS);
-  //         console.log("veenaaaaaaaaaaaa")
-  //         console.log(tiAuth.user,"this is the status")
-  //         const role=tiAuth.user
-  //         setUserIdLink(role)
-  //         // setIsLoggedInFromLS(tiAuth.isLoggedIn);
-  //         // console.log(tiAuth,"this is ssssssssssss")
-  //         // console.log(isLoggedInFromLS, "wwwwwwwwwwwwwwwwwwwwwww");
-  //         if (role === "User") {
-  //           setIsAdmin(true);
-
-  //         }
-  //       } catch (error) {
-  //         console.log(error, "parsing the tiauth for back button");
-  //       }
-  //     }
-  //   };
-  //   checkLoggedIn();
-  // }, []);
-
-
-  // const encryptUserId = (decryptedParam2) => {
-  //   const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
-  //   return CryptoJS.AES.encrypt(decryptedParam2.toString(), secretKey).toString();
-  // };
 
   const [encodedUserId, setEncodedUserId] = useState('');
 
