@@ -129,6 +129,9 @@ img.t2LogoImg {
     font-optical-sizing: auto;
     font-style: normal;
 }
+.landing_img_div.t2LCapImgDiv img{
+    width: 100%;
+}
 .t2TextContainer div p {
     margin-left: 102px;
     color: #418f95;
