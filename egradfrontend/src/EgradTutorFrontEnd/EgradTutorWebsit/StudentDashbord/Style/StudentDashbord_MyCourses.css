@@ -640,7 +640,7 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 .OVL_card_data {
   background-color: #ffffff; 
   border: 1px solid #ddd;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -661,6 +661,7 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 .OVL_text {
   font-size: 18px;
   margin-right: 20px;
+  margin-bottom: 0px;
   align-items: center;
 }
 

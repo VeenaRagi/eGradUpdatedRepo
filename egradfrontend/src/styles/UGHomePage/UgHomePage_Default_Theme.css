@@ -776,8 +776,8 @@ ul.themeUgHeaderUlDefault {
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    padding: 10px;
-    height: 100px;
+    /* padding: 10px;
+    height: 100px; */
     padding-top: 3rem;
 }
 
