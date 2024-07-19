@@ -171,10 +171,10 @@
   background: #f6f8eb;
 }
 
-.greenImgDiv {
+.greenCard .greenImgDiv {
   padding: 10px;
   box-shadow: 0 2px 7px 0px #c3cf84;
-  height: 430px;
+  height: 460px;
 }
 
 span.greenThemeCourseInfo {

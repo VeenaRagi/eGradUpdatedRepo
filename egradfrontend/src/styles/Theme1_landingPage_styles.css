@@ -181,7 +181,7 @@ img.t1LogoImg {
         h1 {
             text-align: center;
             font-size: 65px;
-            color: #ff5e6c;
+            color: #005518;
             ;
             justify-content: center;
             align-items: center;
@@ -396,8 +396,8 @@ img.t1LogoImg {
     display: flex;
     flex-direction: column;
     font-size: 30px;
-    position: absolute;
-    left: 330px;
+    /* position: absolute; */
+    left: 310px;
     gap: 5px;
 }
 
@@ -421,6 +421,10 @@ img.t1LogoImg {
 
     .t1LandingParentContainer {
         object-fit: cover;
+        display: flex;
+        flex-direction: column;
+        height: 280px;
+        gap: 25px;
     }
 
     .t1LCapImgDiv {
@@ -515,6 +519,9 @@ img.t1LogoImg {
             margin: 0px 45px;
         
     }
+    .t1TextContainer {
+        margin-bottom: 20px;
+    }
 
 
 }
@@ -580,7 +587,7 @@ img.t1LogoImg {
     flex-direction: row;
     font-size: 30px;
     position: absolute;
-    left: 1000px;
+    left: 930px;
     /* justify-content: flex-end;  */
     gap: 15px;
 }

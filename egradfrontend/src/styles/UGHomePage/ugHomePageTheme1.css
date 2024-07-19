@@ -143,7 +143,7 @@
 
 
 .t1ExamPageHeaderContainer a img {
-    height: 160px;
+    /* height: 160px; */
     width: 350px;
 }
 
@@ -445,3 +445,5 @@ hr {
     -ms-flex-pack: center;
     justify-content: center;
 }
+
+

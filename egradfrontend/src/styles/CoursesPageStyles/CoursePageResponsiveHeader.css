@@ -327,6 +327,8 @@ ul.DefaultulCPDiv{
         position: relative;
         font-size: 1.8rem;
     }
+
+    
     ul.ulDiv.DefaultulCPDiv {
         display: flex;
         gap: 2rem;
