@@ -217,9 +217,9 @@ ul.t1ulCPDiv{
         padding: 4rem 2rem 2rem 2rem;
         flex-direction: column;
         position: absolute;
-        top: 1%;
-        right: 7%;
-        background-color:  #74c48a;
+        top: 14%;
+        right: 1%;
+        background-color: #74c48a6e;
         color: white;
         border-radius: 10px;
     }
@@ -279,7 +279,7 @@ ul.ulDiv {
     margin: 0;
     border: 1px solid;
     padding: 1rem;
-    background-color: #274c61;
+    background-color:#74c48a6e;
     color: white;
     font-size: 20px;
     padding-left: 4rem;
@@ -328,7 +328,7 @@ ul.DefaultulCPDiv{
         font-size: 1.8rem;
     }
 
-    
+
     ul.ulDiv.DefaultulCPDiv {
         display: flex;
         gap: 2rem;
