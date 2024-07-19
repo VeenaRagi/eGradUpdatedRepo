@@ -183,6 +183,11 @@ span.greenThemeCourseInfo {
   font-weight: 500 !important;
 }
 
+.logo_Img_container img {
+  max-width: 350px;
+  height: auto;
+}
+
 .greenIconsAndCardsPC {
   /* background: #f4fff9; */
   display: flex;
