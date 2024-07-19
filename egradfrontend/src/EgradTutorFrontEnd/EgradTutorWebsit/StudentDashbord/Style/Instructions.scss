@@ -271,6 +271,7 @@
     align-items: center;
     gap: 1rem;
     width: 95%;
+    padding: 10px;
     margin: 0 auto;
     font-size: 18px;
     margin: 0.5rem ;
@@ -299,4 +300,41 @@
     width: 15px;
     height: 15px;
 
+}
+
+
+// General Instructions css //
+
+.Instructions_container {
+    display: grid;
+    padding: 20px;
+}
+
+.Instructions_points {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Instructions_points_list {
+    color: rgb(14, 13, 13);
+    list-style-type:disc; 
+    padding-left: 10px; 
+}
+
+/* Optional: Additional styles to adjust list appearance */
+.Instructions_points_list li {
+    margin-bottom: 8px; 
+}
+
+.gn_next_btn_bull svg{
+    margin-right: 10px;
+}
+
+.disabled-link svg{
+margin-left: 15px;
+}
+
+.gn_next_btn svg{
+    margin-left: 10px;
 }
