@@ -276,7 +276,9 @@ ul.tabButtonUl.t1TabButtonUl button {
         display: flex;
         flex-direction: column;
     }
-
+    .t1HeadingInCp h2 {
+        font-size: 30px;
+    }
 
     .t1TabsSubContainer .t1TabButtonUl {
         flex-direction: row;
