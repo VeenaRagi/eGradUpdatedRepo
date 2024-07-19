@@ -55,7 +55,7 @@ const StudentDashboardHeader = ({ usersData = {}, decryptedUserIdState,setActive
                 {usersData.users.map((user) => (
                   <div className="SDHeaderImgContainer" key={user.UplodadPhto}>
                     <img
-                      style={{ width: '100%', borderRadius: '50%',height: '3rem' }}
+                      style={{ width: '100%', borderRadius: '50%',height: '3.5rem' }}
                       src={`${BASE_URL}/uploads/studentinfoimeages/${user.UplodadPhto}`}
                       alt={`no img${user.UplodadPhto}`}
                     />
