@@ -229,7 +229,6 @@ router.post(
         "SELECT * FROM course_tab_images WHERE course_tab_title_id = ?",
         [courseTabId]
       );
-
       if (existingImage.length > 0) {
         // Update the existing record if found
         await db.query(
@@ -243,6 +242,11 @@ router.post(
           [courseTabId, tabImage]
         );
       }
+      response = await db.query(
+        "INSERT INTO course_tab_details (course_portale_id, course_tab_title_id, course_tab_text) VALUES (?, ?, ?)",
+        [coursePortaleId, courseTabId, courseTabDescription]
+      );
+
     } else {
       response = await db.query(
         "INSERT INTO course_tab_details (course_portale_id, course_tab_title_id, course_tab_text) VALUES (?, ?, ?)",
