@@ -9,7 +9,7 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    height: 320px;
+    height: 520px;
     flex: 1 0 auto;
     max-width: 41%; 
     margin: 10px;
@@ -20,11 +20,12 @@
     border-radius: 10px;
     cursor: pointer;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
     transition: background-color 0.3s ease;
+    padding-top: 1rem;
 }
  
 .theme-selector-card:hover {
@@ -35,7 +36,7 @@
  
 .theme-selector-image {
     max-width: 100%;
-    max-height: 100%;
+    max-height: 90%;
     display: block;
     border-radius: 10px;
 }

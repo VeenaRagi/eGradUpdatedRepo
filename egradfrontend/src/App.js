@@ -9,7 +9,7 @@ import ContactUs from "./EgradTutorFrontEnd/EgradTutorWebsit/WebsiteSubPages/Con
 import Login from "./Login/Login";
 import AdminLogin from "./Login/AdminLogin";
 import Register from "./Login/Register";
-import UgadminHome from "./Login/UgadminHome";
+// import UgadminHome from "./Login/UgadminHome";
 import LinkPage from "./EgradTutorFrontEnd/EgradTutorWebsit/Footer/LinkPage";
 import FAQ from "./EgradTutorFrontEnd/EgradTutorWebsit/WebsiteSubPages/FAQPage/FAQ";
 import CoursePage from "./EgradTutorFrontEnd/EgradTutorWebsit/CoursePages/CoursePage";
