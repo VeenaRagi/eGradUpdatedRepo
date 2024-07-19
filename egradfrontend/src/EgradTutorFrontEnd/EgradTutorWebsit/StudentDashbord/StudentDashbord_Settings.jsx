@@ -16,26 +16,26 @@ const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
   const [tiAuth] = useTIAuth();
   const [updateUserName, setUpdateUserName] = useState("");
   const [updateUserNumber, setUpdateUserNumber] = useState("");
-  const[userEmailDisable,setUserEmailDisable]=useState("")
+  const [userEmailDisable, setUserEmailDisable] = useState("")
 
-  
-    const initializeUserData = () => {
-      const { userData } = tiAuth;
-      if (userData && userData.users && userData.users.length > 0) {
-        const userName = userData.users[0].username;
-        const studentRegId = userData.users[0].studentregistationId;
-        setUserNameFromContext(userName);
-        setRegIdOfUser(studentRegId);
-        console.log(studentRegId, "This is the user's data");
-        console.log(userName, "User Name");
-      } else {
-        console.log("userData or userData.users is undefined or empty");
-      }
-    };
-useEffect(()=>{
-  initializeUserData();
 
-})
+  const initializeUserData = () => {
+    const { userData } = tiAuth;
+    if (userData && userData.users && userData.users.length > 0) {
+      const userName = userData.users[0].username;
+      const studentRegId = userData.users[0].studentregistationId;
+      setUserNameFromContext(userName);
+      setRegIdOfUser(studentRegId);
+      console.log(studentRegId, "This is the user's data");
+      console.log(userName, "User Name");
+    } else {
+      console.log("userData or userData.users is undefined or empty");
+    }
+  };
+  useEffect(() => {
+    initializeUserData();
+
+  })
 
 
   useEffect(() => {
@@ -142,10 +142,11 @@ useEffect(()=>{
     setUpdateUserNumber(prev => e.target.value)
     console.log(updateUserNumber)
   }
-  // const 
-const handleUpdateButtonClick=()=>{
-  
-}
+  const [showProfileUpdateForm, setShowProfileUpdateForm] = useState(true)
+  const handleUpdateButtonClick = () => {
+    setShowProfileUpdateForm(!showProfileUpdateForm)
+    console.log(showProfileUpdateForm)
+  }
   return (
     <div className="dashboard_settings">
       {usersData.users && usersData.users.length > 0 && (
@@ -162,57 +163,55 @@ const handleUpdateButtonClick=()=>{
           {/* <img src={`${BASE_URL}/uploads/studentinfoimeages/${img}`} alt="nnnnnnnn" /> */}
         </ul>
       )}
-
-      {showChangePasswordForm ? (
-        <div className="change-password-container">
-          <form className="change-password-form" onSubmit={(e) => handleChangePasswordSubmit(e)}>
-            <div>
-              <div>NOTE: OTP IS VALID FOR TEN MINUTES ONLY</div>
-              <label htmlFor="otp">Enter your Code (sent through Email):</label>
-              <input
-                type="number"
-                id="otp"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="newPassword">Enter new password</label>
-              <input
-                type="password"
-                id="newPassword"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="confirmNewPassword">Confirm New Password</label>
-              <input
-                type="password"
-                id="confirmNewPassword"
-                value={confirmNewPassword}
-                onChange={(e) => setConfirmNewPassword(e.target.value)}
-              />
-            </div>
-            {errorsOfForm && (
-              <div className="error-message">{errorsOfForm}</div>
-            )}
-            <div className="button-container">
-              <button type="submit">Change Password</button>
-              <button type="button" className="close-button" onClick={() => handleClose()}>Close</button>
-            </div>
-          </form>
-        </div>
-      ) : (
-        <>
-        <button onClick={() =>handleUpdateButtonClick }>Profile Update </button>
+      <div className='buttonsToBeFlex'>
+        <button onClick={handleUpdateButtonClick} >Profile Update </button>
         <button onClick={() => handleChangePassword(decryptedUserIdState)}>Change Password ?</button>
-        </>
-      )}
-      {/* <h3>This is the username from the context globally so that every component can access..........</h3>
-      <p>{userNameFromContext}</p> */}
-      <div>
-        {/* <div>
+      </div>
+      <div className='buttonsToBeFlex'>
+        {showChangePasswordForm && (
+          <div className="change-password-container">
+            <form className="change-password-form" onSubmit={(e) => handleChangePasswordSubmit(e)}>
+              <div>
+                <div>NOTE: OTP IS VALID FOR TEN MINUTES ONLY</div>
+                <label htmlFor="otp">Enter your Code (sent through Email):</label>
+                <input
+                  type="number"
+                  id="otp"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="newPassword">Enter new password</label>
+                <input
+                  type="password"
+                  id="newPassword"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="confirmNewPassword">Confirm New Password</label>
+                <input
+                  type="password"
+                  id="confirmNewPassword"
+                  value={confirmNewPassword}
+                  onChange={(e) => setConfirmNewPassword(e.target.value)}
+                />
+              </div>
+              {errorsOfForm && (
+                <div className="error-message">{errorsOfForm}</div>
+              )}
+              <div className="button-container">
+                <button type="submit">Change Password</button>
+                <button type="button" className="close-button" onClick={() => handleClose()}>Close</button>
+              </div>
+            </form>
+          </div>
+        )
+        }
+        <div>
+          {/* <div>
           {userDetailsForEdit.map((student, index) => (
             <div key={index} className="student-details">
               <h2>{student.candidateName}</h2>
@@ -223,25 +222,29 @@ const handleUpdateButtonClick=()=>{
             </div>
           ))}
         </div> */}
+        </div>
+        {showProfileUpdateForm && (
+          <form action="" className='studentNameUpdateForm' onSubmit={handleUpdateStudentData}>
+            <div className='centerDivForForm'>
+              <div >
+                <label htmlFor="">Update Your Name:</label>
+                <input type="text" value={updateUserName} onChange={handleUseNameChange} />
+              </div>
+              <div>
+                <label htmlFor="">Email:</label>
+                <input type="email" className='emailDisabledInStudentSetting' disabled value={userEmailDisable} />
+              </div>
+              <div>
+                <label htmlFor="">Update Your Number:</label>
+                <input type="number" value={updateUserNumber} onChange={handleUserNumberChange} />
+              </div>
+              <span>
+              <button type='submit' className='submitButton'>Submit</button>
+              </span>
+            </div>
+          </form>
+        )}
       </div>
-      <form action="" className='studentNameUpdateForm' onSubmit={handleUpdateStudentData}>
-        <div className='centerDivForForm'>
-        <div >
-          <label htmlFor="">Update Your Name:</label>
-          <input type="text" value={updateUserName} onChange={handleUseNameChange} />
-        </div>
-        <div>
-          <label htmlFor="">Email</label>
-          <input type="email" disabled  value={userEmailDisable}/>
-        </div>
-        <div>
-          <label htmlFor="">Update Your Number</label>
-          <input type="number" value={updateUserNumber} onChange={handleUserNumberChange} />
-        </div>
-        <button type='submit'>Submit</button>
-        </div>
-      </form>
-
     </div>
   )
 }

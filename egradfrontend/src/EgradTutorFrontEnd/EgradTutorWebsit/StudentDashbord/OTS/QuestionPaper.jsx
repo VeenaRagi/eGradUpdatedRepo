@@ -117,6 +117,7 @@ const QuestionPaper = ({ onClose }) => {
                       <div className="Paragraph_divQuestionPaper">
                         <b>Paragraph:</b>
                         <img
+                          id="questionPaper_logo"
                           src={`${BASE_URL}/uploads/${question.documen_name}/${question.paragraph.paragraphImg}`}
                           alt={`ParagraphImage ${question.paragraph.paragraph_Id}`}
                         />
