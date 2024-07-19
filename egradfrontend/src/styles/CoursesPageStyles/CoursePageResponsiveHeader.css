@@ -273,7 +273,7 @@ ul.t1ulCPDiv{
 }
 
 /* ul items css */
-ul.ulDiv {
+ul.ulDiv.t1ulCPDiv ul.ulDiv {
     display: flex;
     gap: 2rem;
     margin: 0;
