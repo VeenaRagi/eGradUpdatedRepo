@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import BASE_URL from "../apiConfig";
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import { useTIAuth } from '../TechInfoContext/AuthContext';
 import '../styles/UserLoginPage/userLoginPageCss.css'
 const UserLogin = () => {
+
   const [tiAuth, settiAuth] = useTIAuth()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -94,14 +96,36 @@ const UserLogin = () => {
     navigate('/forgot-password');
   };
 
+  const [welcomeimage, setWelcomeImage] = useState(null);
+
+  const fetchWelcomeImage = async () => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/LandingPageHeader/welcomeimage`,
+        {
+          responseType: "arraybuffer",
+        }
+      );
+      const imageBlob = new Blob([response.data], { type: "image/png" });
+      const imageUrl = URL.createObjectURL(imageBlob);
+      setWelcomeImage(imageUrl);
+    } catch (error) {
+      console.error("Error fetching image:", error);
+    }
+  };
 
 
+  useEffect(() => {
+    fetchWelcomeImage();
+  }, []);
 
   return (
     <div className="">
       <div className='userLoginPagePC'>
         <div className='userLoginSubContainer'>
           <div className='formAndHeaddingContainer'>
+            <div className='logoInLogin'> < img src={welcomeimage} className='userlogoimg' alt="welcomeCurrent" /></div>
+        
             <div className='loginPageHeadingContainer'>
               <h1>User Login</h1>
             </div>
