@@ -327,4 +327,14 @@ img.t1LogoImg {
 
 
 
-
+@media (min-width: 768px) and (max-width: 1000px) {
+  .menu-link.mobileMenuLink {
+      display: flex;
+      position: absolute;
+      top: 4%;
+      width: 40%;
+      border-radius: 20px;
+      right: 0;
+      z-index: 1;
+  }
+}

@@ -1018,7 +1018,7 @@ background-repeat: no-repeat;
         display: flex;
         flex-direction: column;
         width: 100%;
-        margin-left: 20px;
+        margin-left: 5px;
     }
 
     .t1FooterContentColumn ul li a {
@@ -1077,6 +1077,16 @@ background-repeat: no-repeat;
         height: 50px;
         align-items: center;
         border: 2px outset hsla(0, 60%, 70%, .5);
+    }
+    .logo_Img_container.t1ThemeLogoImgC {
+        width: 400px;
+        /* height: 125px; */
+    }
+
+    img.t1LogoImg {
+        height: 100%;
+        width: 100%;
+        padding: 20px;
     }
 }
 
