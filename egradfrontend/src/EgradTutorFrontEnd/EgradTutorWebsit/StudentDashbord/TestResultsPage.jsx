@@ -611,7 +611,7 @@ useEffect(() => {
               Your result will be available My Result Tab In student DashBoard.
             </h2>
             <h3 className="viewReport_popup_subheading">View your Test Report</h3>
-            <button onClick={openPopup} className="viewReport_popup_button">
+            <button onClick={openPopup} title="Click here to view report" className="viewReport_popup_button">
               View Report
             </button>
           </div>

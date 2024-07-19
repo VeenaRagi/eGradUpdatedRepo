@@ -200,38 +200,3 @@ export default General_intructions_page_container;
 
 
 
-  // useEffect(() => {
-  //   const checkLoggedIn = () => {
-  //     const loggedIn = localStorage.getItem("isLoggedIn");
-  //     if (loggedIn === "true") {
-  //       fetchUserData();
-  //     }
-  //   };
-  //   checkLoggedIn();
-  // }, []);
-
-  // const fetchUserData = async () => {
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     const response = await fetch(
-  //       `http://localhost:5001/ughomepage_banner_login/user`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-
-  //     if (!response.ok) {
-  //       localStorage.removeItem("isLoggedIn");
-  //       localStorage.removeItem("token");
-  //       navigate("/Login"); // Redirect to login page if not authenticated
-  //       return;
-  //     }
-
-  //     const userData = await response.json();
-  //     setUserData(userData);
-  //   } catch (error) {
-  //     console.error("Error fetching user data:", error);
-  //   }
-  // };
