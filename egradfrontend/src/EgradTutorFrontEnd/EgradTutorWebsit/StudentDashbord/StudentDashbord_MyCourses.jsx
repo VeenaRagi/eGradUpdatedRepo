@@ -298,10 +298,11 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
 
         // Detect focus change and show a warning if the user switches away
         const showMalpracticeWarning = () => {
-          alert(
-            "Warning: You are not allowed to switch applications during the test."
-          );
-          newWinRef.focus();
+          // alert(
+          //   "Warning: You are not allowed to switch applications during the test."
+          // );
+          // newWinRef.focus();
+          newWinRef.postMessage('showMalpracticeWarning', '*');
         };
 
         newWinRef.addEventListener("blur", showMalpracticeWarning);
@@ -1007,3 +1008,6 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
 };
 
 export default StudentDashbord_MyCourses;
+
+
+
