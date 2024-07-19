@@ -17,42 +17,7 @@ const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
   const [updateUserName, setUpdateUserName] = useState("");
   const [updateUserNumber, setUpdateUserNumber] = useState("");
   const[userEmailDisable,setUserEmailDisable]=useState("")
-  // useEffect for getting the role
-  // useEffect(()=>{
-  //   const { userData } = tiAuth;
-  //   if (!userData) {
-  //     return <div>Loading...</div>;
-  //   }
-  //  const userName = userData.users[0].username;
-  //  console.log(userData.users[0].studentregistationId,"This is the user's dasta  ")
-  //  setUserNameFromContext(userName)
-  //  setRegIdOfUser(userData.users[0].studentregistationId);
-  //  console.log(regIdOfUser,"This is the userData.users[0].studentregistationId")
-  // console.log(userName,"ddddddddddddddddddddddddddddddddddddddd")
-  // })
 
-  // useEffect(() => {
-  //   const { userData } = tiAuth;
-  //   if (userData) {
-  //     const userName = userData.users[0].username;
-  //     const studentRegId = userData.users[0].studentregistationId;
-
-  //     setUserNameFromContext(userName);
-  //     // setRegIdOfUser(studentRegId);
-
-  //     console.log(studentRegId, "This is the user's data");
-  //     console.log(userName, "User Name");
-  //   }
-  // }, [tiAuth]);
-  // useEffect(() => {
-  //   const { userData } = tiAuth;
-  //   if (userData) {
-  //     // const studentRegId = userData.users[0].studentregistationId;
-  //     const studentRegId = userData.users[0].studentregistationId;
-  //     setRegIdOfUser(studentRegId);
-  //     console.log(regIdOfUser, "From seperate useeffect")
-  //   }
-  // }, []);
   
     const initializeUserData = () => {
       const { userData } = tiAuth;
@@ -65,13 +30,8 @@ const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {
         console.log(userName, "User Name");
       } else {
         console.log("userData or userData.users is undefined or empty");
-        // Handle the case where userData or userData.users is not available
-        // For example, show a loading indicator or handle the absence of data
       }
     };
-    // initializeUserData(); // Initialize on component mount
-    // Optionally, return a cleanup function if needed
-  
 useEffect(()=>{
   initializeUserData();
 
@@ -182,7 +142,10 @@ useEffect(()=>{
     setUpdateUserNumber(prev => e.target.value)
     console.log(updateUserNumber)
   }
-
+  // const 
+const handleUpdateButtonClick=()=>{
+  
+}
   return (
     <div className="dashboard_settings">
       {usersData.users && usersData.users.length > 0 && (
@@ -241,12 +204,15 @@ useEffect(()=>{
           </form>
         </div>
       ) : (
+        <>
+        <button onClick={() =>handleUpdateButtonClick }>Profile Update </button>
         <button onClick={() => handleChangePassword(decryptedUserIdState)}>Change Password ?</button>
+        </>
       )}
-      <h3>This is the username from the context globally so that every component can access..........</h3>
-      <p>{userNameFromContext}</p>
+      {/* <h3>This is the username from the context globally so that every component can access..........</h3>
+      <p>{userNameFromContext}</p> */}
       <div>
-        <div>
+        {/* <div>
           {userDetailsForEdit.map((student, index) => (
             <div key={index} className="student-details">
               <h2>{student.candidateName}</h2>
@@ -254,13 +220,13 @@ useEffect(()=>{
               <p>Gender: {student.Gender}</p>
               <p>Category: {student.Category}</p>
               <p>Email: {student.emailId}</p>
-              {/* Render other details as needed */}
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
       <form action="" className='studentNameUpdateForm' onSubmit={handleUpdateStudentData}>
-        <div>
+        <div className='centerDivForForm'>
+        <div >
           <label htmlFor="">Update Your Name:</label>
           <input type="text" value={updateUserName} onChange={handleUseNameChange} />
         </div>
@@ -273,6 +239,7 @@ useEffect(()=>{
           <input type="number" value={updateUserNumber} onChange={handleUserNumberChange} />
         </div>
         <button type='submit'>Submit</button>
+        </div>
       </form>
 
     </div>

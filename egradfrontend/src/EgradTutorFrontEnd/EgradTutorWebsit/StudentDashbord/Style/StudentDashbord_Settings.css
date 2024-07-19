@@ -10,11 +10,25 @@
   max-width: 600px;
   margin: 50px auto;
 }
+.centerDivForForm {
+  display: flex;
+  flex-direction: column;
+  /* align-items: start; */
+  /* justify-content: center; */
+  padding-left: 2rem;
+  /* gap: 2rem; */
+  border: 1px solid;
+}
 form.studentNameUpdateForm {
   border: 1px solid;
   padding: 1rem 2rem;
+  gap: 1rem;
 }
-
+.centerDivForForm div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}
 /* Form styling */
 .change-password-form {
   width: 100%;
