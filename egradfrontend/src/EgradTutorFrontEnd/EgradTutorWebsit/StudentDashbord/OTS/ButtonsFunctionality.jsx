@@ -9,7 +9,7 @@ import "../Style/RightSidebar.css"
 import BASE_URL from "../../../../apiConfig";
 import { decryptData, encryptData } from "../utils/crypto"; 
 // import { useTIAuth } from "../../../../TechInfoContext/AuthContext";
-
+import QuestionPaper from './QuestionPaper'
 // This component manages the functionality of buttons in the right sidebar
 const ButtonsFunctionality = ({
   activeQuestion,
@@ -411,6 +411,17 @@ const ButtonsFunctionality = ({
 console.log("helloooooooooooooooooooHELLOOOOOOOOOOOOO")
 console.log(userData)
 console.log(decryptedParam2)
+
+const [showPopup, setShowPopup] = useState(false);
+const openQuestionPaper = () => {
+  setShowPopup(true);
+};
+
+const closeQuestionPaper = () => {
+  setShowPopup(false);
+};
+
+
   return (
     <>
       <div className="right-side-bar">
@@ -502,6 +513,16 @@ console.log(decryptedParam2)
             </div>{" "}
           </div>
         </div>
+        <div>
+          {/* <Link to={`/QuestionPaper/${decryptedParam1}/${decryptedParam2}`}>Question Paper</Link> */}
+          <button
+              className="question_paper_btn"
+              onClick={openQuestionPaper}
+            >
+              Question Paper
+            </button>
+        </div>
+        {showPopup && <QuestionPaper onClose={closeQuestionPaper} />}
       </div>
     </>
   );

@@ -314,17 +314,25 @@
 
 .admin_ul_container {
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   /* flex-direction: column; */
   align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
 }
 
 .admin_img_container {
-  height: 200px;
-  width: 200px;
+  /* height: 200px; */
+  /* width: 200px; */
+  border-radius: 10px;
+  display: flex;
+  border: 1px solid;
   justify-content: center;
+  flex-direction: column;
+  padding: 0.5rem;
+  align-items: center;
 }
-
 .users_profile_img_admin {
   height: 100%;
   border: 1px solid gray;

@@ -87,11 +87,13 @@ const AccountInfo = () => {
           <ul className='admin_ul_container'>
             {userData.map(user => (
               <li className='admin_img_container' key={user.studentRegistationId}>
+                <div style={{height:"100px",width:"100px"}}>
                 <img
                   className="users_profile_img_admin"
                   src={`${BASE_URL}/uploads/studentinfoimeages/${user.UplodadPhto}`}
                   alt={`no img${user.UplodadPhto}`}
                 />
+                </div>
                 <div className='tttttttttt'>
                   <div className='detailsss_container'>
                     <p className='admin_para'>Name: {user.username}</p>
