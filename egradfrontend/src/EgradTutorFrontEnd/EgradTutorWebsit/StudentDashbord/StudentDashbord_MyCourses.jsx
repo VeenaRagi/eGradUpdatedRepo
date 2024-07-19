@@ -190,135 +190,135 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
         console.error("Failed to open new window");
       }
 
-      if (newWinRef && !newWinRef.closed) {
-        newWinRef.focus();
-        newWinRef.moveTo(0, 0);
-        newWinRef.resizeTo(screenWidth, screenHeight);
+      // if (newWinRef && !newWinRef.closed) {
+      //   newWinRef.focus();
+      //   newWinRef.moveTo(0, 0);
+      //   newWinRef.resizeTo(screenWidth, screenHeight);
 
-        const requestFullscreen = () => {
-          const docElm = newWinRef.document.documentElement;
-          if (docElm.requestFullscreen) {
-            docElm.requestFullscreen().catch((err) => {
-              console.error("Fullscreen request failed:", err.message);
-            });
-          } else if (docElm.mozRequestFullScreen) {
-            docElm.mozRequestFullScreen().catch((err) => {
-              console.error("Fullscreen request failed:", err.message);
-            });
-          } else if (docElm.webkitRequestFullscreen) {
-            docElm.webkitRequestFullscreen().catch((err) => {
-              console.error("Fullscreen request failed:", err.message);
-            });
-          } else if (docElm.msRequestFullscreen) {
-            docElm.msRequestFullscreen().catch((err) => {
-              console.error("Fullscreen request failed:", err.message);
-            });
-          }
-        };
+      //   const requestFullscreen = () => {
+      //     const docElm = newWinRef.document.documentElement;
+      //     if (docElm.requestFullscreen) {
+      //       docElm.requestFullscreen().catch((err) => {
+      //         console.error("Fullscreen request failed:", err.message);
+      //       });
+      //     } else if (docElm.mozRequestFullScreen) {
+      //       docElm.mozRequestFullScreen().catch((err) => {
+      //         console.error("Fullscreen request failed:", err.message);
+      //       });
+      //     } else if (docElm.webkitRequestFullscreen) {
+      //       docElm.webkitRequestFullscreen().catch((err) => {
+      //         console.error("Fullscreen request failed:", err.message);
+      //       });
+      //     } else if (docElm.msRequestFullscreen) {
+      //       docElm.msRequestFullscreen().catch((err) => {
+      //         console.error("Fullscreen request failed:", err.message);
+      //       });
+      //     }
+      //   };
 
-        const reEnterFullscreen = () => {
-          if (
-            !newWinRef.document.fullscreenElement &&
-            !newWinRef.document.webkitFullscreenElement &&
-            !newWinRef.document.mozFullScreenElement &&
-            !newWinRef.document.msFullscreenElement
-          ) {
-            requestFullscreen();
-          }
-        };
+      //   const reEnterFullscreen = () => {
+      //     if (
+      //       !newWinRef.document.fullscreenElement &&
+      //       !newWinRef.document.webkitFullscreenElement &&
+      //       !newWinRef.document.mozFullScreenElement &&
+      //       !newWinRef.document.msFullscreenElement
+      //     ) {
+      //       requestFullscreen();
+      //     }
+      //   };
 
-        newWinRef.addEventListener("load", () => {
-          requestFullscreen();
+      //   newWinRef.addEventListener("load", () => {
+      //     requestFullscreen();
 
-          newWinRef.document.body.addEventListener("click", requestFullscreen);
+      //     newWinRef.document.body.addEventListener("click", requestFullscreen);
 
-          newWinRef.document.addEventListener("keydown", (event) => {
-            if (event.key === "Shift") {
-              newWinRef.close();
-            }
-          });
+      //     newWinRef.document.addEventListener("keydown", (event) => {
+      //       if (event.key === "Shift") {
+      //         newWinRef.close();
+      //       }
+      //     });
 
-          ["cut", "copy", "paste"].forEach((eventType) => {
-            newWinRef.document.addEventListener(eventType, (event) => {
-              event.preventDefault();
-            });
-          });
+      //     ["cut", "copy", "paste"].forEach((eventType) => {
+      //       newWinRef.document.addEventListener(eventType, (event) => {
+      //         event.preventDefault();
+      //       });
+      //     });
 
-          newWinRef.document.addEventListener("contextmenu", (event) => {
-            event.preventDefault();
-          });
+      //     newWinRef.document.addEventListener("contextmenu", (event) => {
+      //       event.preventDefault();
+      //     });
 
-          newWinRef.document.body.style.userSelect = "none";
-          newWinRef.document.body.style.webkitUserSelect = "none";
-          newWinRef.document.body.style.mozUserSelect = "none";
-          newWinRef.document.body.style.msUserSelect = "none";
-          newWinRef.document.body.style.webkitUserDrag = "none";
-          newWinRef.document.body.draggable = false;
+      //     newWinRef.document.body.style.userSelect = "none";
+      //     newWinRef.document.body.style.webkitUserSelect = "none";
+      //     newWinRef.document.body.style.mozUserSelect = "none";
+      //     newWinRef.document.body.style.msUserSelect = "none";
+      //     newWinRef.document.body.style.webkitUserDrag = "none";
+      //     newWinRef.document.body.draggable = false;
 
-          newWinRef.document.addEventListener("copy", (event) => {
-            event.preventDefault();
-          });
+      //     newWinRef.document.addEventListener("copy", (event) => {
+      //       event.preventDefault();
+      //     });
 
-          newWinRef.addEventListener("beforeunload", (event) => {
-            const confirmationMessage =
-              "Are you sure you want to leave this page?";
-            event.returnValue = confirmationMessage; // For most browsers
-            return confirmationMessage; // For some older browsers
-          });
-        });
+      //     newWinRef.addEventListener("beforeunload", (event) => {
+      //       const confirmationMessage =
+      //         "Are you sure you want to leave this page?";
+      //       event.returnValue = confirmationMessage; // For most browsers
+      //       return confirmationMessage; // For some older browsers
+      //     });
+      //   });
 
-        newWinRef.document.addEventListener(
-          "fullscreenchange",
-          reEnterFullscreen
-        );
-        newWinRef.document.addEventListener(
-          "webkitfullscreenchange",
-          reEnterFullscreen
-        );
-        newWinRef.document.addEventListener(
-          "mozfullscreenchange",
-          reEnterFullscreen
-        );
-        newWinRef.document.addEventListener(
-          "msfullscreenchange",
-          reEnterFullscreen
-        );
+      //   newWinRef.document.addEventListener(
+      //     "fullscreenchange",
+      //     reEnterFullscreen
+      //   );
+      //   newWinRef.document.addEventListener(
+      //     "webkitfullscreenchange",
+      //     reEnterFullscreen
+      //   );
+      //   newWinRef.document.addEventListener(
+      //     "mozfullscreenchange",
+      //     reEnterFullscreen
+      //   );
+      //   newWinRef.document.addEventListener(
+      //     "msfullscreenchange",
+      //     reEnterFullscreen
+      //   );
 
-        // Continuously monitor and correct the window size and position
-        setInterval(() => {
-          if (
-            newWinRef.outerWidth !== screenWidth ||
-            newWinRef.outerHeight !== screenHeight
-          ) {
-            newWinRef.moveTo(0, 0);
-            newWinRef.resizeTo(screenWidth, screenHeight);
-          }
-          newWinRef.focus();
-        }, 1000);
+      //   // Continuously monitor and correct the window size and position
+      //   setInterval(() => {
+      //     if (
+      //       newWinRef.outerWidth !== screenWidth ||
+      //       newWinRef.outerHeight !== screenHeight
+      //     ) {
+      //       newWinRef.moveTo(0, 0);
+      //       newWinRef.resizeTo(screenWidth, screenHeight);
+      //     }
+      //     newWinRef.focus();
+      //   }, 1000);
 
-        // Detect focus change and show a warning if the user switches away
-        const showMalpracticeWarning = () => {
-          alert(
-            "Warning: You are not allowed to switch applications during the test."
-          );
-          newWinRef.focus();
-        };
+      //   // Detect focus change and show a warning if the user switches away
+      //   const showMalpracticeWarning = () => {
+      //     alert(
+      //       "Warning: You are not allowed to switch applications during the test."
+      //     );
+      //     newWinRef.focus();
+      //   };
 
-        newWinRef.addEventListener("blur", showMalpracticeWarning);
-        document.addEventListener("visibilitychange", () => {
-          if (document.hidden) {
-            showMalpracticeWarning();
-          }
-        });
-      }
+      //   newWinRef.addEventListener("blur", showMalpracticeWarning);
+      //   document.addEventListener("visibilitychange", () => {
+      //     if (document.hidden) {
+      //       showMalpracticeWarning();
+      //     }
+      //   });
+      // }
 
-      const preventFocusLoss = (e) => {
-        if (newWinRef && !newWinRef.closed) {
-          newWinRef.focus();
-        }
-      };
+      // const preventFocusLoss = (e) => {
+      //   if (newWinRef && !newWinRef.closed) {
+      //     newWinRef.focus();
+      //   }
+      // };
 
-      document.addEventListener("visibilitychange", preventFocusLoss);
+      // document.addEventListener("visibilitychange", preventFocusLoss);
     } catch (error) {
       console.error("Error encrypting data:", error);
     }
@@ -346,16 +346,16 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
   // Render logic for displaying fetched data
 
   // //mouseclick disabling
-  const handleContextMenu = (e) => {
-    e.preventDefault();
-  };
-  useEffect(() => {
-    document.addEventListener("contextmenu", handleContextMenu);
+  // const handleContextMenu = (e) => {
+  //   e.preventDefault();
+  // };
+  // useEffect(() => {
+  //   document.addEventListener("contextmenu", handleContextMenu);
 
-    return () => {
-      document.removeEventListener("contextmenu", handleContextMenu);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("contextmenu", handleContextMenu);
+  //   };
+  // }, []);
 
   const handleTypeOfTestClickback = () => {
     setShowQuizCourses(true);
