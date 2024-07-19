@@ -92,17 +92,17 @@ const QuizPage = () => {
  
 
   // //mouseclick disabling
-   // const handleContextMenu = (e) => {
-  //   e.preventDefault();
-  // };
+   const handleContextMenu = (e) => {
+    e.preventDefault();
+  };
   
-  // useEffect(() => {
-  //   document.addEventListener('contextmenu', handleContextMenu);
+  useEffect(() => {
+    document.addEventListener('contextmenu', handleContextMenu);
 
-  //   return () => {
-  //     document.removeEventListener('contextmenu', handleContextMenu);
-  //   };
-  // }, []);
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+    };
+  }, []);
 
   //keyboard disabling
   useEffect(() => {
@@ -3154,57 +3154,46 @@ const QuizPage = () => {
                     </div>
                     <div className="quiz_btns_contaioner">
                       <div>
-                        {/* <Tooltip
-                          title="Click here to Save & Mark for Review"
-                          arrow
-                        > */}
                         <button
                           className="Quiz_Save_MarkforReview"
                           onClick={markForReview}
+                          title="Click here to Save & Mark for Review"
                         >
                           Save & Mark for Review
                         </button>
-                        {/* </Tooltip> */}
-                        {/* <Tooltip title="Click here to Clear Response" arrow> */}
                         <button
                           className="Quiz_clearResponse"
                           onClick={clearResponse}
+                          title="Click here to Clear Response"
                         >
                           Clear Response
                         </button>
-                        {/* </Tooltip> */}
-                        {/* <Tooltip title="Click here to Save & Next" arrow> */}
                         <button
+                        title="Click here to Save & Next" 
                           className="quizsave_next"
                           onClick={handleSaveNextQuestion}
                         >
                           Save & Next
                         </button>
-                        {/* </Tooltip> */}
                       </div>
                       <div className="quiz_Next_back">
-                        {/* <Tooltip title="Click here to go Back" arrow> */}
                         <button
                           className="previous-btn"
                           onClick={handlePreviousClick}
                           disabled={currentQuestionIndex === 0}
+                          title="Click here to go Back"
                         >
                           <i className="fa-solid fa-angles-left"></i> Back
                         </button>
-                        {/* </Tooltip> */}
-                        {/* <Tooltip title="Click here to go Next" arrow> */}
-                        <button onClick={handleNextQuestion}>Next</button>
-                        {/* </Tooltip> */}
-
-                        {/* <Tooltip title="Click here to Submit" arrow> */}
+                        <button  title="Click here to go Next" onClick={handleNextQuestion}>Next</button>
                         <button
                           style={{ background: "#f0a607da" }}
                           onClick={handleSubmit}
                           id="resume_btn"
+                          title="Click here to Submit"
                         >
                           Submit
                         </button>
-                        {/* </Tooltip> */}
                       </div>
                     </div>
                   </>
@@ -3246,7 +3235,8 @@ const QuizPage = () => {
                   seconds={600}
                   onUpdateOption={handleUpdateOption}
                   option={option}
-                  userData={userData}
+                  // userData={userData}
+                  users={userData?.users || []}
                 />
               </div>
             </div>
@@ -3277,25 +3267,9 @@ const QuizPage = () => {
                 </tr>
               </table>
             </div>
-            {/* <h1>hellooooo</h1>
-          {userData.users && userData.users.length > 0 && (
-            <ul>
-              {userData.users.map((user) => (
-                <div className="greeting_section">
-                  <h2 className="dashboard_greeting_container">
-                    {user.username}
-                  </h2>
-                </div>
-              ))}
-            </ul>
-          )} */}
+           
             <div>
-              {/* {showButtonNo && (
-              <h2 className="Exam_summary_question_tag">
-                Are you sure you want to submit ? <br />
-                No changes will be allowed after submission.
-              </h2>
-            )} */}
+             
               {showButtonNo === false ? (
                 <h2 className="Exam_summary_question_tag">
                   Please press okay to view your result.
@@ -3309,38 +3283,34 @@ const QuizPage = () => {
 
               <div className="Exam_summary_btns">
                 {showButtonNo === false ? (
-                  // <Tooltip title="Yes" arrow>
                   <>
                     <Link
                       className="es_btn"
                       // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
                       // to='/Submit_Page'
                       onClick={handleYes}
+                      title="Click here to go Next"
                     >
                       Okay
                     </Link>
                   </>
                 ) : (
-                  // {/* </Tooltip> */}
-                  // <Tooltip title="Yes" arrow>
                   <>
                     <Link
                       className="es_btn"
                       // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
                       // to='/Submit_Page'
                       onClick={handleYes}
+                      title="Click here to go Next"
                     >
                       Yes
                     </Link>
                   </>
-                  // {/* </Tooltip> */}
                 )}
                 {showButtonNo && (
-                  // <Tooltip title="No" arrow>
-                  <button className="es_btn" onClick={handleNo}>
+                  <button className="es_btn"  title="Click here to go Back" onClick={handleNo}>
                     NO
                   </button>
-                  // {/* </Tooltip> */}
                 )}
               </div>
             </div>

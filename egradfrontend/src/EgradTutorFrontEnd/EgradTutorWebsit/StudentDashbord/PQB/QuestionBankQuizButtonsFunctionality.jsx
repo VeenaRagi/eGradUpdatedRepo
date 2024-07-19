@@ -23,7 +23,8 @@ const QuestionBankQuizButtonsFunctionality = ({
   option,
   setButtonText,
   activeIndex,
-  userData
+  users,
+  // userData
 }) => {
   const navigate = useNavigate();
   const { param1, param2 } = useParams();
@@ -336,21 +337,19 @@ const QuestionBankQuizButtonsFunctionality = ({
       clearInterval(interval);
     };
   }, [wtimer]);
-console.log("helloooooooooooooooooooHELLOOOOOOOOOOOOO")
-  console.log(userData)
-  console.log(decryptedParam2)
+  console.log("helloooooooooooooooooooHELLOOOOOOOOOOOOO");
+  // console.log(userData)
+  console.log(decryptedParam2);
+
+  if (!users || !Array.isArray(users)) {
+    return <div>Error: Users data is not available</div>;
+  }
+
   return (
     <>
       <div className="right-side-bar">
         <div className="rightSidebar-topHeader">
-          {/* <img
-            title={userData.username}
-            src={userData.imageData}
-            alt={`Image ${userData.user_Id}`}
-          />
-          <p>Candidate Name: {userData.username}</p>
-          <p key={testName.testCreationTableId}>Test Name: {testName}</p> */}
-           {userData.users && userData.users.length > 0 && (
+          {/* {userData.users && userData.users.length > 0 && (
             <ul>
               {userData.users.map((user) => (
                 <div>
@@ -365,7 +364,19 @@ console.log("helloooooooooooooooooooHELLOOOOOOOOOOOOO")
               ))}
                <p key={testName.testCreationTableId}>Test Name: {testName}</p> 
             </ul>
-          )}
+          )} */}
+          {users.map((user) => (
+            <div>
+              <img
+                title={user.username}
+                // title={userNameFromContext}
+                src={`${BASE_URL}/uploads/studentinfoimeages/${user.UplodadPhto}`}
+                alt={`no img${user.UplodadPhto}`}
+              />
+              <p>Candidate Name: {user.username}</p>
+            </div>
+          ))}
+          <p key={testName.testCreationTableId}>Test Name: {testName}</p>
         </div>
 
         <div className="buttons_container">

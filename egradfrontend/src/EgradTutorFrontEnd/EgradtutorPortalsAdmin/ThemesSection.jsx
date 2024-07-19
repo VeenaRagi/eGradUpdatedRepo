@@ -157,6 +157,7 @@ const ThemesSection = () => {
                                 // onClick={() => handleDivClick(fClass.s_no, fClass.theme_color)}
                                 >
                                     {/* <p>have to show images</p> */}
+                                    
                                     {fClass.theme_color === 'Theme-2' && <img src={imgOrange} onClick={() => handleImagePreview(imgOrange, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />}
 
                                     {fClass.theme_color === 'Theme-default' && <img src={imgBlue} onClick={() => handleImagePreview(imgBlue, fClass.theme_color)} className='theme-selector-image' alt='themeImage' />}

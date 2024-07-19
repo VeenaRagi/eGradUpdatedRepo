@@ -4624,7 +4624,8 @@ const QuestionBankQuiz = () => {
                   option={option}
                   setButtonText={setButtonText}
                   activeIndex={activeIndex}
-                  userData={userData}
+                  // userData={userData}
+                  users={userData?.users || []}
                 />
               </div>
             </div>

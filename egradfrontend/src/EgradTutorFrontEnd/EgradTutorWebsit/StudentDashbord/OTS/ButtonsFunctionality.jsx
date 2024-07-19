@@ -1,15 +1,12 @@
-
-
-
 import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import {useNavigate, useParams } from "react-router-dom";
-import "../Style/RightSidebar.css"
+import { useNavigate, useParams } from "react-router-dom";
+import "../Style/RightSidebar.css";
 // import axios from "axios";
 import BASE_URL from "../../../../apiConfig";
-import { decryptData, encryptData } from "../utils/crypto"; 
+import { decryptData, encryptData } from "../utils/crypto";
 // import { useTIAuth } from "../../../../TechInfoContext/AuthContext";
-import QuestionPaper from './QuestionPaper'
+import QuestionPaper from "./QuestionPaper";
 // This component manages the functionality of buttons in the right sidebar
 const ButtonsFunctionality = ({
   activeQuestion,
@@ -26,22 +23,21 @@ const ButtonsFunctionality = ({
   updateQuestionStatus,
   onUpdateOption,
   option,
-  userData,
+  users,
+  // userData,
 }) => {
-
-  
   const navigate = useNavigate();
   const { param1, param2 } = useParams();
 
-  const [decryptedParam1, setDecryptedParam1] = useState('');
-  const [decryptedParam2, setDecryptedParam2] = useState('');
+  const [decryptedParam1, setDecryptedParam1] = useState("");
+  const [decryptedParam2, setDecryptedParam2] = useState("");
 
   useEffect(() => {
-    const token = sessionStorage.getItem('navigationToken');
+    const token = sessionStorage.getItem("navigationToken");
 
     // If token doesn't exist, navigate to the error page
     if (!token) {
-      navigate('/Error');
+      navigate("/Error");
       return;
     }
 
@@ -52,23 +48,27 @@ const ButtonsFunctionality = ({
         const decrypted2 = await decryptData(param2);
 
         // Example validation (you can modify this based on your actual requirements)
-        if (!decrypted1 || !decrypted2 || isNaN(parseInt(decrypted1)) || isNaN(parseInt(decrypted2))) {
+        if (
+          !decrypted1 ||
+          !decrypted2 ||
+          isNaN(parseInt(decrypted1)) ||
+          isNaN(parseInt(decrypted2))
+        ) {
           // If parameters are not valid, navigate to the error page or handle as needed
-          navigate('/Error');
+          navigate("/Error");
           return;
         }
 
         setDecryptedParam1(decrypted1);
         setDecryptedParam2(decrypted2);
       } catch (error) {
-        console.error('Error decrypting data:', error);
-        navigate('/Error');
+        console.error("Error decrypting data:", error);
+        navigate("/Error");
       }
     };
 
     decryptParams();
   }, [param1, param2, navigate]);
-
 
   const [wtimer, setWTimer] = useState(0); // State to manage timer
 
@@ -84,7 +84,7 @@ const ButtonsFunctionality = ({
   const NotVisited = remainingQuestions < 0 ? 0 : remainingQuestions;
 
   useEffect(() => {
-    console.log("hiiiiiiiiiiiiiiiiiiiiiiiii")
+    console.log("hiiiiiiiiiiiiiiiiiiiiiiiii");
     console.log("Current active question number:", activeQuestion);
   }, [activeQuestion]);
   // const [activeQuestion, setActiveQuestion] = useState(0);
@@ -99,12 +99,12 @@ const ButtonsFunctionality = ({
         const questionKey = question.id || index;
         // const questionStatusAtIndex = questionStatus && questionStatus[index];
         let questionStatusAtIndex;
-         // Set the status of the first button to "notAnswered" by default
-      if (index === 0 && !questionStatus[index]) {
-        questionStatusAtIndex = "notAnswered";
-      } else {
-        questionStatusAtIndex = questionStatus[index];
-      }
+        // Set the status of the first button to "notAnswered" by default
+        if (index === 0 && !questionStatus[index]) {
+          questionStatusAtIndex = "notAnswered";
+        } else {
+          questionStatusAtIndex = questionStatus[index];
+        }
 
         if (questionStatusAtIndex === "answered") {
           className += " instruction-btn1";
@@ -322,8 +322,8 @@ const ButtonsFunctionality = ({
         // Optionally, you may update the option state in the parent component here
         onUpdateOption(null); // Assuming null means no option is selected
 
-         // Log the active question number
-      console.log('Active question number:', questionNumber);
+        // Log the active question number
+        console.log("Active question number:", questionNumber);
       } catch (error) {
         console.error("Error fetching test name:", error);
       }
@@ -387,73 +387,57 @@ const ButtonsFunctionality = ({
 
   // Fetch test name based on testCreationTableId
 
-
-
-
   // const [tiAuth] = useTIAuth();
   // const { userData2 } = tiAuth;
   // const [userNameFromContext,setUserNameFromContext]=useState("")
 
   // useEffect for getting the role
- // useEffect for getting the role
-// useEffect(() => {
-//   if (!userData2 || !userData2.users || userData2.users.length === 0) {
-//     return;
-//   }
-  
-//   const userName = userData2.users[0].username;
-//   setUserNameFromContext(userName);
-// }, [userData2]);
+  // useEffect for getting the role
+  // useEffect(() => {
+  //   if (!userData2 || !userData2.users || userData2.users.length === 0) {
+  //     return;
+  //   }
 
-// if (!userData2) {
-//   return <div>Loading...</div>;
-// }
-console.log("helloooooooooooooooooooHELLOOOOOOOOOOOOO")
-console.log(userData)
-console.log(decryptedParam2)
+  //   const userName = userData2.users[0].username;
+  //   setUserNameFromContext(userName);
+  // }, [userData2]);
 
-const [showPopup, setShowPopup] = useState(false);
-const openQuestionPaper = () => {
-  setShowPopup(true);
-};
+  // if (!userData2) {
+  //   return <div>Loading...</div>;
+  // }
+  console.log("helloooooooooooooooooooHELLOOOOOOOOOOOOO");
+  // console.log(userData)
+  console.log(decryptedParam2);
 
-const closeQuestionPaper = () => {
-  setShowPopup(false);
-};
+  const [showPopup, setShowPopup] = useState(false);
+  const openQuestionPaper = () => {
+    setShowPopup(true);
+  };
 
+  const closeQuestionPaper = () => {
+    setShowPopup(false);
+  };
+
+  if (!users || !Array.isArray(users)) {
+    return <div>Error: Users data is not available</div>;
+  }
 
   return (
     <>
       <div className="right-side-bar">
         <div className="rightSidebar-topHeader">
-          {userData.users && userData.users.length > 0 && (
-            <ul>
-              {userData.users.map((user) => (
-                <div>
-                     <img
-                   title={user.username}
-                   // title={userNameFromContext}
-                   src={`${BASE_URL}/uploads/studentinfoimeages/${user.UplodadPhto}`}
-                      alt={`no img${user.UplodadPhto}`}
-                 />
-                 <p>Candidate Name: {user.username}</p>
-                </div>
-                // <div className="greeting_section">
-                //   <h2 className="dashboard_greeting_container">
-                //     {user.username}
-                //   </h2>
-                // </div>
-              ))}
-            </ul>
-          )}
-          {/* <img
-            title={userData.username}
-            // title={userNameFromContext}
-            src={userData.imageData}
-            alt={`Image ${userData.user_Id}`}
-          /> */}
-          {/* <p>Candidate Name: {userData.username}</p> */}
-          {/* <p>Candidate Name:{userNameFromContext}</p> */}
+          {users.map((user) => (
+            <div>
+              <img
+                title={user.username}
+                // title={userNameFromContext}
+                src={`${BASE_URL}/uploads/studentinfoimeages/${user.UplodadPhto}`}
+                alt={`no img${user.UplodadPhto}`}
+              />
+              <p>Candidate Name: {user.username}</p>
+            </div>
+          ))}
+
           <p key={testName.testCreationTableId}>Test Name: {testName}</p>
         </div>
 
@@ -515,12 +499,9 @@ const closeQuestionPaper = () => {
         </div>
         <div>
           {/* <Link to={`/QuestionPaper/${decryptedParam1}/${decryptedParam2}`}>Question Paper</Link> */}
-          <button
-              className="question_paper_btn"
-              onClick={openQuestionPaper}
-            >
-              Question Paper
-            </button>
+          <button className="question_paper_btn"  title="View Question Paper" onClick={openQuestionPaper}>
+            Question Paper
+          </button>
         </div>
         {showPopup && <QuestionPaper onClose={closeQuestionPaper} />}
       </div>
