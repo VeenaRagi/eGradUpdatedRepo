@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ButtonsFunctionality from "./ButtonsFunctionality";
-// import Tooltip from "@mui/material/Tooltip";
-// import { Tooltip } from '@mui/material';
+
 
 import "../Style/Paper.css";
 // import logo from "../egate logo 1.png";
@@ -159,6 +158,7 @@ const QuizPage = () => {
     console.log("Window is focused");
   };
 
+  
   // useEffect(() => {
   //   if ("hidden" in document) {
   //     document.addEventListener("visibilitychange", handleVisibilityChange);
