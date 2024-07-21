@@ -6,7 +6,7 @@ import BASE_URL from "../../apiConfig"
 import ReactPaginate from "react-paginate";
 import { FaSearch } from "react-icons/fa";
 import { useParams } from 'react-router-dom';
-import '../../EgradTutorFrontEnd/EgradtutorPortalsAdmin/styles/Ovlvidesupload.css'
+import '../../EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/styles/Ovlvidesupload.css'
 // import '../../EgradTutorFrontEnd/'
 function OvlvidesUpload() {
   const [selectedFile, setSelectedFile] = useState(null);

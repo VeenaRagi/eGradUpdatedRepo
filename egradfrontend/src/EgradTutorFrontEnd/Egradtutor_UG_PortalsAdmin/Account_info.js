@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
 import BASE_URL from '../../apiConfig';
-import '../../EgradTutorFrontEnd/EgradtutorPortalsAdmin/styles/Account_info.css'
+import '../../EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/styles/Account_info.css'
 
 Modal.setAppElement('#root'); // Set the root element for accessibility
 

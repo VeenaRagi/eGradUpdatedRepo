@@ -3,7 +3,7 @@ import AdminHeader from './AdminHeader';
 import BASE_URL from '../../apiConfig';
 import axios from 'axios';
 
-import '../EgradtutorPortalsAdmin/styles/AdminProfile.css'
+import '../Egradtutor_UG_PortalsAdmin/styles/AdminProfile.css'
 
 const AdminProfile = () => {
     const [adminData, setAdminData] = useState([]);

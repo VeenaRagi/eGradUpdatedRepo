@@ -1,5 +1,5 @@
 import React from 'react';
-import "../EgradTutorWebsit/StudentDashbord/Style/StudentDashbord_MyCourses.css"
+import "../EgradTutorWebsit/eGradTutor_StudentDashbord/Style/StudentDashbord_MyCourses.css"
 const ProgressPieChart = ({ videoProgress, onClick}) => {
   // Calculate the watched percentage
   const watchedPercentage = (videoProgress.watched / videoProgress.total) * 100;

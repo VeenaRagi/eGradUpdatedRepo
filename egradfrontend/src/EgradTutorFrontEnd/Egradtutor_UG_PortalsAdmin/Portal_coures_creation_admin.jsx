@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import BASE_URL from "../../apiConfig";
 import { FaSearch } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
-import '../EgradtutorPortalsAdmin/styles/Portal_coures_creation_admin.css'
+import '../Egradtutor_UG_PortalsAdmin/styles/Portal_coures_creation_admin.css'
 
 function Portal_coures_creation_admin() {
   const [courseData, setCourseData] = useState([]);

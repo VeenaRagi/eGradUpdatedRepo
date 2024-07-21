@@ -257,7 +257,7 @@
 import React, { useEffect, useState } from 'react'
 import BASE_URL from '../../../apiConfig';
 import axios from 'axios';
-import '../../EgradTutorWebsit/StudentDashbord/Style/StudentDashbord_Settings.css'
+import '../../EgradTutorWebsit/eGradTutor_StudentDashbord/Style/StudentDashbord_Settings.css'
 import { useTIAuth } from '../../../TechInfoContext/AuthContext';
 
 const StudentDashbord_Settings = ({ usersData, decryptedUserIdState }) => {

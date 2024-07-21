@@ -19,27 +19,27 @@ import SuperAdminLogin from "./Login/SuperAdminLogin";
 import ForgotPassword from "./Login/ForgotPassword";
 import BASE_URL from "./apiConfig.js";
 import NotFound from "./NotFound.jsx";
-import RegistrationForm from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/RegistrationForm.jsx";
-import Student_dashboard from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/Student_dashboard.jsx";
-import Payu from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/Payu.jsx";
-import Document_ImageInfo from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/Document_ImageInfo.jsx";
-import Exam_portal_admin_integration from "../src/EgradTutorFrontEnd/EgradtutorPortalsAdmin/Exam_portal_admin_integration.jsx";
-import ExamUpdataion_admin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/ExamUpdataion_admin.jsx";
-import UpdatingConrseInAdmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/UpdatingCourseInAdmin.jsx";
-import GettingInstructions from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/GettinggInstructions.jsx";
-import { UpdateInstruction } from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/UpdateInstruction.jsx";
-import TestUpdateadmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/TestUpdateadmin.jsx";
-import InstructionPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/InstructionPage.jsx";
-import General_Intructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/General_intructions_page_container.jsx";
-import QuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/OTS/QuizPage.jsx";
-import QuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/OTS/QuestionPaper.jsx";
-import QuestionBankQuiz from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PQB/QuestionBankQuiz.jsx";
-import StudentDashbord_MyResults from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/StudentDashbord_MyResults.jsx";
-import TestResultsPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/TestResultsPage.jsx";
-import { UserReport } from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UserReport.jsx";
-import ThemesSection from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/ThemesSection.jsx";
-import Leftnav from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/Leftnav.jsx";
-import AdminProfile from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/AdminProfile.jsx";
+import RegistrationForm from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/RegistrationForm.jsx";
+import Student_dashboard from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/Student_dashboard.jsx";
+import Payu from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/Payu.jsx";
+import Document_ImageInfo from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/Document_ImageInfo.jsx";
+import Exam_portal_admin_integration from "../src/EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/Exam_portal_admin_integration.jsx";
+import ExamUpdataion_admin from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/ExamUpdataion_admin.jsx";
+import UpdatingConrseInAdmin from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/UpdatingCourseInAdmin.jsx";
+import GettingInstructions from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/GettinggInstructions.jsx";
+import { UpdateInstruction } from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/UpdateInstruction.jsx";
+import TestUpdateadmin from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/TestUpdateadmin.jsx";
+import InstructionPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/InstructionPage.jsx";
+import General_Intructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/General_intructions_page_container.jsx";
+import QuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/OTS/QuizPage.jsx";
+import QuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/OTS/QuestionPaper.jsx";
+import QuestionBankQuiz from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PQB/QuestionBankQuiz.jsx";
+import StudentDashbord_MyResults from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/StudentDashbord_MyResults.jsx";
+import TestResultsPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/TestResultsPage.jsx";
+import { UserReport } from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UserReport.jsx";
+import ThemesSection from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/ThemesSection.jsx";
+import Leftnav from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/Leftnav.jsx";
+import AdminProfile from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/AdminProfile.jsx";
 import axios from "axios";
 // Test
 import { UserProvider } from "./UserContext";
@@ -106,7 +106,6 @@ function App({ decryptedUserIdState, usersData }) {
         console.log(error, "parsing the tiAuth for viewer role");
       }
     }
-  
     return <Navigate to="/userlogin" />;
   };
   
@@ -174,7 +173,7 @@ function App({ decryptedUserIdState, usersData }) {
 
                 {/* --------------------Student_dashboard_INTERFACE_ROUTES_END-------------------- */}
 
-                {/*--------------------- EgradtutorPortalsAdmin ------------- */}
+                {/*--------------------- Egradtutor_UG_PortalsAdmin ------------- */}
                 <Route
                   path="/getSubjectData/:testCreationTableId/:subjectId/:sectionId"
                   element={<Document_ImageInfo />}
