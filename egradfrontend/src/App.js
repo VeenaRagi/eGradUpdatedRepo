@@ -43,6 +43,7 @@ import AdminProfile from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/AdminP
 import axios from "axios";
 // Test
 import { UserProvider } from "./UserContext";
+import ScientificCalculator from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/ScientificCalculator.jsx";
 
 function App({ decryptedUserIdState, usersData }) {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -261,6 +262,8 @@ function App({ decryptedUserIdState, usersData }) {
                   element={<Exam_portal_admin_integration />}
                 />
                 <Route path="/adminProfile" element={<AdminProfile />} />
+
+                <Route path="/ScientificCalculator" element={<ScientificCalculator/>}/>
               </Routes>
             </UserProvider>
           </Router>
