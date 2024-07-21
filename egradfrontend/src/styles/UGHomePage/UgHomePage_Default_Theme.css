@@ -492,7 +492,7 @@ ul.defaultCoursesUl li:hover {
 
     .navItemsContainer.themeUgNavContainerDefault {
         width: 95%;
-        margin-left: 0px;
+        margin-left: 1rem;
     }
 
     li.themeUgHeaderLiDefault {
@@ -871,7 +871,25 @@ ul.themeUgHeaderUlDefault {
         border-radius: 5px;
         width: 185px;
     }
-
+    .AboutUs1stContentContainer.AboutUs1stContentContainerDefault {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0rem;
+        max-width: none;
+    }
+    .AboutUs1stContentContainer.AboutUs1stContentContainerDefault .AboutUsImgDataContentContainer.AboutUsImgDataContentContainerDefault img {
+        width: 280px;
+        border-radius: 15px;
+        height: 250px;
+    }
+    
+    .AboutUsContentMainContainer.AboutUsContentMainContainerDefault h1 {
+        font-size: 16px;
+        /* margin-top: 16px; */
+        font-weight: bold;
+    }
     .AboutUsImgDataContentContainer.AboutUsImgDataContentContainerDefault img {
         width: 343px;
     }
@@ -924,7 +942,21 @@ ul.themeUgHeaderUlDefault {
         padding: 10px;
         height: 50px;
     }
-
+    .AboutUsContentSubContainerDefault {
+        padding: 3rem 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6rem;
+    }
+    .AboutUs1stContentContainer.AboutUs1stContentContainerDefault {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width:none;
+        gap: 1rem;
+    }
     .AboutUsImgContainerDefault {
 
         padding-top: 40px;
