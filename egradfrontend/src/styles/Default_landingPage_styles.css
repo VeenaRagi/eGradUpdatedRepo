@@ -787,7 +787,11 @@ button:hover {
     width: 100%;
 
 } 
-
+@media(max-width:600px) {
+    .Pg_buttonn_Default_Cards a {
+        font-size: 15px;
+        color: #000;
+    }}
 
 .Newlandingpage .Egate_eLanding_Container_Egate_landing .EGATE_eCordsLanding .EGATE_elandUl-pg_Default a:hover {
     opacity: 0.75;
