@@ -422,33 +422,14 @@ const ButtonsFunctionality = ({
     return <div>Error: Users data is not available</div>;
   }
 
+  const uniqueSections = [
+    ...new Set(questionData.questions.map((question) => question.sectionName)),
+  ];
+
   return (
     <>
       <div className="right-side-bar">
-        <div className="rightSidebar-topHeader">
-          {users.map((user) => (
-            <div>
-              <img
-                title={user.username}
-                // title={userNameFromContext}
-                src={`${BASE_URL}/uploads/studentinfoimeages/${user.UplodadPhto}`}
-                alt={`no img${user.UplodadPhto}`}
-              />
-              <p>Candidate Name: {user.username}</p>
-            </div>
-          ))}
-
-          <p key={testName.testCreationTableId}>Test Name: {testName}</p>
-        </div>
-
-        <div className="buttons_container">
-          <div className="ques-btn">
-            <ul className="btn-ul quesAns-btn">{renderQuestionButtons}</ul>
-          </div>
-        </div>
-
-        <div className="sidebar-footer">
-          <h4 className="sidebar-footer-header">Legend:</h4>
+      <div className="sidebar-footer">
           <div className="footer-btns">
             <div className="inst-btns">
               {" "}
@@ -497,13 +478,16 @@ const ButtonsFunctionality = ({
             </div>{" "}
           </div>
         </div>
-        <div>
-          {/* <Link to={`/QuestionPaper/${decryptedParam1}/${decryptedParam2}`}>Question Paper</Link> */}
-          <button className="question_paper_btn"  title="View Question Paper" onClick={openQuestionPaper}>
-            Question Paper
-          </button>
+<div>
+{uniqueSections.map((sectionName, index) => (
+                        <p key={index}>{sectionName}</p>
+                      ))}
+</div>
+        <div className="buttons_container">
+          <div className="ques-btn">
+            <ul className="btn-ul quesAns-btn">{renderQuestionButtons}</ul>
+          </div>
         </div>
-        {showPopup && <QuestionPaper onClose={closeQuestionPaper} />}
       </div>
     </>
   );

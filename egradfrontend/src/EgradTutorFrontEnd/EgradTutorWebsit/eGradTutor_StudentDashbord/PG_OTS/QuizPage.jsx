@@ -3,16 +3,17 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ButtonsFunctionality from "./ButtonsFunctionality";
 
-
-import "../Style/Paper.css";
-// import logo from "../egate logo 1.png";
+import "../Style/PGQuizPagePaper.css";
 import { MdOutlineTimer } from "react-icons/md";
 import { useRef } from "react";
 import { BiMenuAltLeft } from "react-icons/bi";
+import { FcCalculator } from "react-icons/fc";
 import BASE_URL from "../../../../apiConfig";
 import { decryptData, encryptData } from "../utils/crypto";
 import "../Style/Watermark.css";
 import { useLocation } from "react-router-dom";
+import QuestionPaper from "./QuestionPaper";
+import ScientificCalculator from "./ScientificCalculator";
 
 const QuizPage = () => {
   const location = useLocation();
@@ -88,20 +89,19 @@ const QuizPage = () => {
   useEffect(() => {
     fetchImage();
   }, []);
- 
 
   // //mouseclick disabling
-   const handleContextMenu = (e) => {
-    e.preventDefault();
-  };
-  
-  useEffect(() => {
-    document.addEventListener('contextmenu', handleContextMenu);
+  // const handleContextMenu = (e) => {
+  //   e.preventDefault();
+  // };
 
-    return () => {
-      document.removeEventListener('contextmenu', handleContextMenu);
-    };
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener("contextmenu", handleContextMenu);
+
+  //   return () => {
+  //     document.removeEventListener("contextmenu", handleContextMenu);
+  //   };
+  // }, []);
 
   //keyboard disabling
   useEffect(() => {
@@ -119,8 +119,6 @@ const QuizPage = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []); // Empty dependency array ensures the effect runs only once
-
-
 
   const [showMalPractisePopup, setShowMalPractisePopup] = useState(false);
   const [showButtonNo, setShowButtonNo] = useState(false);
@@ -158,7 +156,6 @@ const QuizPage = () => {
     console.log("Window is focused");
   };
 
-  
   // useEffect(() => {
   //   if ("hidden" in document) {
   //     document.addEventListener("visibilitychange", handleVisibilityChange);
@@ -2238,40 +2235,41 @@ const QuizPage = () => {
   //   const QBPBgenerate=(Portale_Id, testCreationTableId, user_Id)=>{
   // console.log(Portale_Id, testCreationTableId, user_Id)
   //   }
+  const [showPopupCalculator, setShowPopupCalculator] = useState(false);
+  const toggleCalculator = () => {
+    setShowPopupCalculator((prevState) => !prevState);
+  };
+
+  const closeCalculator = () => {
+    setShowPopupCalculator(false);
+  };
+
+  const uniqueSections = [
+    ...new Set(questionData.questions.map((question) => question.sectionName)),
+  ];
+
+
+  const [showQuestionPaperPopup, setShowQuestionPaperPopup] = useState(false);
+  const openQuestionPaper = () => {
+    setShowQuestionPaperPopup(true);
+  };
+
+  const closeQuestionPaper = () => {
+    setShowQuestionPaperPopup(false);
+  };
 
   return (
     // <div className="QuestionPaper_-container"  ref={quizRef}
     // onClick={enterFullscreen}  style={{ backgroundColor: 'white', }}>
-    // <div className="QuestionPaper_-container"  >
-
-    <div
-      className="QuestionPaper_-container"
-      ref={quizRef}
-      onClick={enterFullscreen}
-      style={{ backgroundColor: "white" }}
-    >
+    <div className="QuestionPaper_-container">
+      {/* 
+    // <div
+    //   className="QuestionPaper_-container"
+    //   ref={quizRef}
+    //   onClick={enterFullscreen}
+    //   style={{ backgroundColor: "white" }}
+    // > */}
       {/* {showMalPractisePopup && (
-        <div className="popup">
-          <div className="popup-content">
-            <h2>Malpractice Attempt</h2>
-            <p>You have attempted malpractice.</p>
-            <Link
-              // to='/student_dashboard'
-              // to={`/TestResultsPage/${decryptedParam1}/${decryptedParam2}`}
-              style={{ color: "red" }}
-              target="_blank"
-              onClick={() => {
-                setShowMalPractisePopup(false);
-                handleMalPractiseSubmit();
-              }}
-            >
-              OK
-            </Link>
-          </div>
-        </div>
-      )} */}
-
-      {showMalPractisePopup && (
         <div className="MalPracticePopup">
           <div className="malpractice_popup_content">
             <h2>Malpractice Attempt</h2>
@@ -2290,147 +2288,173 @@ const QuizPage = () => {
             </button>
           </div>
         </div>
-      )}
+      )} */}
       <div className="quiz_exam_interface_header quiz_exam_interface_header_q_if_H">
         <div className="quiz_exam_interface_header_LOGO ">
-          {/* <img src={logo} alt="" /> */}
           <img src={image} alt="Current" />
         </div>
-        <p className="testname_heading_quizPage" key={testName.decryptedParam1}>
+        {/* <p className="testname_heading_quizPage" key={testName.decryptedParam1}>
+          {testName}
+        </p> */}
+      </div>
+      <div className="QuizExam_Name">
+        <p className="QuizPage_testname_heading" key={testName.decryptedParam1}>
           {testName}
         </p>
-        {/* {testDetails && testDetails.length > 0 && (
-          <div>
-            <p className="testname_heading_quizPage">
-              {testDetails[0].TestName}
-            </p>
-            <h3>
-               {testDetails[0].courseName}
-            </h3>
-
-            <p>
-              <b>Exam Name:</b> {testDetails[0].examName}
-            </p>
-          </div>
-        )} */}
+       <p className="QPaper_Instructions">
+       <button className="View_QuestionPaper" onClick={openQuestionPaper}>Question Paper</button>
+        <button className="View_Instructions">Instructions</button>
+       </p>
+        {showQuestionPaperPopup && <QuestionPaper onClose={closeQuestionPaper} />}
       </div>
-      {/* <p>Decrypted Param 1: {decryptedParam1}</p>
-      <p>Decrypted Param 2: {decryptedParam2}</p> */}
 
       {!showExamSumary ? (
         <div className="quiz_exam_interface_body">
-          {/* --------------- quiz examconatiner -------------------- */}
           <div className="quizPagewatermark">
-            <div className="quiz_exam_interface_body_left_container">
-              {/* --------------- quiz sub container -------------------- */}
-
-              {/* <div class="quiz_exam_interface_SUBJECTS_CONTAINER">
-              <div>
-                <div class="subjects_BTN_container">
-                  <li>
-                    <h6>Time Left: {WformatTime(wtimer)}</h6>
-                  </li>
-                </div>
-              </div>
-
-              <div class="right-header"></div>
-            </div> */}
-
-              {/* --------------- quiz question container -------------------- */}
-              <div class="quiz_exam_interface_exam_CONTAINEr">
-                {questionData.questions.length > 0 && (
-                  <>
-                    <div className="quiz_exam_interface_exam_subCONTAINEr">
-                      <div className="quiz_exam_interface_exam_qN_Q">
-                        <div class="quiz_exam_interface_SUBJECTS_CONTAINER">
-                          {/* <div className="qtype_div">
-                          Question Type:{" "}
-                          {currentQuestion.quesion_type && (
-                            <p>{currentQuestion.quesion_type.typeofQuestion}</p>
-                          )}
-                        </div> */}
-                          <div className="time_qtype_div">
-                            <div class="">
-                              <div>
-                                <p className="time_left_tag">
-                                  <span>
-                                    <MdOutlineTimer />
-                                  </span>
-                                  {/* Time Left: {WformatTime(wtimer)} */}
-                                  <div>
-                                    {/* Time Left:{countDown} */}
-                                    Time Left:{" "}
-                                    {hours.toString().padStart(2, "0")}:
-                                    {minutes.toString().padStart(2, "0")}:
-                                    {seconds.toString().padStart(2, "0")}
-                                  </div>
+            {questionData.questions.length > 0 && (
+              <div className="QuizInterface_body_container">
+                <div className="QuizExam_Details_And_StudentInfo">
+                  <div class="quiz_exam_interface_SUBJECTS_CONTAINER">
+                    <div className="Subject_And_Calculator_div">
+                      <div className="Subjects">
+                        {[
+                          ...new Set(
+                            questionData.questions.map(
+                              (question) => question.subjectName
+                            )
+                          ),
+                        ].map((subjectName, index) => (
+                          <p key={index}>{subjectName}</p>
+                        ))}
+                      </div>
+                      <div className="Calculator">
+                        {questionData.calculator === "no" ? (
+                          <FcCalculator
+                            onClick={toggleCalculator}
+                            style={{
+                              cursor: "pointer",
+                              fontSize: "24px",
+                            }}
+                          />
+                        ) : null}
+                        {showPopupCalculator && (
+                          <ScientificCalculator onClose={closeCalculator} />
+                        )}
+                      </div>
+                    </div>
+                    <div className="Sections_And_Timer">
+                      <div>
+                        <p>Sections</p>
+                      </div>
+                      <div className="countDown_time_div">
+                        <div>
+                          <p className="countDown_time_tag">
+                            <span>
+                              <MdOutlineTimer />
+                            </span>
+                            <div>
+                              Time Left: {hours.toString().padStart(2, "0")}:
+                              {minutes.toString().padStart(2, "0")}:
+                              {seconds.toString().padStart(2, "0")}
+                            </div>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="Sections">
+                      {uniqueSections.map((sectionName, index) => (
+                        <p key={index}>{sectionName}</p>
+                      ))}
+                    </div>
+                    <div className="QuestionType_And_Marks_div">
+                      <div>
+                        {currentQuestion.quesion_type && (
+                          <p>
+                            Question Type:
+                            {currentQuestion.quesion_type.typeofQuestion}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="Quiz_Student_Name_TestName_div">
+                    <div>
+                      {userData.users && userData.users.length > 0 && (
+                        <div>
+                          {userData.users.map((user) => (
+                            <div className="StudentImgName_TestName_div">
+                              <img
+                                id="QuizExam_StudentImg"
+                                title={user.username}
+                                src={`${BASE_URL}/uploads/studentinfoimeages/${user.UplodadPhto}`}
+                                alt={`no img${user.UplodadPhto}`}
+                              />
+                              <div className="StudentName_TestName_div">
+                                <p>Candidate Name: {user.username}</p>
+                                <p key={testName.testCreationTableId}>
+                                  Test Name: {testName}
                                 </p>
                               </div>
                             </div>
-                          </div>
+                          ))}
                         </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
 
-                        {/* <div>
-                        Question Type:
-                        {currentQuestion.quesion_type && (
-                          <p>{currentQuestion.quesion_type.typeofQuestion}</p>
-                        )}
-                      </div> */}
-                        {/* <h3>Question:{currentQuestion.sortid.sortid_text}</h3> */}
-                        {/* main working code start*/}
-                        <div className="question_options_div">
-                          <div className="question_div">
-                            <div className="pravagragh_container ">
-                              {currentQuestion.paragraph &&
-                                currentQuestion.paragraph.paragraphImg && (
-                                  <div className="Paragraph_div ">
-                                    <b>Paragraph:</b>
-                                    <img
-                                      src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${currentQuestion.paragraph.paragraphImg}`}
-                                      alt={`ParagraphImage ${currentQuestion.paragraph.paragraph_Id}`}
-                                    />
-                                  </div>
-                                )}
+                <div className="QuizExam_Interface_Div">
+                  <div className="QuestionOptions_Parent_div">
+                    <div className="QuestionOptions_MainContainer">
+                      <div className="pravagragh_container ">
+                        {currentQuestion.paragraph &&
+                          currentQuestion.paragraph.paragraphImg && (
+                            <div className="Paragraph_div ">
+                              <b>Paragraph:</b>
+                              <img
+                                src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${currentQuestion.paragraph.paragraphImg}`}
+                                alt={`ParagraphImage ${currentQuestion.paragraph.paragraph_Id}`}
+                              />
                             </div>
-                          </div>
-                          <b>Question</b>
-                          <div className="question_number_continer">
-                            <h4 id="question_number">
-                              {currentQuestionIndex + 1}.
-                            </h4>
-                            <img
-                              src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${currentQuestion.questionImgName}`}
-                              alt={`Question ${currentQuestion.question_id}`}
-                            />
-                          </div>
-                          <div className="parent-div">
-                            {currentQuestionType.includes("NATD") ||
-                            currentQuestionType.includes("NATI") ? (
-                              <div className="quiz_exam_interface_exam_qN_Q_options_calculator_input">
-                                {currentQuestion.options &&
-                                  Array.isArray(currentQuestion.options) &&
-                                  currentQuestion.options.filter(
-                                    (opt) =>
-                                      opt.question_id ===
-                                      questionData.questions[
-                                        currentQuestionIndex
-                                      ]?.question_id
-                                  ) &&
-                                  currentQuestion.options.map(
-                                    (option, optionIndex) => (
-                                      <div
-                                        className="option"
-                                        key={option.option_id}
-                                      >
-                                        <li key={optionIndex}>
-                                          {/* calculator ============ */}
-                                          {currentQuestionType.includes(
-                                            "NATD( Numeric Answer type of questions with Decimal values)"
-                                          ) && (
-                                            <div className="calculator">
-                                              <div className="display">
-                                                <label>Answer:</label>
-                                                {/* <input
+                          )}
+                      </div>
+                      <div className="question_number_continer">
+                        <b>Question</b>
+                        <h4 id="question_number">
+                          {currentQuestionIndex + 1}.
+                        </h4>
+                        <img
+                          src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${currentQuestion.questionImgName}`}
+                          alt={`Question ${currentQuestion.question_id}`}
+                        />
+                      </div>
+                      <div className="parent-div">
+                        {currentQuestionType.includes("NATD") ||
+                        currentQuestionType.includes("NATI") ? (
+                          <div className="quiz_exam_interface_exam_qN_Q_options_calculator_input">
+                            {currentQuestion.options &&
+                              Array.isArray(currentQuestion.options) &&
+                              currentQuestion.options.filter(
+                                (opt) =>
+                                  opt.question_id ===
+                                  questionData.questions[currentQuestionIndex]
+                                    ?.question_id
+                              ) &&
+                              currentQuestion.options.map(
+                                (option, optionIndex) => (
+                                  <div
+                                    className="option"
+                                    key={option.option_id}
+                                  >
+                                    <li key={optionIndex}>
+                                      {/* calculator ============ */}
+                                      {currentQuestionType.includes(
+                                        "NATD( Numeric Answer type of questions with Decimal values)"
+                                      ) && (
+                                        <div className="calculator">
+                                          <div className="display">
+                                            <label>Answer:</label>
+                                            {/* <input
                                         type="text"
                                         name={`question-${currentQuestionIndex}`}
                                         value={value}
@@ -2438,242 +2462,230 @@ const QuizPage = () => {
                                         placeholder="Enter your answer"
                                         readOnly
                                       /> */}
-                                                <input
-                                                  type="text"
-                                                  name={`question-${currentQuestionIndex}`}
-                                                  value={
-                                                    option.ans !== null
-                                                      ? option.ans
-                                                      : value
-                                                  }
-                                                  onChange={(e) =>
-                                                    onAnswerSelected3(e)
-                                                  }
-                                                  placeholder="Enter your answer"
-                                                />
-                                              </div>
-                                              <div>
-                                                {/* <input
+                                            <input
+                                              type="text"
+                                              name={`question-${currentQuestionIndex}`}
+                                              value={
+                                                option.ans !== null
+                                                  ? option.ans
+                                                  : value
+                                              }
+                                              onChange={(e) =>
+                                                onAnswerSelected3(e)
+                                              }
+                                              placeholder="Enter your answer"
+                                            />
+                                          </div>
+                                          <div>
+                                            {/* <input
                                         type="button"
                                         value="DEL"
                                         onClick={(e) =>
                                           setValue(String(value).slice(0, -1))
                                         }
                                       /> */}
-                                                <input
-                                                  type="button"
-                                                  value="DEL"
-                                                  onClick={(e) => {
-                                                    if (option.ans !== null) {
-                                                      // If option.ans is not null, clear it
-                                                      option.ans = null;
-                                                    } else {
-                                                      // If option.ans is null, remove the last character from value
-                                                      // setValue(
-                                                      //   String(value).slice(0, -1)
-                                                      // );
-                                                      setValue("");
-                                                    }
-                                                  }}
-                                                />
-                                              </div>
-                                              <div>
-                                                <input
-                                                  type="button"
-                                                  value="7"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="8"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="9"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                              </div>
-                                              <div>
-                                                <input
-                                                  type="button"
-                                                  value="4"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="5"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="6"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                              </div>
-                                              <div>
-                                                <input
-                                                  type="button"
-                                                  value="1"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="2"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="3"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                              </div>
-                                              <div>
-                                                <input
-                                                  type="button"
-                                                  value="0"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="."
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="-"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                              </div>
-                                            </div>
-                                          )}
-                                          {currentQuestionType.includes(
-                                            "NATI( Numeric Answer type of questions with integer values)"
-                                          ) && (
-                                            <div className="calculator">
-                                              <div className="display">
-                                                <label>Answer:</label>
-                                                {/* <input
+                                            <input
+                                              type="button"
+                                              value="DEL"
+                                              onClick={(e) => {
+                                                if (option.ans !== null) {
+                                                  // If option.ans is not null, clear it
+                                                  option.ans = null;
+                                                } else {
+                                                  // If option.ans is null, remove the last character from value
+                                                  // setValue(
+                                                  //   String(value).slice(0, -1)
+                                                  // );
+                                                  setValue("");
+                                                }
+                                              }}
+                                            />
+                                          </div>
+                                          <div>
+                                            <input
+                                              type="button"
+                                              value="7"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="8"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="9"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                          </div>
+                                          <div>
+                                            <input
+                                              type="button"
+                                              value="4"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="5"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="6"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                          </div>
+                                          <div>
+                                            <input
+                                              type="button"
+                                              value="1"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="2"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="3"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                          </div>
+                                          <div>
+                                            <input
+                                              type="button"
+                                              value="0"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="."
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="-"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                          </div>
+                                        </div>
+                                      )}
+                                      {currentQuestionType.includes(
+                                        "NATI( Numeric Answer type of questions with integer values)"
+                                      ) && (
+                                        <div className="calculator">
+                                          <div className="display">
+                                            <label>Answer:</label>
+                                            {/* <input
                                         type="text"
                                         name={`question-${currentQuestionIndex}`}
                                         value={value}
@@ -2681,478 +2693,452 @@ const QuizPage = () => {
                                         placeholder="Enter your answer"
                                         readOnly
                                       /> */}
-                                                <input
-                                                  type="text"
-                                                  name={`question-${currentQuestionIndex}`}
-                                                  value={
-                                                    option.ans !== null
-                                                      ? option.ans
-                                                      : value
-                                                  }
-                                                  onChange={(e) =>
-                                                    onAnswerSelected3(e)
-                                                  }
-                                                  placeholder="Enter your answer"
-                                                />
-                                              </div>
-                                              <div>
-                                                {/* <input
+                                            <input
+                                              type="text"
+                                              name={`question-${currentQuestionIndex}`}
+                                              value={
+                                                option.ans !== null
+                                                  ? option.ans
+                                                  : value
+                                              }
+                                              onChange={(e) =>
+                                                onAnswerSelected3(e)
+                                              }
+                                              placeholder="Enter your answer"
+                                            />
+                                          </div>
+                                          <div>
+                                            {/* <input
                                         type="button"
                                         value="DEL"
                                         onClick={(e) =>
                                           setValue(String(value).slice(0, -1))
                                         }
                                       /> */}
-                                                <input
-                                                  type="button"
-                                                  value="DEL"
-                                                  onClick={(e) => {
-                                                    if (option.ans !== null) {
-                                                      // If option.ans is not null, clear it
-                                                      option.ans = null;
-                                                    } else {
-                                                      // If option.ans is null, remove the last character from value
-                                                      setValue(
-                                                        String(value).slice(
-                                                          0,
-                                                          -1
-                                                        )
-                                                      );
-                                                    }
-                                                  }}
-                                                />
-                                              </div>
-                                              <div>
-                                                <input
-                                                  type="button"
-                                                  value="7"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="8"
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      value + e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="9"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                              </div>
-                                              <div>
-                                                <input
-                                                  type="button"
-                                                  value="4"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="5"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="6"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                              </div>
-                                              <div>
-                                                <input
-                                                  type="button"
-                                                  value="1"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="2"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="3"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                              </div>
-                                              <div>
-                                                <input
-                                                  type="button"
-                                                  value="0"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="."
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                                <input
-                                                  type="button"
-                                                  value="-"
-                                                  // onClick={(e) =>
-                                                  //   setValue(value + e.target.value)
-                                                  // }
-                                                  onClick={(e) =>
-                                                    setValue(
-                                                      (option.ans !== null
-                                                        ? option.ans
-                                                        : value) +
-                                                        e.target.value
-                                                    )
-                                                  }
-                                                />
-                                              </div>
-                                            </div>
-                                          )}
-                                          {/* calculator ============ */}
-                                        </li>
-                                      </div>
-                                    )
-                                  )}
-                              </div>
-                            ) : (
-                              <div className="quiz_exam_interface_exam_qN_Q_options">
-                                {/* Render only if it's not NATD or NATI type question */}
-                                <b>Options</b>
-                                {currentQuestion.options &&
-                                  Array.isArray(currentQuestion.options) &&
-                                  currentQuestion.options.filter(
-                                    (opt) =>
-                                      opt.question_id ===
-                                      questionData.questions[
-                                        currentQuestionIndex
-                                      ]?.question_id
-                                  ) &&
-                                  currentQuestion.options.map(
-                                    (option, optionIndex) => (
-                                      <div
-                                        className="option"
-                                        key={option.option_id}
-                                      >
-                                        <li key={optionIndex}>
-                                          {currentQuestionType.includes(
-                                            "MCQ4(MCQ with 4 Options)"
-                                          ) && (
-                                            <div>
-                                              <input
-                                                className="opt_btns"
-                                                type="radio"
-                                                name={`question-${currentQuestionIndex}-option`}
-                                                value={option.ans}
-                                                checked={
-                                                  selectedAnswersMap1[
-                                                    currentQuestion.question_id
-                                                  ] === optionIndex
+                                            <input
+                                              type="button"
+                                              value="DEL"
+                                              onClick={(e) => {
+                                                if (option.ans !== null) {
+                                                  // If option.ans is not null, clear it
+                                                  option.ans = null;
+                                                } else {
+                                                  // If option.ans is null, remove the last character from value
+                                                  setValue(
+                                                    String(value).slice(0, -1)
+                                                  );
                                                 }
-                                                onChange={() =>
-                                                  onAnswerSelected1(optionIndex)
-                                                }
-                                              />
-                                              <label htmlFor="">
-                                                ({option.option_index})
-                                              </label>
-                                              <img
-                                                src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${option.optionImgName}`}
-                                                alt={`Option ${option.option_id}`}
-                                              />
-                                            </div>
-                                          )}
-                                          {currentQuestionType.includes(
-                                            "MCQ5(MCQ with 5 Options)"
-                                          ) && (
-                                            <div>
-                                              <input
-                                                className="opt_btns"
-                                                type="radio"
-                                                name={`question-${currentQuestionIndex}-option`}
-                                                value={String.fromCharCode(
-                                                  "A".charCodeAt(0) +
-                                                    optionIndex
-                                                )}
-                                                checked={
-                                                  selectedAnswersMap1[
-                                                    questionData.questions[
-                                                      currentQuestionIndex
-                                                    ]?.question_id
-                                                  ] === optionIndex
-                                                }
-                                                onChange={() =>
-                                                  onAnswerSelected1(optionIndex)
-                                                }
-                                              />
-                                              (
-                                              {String.fromCharCode(
-                                                "a".charCodeAt(0) + optionIndex
-                                              )}
-                                              )
-                                              <img
-                                                src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${option.optionImgName}`}
-                                                alt={`Option ${option.option_id}`}
-                                              />
-                                            </div>
-                                          )}
-                                          {currentQuestionType.includes(
-                                            "MSQN(MSQ with -ve marking)"
-                                          ) && (
-                                            <div>
-                                              <input
-                                                className="opt_btns"
-                                                type="checkbox"
-                                                name={`question-${currentQuestionIndex}-optionIndex`}
-                                                value={String.fromCharCode(
-                                                  "A".charCodeAt(0) +
-                                                    optionIndex
-                                                )}
-                                                checked={
-                                                  selectedAnswersMap2[
-                                                    questionData.questions[
-                                                      currentQuestionIndex
-                                                    ]?.question_id
-                                                  ] &&
-                                                  selectedAnswersMap2[
-                                                    questionData.questions[
-                                                      currentQuestionIndex
-                                                    ]?.question_id
-                                                  ].includes(optionIndex)
-                                                }
-                                                onChange={() =>
-                                                  onAnswerSelected2(optionIndex)
-                                                }
-                                              />
-                                              (
-                                              {String.fromCharCode(
-                                                "a".charCodeAt(0) + optionIndex
-                                              )}
-                                              )
-                                              <img
-                                                src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${option.optionImgName}`}
-                                                alt={`Option ${option.option_id}`}
-                                              />
-                                            </div>
-                                          )}
-                                          {currentQuestionType.includes(
-                                            "MSQ(MSQ without -ve marking)"
-                                          ) && (
-                                            <div>
-                                              <input
-                                                className="opt_btns"
-                                                type="checkbox"
-                                                name={`question-${currentQuestionIndex}-optionIndex`}
-                                                value={String.fromCharCode(
-                                                  "A".charCodeAt(0) +
-                                                    optionIndex
-                                                )}
-                                                checked={
-                                                  selectedAnswersMap2[
-                                                    questionData.questions[
-                                                      currentQuestionIndex
-                                                    ]?.question_id
-                                                  ] &&
-                                                  selectedAnswersMap2[
-                                                    questionData.questions[
-                                                      currentQuestionIndex
-                                                    ]?.question_id
-                                                  ].includes(optionIndex)
-                                                }
-                                                onChange={() =>
-                                                  onAnswerSelected2(optionIndex)
-                                                }
-                                              />
-                                              (
-                                              {String.fromCharCode(
-                                                "a".charCodeAt(0) + optionIndex
-                                              )}
-                                              )
-                                              <img
-                                                src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${option.optionImgName}`}
-                                                alt={`Option ${option.option_id}`}
-                                              />{" "}
-                                            </div>
-                                          )}
-                                          {currentQuestionType.includes(
-                                            "TF(True or false)"
-                                          ) && (
-                                            <div>
-                                              <input
-                                                className="opt_btns"
-                                                type="radio"
-                                                name={`question-${currentQuestionIndex}-option`}
-                                                value={String.fromCharCode(
-                                                  "A".charCodeAt(0) +
-                                                    optionIndex
-                                                )}
-                                                checked={
-                                                  selectedAnswersMap1[
-                                                    questionData.questions[
-                                                      currentQuestionIndex
-                                                    ]?.question_id
-                                                  ] === optionIndex
-                                                }
-                                                onChange={() =>
-                                                  onAnswerSelected1(optionIndex)
-                                                }
-                                              />
-                                              (
-                                              {String.fromCharCode(
-                                                "a".charCodeAt(0) + optionIndex
-                                              )}
-                                              )
-                                              <img
-                                                src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${option.optionImgName}`}
-                                                alt={`Option ${option.option_id}`}
-                                              />
-                                            </div>
-                                          )}
-
-                                          {currentQuestionType.includes(
-                                            "CTQ(Comprehension type of questions )"
-                                          ) && (
-                                            <div>
-                                              <input
-                                                className="opt_btns"
-                                                type="radio"
-                                                name={`question-${currentQuestionIndex}-option`}
-                                                value={String.fromCharCode(
-                                                  "A".charCodeAt(0) +
-                                                    optionIndex
-                                                )}
-                                                checked={
-                                                  selectedAnswersMap1[
-                                                    questionData.questions[
-                                                      currentQuestionIndex
-                                                    ]?.question_id
-                                                  ] === optionIndex
-                                                }
-                                                onChange={() =>
-                                                  onAnswerSelected1(optionIndex)
-                                                }
-                                              />
-                                              (
-                                              {String.fromCharCode(
-                                                "a".charCodeAt(0) + optionIndex
-                                              )}
-                                              )
-                                              <img
-                                                src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${option.optionImgName}`}
-                                                alt={`Option ${option.option_id}`}
-                                              />
-                                            </div>
-                                          )}
-                                        </li>
-                                      </div>
-                                    )
-                                  )}
-                              </div>
-                            )}
+                                              }}
+                                            />
+                                          </div>
+                                          <div>
+                                            <input
+                                              type="button"
+                                              value="7"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="8"
+                                              onClick={(e) =>
+                                                setValue(value + e.target.value)
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="9"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                          </div>
+                                          <div>
+                                            <input
+                                              type="button"
+                                              value="4"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="5"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="6"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                          </div>
+                                          <div>
+                                            <input
+                                              type="button"
+                                              value="1"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="2"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="3"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                          </div>
+                                          <div>
+                                            <input
+                                              type="button"
+                                              value="0"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="."
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                            <input
+                                              type="button"
+                                              value="-"
+                                              // onClick={(e) =>
+                                              //   setValue(value + e.target.value)
+                                              // }
+                                              onClick={(e) =>
+                                                setValue(
+                                                  (option.ans !== null
+                                                    ? option.ans
+                                                    : value) + e.target.value
+                                                )
+                                              }
+                                            />
+                                          </div>
+                                        </div>
+                                      )}
+                                      {/* calculator ============ */}
+                                    </li>
+                                  </div>
+                                )
+                              )}
                           </div>
-                        </div>
+                        ) : (
+                          <div className="quiz_exam_interface_exam_qN_Q_options">
+                            {/* Render only if it's not NATD or NATI type question */}
+                            <b>Options</b>
+                            {currentQuestion.options &&
+                              Array.isArray(currentQuestion.options) &&
+                              currentQuestion.options.filter(
+                                (opt) =>
+                                  opt.question_id ===
+                                  questionData.questions[currentQuestionIndex]
+                                    ?.question_id
+                              ) &&
+                              currentQuestion.options.map(
+                                (option, optionIndex) => (
+                                  <div
+                                    className="option"
+                                    key={option.option_id}
+                                  >
+                                    <li key={optionIndex}>
+                                      {currentQuestionType.includes(
+                                        "MCQ4(MCQ with 4 Options)"
+                                      ) && (
+                                        <div>
+                                          <input
+                                            className="opt_btns"
+                                            type="radio"
+                                            name={`question-${currentQuestionIndex}-option`}
+                                            value={option.ans}
+                                            checked={
+                                              selectedAnswersMap1[
+                                                currentQuestion.question_id
+                                              ] === optionIndex
+                                            }
+                                            onChange={() =>
+                                              onAnswerSelected1(optionIndex)
+                                            }
+                                          />
+                                          <label htmlFor="">
+                                            ({option.option_index})
+                                          </label>
+                                          <img
+                                            src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${option.optionImgName}`}
+                                            alt={`Option ${option.option_id}`}
+                                          />
+                                        </div>
+                                      )}
+                                      {currentQuestionType.includes(
+                                        "MCQ5(MCQ with 5 Options)"
+                                      ) && (
+                                        <div>
+                                          <input
+                                            className="opt_btns"
+                                            type="radio"
+                                            name={`question-${currentQuestionIndex}-option`}
+                                            value={String.fromCharCode(
+                                              "A".charCodeAt(0) + optionIndex
+                                            )}
+                                            checked={
+                                              selectedAnswersMap1[
+                                                questionData.questions[
+                                                  currentQuestionIndex
+                                                ]?.question_id
+                                              ] === optionIndex
+                                            }
+                                            onChange={() =>
+                                              onAnswerSelected1(optionIndex)
+                                            }
+                                          />
+                                          (
+                                          {String.fromCharCode(
+                                            "a".charCodeAt(0) + optionIndex
+                                          )}
+                                          )
+                                          <img
+                                            src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${option.optionImgName}`}
+                                            alt={`Option ${option.option_id}`}
+                                          />
+                                        </div>
+                                      )}
+                                      {currentQuestionType.includes(
+                                        "MSQN(MSQ with -ve marking)"
+                                      ) && (
+                                        <div>
+                                          <input
+                                            className="opt_btns"
+                                            type="checkbox"
+                                            name={`question-${currentQuestionIndex}-optionIndex`}
+                                            value={String.fromCharCode(
+                                              "A".charCodeAt(0) + optionIndex
+                                            )}
+                                            checked={
+                                              selectedAnswersMap2[
+                                                questionData.questions[
+                                                  currentQuestionIndex
+                                                ]?.question_id
+                                              ] &&
+                                              selectedAnswersMap2[
+                                                questionData.questions[
+                                                  currentQuestionIndex
+                                                ]?.question_id
+                                              ].includes(optionIndex)
+                                            }
+                                            onChange={() =>
+                                              onAnswerSelected2(optionIndex)
+                                            }
+                                          />
+                                          (
+                                          {String.fromCharCode(
+                                            "a".charCodeAt(0) + optionIndex
+                                          )}
+                                          )
+                                          <img
+                                            src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${option.optionImgName}`}
+                                            alt={`Option ${option.option_id}`}
+                                          />
+                                        </div>
+                                      )}
+                                      {currentQuestionType.includes(
+                                        "MSQ(MSQ without -ve marking)"
+                                      ) && (
+                                        <div>
+                                          <input
+                                            className="opt_btns"
+                                            type="checkbox"
+                                            name={`question-${currentQuestionIndex}-optionIndex`}
+                                            value={String.fromCharCode(
+                                              "A".charCodeAt(0) + optionIndex
+                                            )}
+                                            checked={
+                                              selectedAnswersMap2[
+                                                questionData.questions[
+                                                  currentQuestionIndex
+                                                ]?.question_id
+                                              ] &&
+                                              selectedAnswersMap2[
+                                                questionData.questions[
+                                                  currentQuestionIndex
+                                                ]?.question_id
+                                              ].includes(optionIndex)
+                                            }
+                                            onChange={() =>
+                                              onAnswerSelected2(optionIndex)
+                                            }
+                                          />
+                                          (
+                                          {String.fromCharCode(
+                                            "a".charCodeAt(0) + optionIndex
+                                          )}
+                                          )
+                                          <img
+                                            src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${option.optionImgName}`}
+                                            alt={`Option ${option.option_id}`}
+                                          />{" "}
+                                        </div>
+                                      )}
+                                      {currentQuestionType.includes(
+                                        "TF(True or false)"
+                                      ) && (
+                                        <div>
+                                          <input
+                                            className="opt_btns"
+                                            type="radio"
+                                            name={`question-${currentQuestionIndex}-option`}
+                                            value={String.fromCharCode(
+                                              "A".charCodeAt(0) + optionIndex
+                                            )}
+                                            checked={
+                                              selectedAnswersMap1[
+                                                questionData.questions[
+                                                  currentQuestionIndex
+                                                ]?.question_id
+                                              ] === optionIndex
+                                            }
+                                            onChange={() =>
+                                              onAnswerSelected1(optionIndex)
+                                            }
+                                          />
+                                          (
+                                          {String.fromCharCode(
+                                            "a".charCodeAt(0) + optionIndex
+                                          )}
+                                          )
+                                          <img
+                                            src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${option.optionImgName}`}
+                                            alt={`Option ${option.option_id}`}
+                                          />
+                                        </div>
+                                      )}
 
-                        {/* main working code end */}
+                                      {currentQuestionType.includes(
+                                        "CTQ(Comprehension type of questions )"
+                                      ) && (
+                                        <div>
+                                          <input
+                                            className="opt_btns"
+                                            type="radio"
+                                            name={`question-${currentQuestionIndex}-option`}
+                                            value={String.fromCharCode(
+                                              "A".charCodeAt(0) + optionIndex
+                                            )}
+                                            checked={
+                                              selectedAnswersMap1[
+                                                questionData.questions[
+                                                  currentQuestionIndex
+                                                ]?.question_id
+                                              ] === optionIndex
+                                            }
+                                            onChange={() =>
+                                              onAnswerSelected1(optionIndex)
+                                            }
+                                          />
+                                          (
+                                          {String.fromCharCode(
+                                            "a".charCodeAt(0) + optionIndex
+                                          )}
+                                          )
+                                          <img
+                                            src={`${BASE_URL}/uploads/${currentQuestion.documen_name}/${option.optionImgName}`}
+                                            alt={`Option ${option.option_id}`}
+                                          />
+                                        </div>
+                                      )}
+                                    </li>
+                                  </div>
+                                )
+                              )}
+                          </div>
+                        )}
                       </div>
                     </div>
-                    <div className="quiz_btns_contaioner">
+                    <div className="QuestionOptions_Buttons_Container">
                       <div>
                         <button
                           className="Quiz_Save_MarkforReview"
@@ -3169,7 +3155,7 @@ const QuizPage = () => {
                           Clear Response
                         </button>
                         <button
-                        title="Click here to Save & Next" 
+                          title="Click here to Save & Next"
                           className="quizsave_next"
                           onClick={handleSaveNextQuestion}
                         >
@@ -3185,7 +3171,12 @@ const QuizPage = () => {
                         >
                           <i className="fa-solid fa-angles-left"></i> Back
                         </button>
-                        <button  title="Click here to go Next" onClick={handleNextQuestion}>Next</button>
+                        <button
+                          title="Click here to go Next"
+                          onClick={handleNextQuestion}
+                        >
+                          Next
+                        </button>
                         <button
                           style={{ background: "#f0a607da" }}
                           onClick={handleSubmit}
@@ -3196,50 +3187,31 @@ const QuizPage = () => {
                         </button>
                       </div>
                     </div>
-                  </>
-                )}
+                  </div>
+                  <div className="QuestionOptions_RightSideBarButtons_div">
+                    <ButtonsFunctionality
+                      onQuestionSelect={handleQuestionSelect}
+                      questionStatus={questionStatus}
+                      setQuestionStatus={setQuestionStatus}
+                      answeredCount={answeredCount}
+                      notAnsweredCount={notAnsweredCount}
+                      answeredmarkedForReviewCount={
+                        answeredmarkedForReviewCount
+                      }
+                      markedForReviewCount={markedForReviewCount}
+                      VisitedCount={VisitedCount}
+                      selectedSubject={selectedSubject}
+                      questionData={questionData}
+                      updateQuestionStatus={updateQuestionStatus}
+                      seconds={600}
+                      onUpdateOption={handleUpdateOption}
+                      option={option}
+                      users={userData?.users || []}
+                    />
+                  </div>
+                </div>
               </div>
-
-              {/* --------------- quiz option container -------------------- */}
-
-              {/* --------------- quiz btns container -------------------- */}
-            </div>
-          </div>
-          <div className="quiz_exam_interface_body_right_container">
-            {/* --------------- right bar -------------------- */}
-            <div className="rightsidebar_container">
-              <div
-                className="rightsidebar_container_btn_menubar"
-                onClick={toggleSidebar}
-              >
-                <BiMenuAltLeft />
-              </div>
-              <div
-                className={
-                  isSidebarVisible ? "rightsidebar visible" : "rightsidebar"
-                }
-              >
-                <ButtonsFunctionality
-                  onQuestionSelect={handleQuestionSelect}
-                  questionStatus={questionStatus}
-                  setQuestionStatus={setQuestionStatus}
-                  answeredCount={answeredCount}
-                  notAnsweredCount={notAnsweredCount}
-                  answeredmarkedForReviewCount={answeredmarkedForReviewCount}
-                  markedForReviewCount={markedForReviewCount}
-                  VisitedCount={VisitedCount}
-                  selectedSubject={selectedSubject}
-                  questionData={questionData}
-                  updateQuestionStatus={updateQuestionStatus}
-                  // seconds={seconds}
-                  seconds={600}
-                  onUpdateOption={handleUpdateOption}
-                  option={option}
-                  // userData={userData}
-                  users={userData?.users || []}
-                />
-              </div>
-            </div>
+            )}
           </div>
         </div>
       ) : (
@@ -3267,9 +3239,8 @@ const QuizPage = () => {
                 </tr>
               </table>
             </div>
-           
+
             <div>
-             
               {showButtonNo === false ? (
                 <h2 className="Exam_summary_question_tag">
                   Please press okay to view your result.
@@ -3308,7 +3279,11 @@ const QuizPage = () => {
                   </>
                 )}
                 {showButtonNo && (
-                  <button className="es_btn"  title="Click here to go Back" onClick={handleNo}>
+                  <button
+                    className="es_btn"
+                    title="Click here to go Back"
+                    onClick={handleNo}
+                  >
                     NO
                   </button>
                 )}

@@ -2393,8 +2393,9 @@ const QuizPage = () => {
                                 )}
                             </div>
                           </div>
-                          <b>Question</b>
+                      
                           <div className="question_number_continer">
+                            <b>Question</b>
                             <h4 id="question_number">
                               {currentQuestionIndex + 1}.
                             </h4>

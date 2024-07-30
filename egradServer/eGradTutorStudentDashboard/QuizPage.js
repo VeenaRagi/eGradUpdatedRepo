@@ -715,47 +715,188 @@ router.get("/questionOptions/:testCreationTableId/:userId", async (req, res) => 
   }
 });
 
+// router.get("/PG_QuestionOptions/:testCreationTableId/:userId", async (req, res) => {
+//   const { testCreationTableId, userId } = req.params;
+//   try {
+//     const [rows] = await db.query(
+//       `SELECT 
+//         q.question_id, q.questionImgName, 
+//         o.option_id, o.optionImgName, o.option_index,
+//         s.solution_id, s.solutionImgName, 
+//         qt.qtypeId, qt.qtype_text,
+//         ur.user_answer, ur.user_Sno, qts.typeofQuestion,
+//         ans.answer_id, ans.answer_text,
+//         m.markesId, m.marks_text,
+//         si.sort_id, si.sortid_text,
+//         doc.documen_name, doc.sectionId, 
+//         doc.subjectId, doc.testCreationTableId,
+//         p.paragraphImg, p.paragraph_Id,
+//         pq.paragraphQNo_Id, pq.paragraphQNo, qts.quesionTypeId,
+//         tct.TestName,
+//         tct.calculator
+//       FROM 
+//         questions q 
+//         LEFT OUTER JOIN options o ON q.question_id = o.question_id
+//         LEFT OUTER JOIN qtype qt ON q.question_id = qt.question_id 
+//         LEFT OUTER JOIN quesion_type qts ON qt.quesionTypeId = qts.quesionTypeId 
+//         LEFT OUTER JOIN answer ans ON q.question_id = ans.question_id 
+//         LEFT OUTER JOIN marks m ON q.question_id = m.question_id 
+//         LEFT OUTER JOIN sortid si ON q.question_id = si.question_id 
+//         LEFT OUTER JOIN solution s ON q.question_id = s.solution_id 
+//         LEFT OUTER JOIN paragraphqno pq ON q.question_id = pq.question_id
+//         LEFT OUTER JOIN paragraph p ON pq.paragraph_Id = p.paragraph_Id
+//         LEFT OUTER JOIN ots_document doc ON q.document_Id = doc.document_Id
+//         LEFT OUTER JOIN user_responses ur ON q.question_id = ur.question_id 
+//         LEFT OUTER JOIN test_creation_table tct ON doc.testCreationTableId = tct.testCreationTableId
+//         LEFT OUTER JOIN log l ON ur.user_Id = l.user_Id AND ur.user_Id = l.user_Id
+//       WHERE 
+//         doc.testCreationTableId = ? AND
+//         (l.user_Id = ? OR ur.user_answer IS NULL)
+//       ORDER BY 
+//         q.question_id ASC, o.option_index ASC;`,
+//       [testCreationTableId, userId]
+//     );
+
+//     // Check if rows is not empty
+//     if (rows.length > 0) {
+//       const questionData = {
+//         questions: [],
+//         calculator: rows[0].calculator // Assuming all rows have the same calculator value
+//       };
+
+//       // Organize data into an array of questions
+//       rows.forEach((row) => {
+//         const existingQuestion = questionData.questions.find(
+//           (q) => q.question_id === row.question_id
+//         );
+//         const option = {
+//           option_id: row.option_id,
+//           option_index: row.option_index,
+//           optionImgName: row.optionImgName,
+//           ans: row.user_answer,
+//         };
+//         if (existingQuestion) {
+//           const existingOption = existingQuestion.options.find(
+//             (opt) => opt.option_id === option.option_id
+//           );
+
+//           if (!existingOption) {
+//             existingQuestion.options.push(option);
+//           }
+//         } else {
+//           // Question doesn't exist, create a new question
+//           const newQuestion = {
+//             TestName: row.TestName,
+//             question_id: row.question_id,
+//             questionImgName: row.questionImgName,
+//             documen_name: row.documen_name,
+//             options: [option],
+//             subjectId: row.subjectId,
+//             sectionId: row.sectionId,
+//             qtype: {
+//               qtypeId: row.qtypeId,
+//               qtype_text: row.qtype_text,
+//             },
+//             quesion_type: {
+//               quesionTypeId: row.quesionTypeId,
+//               quesion_type: row.quesion_type,
+//               typeofQuestion: row.typeofQuestion,
+//             },
+//             answer: {
+//               answer_id: row.answer_id,
+//               answer_text: row.answer_text,
+//             },
+//             useranswer: {
+//               urid: row.question_id,
+//               ans: row.user_answer,
+//             },
+//             marks: {
+//               markesId: row.markesId,
+//               marks_text: row.marks_text,
+//             },
+//             sortid: {
+//               sort_id: row.sort_id,
+//               sortid_text: row.sortid_text,
+//             },
+//             solution: {              
+//               solution_id: row.solution_id,              
+//               solutionImgName: row.solutionImgName,            
+//             },
+//             paragraph: {},
+//             paragraphqno: {},
+//           };
+
+//           if (row.paragraph_Id && row.paragraphQNo) {
+//             newQuestion.paragraph = {
+//               paragraph_Id: row.paragraph_Id,
+//               paragraphImg: row.paragraphImg,
+//             };
+
+//             newQuestion.paragraphqno = {
+//               paragraphQNo_Id: row.paragraphQNo_Id,
+//               paragraphQNo: row.paragraphQNo,
+//             };
+//           }
+
+//           questionData.questions.push(newQuestion);
+//         }
+//       });
+
+//       res.json(questionData);
+//     } else {
+//       res.status(404).json({ error: "No data found" });
+//     }
+//   } catch (error) {
+//     console.error("Error fetching question data:", error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
+
+ 
+
 router.get("/PG_QuestionOptions/:testCreationTableId/:userId", async (req, res) => {
   const { testCreationTableId, userId } = req.params;
   try {
     const [rows] = await db.query(
       `SELECT 
-      q.question_id, q.questionImgName, 
-      o.option_id, o.optionImgName, o.option_index,
-      s.solution_id, s.solutionImgName, 
-      qt.qtypeId, qt.qtype_text,
-      ur.user_answer, ur.user_Sno, qts.typeofQuestion,
-      ans.answer_id, ans.answer_text,
-      m.markesId, m.marks_text,
-      si.sort_id, si.sortid_text,
-      doc.documen_name, doc.sectionId, 
-      doc.subjectId, doc.testCreationTableId,
-      p.paragraphImg, p.paragraph_Id,
-      pq.paragraphQNo_Id, pq.paragraphQNo, qts.quesionTypeId,
-      tct.TestName,
-      tct.calculator
-  FROM 
-      questions q 
-      LEFT OUTER JOIN options o ON q.question_id = o.question_id
-      LEFT OUTER JOIN qtype qt ON q.question_id = qt.question_id 
-      LEFT OUTER JOIN quesion_type qts ON qt.quesionTypeId = qts.quesionTypeId 
-      LEFT OUTER JOIN answer ans ON q.question_id = ans.question_id 
-      LEFT OUTER JOIN marks m ON q.question_id = m.question_id 
-      LEFT OUTER JOIN sortid si ON q.question_id = si.question_id 
-      LEFT OUTER JOIN solution s ON q.question_id = s.solution_id 
-      LEFT OUTER JOIN paragraphqno pq ON q.question_id = pq.question_id
-      LEFT OUTER JOIN paragraph p ON pq.paragraph_Id = p.paragraph_Id
-      LEFT OUTER JOIN ots_document doc ON q.document_Id = doc.document_Id
-      LEFT OUTER JOIN user_responses ur ON q.question_id = ur.question_id 
-      LEFT OUTER JOIN test_creation_table tct ON doc.testCreationTableId = tct.testCreationTableId
-      LEFT OUTER JOIN log l ON ur.user_Id = l.user_Id AND ur.user_Id = l.user_Id
-  WHERE 
-      doc.testCreationTableId = ? AND
-      (l.user_Id = ? OR ur.user_answer IS NULL)
-  ORDER BY 
-       q.question_id ASC, o.option_index ASC;
-  
-      `,
+        q.question_id, q.questionImgName, 
+        o.option_id, o.optionImgName, o.option_index,
+        s.solution_id, s.solutionImgName, 
+        qt.qtypeId, qt.qtype_text,
+        ur.user_answer, ur.user_Sno, qts.typeofQuestion,
+        ans.answer_id, ans.answer_text,
+        m.markesId, m.marks_text,
+        si.sort_id, si.sortid_text,
+        doc.documen_name, doc.sectionId, 
+        doc.subjectId, doc.testCreationTableId,
+        p.paragraphImg, p.paragraph_Id,
+        pq.paragraphQNo_Id, pq.paragraphQNo, qts.quesionTypeId,
+        tct.TestName,
+        tct.calculator,
+        subj.subjectName, -- Added
+        sect.sectionName  -- Added
+      FROM 
+        questions q 
+        LEFT OUTER JOIN options o ON q.question_id = o.question_id
+        LEFT OUTER JOIN qtype qt ON q.question_id = qt.question_id 
+        LEFT OUTER JOIN quesion_type qts ON qt.quesionTypeId = qts.quesionTypeId 
+        LEFT OUTER JOIN answer ans ON q.question_id = ans.question_id 
+        LEFT OUTER JOIN marks m ON q.question_id = m.question_id 
+        LEFT OUTER JOIN sortid si ON q.question_id = si.question_id 
+        LEFT OUTER JOIN solution s ON q.question_id = s.solution_id 
+        LEFT OUTER JOIN paragraphqno pq ON q.question_id = pq.question_id
+        LEFT OUTER JOIN paragraph p ON pq.paragraph_Id = p.paragraph_Id
+        LEFT OUTER JOIN ots_document doc ON q.document_Id = doc.document_Id
+        LEFT OUTER JOIN user_responses ur ON q.question_id = ur.question_id 
+        LEFT OUTER JOIN test_creation_table tct ON doc.testCreationTableId = tct.testCreationTableId
+        LEFT OUTER JOIN log l ON ur.user_Id = l.user_Id AND ur.user_Id = l.user_Id
+        LEFT OUTER JOIN subjects subj ON doc.subjectId = subj.subjectId -- Added
+        LEFT OUTER JOIN sections sect ON doc.sectionId = sect.sectionId -- Added
+      WHERE 
+        doc.testCreationTableId = ? AND
+        (l.user_Id = ? OR ur.user_answer IS NULL)
+      ORDER BY 
+        q.question_id ASC, o.option_index ASC;`,
       [testCreationTableId, userId]
     );
 
@@ -763,6 +904,7 @@ router.get("/PG_QuestionOptions/:testCreationTableId/:userId", async (req, res) 
     if (rows.length > 0) {
       const questionData = {
         questions: [],
+        calculator: rows[0].calculator // Assuming all rows have the same calculator value
       };
 
       // Organize data into an array of questions
@@ -793,7 +935,9 @@ router.get("/PG_QuestionOptions/:testCreationTableId/:userId", async (req, res) 
             documen_name: row.documen_name,
             options: [option],
             subjectId: row.subjectId,
+            subjectName: row.subjectName, // Added
             sectionId: row.sectionId,
+            sectionName: row.sectionName, // Added
             qtype: {
               qtypeId: row.qtypeId,
               qtype_text: row.qtype_text,
@@ -823,7 +967,6 @@ router.get("/PG_QuestionOptions/:testCreationTableId/:userId", async (req, res) 
               solution_id: row.solution_id,              
               solutionImgName: row.solutionImgName,            
             },
-
             paragraph: {},
             paragraphqno: {},
           };
@@ -853,7 +996,7 @@ router.get("/PG_QuestionOptions/:testCreationTableId/:userId", async (req, res) 
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
- 
+
 router.get("/questionpaper/:testCreationTableId", async (req, res) => {
   const { testCreationTableId } = req.params;
   try {
