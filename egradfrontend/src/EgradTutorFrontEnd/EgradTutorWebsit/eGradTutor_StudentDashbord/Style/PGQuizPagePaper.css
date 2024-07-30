@@ -1,0 +1,172 @@
+
+
+.QuizExam_Name{
+    width: 100%;
+    background: #8b8b8b;
+    display: flex;
+}
+.QuizInterface_body_container{
+    width: 119rem;
+}
+.QPaper_Instructions{
+    margin: 0;
+    display: flex;
+    position: relative;
+    left: 60rem;
+    gap: 41px;
+}
+
+.QuizExam_Details_And_StudentInfo{
+    display: flex;
+    width: 100vh;
+}
+
+.quiz_exam_interface_header {
+    width: 100%;
+    background-color: #d3e0e5;
+    padding: 1rem 3rem;
+  }
+
+.QuizExam_Interface_Div{
+    display: flex;
+    border-top: 1px solid grey;
+}
+.QuizPage_testname_heading {
+    font-size: 1.5rem;
+    color: black;
+    font-weight: bold;
+    margin: 0%;
+  }
+.QuestionOptions_Parent_div{
+    width: 100%;
+    height: 100%;
+    margin: 2px 2rem;
+}
+.QuestionOptions_RightSideBarButtons_div{
+    width: 30%;
+    background-color: lightblue;
+    padding: 2rem;
+}
+
+.quiz_exam_interface_SUBJECTS_CONTAINER {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  }
+  
+  .Subject_And_Calculator_div {
+    display: flex;
+    gap: 72rem;
+    align-items: center;
+    margin-bottom: 1px;
+    border-bottom: 2px solid gray;
+    background-color: #f3f3f3;
+    width: 100%;
+  }
+  
+  .Subjects {
+    /* flex: 1;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  }
+  
+  .Subjects p {
+    /* margin: 5px 0;
+    font-size: 16px;
+    color: #333; */
+  }
+  
+  .Calculator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .Calculator .FcCalculator {
+    color: #007bff; /* Change as needed */
+  }
+  
+  .Sections_And_Timer {
+    display: flex;
+    gap: 60rem;
+    border-bottom: 2px solid grey;
+    width: 100%;
+  }
+  
+  .Sections_And_Timer p {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+  }
+  
+  .countDown_time_div {
+    display: flex;
+    align-items: center;
+  }
+  
+  .countDown_time_tag {
+    font-size: 16px;
+    color: #555;
+    display: flex;
+    align-items: center;
+  }
+  
+  .countDown_time_tag span {
+    margin-right: 8px;
+  }
+  
+  .Sections {
+    padding: 8px;
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    border-bottom: 2px solid grey;
+  }
+  
+  .Sections p {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .QuestionType_And_Marks_div {
+    width: 100%;
+  }
+  
+  .QuestionType_And_Marks_div p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .StudentImgName_TestName_div{
+    display: flex;
+  }
+
+  #QuizExam_StudentImg{
+    width: 8rem;
+    height: 8rem;
+  }
+  
+  @media (max-width: 768px) {
+    .Subject_And_Calculator_div {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .Sections_And_Timer {
+      flex-direction: column;
+    }
+  }
+
+  .StudentName_TestName_div{
+    background-color: red;
+    width: 386px;
+    height: 8rem;
+    padding: 15px;
+  }
+

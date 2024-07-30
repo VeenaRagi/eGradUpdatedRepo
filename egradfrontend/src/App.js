@@ -31,8 +31,8 @@ import { UpdateInstruction } from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdm
 import TestUpdateadmin from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/TestUpdateadmin.jsx";
 import InstructionPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_Instructions_Page.jsx";
 import General_Intructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_General_Intructions_Page.jsx";
-import QuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_OTS/QuizPage.jsx";
-import QuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_OTS/QuestionPaper.jsx";
+import QuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/QuizPage.jsx";
+import QuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/QuestionPaper.jsx";
 import QuestionBankQuiz from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_PQB/QuestionBankQuiz.jsx";
 import StudentDashbord_MyResults from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/StudentDashbord_MyResults.jsx";
 import TestResultsPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/TestResultsPage.jsx";

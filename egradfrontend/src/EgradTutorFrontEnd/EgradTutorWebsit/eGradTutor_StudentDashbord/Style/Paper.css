@@ -15,7 +15,7 @@ body {
 /* -------------------------------------------- quiz header start------------------------------ */
 .quiz_exam_interface_header {
   width: 100%;
-  background: #000;
+  /* background: #000; */
   padding: 1rem 3rem;
 }
 .quiz_exam_interface_header_q_if_H {
