@@ -618,7 +618,7 @@ button {
 
 /* Optional: Hover effect */
 button:hover {
-    background: #d4d6d6;
+    /* background: #d4d6d6; */
     /* Darker shade for hover */
 }
 

@@ -1373,7 +1373,7 @@ const ScientificCalculator = () => {
                 =
               </button>
             </div>
-            <div className="secondlineright">
+            <div className="secondlineright secondlineright11 ">
               <button
                 className="calculatorbutton calculatorzero"
                 onClick={() => handleButtonClick("0")}

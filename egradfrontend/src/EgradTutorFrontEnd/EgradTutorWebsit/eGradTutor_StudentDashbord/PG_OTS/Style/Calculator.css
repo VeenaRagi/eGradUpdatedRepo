@@ -115,6 +115,8 @@
 }
 
 
+
+
 .calculatorClear{
   background-color: rgb(202, 32, 32);
   color: #fff !important;
@@ -168,9 +170,11 @@
   gap: 5px;
 }
 .calculatorequalto{
-  position: absolute;
+  /* position: absolute;
   top: 21.7rem;
-  left: 28.5rem;
+  left: 28.5rem; */
+  margin-left: 11.2rem;
+  margin-top: -2.1rem;
 }
 
 .calculatorequalto1{
@@ -182,4 +186,8 @@
   color: #fff;
   font-weight: 700 !important;
   font-size: 25px !important;
+}
+
+.secondlineright11{
+  margin-top: -2.2rem;
 }
