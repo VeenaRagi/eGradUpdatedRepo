@@ -33,6 +33,7 @@ import InstructionPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_St
 import General_Intructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_General_Intructions_Page.jsx";
 import QuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/QuizPage.jsx";
 import QuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/QuestionPaper.jsx";
+import PG_PopUpInstructionsView from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/PG_PopUpInstructionsView.jsx";
 import QuestionBankQuiz from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_PQB/QuestionBankQuiz.jsx";
 import StudentDashbord_MyResults from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/StudentDashbord_MyResults.jsx";
 import TestResultsPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/TestResultsPage.jsx";
@@ -229,6 +230,10 @@ function App({ decryptedUserIdState, usersData }) {
                   path="/QuizPage/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<QuizPage seconds={20} />} />}
                 />
+                  <Route
+                  path="/QuizPage"
+                  element={<QuizPage seconds={20} />}
+                />
                 <Route
                   path="/QuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<QuestionBankQuiz />} />}
@@ -254,7 +259,10 @@ function App({ decryptedUserIdState, usersData }) {
                   path="/QuestionPaper/:param1"
                   element={<QuestionPaper />}
                 />
-
+ <Route
+                   path="/Instructions"
+                  element={<PG_PopUpInstructionsView />}
+                />
                 <Route path="/Error" element={<PrivateRoute element={<NotFound/>} />}/>
                 <Route path="/WebsiteAdmin" element={<ThemesSection />} />
                 <Route
