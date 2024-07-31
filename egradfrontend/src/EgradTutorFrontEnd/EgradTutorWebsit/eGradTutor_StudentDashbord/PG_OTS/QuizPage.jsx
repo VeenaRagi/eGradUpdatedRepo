@@ -13,16 +13,14 @@ import { decryptData, encryptData } from "../utils/crypto";
 import "../Style/Watermark.css";
 import { useLocation } from "react-router-dom";
 import QuestionPaper from "./QuestionPaper";
+import PG_PopUpInstructionsView from "./PG_PopUpInstructionsView";
 import ScientificCalculator from "./ScientificCalculator";
 
 const QuizPage = () => {
   const location = useLocation();
   const { userData } = location.state || {};
-
   const navigate = useNavigate();
-
   const { param1, param2 } = useParams();
-
   const [decryptedParam1, setDecryptedParam1] = useState("");
   const [decryptedParam2, setDecryptedParam2] = useState("");
 
@@ -2248,7 +2246,6 @@ const QuizPage = () => {
     ...new Set(questionData.questions.map((question) => question.sectionName)),
   ];
 
-
   const [showQuestionPaperPopup, setShowQuestionPaperPopup] = useState(false);
   const openQuestionPaper = () => {
     setShowQuestionPaperPopup(true);
@@ -2258,6 +2255,28 @@ const QuizPage = () => {
     setShowQuestionPaperPopup(false);
   };
 
+  const [showInstructionsPopup, setShowInstructionsPopup] = useState(false);
+  const openInstructions = () => {
+    setShowInstructionsPopup(true);
+  };
+
+  const closeInstructions = () => {
+    setShowInstructionsPopup(false);
+  };
+
+  const [selectedSection, setSelectedSection] = useState(null);
+
+  // Handle section selection
+  const handleSectionChange = (section) => {
+    setSelectedSection(section);
+  };
+
+  // Filter questions based on selected section
+  const filteredQuestions = selectedSection 
+    ? currentQuestion.filter(question => question.section === selectedSection)
+    : currentQuestion;
+
+    
   return (
     // <div className="QuestionPaper_-container"  ref={quizRef}
     // onClick={enterFullscreen}  style={{ backgroundColor: 'white', }}>
@@ -2301,11 +2320,20 @@ const QuizPage = () => {
         <p className="QuizPage_testname_heading" key={testName.decryptedParam1}>
           {testName}
         </p>
-       <p className="QPaper_Instructions">
-       <button className="View_QuestionPaper" onClick={openQuestionPaper}>Question Paper</button>
-        <button className="View_Instructions">Instructions</button>
-       </p>
-        {showQuestionPaperPopup && <QuestionPaper onClose={closeQuestionPaper} />}
+        <p className="QPaper_Instructions">
+          <button className="View_QuestionPaper" onClick={openQuestionPaper}>
+            Question Paper
+          </button>
+          <button className="View_Instructions" onClick={openInstructions}>
+            View Instructions
+          </button>
+        </p>
+        {showQuestionPaperPopup && (
+          <QuestionPaper onClose={closeQuestionPaper} />
+        )}
+        {showInstructionsPopup && (
+          <PG_PopUpInstructionsView onClose={closeInstructions} />
+        )}
       </div>
 
       {!showExamSumary ? (
