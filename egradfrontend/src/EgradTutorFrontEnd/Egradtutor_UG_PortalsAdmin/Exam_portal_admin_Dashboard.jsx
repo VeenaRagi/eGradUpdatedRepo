@@ -330,7 +330,8 @@ const Exam_portal_admin_Dashboard = () => {
                                       </h2>
                                       {exams.map((exam, index) => (
                                         <li key={index}>
-                                          {exam.examName}</li>
+                                          {exam.coursesPortalExamname}
+                                        </li>
                                       ))}
                                     </ul>
                                   )}

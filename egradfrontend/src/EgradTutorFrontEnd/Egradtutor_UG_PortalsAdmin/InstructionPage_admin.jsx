@@ -34,7 +34,7 @@ const InstructionPage_admin = () => {
     setFile(selectedFile);
   };
 
-  
+
 
   const handleUpload = async () => {
     try {
@@ -109,7 +109,7 @@ const InstructionPage_admin = () => {
                   <option value="">Select Exam:</option>
                   {exams.map((exam) => (
                     <option key={exam.examId} value={[exam.examId]}>
-                      {exam.examName}
+                      {exam.coursesPortalExamname}
                     </option>
                   ))}
                 </select>

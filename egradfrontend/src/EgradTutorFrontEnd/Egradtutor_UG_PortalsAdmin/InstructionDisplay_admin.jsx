@@ -81,7 +81,7 @@ const InstructionDisplay_admin = () => {
     : [];
 
   const filteredData = filteredInstruction.filter((data) =>
-    data.examName ? data.examName.toLowerCase().includes(searchQuery.toLowerCase()) : false
+    data.coursesPortalExamname ? data.coursesPortalExamname.toLowerCase().includes(searchQuery.toLowerCase()) : false
   );
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -128,7 +128,7 @@ const InstructionDisplay_admin = () => {
               currentItems.map((ite, inde) => (
                 <tr key={inde} className={inde % 2 === 0 ? "color1" : "color2"}>
                   <td style={{ textAlign: "center" }}>{ite.instructionId}</td>
-                  <td style={{ padding: 10 }}>{ite.examName}</td>
+                  <td style={{ padding: 10 }}>{ite.coursesPortalExamname}</td>
                   <td style={{ padding: 10 }}>{ite.instructionHeading}</td>
                   <td style={{ padding: 10 }}>{ite.documentName}</td>
 
