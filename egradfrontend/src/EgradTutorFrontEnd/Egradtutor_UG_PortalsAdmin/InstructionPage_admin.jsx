@@ -13,26 +13,7 @@ const InstructionPage_admin = () => {
   const [selectedExam, setSelectedExam] = useState("");
   const [file, setFile] = useState(null);
   const [formOpen, setFormOpen] = useState(false);
-  // const [instructions, setInstructions] = useState([]);
-  // const [instructionPoints, setInstructionPoints] = useState([]);
-  // const [submitting, setSubmitting] = useState(false);
-  // const [formErrors, setFormErrors] = useState({});
-  // const validateForm = () => {
-  //   const errors = {};
 
-  //   if (!selectedExam) {
-  //     errors.examId = 'required';
-  //   }
-  //   if (!instructionHeading) {
-  //     errors.instructionHeading = 'required';
-  //   }
-  //   if (!file) {
-  //     errors.file = 'required';
-  //   }
-
-  //   setFormErrors(errors);
-  //   return Object.keys(errors).length === 0;
-  // };
 
   useEffect(() => {
     const fetchExams = async () => {
@@ -53,9 +34,9 @@ const InstructionPage_admin = () => {
     setFile(selectedFile);
   };
 
+  
+
   const handleUpload = async () => {
-    // if (validateForm()) {
-    // setSubmitting(true);
     try {
       if (file) {
         const formData = new FormData();
