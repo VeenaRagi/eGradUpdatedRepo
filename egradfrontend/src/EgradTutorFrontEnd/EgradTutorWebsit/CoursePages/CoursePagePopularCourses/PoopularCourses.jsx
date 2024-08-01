@@ -17,13 +17,13 @@ import '../../../../styles/CoursesPageStyles/Theme-green.css';
 import '../../../../styles/CoursesPageStyles/CoursePage.css'
  
 const PoopularCourses = ({userRole}) => {
-  const { Portale_Id } = useParams();
+  const { Portale_Id,Branch_Id } = useParams();
   const [unPurchasedCourses, setUnPurchasedCourses] = useState([]);
   const themeFromContext = useContext(ThemeContext);
   const fetchunPurchasedCourses = async () => {
     try {
       const response = await fetch(
-        `${BASE_URL}/PoopularCourses/unPurchasedCoursesOnHomePage/${Portale_Id}`
+        `${BASE_URL}/PoopularCourses/unPurchasedCoursesOnHomePage/${Portale_Id}/${Branch_Id}`
       );
       const data = await response.json();
       setUnPurchasedCourses(data);
@@ -44,14 +44,14 @@ const PoopularCourses = ({userRole}) => {
   const coursesByPortalAndExam = unPurchasedCourses.reduce(
     (portals, course) => {
       const portal = course.portal || "Unknown Portal";
-      const examName = course.examName || "Unknown Exam";
+      const coursesPortalExamname = course.coursesPortalExamname || "Unknown Exam";
       if (!portals[portal]) {
         portals[portal] = {};
       }
-      if (!portals[portal][examName]) {
-        portals[portal][examName] = [];
+      if (!portals[portal][coursesPortalExamname]) {
+        portals[portal][coursesPortalExamname] = [];
       }
-      portals[portal][examName].push(course);
+      portals[portal][coursesPortalExamname].push(course);
       console.log(portals, "portals from the coursesByPortalAndExam");
       return portals;
     },
@@ -103,9 +103,9 @@ const PoopularCourses = ({userRole}) => {
             ) : (
               <h2 className="portal_group_h2">{portal}</h2>
             )}
-            {Object.entries(exams).map(([examName, courses], index) => (
+            {Object.entries(exams).map(([coursesPortalExamname, courses], index) => (
               <div
-                key={examName}
+                key={coursesPortalExamname}
                 className={`exam_group ${themeDetails.theme_exam_group}
                 ${index % 2 === 0 ? 'evenColor' : 'oddColor'}`}
               >
@@ -113,7 +113,7 @@ const PoopularCourses = ({userRole}) => {
                   className={`subheading ${themeDetails.theme_examName}`}
                   id={themeDetails.theme_examName}
                 >
-                  {examName}
+                  {coursesPortalExamname}
                 </h2>
                 <div
                   className={`courses_container ${themeDetails.theme_courses_container}`}
