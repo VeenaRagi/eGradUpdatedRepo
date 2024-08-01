@@ -32,7 +32,7 @@ router.get("/type_of_questions", async (req, res) => {
 // --------------- fetch exams -----------------------------
 router.get("/courese-exams", async (req, res) => {
   try {
-    const [rows] = await db.query("SELECT  examId,examName FROM exams");
+    const [rows] = await db.query("SELECT * FROM exams AS e JOIN coursesportalexams AS cpe ON cpe.coursesPortalExamsId=e.coursesPortalExamsId");
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -579,7 +579,7 @@ router.post("/course_type_of_question", async (req, res) => {
 router.get("/course_creation_table", async (req, res) => {
   try {
     const query = `
-    SELECT
+   SELECT
     cc.courseCreationId,
     cc.courseName,
     cc.courseYear,
@@ -591,7 +591,7 @@ router.get("/course_creation_table", async (req, res) => {
     cc.paymentlink,
     cc.Portale_Id,
     p.Portale_Name,
-    e.examName,
+    cpe.coursesPortalExamname,
     subjects.subjects AS subjects,
     questions.quesion_types AS question_types,
     typeOfTests.type_of_test AS type_of_test,
@@ -602,6 +602,7 @@ router.get("/course_creation_table", async (req, res) => {
     cc.examId = e.examId
     LEFT JOIN portales p ON
     cc.Portale_Id = p.Portale_Id
+    LEFT JOIN coursesportalexams AS cpe ON cpe.coursesPortalExamsId=e.coursesPortalExamsId
   LEFT JOIN (
     SELECT cs.courseCreationId,
       GROUP_CONCAT(s.subjectName) AS subjects
@@ -800,7 +801,7 @@ router.get("/courseupdate/:portalId/:courseCreationId", async (req, res) => {
     cc.*,
     subjects.subjects AS subjects,
     questions.quesion_types AS question_types,
-    e.examName,
+    e.coursesPortalExamname,
     typeOfTests.type_of_test AS type_of_test,
     tp.topicName
 FROM

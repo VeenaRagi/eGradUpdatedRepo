@@ -960,7 +960,7 @@ function Portal_coures_creation_admin() {
                     <option value="">Select exams</option>
                     {exams.map((exams) => (
                       <option key={exams.examId} value={exams.examId}>
-                        {exams.examName}
+                        {exams.coursesPortalExamname}
                       </option>
                     ))}
                   </select>
@@ -1212,7 +1212,7 @@ function Portal_coures_creation_admin() {
                   <option value="">Select exams</option>
                   {exams.map((exams) => (
                     <option key={exams.examId} value={exams.examId}>
-                      {exams.examName}
+                      {exams.coursesPortalExamname}
                     </option>
                   ))}
                 </select>
@@ -1431,7 +1431,7 @@ function Portal_coures_creation_admin() {
                     <option value="">Select exams</option>
                     {exams.map((exams) => (
                       <option key={exams.examId} value={exams.examId}>
-                        {exams.examName}
+                        {exams.coursesPortalExamname}
                       </option>
                     ))}
                   </select>
@@ -1626,7 +1626,7 @@ function Portal_coures_creation_admin() {
                     <option value="">Select exams</option>
                     {exams.map((exams) => (
                       <option key={exams.examId} value={exams.examId}>
-                        {exams.examName}
+                        {exams.coursesPortalExamname}
                       </option>
                     ))}
                   </select>
@@ -1826,7 +1826,7 @@ function Portal_coures_creation_admin() {
                 >
                   <td>{index + 1 + pageNumber * usersPerPage}</td>
                   <td>{course.Portale_Name}</td>
-                  <td>{course.examName}</td>
+                  <td>{course.coursesPortalExamname}</td>
                   <td>{course.courseName}</td>
                   <td>
                     {Array.isArray(course.subjects) &&

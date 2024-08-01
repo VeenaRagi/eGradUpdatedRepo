@@ -13,7 +13,65 @@ router.get('/subjects', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
-  
+
+  router.get('/branches', async (req, res) => {
+    // Fetch branches
+    try {
+      const [rows] = await db.query('SELECT * FROM branches');
+      res.json(rows);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+  // Endpoint to fetch exams based on Branch_Id
+router.get('/branchesexams', async (req, res) => {
+  const { Branch_Id } = req.query;
+
+  try {
+    const [rows] = await db.query('SELECT * FROM coursesportalexams WHERE Branch_Id = ?', [Branch_Id]);
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+// Endpoint to fetch subjects based on coursesPortalExamsId
+router.get('/branchesexamssubjects', async (req, res) => {
+  const { coursesPortalExamsId } = req.query;
+
+  try {
+    const [rows] = await db.query('SELECT * FROM subjects WHERE coursesPortalExamsId = ?', [coursesPortalExamsId]);
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+router.post('/create', async (req, res) => {
+  const { Branch_Id, coursesPortalExamsId, startDate, endDate, selectedSubjects } = req.body;
+
+  try {
+    // Insert into exams table
+    const [result] = await db.query(
+      'INSERT INTO exams (Branch_Id, coursesPortalExamsId, startDate, endDate) VALUES (?, ?, ?, ?)',
+      [Branch_Id, coursesPortalExamsId, startDate, endDate]
+    );
+    const examId = result.insertId;
+
+    // Insert into exam_creation_table one by one
+    for (const subjectId of selectedSubjects) {
+      await db.query('INSERT INTO exam_creation_table (subjectId, examId) VALUES (?, ?)', [subjectId, examId]);
+    }
+
+    res.status(200).json({ message: 'Exam created successfully!' });
+  } catch (error) {
+    console.error('Error creating exam:', error);
+    res.status(500).json({ message: 'Error creating exam', error });
+  }
+});
+
   router.get('/feachingexams/:examId', async (req, res) => {
     const { examId } = req.params;
     try {

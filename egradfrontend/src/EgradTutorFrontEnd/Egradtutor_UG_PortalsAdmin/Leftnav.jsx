@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 
 import "./styles/Leftnav.css";
 import Exam_portal_admin_Dashboard from "./Exam_portal_admin_Dashboard.jsx";
-import Examcreation_admin from "./Examcreation_admin";
+import ExamCreationForUGPG from "./ExamCreationForUGPG";
+
 // import Coursecreation_admin from "./Coursecreation_admin";
 import InstructionPage_admin from "./InstructionPage_admin";
 import Testcreationadmin from "./Testcreationadmin";
@@ -263,7 +264,7 @@ const Leftnav = ({decryptedUserIdState}) => {
 
       {showdashboard ? <Exam_portal_admin_Dashboard /> : null}
 
-      {showExamcreation_admin ? <Examcreation_admin /> : null}
+      {showExamcreation_admin ? <ExamCreationForUGPG /> : null}
 
       {/* {showCoursecreation_admin ? <Coursecreation_admin /> : null} */}
       {showCoursecreation_admin ? <Portal_coures_creation_admin /> : null}
