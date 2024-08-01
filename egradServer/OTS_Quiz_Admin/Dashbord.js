@@ -26,9 +26,6 @@ router.get('/exam', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
-
 router.get('/courses/count', async (req, res) => {
   try {
     const [results, fields] = await db.execute(

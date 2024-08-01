@@ -55,7 +55,7 @@
   left: 50%;
   transform: translate(-50%, -50%); /* Centering trick */
   max-width: 100%;
-  width: 420px;
+  width: 500px;
   height: auto;
   margin: 0 auto;
   background: #ffffff;
@@ -112,12 +112,12 @@
   display: flex;
 }
 
-.formdiv_contaniner input {
+/* .formdiv_contaniner input {
   width: 270px;
   padding: 6px;
   border: none;
   box-shadow: 1px 4px 11px 0px #1a374d;
-}
+} */
 
 .formdiv_contaniner_ch input {
   width: 22px;
@@ -147,7 +147,14 @@
   /* flex-wrap: wrap; */
   /* align-items: center; */
   display: grid;
+  overflow: auto;
+    max-height: 15rem;
   /* grid-template-columns: repeat(2,1fr); */
+}
+.examcreationselectAll{
+  display: flex;
+  justify-content: space-between;
+
 }
 .examSubject_conten li {
   display: flex;
