@@ -1101,7 +1101,7 @@ const UpdatingCourseInAdmin = () => {
                 <option value="">Select exams</option>
                 {exams.map((exams) => (
                   <option key={exams.examId} value={exams.examId}>
-                    {exams.examName}
+                    {exams.coursesPortalExamname}
                   </option>
                 ))}
               </select>
@@ -1350,7 +1350,7 @@ const UpdatingCourseInAdmin = () => {
                 <option value="">Select exams</option>
                 {exams.map((exams) => (
                   <option key={exams.examId} value={exams.examId}>
-                    {exams.examName}
+                    {exams.coursesPortalExamname}
                   </option>
                 ))}
               </select>
@@ -1583,7 +1583,7 @@ const UpdatingCourseInAdmin = () => {
               <option value="">Select Exam</option>
               {exams.map((exam) => (
                 <option key={exam.examId} value={exam.examId}>
-                  {exam.examName}
+                  {exam.coursesPortalExamname}
                 </option>
               ))}
             </select>
@@ -1734,7 +1734,7 @@ const UpdatingCourseInAdmin = () => {
                     <option value="">Select exams</option>
                     {exams.map((exams) => (
                       <option key={exams.examId} value={exams.examId}>
-                        {exams.examName}
+                        {exams.coursesPortalExamname}
                       </option>
                     ))}
                   </select>

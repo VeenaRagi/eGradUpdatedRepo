@@ -171,11 +171,12 @@ router.post('/create', async (req, res) => {
     // Display selected subjects in table
     try {
       const query = `
-        SELECT e.examId, e.examName, e.startDate, e.endDate, GROUP_CONCAT(s.subjectName) AS subjects
+        SELECT e.examId, cpe.coursesPortalExamname, e.startDate, e.endDate, GROUP_CONCAT(s.subjectName) AS subjects
         FROM exams AS e
         JOIN exam_creation_table AS ec ON e.examId = ec.examId
         JOIN subjects AS s ON ec.subjectId = s.subjectId
-        GROUP BY e.examId
+        JOIN coursesportalexams AS cpe ON cpe.coursesPortalExamsId=e.coursesPortalExamsId
+        GROUP BY e.examId;
       `;
       const [rows] = await db.query(query);
       res.json(rows);

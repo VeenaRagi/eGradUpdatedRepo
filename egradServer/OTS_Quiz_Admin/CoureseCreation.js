@@ -801,7 +801,7 @@ router.get("/courseupdate/:portalId/:courseCreationId", async (req, res) => {
     cc.*,
     subjects.subjects AS subjects,
     questions.quesion_types AS question_types,
-    e.coursesPortalExamname,
+    cpe.coursesPortalExamname,
     typeOfTests.type_of_test AS type_of_test,
     tp.topicName
 FROM
@@ -819,7 +819,7 @@ FROM
 ) AS typeOfTests
 ON
     cc.courseCreationId = typeOfTests.courseCreationId   
-    
+       
 LEFT JOIN(
     SELECT cs.courseCreationId,
         GROUP_CONCAT(s.subjectName) AS subjects
@@ -844,9 +844,10 @@ LEFT JOIN(
 ) AS questions
 ON
     cc.courseCreationId = questions.courseCreationId
-JOIN exams AS e
+LEFT JOIN exams AS e
 ON
     cc.examId = e.examId
+     LEFT JOIN coursesportalexams AS cpe ON cpe.coursesPortalExamsId=e.coursesPortalExamsId
 LEFT JOIN 
 topics tp
  ON cc.courseCreationId=tp.courseCreationId

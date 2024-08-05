@@ -28,7 +28,7 @@ const upload = multer({ storage });
   
   router.get("/exams", async (req, res) => {
     try {
-      const query = "SELECT examId,examName FROM exams";
+      const query = "SELECT * FROM exams AS e JOIN coursesportalexams AS cpe ON cpe.coursesPortalExamsId=e.coursesPortalExamsId";
       const [rows] = await db.query(query);
       res.json(rows);
     } catch (error) {
@@ -36,10 +36,12 @@ const upload = multer({ storage });
       res.status(500).json({ error: "Internal Server Error" });
     }
   });
+
   router.use((req, res, next) => {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     next();
   });
+
   // kevin ---------
   // router.post("/instructionupload", upload.single("file"), async (req, res) => {
   //   try {
@@ -123,7 +125,7 @@ const upload = multer({ storage });
   
   router.get("/exams", async (req, res) => {
     try {
-      const query = "SELECT examId,examName FROM exams";
+      const query = "SELECT * FROM exams AS e JOIN coursesportalexams AS cpe ON cpe.coursesPortalExamsId=e.coursesPortalExamsId";
       const [rows] = await db.query(query);
       res.json(rows);
     } catch (error) {
@@ -565,7 +567,17 @@ const upload = multer({ storage });
       // Extract examId from request parameters
   
       // Select all points for the specified examId from the instructions_points table
-      const query = "SELECT i.*,e.* FROM instruction AS i LEFT JOIN exams AS e ON i.examId=e.examId";
+      const query = `SELECT
+    i.*,
+    e.*,cpe.*
+FROM
+    instruction AS i
+LEFT JOIN exams AS e
+ON
+    i.examId = e.examId
+LEFT JOIN coursesportalexams AS cpe
+ON
+    e.coursesPortalExamsId = cpe.coursesPortalExamsId`;
       const [rows] = await db.query(query);
   
       // Send the fetched data in the response
