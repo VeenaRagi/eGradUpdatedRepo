@@ -74,6 +74,7 @@ results.forEach((result) => {
       courseCardImage: cardImage,
       testCount: result.testCount,
       subjectNames: result.subjectNames,
+      Branch_Id:result.Branch_Id,
       customName: Portale_Id === 4 ? "OTS,OVL,PQB" : null,
       ...(Portale_Id === 4 && { topicName: `(TopicName:${result.topicName})` }),
     };
@@ -209,7 +210,7 @@ LEFT JOIN topics t ON
 LEFT JOIN ovl_links ol ON
   ol.courseCreationId = cct.courseCreationId
 WHERE
-  cct.courseCreationId = 1
+  cct.courseCreationId = ?
 GROUP BY
   cct.courseCreationId,
   s.subjectName;

@@ -37,7 +37,21 @@ router.get('/branches', async (req, res) => {
     }
   });
 
+  router.get('/branch/:Branch_Id', async (req, res) => {
+    const Branch_Id = req.params.Branch_Id;
+    const sql = 'SELECT Branch_Id, Branch_Name FROM branches WHERE Branch_Id = ?';
 
+    try {
+        const results = await db.query(sql, [Branch_Id]);
+        if (results.length === 0) {
+            return res.status(404).json({ error: 'Branch not found' });
+        }
+        res.json(results[0]); // Assuming there's only one branch with the given ID
+    } catch (err) {
+        console.error('Error fetching branch:', err);
+        res.status(500).json({ error: 'Error fetching branch' });
+    }
+});
   
   router.get('/getExamImages', async (req, res) => {
     try {

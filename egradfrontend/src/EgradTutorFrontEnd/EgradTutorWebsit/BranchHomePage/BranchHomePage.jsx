@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useState} from 'react'
+import { Link } from "react-router-dom";
 import BHPHeading from "./BHPHeading/BHPHeading";
 import BHPNavBar from "./BHPHeading/BHPNavBar";
 import BHBanners from "./BranchHomeBanners/BHBanners";
@@ -7,12 +8,30 @@ import OurCourses from "./OurCourses/OurCourses";
 import Footer from "../Footer/Footer";
 import FooterEdit from "../Footer/FooterEdit";
 import { Element } from "react-scroll";
-const BranchHomePage = ({ isEditMode }) => {
+
+const BranchHomePage = ({ isEditMode,Branch_Id }) => {
+  const [branches] = useState([]);
   return (
     <div>
       <BHPHeading isEditMode={isEditMode} />
-      <BHPNavBar  isEditMode={isEditMode}/>
+      <BHPNavBar  isEditMode={isEditMode} Branch_Id={Branch_Id}/>
       <BHBanners  isEditMode={isEditMode}/>
+      <h2>{Branch_Id}</h2>
+      {branches && branches.length > 0 && (
+  branches.map((branch) => (
+    <div
+      
+      key={branch.Branch_Id}
+    >
+      <p>{branch.Branch_Id}</p>
+      <button>
+        <Link to={{ pathname: `/BranchHomePage/${branch.Branch_Id}` }}>
+          {branch.Branch_Name}
+        </Link>
+      </button>
+    </div>
+  ))
+)}
       <Element id="ExploreExam">
         <ExploreExam  isEditMode={isEditMode}/>
       </Element>

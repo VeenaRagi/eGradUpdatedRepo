@@ -72,7 +72,7 @@ const PoopularCourses = ({userRole}) => {
       window.location.reload(); // Reload the page
     }
   };
- 
+ console.log("unPurchasedCourses",unPurchasedCourses)
   return (
     <div id="PoopularCourses" className={`${themeDetails.themePopularCourses_container}`}>
       <div className={`${themeDetails.themePopularCourses_Subcontainer}`}>
@@ -176,9 +176,10 @@ const PoopularCourses = ({userRole}) => {
                               <span className={themeDetails.themeCourseInfoSpan}>Amount: ₹</span>
                               {courseExamsDetails.totalPrice}/-
                             </p>
+                            <p>Branch_Id:{courseExamsDetails.Branch_Id}</p>
                             <div className={`before_start_now ${themeDetails.themeBuyButtonInCP}`}>
                               <Link
-                                to={`/RegistrationForm/${courseExamsDetails.courseCreationId}`}
+                                to={`/CourseRegistrationForm/${courseExamsDetails.courseCreationId}/${courseExamsDetails.Branch_Id}`}
                               >
                                 Buy Now
                               </Link>

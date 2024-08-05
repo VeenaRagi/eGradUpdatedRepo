@@ -1,9 +1,12 @@
 // src/components/RegistrationForm.js
 import React, { useState, useEffect} from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate,Link,useLocation  } from "react-router-dom";
 import './Style/Registrationform.css'
 import uploadPicImg from './Images/NoImages.jpg'
+import BASE_URL from "../../../apiConfig";
+import { SiCarlsberggroup } from "react-icons/si";
+
 const RegistrationForm = () => {
   const { courseCreationId } = useParams();
   const navigate = useNavigate();
@@ -88,12 +91,56 @@ const RegistrationForm = () => {
     
   };
 
+  const { Branch_Id: Branch_Id_from_pattern1 } = useParams(); // Pattern 1
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const Branch_Id_from_pattern2 = queryParams.get('Branch_Id'); // Pattern 2
+  
+  // const{Branch_Id} = useParams();
+  const [branches, setBranches] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBranches = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/LandingPageExamData/branch/${Branch_Id_from_pattern1}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setBranches(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching branches:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchBranches();
+  }, [Branch_Id_from_pattern1]);
+
+  console.log('Branch_Id', Branch_Id_from_pattern1);
+
+  // const location = useLocation();
+  // const queryParams = new URLSearchParams(location.search);
+  // const branchId = queryParams.get('Branch_Id');
+
   
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted with data:', formData);
+    console.log("shinchannnnn");
+    console.log("Branch_Id for registration:", Branch_Id_from_pattern1 || Branch_Id_from_pattern2);
 
-    const errors = validateForm(formData);
+ // Determine the correct Branch_Id based on submitType
+ const Branch_Id = submitType === "register" ? Branch_Id_from_pattern1 : Branch_Id_from_pattern2;
+
+
+    // Add Branch_Id to the formData object
+    const formDataWithBranchId = { ...formData, Branch_Id, submitType };
+console.log("shizukaaaaaaaaa")
+console.log("Branch_Id:",Branch_Id)
+    const errors = validateForm(formDataWithBranchId);
     if (Object.keys(errors).length > 0) {
       console.log('Form validation errors:', errors);
       setFormErrors(errors);
@@ -104,8 +151,8 @@ const RegistrationForm = () => {
     console.log('Form data is valid');
 
     const formDataObj = new FormData();
-    for (let key in formData) {
-      formDataObj.append(key, formData[key]);
+    for (let key in formDataWithBranchId) {
+      formDataObj.append(key, formDataWithBranchId[key]);
     }
 
     try {
@@ -187,9 +234,21 @@ const RegistrationForm = () => {
     alert("Please manually enter the Confirm Email.");
   };
 
+
+
   return (
     <div className="registrationFormParentDiv">
       <h2 style={{ textAlign: "center", textTransform: "uppercase" }}>Student Registration Page</h2>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        branches.map((branch) => (
+          <div key={branch.Branch_Id}>
+            <h1>{branch.Branch_Id}</h1>
+          </div>
+        ))
+      )}
+     <h1>{Branch_Id_from_pattern2}</h1>
 
       {courseDetails && (
         <div className="courseDetailsPC">
@@ -220,6 +279,7 @@ const RegistrationForm = () => {
           </div>
         </div>
       )}
+
   {emailExists && (
   <div className="popup-overlay">
     <div className="popup-content">
@@ -680,7 +740,6 @@ const RegistrationForm = () => {
                   <span className="mandatoryIndicator">*</span>
 
                 </label>
-                {/* <div> */}
                 <div className="uploadPicDiv">
                   <img src={uploadPicImg} alt="no img" />
                 </div>
@@ -693,33 +752,28 @@ const RegistrationForm = () => {
                 {formErrors["UplodadPhto"] && (
                   <span style={{ color: "red" }}>{formErrors["UplodadPhto"]}</span>
                 )}
-                {/* </div> */}
               </div>
 
               <div>
                 <label>Signature:
                   <span className="mandatoryIndicator">*</span>
                 </label>
-                {/* <div> */}
                 <div className="uploadPicDiv">
                   <img src={uploadPicImg} alt="no img" />
                 </div>
                 <input type="file" name="Signature" onChange={handleChange} />
               </div>
-              {/* </div> */}
 
               <div>
                 <label>Proof:
                   <span className="mandatoryIndicator">*</span>
 
                 </label>
-                {/* <div> */}
                 <div className="uploadPicDiv">
                   <img src={uploadPicImg} alt="no img" />
                 </div>
                 <input type="file" name="Proof" onChange={handleChange} />
               </div>
-              {/* </div> */}
             </div>
           </div>
           <div className="registerOrCousesButtonDiv">

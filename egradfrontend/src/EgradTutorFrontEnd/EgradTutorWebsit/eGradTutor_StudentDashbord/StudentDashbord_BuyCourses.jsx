@@ -42,17 +42,17 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
   const coursesByPortalAndExam = unPurchasedCourses.reduce(
     (portals, course) => {
       const portal = course.portal || "Unknown Portal"; // Default value
-      const examName = course.examName || "Unknown Exam"; // Default value
+      const coursesPortalExamname = course.coursesPortalExamname || "Unknown Exam"; // Default value
 
       if (!portals[portal]) {
         portals[portal] = {}; // Initialize portal if not present
       }
 
-      if (!portals[portal][examName]) {
-        portals[portal][examName] = []; // Initialize exam group if not present
+      if (!portals[portal][coursesPortalExamname]) {
+        portals[portal][coursesPortalExamname] = []; // Initialize exam group if not present
       }
 
-      portals[portal][examName].push(course); // Group courses by portal and exam name
+      portals[portal][coursesPortalExamname].push(course); // Group courses by portal and exam name
       return portals;
     },
     {}
@@ -140,7 +140,7 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
             <div className="popupbeforeloginboxright">
               <p>{item.portal}</p>
               <p>
-                <b>Exam Name:</b> {item.examName}
+                <b>Exam Name:</b> {item.coursesPortalExamname}
               </p>
 
               <p>
@@ -216,9 +216,9 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
                 >
                   <h2 className="portal_group_h2">{portal}</h2>
                   {/* Display portal name */}
-                  {Object.entries(exams).map(([examName, courses]) => (
-                    <div key={examName} className="exam_group">
-                      <h2 className="subheadingbuycourse">{examName}</h2>
+                  {Object.entries(exams).map(([coursesPortalExamname, courses]) => (
+                    <div key={coursesPortalExamname} className="exam_group">
+                      <h2 className="subheadingbuycourse">{coursesPortalExamname}</h2>
                       <div className="courses_boxcontainer">
                         {courses.map((courseExamsDetails) => (
                           <div

@@ -12,7 +12,7 @@ import "../../../../styles/LandingPage_main.css";
 import JSONClasses from "../../../../ThemesFolder/JSONForCSS/JSONClasses.js";
 import { Link } from "react-router-dom";
 
-const LandingPageHeader = ({ isEditMode, userRole }) => {
+const LandingPageHeader = ({ isEditMode, userRole,Branch_Id }) => {
   const [image, setImage] = useState(null);
   const [showImage, setShowImage] = useState(false);
   const [welcomeimage, setWelcomeImage] = useState(null);

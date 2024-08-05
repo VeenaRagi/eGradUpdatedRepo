@@ -46,7 +46,7 @@ import axios from "axios";
 import { UserProvider } from "./UserContext";
 import ScientificCalculator from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/ScientificCalculator.jsx";
 
-function App({ decryptedUserIdState, usersData }) {
+function App({ decryptedUserIdState, usersData,Branch_Id }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -132,7 +132,11 @@ function App({ decryptedUserIdState, usersData }) {
                 <Route path="/adminlogin" element={<AdminLogin />} />
                 <Route path="/UserLogin" element={<UserLogin />} />
                 <Route
-                  path="/RegistrationForm/:courseCreationId"
+                  path="/RegistrationForm/:Branch_Id"
+                  element={<RegistrationForm />}
+                />
+                <Route
+                  path="/CourseRegistrationForm/:courseCreationId/:Branch_Id"
                   element={<RegistrationForm />}
                 />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -144,7 +148,7 @@ function App({ decryptedUserIdState, usersData }) {
 
                 <Route
                   path="/"
-                  element={<WebSiteLandingPage isEditMode={isEditMode} />}
+                  element={<WebSiteLandingPage isEditMode={isEditMode} Branch_Id={Branch_Id}/>}
                 />
                 <Route
                   path="/BranchHomePage/:Branch_Id"

@@ -10,7 +10,7 @@ import { Link as ScrollLink } from 'react-scroll';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMdArrowDropright } from "react-icons/io";
 
-const BHPNavBar = ({ isEditMode,userRole }) => {
+const BHPNavBar = ({ isEditMode,userRole,Branch_Id }) => {
   const [navItems, setNavItems] = useState([]);
   const [marqueeItems, setMarqueeItems] = useState([]);
   const navigate = useNavigate();
