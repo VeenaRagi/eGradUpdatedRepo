@@ -8,7 +8,7 @@ import UserContext from '../../../UserContext';
 
 
 
-const StudentDashbord_Bookmarks = () => {
+const StudentDashbord_Bookmarks = ({Branch_Id}) => {
 
   const { decryptedUserIdState, usersData } = useContext(UserContext);
   const { decryptedUserIdState: paramUserId } = useParams();
@@ -74,13 +74,14 @@ const StudentDashbord_Bookmarks = () => {
     return (
       <div className="container">
         <div className="bookmark_subheading">You haven't bookmarked anything yet.</div>
+        <h1>Branch_Id:{Branch_Id}</h1>
       </div>
     );
   }
 
   console.log("Shizukaaaaaaaaaaaaaaa",decryptedUserIdState)
 
-// console.log("Shizukaaaaaaaaaaaaaaa",encodedUserId)
+console.log("SHINCHANNNNNNNNNNNN",Branch_Id)
 
   return (
     <div className="Questionbookmark_container">

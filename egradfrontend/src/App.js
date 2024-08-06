@@ -46,6 +46,7 @@ import axios from "axios";
 import { UserProvider } from "./UserContext";
 import ScientificCalculator from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/ScientificCalculator.jsx";
 import PG_Instructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_Instructions_Page.jsx";
+import { TIAuthProvider } from "./TechInfoContext/AuthContext.js";
 
 function App({ decryptedUserIdState, usersData,Branch_Id }) {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -174,7 +175,7 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
                 {/* --------------------Student_dashboard_INTERFACE_ROUTES_START-------------------- */}
 
                 <Route
-                  path="/Student_dashboard/:userIdTesting"
+                  path="/Student_dashboard/:userIdTesting/:encryptedBranchId"
                   element={<Student_dashboard />}
                 />
 

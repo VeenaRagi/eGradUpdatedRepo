@@ -9,7 +9,7 @@ import { FaBookOpenReader } from "react-icons/fa6";
 import ReactPlayer from "react-player";
 import ProgressPieChart from "../ProgressPieChart ";
 
-const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
+const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState,Branch_Id }) => {
   const [showQuizCourses, setShowQuizCourses] = useState(true);
   const [showtestContainer1, setShowtestContainer1] = useState(false);
   const [showtestContainer2, setShowtestContainer2] = useState(false);
@@ -50,7 +50,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     const fetchPurchasedCourses = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/Exam_Course_Page/purchasedCourses/${user_Id}`
+          `${BASE_URL}/Exam_Course_Page/purchasedCourses/${user_Id}/${Branch_Id}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch purchased courses");
@@ -64,7 +64,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     };
 
     fetchPurchasedCourses();
-  }, [user_Id]);
+  }, [user_Id,Branch_Id]);
 
   // Function to check if a course is within the specified time frame
   const isCourseActive = (course) => {
