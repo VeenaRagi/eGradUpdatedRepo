@@ -35,8 +35,8 @@ const UserLogin = () => {
 
       console.log("Response Data:", response.data);
 
-      const { user_Id, role, accessToken, decryptedId,userDetails } = response.data;
-      console.log("Extracted Data:", { user_Id, role, accessToken,userDetails });
+      const { user_Id, role, accessToken, decryptedId,userDetails,Branch_Id,encryptedBranchId} = response.data;
+      console.log("Extracted Data:", { user_Id, role, accessToken,userDetails,Branch_Id,encryptedBranchId });
       if (!user_Id) {
         throw new Error('User ID is missing');
       }
@@ -54,6 +54,7 @@ const UserLogin = () => {
           userDecryptedId: decryptedId,
           isLoggedIn: true,
           userData:userDetails,
+          userBranchId:encryptedBranchId
         };
         console.log("New Auth State:", newAuthState);
         settiAuth(newAuthState);
@@ -62,7 +63,9 @@ const UserLogin = () => {
 
         console.log("Stored in localStorage and useContext:", tiAuth);
         const encodedUserId = encodeURIComponent((user_Id));
-        navigate(`/Student_dashboard/${encodedUserId}`);
+        const encodedBranchId=encodeURIComponent((encryptedBranchId))
+        console.log("first")
+        navigate(`/Student_dashboard/${encodedUserId}/${encodedBranchId}`);
 
         // Get the current time
         const currentTime = new Date();

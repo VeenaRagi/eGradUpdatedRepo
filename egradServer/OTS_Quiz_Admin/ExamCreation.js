@@ -306,5 +306,88 @@ router.post('/create', async (req, res) => {
     });
     //--------------------------------------------END--------------------------------------------------
   //_____________________Exam creation end__________________________
+  router.put('/api/exams/update', async (req, res) => {
+    const { examId, examName, startDate, endDate,  selectedSubjects } = req.body;
+  
+    if (!examId || !examName || !startDate || !endDate || !Array.isArray(selectedSubjects)) {
+      return res.status(400).json({ error: 'Invalid input' });
+    }
+  
+    try {
+      await pool.query(
+        `UPDATE exams 
+         SET examName = $1, startDate = $2, endDate = $3, branchId = $4 
+         WHERE examId = $5`,
+        [examName, startDate, endDate,examId]
+      );
+  
+      // Delete existing subjects for this exam
+      await pool.query('DELETE FROM subjects WHERE examId = $1', [examId]);
+  
+      // Insert new subjects
+      if (selectedSubjects.length > 0) {
+        const subjectValues = selectedSubjects.map(subjectId => `(${examId}, ${subjectId})`).join(',');
+        await pool.query(
+          `INSERT INTO subjects (examId, subjectId) 
+           VALUES ${subjectValues}`
+        );
+      }
+  
+      // Fetch updated exam details with joins
+      const result = await pool.query(
+        `SELECT e.examId, e.startDate, e.endDate, e.branchId, 
+                b.branchName, 
+                array_agg(s.subjectName) as subjects
+         FROM exams e
+         JOIN branches b ON e.branchId = b.branchId
+         LEFT JOIN subjects es ON e.examId = es.examId
+         LEFT JOIN subjects s ON es.subjectId = s.subjectId
+         WHERE e.examId = $1
+         GROUP BY e.examId, b.branchName`,
+        [examId]
+      );
+  
+      // Commit transaction
+      await pool.query('COMMIT');
+  
+      res.status(200).json(result.rows[0]);
+    } catch (error) {
+      // Rollback transaction on error
+      await pool.query('ROLLBACK');
+      console.error('Error updating exam:', error);
+      res.status(500).json({ error: 'Failed to update exam' });
+    }
+  });
+
+
+
+  router.get('/ExamCreation/feachingexams/:examId', async (req, res) => {
+    const { examId } = req.params;
+    
+    try {
+      const [rows] = await db.query(
+        `SELECT cpe.coursesPortalExamname, e.examId 
+         FROM exams AS e 
+         LEFT JOIN coursesportalexams AS cpe 
+         ON cpe.coursesPortalExamsId = e.coursesPortalExamsId 
+         WHERE e.examId = ?;`,
+        [examId]
+      );
+  
+      res.json(rows);
+    } catch (error) {
+      console.error("Error fetching exams:", error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+  
+  // router.put('/exam_updation/update_exams/:examId'),async(req,res)=>{
+  //   const {examId}=req.params;
+  //   try{
+
+  //   }
+  // }
+
+
 
 module.exports = router;
