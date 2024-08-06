@@ -279,6 +279,7 @@ const RegistrationForm = () => {
         ))
       )}
       <h1>{Branch_Id_from_pattern2}This is branch ID P2 </h1>
+      <h1>{Branch_Id_from_pattern1} This is the branch ID of P1</h1>
 
       {courseDetails && (
         <div className="courseDetailsPC">
