@@ -10,6 +10,8 @@ const TIAuthProvider = ({ children }) => {
     role: "",
     userDecryptedId: null,
     userData: null,  // Initialize userData as null
+    userBranchId: null, // Ensure this is initialized
+    decryptedBranchId: null, 
   });
   // useEffect(()=>{
   //   const data=localStorage.getItem('tiAuth')
@@ -38,6 +40,8 @@ const TIAuthProvider = ({ children }) => {
         userData: parseData.userData || null,  // Handle possible missing data
         userDecryptedId: parseData.userDecryptedId || null,
         isLoggedIn: parseData.isLoggedIn || false,
+        userBranchId: parseData.userBranchId || null,
+        decryptedBranchId: parseData.decryptedBranchId || null,
       });
     }
   }, []);

@@ -6,7 +6,7 @@ import welcome_greeting_img from './Images/welcome_greeting_img.png'
 import { useLocation, useNavigate } from 'react-router-dom';
 // import welcome_greeting_img from './Images/welcome_greeting_img.png'
 // import welcome_greeting_img from './Images/welcome_greeting_img.png'
-const Student_dashboard_Home = ({ usersData,decryptedUserIdState }) => {
+const Student_dashboard_Home = ({ usersData,decryptedUserIdState,branchIdFromLS  }) => {
   const [roleOfLoggedIn, setRoleOfLoggedIn] = useState("");
   // const roleOfTheUser=usersData.users&&usersData.length>0?(
 
@@ -19,6 +19,7 @@ const Student_dashboard_Home = ({ usersData,decryptedUserIdState }) => {
 
   ) : null;
   const [greeting, setGreeting] = useState("");
+  // console.log(branchIdFromLS,"vvvvvvvvvvvvvvvvvnnnnnnnnnnnnnnnaaaaaaaaaaaa")
   // useEffect(()=>{
   //   const handlePopState=()=>{
   //     setShowLogOutContent(true)
@@ -92,6 +93,7 @@ const Student_dashboard_Home = ({ usersData,decryptedUserIdState }) => {
                 </p>
                 <h1>
                   {user.Branch_Id}
+                  
                 </h1>
               </div>
             ))}

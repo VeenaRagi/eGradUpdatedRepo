@@ -46,6 +46,7 @@ import axios from "axios";
 import { UserProvider } from "./UserContext";
 import ScientificCalculator from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/ScientificCalculator.jsx";
 import PG_Instructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_Instructions_Page.jsx";
+import { TIAuthProvider } from "./TechInfoContext/AuthContext.js";
 
 function App({ decryptedUserIdState, usersData,Branch_Id }) {
   const [isEditMode, setIsEditMode] = useState(false);
