@@ -54,7 +54,6 @@ input[type="email"] {
 .popup {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -542,7 +541,7 @@ text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999; 
+  z-index: unset; 
 }
 
 .popup-content {
@@ -554,6 +553,7 @@ text-transform: uppercase;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
+  z-index: unset;
 }
 
 .popup-content p {

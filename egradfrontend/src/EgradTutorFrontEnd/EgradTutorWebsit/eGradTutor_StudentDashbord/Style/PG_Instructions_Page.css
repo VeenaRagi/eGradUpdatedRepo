@@ -1,0 +1,19 @@
+.pg_Instructions{
+  
+    background-color: #c1e8f6;
+    text-align: left;
+    padding: 1rem;
+    color: rgb(102, 100, 100);
+    font-size: 20px;
+}
+.pg_Instructionspage{
+    width: 80%;
+}
+.pg_readinstructions{
+    text-align: center;
+
+}
+
+.pg_siteheding{
+    text-decoration: underline;
+}

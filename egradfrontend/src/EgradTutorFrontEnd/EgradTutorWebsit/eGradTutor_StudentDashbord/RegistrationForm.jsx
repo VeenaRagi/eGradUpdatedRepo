@@ -1,14 +1,18 @@
 // src/components/RegistrationForm.js
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { useParams, useNavigate,Link,useLocation  } from "react-router-dom";
+import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 import './Style/Registrationform.css'
 import uploadPicImg from './Images/NoImages.jpg'
 import BASE_URL from "../../../apiConfig";
 import { SiCarlsberggroup } from "react-icons/si";
 
 const RegistrationForm = () => {
+  const inputRefs = useRef([]);
   const { courseCreationId } = useParams();
+  const formRef = useRef(null)
+  // console.log(courseCreationId, "This is the course creation Id ")
+  const emailRef = useRef(null)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     candidateName: "",
@@ -44,20 +48,49 @@ const RegistrationForm = () => {
     navigate('/CoursePage/1/1'); // This navigates to the home page
   };
 
+  const handleClose = async () => {
+    setEmailExists(false);
+    if (emailRef.current) {
+      emailRef.current.focus();
+    }
+    console.log("setting email exists to false");
+  }
   useEffect(() => {
+    console.log(emailExists, "this is the value after setting the email exists value");
+
+  }, [emailExists]);
+  const handleKeyDown = (e, index) => {
+    // console.log("the key pressed is",e.key)
+    if (e.key === 'Enter') {
+    e.preventDefault();
+    console.log(inputRefs.current,"this is the current input ref")
+    console.log(inputRefs,"this is the inputRefs array");
+      if (inputRefs.current[index + 1]) {
+        inputRefs.current[index + 1].focus();
+      }
+    }
+  }
+
+  useEffect(() => {
+    const fetchCourseDetails = async () => {
+      if (courseCreationId) {
+        axios
+          .get(
+            `http://localhost:5001/PoopularCourses/unPurchasedCoursesBuyNow/${courseCreationId}`
+          )
+          .then((response) => {
+            if (response.data && response.data.length > 0) {
+              setCourseDetails(response.data[0]);
+              console.log(response.data[0]);
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching course details:", error);
+          });
+      }
+    }
     if (courseCreationId) {
-      axios
-        .get(
-          `http://localhost:5001/PoopularCourses/unPurchasedCoursesBuyNow/${courseCreationId}`
-        )
-        .then((response) => {
-          if (response.data && response.data.length > 0) {
-            setCourseDetails(response.data[0]);
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching course details:", error);
-        });
+      fetchCourseDetails();
     }
   }, [courseCreationId]);
 
@@ -67,10 +100,9 @@ const RegistrationForm = () => {
       setFormData({ ...formData, [name]: files[0] });
     } else {
       setFormData({ ...formData, [name]: value });
-
-      if (name === "emailId") {
-        checkEmailExists(value);
-      }
+      // if (name === "emailId") {
+      //   checkEmailExists(value);
+      // }
     }
   };
 
@@ -82,28 +114,63 @@ const RegistrationForm = () => {
       );
       if (response.data.exists) {
         setEmailExists(true);
+        console.log("email already exists and setting exmail exists to true");
       } else {
         setEmailExists(false);
       }
     } catch (error) {
       console.error("Error checking email:", error);
     }
-    
+
   };
 
-  const { Branch_Id: Branch_Id_from_pattern1 } = useParams(); // Pattern 1
+  // const location = useLocation();
+  // const queryParams = new URLSearchParams(location.search);
+  // const Branch_Id_from_pattern2 = queryParams.get('Branch_Id');
+
+  // const { Branch_Id } = useParams();
+  // const [branches, setBranches] = useState([]);
+  // const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   const fetchBranches = async () => {
+  //     try {
+  //       const response = await fetch(`${BASE_URL}/LandingPageExamData/branch/${Branch_Id}`);
+  //       if (!response.ok) {
+  //         throw new Error('Network response was not ok');
+  //       }
+  //       const data = await response.json();
+  //       setBranches(data);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error('Error fetching branches:', error);
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchBranches();
+  // }, [Branch_Id]);
+
+  // console.log('Branch_Id', Branch_Id);
+
+
+  const { Branch_Id: Branch_Id_from_params } = useParams();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const Branch_Id_from_pattern2 = queryParams.get('Branch_Id'); // Pattern 2
-  
-  // const{Branch_Id} = useParams();
+  const Branch_Id_from_query = queryParams.get('Branch_Id');
+
+  // Determine the Branch_Id from either params or query
+  const Branch_Id =  Branch_Id_from_query || Branch_Id_from_params;
+
   const [branches, setBranches] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBranches = async () => {
+      if (!Branch_Id) return;
+
       try {
-        const response = await fetch(`${BASE_URL}/LandingPageExamData/branch/${Branch_Id_from_pattern1}`);
+        const response = await fetch(`${BASE_URL}/LandingPageExamData/branch/${Branch_Id}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -117,36 +184,28 @@ const RegistrationForm = () => {
     };
 
     fetchBranches();
-  }, [Branch_Id_from_pattern1]);
+  }, [Branch_Id]);
+console.log("shinchannnnnnnnnn")
+  console.log('Branch_Id', Branch_Id);
+console.log("Branch_Id_from_query",Branch_Id_from_query)
 
-  console.log('Branch_Id', Branch_Id_from_pattern1);
 
-  // const location = useLocation();
-  // const queryParams = new URLSearchParams(location.search);
-  // const branchId = queryParams.get('Branch_Id');
-
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted with data:', formData);
-    console.log("shinchannnnn");
-    console.log("Branch_Id for registration:", Branch_Id_from_pattern1 || Branch_Id_from_pattern2);
-
- // Determine the correct Branch_Id based on submitType
- const Branch_Id = submitType === "register" ? Branch_Id_from_pattern1 : Branch_Id_from_pattern2;
-
-
+  
+    // Determine the correct Branch_Id based on submitType
+    // const Branch_Id = submitType === "register" ? Branch_Id : Branch_Id_from_pattern2;
+    console.log("shizukaaaaaaaaaaa")
+    console.log("Branch_Id for registration:",   Branch_Id);
     // Add Branch_Id to the formData object
-    const formDataWithBranchId = { ...formData, Branch_Id, submitType };
-console.log("shizukaaaaaaaaa")
-console.log("Branch_Id:",Branch_Id)
+    const formDataWithBranchId = { ...formData, Branch_Id };
     const errors = validateForm(formDataWithBranchId);
     if (Object.keys(errors).length > 0) {
       console.log('Form validation errors:', errors);
       setFormErrors(errors);
       return;
     }
-
     setFormErrors({});
     console.log('Form data is valid');
 
@@ -234,7 +293,10 @@ console.log("Branch_Id:",Branch_Id)
     alert("Please manually enter the Confirm Email.");
   };
 
-
+  const combinedRef = (el) => {
+    emailRef.current=el;
+    inputRefs.current[8]=el;
+  }
 
   return (
     <div className="registrationFormParentDiv">
@@ -248,13 +310,13 @@ console.log("Branch_Id:",Branch_Id)
           </div>
         ))
       )}
-     <h1>{Branch_Id_from_pattern2}</h1>
+      {/* <h1>{Branch_Id_from_pattern2}</h1> */}
 
       {courseDetails && (
         <div className="courseDetailsPC">
           <div className="courseDetailsSubContainer">
             <div className="courseDetailsh2Div">
-              <h2 style={{textTransform:"uppercase"}}>Course Details</h2>
+              <h2 style={{ textTransform: "uppercase" }}>Course Details</h2>
             </div>
             <div className="courseDetailsDiv" >
               <div>
@@ -280,22 +342,24 @@ console.log("Branch_Id:",Branch_Id)
         </div>
       )}
 
-  {emailExists && (
-  <div className="popup-overlay">
-    <div className="popup-content">
-      <button className="close-button" onClick={() => setEmailExists(false)}>X</button>
-      <p>An account with this email already exists.</p>
-      <button onClick={() => navigate("/UserLogin")}>Login</button>
-    </div>
-  </div>
-)}
+      {emailExists && (
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <button className="close-button" onClick={handleClose}>X</button>
+            <p>An account with this email already exists.</p>
+            <button onClick={() => navigate("/UserLogin")}>Login</button>
+          </div>
+        </div>
+      )}
 
 
-      <form onSubmit={handleSubmit} className="registrationForm" encType="multipart/form-data">
+      <form onSubmit={handleSubmit}
+        onKeyDown={handleKeyDown}
+        ref={formRef} className="registrationForm" encType="multipart/form-data">
         <div className="">
-         <div className="">
-          <button className="" onClick={handleeBack}>Back</button>
-         </div>
+          <div className="">
+            <button className="" onClick={handleeBack}>Back</button>
+          </div>
           <div className="fieldsToBeGrid">
             <h1>PersonalDetails</h1>
             <div>
@@ -305,6 +369,8 @@ console.log("Branch_Id:",Branch_Id)
               </label>
               <input
                 type="text"
+                ref={(el) => inputRefs.current[0] = el}
+                onKeyDown={(e) => handleKeyDown(e, 0)}
                 name="candidateName"
                 value={formData.candidateName}
                 onChange={handleChange}
@@ -327,6 +393,8 @@ console.log("Branch_Id:",Branch_Id)
                 value={formData.dateOfBirth}
                 onChange={handleChange}
                 required
+                ref={(el) => inputRefs.current[1] = el}
+                onKeyDown={(e) => handleKeyDown(e, 1)}
               />
               {formErrors["dateOfBirth"] && (
                 <span style={{ color: "red" }}>{formErrors["dateOfBirth"]}</span>
@@ -357,6 +425,8 @@ console.log("Branch_Id:",Branch_Id)
                     value="Male"
                     onChange={handleChange}
                     required
+                    ref={(el) => inputRefs.current[2] = el}
+                    onKeyDown={(e) => handleKeyDown(e, 2)}
                   />
                   <label for="male">
                     Male
@@ -371,6 +441,8 @@ console.log("Branch_Id:",Branch_Id)
                     value="Female"
                     onChange={handleChange}
                     required
+                    ref={(el) => inputRefs.current[3] = el}
+                    onKeyDown={(e) => handleKeyDown(e, 3)}
                   />
                   <label> Female
                   </label>
@@ -383,6 +455,8 @@ console.log("Branch_Id:",Branch_Id)
                     value="Other"
                     onChange={handleChange}
                     required
+                    ref={(el) => inputRefs.current[4] = el}
+                    onKeyDown={(e) => handleKeyDown(e, 4)}
                   />
                   <label> Other
                   </label>
@@ -408,6 +482,8 @@ console.log("Branch_Id:",Branch_Id)
                     value="General"
                     onChange={handleChange}
                     required
+                    ref={(el) => inputRefs.current[5] = el}
+                    onKeyDown={(e) => handleKeyDown(e, 5)}
                   />
                   <label>
                     General
@@ -421,9 +497,10 @@ console.log("Branch_Id:",Branch_Id)
                     value="OBC"
                     onChange={handleChange}
                     required
+                    ref={(el) => inputRefs.current[6] = el}
+                    onKeyDown={(e) => handleKeyDown(e, 6)}
                   />{" "}
                   <label>
-
                     OBC
                   </label>
 
@@ -435,6 +512,8 @@ console.log("Branch_Id:",Branch_Id)
                     value="SC/ST"
                     onChange={handleChange}
                     required
+                    ref={(el) => inputRefs.current[7] = el}
+                    onKeyDown={(e) => handleKeyDown(e, 7)}
                   />{" "}
                   <label>
                     SC/ST
@@ -454,10 +533,14 @@ console.log("Branch_Id:",Branch_Id)
               <input
                 type="email"
                 name="emailId"
+                ref={combinedRef}
+                autoComplete="off"
                 value={formData.emailId}
                 onChange={handleChange}
                 placeholder="Email ID"
+                onBlur={(e) => checkEmailExists(e.target.value)}
                 required
+                onKeyDown={(e)=>handleKeyDown(e,8)}
               />
               {formErrors["emailId"] && (
                 <span style={{ color: "red" }}>{formErrors["emailId"]}</span>
@@ -474,9 +557,12 @@ console.log("Branch_Id:",Branch_Id)
                 name="confirmEmailId"
                 value={formData.confirmEmailId}
                 onChange={handleChange}
+                autoComplete="off"
                 onPaste={handleConfirmEmailPaste}
                 placeholder="Confirm Email ID"
                 required
+                ref={(el)=>inputRefs.current[9]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,9)}
               />
               {formErrors["confirmEmailId"] && (
                 <span style={{ color: "red" }}>{formErrors["confirmEmailId"]}</span>
@@ -495,6 +581,8 @@ console.log("Branch_Id:",Branch_Id)
                 onChange={handleChange}
                 placeholder="Contact No"
                 required
+                ref={(el)=>inputRefs.current[10]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,10)}
               />
               {formErrors["contactNo"] && (
                 <span style={{ color: "red" }}>{formErrors["contactNo"]}</span>
@@ -515,6 +603,8 @@ console.log("Branch_Id:",Branch_Id)
                 onChange={handleChange}
                 placeholder="Father Name"
                 required
+                ref={(el)=>inputRefs.current[11]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,11)}
               />
               {formErrors["fatherName"] && (
                 <span style={{ color: "red" }}>{formErrors["fatherName"]}</span>
@@ -533,6 +623,8 @@ console.log("Branch_Id:",Branch_Id)
                 onChange={handleChange}
                 placeholder="Occupation"
                 required
+                ref={(el)=>inputRefs.current[12]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,12)}
               />
               {formErrors["occupation"] && (
                 <span style={{ color: "red" }}>{formErrors["occupation"]}</span>
@@ -551,6 +643,8 @@ console.log("Branch_Id:",Branch_Id)
                 onChange={handleChange}
                 placeholder="Mobile No"
                 required
+                ref={(el)=>inputRefs.current[13]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,13)}
               />
               {formErrors["mobileNo"] && (
                 <span style={{ color: "red" }}>{formErrors["mobileNo"]}</span>
@@ -572,6 +666,8 @@ console.log("Branch_Id:",Branch_Id)
                 onChange={handleChange}
                 placeholder="Line1"
                 required
+                ref={(el)=>inputRefs.current[14]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,14)}
               />
               {formErrors["line1"] && (
                 <span style={{ color: "red" }}>{formErrors["line1"]}</span>
@@ -590,6 +686,8 @@ console.log("Branch_Id:",Branch_Id)
                 onChange={handleChange}
                 placeholder="State"
                 required
+                ref={(el)=>inputRefs.current[15]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,15)}
               />
               {formErrors["state"] && (
                 <span style={{ color: "red" }}>{formErrors["state"]}</span>
@@ -608,6 +706,8 @@ console.log("Branch_Id:",Branch_Id)
                 onChange={handleChange}
                 placeholder="Districts"
                 required
+                ref={(el)=>inputRefs.current[16]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,16)}
               />
               {formErrors["districts"] && (
                 <span style={{ color: "red" }}>{formErrors["districts"]}</span>
@@ -626,6 +726,8 @@ console.log("Branch_Id:",Branch_Id)
                 onChange={handleChange}
                 placeholder="Pincode"
                 required
+                ref={(el)=>inputRefs.current[17]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,17)}
               />
               {formErrors["pincode"] && (
                 <span style={{ color: "red" }}>{formErrors["pincode"]}</span>
@@ -651,9 +753,11 @@ console.log("Branch_Id:",Branch_Id)
                       value="Appearing"
                       onChange={handleChange}
                       required
+                      ref={(el)=>inputRefs.current[18]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,18)}
                     />{" "}
                     <label>
-                   Appearing XII
+                      Appearing XII
                     </label>
 
                   </div>
@@ -664,9 +768,11 @@ console.log("Branch_Id:",Branch_Id)
                       value="Passsed"
                       onChange={handleChange}
                       required
+                      ref={(el)=>inputRefs.current[19]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,19)}
                     />{" "}
                     <label>
-                     Passsed XII
+                      Passsed XII
                     </label>
 
                   </div>
@@ -690,6 +796,8 @@ console.log("Branch_Id:",Branch_Id)
                 onChange={handleChange}
                 placeholder="Name of College"
                 required
+                ref={(el)=>inputRefs.current[20]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,20)}
               />
               {formErrors["NameOfCollege"] && (
                 <span style={{ color: "red" }}>{formErrors["NameOfCollege"]}</span>
@@ -708,6 +816,8 @@ console.log("Branch_Id:",Branch_Id)
                 onChange={handleChange}
                 placeholder="Passing Year"
                 required
+                ref={(el)=>inputRefs.current[21]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,21)}
               />
               {formErrors["passingYear"] && (
                 <span style={{ color: "red" }}>{formErrors["passingYear"]}</span>
@@ -726,6 +836,8 @@ console.log("Branch_Id:",Branch_Id)
                 onChange={handleChange}
                 placeholder="Marks (%)"
                 required
+                ref={(el)=>inputRefs.current[22]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,22)}
               />
               {formErrors["marks"] && (
                 <span style={{ color: "red" }}>{formErrors["marks"]}</span>
@@ -748,6 +860,8 @@ console.log("Branch_Id:",Branch_Id)
                   name="UplodadPhto"
                   onChange={handleChange}
                   required
+                  ref={(el)=>inputRefs.current[23]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,23)}
                 />
                 {formErrors["UplodadPhto"] && (
                   <span style={{ color: "red" }}>{formErrors["UplodadPhto"]}</span>
@@ -761,7 +875,10 @@ console.log("Branch_Id:",Branch_Id)
                 <div className="uploadPicDiv">
                   <img src={uploadPicImg} alt="no img" />
                 </div>
-                <input type="file" name="Signature" onChange={handleChange} />
+                <input type="file" name="Signature" onChange={handleChange} 
+                ref={(el)=>inputRefs.current[24]=el}
+                onKeyDown={(e)=>handleKeyDown(e,24)}
+                />
               </div>
 
               <div>
@@ -772,7 +889,10 @@ console.log("Branch_Id:",Branch_Id)
                 <div className="uploadPicDiv">
                   <img src={uploadPicImg} alt="no img" />
                 </div>
-                <input type="file" name="Proof" onChange={handleChange} />
+                <input type="file" name="Proof" onChange={handleChange} 
+                ref={(el)=>inputRefs.current[25]=el}
+                onKeyDown={(e)=>handleKeyDown(e,25)}
+                />
               </div>
             </div>
           </div>
