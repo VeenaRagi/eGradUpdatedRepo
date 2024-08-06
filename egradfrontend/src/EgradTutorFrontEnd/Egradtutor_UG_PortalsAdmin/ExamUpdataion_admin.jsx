@@ -258,8 +258,8 @@ const ExamUpdataion_admin = () => {
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [selectedBranch, setSelectedBranch] = useState("");
   const [initialExamDetails, setInitialExamDetails] = useState({});
-  const[examFromBackend,setExamFromBackend]=useState("")
-  const[branchFB,setBranchFB]=useState("")
+  const [examFromBackend, setExamFromBackend] = useState("")
+  const [branchFB, setBranchFB] = useState("")
 
   // Fetch branches and exams
   useEffect(() => {
@@ -304,13 +304,9 @@ const ExamUpdataion_admin = () => {
           const response = await axios.get(
             `${BASE_URL}/ExamCreation/feachingexams/${examId}`
           );
-          // Update the exams state with the fetched data
           const fetchedExams = response.data;
-
-          // Assuming the exams list might be empty; handle that case
           setExams(fetchedExams);
 
-          // Set the selectedExam if it's not already set and if data is available
           if (!selectedExam && fetchedExams.length > 0) {
             setSelectedExam(fetchedExams[0].examId);
           }
@@ -332,6 +328,8 @@ const ExamUpdataion_admin = () => {
       .catch((error) => console.error("Error fetching subjects:", error));
   }, []);
 
+  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -345,16 +343,17 @@ const ExamUpdataion_admin = () => {
         const examData = examResponse.data[0];
         const selectedSubjectsData = selectedSubjectsResponse.data;
         setSelectedBranch(examData.Branch_Id);
-
         console.log(selectedBranch, "sssssssssssss")
+
         setSelectedExam(examData.coursesPortalExamsId);
         // asdf
         console.log(selectedExam, "uuuuuuuuuuuuuuuuuuuuuuuuuuu")
         // setExamName(examData.examName);
         setExamFromBackend(examData.Branch_Id);
         setBranchFB(examData.Branch_Id)
+
         setSelectedExam(examData.coursesPortalExamsId)
-        console.log(selectedExam,"7777777777777777")
+        console.log(selectedExam, "7777777777777777")
         setStartDate(examData.startDate);
 
         setEndDate(examData.endDate);
@@ -425,7 +424,7 @@ const ExamUpdataion_admin = () => {
     console.log()
   };
 
- 
+
 
   return (
     <>
@@ -474,7 +473,7 @@ const ExamUpdataion_admin = () => {
             >
               <option value="">Select an exam</option>
               {exams.map((exam) => (
-                <option key={exam.examId} value={exam.examId}>
+                <option key={exam.coursesPortalExamsId} value={exam.coursesPortalExamsId}>
                   {exam.coursesPortalExamname}
                 </option>
               ))}
@@ -560,3 +559,18 @@ const ExamUpdataion_admin = () => {
 };
 
 export default ExamUpdataion_admin;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
