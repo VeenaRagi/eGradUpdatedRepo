@@ -110,8 +110,8 @@ router.post('/register', upload.fields([{ name: 'UplodadPhto' }, { name: 'Signat
     // SQL query to insert student registration data
     const sql = `
       INSERT INTO otsstudentregistation 
-      (candidateName, dateOfBirth, Gender, Category, emailId, confirmEmailId, contactNo, fatherName, occupation, mobileNo, line1, state, districts, pincode, qualifications, NameOfCollege, passingYear, marks, UplodadPhto, Signature, Proof, courseCreationId,Branch_Id) 
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+      (candidateName, dateOfBirth, Gender, Category, emailId, confirmEmailId, contactNo, fatherName, occupation, mobileNo, line1, state, districts, pincode, qualifications, NameOfCollege, passingYear, marks, UplodadPhto, Signature, Proof,Branch_Id) 
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
 
     const values = [
       studentData.candidateName,
@@ -135,8 +135,8 @@ router.post('/register', upload.fields([{ name: 'UplodadPhto' }, { name: 'Signat
       files.UplodadPhto ? files.UplodadPhto[0].filename : null,
       files.Signature ? files.Signature[0].filename : null,
       files.Proof ? files.Proof[0].filename : null,
-      studentData.courseCreationId || null,
-      studentData.Branch_Id || null,
+      // studentData.courseCreationId || null,
+      studentData.bId2 || null,
     ];
 
     const [result] = await db.execute(sql, values);
