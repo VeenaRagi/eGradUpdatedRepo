@@ -3,7 +3,7 @@ import BASE_URL from "../../../apiConfig";
 import { PiHandTapBold, PiHandTapThin } from "react-icons/pi";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
+const StudentDashbord_BuyCourses = ({decryptedUserIdState,Branch_Id }) => {
   const navigate = useNavigate(); 
   const [unPurchasedCourses, setUnPurchasedCourses] = useState([]);
   const [popupContent, setPopupContent] = useState(null);
@@ -15,11 +15,12 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
 
     try {
       const response = await fetch(
-        `${BASE_URL}/Exam_Course_Page/unPurchasedCourses/${decryptedUserIdState}`
+        `${BASE_URL}/Exam_Course_Page/unPurchasedCourses/${decryptedUserIdState}/${Branch_Id}`
       );
       if (response.ok) {
         const data = await response.json();
         setUnPurchasedCourses(data);
+        console.log("Fetched UnPurchased courses:", data);
       } else {
         console.error("Failed to fetch unPurchased courses");
       }
@@ -29,7 +30,7 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
   };
   useEffect(() => {
     fetchUnPurchasedCourses();
-  }, [decryptedUserIdState]);
+  }, [decryptedUserIdState,Branch_Id]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -116,7 +117,7 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
     // setPopupbeforelogin(true);
     try {
       const response = await fetch(
-        `${BASE_URL}/Exam_Course_Page/unPurchasedCourses/${decryptedUserIdState}`
+        `${BASE_URL}/Exam_Course_Page/unPurchasedCourses/${decryptedUserIdState}/${Branch_Id}`
       );
       const data = await response.json();
 
@@ -181,6 +182,7 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
   return (
     <div className="QuizBUy_courses QuizBUy_coursesinstudentdB">
       {popupContent}
+      <h1>Branch_Id:{Branch_Id}</h1>
       <div className="QuizBUy_coursessub_conatiner QuizBUy_coursessub_conatinerinstudentdB">
         <div className="QuizBUy_coursesheaderwithfilteringcontainer">
           <div className="QuizBUy_coursesheaderwithfilteringcontainerwithtagline">

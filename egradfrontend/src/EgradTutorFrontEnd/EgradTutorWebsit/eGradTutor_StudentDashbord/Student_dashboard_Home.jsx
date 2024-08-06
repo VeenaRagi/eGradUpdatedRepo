@@ -6,7 +6,7 @@ import welcome_greeting_img from './Images/welcome_greeting_img.png'
 import { useLocation, useNavigate } from 'react-router-dom';
 // import welcome_greeting_img from './Images/welcome_greeting_img.png'
 // import welcome_greeting_img from './Images/welcome_greeting_img.png'
-const Student_dashboard_Home = ({ usersData,decryptedUserIdState }) => {
+const Student_dashboard_Home = ({ usersData,decryptedUserIdState,Branch_Id }) => {
   const [roleOfLoggedIn, setRoleOfLoggedIn] = useState("");
   // const roleOfTheUser=usersData.users&&usersData.length>0?(
 
@@ -98,6 +98,7 @@ const Student_dashboard_Home = ({ usersData,decryptedUserIdState }) => {
           <img className='dashboard_img' src={welcome_greeting_img} />
         </div>
       </div>
+      <h1>Branch_Id:{Branch_Id}</h1>
       <div>
         <div className="testcounts_student_dashbard">
           {attemptedTestCount

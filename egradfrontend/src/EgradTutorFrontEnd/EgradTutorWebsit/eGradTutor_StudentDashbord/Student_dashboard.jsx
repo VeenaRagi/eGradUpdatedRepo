@@ -6,6 +6,7 @@ import StudentDashbord_Header from "./StudentDashbord_Header";
 import Student_dashboard_Container from "./Student_dashboard_Container";
 import PasswordChangeForm from "../../../Login/PasswordChangeForm";
 import UserLogin from "../../../Login/UserLogin";
+import BASE_URL from "../../../apiConfig";
 
 const Student_dashboard = () => {
   // -----------------PARAMS_DECLARATION_START---------------
@@ -87,6 +88,37 @@ const Student_dashboard = () => {
     };
   }, []);
 
+
+    
+  // const { Branch_Id } = useParams();
+
+const Branch_Id =1
+const [branches, setBranches] = useState([]);
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  const fetchBranches = async () => {
+    if (!Branch_Id) return;
+
+    try {
+      const response = await fetch(`${BASE_URL}/LandingPageExamData/branch/${Branch_Id}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setBranches(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching branches:', error);
+      setLoading(false);
+    }
+  };
+
+  fetchBranches();
+}, [Branch_Id]);
+console.log("shinchannnnnnnnnn")
+console.log('Branch_Id', Branch_Id);
+
   return (
     <>
       {/* SDAfterLogin <br />
@@ -111,7 +143,7 @@ const Student_dashboard = () => {
           <Student_dashboard_Container
             usersData={usersData}
             decryptedUserIdState={decryptedUserIdState}
-
+            Branch_Id={Branch_Id}
           />
         </div>
       ) : (

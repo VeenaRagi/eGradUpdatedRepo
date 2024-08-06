@@ -215,8 +215,8 @@ async function checkExistence(userId, courseCreationId) {
 
 
 
-router.get("/purchasedCourses/:userId", async (req, res) => {
-  const { userId } = req.params;
+router.get("/purchasedCourses/:userId/:Branch_Id", async (req, res) => {
+  const { userId,Branch_Id } = req.params;
 
   if (!userId) {
     return res.status(400).json({ error: "userId is required" });
@@ -224,7 +224,7 @@ router.get("/purchasedCourses/:userId", async (req, res) => {
 
   try {
     const query = `
-   SELECT
+    SELECT
     cct.courseCreationId,
     cct.courseName,
     cct.courseStartDate,
@@ -233,8 +233,11 @@ router.get("/purchasedCourses/:userId", async (req, res) => {
     cct.cardImage,
     cct.Portale_Id,
     e.examId,
+      cpe.coursesPortalExamsId,
    cpe.coursesPortalExamname,
     p.Portale_Name,
+    brn.Branch_Id,
+    brn.Branch_Name,
     sbc.user_Id,
     sbc.payment_status,
     COUNT(DISTINCT ovl.OVL_Linke_Id) AS totalLectures,
@@ -245,6 +248,8 @@ FROM
     course_creation_table AS cct
 LEFT JOIN exams AS e ON e.examId = cct.examId
 LEFT JOIN coursesportalexams AS cpe On e.coursesPortalExamsId=cpe.coursesPortalExamsId
+LEFT JOIN branches brn ON
+    brn.Branch_Id = cpe.Branch_Id AND brn.Branch_Id = e.Branch_Id
 LEFT JOIN portales AS p ON p.Portale_Id = cct.Portale_Id
 LEFT JOIN student_buy_courses AS sbc ON sbc.courseCreationId = cct.courseCreationId
 LEFT JOIN course_subjects cs ON cs.courseCreationId = cct.courseCreationId
@@ -254,7 +259,7 @@ LEFT JOIN topics t ON t.courseCreationId = cct.courseCreationId
 LEFT JOIN ovl_links AS ovl ON cct.courseCreationId = ovl.courseCreationId
 WHERE 
     sbc.user_Id = ?
-    AND sbc.payment_status = 1 
+    AND sbc.payment_status = 1 AND brn.Branch_Id = 1
 GROUP BY
     cct.courseCreationId;
 
@@ -460,7 +465,7 @@ WHERE
       FROM
         student_buy_courses sbc
       WHERE
-        sbc.payment_status = 1 AND sbc.user_Id = 44
+        sbc.payment_status = 1 AND sbc.user_Id = 53
     )
 AND brn.Branch_Id = 1
 GROUP BY
@@ -480,7 +485,7 @@ GROUP BY
         Portale_Id: portalId,
         portal: result.Portale_Name,
         examId: result.examId,
-        examName: result.examName,
+        coursesPortalExamname: result.coursesPortalExamname,
         courseCreationId: result.courseCreationId,
         courseName: result.courseName,
         courseStartDate: result.courseStartDate,
