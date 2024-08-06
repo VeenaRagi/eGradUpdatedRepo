@@ -224,7 +224,7 @@ router.get("/purchasedCourses/:userId", async (req, res) => {
 
   try {
     const query = `
-    SELECT
+   SELECT
     cct.courseCreationId,
     cct.courseName,
     cct.courseStartDate,
@@ -233,7 +233,7 @@ router.get("/purchasedCourses/:userId", async (req, res) => {
     cct.cardImage,
     cct.Portale_Id,
     e.examId,
-    e.examName,
+   cpe.coursesPortalExamname,
     p.Portale_Name,
     sbc.user_Id,
     sbc.payment_status,
@@ -244,6 +244,7 @@ router.get("/purchasedCourses/:userId", async (req, res) => {
 FROM
     course_creation_table AS cct
 LEFT JOIN exams AS e ON e.examId = cct.examId
+LEFT JOIN coursesportalexams AS cpe On e.coursesPortalExamsId=cpe.coursesPortalExamsId
 LEFT JOIN portales AS p ON p.Portale_Id = cct.Portale_Id
 LEFT JOIN student_buy_courses AS sbc ON sbc.courseCreationId = cct.courseCreationId
 LEFT JOIN course_subjects cs ON cs.courseCreationId = cct.courseCreationId
@@ -281,7 +282,7 @@ GROUP BY
           totalPrice: result.totalPrice,
           courseCardImage: cardImage,
           examId: result.examId,
-          examName: result.examName,
+          examName: result.coursesPortalExamname,
           portalName: result.Portale_Name,
           specificPortal: result.Portale_Id,
           portal:result.Portale_Id,
