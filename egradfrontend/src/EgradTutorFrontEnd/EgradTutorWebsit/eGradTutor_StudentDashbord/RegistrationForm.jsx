@@ -8,11 +8,11 @@ import BASE_URL from "../../../apiConfig";
 import { SiCarlsberggroup } from "react-icons/si";
 
 const RegistrationForm = () => {
-  const inputRefs=useRef([]);
+  const inputRefs = useRef([]);
   const { courseCreationId } = useParams();
-  const formRef=useRef(null)
+  const formRef = useRef(null)
   // console.log(courseCreationId, "This is the course creation Id ")
-  const emailRef=useRef(null)
+  const emailRef = useRef(null)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     candidateName: "",
@@ -47,14 +47,11 @@ const RegistrationForm = () => {
   const handleeBack = () => {
     navigate('/CoursePage/1/1'); // This navigates to the home page
   };
-  // useEffect(()=>{
-  //   document.addEventListener('click',handleOutSideClick);
-  //   return()=>document.removeEventListener('click',handleOutSideClick);
-  // },[])
-  const handleClose=async()=>{
+
+  const handleClose = async () => {
     setEmailExists(false);
-    console.log(emailExists,"this is the value after setting the email exists valueeeeeeeeee")
-    if(emailRef.current){
+    console.log(emailExists, "this is the value after setting the email exists valueeeeeeeeee")
+    if (emailRef.current) {
       emailRef.current.focus();
     }
     console.log("setting email exists to false");
@@ -63,37 +60,36 @@ const RegistrationForm = () => {
     console.log(emailExists, "this is the value after setting the email exists value");
 
   }, [emailExists]);
-  const handleKeyDown=(e,index)=>{
-    if(e.key==='Enter'){
-      if(inputRefs.current[index+1]){
-        inputRefs.current[index+1].focus();
+  const handleKeyDown = (e, index) => {
+    // console.log("the key pressed is",e.key)
+    if (e.key === 'Enter') {
+    e.preventDefault();
+    console.log(inputRefs.current,"this is the current input ref")
+    console.log(inputRefs,"this is the inputRefs array");
+      if (inputRefs.current[index + 1]) {
+        inputRefs.current[index + 1].focus();
       }
     }
   }
 
-  const handleOutSideClick=(event)=>{
-    if(formRef.current&& !formRef.current.contains(event.target)){
-      handleClose();
-    }
-  }
-  
   useEffect(() => {
     const fetchCourseDetails = async () => {
-    if (courseCreationId) {
-      axios
-        .get(
-          `http://localhost:5001/PoopularCourses/unPurchasedCoursesBuyNow/${courseCreationId}`
-        )
-        .then((response) => {
-          if (response.data && response.data.length > 0) {
-            setCourseDetails(response.data[0]);
-            console.log(response.data[0]);
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching course details:", error);
-        });
-    }}
+      if (courseCreationId) {
+        axios
+          .get(
+            `http://localhost:5001/PoopularCourses/unPurchasedCoursesBuyNow/${courseCreationId}`
+          )
+          .then((response) => {
+            if (response.data && response.data.length > 0) {
+              setCourseDetails(response.data[0]);
+              console.log(response.data[0]);
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching course details:", error);
+          });
+      }
+    }
     if (courseCreationId) {
       fetchCourseDetails();
     }
@@ -158,29 +154,26 @@ const RegistrationForm = () => {
   // }, [Branch_Id_from_pattern1]);
 
   console.log('Branch_Id', Branch_Id_from_pattern1);
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted with data:', formData);
-    // console.log("shinchannnnn");
     console.log("Branch_Id for registration:", Branch_Id_from_pattern1 || Branch_Id_from_pattern2);
-
     // Determine the correct Branch_Id based on submitType
-    const Branch_Id = submitType === "register" ? Branch_Id_from_pattern1 : Branch_Id_from_pattern2;
-    const bId2=Branch_Id_from_pattern2;
-    console.log(bId2,"This is the bid222222222222");
+    // const Branch_Id = submitType === "register" ? Branch_Id_from_pattern1 : Branch_Id_from_pattern2;
+    const bId2 =Branch_Id_from_pattern1 || Branch_Id_from_pattern2;
+    console.log(bId2, "This is the bid222222222222");
 
     // Add Branch_Id to the formData object
     const formDataWithBranchId = { ...formData, bId2, submitType };
     // console.log("shizukaaaaaaaaa")
-    console.log("Branch_Id:", Branch_Id,"This issssss theeeeeeeeeeeee branch iddddddddddddd that we are submitting  ")
+    // console.log("Branch_Id:", Branch_Id, "This issssss theeeeeeeeeeeee branch iddddddddddddd that we are submitting  ")
     const errors = validateForm(formDataWithBranchId);
     if (Object.keys(errors).length > 0) {
       console.log('Form validation errors:', errors);
       setFormErrors(errors);
       return;
     }
-
     setFormErrors({});
     console.log('Form data is valid');
 
@@ -268,19 +261,9 @@ const RegistrationForm = () => {
     alert("Please manually enter the Confirm Email.");
   };
 
-  // useEffect(() => {
-  //   if (!emailExists && emailRef.current) {
-  //     emailRef.current.focus();
-  //   }
-  // }, [emailExists]);
-  const handleEnterButton=(event)=>{
-    event.preventDefault();
-    console.log(event,"This is the event obj",
-      event.keyCode,"this is the key code of the key that u pressseddddddddd  ")
-      console.log("Event path:",event.composedPath());
-    if(event.keyCode===13){
-      alert("You have pressed the enter button instead of submit ");
-    }
+  const combinedRef = (el) => {
+    emailRef.current=el;
+    inputRefs.current[8]=el;
   }
 
   return (
@@ -330,7 +313,7 @@ const RegistrationForm = () => {
       {emailExists && (
         <div className="popup-overlay">
           <div className="popup-content">
-            <button className="close-button" onClick={ handleClose}>X</button>
+            <button className="close-button" onClick={handleClose}>X</button>
             <p>An account with this email already exists.</p>
             <button onClick={() => navigate("/UserLogin")}>Login</button>
           </div>
@@ -338,7 +321,9 @@ const RegistrationForm = () => {
       )}
 
 
-      <form onSubmit={handleSubmit} onKeyDown={handleEnterButton} ref={formRef}  className="registrationForm" encType="multipart/form-data">
+      <form onSubmit={handleSubmit}
+        onKeyDown={handleKeyDown}
+        ref={formRef} className="registrationForm" encType="multipart/form-data">
         <div className="">
           <div className="">
             <button className="" onClick={handleeBack}>Back</button>
@@ -352,6 +337,8 @@ const RegistrationForm = () => {
               </label>
               <input
                 type="text"
+                ref={(el) => inputRefs.current[0] = el}
+                onKeyDown={(e) => handleKeyDown(e, 0)}
                 name="candidateName"
                 value={formData.candidateName}
                 onChange={handleChange}
@@ -374,6 +361,8 @@ const RegistrationForm = () => {
                 value={formData.dateOfBirth}
                 onChange={handleChange}
                 required
+                ref={(el) => inputRefs.current[1] = el}
+                onKeyDown={(e) => handleKeyDown(e, 1)}
               />
               {formErrors["dateOfBirth"] && (
                 <span style={{ color: "red" }}>{formErrors["dateOfBirth"]}</span>
@@ -404,6 +393,8 @@ const RegistrationForm = () => {
                     value="Male"
                     onChange={handleChange}
                     required
+                    ref={(el) => inputRefs.current[2] = el}
+                    onKeyDown={(e) => handleKeyDown(e, 2)}
                   />
                   <label for="male">
                     Male
@@ -418,6 +409,8 @@ const RegistrationForm = () => {
                     value="Female"
                     onChange={handleChange}
                     required
+                    ref={(el) => inputRefs.current[3] = el}
+                    onKeyDown={(e) => handleKeyDown(e, 3)}
                   />
                   <label> Female
                   </label>
@@ -430,6 +423,8 @@ const RegistrationForm = () => {
                     value="Other"
                     onChange={handleChange}
                     required
+                    ref={(el) => inputRefs.current[4] = el}
+                    onKeyDown={(e) => handleKeyDown(e, 4)}
                   />
                   <label> Other
                   </label>
@@ -455,6 +450,8 @@ const RegistrationForm = () => {
                     value="General"
                     onChange={handleChange}
                     required
+                    ref={(el) => inputRefs.current[5] = el}
+                    onKeyDown={(e) => handleKeyDown(e, 5)}
                   />
                   <label>
                     General
@@ -468,6 +465,8 @@ const RegistrationForm = () => {
                     value="OBC"
                     onChange={handleChange}
                     required
+                    ref={(el) => inputRefs.current[6] = el}
+                    onKeyDown={(e) => handleKeyDown(e, 6)}
                   />{" "}
                   <label>
 
@@ -482,6 +481,8 @@ const RegistrationForm = () => {
                     value="SC/ST"
                     onChange={handleChange}
                     required
+                    ref={(el) => inputRefs.current[7] = el}
+                    onKeyDown={(e) => handleKeyDown(e, 7)}
                   />{" "}
                   <label>
                     SC/ST
@@ -501,12 +502,14 @@ const RegistrationForm = () => {
               <input
                 type="email"
                 name="emailId"
-                ref={emailRef}
+                ref={combinedRef}
+                autoComplete="off"
                 value={formData.emailId}
                 onChange={handleChange}
                 placeholder="Email ID"
-                onBlur={(e)=>checkEmailExists(e.target.value)}
+                onBlur={(e) => checkEmailExists(e.target.value)}
                 required
+                onKeyDown={(e)=>handleKeyDown(e,8)}
               />
               {formErrors["emailId"] && (
                 <span style={{ color: "red" }}>{formErrors["emailId"]}</span>
@@ -523,9 +526,12 @@ const RegistrationForm = () => {
                 name="confirmEmailId"
                 value={formData.confirmEmailId}
                 onChange={handleChange}
+                autoComplete="off"
                 onPaste={handleConfirmEmailPaste}
                 placeholder="Confirm Email ID"
                 required
+                ref={(el)=>inputRefs.current[9]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,9)}
               />
               {formErrors["confirmEmailId"] && (
                 <span style={{ color: "red" }}>{formErrors["confirmEmailId"]}</span>
@@ -544,6 +550,8 @@ const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Contact No"
                 required
+                ref={(el)=>inputRefs.current[10]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,10)}
               />
               {formErrors["contactNo"] && (
                 <span style={{ color: "red" }}>{formErrors["contactNo"]}</span>
@@ -564,6 +572,8 @@ const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Father Name"
                 required
+                ref={(el)=>inputRefs.current[11]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,11)}
               />
               {formErrors["fatherName"] && (
                 <span style={{ color: "red" }}>{formErrors["fatherName"]}</span>
@@ -582,6 +592,8 @@ const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Occupation"
                 required
+                ref={(el)=>inputRefs.current[12]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,12)}
               />
               {formErrors["occupation"] && (
                 <span style={{ color: "red" }}>{formErrors["occupation"]}</span>
@@ -600,6 +612,8 @@ const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Mobile No"
                 required
+                ref={(el)=>inputRefs.current[13]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,13)}
               />
               {formErrors["mobileNo"] && (
                 <span style={{ color: "red" }}>{formErrors["mobileNo"]}</span>
@@ -621,6 +635,8 @@ const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Line1"
                 required
+                ref={(el)=>inputRefs.current[14]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,14)}
               />
               {formErrors["line1"] && (
                 <span style={{ color: "red" }}>{formErrors["line1"]}</span>
@@ -639,6 +655,8 @@ const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="State"
                 required
+                ref={(el)=>inputRefs.current[15]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,15)}
               />
               {formErrors["state"] && (
                 <span style={{ color: "red" }}>{formErrors["state"]}</span>
@@ -657,6 +675,8 @@ const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Districts"
                 required
+                ref={(el)=>inputRefs.current[16]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,16)}
               />
               {formErrors["districts"] && (
                 <span style={{ color: "red" }}>{formErrors["districts"]}</span>
@@ -675,6 +695,8 @@ const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Pincode"
                 required
+                ref={(el)=>inputRefs.current[17]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,17)}
               />
               {formErrors["pincode"] && (
                 <span style={{ color: "red" }}>{formErrors["pincode"]}</span>
@@ -700,6 +722,8 @@ const RegistrationForm = () => {
                       value="Appearing"
                       onChange={handleChange}
                       required
+                      ref={(el)=>inputRefs.current[18]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,18)}
                     />{" "}
                     <label>
                       Appearing XII
@@ -713,6 +737,8 @@ const RegistrationForm = () => {
                       value="Passsed"
                       onChange={handleChange}
                       required
+                      ref={(el)=>inputRefs.current[19]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,19)}
                     />{" "}
                     <label>
                       Passsed XII
@@ -739,6 +765,8 @@ const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Name of College"
                 required
+                ref={(el)=>inputRefs.current[20]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,20)}
               />
               {formErrors["NameOfCollege"] && (
                 <span style={{ color: "red" }}>{formErrors["NameOfCollege"]}</span>
@@ -757,6 +785,8 @@ const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Passing Year"
                 required
+                ref={(el)=>inputRefs.current[21]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,21)}
               />
               {formErrors["passingYear"] && (
                 <span style={{ color: "red" }}>{formErrors["passingYear"]}</span>
@@ -775,6 +805,8 @@ const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Marks (%)"
                 required
+                ref={(el)=>inputRefs.current[22]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,22)}
               />
               {formErrors["marks"] && (
                 <span style={{ color: "red" }}>{formErrors["marks"]}</span>
@@ -797,6 +829,8 @@ const RegistrationForm = () => {
                   name="UplodadPhto"
                   onChange={handleChange}
                   required
+                  ref={(el)=>inputRefs.current[23]=el}
+                    onKeyDown={(e)=>handleKeyDown(e,23)}
                 />
                 {formErrors["UplodadPhto"] && (
                   <span style={{ color: "red" }}>{formErrors["UplodadPhto"]}</span>
@@ -810,7 +844,10 @@ const RegistrationForm = () => {
                 <div className="uploadPicDiv">
                   <img src={uploadPicImg} alt="no img" />
                 </div>
-                <input type="file" name="Signature" onChange={handleChange} />
+                <input type="file" name="Signature" onChange={handleChange} 
+                ref={(el)=>inputRefs.current[24]=el}
+                onKeyDown={(e)=>handleKeyDown(e,24)}
+                />
               </div>
 
               <div>
@@ -821,7 +858,10 @@ const RegistrationForm = () => {
                 <div className="uploadPicDiv">
                   <img src={uploadPicImg} alt="no img" />
                 </div>
-                <input type="file" name="Proof" onChange={handleChange} />
+                <input type="file" name="Proof" onChange={handleChange} 
+                ref={(el)=>inputRefs.current[25]=el}
+                onKeyDown={(e)=>handleKeyDown(e,25)}
+                />
               </div>
             </div>
           </div>
