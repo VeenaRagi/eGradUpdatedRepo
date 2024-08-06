@@ -232,6 +232,13 @@
   box-shadow: 0 0 10px #000;
 }
 
+.exam_updation_admin_subjectDiv {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  overflow: scroll;
+}
+
 .examUpdate_-contant {
   display: flex;
   /* flex-direction: column; */
