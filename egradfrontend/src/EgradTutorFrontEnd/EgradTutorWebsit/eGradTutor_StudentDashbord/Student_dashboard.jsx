@@ -63,6 +63,7 @@ const Student_dashboard = () => {
   console.log(secretKey, "secret key while decoding");
   console.log("hiiiiiiiiiiiiiii");
   console.log(usersData);
+
   const handleLogOut = () => {
     settiAuth({
       ...tiAuth,
@@ -93,6 +94,8 @@ const Student_dashboard = () => {
   // const { Branch_Id } = useParams();
 
 const Branch_Id =1
+// const BranchId
+
 const [branches, setBranches] = useState([]);
 const [loading, setLoading] = useState(true);
 
@@ -141,9 +144,11 @@ console.log('Branch_Id', Branch_Id);
             /> */}
           </div>
           <Student_dashboard_Container
+
             usersData={usersData}
             decryptedUserIdState={decryptedUserIdState}
             Branch_Id={Branch_Id}
+            // decryptedBranchId={decryptedBranchId}
           />
         </div>
       ) : (

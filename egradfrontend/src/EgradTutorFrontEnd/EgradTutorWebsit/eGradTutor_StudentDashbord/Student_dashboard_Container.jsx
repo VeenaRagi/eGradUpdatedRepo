@@ -12,7 +12,7 @@ import StudentDashbord_Bookmarks from "./StudentDashbord_Bookmarks";
 import StudentDashbord_Settings from "./StudentDashbord_Settings";
 import StudentDashboardHeader from "./StudentDashboardHeader";
 
-const Student_dashboard_Container = ({ usersData, decryptedUserIdState,Branch_Id }) => {
+const Student_dashboard_Container = ({ usersData, decryptedUserIdState }) => {
   const [activeComponent, setActiveComponent] = useState("home");
 
   const handleMenuClick = (component) => {
@@ -92,22 +92,22 @@ const Student_dashboard_Container = ({ usersData, decryptedUserIdState,Branch_Id
 
         <div className="ugquiz_StudentDashbordconatiner_right_Std_MB_Course">
           {activeComponent === "home" && (
-            <Student_dashboard_Home usersData={usersData} decryptedUserIdState={decryptedUserIdState} Branch_Id={Branch_Id}/>
+            <Student_dashboard_Home usersData={usersData} decryptedUserIdState={decryptedUserIdState}/>
           )}
           {activeComponent === "myCourses" && (
-            <StudentDashbord_MyCourses usersData={usersData} decryptedUserIdState={decryptedUserIdState} Branch_Id={Branch_Id}/>
+            <StudentDashbord_MyCourses usersData={usersData} decryptedUserIdState={decryptedUserIdState} />
           )}
           {activeComponent === "buyCourses" && (
-            <StudentDashbord_BuyCourses usersData={usersData} decryptedUserIdState={decryptedUserIdState} Branch_Id={Branch_Id}/>
+            <StudentDashbord_BuyCourses usersData={usersData} decryptedUserIdState={decryptedUserIdState}/>
           )}
           {activeComponent === "myResults" && (
-            <StudentDashbord_MyResults usersData={usersData} decryptedUserIdState={decryptedUserIdState} Branch_Id={Branch_Id}/>
+            <StudentDashbord_MyResults usersData={usersData} decryptedUserIdState={decryptedUserIdState}/>
           )}
           {activeComponent === "bookmarks" && (
-            <StudentDashbord_Bookmarks usersData={usersData} decryptedUserIdState={decryptedUserIdState} Branch_Id={Branch_Id}/>
+            <StudentDashbord_Bookmarks usersData={usersData} decryptedUserIdState={decryptedUserIdState} />
           )}
           {activeComponent === "settings" && (
-            <StudentDashbord_Settings usersData={usersData} decryptedUserIdState={decryptedUserIdState} Branch_Id={Branch_Id}/>
+            <StudentDashbord_Settings usersData={usersData} decryptedUserIdState={decryptedUserIdState} />
           )}
         </div>
       </div>

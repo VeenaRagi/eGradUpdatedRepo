@@ -581,7 +581,6 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState,Branch_Id }
 
   return (
     <div>
-         <h1>Branch_Id:{Branch_Id}</h1>
       {!showtestContainer1 &&
         !showtestContainer2 &&
         // !showCompletePackageContainer

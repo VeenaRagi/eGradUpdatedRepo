@@ -35,8 +35,8 @@ const UserLogin = () => {
 
       console.log("Response Data:", response.data);
 
-      const { user_Id, role, accessToken, decryptedId,userDetails,Branch_Id,encryptedBranchId} = response.data;
-      console.log("Extracted Data:", { user_Id, role, accessToken,userDetails,Branch_Id,encryptedBranchId });
+      const { user_Id, role, accessToken, decryptedId,userDetails,Branch_Id,encryptedBranchId,branchId} = response.data;
+      console.log("Extracted Data:", { user_Id, role, accessToken,userDetails,Branch_Id,encryptedBranchId,branchId });
       if (!user_Id) {
         throw new Error('User ID is missing');
       }
@@ -54,7 +54,8 @@ const UserLogin = () => {
           userDecryptedId: decryptedId,
           isLoggedIn: true,
           userData:userDetails,
-          userBranchId:encryptedBranchId
+          userBranchId:encryptedBranchId,
+          decryptedBranchId:branchId
         };
         console.log("New Auth State:", newAuthState);
         settiAuth(newAuthState);
