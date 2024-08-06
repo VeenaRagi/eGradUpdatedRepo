@@ -1,18 +1,18 @@
 // src/components/RegistrationForm.js
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
-import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
+import { useParams, useNavigate,Link,useLocation  } from "react-router-dom";
 import './Style/Registrationform.css'
 import uploadPicImg from './Images/NoImages.jpg'
 import BASE_URL from "../../../apiConfig";
 import { SiCarlsberggroup } from "react-icons/si";
 
 const RegistrationForm = () => {
-  const inputRefs = useRef([]);
+  const inputRefs=useRef([]);
   const { courseCreationId } = useParams();
-  const formRef = useRef(null)
+  const formRef=useRef(null)
   // console.log(courseCreationId, "This is the course creation Id ")
-  const emailRef = useRef(null)
+  const emailRef=useRef(null)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     candidateName: "",
@@ -47,9 +47,13 @@ const RegistrationForm = () => {
   const handleeBack = () => {
     navigate('/CoursePage/1/1'); // This navigates to the home page
   };
-
-  const handleClose = async () => {
+  // useEffect(()=>{
+  //   document.addEventListener('click',handleOutSideClick);
+  //   return()=>document.removeEventListener('click',handleOutSideClick);
+  // },[])
+  const handleClose=async()=>{
     setEmailExists(false);
+    console.log(emailExists, "this is the value after setting the email exists valueeeeeeeeee")
     if (emailRef.current) {
       emailRef.current.focus();
     }
@@ -59,36 +63,37 @@ const RegistrationForm = () => {
     console.log(emailExists, "this is the value after setting the email exists value");
 
   }, [emailExists]);
-  const handleKeyDown = (e, index) => {
-    // console.log("the key pressed is",e.key)
-    if (e.key === 'Enter') {
-    e.preventDefault();
-    console.log(inputRefs.current,"this is the current input ref")
-    console.log(inputRefs,"this is the inputRefs array");
-      if (inputRefs.current[index + 1]) {
-        inputRefs.current[index + 1].focus();
+  const handleKeyDown=(e,index)=>{
+    if(e.key==='Enter'){
+      if(inputRefs.current[index+1]){
+        inputRefs.current[index+1].focus();
       }
     }
   }
 
+  const handleOutSideClick=(event)=>{
+    if(formRef.current&& !formRef.current.contains(event.target)){
+      handleClose();
+    }
+  }
+  
   useEffect(() => {
     const fetchCourseDetails = async () => {
-      if (courseCreationId) {
-        axios
-          .get(
-            `http://localhost:5001/PoopularCourses/unPurchasedCoursesBuyNow/${courseCreationId}`
-          )
-          .then((response) => {
-            if (response.data && response.data.length > 0) {
-              setCourseDetails(response.data[0]);
-              console.log(response.data[0]);
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching course details:", error);
-          });
-      }
-    }
+    if (courseCreationId) {
+      axios
+        .get(
+          `http://localhost:5001/PoopularCourses/unPurchasedCoursesBuyNow/${courseCreationId}`
+        )
+        .then((response) => {
+          if (response.data && response.data.length > 0) {
+            setCourseDetails(response.data[0]);
+            console.log(response.data[0]);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching course details:", error);
+        });
+    }}
     if (courseCreationId) {
       fetchCourseDetails();
     }
@@ -100,9 +105,10 @@ const RegistrationForm = () => {
       setFormData({ ...formData, [name]: files[0] });
     } else {
       setFormData({ ...formData, [name]: value });
-      // if (name === "emailId") {
-      //   checkEmailExists(value);
-      // }
+
+      if (name === "emailId") {
+        checkEmailExists(value);
+      }
     }
   };
 
@@ -114,60 +120,58 @@ const RegistrationForm = () => {
       );
       if (response.data.exists) {
         setEmailExists(true);
-        console.log("email already exists and setting exmail exists to true");
       } else {
         setEmailExists(false);
       }
     } catch (error) {
       console.error("Error checking email:", error);
     }
-
+    
   };
 
-  const { Branch_Id } = useParams();
-  console.log(Branch_Id,"this is from params")
+  const { Branch_Id: Branch_Id_from_pattern1 } = useParams();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const Branch_Id_from_pattern2 = queryParams.get('Branch_Id'); // Pattern 2
-
+  
   // const{Branch_Id} = useParams();
   const [branches, setBranches] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const fetchBranches = async () => {
-  //     try {
-  //       const response = await fetch(`${BASE_URL}/LandingPageExamData/branch/${Branch_Id_from_pattern1}`);
-  //       if (!response.ok) {
-  //         throw new Error('Network response was not ok');
-  //       }
-  //       const data = await response.json();
-  //       setBranches(data);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error('Error fetching branches:', error);
-  //       setLoading(false);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchBranches = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/LandingPageExamData/branch/${Branch_Id_from_pattern1}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setBranches(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching branches:', error);
+        setLoading(false);
+      }
+    };
 
-  //   fetchBranches();
-  // }, [Branch_Id_from_pattern1]);
+    fetchBranches();
+  }, [Branch_Id_from_pattern1]);
 
-  // console.log('Branch_Id', Branch_Id_from_pattern1);
+  console.log('Branch_Id', Branch_Id_from_pattern1);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted with data:', formData);
-    console.log("Branch_Id for registration:",   Branch_Id);
+    console.log("Branch_Id for registration:", Branch_Id_from_pattern1 || Branch_Id_from_pattern2);
     // Determine the correct Branch_Id based on submitType
     // const Branch_Id = submitType === "register" ? Branch_Id_from_pattern1 : Branch_Id_from_pattern2;
-    const bId2 =  Branch_Id;
+    const bId2 =Branch_Id_from_pattern1 || Branch_Id_from_pattern2;
     console.log(bId2, "This is the bid222222222222");
 
     // Add Branch_Id to the formData object
     const formDataWithBranchId = { ...formData, bId2, submitType };
     // console.log("shizukaaaaaaaaa")
-    // console.log("Branch_Id:", Branch_Id, "This issssss theeeeeeeeeeeee branch iddddddddddddd that we are submitting  ")
+    console.log("Branch_Id:", Branch_Id,"This issssss theeeeeeeeeeeee branch iddddddddddddd that we are submitting  ")
     const errors = validateForm(formDataWithBranchId);
     if (Object.keys(errors).length > 0) {
       console.log('Form validation errors:', errors);
@@ -261,9 +265,19 @@ const RegistrationForm = () => {
     alert("Please manually enter the Confirm Email.");
   };
 
-  const combinedRef = (el) => {
-    emailRef.current=el;
-    inputRefs.current[8]=el;
+  // useEffect(() => {
+  //   if (!emailExists && emailRef.current) {
+  //     emailRef.current.focus();
+  //   }
+  // }, [emailExists]);
+  const handleEnterButton=(event)=>{
+    event.preventDefault();
+    console.log(event,"This is the event obj",
+      event.keyCode,"this is the key code of the key that u pressseddddddddd  ")
+      console.log("Event path:",event.composedPath());
+    if(event.keyCode===13){
+      alert("You have pressed the enter button instead of submit ");
+    }
   }
 
   return (
@@ -274,18 +288,18 @@ const RegistrationForm = () => {
       ) : (
         branches.map((branch) => (
           <div key={branch.Branch_Id}>
-            <h1>{branch.Branch_Id} This is branch ID P1</h1>
+            <p>{branch.Branch_Id}</p>
           </div>
         ))
       )}
-      <h1>{Branch_Id}This is branch ID P2 </h1>
-      {/* <h1>{Branch_Id_from_pattern1} This is the branch ID of P1</h1> */}
+      <h1>{Branch_Id_from_pattern2}This is branch ID P2 </h1>
+      <h1>{Branch_Id_from_pattern1} This is the branch ID of P1</h1>
 
       {courseDetails && (
         <div className="courseDetailsPC">
           <div className="courseDetailsSubContainer">
             <div className="courseDetailsh2Div">
-              <h2 style={{ textTransform: "uppercase" }}>Course Details</h2>
+              <h2 style={{textTransform:"uppercase"}}>Course Details</h2>
             </div>
             <div className="courseDetailsDiv" >
               <div>
@@ -314,7 +328,7 @@ const RegistrationForm = () => {
       {emailExists && (
         <div className="popup-overlay">
           <div className="popup-content">
-            <button className="close-button" onClick={handleClose}>X</button>
+            <button className="close-button" onClick={ handleClose}>X</button>
             <p>An account with this email already exists.</p>
             <button onClick={() => navigate("/UserLogin")}>Login</button>
           </div>
@@ -322,13 +336,11 @@ const RegistrationForm = () => {
       )}
 
 
-      <form onSubmit={handleSubmit}
-        onKeyDown={handleKeyDown}
-        ref={formRef} className="registrationForm" encType="multipart/form-data">
+      <form onSubmit={handleSubmit} onKeyDown={handleEnterButton} ref={formRef}  className="registrationForm" encType="multipart/form-data">
         <div className="">
-          <div className="">
-            <button className="" onClick={handleeBack}>Back</button>
-          </div>
+         <div className="">
+          <button className="" onClick={handleeBack}>Back</button>
+         </div>
           <div className="fieldsToBeGrid">
             <h1>PersonalDetails</h1>
             <div>
@@ -503,12 +515,11 @@ const RegistrationForm = () => {
               <input
                 type="email"
                 name="emailId"
-                ref={combinedRef}
-                autoComplete="off"
+                ref={emailRef}
                 value={formData.emailId}
                 onChange={handleChange}
                 placeholder="Email ID"
-                onBlur={(e) => checkEmailExists(e.target.value)}
+                onBlur={(e)=>checkEmailExists(e.target.value)}
                 required
                 onKeyDown={(e)=>handleKeyDown(e,8)}
               />
@@ -727,7 +738,7 @@ const RegistrationForm = () => {
                     onKeyDown={(e)=>handleKeyDown(e,18)}
                     />{" "}
                     <label>
-                      Appearing XII
+                   Appearing XII
                     </label>
 
                   </div>
@@ -742,7 +753,7 @@ const RegistrationForm = () => {
                     onKeyDown={(e)=>handleKeyDown(e,19)}
                     />{" "}
                     <label>
-                      Passsed XII
+                     Passsed XII
                     </label>
 
                   </div>
@@ -822,6 +833,7 @@ const RegistrationForm = () => {
                   <span className="mandatoryIndicator">*</span>
 
                 </label>
+                {/* <div> */}
                 <div className="uploadPicDiv">
                   <img src={uploadPicImg} alt="no img" />
                 </div>
@@ -836,12 +848,14 @@ const RegistrationForm = () => {
                 {formErrors["UplodadPhto"] && (
                   <span style={{ color: "red" }}>{formErrors["UplodadPhto"]}</span>
                 )}
+                {/* </div> */}
               </div>
 
               <div>
                 <label>Signature:
                   <span className="mandatoryIndicator">*</span>
                 </label>
+                {/* <div> */}
                 <div className="uploadPicDiv">
                   <img src={uploadPicImg} alt="no img" />
                 </div>
@@ -850,12 +864,14 @@ const RegistrationForm = () => {
                 onKeyDown={(e)=>handleKeyDown(e,24)}
                 />
               </div>
+              {/* </div> */}
 
               <div>
                 <label>Proof:
                   <span className="mandatoryIndicator">*</span>
 
                 </label>
+                {/* <div> */}
                 <div className="uploadPicDiv">
                   <img src={uploadPicImg} alt="no img" />
                 </div>
@@ -864,6 +880,7 @@ const RegistrationForm = () => {
                 onKeyDown={(e)=>handleKeyDown(e,25)}
                 />
               </div>
+              {/* </div> */}
             </div>
           </div>
           <div className="registerOrCousesButtonDiv">
