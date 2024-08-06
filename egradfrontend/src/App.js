@@ -45,6 +45,7 @@ import axios from "axios";
 // Test
 import { UserProvider } from "./UserContext";
 import ScientificCalculator from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/ScientificCalculator.jsx";
+import PG_Instructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_Instructions_Page.jsx";
 
 function App({ decryptedUserIdState, usersData,Branch_Id }) {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -276,6 +277,8 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
                 <Route path="/adminProfile" element={<AdminProfile />} />
 
                 <Route path="/ScientificCalculator" element={<ScientificCalculator/>}/>
+
+                <Route path="/PG_Instructions_Page" element={< PG_Instructions_Page  />} />
               </Routes>
             </UserProvider>
           </Router>
