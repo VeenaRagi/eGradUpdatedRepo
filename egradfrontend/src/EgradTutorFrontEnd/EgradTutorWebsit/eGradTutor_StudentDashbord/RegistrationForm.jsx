@@ -50,7 +50,6 @@ const RegistrationForm = () => {
 
   const handleClose = async () => {
     setEmailExists(false);
-    console.log(emailExists, "this is the value after setting the email exists valueeeeeeeeee")
     if (emailRef.current) {
       emailRef.current.focus();
     }
@@ -125,7 +124,8 @@ const RegistrationForm = () => {
 
   };
 
-  const { Branch_Id: Branch_Id_from_pattern1 } = useParams();
+  const { Branch_Id } = useParams();
+  console.log(Branch_Id,"this is from params")
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const Branch_Id_from_pattern2 = queryParams.get('Branch_Id'); // Pattern 2
@@ -153,15 +153,15 @@ const RegistrationForm = () => {
   //   fetchBranches();
   // }, [Branch_Id_from_pattern1]);
 
-  console.log('Branch_Id', Branch_Id_from_pattern1);
+  // console.log('Branch_Id', Branch_Id_from_pattern1);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted with data:', formData);
-    console.log("Branch_Id for registration:", Branch_Id_from_pattern1 || Branch_Id_from_pattern2);
+    console.log("Branch_Id for registration:",   Branch_Id);
     // Determine the correct Branch_Id based on submitType
     // const Branch_Id = submitType === "register" ? Branch_Id_from_pattern1 : Branch_Id_from_pattern2;
-    const bId2 =Branch_Id_from_pattern1 || Branch_Id_from_pattern2;
+    const bId2 =  Branch_Id;
     console.log(bId2, "This is the bid222222222222");
 
     // Add Branch_Id to the formData object
@@ -278,8 +278,8 @@ const RegistrationForm = () => {
           </div>
         ))
       )}
-      <h1>{Branch_Id_from_pattern2}This is branch ID P2 </h1>
-      <h1>{Branch_Id_from_pattern1} This is the branch ID of P1</h1>
+      <h1>{Branch_Id}This is branch ID P2 </h1>
+      {/* <h1>{Branch_Id_from_pattern1} This is the branch ID of P1</h1> */}
 
       {courseDetails && (
         <div className="courseDetailsPC">
