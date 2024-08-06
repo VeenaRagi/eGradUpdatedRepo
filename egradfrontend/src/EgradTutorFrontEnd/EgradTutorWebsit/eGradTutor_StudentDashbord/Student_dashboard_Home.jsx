@@ -92,8 +92,8 @@ const Student_dashboard_Home = ({ usersData,decryptedUserIdState,branchIdFromLS 
                   your educational path."
                 </p>
                 <h1>
-                  {user.Branch_Id}
-                  
+                  {/* {user.Branch_Id} */}
+                  This is from localstorage which is passed through props {branchIdFromLS}
                 </h1>
               </div>
             ))}
