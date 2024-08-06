@@ -102,6 +102,7 @@ const CourseHeader2 = ({ isEditMode, userRole,Branch_Id }) => {
 
     const renderNavItemInCoursePage = (headeritem, Branch_Id) => {
         const isInternalLink = headeritem.HeaderItemLink.startsWith('PoopularCourses') || headeritem.HeaderItemLink.startsWith('WhyChooseUs');
+    
         if (isInternalLink) {
             return (
                 <ScrollLink to={headeritem.HeaderItemLink} smooth={true} duration={100}>

@@ -124,20 +124,18 @@ const RegistrationForm = () => {
 
   };
 
-  const { Branch_Id } = useParams();
-  console.log(Branch_Id,"this is from params")
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const Branch_Id_from_pattern2 = queryParams.get('Branch_Id'); // Pattern 2
+  // const location = useLocation();
+  // const queryParams = new URLSearchParams(location.search);
+  // const Branch_Id_from_pattern2 = queryParams.get('Branch_Id');
 
-  // const{Branch_Id} = useParams();
-  const [branches, setBranches] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const { Branch_Id } = useParams();
+  // const [branches, setBranches] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
   // useEffect(() => {
   //   const fetchBranches = async () => {
   //     try {
-  //       const response = await fetch(`${BASE_URL}/LandingPageExamData/branch/${Branch_Id_from_pattern1}`);
+  //       const response = await fetch(`${BASE_URL}/LandingPageExamData/branch/${Branch_Id}`);
   //       if (!response.ok) {
   //         throw new Error('Network response was not ok');
   //       }
@@ -151,23 +149,57 @@ const RegistrationForm = () => {
   //   };
 
   //   fetchBranches();
-  // }, [Branch_Id_from_pattern1]);
+  // }, [Branch_Id]);
 
-  // console.log('Branch_Id', Branch_Id_from_pattern1);
+  // console.log('Branch_Id', Branch_Id);
+
+
+  const { Branch_Id: Branch_Id_from_params } = useParams();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const Branch_Id_from_query = queryParams.get('Branch_Id');
+
+  // Determine the Branch_Id from either params or query
+  const Branch_Id =  Branch_Id_from_query || Branch_Id_from_params;
+
+  const [branches, setBranches] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBranches = async () => {
+      if (!Branch_Id) return;
+
+      try {
+        const response = await fetch(`${BASE_URL}/LandingPageExamData/branch/${Branch_Id}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setBranches(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching branches:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchBranches();
+  }, [Branch_Id]);
+console.log("shinchannnnnnnnnn")
+  console.log('Branch_Id', Branch_Id);
+console.log("Branch_Id_from_query",Branch_Id_from_query)
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted with data:', formData);
-    console.log("Branch_Id for registration:",   Branch_Id);
+  
     // Determine the correct Branch_Id based on submitType
-    // const Branch_Id = submitType === "register" ? Branch_Id_from_pattern1 : Branch_Id_from_pattern2;
-    const bId2 =  Branch_Id;
-    console.log(bId2, "This is the bid222222222222");
-
+    // const Branch_Id = submitType === "register" ? Branch_Id : Branch_Id_from_pattern2;
+    console.log("shizukaaaaaaaaaaa")
+    console.log("Branch_Id for registration:",   Branch_Id);
     // Add Branch_Id to the formData object
-    const formDataWithBranchId = { ...formData, bId2, submitType };
-    // console.log("shizukaaaaaaaaa")
-    // console.log("Branch_Id:", Branch_Id, "This issssss theeeeeeeeeeeee branch iddddddddddddd that we are submitting  ")
+    const formDataWithBranchId = { ...formData, Branch_Id };
     const errors = validateForm(formDataWithBranchId);
     if (Object.keys(errors).length > 0) {
       console.log('Form validation errors:', errors);
@@ -274,12 +306,11 @@ const RegistrationForm = () => {
       ) : (
         branches.map((branch) => (
           <div key={branch.Branch_Id}>
-            <h1>{branch.Branch_Id} This is branch ID P1</h1>
+            <h1>{branch.Branch_Id}</h1>
           </div>
         ))
       )}
-      <h1>{Branch_Id}This is branch ID P2 </h1>
-      {/* <h1>{Branch_Id_from_pattern1} This is the branch ID of P1</h1> */}
+      {/* <h1>{Branch_Id_from_pattern2}</h1> */}
 
       {courseDetails && (
         <div className="courseDetailsPC">
@@ -470,7 +501,6 @@ const RegistrationForm = () => {
                     onKeyDown={(e) => handleKeyDown(e, 6)}
                   />{" "}
                   <label>
-
                     OBC
                   </label>
 

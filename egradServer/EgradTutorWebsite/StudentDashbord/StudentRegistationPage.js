@@ -136,7 +136,7 @@ router.post('/register', upload.fields([{ name: 'UplodadPhto' }, { name: 'Signat
       files.Signature ? files.Signature[0].filename : null,
       files.Proof ? files.Proof[0].filename : null,
       // studentData.courseCreationId || null,
-      studentData.bId2 || null,
+      studentData.Branch_Id || null,
     ];
 
     const [result] = await db.execute(sql, values);
