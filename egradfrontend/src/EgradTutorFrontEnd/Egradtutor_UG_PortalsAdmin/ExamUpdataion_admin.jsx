@@ -339,7 +339,7 @@ const ExamUpdataion_admin = () => {
       selectedSubjects,
     };
 
-    axios.put(`${BASE_URL}/api/exams/update`, updatedExamData)
+    axios.put(`${BASE_URL}/ExamCreation/update/${examId}`, updatedExamData)
       .then(() => {
         navigate("/UgadminHome");
       })
