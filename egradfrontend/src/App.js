@@ -29,12 +29,14 @@ import UpdatingConrseInAdmin from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdm
 import GettingInstructions from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/GettinggInstructions.jsx";
 import { UpdateInstruction } from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/UpdateInstruction.jsx";
 import TestUpdateadmin from "./EgradTutorFrontEnd/Egradtutor_UG_PortalsAdmin/TestUpdateadmin.jsx";
-import InstructionPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_Instructions_Page.jsx";
-import General_Intructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_General_Intructions_Page.jsx";
-import QuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/QuizPage.jsx";
-import QuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/QuestionPaper.jsx";
+import UG_Instructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_Instructions_Page.jsx";
+import General_Intructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/General_intructions_page.jsx";
+import UGQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_OTS/UGQuizPage.jsx";
+import PGQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/PGQuizPage.jsx";
+import UGQuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_OTS/UGQuestionPaper.jsx";
+import PGQuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/PGQuestionPaper.jsx";
 import PG_PopUpInstructionsView from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_OTS/PG_PopUpInstructionsView.jsx";
-import QuestionBankQuiz from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_PQB/QuestionBankQuiz.jsx";
+import QuestionBankQuiz from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UG_PQB/UGQuestionBankQuiz.jsx";
 import StudentDashbord_MyResults from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/StudentDashbord_MyResults.jsx";
 import TestResultsPage from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/TestResultsPage.jsx";
 import { UserReport } from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/UserReport.jsx";
@@ -224,25 +226,29 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
                 />
 
                 <Route
-                  path="/Instructions/:param1/:param2/:param3"
-                  element={<PrivateRoute element={<InstructionPage />} />}
+                  path="/UG_Instructions_Page/:param1/:param2/:param3/:param4"
+                  element={<PrivateRoute element={<UG_Instructions_Page />} />}
                 />
 
                 <Route
-                  path="/General_intructions_page/:param1/:param2/:param3"
+                  path="/General_intructions_page/:param1/:param2/:param3/:param4"
                   element={<PrivateRoute element={<General_Intructions_Page />} />}
                 />
                 <Route
-                  path="/QuizPage/questionOptions/:param1/:param2"
-                  element={<PrivateRoute element={<QuizPage seconds={20} />} />}
-                />
-                  <Route
-                  path="/QuizPage"
-                  element={<QuizPage seconds={20} />}
+                  path="/UGQuizPage/questionOptions/:param1/:param2"
+                  element={<PrivateRoute element={<UGQuizPage seconds={20} />} />}
                 />
                 <Route
-                  path="/QuestionBankQuiz/questionOptions/:param1/:param2"
-                  element={<PrivateRoute element={<QuestionBankQuiz />} />}
+                  path="/UGQuestionBankQuiz/questionOptions/:param1/:param2"
+                  element={<PrivateRoute element={<UGQuestionPaper />} />}
+                />
+                 <Route
+                  path="/PGQuizPage/questionOptions/:param1/:param2"
+                  element={<PrivateRoute element={<PGQuizPage seconds={20} />} />}
+                />
+                <Route
+                  path="/PGQuestionBankQuiz/questionOptions/:param1/:param2"
+                  element={<PrivateRoute element={<PGQuestionPaper />} />}
                 />
                 <Route
                   path="/StudentDashbord_MyResults"
@@ -262,8 +268,12 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
                   element={<UserReport />}
                 />
                 <Route
-                  path="/QuestionPaper/:param1"
-                  element={<QuestionPaper />}
+                  path="/UGQuestionPaper/:param1"
+                  element={<UGQuestionPaper />}
+                />
+                     <Route
+                  path="/PGQuestionPaper/:param1"
+                  element={<PGQuestionPaper />}
                 />
  <Route
                    path="/Instructions"
@@ -279,7 +289,7 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
 
                 <Route path="/ScientificCalculator" element={<ScientificCalculator/>}/>
 
-                <Route path="/PG_Instructions_Page" element={< PG_Instructions_Page  />} />
+                <Route path="/PG_Instructions_Page/:param1/:param2/:param3/:param4" element={< PG_Instructions_Page  />} />
               </Routes>
             </UserProvider>
           </Router>

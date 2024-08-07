@@ -260,7 +260,7 @@ import axios from 'axios';
 import '../../EgradTutorWebsit/eGradTutor_StudentDashbord/Style/StudentDashbord_Settings.css'
 import { useTIAuth } from '../../../TechInfoContext/AuthContext';
 
-const StudentDashbord_Settings = ({ usersData, decryptedUserIdState,Branch_Id }) => {
+const StudentDashbord_Settings = ({ usersData, decryptedUserIdState,branchIdFromLS }) => {
   // form states
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -275,7 +275,7 @@ const StudentDashbord_Settings = ({ usersData, decryptedUserIdState,Branch_Id })
   const [updateUserNumber, setUpdateUserNumber] = useState("");
   const [userEmailDisable, setUserEmailDisable] = useState("");
   const [showProfileUpdateForm, setShowProfileUpdateForm] = useState(true);
-
+  const  Branch_Id= branchIdFromLS;
   const initializeUserData = () => {
     const { userData } = tiAuth;
     if (userData && userData.users && userData.users.length > 0) {

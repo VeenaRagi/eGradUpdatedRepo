@@ -218,7 +218,7 @@ async function checkExistence(userId, courseCreationId) {
 router.get("/purchasedCourses/:userId/:Branch_Id", async (req, res) => {
   const { userId,Branch_Id } = req.params;
 
-  if (!userId) {
+  if (!userId && !Branch_Id) {
     return res.status(400).json({ error: "userId is required" });
   }
 
@@ -259,13 +259,13 @@ LEFT JOIN topics t ON t.courseCreationId = cct.courseCreationId
 LEFT JOIN ovl_links AS ovl ON cct.courseCreationId = ovl.courseCreationId
 WHERE 
     sbc.user_Id = ?
-    AND sbc.payment_status = 1 AND brn.Branch_Id = 1
+    AND sbc.payment_status = 1 AND brn.Branch_Id = ?
 GROUP BY
     cct.courseCreationId;
 
     `;
 
-    const [results, fields] = await db.execute(query, [userId]);
+    const [results, fields] = await db.execute(query, [userId,Branch_Id]);
 
     // Ensure you're using a unique identifier for each course
     const organizedData = {};
@@ -465,9 +465,9 @@ WHERE
       FROM
         student_buy_courses sbc
       WHERE
-        sbc.payment_status = 1 AND sbc.user_Id = 53
+        sbc.payment_status = 1 AND sbc.user_Id = ?
     )
-AND brn.Branch_Id = 1
+AND brn.Branch_Id = ?
 GROUP BY
     cct.courseCreationId;
 

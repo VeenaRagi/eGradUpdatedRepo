@@ -12,11 +12,12 @@ const General_intructions_page_container = () => {
   const location = useLocation();
   const { userData } = location.state || {}; 
 
-  const { param1, param2, param3 } = useParams();
+  const { param1, param2, param3,param4 } = useParams();
   const navigate = useNavigate();
   const [decryptedParam1, setDecryptedParam1] = useState("");
   const [decryptedParam2, setDecryptedParam2] = useState("");
   const [decryptedParam3, setDecryptedParam3] = useState("");
+  const [decryptedParam4, setDecryptedParam4] = useState("");
   const [instructionsData, setInstructionsData] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
   // const [userData, setUserData] = useState({});
@@ -35,14 +36,17 @@ const General_intructions_page_container = () => {
         const decrypted1 = await decryptData(param1);
         const decrypted2 = await decryptData(param2);
         const decrypted3 = await decryptData(param3);
+        const decrypted4 = await decryptData(param4);
 
         if (
           !decrypted1 ||
           !decrypted2 ||
           !decrypted3 ||
+          !decrypted4 ||
           isNaN(parseInt(decrypted1)) ||
           isNaN(parseInt(decrypted2)) ||
-          isNaN(parseInt(decrypted3))
+          isNaN(parseInt(decrypted3)) ||
+          isNaN(parseInt(decrypted4))
         ) {
           navigate("/Error");
           return;
@@ -51,6 +55,7 @@ const General_intructions_page_container = () => {
         setDecryptedParam1(decrypted1);
         setDecryptedParam2(decrypted2);
         setDecryptedParam3(decrypted3);
+        setDecryptedParam4(decrypted4);
       } catch (error) {
         console.error("Error decrypting data:", error);
         navigate("/Error");
@@ -58,7 +63,7 @@ const General_intructions_page_container = () => {
     };
 
     decryptParams();
-  }, [param1, param2, param3, navigate]);
+  }, [param1, param2, param3,param4, navigate]);
 
   useEffect(() => {
     const fetchInstructions = async () => {
@@ -89,25 +94,46 @@ const General_intructions_page_container = () => {
     try {
       const encryptedParam1 = await encryptData(decryptedParam1.toString());
       const encryptedParam2 = await encryptData(decryptedParam2.toString());
-
+      const encryptedParam4 = await encryptData(decryptedParam4.toString());
       const token = new Date().getTime().toString();
       sessionStorage.setItem("navigationToken", token);
 
-      const url1 = `/QuizPage/questionOptions/${encodeURIComponent(
+      
+      const url1 = `/UGQuizPage/questionOptions/${encodeURIComponent(
         encryptedParam1
       )}/${encodeURIComponent(encryptedParam2)}`;
 
-      const url2 = `/QuestionBankQuiz/questionOptions/${encodeURIComponent(
+      const url2 = `/UGQuestionBankQuiz/questionOptions/${encodeURIComponent(
         encryptedParam1
       )}/${encodeURIComponent(encryptedParam2)}`;
 
-      if (decryptedParam3 == 1) {
-        // navigate(url1);
-        navigate(url1, { state: { userData } });
-      } else if (decryptedParam3 == 2) {
-        // navigate(url2);
-        navigate(url2, { state: { userData } });
+       
+      const url3 = `/PGQuizPage/questionOptions/${encodeURIComponent(
+        encryptedParam1
+      )}/${encodeURIComponent(encryptedParam2)}`;
+
+      const url4 = `/PGQuestionBankQuiz/questionOptions/${encodeURIComponent(
+        encryptedParam1
+      )}/${encodeURIComponent(encryptedParam2)}`;
+
+      if(decryptedParam4 == 1){
+        if (decryptedParam3 == 1) {
+          // navigate(url1);
+          navigate(url1, { state: { userData } });
+        } else if (decryptedParam3 == 2) {
+          // navigate(url2);
+          navigate(url2, { state: { userData } });
+        }
+      } else if  (decryptedParam4 == 2){
+        if (decryptedParam3 == 1) {
+          // navigate(url1);
+          navigate(url3, { state: { userData } });
+        } else if (decryptedParam3 == 2) {
+          // navigate(url2);
+          navigate(url4, { state: { userData } });
+        }
       }
+     
     } catch (error) {
       console.error("Error encrypting data:", error);
     }
