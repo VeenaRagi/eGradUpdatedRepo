@@ -861,8 +861,153 @@ router.get("/questionOptions/:testCreationTableId/:userId", async (req, res) => 
 // });
 
 
-router.get("/PG_QuestionOptions/:testCreationTableId/:userId/:Branch_Id", async (req, res) => {
-  const { testCreationTableId, userId, Branch_Id } = req.params;
+// router.get("/PG_QuestionOptions/:testCreationTableId/:userId/:Branch_Id", async (req, res) => {
+//   const { testCreationTableId, userId, Branch_Id } = req.params;
+//   try {
+//     const [rows] = await db.query(
+//       `SELECT 
+//       q.question_id, q.questionImgName, 
+//       o.option_id, o.optionImgName, o.option_index,
+//       s.solution_id, s.solutionImgName, 
+//       qt.qtypeId, qt.qtype_text,
+//       ur.user_answer, ur.user_Sno, qts.typeofQuestion,
+//       ans.answer_id, ans.answer_text,
+//       m.markesId, m.marks_text,
+//       si.sort_id, si.sortid_text,
+//       doc.documen_name, doc.sectionId, 
+//       doc.subjectId, doc.testCreationTableId,
+//       p.paragraphImg, p.paragraph_Id,
+//       pq.paragraphQNo_Id, pq.paragraphQNo, qts.quesionTypeId,
+//       tct.TestName,
+//       b.Branch_Id,
+//       sub.SubjectName,
+//       sec.SectionName
+//   FROM 
+//       questions q 
+//       LEFT OUTER JOIN options o ON q.question_id = o.question_id
+//       LEFT OUTER JOIN qtype qt ON q.question_id = qt.question_id 
+//       LEFT OUTER JOIN quesion_type qts ON qt.quesionTypeId = qts.quesionTypeId 
+//       LEFT OUTER JOIN answer ans ON q.question_id = ans.question_id 
+//       LEFT OUTER JOIN marks m ON q.question_id = m.question_id 
+//       LEFT OUTER JOIN sortid si ON q.question_id = si.question_id 
+//       LEFT OUTER JOIN solution s ON q.question_id = s.solution_id 
+//       LEFT OUTER JOIN paragraphqno pq ON q.question_id = pq.question_id
+//       LEFT OUTER JOIN paragraph p ON pq.paragraph_Id = p.paragraph_Id
+//       LEFT OUTER JOIN ots_document doc ON q.document_Id = doc.document_Id
+//       LEFT OUTER JOIN user_responses ur ON q.question_id = ur.question_id 
+//       LEFT OUTER JOIN test_creation_table tct ON doc.testCreationTableId = tct.testCreationTableId
+//       LEFT OUTER JOIN course_creation_table cct ON tct.courseCreationId = cct.courseCreationId 
+//       LEFT OUTER JOIN exams e ON cct.examId = e.examId 
+//       LEFT OUTER JOIN branches b ON e.Branch_Id = b.Branch_Id
+//       LEFT OUTER JOIN subjects sub ON doc.subjectId = sub.subjectId
+//       LEFT OUTER JOIN sections sec ON doc.sectionId = sec.sectionId
+//       LEFT OUTER JOIN log l ON ur.user_Id = l.user_Id AND ur.user_Id = l.user_Id
+//   WHERE 
+//       doc.testCreationTableId = 2 AND
+//       (l.user_Id = 54 OR ur.user_answer IS NULL) AND
+//       b.Branch_Id = 2
+//   ORDER BY 
+//       q.question_id ASC, o.option_index ASC;`,
+//       [testCreationTableId, userId, Branch_Id]
+//     );
+
+//     // Check if rows is not empty
+//     if (rows.length > 0) {
+//       const testData = {
+//         TestName: rows[0].TestName,
+//         subjects: [],
+//       };
+
+//       // Organize data into a hierarchical structure
+//       rows.forEach((row) => {
+//         let subject = testData.subjects.find((s) => s.subjectId === row.subjectId);
+//         if (!subject) {
+//           subject = {
+//             subjectId: row.subjectId,
+//             SubjectName: row.SubjectName,
+//             sections: [],
+//           };
+//           testData.subjects.push(subject);
+//         }
+
+//         let section = subject.sections.find((s) => s.sectionId === row.sectionId);
+//         if (!section) {
+//           section = {
+//             sectionId: row.sectionId,
+//             SectionName: row.SectionName,
+//             questions: [],
+//           };
+//           subject.sections.push(section);
+//         }
+
+//         let question = section.questions.find((q) => q.question_id === row.question_id);
+//         if (!question) {
+//           question = {
+//             question_id: row.question_id,
+//             questionImgName: row.questionImgName,
+//             documen_name: row.documen_name,
+//             options: [],
+//             qtype: [],
+//             quesion_type: [],
+//             answer: [],
+//             useranswer: [],
+//             marks: [],
+//             sortid: [],
+//             solution: [],
+//             paragraph: [],
+//             paragraphqno: [],
+//           };
+//           section.questions.push(question);
+//         }
+
+//         // Add options if not already present
+//         if (row.option_id) {
+//           const optionExists = question.options.some((opt) => opt.option_id === row.option_id);
+//           if (!optionExists) {
+//             question.options.push({
+//               option_id: row.option_id,
+//               option_index: row.option_index,
+//               optionImgName: row.optionImgName,
+//               ans: row.user_answer,
+//             });
+//           }
+//         }
+
+//         // Add other properties if not already present
+//         const addPropertyIfNotExists = (propertyArray, propertyData) => {
+//           const propertyExists = propertyArray.some((prop) => prop[Object.keys(propertyData)[0]] === propertyData[Object.keys(propertyData)[0]]);
+//           if (!propertyExists) {
+//             propertyArray.push(propertyData);
+//           }
+//         };
+
+//         addPropertyIfNotExists(question.qtype, { qtypeId: row.qtypeId, qtype_text: row.qtype_text });
+//         addPropertyIfNotExists(question.quesion_type, { quesionTypeId: row.quesionTypeId, typeofQuestion: row.typeofQuestion });
+//         addPropertyIfNotExists(question.answer, { answer_id: row.answer_id, answer_text: row.answer_text });
+//         addPropertyIfNotExists(question.useranswer, { urid: row.question_id, ans: row.user_answer });
+//         addPropertyIfNotExists(question.marks, { markesId: row.markesId, marks_text: row.marks_text });
+//         addPropertyIfNotExists(question.sortid, { sort_id: row.sort_id, sortid_text: row.sortid_text });
+//         addPropertyIfNotExists(question.solution, { solution_id: row.solution_id, solutionImgName: row.solutionImgName });
+
+//         if (row.paragraph_Id && row.paragraphQNo) {
+//           addPropertyIfNotExists(question.paragraph, { paragraph_Id: row.paragraph_Id, paragraphImg: row.paragraphImg });
+//           addPropertyIfNotExists(question.paragraphqno, { paragraphQNo_Id: row.paragraphQNo_Id, paragraphQNo: row.paragraphQNo });
+//         }
+//       });
+
+//       res.json(testData);
+//     } else {
+//       res.status(404).json({ error: "No data found" });
+//     }
+//   } catch (error) {
+//     console.error("Error fetching question data:", error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
+
+
+router.get("/PG_QuestionOptions/:testCreationTableId/:userId", async (req, res) => {
+  const { testCreationTableId, userId } = req.params;
   try {
     const [rows] = await db.query(
       `SELECT 
@@ -879,7 +1024,6 @@ router.get("/PG_QuestionOptions/:testCreationTableId/:userId/:Branch_Id", async 
       p.paragraphImg, p.paragraph_Id,
       pq.paragraphQNo_Id, pq.paragraphQNo, qts.quesionTypeId,
       tct.TestName,
-      b.Branch_Id,
       sub.SubjectName,
       sec.SectionName
   FROM 
@@ -896,56 +1040,51 @@ router.get("/PG_QuestionOptions/:testCreationTableId/:userId/:Branch_Id", async 
       LEFT OUTER JOIN ots_document doc ON q.document_Id = doc.document_Id
       LEFT OUTER JOIN user_responses ur ON q.question_id = ur.question_id 
       LEFT OUTER JOIN test_creation_table tct ON doc.testCreationTableId = tct.testCreationTableId
-      LEFT OUTER JOIN course_creation_table cct ON tct.courseCreationId = cct.courseCreationId 
-      LEFT OUTER JOIN exams e ON cct.examId = e.examId 
-      LEFT OUTER JOIN branches b ON e.Branch_Id = b.Branch_Id
       LEFT OUTER JOIN subjects sub ON doc.subjectId = sub.subjectId
       LEFT OUTER JOIN sections sec ON doc.sectionId = sec.sectionId
       LEFT OUTER JOIN log l ON ur.user_Id = l.user_Id AND ur.user_Id = l.user_Id
   WHERE 
-      doc.testCreationTableId = 2 AND
-      (l.user_Id = 54 OR ur.user_answer IS NULL) AND
-      b.Branch_Id = 2
+      doc.testCreationTableId = ? AND
+      (l.user_Id = ? OR ur.user_answer IS NULL)
   ORDER BY 
       q.question_id ASC, o.option_index ASC;`,
-      [testCreationTableId, userId, Branch_Id]
+      [testCreationTableId, userId]
     );
 
-    // Check if rows is not empty
     if (rows.length > 0) {
       const testData = {
         TestName: rows[0].TestName,
         subjects: [],
       };
 
-      // Organize data into a hierarchical structure
-      rows.forEach((row) => {
-        let subject = testData.subjects.find((s) => s.subjectId === row.subjectId);
+      // Function to add data to a specific category (section or subject)
+      const addDataToCategory = (categoryId, categoryName, sectionId, sectionName, questionData) => {
+        let subject = testData.subjects.find(s => s.subjectId === categoryId);
         if (!subject) {
           subject = {
-            subjectId: row.subjectId,
-            SubjectName: row.SubjectName,
+            subjectId: categoryId,
+            SubjectName: categoryName,
             sections: [],
           };
           testData.subjects.push(subject);
         }
 
-        let section = subject.sections.find((s) => s.sectionId === row.sectionId);
+        let section = subject.sections.find(s => s.sectionId === sectionId);
         if (!section) {
           section = {
-            sectionId: row.sectionId,
-            SectionName: row.SectionName,
+            sectionId: sectionId,
+            SectionName: sectionName,
             questions: [],
           };
           subject.sections.push(section);
         }
 
-        let question = section.questions.find((q) => q.question_id === row.question_id);
+        let question = section.questions.find(q => q.question_id === questionData.question_id);
         if (!question) {
           question = {
-            question_id: row.question_id,
-            questionImgName: row.questionImgName,
-            documen_name: row.documen_name,
+            question_id: questionData.question_id,
+            questionImgName: questionData.questionImgName,
+            documen_name: questionData.documen_name,
             options: [],
             qtype: [],
             quesion_type: [],
@@ -960,39 +1099,46 @@ router.get("/PG_QuestionOptions/:testCreationTableId/:userId/:Branch_Id", async 
           section.questions.push(question);
         }
 
-        // Add options if not already present
-        if (row.option_id) {
-          const optionExists = question.options.some((opt) => opt.option_id === row.option_id);
+        if (questionData.option_id) {
+          const optionExists = question.options.some(opt => opt.option_id === questionData.option_id);
           if (!optionExists) {
             question.options.push({
-              option_id: row.option_id,
-              option_index: row.option_index,
-              optionImgName: row.optionImgName,
-              ans: row.user_answer,
+              option_id: questionData.option_id,
+              option_index: questionData.option_index,
+              optionImgName: questionData.optionImgName,
+              ans: questionData.user_answer,
             });
           }
         }
 
-        // Add other properties if not already present
         const addPropertyIfNotExists = (propertyArray, propertyData) => {
-          const propertyExists = propertyArray.some((prop) => prop[Object.keys(propertyData)[0]] === propertyData[Object.keys(propertyData)[0]]);
+          const propertyExists = propertyArray.some(prop => prop[Object.keys(propertyData)[0]] === propertyData[Object.keys(propertyData)[0]]);
           if (!propertyExists) {
             propertyArray.push(propertyData);
           }
         };
 
-        addPropertyIfNotExists(question.qtype, { qtypeId: row.qtypeId, qtype_text: row.qtype_text });
-        addPropertyIfNotExists(question.quesion_type, { quesionTypeId: row.quesionTypeId, typeofQuestion: row.typeofQuestion });
-        addPropertyIfNotExists(question.answer, { answer_id: row.answer_id, answer_text: row.answer_text });
-        addPropertyIfNotExists(question.useranswer, { urid: row.question_id, ans: row.user_answer });
-        addPropertyIfNotExists(question.marks, { markesId: row.markesId, marks_text: row.marks_text });
-        addPropertyIfNotExists(question.sortid, { sort_id: row.sort_id, sortid_text: row.sortid_text });
-        addPropertyIfNotExists(question.solution, { solution_id: row.solution_id, solutionImgName: row.solutionImgName });
+        addPropertyIfNotExists(question.qtype, { qtypeId: questionData.qtypeId, qtype_text: questionData.qtype_text });
+        addPropertyIfNotExists(question.quesion_type, { quesionTypeId: questionData.quesionTypeId, typeofQuestion: questionData.typeofQuestion });
+        addPropertyIfNotExists(question.answer, { answer_id: questionData.answer_id, answer_text: questionData.answer_text });
+        addPropertyIfNotExists(question.useranswer, { urid: questionData.question_id, ans: questionData.user_answer });
+        addPropertyIfNotExists(question.marks, { markesId: questionData.markesId, marks_text: questionData.marks_text });
+        addPropertyIfNotExists(question.sortid, { sort_id: questionData.sort_id, sortid_text: questionData.sortid_text });
+        addPropertyIfNotExists(question.solution, { solution_id: questionData.solution_id, solutionImgName: questionData.solutionImgName });
 
-        if (row.paragraph_Id && row.paragraphQNo) {
-          addPropertyIfNotExists(question.paragraph, { paragraph_Id: row.paragraph_Id, paragraphImg: row.paragraphImg });
-          addPropertyIfNotExists(question.paragraphqno, { paragraphQNo_Id: row.paragraphQNo_Id, paragraphQNo: row.paragraphQNo });
+        if (questionData.paragraph_Id && questionData.paragraphQNo) {
+          addPropertyIfNotExists(question.paragraph, { paragraph_Id: questionData.paragraph_Id, paragraphImg: questionData.paragraphImg });
+          addPropertyIfNotExists(question.paragraphqno, { paragraphQNo_Id: questionData.paragraphQNo_Id, paragraphQNo: questionData.paragraphQNo });
         }
+      };
+
+      rows.forEach(row => {
+        const categoryId = row.subjectId;
+        const categoryName = row.SubjectName;
+        const sectionId = row.sectionId;
+        const sectionName = row.SectionName;
+
+        addDataToCategory(categoryId, categoryName, sectionId, sectionName, row);
       });
 
       res.json(testData);
@@ -1004,8 +1150,6 @@ router.get("/PG_QuestionOptions/:testCreationTableId/:userId/:Branch_Id", async 
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
-
 
 
 router.get("/questionpaper/:testCreationTableId", async (req, res) => {

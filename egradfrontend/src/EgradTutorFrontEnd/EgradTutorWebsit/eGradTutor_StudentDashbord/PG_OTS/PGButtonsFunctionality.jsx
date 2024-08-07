@@ -1,14 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useNavigate, useParams } from "react-router-dom";
-import "../Style/RightSidebar.css";
+
 // import axios from "axios";
 import BASE_URL from "../../../../apiConfig";
 import { decryptData, encryptData } from "../utils/crypto";
-// import { useTIAuth } from "../../../../TechInfoContext/AuthContext";
 import PGQuestionPaper from "./PGQuestionPaper";
-// This component manages the functionality of buttons in the right sidebar
-const ButtonsFunctionality = ({
+const PGButtonsFunctionality = ({
   activeQuestion,
   onQuestionSelect,
   questionStatus,
@@ -19,7 +17,7 @@ const ButtonsFunctionality = ({
   answeredmarkedForReviewCount,
   markedForReviewCount,
   VisitedCount,
-  questionData,
+  questionOptions,
   updateQuestionStatus,
   onUpdateOption,
   option,
@@ -27,7 +25,7 @@ const ButtonsFunctionality = ({
   // userData,
 }) => {
   const navigate = useNavigate();
-  const { param1, param2 } = useParams();
+  const { param1, param2,Branch_Id } = useParams();
 
   const [decryptedParam1, setDecryptedParam1] = useState("");
   const [decryptedParam2, setDecryptedParam2] = useState("");
@@ -73,7 +71,23 @@ const ButtonsFunctionality = ({
   const [wtimer, setWTimer] = useState(0); // State to manage timer
 
   // Calculate remaining questions based on different counts
-  const questions = questionData.questions ? questionData.questions.length : 0;
+  // const questions = questionOptions.questions ? questionOptions.questions.length : 0;
+  // const questions = questionOptions && questionOptions.length > 0
+  //   ? questionOptions[0].subjects.reduce((total, subject) => {
+  //       return total + subject.sections.reduce((subTotal, section) => {
+  //           return subTotal + (section.questions ? section.questions.length : 0);
+  //       }, 0);
+  //   }, 0)
+  //   : 0;
+  // Extract questions from the nested structure
+  const questions = (questionOptions && questionOptions.subjects)
+  ? questionOptions.subjects.flatMap(subject =>
+      subject.sections.flatMap(section =>
+        section.questions
+      )
+    )
+  : [];
+
   const remainingQuestions =
     questions -
     VisitedCount -
@@ -87,152 +101,123 @@ const ButtonsFunctionality = ({
     console.log("hiiiiiiiiiiiiiiiiiiiiiiiii");
     console.log("Current active question number:", activeQuestion);
   }, [activeQuestion]);
-  // const [activeQuestion, setActiveQuestion] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [isPaused, setIsPaused] = useState(false);
   const [testName, setTestName] = useState("");
-  // const { testCreationTableId } = useParams();
-  // Render buttons based on question status
-  const renderQuestionButtons = Array.isArray(questionData.questions)
-    ? questionData.questions.map((question, index) => {
-        let className = "right_bar_Buttons ";
-        const questionKey = question.id || index;
-        // const questionStatusAtIndex = questionStatus && questionStatus[index];
-        let questionStatusAtIndex;
-        // Set the status of the first button to "notAnswered" by default
-        if (index === 0 && !questionStatus[index]) {
-          questionStatusAtIndex = "notAnswered";
-        } else {
-          questionStatusAtIndex = questionStatus[index];
-        }
-
-        if (questionStatusAtIndex === "answered") {
-          className += " instruction-btn1";
-        } else if (questionStatusAtIndex === "notAnswered") {
-          className += " instruction-btn2";
-        } else if (questionStatusAtIndex === "marked") {
-          className += " instruction-btn3";
-        } else if (questionStatusAtIndex === "Answered but marked for review") {
-          className += " instruction-btn4";
-        } else if (questionStatusAtIndex === "notVisited") {
-          className += " instruction-btn5";
-        }
-
-        // Highlight the current question being displayed
-        if (index === activeQuestion) {
-          className += " active-question";
-        }
-        // Different tooltip text for each button
-        let tooltipText = "";
-        if (questionStatusAtIndex === "answered") {
-          tooltipText = "Answered";
-        } else if (questionStatusAtIndex === "notAnswered") {
-          tooltipText = "Not Answered";
-        } else if (questionStatusAtIndex === "marked") {
-          tooltipText = "Marked for review";
-        } else if (questionStatusAtIndex === "Answered but marked for review") {
-          tooltipText = "Answered but marked for review";
-        } else if (questionStatusAtIndex === "notVisited") {
-          tooltipText = "Not Visited";
-        }
-
-        return (
-          <li key={questionKey}>
-            <button
-              onClick={() => handleButtonClick(index + 1)}
-              className={className}
-              title={tooltipText}
-            >
-              {index + 1}
-            </button>
-          </li>
-        );
-      })
-    : null;
-
-  // Fetch user data
-  // const [userData, setUserData] = useState({});
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const token = localStorage.getItem("token");
-  //       const response = await fetch(
-  //         `${BASE_URL}/ughomepage_banner_login/user`,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`, // Attach token to headers for authentication
-  //           },
-  //         }
-  //       );
-
-  //       if (response.ok) {
-  //         const userData = await response.json();
-  //         setUserData(userData);
-  //         // console.log(userData);
+  // const renderQuestionButtons = Array.isArray(questionOptions.questions)
+  //   ? questionOptions.questions.map((question, index) => {
+  //       let className = "right_bar_Buttons ";
+  //       const questionKey = question.id || index;
+  //       // const questionStatusAtIndex = questionStatus && questionStatus[index];
+  //       let questionStatusAtIndex;
+  //       // Set the status of the first button to "notAnswered" by default
+  //       if (index === 0 && !questionStatus[index]) {
+  //         questionStatusAtIndex = "notAnswered";
   //       } else {
-  //         // Handle errors, e.g., if user data fetch fails
+  //         questionStatusAtIndex = questionStatus[index];
   //       }
-  //     } catch (error) {
-  //       // Handle other errors
-  //     }
-  //   };
 
-  //   fetchUserData();
-  // }, []);
+  //       if (questionStatusAtIndex === "answered") {
+  //         className += " instruction-btn1";
+  //       } else if (questionStatusAtIndex === "notAnswered") {
+  //         className += " instruction-btn2";
+  //       } else if (questionStatusAtIndex === "marked") {
+  //         className += " instruction-btn3";
+  //       } else if (questionStatusAtIndex === "Answered but marked for review") {
+  //         className += " instruction-btn4";
+  //       } else if (questionStatusAtIndex === "notVisited") {
+  //         className += " instruction-btn5";
+  //       }
 
-  // Handle button click for selecting questions
-  // const handleButtonClick = useCallback(
-  //   (questionNumber) => {
-  //     const questionIndex = questionNumber - 1;
+  //       // Highlight the current question being displayed
+  //       if (index === activeQuestion) {
+  //         className += " active-question";
+  //       }
+  //       // Different tooltip text for each button
+  //       let tooltipText = "";
+  //       if (questionStatusAtIndex === "answered") {
+  //         tooltipText = "Answered";
+  //       } else if (questionStatusAtIndex === "notAnswered") {
+  //         tooltipText = "Not Answered";
+  //       } else if (questionStatusAtIndex === "marked") {
+  //         tooltipText = "Marked for review";
+  //       } else if (questionStatusAtIndex === "Answered but marked for review") {
+  //         tooltipText = "Answered but marked for review";
+  //       } else if (questionStatusAtIndex === "notVisited") {
+  //         tooltipText = "Not Visited";
+  //       }
 
-  //     if (
-  //       questionStatus[questionIndex] === "answered" ||
-  //       questionStatus[questionIndex] === "notAnswered" ||
-  //       questionStatus[questionIndex] === "notVisited"
-  //     ) {
-  //       // If the question is answered, not answered, or not visited, update the status
-  //       setQuestionStatus((prevQuestionStatus) => [
-  //         ...prevQuestionStatus.slice(0, questionIndex),
-  //         "notAnswered",
-  //         ...prevQuestionStatus.slice(questionIndex + 1),
-  //       ]);
+  //       return (
+  //         <li key={questionKey}>
+  //           <button
+  //             onClick={() => handleButtonClick(index + 1)}
+  //             className={className}
+  //             title={tooltipText}
+  //           >
+  //             {index + 1}
+  //           </button>
+  //         </li>
+  //       );
+  //     })
+  //   : null;
+  const renderQuestionButtons = Array.isArray(questions)
+  ? questions.map((question, index) => {
+      let className = "right_bar_Buttons ";
+      const questionKey = question.question_id || index;
+      let questionStatusAtIndex;
+      
+      // Set the status of the first button to "notAnswered" by default
+      if (index === 0 && !questionStatus[index]) {
+        questionStatusAtIndex = "notAnswered";
+      } else {
+        questionStatusAtIndex = questionStatus[index];
+      }
 
-  //       // Update other necessary state or perform additional logic
-  //       onQuestionSelect(questionNumber, "notAnswered");
-  //       setAnsweredQuestions((prevAnsweredQuestions) => [
-  //         ...prevAnsweredQuestions,
-  //         questionNumber,
-  //       ]);
-  //       setIsPaused(false);
-  //     } else {
-  //       // If the button was clicked, mark it as answered
-  //       setQuestionStatus((prevQuestionStatus) => [
-  //         ...prevQuestionStatus.slice(0, questionIndex),
-  //         "answered",
-  //         ...prevQuestionStatus.slice(questionIndex + 1),
-  //       ]);
+      if (questionStatusAtIndex === "answered") {
+        className += " instruction-btn1";
+      } else if (questionStatusAtIndex === "notAnswered") {
+        className += " instruction-btn2";
+      } else if (questionStatusAtIndex === "marked") {
+        className += " instruction-btn3";
+      } else if (questionStatusAtIndex === "Answered but marked for review") {
+        className += " instruction-btn4";
+      } else if (questionStatusAtIndex === "notVisited") {
+        className += " instruction-btn5";
+      }
 
-  //       // Update other necessary state or perform additional logic
-  //       onQuestionSelect(questionNumber);
-  //       setAnsweredQuestions((prevAnsweredQuestions) => [
-  //         ...prevAnsweredQuestions,
-  //         questionNumber,
-  //       ]);
-  //       setIsPaused(false);
-  //     }
+      // Highlight the current question being displayed
+      if (index === activeQuestion) {
+        className += " active-question";
+      }
+      
+      // Different tooltip text for each button
+      let tooltipText = "";
+      if (questionStatusAtIndex === "answered") {
+        tooltipText = "Answered";
+      } else if (questionStatusAtIndex === "notAnswered") {
+        tooltipText = "Not Answered";
+      } else if (questionStatusAtIndex === "marked") {
+        tooltipText = "Marked for review";
+      } else if (questionStatusAtIndex === "Answered but marked for review") {
+        tooltipText = "Answered but marked for review";
+      } else if (questionStatusAtIndex === "notVisited") {
+        tooltipText = "Not Visited";
+      }
 
-  //     // Update the question status in the QuestionPaper component
-  //     updateQuestionStatus(questionStatus[questionIndex]);
-  //   },
-  //   [
-  //     questionStatus,
-  //     setQuestionStatus,
-  //     onQuestionSelect,
-  //     answeredQuestions,
-  //     updateQuestionStatus
-  //   ]
-  // );
-  const [questionData1, setQuestionData1] = useState({ questions: [] });
+      return (
+        <li key={questionKey}>
+          <button
+            onClick={() => handleButtonClick(index + 1)}
+            className={className}
+            title={tooltipText}
+          >
+            {index + 1}
+          </button>
+        </li>
+      );
+    })
+  : null;
+  const [ setQuestionOptions] = useState({ questions: [] });
   useEffect(() => {
     // Check if testCreationTableId is defined before making the request
     if (decryptedParam1) {
@@ -243,7 +228,7 @@ const ButtonsFunctionality = ({
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `${BASE_URL}/QuizPage/PG_QuestionOptions/${decryptedParam1}/${decryptedParam2}`
+        `${BASE_URL}/QuizPage/PG_QuestionOptions/${decryptedParam1}/${decryptedParam2}/${Branch_Id}`
       );
 
       if (!response.ok) {
@@ -251,7 +236,7 @@ const ButtonsFunctionality = ({
       }
 
       const data = await response.json();
-      setQuestionData1(data);
+       setQuestionOptions(data);;
     } catch (error) {
       console.error("Error fetching question data:", error);
     }
@@ -263,7 +248,7 @@ const ButtonsFunctionality = ({
   const fetchTestName = async () => {
     try {
       const response = await fetch(
-        `${BASE_URL}/QuizPage/PG_QuestionOptions/${decryptedParam1}/${decryptedParam2}`
+        `${BASE_URL}/QuizPage/PG_QuestionOptions/${decryptedParam1}/${decryptedParam2}/${Branch_Id}`
       );
       const data = await response.json();
       const testName = data.questions[0].TestName;
@@ -340,7 +325,7 @@ const ButtonsFunctionality = ({
   );
 
   // Proptypes for button functionality component
-  ButtonsFunctionality.propTypes = {
+  PGButtonsFunctionality.propTypes = {
     onQuestionSelect: PropTypes.func.isRequired,
     questionStatus: PropTypes.arrayOf(PropTypes.string),
     seconds: PropTypes.number, // Add the appropriate prop type
@@ -385,28 +370,8 @@ const ButtonsFunctionality = ({
     };
   }, [wtimer]);
 
-  // Fetch test name based on testCreationTableId
 
-  // const [tiAuth] = useTIAuth();
-  // const { userData2 } = tiAuth;
-  // const [userNameFromContext,setUserNameFromContext]=useState("")
-
-  // useEffect for getting the role
-  // useEffect for getting the role
-  // useEffect(() => {
-  //   if (!userData2 || !userData2.users || userData2.users.length === 0) {
-  //     return;
-  //   }
-
-  //   const userName = userData2.users[0].username;
-  //   setUserNameFromContext(userName);
-  // }, [userData2]);
-
-  // if (!userData2) {
-  //   return <div>Loading...</div>;
-  // }
   console.log("helloooooooooooooooooooHELLOOOOOOOOOOOOO");
-  // console.log(userData)
   console.log(decryptedParam2);
 
   const [showPopup, setShowPopup] = useState(false);
@@ -422,70 +387,47 @@ const ButtonsFunctionality = ({
     return <div>Error: Users data is not available</div>;
   }
 
-  const uniqueSections = [
-    ...new Set(questionData.questions.map((question) => question.sectionName)),
-  ];
 
   return (
     <>
-      <div className="right-side-bar">
-      <div className="sidebar-footer">
-          <div className="footer-btns">
-            <div className="inst-btns">
+      <div>
+        <div>
+          <div>
+            <div>
               {" "}
-              <button
-                className="instruction-btn5 r_S_B_BTNS"
-                title="VisitedCount"
-              >
-                {NotVisited}
-              </button>
+              <button title="VisitedCount">{NotVisited}</button>
               <span>Not Visited</span>
             </div>
-            <div className="inst-btns">
-              <p className="instruction-btn1 r_S_B_BTNS" title="answeredCount">
-                {answeredCount}
-              </p>
+            <div>
+              <p title="answeredCount">{answeredCount}</p>
               <span>Answered</span>
             </div>
-            <div className="inst-btns">
-              <p
-                className="instruction-btn2 r_S_B_BTNS"
-                title="notAnsweredCount"
-              >
-                {notAnsweredCount}
-              </p>
+            <div>
+              <p title="notAnsweredCount">{notAnsweredCount}</p>
               <span>Not Answered</span>
             </div>
-            <div className="inst-btns">
-              <p
-                className="instruction-btn3 r_S_B_BTNS"
-                title="answeredmarkedForReviewCount"
-              >
+            <div>
+              <p title="answeredmarkedForReviewCount">
                 {answeredmarkedForReviewCount}
               </p>
               <span>Marked for Review</span>
             </div>
-            <div className="inst-btns">
-              <p
-                className="instruction-btn4 r_S_B_BTNS"
-                title="markedForReviewCount"
-              >
-                {markedForReviewCount}
-              </p>
+            <div>
+              <p title="markedForReviewCount">{markedForReviewCount}</p>
               <span>
                 Answered & Marked for Review (will be considered for evaluation)
               </span>
             </div>{" "}
           </div>
         </div>
-<div>
-{uniqueSections.map((sectionName, index) => (
-                        <p key={index}>{sectionName}</p>
-                      ))}
-</div>
-        <div className="buttons_container">
-          <div className="ques-btn">
-            <ul className="btn-ul quesAns-btn">{renderQuestionButtons}</ul>
+        <div>
+          {/* {uniqueSections.map((sectionName, index) => (
+            <p key={index}>{sectionName}</p>
+          ))} */}
+        </div>
+        <div>
+          <div>
+            <ul>{renderQuestionButtons}</ul>
           </div>
         </div>
       </div>
@@ -493,4 +435,4 @@ const ButtonsFunctionality = ({
   );
 };
 
-export default ButtonsFunctionality;
+export default PGButtonsFunctionality;
