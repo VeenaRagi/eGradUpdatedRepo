@@ -12,7 +12,7 @@ import BASE_URL from "../../../../apiConfig";
 import { decryptData, encryptData } from "../utils/crypto";
 import "../Style/Watermark.css";
 import { useLocation } from "react-router-dom";
-import QuestionPaper from "./QuestionPaper";
+import QuestionPaper from "./PGQuestionPaper";
 import PG_PopUpInstructionsView from "./PG_PopUpInstructionsView";
 import ScientificCalculator from "./ScientificCalculator";
 

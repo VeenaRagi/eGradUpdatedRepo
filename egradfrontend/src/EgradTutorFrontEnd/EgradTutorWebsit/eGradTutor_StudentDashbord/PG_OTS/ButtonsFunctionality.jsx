@@ -6,7 +6,7 @@ import "../Style/RightSidebar.css";
 import BASE_URL from "../../../../apiConfig";
 import { decryptData, encryptData } from "../utils/crypto";
 // import { useTIAuth } from "../../../../TechInfoContext/AuthContext";
-import QuestionPaper from "./QuestionPaper";
+import PGQuestionPaper from "./PGQuestionPaper";
 // This component manages the functionality of buttons in the right sidebar
 const ButtonsFunctionality = ({
   activeQuestion,

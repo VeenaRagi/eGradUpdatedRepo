@@ -302,15 +302,125 @@
 
 // export default InstructionPage;
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import BASE_URL from "../../../apiConfig";
+import { decryptData, encryptData } from "./utils/crypto";
 import "./Style/PG_Instructions_Page.css";
 import grayBox from "./asserts/grayBox.png"
 import greenBox from "./asserts/greenBox.png"
 import orangeBox from "./asserts/orangeBox.png"
 import purpleBox from "./asserts/purpleBox.png"
 import purpleTickBox from "./asserts/purpleTickBox.png"
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 const PG_Instructions_Page = () => {
+
+  const { param1, param2, param3,param4 } = useParams();
+  const navigate = useNavigate();
+  const [decryptedParam1, setDecryptedParam1] = useState("");
+  const [decryptedParam2, setDecryptedParam2] = useState("");
+  const [decryptedParam3, setDecryptedParam3] = useState("");
+  const [decryptedParam4, setDecryptedParam4] = useState("");
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    const token = sessionStorage.getItem("navigationToken");
+
+    if (!token) {
+      navigate("/Error");
+      return;
+    }
+
+    const decryptParams = async () => {
+      try {
+        const decrypted1 = await decryptData(param1);
+        const decrypted2 = await decryptData(param2);
+        const decrypted3 = await decryptData(param3);
+        const decrypted4 = await decryptData(param4);
+
+        if (
+          !decrypted1 ||
+          !decrypted2 ||
+          !decrypted3 ||
+          !decrypted4 ||
+          isNaN(parseInt(decrypted1)) ||
+          isNaN(parseInt(decrypted2)) ||
+          isNaN(parseInt(decrypted3)) ||
+          isNaN(parseInt(decrypted4))
+        ) {
+          navigate("/Error");
+          return;
+        }
+
+        setDecryptedParam1(decrypted1);
+        setDecryptedParam2(decrypted2);
+        setDecryptedParam3(decrypted3);
+        setDecryptedParam4(decrypted4);
+      } catch (error) {
+        console.error("Error decrypting data:", error);
+        navigate("/Error");
+      }
+    };
+
+    decryptParams();
+  }, [param1, param2, param3,param4, navigate]);
+
+  const { user_Id } = useParams();
+
+
+  const handleEndTheTest = async (userId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5001/QuizPage/clearresponseforPB/${userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer yourAccessToken",
+          },
+          body: JSON.stringify({ userId }),
+        }
+      );
+
+      if (!response.ok) {
+        console.error("Failed to delete user data");
+      } else {
+        console.log("User data deleted successfully");
+      }
+    } catch (error) {
+      console.error("Error deleting user data:", error);
+    }
+  };
+
+  const openGenInstPopup = async (
+    decryptedParam1,
+    decryptedParam2,
+    decryptedParam3,
+    decryptedParam4
+  ) => {
+    try {
+      const encryptedParam1 = await encryptData(decryptedParam1.toString());
+      const encryptedParam2 = await encryptData(decryptedParam2.toString());
+      const encryptedParam3 = await encryptData(decryptedParam3.toString());
+      const encryptedParam4 = await encryptData(decryptedParam4.toString());
+
+      const token = new Date().getTime().toString();
+      sessionStorage.setItem("navigationToken", token);
+
+      const url = `/General_intructions_page/${encodeURIComponent(
+        encryptedParam1
+      )}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(
+        encryptedParam3
+      )}/${encodeURIComponent(
+        encryptedParam4
+      )}`;
+
+      navigate(url,{ state: { userData } });
+    } catch (error) {
+      console.error("Error encrypting data:", error);
+    }
+  };
+
   return (
     <div>
       <div className="pg_Instructionspage">
@@ -444,7 +554,24 @@ const PG_Instructions_Page = () => {
           </li>
           <li>14.To zoom the image provided in the question roll over it.</li>
         </ul>
+        
       </div>
+      <div className="intro_next_btn_container">
+          <button
+            onClick={() => {
+              handleEndTheTest(user_Id);
+              openGenInstPopup(
+                decryptedParam1,
+                decryptedParam2,
+                decryptedParam3,
+                decryptedParam4
+              );
+            }}
+            className="intro_next_btn"
+          >
+            NEXT <AiOutlineArrowRight />
+          </button>
+        </div>
     </div>
   );
 };

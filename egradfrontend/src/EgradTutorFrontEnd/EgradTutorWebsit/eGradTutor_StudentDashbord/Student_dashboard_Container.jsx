@@ -12,7 +12,7 @@ import StudentDashbord_Bookmarks from "./StudentDashbord_Bookmarks";
 import StudentDashbord_Settings from "./StudentDashbord_Settings";
 import StudentDashboardHeader from "./StudentDashboardHeader";
 
-const Student_dashboard_Container = ({ usersData, decryptedUserIdState }) => {
+const Student_dashboard_Container = ({ usersData, decryptedUserIdState,Branch_Id }) => {
   const [activeComponent, setActiveComponent] = useState("home");
 
   const handleMenuClick = (component) => {
@@ -95,10 +95,10 @@ const Student_dashboard_Container = ({ usersData, decryptedUserIdState }) => {
             <Student_dashboard_Home usersData={usersData} decryptedUserIdState={decryptedUserIdState}/>
           )}
           {activeComponent === "myCourses" && (
-            <StudentDashbord_MyCourses usersData={usersData} decryptedUserIdState={decryptedUserIdState} />
+            <StudentDashbord_MyCourses usersData={usersData} decryptedUserIdState={decryptedUserIdState} Branch_Id={Branch_Id}/>
           )}
           {activeComponent === "buyCourses" && (
-            <StudentDashbord_BuyCourses usersData={usersData} decryptedUserIdState={decryptedUserIdState}/>
+            <StudentDashbord_BuyCourses usersData={usersData} decryptedUserIdState={decryptedUserIdState} Branch_Id={Branch_Id}/>
           )}
           {activeComponent === "myResults" && (
             <StudentDashbord_MyResults usersData={usersData} decryptedUserIdState={decryptedUserIdState}/>
