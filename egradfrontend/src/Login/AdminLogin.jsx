@@ -11,7 +11,7 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5001/Login/login', { email, password });
+      const response = await axios.post('http://localhost:5001/Login/adminlogin', { email, password });
       console.log("Response Data:", response.data);
       // const { accessToken, role } = response.data;
       const { user_Id, role, accessToken,decryptedId } = response.data;
