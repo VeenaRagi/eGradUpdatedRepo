@@ -242,9 +242,13 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
                   path="/UGQuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<UGQuestionPaper />} />}
                 />
-                 <Route
+                 {/* <Route
                   path="/PGQuizPage/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<PGQuizPage seconds={20} />} />}
+                /> */}
+                 <Route
+                  path="/PGQuizPage"
+              element={<PGQuizPage seconds={20} />}
                 />
                 <Route
                   path="/PGQuestionBankQuiz/questionOptions/:param1/:param2"
