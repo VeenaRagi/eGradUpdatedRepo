@@ -155,6 +155,30 @@ router.get('/fetchStudentDetailsForEdit/:regIdOfUser',async(req,res)=>{
   
 
 })
+
+
+router.get('/fetchStudentDetailstest/:user_Id',async(req,res)=>{
+  const user_Id = req.params.user_Id;
+  console.log(user_Id,"reg id of user")
+  const sql=`SELECT
+    osr.candidateName,
+    osr.UplodadPhto,
+    l.user_Id
+FROM
+    LOG AS l
+LEFT JOIN otsstudentregistation AS osr
+ON
+    osr.studentregistationId = l.studentregistationId
+WHERE
+    l.user_Id = ?`
+  try {
+    const[rows]=await db.query(sql,[user_Id]);
+    console.log(rows);
+    res.send(rows)
+  } catch (error) {
+    console.log(error,"Error happened while getting student details")
+  }
+})
 // ----------------------------------------------------------------------
 router.post('/studentNameNumberUpdate/:regIdOfUser',async(req,res)=>{
   const {regIdOfUser}=req.params;

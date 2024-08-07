@@ -283,6 +283,10 @@ const navigateToAdmin=()=>{
                     <PrivateRoute element={<PGQuizPage seconds={20} />} />
                   }
                 />
+                 {/* <Route
+                  path="/PGQuizPage"
+              element={<PGQuizPage seconds={20} />}
+                /> */}
                 <Route
                   path="/PGQuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<PGQuestionPaper />} />}
