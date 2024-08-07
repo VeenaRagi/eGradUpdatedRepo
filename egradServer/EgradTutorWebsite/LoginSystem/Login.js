@@ -8,11 +8,11 @@ const CryptoJS = require('crypto-js');
 const cors=require('cors');
 const { encryptData, decryptData } = require("../../CryptoUtils/Utils");
 router.use(cors());
-router.use(cors({
-  origin: 'http://localhost:3000', // Update to your client URL
-  methods: 'GET,POST,PUT,DELETE,OPTIONS',
-  allowedHeaders: 'Content-Type,Authorization'
-}));
+// router.use(cors({
+//   origin: 'http://localhost:3000', // Update to your client URL
+//   methods: 'GET,POST,PUT,DELETE,OPTIONS',
+//   allowedHeaders: 'Content-Type,Authorization'
+// }));y
 const secretKey=process.env.LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
 router.use(express.json());
 router.options('*', cors()); // Enable preflight requests
