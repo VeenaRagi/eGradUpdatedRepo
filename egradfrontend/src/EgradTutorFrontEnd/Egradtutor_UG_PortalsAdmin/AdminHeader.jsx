@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 // import axios from '../../api/axios';
 import BASE_URL from '../../apiConfig';
@@ -18,6 +18,7 @@ const AdminHeader = ({ userRole }) => {
 const navigate=useNavigate();
   const themeColor = themeFromContext[0]?.current_theme;
   console.log(themeColor, "this is the theme json classesssssss")
+  const adminHeaderNavRef=useRef(null);
   const themeDetails = JSONClasses[themeColor] || []
   console.log(themeDetails, "mapppping from json....")
   useEffect(() => {
@@ -54,48 +55,90 @@ const handleLogOut=()=>{
   localStorage.removeItem("tiAuth")
   navigate("/adminLogin")
 }
-  return (
-    <div>
-      <div className={`adminHeaderParentContainer _dFlex`}>
-        <div className={`adminHeaderSubContainer _dFlex _fBetween`}>
-          {/* <div></div> */}
-          <div className='adminHeaderLogoImgContainer'>
-            {image ? (
-              <Link to="/">
-                <img
-                  src={image}
-                  className={``}
-                  alt="Current"
-                />
-              </Link>
-            ) : userRole === 'user' ? (
-              <p>Unable to load image at the moment. Please try again later.</p>
-            ) : userRole === 'admin' ? (
-              <p>No image available. Please upload an image.</p>
-            ) : (
-              <p>No image available. Please contact support if this issue persists.</p>
-            )}</div>
-          <div className={` _fBetween adminHeaderNavLinks ${showLinks? "menu-link mobileMenuLink " : "menu-link "}`}>
-            <Link to='/WebsiteAdmin'>Website Admin</Link>
-            <Link to='/CourseAdmin'>Course Admin</Link>
-            <Link to='/adminProfile'>Profile</Link>
-            <Link to={`/`}><IoHome />Home</Link>
-            <button onClick={handleLogOut}> LogOut</button>
-          </div>
-          <div
-              className="hamburgerMenu adminHeaderhamburgerMenu"
-              onClick={() => {
-                setShowLinks(!showLinks);
-                console.log(showLinks, "this is from onclick of hMenu");
-              }}
-            >
-              {" "}
-              <RxHamburgerMenu />
-            </div>
+const showAdminNavBar=()=>{
+  adminHeaderNavRef.current.classList.toggle("navHeaderAdmin");
 
+}
+  return (
+    // <div>
+    //   <div className={`adminHeaderParentContainer _dFlex`} ref={adminHeaderNavRef}>
+    //     <div className={`adminHeaderSubContainer _dFlex _fBetween`}>
+    //       {/* <div></div> */}
+    //       <div className='adminHeaderLogoImgContainer'>
+    //         {image ? (
+    //           <Link to="/">
+    //             <img
+    //               src={image}
+    //               className={``}
+    //               alt="Current"
+    //             />
+    //           </Link>
+    //         ) : userRole === 'user' ? (
+    //           <p>Unable to load image at the moment. Please try again later.</p>
+    //         ) : userRole === 'admin' ? (
+    //           <p>No image available. Please upload an image.</p>
+    //         ) : (
+    //           <p>No image available. Please contact support if this issue persists.</p>
+    //         )}</div>
+    //       <div className={` _fBetween adminHeaderNavLinks ${showLinks? "menu-link mobileMenuLink " : "menu-link "}`}>
+    //         <Link to='/WebsiteAdmin'>Website Admin</Link>
+    //         <Link to='/CourseAdmin'>Course Admin</Link>
+    //         <Link to='/adminProfile'>Profile</Link>
+    //         <Link to={`/`}><IoHome />Home</Link>
+    //         <button onClick={handleLogOut}> LogOut</button>
+    //       </div>
+    //       <button 
+    //           className="adminHeaderNavBtn  adminHeaderhamburgerMenu"
+    //           // onClick={() => {
+    //           //   setShowLinks(!showLinks);
+    //           //   console.log(showLinks, "this is from onclick of hMenu");
+    //           // }}
+    //           onClick={showAdminNavBar}
+    //         >
+    //           {" "}
+    //           <RxHamburgerMenu />
+    //         </button>
+
+    //     </div>
+    //   </div>
+    // </div>
+    <div className='adminWithW80 _fBetween'>
+    <div className={`adminHeaderPC _dFlex`} >
+      <div className={`adminHeaderSC _dFlex _fBetween`}>
+        <div className='adminHeaderLogoImgContainer'>
+          {image ? (
+            <Link to="/">
+              <img
+                src={image}
+                className={``}
+                alt="Current"
+              />
+            </Link>
+          ) : userRole === 'user' ? (
+            <p>Unable to load image at the moment. Please try again later.</p>
+          ) : userRole === 'admin' ? (
+            <p>No image available. Please upload an image.</p>
+          ) : (
+            <p>No image available. Please contact support if this issue persists.</p>
+          )}</div>
+        <div  ref={adminHeaderNavRef} className='adminHeaderNavToToggle'>
+          <Link to='/WebsiteAdmin'>Website Admin</Link>
+          <Link to='/CourseAdmin'>Course Admin</Link>
+          <Link to='/adminProfile'>Profile</Link>
+          <Link to={`/`} className='homeWithIconAH'><IoHome />Home</Link>
+          <button onClick={handleLogOut} className='logOutButton'> LogOut</button>
         </div>
+        <button 
+            className="adminHeaderNavRefBtn  adminHeaderNavRefBtnClose"
+            onClick={showAdminNavBar}
+          >
+            {" "}
+            <RxHamburgerMenu />
+          </button>
+
       </div>
     </div>
+  </div>
   )
 }
 

@@ -8,7 +8,9 @@
   display: none;
 }
 
-
+.ul-pd-0{
+  padding-left:0;
+}
 
 .table {
   text-align: center;

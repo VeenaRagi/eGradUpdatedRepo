@@ -196,7 +196,7 @@ function OvlvidesUpload() {
 
       
       <div
-        className="uploadedDocumentFilds examSubjects_-contant ovl_Container overFlowX"
+        className="uploadedDocumentFilds grid-one-fr examSubjects_-contant ovl_Container overFlowX"
         style={{ marginTop: "1rem" }} 
       >
         <label>Select a course:</label>

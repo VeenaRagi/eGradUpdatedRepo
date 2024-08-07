@@ -1055,6 +1055,7 @@ fieldset > legend {
     flex-direction: row;
     padding: 20px;
     margin-top: 100px;
+    flex-wrap: wrap;
   }
   .create_exam_container .overlay{
     overflow: scroll;

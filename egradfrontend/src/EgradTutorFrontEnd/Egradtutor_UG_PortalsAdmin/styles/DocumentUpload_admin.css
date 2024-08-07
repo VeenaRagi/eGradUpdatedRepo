@@ -109,3 +109,9 @@
   }
 
 }
+@media (max-width:425px) {
+  .uploadedDocumentFilds.grid-one-fr{
+    grid-template-columns: 1fr  ;
+    /* justify-items: center; */
+  }
+}

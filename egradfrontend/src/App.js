@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route,  Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import WebSiteLandingPage from "./EgradTutorFrontEnd/EgradTutorWebsit/WebsiteLandingPage/WebSiteLandingPage";
 import BranchHomePage from "./EgradTutorFrontEnd/EgradTutorWebsit/BranchHomePage/BranchHomePage";
 import ExamHomePage from "./EgradTutorFrontEnd/EgradTutorWebsit/ExamHomePage/ExamHomePage";
@@ -50,10 +57,22 @@ import ScientificCalculator from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTut
 import PG_Instructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/eGradTutor_StudentDashbord/PG_Instructions_Page.jsx";
 import { TIAuthProvider } from "./TechInfoContext/AuthContext.js";
 
-function App({ decryptedUserIdState, usersData,Branch_Id }) {
+const App = () => {
+  return (
+    <ThemeProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </ThemeProvider>
+  );
+};
+function AppContent({ decryptedUserIdState, usersData, Branch_Id }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-
+  const navigate=useNavigate()
+  const location=useLocation();
+  const showAdminPageButton=location.pathname==='/';
+  const showButtonForAdmin = isAdmin && location.pathname !== '/AdminPage';
   useEffect(() => {
     const checkLoggedIn = () => {
       const isLoggedInObjFromLS = localStorage.getItem("tiAuth");
@@ -101,7 +120,7 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
 
   const PrivateRoute = ({ element }) => {
     const isLoggedInObjFromLS = localStorage.getItem("tiAuth");
-  
+
     if (isLoggedInObjFromLS) {
       try {
         const tiAuth = JSON.parse(isLoggedInObjFromLS);
@@ -114,22 +133,29 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
     }
     return <Navigate to="/userlogin" />;
   };
-  
-
-
+const navigateToAdmin=()=>{
+  navigate('/AdminPage')
+}
   return (
     <ThemeProvider>
       <div>
-        {isAdmin && (
+        {showButtonForAdmin && (
           <button onClick={toggleEditMode}>
             {isEditMode ? "Disable Edit" : "Enable Edit"}
           </button>
         )}
-
+        {showButtonForAdmin && (
+          <button 
+          onClick={navigateToAdmin} 
+          style={{marginLeft:"20px"}}>
+            {/* {isEditMode ? "Disable Edit" : "Enable Edit"} */}
+            Back To Admin Page 
+          </button>
+        )}
         {serverError ? (
           <NotFound />
         ) : (
-          <Router>
+          // <Router>
             <UserProvider>
               <Routes>
                 <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
@@ -152,7 +178,12 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
 
                 <Route
                   path="/"
-                  element={<WebSiteLandingPage isEditMode={isEditMode} Branch_Id={Branch_Id}/>}
+                  element={
+                    <WebSiteLandingPage
+                      isEditMode={isEditMode}
+                      Branch_Id={Branch_Id}
+                    />
+                  }
                 />
                 <Route
                   path="/BranchHomePage/:Branch_Id"
@@ -232,19 +263,25 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
 
                 <Route
                   path="/General_intructions_page/:param1/:param2/:param3/:param4"
-                  element={<PrivateRoute element={<General_Intructions_Page />} />}
+                  element={
+                    <PrivateRoute element={<General_Intructions_Page />} />
+                  }
                 />
                 <Route
                   path="/UGQuizPage/questionOptions/:param1/:param2"
-                  element={<PrivateRoute element={<UGQuizPage seconds={20} />} />}
+                  element={
+                    <PrivateRoute element={<UGQuizPage seconds={20} />} />
+                  }
                 />
                 <Route
                   path="/UGQuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<UGQuestionPaper />} />}
                 />
-                 <Route
+                <Route
                   path="/PGQuizPage/questionOptions/:param1/:param2"
-                  element={<PrivateRoute element={<PGQuizPage seconds={20} />} />}
+                  element={
+                    <PrivateRoute element={<PGQuizPage seconds={20} />} />
+                  }
                 />
                 <Route
                   path="/PGQuestionBankQuiz/questionOptions/:param1/:param2"
@@ -271,15 +308,18 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
                   path="/UGQuestionPaper/:param1"
                   element={<UGQuestionPaper />}
                 />
-                     <Route
+                <Route
                   path="/PGQuestionPaper/:param1"
                   element={<PGQuestionPaper />}
                 />
- <Route
-                   path="/Instructions"
+                <Route
+                  path="/Instructions"
                   element={<PG_PopUpInstructionsView />}
                 />
-                <Route path="/Error" element={<PrivateRoute element={<NotFound/>} />}/>
+                <Route
+                  path="/Error"
+                  element={<PrivateRoute element={<NotFound />} />}
+                />
                 <Route path="/WebsiteAdmin" element={<ThemesSection />} />
                 <Route
                   path="/CourseAdmin"
@@ -287,12 +327,18 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
                 />
                 <Route path="/adminProfile" element={<AdminProfile />} />
 
-                <Route path="/ScientificCalculator" element={<ScientificCalculator/>}/>
+                <Route
+                  path="/ScientificCalculator"
+                  element={<ScientificCalculator />}
+                />
 
-                <Route path="/PG_Instructions_Page/:param1/:param2/:param3/:param4" element={< PG_Instructions_Page  />} />
+                <Route
+                  path="/PG_Instructions_Page/:param1/:param2/:param3/:param4"
+                  element={<PG_Instructions_Page />}
+                />
               </Routes>
             </UserProvider>
-          </Router>
+          // </Router>
         )}
       </div>
     </ThemeProvider>
