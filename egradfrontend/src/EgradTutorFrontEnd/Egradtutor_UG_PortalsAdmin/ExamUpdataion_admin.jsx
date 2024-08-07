@@ -235,9 +235,6 @@
 
 
 
-
-
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
@@ -257,125 +254,71 @@ const ExamUpdataion_admin = () => {
   const [subjects, setSubjects] = useState([]);
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [selectedBranch, setSelectedBranch] = useState("");
-  const [initialExamDetails, setInitialExamDetails] = useState({});
-  const [examFromBackend, setExamFromBackend] = useState("")
-  const [branchFB, setBranchFB] = useState("")
 
   // Fetch branches and exams
   useEffect(() => {
-    const fetchBranches = async () => {
+    const fetchBranchesAndExams = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/ExamCreation/branches`);
-        setBranches(response.data);
+        // Fetch branches
+        const branchResponse = await axios.get(`${BASE_URL}/ExamCreation/branches`);
+        setBranches(branchResponse.data);
+
+        if (selectedBranch) {
+          // Fetch exams based on selected branch
+          const examResponse = await axios.get(`${BASE_URL}/ExamCreation/branchesexams`, { params: { Branch_Id: selectedBranch } });
+          setExams(examResponse.data);
+        }
       } catch (error) {
-        console.error("Error fetching branches:", error);
+        console.error("Error fetching branches or exams:", error);
       }
     };
 
-    fetchBranches();
-  }, []);
-
-  useEffect(() => {
-    if (selectedBranch) {
-      const fetchExams = async () => {
-        try {
-          const response = await axios.get(
-            `${BASE_URL}/ExamCreation/branchesexams`,
-            { params: { Branch_Id: branchFB } }
-          );
-          setExams(response.data);
-        } catch (error) {
-          console.error("Error fetching exams:", error);
-        }
-      };
-
-      fetchExams();
-    }
+    fetchBranchesAndExams();
   }, [selectedBranch]);
 
-
-
-
-
+  // Fetch subjects
   useEffect(() => {
-    if (examId) {
-      const fetchExams = async () => {
-        try {
-          const response = await axios.get(
-            `${BASE_URL}/ExamCreation/feachingexams/${examId}`
-          );
-          const fetchedExams = response.data;
-          setExams(fetchedExams);
-
-          if (!selectedExam && fetchedExams.length > 0) {
-            setSelectedExam(fetchedExams[0].examId);
-          }
-        } catch (error) {
-          console.error("Error fetching exams:", error);
-        }
-      };
-
-      fetchExams();
-    }
-  }, [examId, selectedExam]);
-
-
-  useEffect(() => {
-    // Fetch subjects from the API
-    fetch(`${BASE_URL}/ExamCreation/subjectS`)
-      .then((response) => response.json())
-      .then((data) => setSubjects(data))
-      .catch((error) => console.error("Error fetching subjects:", error));
-  }, []);
-
-  
-
-  useEffect(() => {
-    const fetchData = async () => {
+    const fetchSubjects = async () => {
       try {
-        const examResponse = await axios.get(
-          `${BASE_URL}/ExamCreation/feachingexams/${examId}`
-        );
-        const selectedSubjectsResponse = await axios.get(
-          `${BASE_URL}/ExamCreation/exams/${examId}/subjects`
-        );
-
-        const examData = examResponse.data[0];
-        const selectedSubjectsData = selectedSubjectsResponse.data;
-        setSelectedBranch(examData.Branch_Id);
-        console.log(selectedBranch, "sssssssssssss")
-
-        setSelectedExam(examData.coursesPortalExamsId);
-        // asdf
-        console.log(selectedExam, "uuuuuuuuuuuuuuuuuuuuuuuuuuu")
-        // setExamName(examData.examName);
-        setExamFromBackend(examData.Branch_Id);
-        setBranchFB(examData.Branch_Id)
-
-        setSelectedExam(examData.coursesPortalExamsId)
-        console.log(selectedExam, "7777777777777777")
-        setStartDate(examData.startDate);
-
-        setEndDate(examData.endDate);
-        setSelectedSubjects(selectedSubjectsData);
-        setInitialExamDetails({
-          examName: examData.coursesPortalExamname,
-          startDate: examData.startDate,
-          endDate: examData.endDate,
-          subjects: selectedSubjectsData,
-        });
+        const response = await axios.get(`${BASE_URL}/ExamCreation/subjectS`);
+        setSubjects(response.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching subjects:", error);
       }
     };
 
-    fetchData();
+    fetchSubjects();
+  }, []);
+
+  // Fetch exam details and set initial values
+  useEffect(() => {
+    const fetchExamDetails = async () => {
+      try {
+        const examResponse = await axios.get(`${BASE_URL}/ExamCreation/feachingexams/${examId}`);
+        const examData = examResponse.data[0];
+
+        if (examData) {
+          setSelectedBranch(examData.Branch_Id);
+          setSelectedExam(examData.coursesPortalExamsId);
+          setExamName(examData.coursesPortalExamname);
+          setStartDate(examData.startDate);
+          setEndDate(examData.endDate);
+
+          // Fetch selected subjects for this exam
+          const subjectsResponse = await axios.get(`${BASE_URL}/ExamCreation/exams/${examId}/subjects`);
+          setSelectedSubjects(subjectsResponse.data);
+        }
+      } catch (error) {
+        console.error("Error fetching exam details:", error);
+      }
+    };
+
+    fetchExamDetails();
   }, [examId]);
 
   const handleSubjectChange = (subjectId) => {
     setSelectedSubjects((prevSelectedSubjects) => {
       const newSelectedSubjects = new Set(prevSelectedSubjects);
-
       if (newSelectedSubjects.has(subjectId)) {
         newSelectedSubjects.delete(subjectId);
       } else {
@@ -385,11 +328,8 @@ const ExamUpdataion_admin = () => {
     });
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Prepare the data to send
     const updatedExamData = {
       examId,
       examName,
@@ -399,11 +339,8 @@ const ExamUpdataion_admin = () => {
       selectedSubjects,
     };
 
-    axios
-      .put(`${BASE_URL}/api/exams/update`, updatedExamData)
-      .then((response) => {
-        // Handle success, e.g., show a success message to the user
-        console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm')
+    axios.put(`${BASE_URL}/api/exams/update`, updatedExamData)
+      .then(() => {
         navigate("/UgadminHome");
       })
       .catch((error) => {
@@ -412,46 +349,31 @@ const ExamUpdataion_admin = () => {
       });
   };
 
-
   const handleBranchChange = (event) => {
     setSelectedBranch(event.target.value);
     setSelectedExam("");
-    setExams([]);
   };
 
   const handleExamChange = (event) => {
     setSelectedExam(event.target.value);
-    console.log()
   };
-
-
 
   return (
     <>
       <AdminHeader />
       <div className="examUpdate_-container">
-
-        <form
-          onSubmit={handleSubmit}
-          style={{ background: "#fff" }}
-        >
+        <form onSubmit={handleSubmit} style={{ background: "#fff" }}>
           <h2 className="textColor">Update Exam</h2>
 
-          {/* Display error message if there is one */}
           {error && (
             <div className="error-message" style={{ color: "red", marginBottom: "10px" }}>
               {error}
             </div>
           )}
 
-          {/* Rest of your form fields */}
           <div className="examUpdate_-contant">
             <label htmlFor="branch">Select a branch</label>
-            <select
-              id="branch"
-              value={selectedBranch}
-              onChange={handleBranchChange}
-            >
+            <select id="branch" value={selectedBranch} onChange={handleBranchChange}>
               <option value="">Select a branch</option>
               {branches.map((branch) => (
                 <option key={branch.Branch_Id} value={branch.Branch_Id}>
@@ -461,16 +383,9 @@ const ExamUpdataion_admin = () => {
             </select>
           </div>
 
-
-
           <div className="examUpdate_-contant">
             <label htmlFor="exam">Select an Exam:</label>
-            <select
-              id="exam"
-              value={selectedExam}
-              onChange={handleExamChange}
-              disabled={!selectedBranch}
-            >
+            <select id="exam" value={selectedExam} onChange={handleExamChange} disabled={!selectedBranch}>
               <option value="">Select an exam</option>
               {exams.map((exam) => (
                 <option key={exam.coursesPortalExamsId} value={exam.coursesPortalExamsId}>
@@ -478,10 +393,7 @@ const ExamUpdataion_admin = () => {
                 </option>
               ))}
             </select>
-
           </div>
-
-
 
           <div className="examUpdate_-contant">
             <label htmlFor="startDate">Start Date:</label>
@@ -493,6 +405,7 @@ const ExamUpdataion_admin = () => {
               required
             />
           </div>
+
           <div className="examUpdate_-contant">
             <label htmlFor="endDate">End Date:</label>
             <input
@@ -503,8 +416,6 @@ const ExamUpdataion_admin = () => {
               required
             />
           </div>
-
-
 
           <div className="exam_updation_admin_subjectDiv">
             <label
@@ -523,7 +434,6 @@ const ExamUpdataion_admin = () => {
                 className="examUpdate_-contant examSubjects_-contant"
               >
                 <label htmlFor={subject.subjectId}>{subject.subjectName}</label>
-
                 <input
                   className="inputLable"
                   type="checkbox"
@@ -535,8 +445,6 @@ const ExamUpdataion_admin = () => {
               </div>
             ))}
           </div>
-
-
 
           <div className="create_exam_header">
             <button
@@ -555,22 +463,6 @@ const ExamUpdataion_admin = () => {
       </div>
     </>
   );
-
 };
 
 export default ExamUpdataion_admin;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
