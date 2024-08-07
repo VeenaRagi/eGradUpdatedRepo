@@ -8,12 +8,12 @@ import UserContext from '../../../UserContext';
 
 
 
-const StudentDashbord_Bookmarks = ({Branch_Id}) => {
+const StudentDashbord_Bookmarks = ({branchIdFromLS}) => {
 
   const { decryptedUserIdState, usersData } = useContext(UserContext);
   const { decryptedUserIdState: paramUserId } = useParams();
   // const user_Id = decryptedUserIdState;
-
+  const  Branch_Id= branchIdFromLS;
   const { testCreationTableId, question_id } = useParams();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [Questionbookmark, setQuestionbookmark] = useState([]);

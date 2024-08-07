@@ -9,7 +9,7 @@ import { FaBookOpenReader } from "react-icons/fa6";
 import ReactPlayer from "react-player";
 import ProgressPieChart from "../ProgressPieChart ";
 
-const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState,Branch_Id }) => {
+const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState,branchIdFromLS }) => {
   const [showQuizCourses, setShowQuizCourses] = useState(true);
   const [showtestContainer1, setShowtestContainer1] = useState(false);
   const [showtestContainer2, setShowtestContainer2] = useState(false);
@@ -45,6 +45,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState,Branch_Id }
     fetchTestDetails();
   }, [user_Id]);
 
+  const Branch_Id = branchIdFromLS;
   // Fetch purchased courses based on decryptedUserIdState
   useEffect(() => {
     const fetchPurchasedCourses = async () => {
@@ -154,12 +155,12 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState,Branch_Id }
     }
   };
 
-  const openPopup = async (testCreationTableId, user_Id, Portale_Id,Branch_Id) => {
+  const openPopup = async (testCreationTableId, user_Id, Portale_Id,branchIdFromLS) => {
     const userId = user_Id;
     let param1 = testCreationTableId;
     let param2 = user_Id;
     let param3 = Portale_Id;
-    let param4 = Branch_Id;
+    let param4 = branchIdFromLS;
     const screenWidth = window.screen.width;
     const screenHeight = window.screen.height;
 
@@ -429,7 +430,7 @@ if (param4 === 1) {
         className="span_style_start_button"
         to="#"
         onClick={() => {
-          openPopup(testCreationTableId, user_Id, Portale_Id,Branch_Id);
+          openPopup(testCreationTableId, user_Id, Portale_Id,branchIdFromLS);
           handleSaveStartTime(user_Id, testCreationTableId, courseCreationId);
         }}
       >
@@ -594,7 +595,7 @@ if (param4 === 1) {
 
   return (
     <div>
-       <h1>Branch_Id:{Branch_Id}</h1>
+       <h1>Branch_Id:{branchIdFromLS}</h1>
       {!showtestContainer1 &&
         !showtestContainer2 &&
         // !showCompletePackageContainer
