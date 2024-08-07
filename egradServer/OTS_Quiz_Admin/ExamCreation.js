@@ -109,11 +109,11 @@ router.post('/create', async (req, res) => {
   
   router.put('/update/:examId', async (req, res) => {
     const { examId } = req.params;
-    const { examName, startDate, endDate, subjects,branchId } = req.body;
+    const { examName, startDate, endDate, subjects } = req.body;
   
     try {
       // Update data in the exams table
-      await db.query('UPDATE exams SET Branch_Id = ?, startDate = ?, endDate = ? WHERE examId = ?', [branchId,examName, startDate, endDate, examId]);
+      await db.query('UPDATE exams SET examName = ?, startDate = ?, endDate = ? WHERE examId = ?', [examName, startDate, endDate, examId]);
   
       // Update subjects in the exam_creation_table
       // 1. Delete existing subjects that are not in the updated list
