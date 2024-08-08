@@ -894,7 +894,28 @@ const upload = multer({ storage });
   
   
 
-
+  router.get("/instructionpointEdit/:instructionId", async (req, res) => {
+    const instructionId = req.params.instructionId;
+  
+    try {
+      // Select all points for a specific instructionId from the instructions_points table
+      const query = "SELECT * FROM points WHERE instructionId = ?";
+      const [rows] = await db.query(query, [instructionId]);
+  
+      // Send the fetched data in the response
+      res.json({ success: true, points: rows });
+    } catch (error) {
+      console.error("Error fetching instruction points:", error);
+  
+      // Send a consistent error response
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch instruction points.",
+        error: error.message,
+      });
+    }
+  });
+  
 
 
 

@@ -4,7 +4,8 @@ import axios from "axios";
 import base64 from "base64-js";
 import BASE_URL from "../../apiConfig";
 // import "./styles/InstructionPage_admin.css";
-// import InstructionDisplay_admin from "./InstructionDisplay_admin";
+import '../EgradtutorPortalsAdmin/styles/InstructionPage_admin.css'
+import InstructionDisplay_admin from "../EgradtutorPortalsAdmin/InstructionDisplay_admin";
 
 // import { Link } from "react-router-dom";
 const PGAdminInstructionPage = () => {
@@ -38,7 +39,7 @@ const PGAdminInstructionPage = () => {
     const fetchExams = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/InstructionCreation/pgExams`
+          `${BASE_URL}/InstructionCreation/exams`
         );
         setExams(response.data);
       } catch (error) {
@@ -127,8 +128,8 @@ const PGAdminInstructionPage = () => {
                 >
                   <option value="">Select Exam:</option>
                   {exams.map((exam) => (
-                    <option key={exam.EntranceExams_Id} value={[exam.EntranceExams_Id]}>
-                      {exam.EntranceExams_name}
+                    <option key={exam.examId} value={[exam.examId]}>
+                      {exam.examName}
                     </option>
                   ))}
                 </select>
@@ -194,7 +195,7 @@ const PGAdminInstructionPage = () => {
           </div>
         )}
         <div className="instruction_content">
-          {/* <InstructionDisplay_admin /> */}
+          <InstructionDisplay_admin />
           {/* <ExcelTable /> */}
         </div>
       </div>
