@@ -1,7 +1,7 @@
 import { window } from "d3";
 import React, { useState, useEffect } from "react";
 import BASE_URL from '../../apiConfig'
-const StudentDoubtSection = () => {
+const PGStudentDoubtSection = () => {
   const [doubtData, setDoubtData] = useState([]);
   const [selectedDoubtId, setSelectedDoubtId] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -169,4 +169,4 @@ const handleSendSolution = async (doubtId) => {
   );
 };
 
-export default StudentDoubtSection;
+export default PGStudentDoubtSection;

@@ -6,7 +6,7 @@ import '../../EgradTutorFrontEnd/EgradtutorPortalsAdmin/styles/Account_info.css'
 
 Modal.setAppElement('#root'); // Set the root element for accessibility
 
-const AccountInfo = () => {
+const PGAccountInfo = () => {
   const [userData, setUserData] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -185,4 +185,4 @@ const AccountInfo = () => {
   );
 };
 
-export default AccountInfo;
+export default PGAccountInfo;

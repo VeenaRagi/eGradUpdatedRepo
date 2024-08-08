@@ -6,7 +6,7 @@ import BASE_URL from "../../apiConfig";
 import { FaSearch } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
-const DocumentUpload_admin = () => {
+const PGDocumentUpload_admin = () => {
   const [tests, setTests] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [sections, setSections] = useState([]);
@@ -176,7 +176,7 @@ const DocumentUpload_admin = () => {
   );
 };
 
-export default DocumentUpload_admin;
+export default PGDocumentUpload_admin;
 
 export const UploadedDoc = () => {
   const [data, setData] = useState([]);
