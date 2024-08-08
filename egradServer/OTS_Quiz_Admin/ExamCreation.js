@@ -278,9 +278,15 @@ router.get('/pgExams', async (req, res) => {
 
 
 
-
-
-
+router.get('/subjectss', async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM pg_departments');
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
 module.exports = router;
