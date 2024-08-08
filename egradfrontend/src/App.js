@@ -50,7 +50,7 @@ import { UserProvider } from "./UserContext";
 // import PGAdminDashboard from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminDashboardIntegration.jsx";
 import PGAdminDashboardIntegration from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminDashboardIntegration.jsx";
 import OnlineTestSerices_pg from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/OnlineTestSerices_pg.jsx";
-
+import UG_OTSQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UG_OTSQuizPage.jsx";
 const App = () => {
   return (
     <ThemeProvider>
@@ -329,6 +329,7 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                 {/* PGCourseAdmin */}
                 <Route path="/adminProfile" element={<AdminProfile />} />
                 <Route path="/ots" element={<OnlineTestSerices_pg/>}/>
+                <Route path="/ugots" element={<UG_OTSQuizPage/>}/>
               </Routes>
             </UserProvider>
         )}
