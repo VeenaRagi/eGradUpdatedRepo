@@ -12,7 +12,7 @@ import PGOvlVideosUpload from "./PGOvlVideosUpload.jsx";
 import PGAccountInfo from "./PGAccountInfo.jsx";
 import PGStudentDoubtSection from "./PGStudentDoubtSection.jsx";
 // import ThemesSection from "./ThemesSection.jsx";
-const STORAGE_KEY = "left_nav_state_admin";
+const STORAGE_KEY = "left_nav_state_adminPG";
 
 const PGLeftNav = ({ decryptedUserIdState }) => {
     const [showMenu, setshowMenu] = useState(0);
