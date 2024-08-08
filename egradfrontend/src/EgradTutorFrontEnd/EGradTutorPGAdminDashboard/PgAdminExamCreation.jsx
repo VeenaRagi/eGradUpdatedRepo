@@ -112,7 +112,7 @@ function PgAdminExamCreation() {
     if (validateForm()) {
       setSubmitting(true);
       axios
-        .post(`${BASE_URL}/ExamCreation/exams`, examData)
+        .post(`${BASE_URL}/ExamCreation/pgExamsCreation`, examData)
         .then((response) => {
           // console.log("Exam created:", response.data);
           // Reset form fields and state as needed
