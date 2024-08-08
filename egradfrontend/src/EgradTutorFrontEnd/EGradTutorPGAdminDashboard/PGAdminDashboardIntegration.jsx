@@ -6,11 +6,11 @@ import PGLeftNav from './PGLeftNav'
 const PGAdminDashboardIntegration = () => {
     return (
         <>
-            <AdminHeader /> 
+            <AdminHeader />
             <p>PG Admin</p>
             <div className="Exam_portal_admin_integration_container">
                 <PGLeftNav />
-                /</div>
+            </div>
         </>
     )
 }
