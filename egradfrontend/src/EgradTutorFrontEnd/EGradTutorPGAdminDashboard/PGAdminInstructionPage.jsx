@@ -3,7 +3,7 @@ import axios from "axios";
 import InstructionsDisplay from "./InstructionDisplay_admin";
 import base64 from "base64-js";
 import BASE_URL from "../../apiConfig";
-import "./styles/InstructionPage_admin.css";
+// import "./styles/InstructionPage_admin.css";
 import InstructionDisplay_admin from "./InstructionDisplay_admin";
 
 // import { Link } from "react-router-dom";

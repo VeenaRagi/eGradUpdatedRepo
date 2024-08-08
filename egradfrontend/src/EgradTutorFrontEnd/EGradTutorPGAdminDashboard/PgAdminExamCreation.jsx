@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import "./styles/Examcreation_admin.css";
+// import "./styles/Examcreation_admin.css";
 import BASE_URL from '../../apiConfig'
 import { Link, useParams } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
