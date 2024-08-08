@@ -19,9 +19,9 @@ function PgAdminExamCreation() {
   const { subjectId } = useParams();
   const [formErrors, setFormErrors] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
-  const [pgExams,setPgExams]=useState('')
+  const [pgExams, setPgExams] = useState('')
   const [selectedExamName, setSelectedExamName] = useState("");
-  
+
 
   const validateForm = () => {
     const errors = {};
@@ -71,7 +71,7 @@ function PgAdminExamCreation() {
   useEffect(() => {
     // Fetch subjects from the backend when the component mounts
     axios
-      .get(`${BASE_URL}/ExamCreation/pg_subjectss`)
+      .get(`${BASE_URL}/ExamCreation/subjectss`)
       .then((response) => {
         if (Array.isArray(response.data)) {
           setSubjects(response.data);
@@ -231,7 +231,7 @@ function PgAdminExamCreation() {
                     </button>
                   </div>
                   <div className="Exams_contant examSubjects_-contant examSubjects_-contant_exc">
-                  <div className="formdiv_contaniner">
+                    <div className="formdiv_contaniner">
                       <label>Exam Name:</label>
                       <select
                         value={selectedExamName}
@@ -284,39 +284,39 @@ function PgAdminExamCreation() {
                   </div>
 
                   <div className="exam_SubjectCOnatiner examSubjects_-contant">
-      <div className="formdiv_contaniner_ch">
-        <ul className="examSubject_conten">
-          <label>Subjects:</label>
-          {subjects.length > 0 ? (
-            subjects.map((subject) => (
-              <li key={subject.subjectIdsame}>
-                <label>{subject.departmentName}</label>
-                <input
-                  className="inputLable"
-                  type="checkbox"
-                  checked={selectedSubjects.includes(subject.subjectId)}
-                  onChange={() => handleCheckboxChange(subject.subjectId)}
-                />
-              </li>
-            ))
-          ) : (
-            <li>No subjects available</li>
-          )}
-          {formErrors.subjects && (
-            <span className="error-message">{formErrors.subjects}</span>
-          )}
-        </ul>
-      </div>
-      <div>
-        <button
-          className="ots_-createBtn"
-          type="submit"
-          disabled={submitting}
-        >
-          Create Exam
-        </button>
-      </div>
-    </div>
+                    <div className="formdiv_contaniner_ch">
+                      <ul className="examSubject_conten">
+                        <label>Subjects:</label>
+                        {subjects.length > 0 ? (
+                          subjects.map((subject) => (
+                            <li key={subject.departmentId}>
+                              <label>{subject.departmentName}</label>
+                              <input
+                                className="inputLable"
+                                type="checkbox"
+                                checked={selectedSubjects.includes(subject.subjectId)}
+                                onChange={() => handleCheckboxChange(subject.subjectId)}
+                              />
+                            </li>
+                          ))
+                        ) : (
+                          <li>No subjects available</li>
+                        )}
+                        {formErrors.subjects && (
+                          <span className="error-message">{formErrors.subjects}</span>
+                        )}
+                      </ul>
+                    </div>
+                    <div>
+                      <button
+                        className="ots_-createBtn"
+                        type="submit"
+                        disabled={submitting}
+                      >
+                        Create Exam
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>
@@ -339,7 +339,7 @@ function PgAdminExamCreation() {
           />
         </div>
         {/* Table of exams */}
-        <div className="examCreation_-createdData" style={{overflowX:"scroll"}}>
+        <div className="examCreation_-createdData" style={{ overflowX: "scroll" }}>
           <h3 className="list_-otsTitels">created exams list</h3>
           <div>
             <table className="otc_-table otsAdminTable_Container">
