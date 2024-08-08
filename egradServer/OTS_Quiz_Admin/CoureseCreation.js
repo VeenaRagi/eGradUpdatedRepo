@@ -32,7 +32,7 @@ router.get("/type_of_questions", async (req, res) => {
 // --------------- fetch exams -----------------------------
 router.get("/courese-exams", async (req, res) => {
   try {
-    const [rows] = await db.query("SELECT  examId,examName FROM exams");
+    const [rows] = await db.query("SELECT  examId,examName FROM exams WHERE branchId=1");
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -1602,10 +1602,10 @@ router.get("/courese-exam-subjects/:examId/pgSubjects", async (req, res) => {
 
   try {
     const query = `
-        SELECT s.subjectId, s.subjectName
-        FROM subjects AS s
-        JOIN exam_creation_table AS ec ON s.subjectId = ec.subjectId
-        WHERE ec.examId = ?
+     SELECT pgd.departmentId, pgd.departmentName
+        FROM pg_departments AS pgd
+        JOIN exam_creation_table AS ec ON pgd.departmentId = ec.subjectId
+        WHERE ec.examId = ?;
       `;
     const [rows] = await db.query(query, [examId]);
     res.json(rows);
@@ -1614,7 +1614,15 @@ router.get("/courese-exam-subjects/:examId/pgSubjects", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
+router.get("/getCourseExams", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT  examId,examName FROM exams WHERE branchId=2");
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 
 
