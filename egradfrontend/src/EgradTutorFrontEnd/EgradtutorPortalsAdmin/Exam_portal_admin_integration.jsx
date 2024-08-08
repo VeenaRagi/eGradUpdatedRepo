@@ -7,6 +7,7 @@ const Exam_portal_admin_integration = ({decryptedUserIdState}) => {
   return (
     <div>
       <AdminHeader/>
+            {/* <p>Need to create left nav</p> */}
       <div className="Exam_portal_admin_integration_container">
         <Leftnav decryptedUserIdState={decryptedUserIdState}/>
       </div>
