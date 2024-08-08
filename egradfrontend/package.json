@@ -73,6 +73,7 @@
     ]
   },
   "devDependencies": {
+    "@locator/babel-jsx": "^0.4.3",
     "dotenv-webpack": "^8.1.0"
   }
 }
