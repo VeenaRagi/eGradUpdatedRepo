@@ -239,6 +239,37 @@
   overflow: scroll;
 }
 
+
+
+
+.exam_updation_admin_subjectDiv::-webkit-scrollbar {
+  width: 5px;
+  height: 1px; 
+}
+
+
+.exam_updation_admin_subjectDiv::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+
+.exam_updation_admin_subjectDiv::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+
+.exam_updation_admin_subjectDiv::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.exam_updation_admin_subjectDiv::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
 .examUpdate_-contant {
   display: flex;
   /* flex-direction: column; */

@@ -229,10 +229,7 @@
 
 
 
-
-
-
-
+// _________________________ CORRECT CODE ______________________________________________________//
 
 
 import React, { useState, useEffect } from "react";
@@ -254,17 +251,16 @@ const ExamUpdataion_admin = () => {
   const [subjects, setSubjects] = useState([]);
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [selectedBranch, setSelectedBranch] = useState("");
+  const [isDropdownsDisabled, setIsDropdownsDisabled] = useState(true);
 
   // Fetch branches and exams
   useEffect(() => {
     const fetchBranchesAndExams = async () => {
       try {
-        // Fetch branches
         const branchResponse = await axios.get(`${BASE_URL}/ExamCreation/branches`);
         setBranches(branchResponse.data);
 
         if (selectedBranch) {
-          // Fetch exams based on selected branch
           const examResponse = await axios.get(`${BASE_URL}/ExamCreation/branchesexams`, { params: { Branch_Id: selectedBranch } });
           setExams(examResponse.data);
         }
@@ -296,26 +292,37 @@ const ExamUpdataion_admin = () => {
       try {
         const examResponse = await axios.get(`${BASE_URL}/ExamCreation/feachingexams/${examId}`);
         const examData = examResponse.data[0];
-
+  
         if (examData) {
           setSelectedBranch(examData.Branch_Id);
           setSelectedExam(examData.coursesPortalExamsId);
           setExamName(examData.coursesPortalExamname);
           setStartDate(examData.startDate);
           setEndDate(examData.endDate);
+  
+          // Fetch selected subjects
+          const selectedSubjectsResponse = await axios.get(`${BASE_URL}/ExamCreation/exams/${examId}/subjects`);
+          const selected = selectedSubjectsResponse.data.filter(subject => subject.isSelected);
+  
+          // Set selected subjects
+          setSelectedSubjects(selected.map(subject => subject.subjectId));
+  
+          // Fetch unselected subjects for the current exam
+          const unselectedSubjectsResponse = await axios.get(`${BASE_URL}/exams/${examId}/not-selected-subjects`);
+          setSubjects(unselectedSubjectsResponse.data);
 
-          // Fetch selected subjects for this exam
-          const subjectsResponse = await axios.get(`${BASE_URL}/ExamCreation/exams/${examId}/subjects`);
-          setSelectedSubjects(subjectsResponse.data);
+          // Disable dropdowns after fetching the exam details
+          setIsDropdownsDisabled(true);
         }
       } catch (error) {
         console.error("Error fetching exam details:", error);
       }
     };
-
+  
     fetchExamDetails();
   }, [examId]);
-
+  
+  
   const handleSubjectChange = (subjectId) => {
     setSelectedSubjects((prevSelectedSubjects) => {
       const newSelectedSubjects = new Set(prevSelectedSubjects);
@@ -328,27 +335,25 @@ const ExamUpdataion_admin = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const updatedExamData = {
-      examId,
-      examName,
       startDate,
       endDate,
-      branchId: selectedBranch,
+      BranchId: selectedBranch,
       selectedSubjects,
     };
-
-    axios.put(`${BASE_URL}/api/exams/update`, updatedExamData)
-      .then(() => {
-        navigate("/UgadminHome");
-      })
-      .catch((error) => {
-        console.error("Error updating exam data:", error);
-        setError("Failed to update exam data. Please try again.");
-      });
+  
+    try {
+      await axios.put(`${BASE_URL}/ExamCreation/update/${examId}`, updatedExamData);
+      alert("Exam Updated Successfully");
+      navigate("/Adminpage");
+    } catch (error) {
+      console.error("Error updating exam data:", error);
+      setError("Failed to update exam data. Please try again.");
+    }
   };
-
+  
   const handleBranchChange = (event) => {
     setSelectedBranch(event.target.value);
     setSelectedExam("");
@@ -373,7 +378,12 @@ const ExamUpdataion_admin = () => {
 
           <div className="examUpdate_-contant">
             <label htmlFor="branch">Select a branch</label>
-            <select id="branch" value={selectedBranch} onChange={handleBranchChange}>
+            <select
+              id="branch"
+              value={selectedBranch}
+              onChange={handleBranchChange}
+              disabled={isDropdownsDisabled}
+            >
               <option value="">Select a branch</option>
               {branches.map((branch) => (
                 <option key={branch.Branch_Id} value={branch.Branch_Id}>
@@ -385,7 +395,12 @@ const ExamUpdataion_admin = () => {
 
           <div className="examUpdate_-contant">
             <label htmlFor="exam">Select an Exam:</label>
-            <select id="exam" value={selectedExam} onChange={handleExamChange} disabled={!selectedBranch}>
+            <select
+              id="exam"
+              value={selectedExam}
+              onChange={handleExamChange}
+              disabled={isDropdownsDisabled || !selectedBranch}
+            >
               <option value="">Select an exam</option>
               {exams.map((exam) => (
                 <option key={exam.coursesPortalExamsId} value={exam.coursesPortalExamsId}>
@@ -425,25 +440,57 @@ const ExamUpdataion_admin = () => {
                 textTransform: "uppercase",
               }}
             >
-              Subjects:
+              Selected Subjects:
             </label>
 
-            {subjects.map((subject) => (
-              <div
-                key={subject.subjectId}
-                className="examUpdate_-contant examSubjects_-contant"
-              >
-                <label htmlFor={subject.subjectId}>{subject.subjectName}</label>
-                <input
-                  className="inputLable"
-                  type="checkbox"
-                  id={subject.subjectId}
-                  value={subject.subjectId}
-                  checked={selectedSubjects.includes(subject.subjectId)}
-                  onChange={() => handleSubjectChange(subject.subjectId)}
-                />
-              </div>
-            ))}
+            {subjects
+              .filter((subject) => selectedSubjects.includes(subject.subjectId))
+              .map((subject) => (
+                <div
+                  key={subject.subjectId}
+                  className="examUpdate_-contant examSubjects_-contant"
+                >
+                  <label htmlFor={subject.subjectId}>{subject.subjectName}</label>
+                  <input
+                    className="inputLable"
+                    type="checkbox"
+                    id={subject.subjectId}
+                    value={subject.subjectId}
+                    checked
+                    onChange={() => handleSubjectChange(subject.subjectId)}
+                  />
+                </div>
+              ))}
+
+            <label
+              style={{
+                paddingBottom: "10px",
+                display: "block",
+                textTransform: "uppercase",
+                marginTop: "20px",
+              }}
+            >
+              Not Selected Subjects:
+            </label>
+
+            {subjects
+              .filter((subject) => !selectedSubjects.includes(subject.subjectId))
+              .map((subject) => (
+                <div
+                  key={subject.subjectId}
+                  className="examUpdate_-contant examSubjects_-contant"
+                >
+                  <label htmlFor={subject.subjectId}>{subject.subjectName}</label>
+                  <input
+                    className="inputLable"
+                    type="checkbox"
+                    id={subject.subjectId}
+                    value={subject.subjectId}
+                    checked={false}
+                    onChange={() => handleSubjectChange(subject.subjectId)}
+                  />
+                </div>
+              ))}
           </div>
 
           <div className="create_exam_header">
@@ -465,4 +512,324 @@ const ExamUpdataion_admin = () => {
   );
 };
 
-export default ExamUpdataion_admin;
+export default ExamUpdataion_admin
+// _________________________ CORRECT CODE END ______________________________________________________//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import { useParams, useNavigate } from "react-router-dom";
+// import BASE_URL from "../../apiConfig";
+// import AdminHeader from "./AdminHeader";
+
+// const ExamUpdataion_admin = () => {
+//   const { examId } = useParams();
+//   const navigate = useNavigate();
+//   const [examName, setExamName] = useState("");
+//   const [startDate, setStartDate] = useState("");
+//   const [selectedExam, setSelectedExam] = useState("");
+//   const [endDate, setEndDate] = useState("");
+//   const [error, setError] = useState("");
+//   const [exams, setExams] = useState([]);
+//   const [branches, setBranches] = useState([]);
+//   const [subjects, setSubjects] = useState([]);
+//   const [selectedSubjects, setSelectedSubjects] = useState([]);
+//   const [selectedBranch, setSelectedBranch] = useState("");
+//   const [isDropdownsDisabled, setIsDropdownsDisabled] = useState(true);
+
+//   // Fetch branches and exams
+//   useEffect(() => {
+//     const fetchBranchesAndExams = async () => {
+//       try {
+//         const branchResponse = await axios.get(`${BASE_URL}/ExamCreation/branches`);
+//         setBranches(branchResponse.data);
+
+//         if (selectedBranch) {
+//           const examResponse = await axios.get(`${BASE_URL}/ExamCreation/branchesexams`, { params: { Branch_Id: selectedBranch } });
+//           setExams(examResponse.data);
+//         }
+//       } catch (error) {
+//         console.error("Error fetching branches or exams:", error);
+//       }
+//     };
+
+//     fetchBranchesAndExams();
+//   }, [selectedBranch]);
+
+//   // Fetch subjects
+//   useEffect(() => {
+//     const fetchSubjects = async () => {
+//       try {
+//         const response = await axios.get(`${BASE_URL}/ExamCreation/subjectS/${coursesPortalExamsId}`);
+//         setSubjects(response.data);
+//       } catch (error) {
+//         console.error("Error fetching subjects:", error);
+//       }
+//     };
+
+//     fetchSubjects();
+//   }, []);
+
+//   // Fetch exam details and set initial values
+//   useEffect(() => {
+//     const fetchExamDetails = async () => {
+//       try {
+//         const examResponse = await axios.get(`${BASE_URL}/ExamCreation/feachingexams/${examId}`);
+//         const examData = examResponse.data[0];
+  
+//         if (examData) {
+//           setSelectedBranch(examData.Branch_Id);
+//           setSelectedExam(examData.coursesPortalExamsId);
+//           setExamName(examData.coursesPortalExamname);
+//           setStartDate(examData.startDate);
+//           setEndDate(examData.endDate);
+  
+//           // Fetch selected subjects
+//           const selectedSubjectsResponse = await axios.get(`${BASE_URL}/ExamCreation/exams/${examId}/subjects`);
+//           const selected = selectedSubjectsResponse.data.filter(subject => subject.isSelected);
+  
+//           // Set selected subjects
+//           setSelectedSubjects(selected.map(subject => subject.subjectId));
+  
+//           // Fetch unselected subjects for the current exam
+//           const unselectedSubjectsResponse = await axios.get(`${BASE_URL}/exams/${examId}/not-selected-subjects`);
+//           setSubjects(unselectedSubjectsResponse.data);
+
+//           // Disable dropdowns after fetching the exam details
+//           setIsDropdownsDisabled(true);
+//         }
+//       } catch (error) {
+//         console.error("Error fetching exam details:", error);
+//       }
+//     };
+  
+//     fetchExamDetails();
+//   }, [examId]);
+  
+  
+//   const handleSubjectChange = (subjectId) => {
+//     setSelectedSubjects((prevSelectedSubjects) => {
+//       const newSelectedSubjects = new Set(prevSelectedSubjects);
+//       if (newSelectedSubjects.has(subjectId)) {
+//         newSelectedSubjects.delete(subjectId);
+//       } else {
+//         newSelectedSubjects.add(subjectId);
+//       }
+//       return Array.from(newSelectedSubjects);
+//     });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     const updatedExamData = {
+//       startDate,
+//       endDate,
+//       BranchId: selectedBranch,
+//       selectedSubjects,
+//     };
+  
+//     try {
+//       await axios.put(`${BASE_URL}/ExamCreation/update/${examId}`, updatedExamData);
+//       alert("Exam Updated Successfully");
+//       navigate("/Adminpage");
+//     } catch (error) {
+//       console.error("Error updating exam data:", error);
+//       setError("Failed to update exam data. Please try again.");
+//     }
+//   };
+  
+//   const handleBranchChange = (event) => {
+//     setSelectedBranch(event.target.value);
+//     setSelectedExam("");
+//   };
+
+//   const handleExamChange = (event) => {
+//     setSelectedExam(event.target.value);
+//   };
+
+//   return (
+//     <>
+//       <AdminHeader />
+//       <div className="examUpdate_-container">
+//         <form onSubmit={handleSubmit} style={{ background: "#fff" }}>
+//           <h2 className="textColor">Update Exam</h2>
+
+//           {error && (
+//             <div className="error-message" style={{ color: "red", marginBottom: "10px" }}>
+//               {error}
+//             </div>
+//           )}
+
+//           <div className="examUpdate_-contant">
+//             <label htmlFor="branch">Select a branch</label>
+//             <select
+//               id="branch"
+//               value={selectedBranch}
+//               onChange={handleBranchChange}
+//               disabled={isDropdownsDisabled}
+//             >
+//               <option value="">Select a branch</option>
+//               {branches.map((branch) => (
+//                 <option key={branch.Branch_Id} value={branch.Branch_Id}>
+//                   {branch.Branch_Name}
+//                 </option>
+//               ))}
+//             </select>
+//           </div>
+
+//           <div className="examUpdate_-contant">
+//             <label htmlFor="exam">Select an Exam:</label>
+//             <select
+//               id="exam"
+//               value={selectedExam}
+//               onChange={handleExamChange}
+//               disabled={isDropdownsDisabled || !selectedBranch}
+//             >
+//               <option value="">Select an exam</option>
+//               {exams.map((exam) => (
+//                 <option key={exam.coursesPortalExamsId} value={exam.coursesPortalExamsId}>
+//                   {exam.coursesPortalExamname}
+//                 </option>
+//               ))}
+//             </select>
+//           </div>
+
+//           <div className="examUpdate_-contant">
+//             <label htmlFor="startDate">Start Date:</label>
+//             <input
+//               type="date"
+//               id="startDate"
+//               value={startDate}
+//               onChange={(e) => setStartDate(e.target.value)}
+//               required
+//             />
+//           </div>
+
+//           <div className="examUpdate_-contant">
+//             <label htmlFor="endDate">End Date:</label>
+//             <input
+//               type="date"
+//               id="endDate"
+//               value={endDate}
+//               onChange={(e) => setEndDate(e.target.value)}
+//               required
+//             />
+//           </div>
+
+//           <div className="exam_updation_admin_subjectDiv">
+//             <label
+//               style={{
+//                 paddingBottom: "10px",
+//                 display: "block",
+//                 textTransform: "uppercase",
+//               }}
+//             >
+//               Selected Subjects:
+//             </label>
+
+//             {subjects
+//               .filter((subject) => selectedSubjects.includes(subject.subjectId))
+//               .map((subject) => (
+//                 <div
+//                   key={subject.subjectId}
+//                   className="examUpdate_-contant examSubjects_-contant"
+//                 >
+//                   <label htmlFor={subject.subjectId}>{subject.subjectName}</label>
+//                   <input
+//                     className="inputLable"
+//                     type="checkbox"
+//                     id={subject.subjectId}
+//                     value={subject.subjectId}
+//                     checked
+//                     onChange={() => handleSubjectChange(subject.subjectId)}
+//                   />
+//                 </div>
+//               ))}
+
+//             <label
+//               style={{
+//                 paddingBottom: "10px",
+//                 display: "block",
+//                 textTransform: "uppercase",
+//                 marginTop: "20px",
+//               }}
+//             >
+//               Not Selected Subjects:
+//             </label>
+
+//             {subjects
+//               .filter((subject) => !selectedSubjects.includes(subject.subjectId))
+//               .map((subject) => (
+//                 <div
+//                   key={subject.subjectId}
+//                   className="examUpdate_-contant examSubjects_-contant"
+//                 >
+//                   <label htmlFor={subject.subjectId}>{subject.subjectName}</label>
+//                   <input
+//                     className="inputLable"
+//                     type="checkbox"
+//                     id={subject.subjectId}
+//                     value={subject.subjectId}
+//                     checked={false}
+//                     onChange={() => handleSubjectChange(subject.subjectId)}
+//                   />
+//                 </div>
+//               ))}
+//           </div>
+
+//           <div className="create_exam_header">
+//             <button
+//               type="button"
+//               onClick={() => navigate("/Adminpage")}
+//               className="ots_-createBtn"
+//               style={{ background: "#ff8080", color: "#fff", margin: "0 9px" }}
+//             >
+//               Close
+//             </button>
+//             <button className="ots_-createBtn" type="submit">
+//               Submit
+//             </button>
+//           </div>
+//         </form>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default ExamUpdataion_admin
+
+
+
+
+
+
+
+
+

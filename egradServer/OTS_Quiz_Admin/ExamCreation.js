@@ -85,58 +85,58 @@ router.post('/create', async (req, res) => {
     }
   });
   
-  router.get('/exams/:examId/subjects', async (req, res) => {
-    const { examId } = req.params;
+  // router.get('/exams/:examId/subjects', async (req, res) => {
+  //   const { examId } = req.params;
   
-    try {
-      console.log('Fetching subjects for examId:', examId);
+  //   try {
+  //     console.log('Fetching subjects for examId:', examId);
   
-      const [rows] = await db.query(
-        'SELECT subjectId FROM exam_creation_table WHERE examId = ?',
-        [examId]
-      );
+  //     const [rows] = await db.query(
+  //       'SELECT subjectId FROM exam_creation_table WHERE examId = ?',
+  //       [examId]
+  //     );
   
-      const selectedSubjects = rows.map(row => row.subjectId);
-      console.log('Selected subjects:', selectedSubjects);
+  //     const selectedSubjects = rows.map(row => row.subjectId);
+  //     console.log('Selected subjects:', selectedSubjects);
   
-      res.json(selectedSubjects);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+  //     res.json(selectedSubjects);
+  //   } catch (error) {
+  //     console.error(error);
+  //     res.status(500).json({ error: 'Internal Server Error' });
+  //   }
+  // });
   
   
-  router.put('/update/:examId', async (req, res) => {
-    const { examId } = req.params;
-    const { examName, startDate, endDate, subjects } = req.body;
+  // router.put('/update/:examId', async (req, res) => {
+  //   const { examId } = req.params;
+  //   const { examName, startDate, endDate, subjects } = req.body;
   
-    try {
-      // Update data in the exams table
-      await db.query('UPDATE exams SET examName = ?, startDate = ?, endDate = ? WHERE examId = ?', [examName, startDate, endDate, examId]);
+  //   try {
+  //     // Update data in the exams table
+  //     await db.query('UPDATE exams SET examName = ?, startDate = ?, endDate = ? WHERE examId = ?', [examName, startDate, endDate, examId]);
   
-      // Update subjects in the exam_creation_table
-      // 1. Delete existing subjects that are not in the updated list
-      await db.query('DELETE FROM exam_creation_table WHERE examId = ? AND subjectId NOT IN (?)', [examId, subjects]);
+  //     // Update subjects in the exam_creation_table
+  //     // 1. Delete existing subjects that are not in the updated list
+  //     await db.query('DELETE FROM exam_creation_table WHERE examId = ? AND subjectId NOT IN (?)', [examId, subjects]);
   
-      // 2. Insert new subjects that are not already in the table
-      const existingSubjects = await db.query('SELECT subjectId FROM exam_creation_table WHERE examId = ?', [examId]);
-      const existingSubjectIds = existingSubjects[0].map(row => row.subjectId);
+  //     // 2. Insert new subjects that are not already in the table
+  //     const existingSubjects = await db.query('SELECT subjectId FROM exam_creation_table WHERE examId = ?', [examId]);
+  //     const existingSubjectIds = existingSubjects[0].map(row => row.subjectId);
   
-      const newSubjects = subjects.filter(subjectId => !existingSubjectIds.includes(subjectId));
+  //     const newSubjects = subjects.filter(subjectId => !existingSubjectIds.includes(subjectId));
   
-      const subjectInsertPromises = newSubjects.map(subjectId =>
-        db.query('INSERT INTO exam_creation_table (examId, subjectId) VALUES (?, ?)', [examId, subjectId])
-      );
+  //     const subjectInsertPromises = newSubjects.map(subjectId =>
+  //       db.query('INSERT INTO exam_creation_table (examId, subjectId) VALUES (?, ?)', [examId, subjectId])
+  //     );
   
-      await Promise.all(subjectInsertPromises);
+  //     await Promise.all(subjectInsertPromises);
   
-      res.json({ success: true, message: 'Exam data updated successfully' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+  //     res.json({ success: true, message: 'Exam data updated successfully' });
+  //   } catch (error) {
+  //     console.error(error);
+  //     res.status(500).json({ error: 'Internal Server Error' });
+  //   }
+  // });
   
   //--------------------------------------------END--------------------------------------------------
   //---------------------------------------------inserting exam creation page data-------------------------------------------------
@@ -306,61 +306,9 @@ router.post('/create', async (req, res) => {
     });
     //--------------------------------------------END--------------------------------------------------
   //_____________________Exam creation end__________________________
-  router.put('/api/exams/update', async (req, res) => {
-    const { examId, examName, startDate, endDate,  selectedSubjects } = req.body;
-  
-    if (!examId || !examName || !startDate || !endDate || !Array.isArray(selectedSubjects)) {
-      return res.status(400).json({ error: 'Invalid input' });
-    }
-  
-    try {
-      await pool.query(
-        `UPDATE exams 
-         SET examName = $1, startDate = $2, endDate = $3, branchId = $4 
-         WHERE examId = $5`,
-        [examName, startDate, endDate,examId]
-      );
-  
-      // Delete existing subjects for this exam
-      await pool.query('DELETE FROM subjects WHERE examId = $1', [examId]);
-  
-      // Insert new subjects
-      if (selectedSubjects.length > 0) {
-        const subjectValues = selectedSubjects.map(subjectId => `(${examId}, ${subjectId})`).join(',');
-        await pool.query(
-          `INSERT INTO subjects (examId, subjectId) 
-           VALUES ${subjectValues}`
-        );
-      }
-  
-      // Fetch updated exam details with joins
-      const result = await pool.query(
-        `SELECT e.examId, e.startDate, e.endDate, e.branchId, 
-                b.branchName, 
-                array_agg(s.subjectName) as subjects
-         FROM exams e
-         JOIN branches b ON e.branchId = b.branchId
-         LEFT JOIN subjects es ON e.examId = es.examId
-         LEFT JOIN subjects s ON es.subjectId = s.subjectId
-         WHERE e.examId = $1
-         GROUP BY e.examId, b.branchName`,
-        [examId]
-      );
-  
-      // Commit transaction
-      await pool.query('COMMIT');
-  
-      res.status(200).json(result.rows[0]);
-    } catch (error) {
-      // Rollback transaction on error
-      await pool.query('ROLLBACK');
-      console.error('Error updating exam:', error);
-      res.status(500).json({ error: 'Failed to update exam' });
-    }
-  });
 
-
-
+// ################################################################################################################################################//
+  
   router.get('/ExamCreation/feachingexams/:examId', async (req, res) => {
     const { examId } = req.params;
     
@@ -380,14 +328,98 @@ router.post('/create', async (req, res) => {
       res.status(500).send('Internal Server Error');
     }
   });
+
+
+
+  router.get('/exams/:examId/subjects', async (req, res) => {
+    const { examId } = req.params;
+    
+    try {
+      const query = `
+       SELECT s.*, 
+       CASE 
+         WHEN ec.subjectId IS NOT NULL THEN 1
+         ELSE 0
+       END AS isSelected
+FROM subjects AS s
+LEFT JOIN exam_creation_table AS ec 
+  ON s.subjectId = ec.subjectId AND ec.examId = ?
+
+      `;
+      
+      const [rows] = await db.query(query, [examId]);
+      
+      res.json(rows);
+    } catch (error) {
+      console.error('Error fetching subjects for exam:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
   
-  // router.put('/exam_updation/update_exams/:examId'),async(req,res)=>{
-  //   const {examId}=req.params;
-  //   try{
+  
+// Endpoint to get unselected subjects for a specific exam
+router.get('/ExamCreation/exams/;examId/unselected-subjects', async (req, res) => {
+  const { examId } = req.params;
 
-  //   }
-  // }
+  try {
+    // Query to get all subjects that are not selected for the specific exam
+    const query = `
+      SELECT s.subjectId, s.subjectName
+      FROM subjects AS s
+      LEFT JOIN exam_creation_table AS ec
+        ON s.subjectId = ec.subjectId AND ec.examId = ?
+      WHERE ec.examId IS NULL
+    `;
+    const [rows] = await db.query(query, [examId]);
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching unselected subjects:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
+
+
+router.put('/update/:examId', async (req, res) => {
+  const { examId } = req.params;
+  const { startDate, endDate, BranchId, selectedSubjects } = req.body;
+
+  try {
+    // Update exam details
+    await db.query(
+      'UPDATE exams SET startDate = ?, endDate = ?, Branch_Id = ? WHERE examId = ?',
+      [startDate, endDate, BranchId, examId]
+    );
+
+    // Delete existing subjects for the exam
+    await db.query(
+      'DELETE FROM exam_creation_table WHERE examId = ?',
+      [examId]
+    );
+    
+
+    // Insert new subjects for the exam
+    const subjectValues = selectedSubjects.map(subjectId => [subjectId, examId]);
+
+    // Insert new subjects for the exam
+    if (subjectValues.length > 0) {
+      await db.query(
+        'INSERT INTO exam_creation_table (subjectId, examId) VALUES ?',
+        [subjectValues]
+      );
+    }
+
+    // Commit transaction
+    await db.query('COMMIT');
+    res.send('Exam updated successfully');
+  } catch (err) {
+    // Rollback transaction on error
+    await db.query('ROLLBACK');
+    console.error('Error updating exam:', err);
+    res.status(500).send('Server error');
+  
+  }
+});
 
 
 module.exports = router;
