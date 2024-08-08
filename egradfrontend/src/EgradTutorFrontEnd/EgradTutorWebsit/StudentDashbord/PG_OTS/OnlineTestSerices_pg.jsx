@@ -152,12 +152,21 @@ const OnlineTestSerices_pg = () => {
   };
 
   const handleMarkForReview = () => {
-    if (!markedForReview.includes(selectedQuestionId)) {
-      setMarkedForReview([...markedForReview, selectedQuestionId]);
+    // Check if the question is answered
+    if (responses[selectedQuestionId]) {
+        // If answered, mark for review with purple tick box
+        if (!markedForReview.includes(selectedQuestionId)) {
+            setMarkedForReview([...markedForReview, selectedQuestionId]);
+        }
     } else {
-      setMarkedForReview(markedForReview.filter(id => id !== selectedQuestionId));
+        // If not answered, just mark for review with purple box
+        if (!markedForReview.includes(selectedQuestionId)) {
+            setMarkedForReview([...markedForReview, selectedQuestionId]);
+        } else {
+            setMarkedForReview(markedForReview.filter(id => id !== selectedQuestionId));
+        }
     }
-  };
+};
 
   const handleClearResponse = () => {
     setResponses(prev => ({
@@ -183,19 +192,39 @@ const OnlineTestSerices_pg = () => {
 
   const handleSaveAndNext = () => {
     if (selectedQuestion) {
-      const questionType = selectedQuestion.quesion_type[0].quesionTypeId;
-      if ([1, 2, 7, 8].includes(questionType) && !responses[selectedQuestionId]) {
-        alert("Please select an option before proceeding.");
-        return;
-      }
-      if ([5, 6].includes(questionType) && inputValue === "") {
-        alert("Please enter a response before proceeding.");
-        return;
-      }
-      setSavedQuestions([...savedQuestions, selectedQuestionId]);
-      handleNextClick();
+        const questionType = selectedQuestion.quesion_type[0].quesionTypeId;
+        if ([1, 2, 7, 8].includes(questionType) && !responses[selectedQuestionId]) {
+            alert("Please select an option before proceeding.");
+            return;
+        }
+        if ([5, 6].includes(questionType) && inputValue === "") {
+            alert("Please enter a response before proceeding.");
+            return;
+        }
+        // Remove the question from the marked for review list if saving and next is clicked
+        if (markedForReview.includes(selectedQuestionId)) {
+            setMarkedForReview(markedForReview.filter(id => id !== selectedQuestionId));
+        }
+        setSavedQuestions([...savedQuestions, selectedQuestionId]);
+        handleNextClick();
     }
-  };
+};
+const getButtonStyle = (questionId) => {
+    if (savedQuestions.includes(questionId) && markedForReview.includes(questionId)) {
+        return { backgroundImage: `url(${purpleTickBox})` };
+    }
+    if (savedQuestions.includes(questionId)) {
+        return { backgroundImage: `url(${greenBox})` };
+    }
+    if (markedForReview.includes(questionId)) {
+        return { backgroundImage: `url(${purpleBox})` };
+    }
+    if (visitedQuestions.includes(questionId)) {
+        return { backgroundImage: `url(${orangeBox})` };
+    }
+    return {};
+};
+
 
   if (!testData) {
     return <div>Loading...</div>;
@@ -210,22 +239,6 @@ const OnlineTestSerices_pg = () => {
   const selectedQuestion = selectedSection
     ? selectedSection.questions.find((question) => question.question_id === selectedQuestionId)
     : selectedSubject.questions.find((question) => question.question_id === selectedQuestionId);
-
-  const getButtonStyle = (questionId) => {
-    if (savedQuestions.includes(questionId) && markedForReview.includes(questionId)) {
-      return { backgroundImage: `url(${purpleTickBox})` };
-    }
-    if (savedQuestions.includes(questionId)) {
-      return { backgroundImage: `url(${greenBox})` };
-    }
-    if (markedForReview.includes(questionId)) {
-      return { backgroundImage: `url(${purpleBox})` };
-    }
-    if (visitedQuestions.includes(questionId)) {
-      return { backgroundImage: `url(${orangeBox})` };
-    }
-    return {};
-  };
 
   return (
     <div>
