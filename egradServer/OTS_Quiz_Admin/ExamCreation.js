@@ -278,8 +278,7 @@ router.get('/pgExams', async (req, res) => {
 
 
 
-router.get('/subjects', async (req, res) => {
-  // Fetch subjects
+router.get('/pg_subjectss', async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM pg_departments');
     res.json(rows);
@@ -288,8 +287,6 @@ router.get('/subjects', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
 
 
 

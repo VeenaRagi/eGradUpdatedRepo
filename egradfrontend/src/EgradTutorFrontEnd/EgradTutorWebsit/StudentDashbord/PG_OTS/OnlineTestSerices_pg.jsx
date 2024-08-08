@@ -7,6 +7,8 @@ const OnlineTestSerices_pg = () => {
   const [selectedSectionId, setSelectedSectionId] = useState(null);
   const [selectedQuestionId, setSelectedQuestionId] = useState(null);
   const [inputValue, setInputValue] = useState("");
+  const [markedForReview, setMarkedForReview] = useState([]);
+  const [responses, setResponses] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -112,6 +114,54 @@ const OnlineTestSerices_pg = () => {
     });
   };
 
+  const handleMarkForReview = () => {
+    if (!markedForReview.includes(selectedQuestionId)) {
+      setMarkedForReview([...markedForReview, selectedQuestionId]);
+    } else {
+      setMarkedForReview(markedForReview.filter(id => id !== selectedQuestionId));
+    }
+  };
+
+  const handleClearResponse = () => {
+    setResponses(prev => ({
+      ...prev,
+      [selectedQuestionId]: undefined,
+    }));
+    setInputValue("");
+  };
+
+  const handleSubmit = () => {
+    const allQuestions = testData.subjects.flatMap(subject => subject.sections.flatMap(section => section.questions));
+    const allAnswered = allQuestions.every(question => responses[question.question_id] !== undefined);
+
+    if (!allAnswered) {
+      alert("Please answer all questions before submitting.");
+      return;
+    }
+
+    // Submit logic here (e.g., POST request)
+    alert("Quiz submitted successfully!");
+  };
+
+  const handleSaveAndNext = () => {
+    // Save the current response
+    // You can also add validation to ensure that a response is provided before moving to the next question.
+    if (selectedQuestion) {
+      const questionType = selectedQuestion.quesion_type[0].quesionTypeId;
+      if ([1, 2, 7, 8].includes(questionType) && !responses[selectedQuestionId]) {
+        alert("Please select an option before proceeding.");
+        return;
+      }
+      if ([5, 6].includes(questionType) && inputValue === "") {
+        alert("Please enter a response before proceeding.");
+        return;
+      }
+    }
+
+    // Move to the next question
+    handleNextClick();
+  };
+
   if (!testData) {
     return <div>Loading...</div>;
   }
@@ -211,6 +261,8 @@ const OnlineTestSerices_pg = () => {
                     type="radio"
                     name={`question_${selectedQuestion.question_id}`}
                     value={option.option_id}
+                    checked={responses[selectedQuestionId] === option.option_id}
+                    onChange={() => setResponses({ ...responses, [selectedQuestionId]: option.option_id })}
                   />
                   <img
                     src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${option.optionImgName}`}
@@ -228,6 +280,16 @@ const OnlineTestSerices_pg = () => {
                     type="checkbox"
                     name={`question_${selectedQuestion.question_id}`}
                     value={option.option_id}
+                    checked={responses[selectedQuestionId]?.includes(option.option_id)}
+                    onChange={(e) => {
+                      const updatedResponse = responses[selectedQuestionId] || [];
+                      if (e.target.checked) {
+                        updatedResponse.push(option.option_id);
+                      } else {
+                        updatedResponse.splice(updatedResponse.indexOf(option.option_id), 1);
+                      }
+                      setResponses({ ...responses, [selectedQuestionId]: updatedResponse });
+                    }}
                   />
                   <img
                     src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${option.optionImgName}`}
@@ -242,7 +304,10 @@ const OnlineTestSerices_pg = () => {
               <input
                 type="text"
                 value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                  setResponses({ ...responses, [selectedQuestionId]: e.target.value });
+                }}
                 maxLength={1}
               />
               <button onClick={() => handleInput("backspace")}>Backspace</button>
@@ -263,6 +328,12 @@ const OnlineTestSerices_pg = () => {
       <div>
         <button onClick={handlePreviousClick}>Previous</button>
         <button onClick={handleNextClick}>Next</button>
+        <button onClick={handleSaveAndNext}>Save and Next</button>
+        <button onClick={handleMarkForReview}>
+          {markedForReview.includes(selectedQuestionId) ? "Unmark for Review" : "Mark for Review"}
+        </button>
+        <button onClick={handleClearResponse}>Clear Response</button>
+        <button onClick={handleSubmit}>Submit</button>
       </div>
     </div>
   );
