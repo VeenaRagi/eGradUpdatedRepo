@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
-import "./styles/Exam_portal_admin_integration.css";
-import "./styles/otcCss.css";
+// import "./styles/Exam_portal_admin_integration.css";
+// import "./styles/otcCss.css";
 
 import { Link } from "react-router-dom";
+// import "./styles/Leftnav.css";
+// import DocumentUpload_admin from "./DocumentUpload_admin";
 
-import "./styles/Leftnav.css";
-import DocumentUpload_admin from "./DocumentUpload_admin";
-
-import Account_info from "./Account_info.js";
+// import Account_info from "./Account_info.js";
 
 import { FaLock, FaUserAlt, FaImage } from "react-icons/fa";
-import Image_Upload_for_Ac_ADMIN from "./Image_Upload_for_Ac_ADMIN";
-import TestActivation_admin from "./TestActivation_admin";
+// import Image_Upload_for_Ac_ADMIN from "./Image_Upload_for_Ac_ADMIN";
+// import TestActivation_admin from "./TestActivation_admin";
 // import { StudentDashborddountsection } from "../StudentDashboard/Student_dashboard.js";
-import StudentDoubtSection from "./StudentDoubtSection.jsx";
-import Portal_coures_creation_admin from "./Portal_coures_creation_admin.jsx";
-import OvlvidesUpload from "./OvlvidesUpload.jsx";
-import Testcreationadminforms from "./Testcreationadminforms.jsx";
+// import StudentDoubtSection from "./StudentDoubtSection.jsx";
+// import Portal_coures_creation_admin from "./Portal_coures_creation_admin.jsx";
+// import OvlvidesUpload from "./OvlvidesUpload.jsx";
+// import Testcreationadminforms from "./Testcreationadminforms.jsx";
 import PGAdminDashBoardInLeftNav from "./PGAdminDashBoardInLeftNav.jsx";
 import PgAdminExamCreation from "./PgAdminExamCreation.jsx";
 import PGAdminPortalCourseCreation from "./PGAdminPortalCourseCreation.jsx";
 import PGAdminInstructionPage from "./PGAdminInstructionPage.jsx";
 import PGAdminTestCreationForms from "./PGAdminTestCreationForms.jsx";
+// import PGDocumentUpload_admin from "./PGDocumentUploadAdmin.jsx";
+import PGDocumentUploadAdmin from "./PGDocumentUploadAdmin.jsx";
+import PGOvlVideosUpload from "./PGOvlVideosUpload.jsx";
+import PGAccountInfo from "./PGAccountInfo.jsx";
+import PGStudentDoubtSection from "./PGStudentDoubtSection.jsx";
 // import ThemesSection from "./ThemesSection.jsx";
 const STORAGE_KEY = "left_nav_state_admin";
 
@@ -270,19 +274,19 @@ const PGLeftNav = ({decryptedUserIdState}) => {
 
       {showTestcreationadmin ? <PGAdminTestCreationForms /> : null}
 
-      {showDocumentUpload_admin ? <DocumentUpload_admin /> : null}
+      {showDocumentUpload_admin ? <PGDocumentUploadAdmin /> : null}
 
-      {showOVLvideosUpload_admin ? <OvlvidesUpload /> : null}
+      {showOVLvideosUpload_admin ? <PGOvlVideosUpload /> : null}
 
       {showregisteredstudent ? (
         <div className="admin_S_R_INfo">
-          <Account_info decryptedUserIdState={decryptedUserIdState} />
+          <PGAccountInfo decryptedUserIdState={decryptedUserIdState} />
         </div>
       ) : null}
 
-      {showImage_Upload_for_Ac ? <Image_Upload_for_Ac_ADMIN /> : null}
+      {/* {showImage_Upload_for_Ac ? <Image_Upload_for_Ac_ADMIN /> : null} */}
 
-      {showStudentDoubtSection ? <StudentDoubtSection /> : null}
+      {showStudentDoubtSection ? <PGStudentDoubtSection /> : null}
       {/* {showThemesSectionn ? <ThemesSection/> : null} */}
 
     </>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import InstructionsDisplay from "./InstructionDisplay_admin";
+// import InstructionsDisplay from "./InstructionDisplay_admin";
 import base64 from "base64-js";
 import BASE_URL from "../../apiConfig";
 // import "./styles/InstructionPage_admin.css";
-import InstructionDisplay_admin from "./InstructionDisplay_admin";
+// import InstructionDisplay_admin from "./InstructionDisplay_admin";
 
 // import { Link } from "react-router-dom";
 const PGAdminInstructionPage = () => {
@@ -194,7 +194,7 @@ const PGAdminInstructionPage = () => {
           </div>
         )}
         <div className="instruction_content">
-          <InstructionDisplay_admin />
+          {/* <InstructionDisplay_admin /> */}
           {/* <ExcelTable /> */}
         </div>
       </div>

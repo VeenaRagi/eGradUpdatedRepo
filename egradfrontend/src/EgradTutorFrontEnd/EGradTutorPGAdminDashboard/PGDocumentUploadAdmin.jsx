@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./styles/DocumentUpload_admin.css";
+// import "./styles/DocumentUpload_admin.css";///
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import BASE_URL from "../../apiConfig";
 import { FaSearch } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
-const PGDocumentUpload_admin = () => {
+const PGDocumentUploadAdmin = () => {
   const [tests, setTests] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [sections, setSections] = useState([]);
@@ -176,7 +176,7 @@ const PGDocumentUpload_admin = () => {
   );
 };
 
-export default PGDocumentUpload_admin;
+export default PGDocumentUploadAdmin;
 
 export const UploadedDoc = () => {
   const [data, setData] = useState([]);

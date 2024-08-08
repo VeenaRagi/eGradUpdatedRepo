@@ -7,7 +7,7 @@ import { FaSearch } from "react-icons/fa";
 import { useParams } from 'react-router-dom';
 import '../../EgradTutorFrontEnd/EgradtutorPortalsAdmin/styles/Ovlvidesupload.css'
 // import '../../EgradTutorFrontEnd/'
-function PGOvlvidesUpload() {
+function PGOvlVideosUpload() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState("");
@@ -369,4 +369,4 @@ function PGOvlvidesUpload() {
   );
 }
 
-export default PGOvlvidesUpload;
+export default PGOvlVideosUpload;
