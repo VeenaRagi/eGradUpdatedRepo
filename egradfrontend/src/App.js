@@ -47,6 +47,8 @@ import AdminProfile from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/AdminProfi
 import axios from "axios";
 // Test
 import { UserProvider } from "./UserContext";
+// import PGAdminDashboard from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminDashboardIntegration.jsx";
+import PGAdminDashboardIntegration from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminDashboardIntegration.jsx";
 
 const App = () => {
   return (
@@ -319,6 +321,11 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                   path="/CourseAdmin"
                   element={<Exam_portal_admin_integration />}
                 />
+                <Route
+                  path="/PGCourseAdmin"
+                  element={<PGAdminDashboardIntegration/>}
+                />
+                {/* PGCourseAdmin */}
                 <Route path="/adminProfile" element={<AdminProfile />} />
               </Routes>
             </UserProvider>
