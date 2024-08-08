@@ -1510,7 +1510,7 @@ router.get('/fetchStudentDetails', async (req, res) => {
   try {
     const sql = `SELECT ots.*,log.user_Id ,log.username,log.role,log.studentregistationId,log.email FROM otsstudentregistation ots 
                  LEFT JOIN log ON ots.studentregistationId = log.studentregistationId 
-                 WHERE role = 'User'`;
+                 WHERE role = 'User' AND branchId=1 `;
     const [rows] = await db.query(sql);
     console.log(rows)
     res.send(rows);
@@ -1686,6 +1686,19 @@ router.put(
     }
   }
 );
-
+// ============================for pg=============================
+router.get('/fetchStudentDetailsForPG', async (req, res) => {
+  try {
+    const sql = `SELECT ots.*,log.user_Id ,log.username,log.role,log.studentregistationId,log.email FROM otsstudentregistation ots 
+                 LEFT JOIN log ON ots.studentregistationId = log.studentregistationId 
+                 WHERE role = 'User' AND branchId=2 `;
+    const [rows] = await db.query(sql);
+    console.log(rows)
+    res.send(rows);
+  } catch (error) {
+    console.log(error, "this is the error");
+    res.status(500).send('Error fetching student details');
+  }
+});
 module.exports = router;
 
