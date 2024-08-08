@@ -420,7 +420,8 @@ const PGQuizPage = () => {
                      answeredmarkedForReviewCount={answeredmarkedForReviewCount}
                      markedForReviewCount={markedForReviewCount}
                      VisitedCount={VisitedCount}
-                    //  selectedSubject={selectedSubject}
+                     selectedSubject={selectedSubject}
+                     selectedSection={selectedSection}
                     questionOptions={questionOptions}
                      updateQuestionStatus={updateQuestionStatus}
                      seconds={600}
