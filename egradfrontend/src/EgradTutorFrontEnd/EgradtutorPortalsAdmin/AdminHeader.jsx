@@ -77,7 +77,8 @@ const handleLogOut=()=>{
             )}</div>
           <div className={` _fBetween adminHeaderNavLinks ${showLinks? "menu-link mobileMenuLink " : "menu-link "}`}>
             <Link to='/WebsiteAdmin'>Website Admin</Link>
-            <Link to='/CourseAdmin'>Course Admin</Link>
+            <Link to='/CourseAdmin'>UG Course Admin</Link>
+            <Link to='/PGCourseAdmin'>PG Course Admin</Link>
             <Link to='/adminProfile'>Profile</Link>
             <Link to={`/`}><IoHome />Home</Link>
             <button onClick={handleLogOut}> LogOut</button>
