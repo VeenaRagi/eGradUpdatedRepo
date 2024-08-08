@@ -393,6 +393,45 @@ router.post('/send-reset-code', async (req, res) => {
 
 // Reset password
 // Reset password endpoint
+// router.post('/reset-password', async (req, res) => {
+//   const { email, code, newPassword } = req.body;
+
+//   console.log('Reset password request:', { email, code, newPassword });
+
+//   try {
+//     const user = await getUserByEmail(email);
+
+//     if (!user) {
+//       console.log(`User not found for email: ${email}`);
+//       return res.status(404).send('User not found');
+//     }
+
+//     console.log(`User found: ${JSON.stringify(user)}`);
+
+//     // Log the values for comparison
+//     console.log(`Comparing reset code for email: ${email}. Expected: ${user.reset_code}, Received: ${code}`);
+
+//     if (user.reset_code?.toString().trim() !== code.trim()) {
+//       console.log(`Invalid reset code for email: ${email}. Expected: ${user.reset_code}, Received: ${code}`);
+//       return res.status(400).send('Invalid reset code');
+//     }
+
+//     const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+//     await updateUserPasswordByEmail(email, hashedPassword);
+
+//     // Clear the reset code
+//     await db.query('UPDATE log SET reset_code = NULL WHERE email = ?', [email]);
+
+//     console.log(`Password reset successfully for email: ${email}`);
+//     res.send('Password reset successfully');
+//   } catch (error) {
+//     console.error('Error resetting password:', error);
+//     res.status(500).send('Server error');
+//   }
+// });
+
+
 router.post('/reset-password', async (req, res) => {
   const { email, code, newPassword } = req.body;
 
@@ -401,15 +440,12 @@ router.post('/reset-password', async (req, res) => {
   try {
     const user = await getUserByEmail(email);
 
+    console.log(`User found: ${JSON.stringify(user)}`);
+
     if (!user) {
       console.log(`User not found for email: ${email}`);
       return res.status(404).send('User not found');
     }
-
-    console.log(`User found: ${JSON.stringify(user)}`);
-
-    // Log the values for comparison
-    console.log(`Comparing reset code for email: ${email}. Expected: ${user.reset_code}, Received: ${code}`);
 
     if (user.reset_code?.toString().trim() !== code.trim()) {
       console.log(`Invalid reset code for email: ${email}. Expected: ${user.reset_code}, Received: ${code}`);
@@ -419,8 +455,8 @@ router.post('/reset-password', async (req, res) => {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     await updateUserPasswordByEmail(email, hashedPassword);
+    console.log(`Password updated for email: ${email}`);
 
-    // Clear the reset code
     await db.query('UPDATE log SET reset_code = NULL WHERE email = ?', [email]);
 
     console.log(`Password reset successfully for email: ${email}`);
@@ -430,8 +466,6 @@ router.post('/reset-password', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-
-
 
 
 

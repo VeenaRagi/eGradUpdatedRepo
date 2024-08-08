@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
@@ -32,16 +33,50 @@ const ForgotPassword = () => {
     }
   };
 
+  // const handleResetPassword = async (e) => {
+  //   e.preventDefault();
+
+  //   // if (newPassword !== confirmPassword) {
+  //   //   alert('Passwords do not match');
+  //   //   return;
+  //   // }
+
+  //   // console.log('Reset password request:', { email, code, newPassword });
+
+  //   try {
+  //     const response = await fetch('http://localhost:5001/StudentRegistationPage/reset-password', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ email, code, newPassword }),
+  //     });
+
+  //     if (response.ok) {
+  //       alert('Password reset successfully');
+  //       navigate('/UserLogin');
+  //     } else {
+  //       const errorMessage = await response.text();
+  //       alert(errorMessage);
+  //     }
+  //   } catch (error) {
+  //   //   console.error('Error resetting password:', error);
+  //     alert('Error resetting password');
+  //   }
+  // };
+
+
+
   const handleResetPassword = async (e) => {
     e.preventDefault();
-
+  
     if (newPassword !== confirmPassword) {
       alert('Passwords do not match');
       return;
     }
-
-    // console.log('Reset password request:', { email, code, newPassword });
-
+  
+    console.log('Reset password request data:', { email, code, newPassword });
+  
     try {
       const response = await fetch('http://localhost:5001/StudentRegistationPage/reset-password', {
         method: 'POST',
@@ -50,19 +85,24 @@ const ForgotPassword = () => {
         },
         body: JSON.stringify({ email, code, newPassword }),
       });
-
+  
       if (response.ok) {
         alert('Password reset successfully');
         navigate('/UserLogin');
       } else {
         const errorMessage = await response.text();
-        alert(errorMessage);
+        alert(`Error: ${errorMessage}`);
       }
     } catch (error) {
-    //   console.error('Error resetting password:', error);
+      console.error('Error resetting password:', error);
       alert('Error resetting password');
     }
   };
+  
+
+
+
+
 
   return (
     <div className="container mt-4">
