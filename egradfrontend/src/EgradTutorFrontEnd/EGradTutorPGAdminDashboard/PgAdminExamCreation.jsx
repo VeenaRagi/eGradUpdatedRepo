@@ -71,7 +71,7 @@ function PgAdminExamCreation() {
   useEffect(() => {
     // Fetch subjects from the backend when the component mounts
     axios
-      .get(`${BASE_URL}/ExamCreation/subjects`)
+      .get(`${BASE_URL}/ExamCreation/pg_subjectss`)
       .then((response) => {
         if (Array.isArray(response.data)) {
           setSubjects(response.data);
@@ -289,7 +289,7 @@ function PgAdminExamCreation() {
           <label>Subjects:</label>
           {subjects.length > 0 ? (
             subjects.map((subject) => (
-              <li key={subject.departmentId}>
+              <li key={subject.subjectIdsame}>
                 <label>{subject.departmentName}</label>
                 <input
                   className="inputLable"
