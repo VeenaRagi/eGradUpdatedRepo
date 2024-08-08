@@ -48,7 +48,17 @@ import axios from "axios";
 // Test
 import { UserProvider } from "./UserContext";
 
-function App({ decryptedUserIdState, usersData,Branch_Id }) {
+const App = () => {
+  return (
+    <ThemeProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </ThemeProvider>
+  );
+};
+
+function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate=useNavigate()
@@ -140,7 +150,6 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
         {serverError ? (
           <NotFound />
         ) : (
-          <Router>
             <UserProvider>
               <Routes>
                 <Route path="/SuperAdminLogin" element={<SuperAdminLogin />} />
@@ -313,7 +322,6 @@ function App({ decryptedUserIdState, usersData,Branch_Id }) {
                 <Route path="/adminProfile" element={<AdminProfile />} />
               </Routes>
             </UserProvider>
-          </Router>
         )}
       </div>
     </ThemeProvider>
