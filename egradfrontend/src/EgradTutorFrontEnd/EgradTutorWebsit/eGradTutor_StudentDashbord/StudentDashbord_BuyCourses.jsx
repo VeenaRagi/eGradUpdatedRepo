@@ -3,11 +3,12 @@ import BASE_URL from "../../../apiConfig";
 import { PiHandTapBold, PiHandTapThin } from "react-icons/pi";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-const StudentDashbord_BuyCourses = ({decryptedUserIdState,Branch_Id }) => {
+const StudentDashbord_BuyCourses = ({decryptedUserIdState,branchIdFromLS }) => {
   const navigate = useNavigate(); 
   const [unPurchasedCourses, setUnPurchasedCourses] = useState([]);
   const [popupContent, setPopupContent] = useState(null);
   const [selectedPortal, setSelectedPortal] = useState("");
+  const  Branch_Id= branchIdFromLS;
   const fetchUnPurchasedCourses = async () => {
     if (!decryptedUserIdState) {
       return;

@@ -33,7 +33,9 @@
   input[type="text"],
   input[type="number"],
   input[type="date"],
-  input[type="time"] {
+  input[type="time"],
+  input[type="file"]
+  {
     /* width: 90%; */
     padding: 6px;
     border: none;
@@ -53,10 +55,10 @@
     height: inherit;
     width: inherit;
   }
-  input[type="file"] {
+  /* input[type="file"] {
     font-size: inherit;
     width: inherit;
-  }
+  } */
   .textColor {
     font-size: 19px;
     letter-spacing: 2px;
