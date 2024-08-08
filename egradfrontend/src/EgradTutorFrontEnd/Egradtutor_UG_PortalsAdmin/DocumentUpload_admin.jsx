@@ -101,7 +101,7 @@ const DocumentUpload_admin = () => {
       </div>
       <form className="admin_document_upload_formm">
         <div className="uploadedDocument_container examSubjects_-contant ">
-          <div className="uploadedDocumentFilds  ">
+          <div className="uploadedDocumentFilds grid-one-fr">
             <label htmlFor="testSelect">Select Test:</label>
             <select
               id="testSelect"
@@ -121,7 +121,7 @@ const DocumentUpload_admin = () => {
 
           </div>
 
-          <div className="uploadedDocumentFilds">
+          <div className="uploadedDocumentFilds grid-one-fr">
             <label htmlFor="subjectSelect">Select Subject:</label>
             <select
               id="subjectSelect"
@@ -138,7 +138,7 @@ const DocumentUpload_admin = () => {
 
           </div>
 
-          <div className="uploadedDocumentFilds">
+          <div className="uploadedDocumentFilds grid-one-fr">
             <label htmlFor="sectionsSelect">Select Sections:</label>
             <select
               id="sectionsSelect"
@@ -155,14 +155,14 @@ const DocumentUpload_admin = () => {
 
           </div>
 
-          <div className="uploadedDocumentFilds">
+          <div className="uploadedDocumentFilds grid-one-fr">
             <label htmlFor="">Upload file</label>
             <input type="file" accept=".docx" onChange={handleFileChange} id="uploadInputFile_ovl_upload_file" />
 
           </div>
         </div>
 
-        <div className="uploadedDocumentFilds" style={{ float: "right" }} >
+        <div className="uploadedDocumentFilds grid-one-fr" style={{ float: "right" }} >
           <button className="ots_-createBtn" onClick={(e) => handleUpload(e)}>
             Upload
           </button>

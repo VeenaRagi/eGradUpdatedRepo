@@ -84,9 +84,9 @@ const AccountInfo = () => {
         <p className='no_data_info_for_admin_account_info_para'>No user data available</p>
       ) : (
         <div className='tttttttttt'>
-          <ul className='admin_ul_container'>
+          <ul className='admin_ul_container ul-pd-0'>
             {userData.map(user => (
-              <li className='admin_img_container' key={user.studentRegistationId}>
+              <li className='admin_img_container ' key={user.studentRegistationId}>
                 <div style={{height:"100px",width:"100px"}}>
                 <img
                   className="users_profile_img_admin"

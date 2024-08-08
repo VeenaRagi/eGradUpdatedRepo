@@ -69,7 +69,9 @@ const handleSendSolution = async (doubtId) => {
 
   return (
     <div className="doubtsectionnodatapater">
-      {/* <h2>Student Doubt Section</h2> */}
+      <div className=" create_exam_container otsMainPages" >
+        <h2 className="textColor">Student Doubt Section </h2>
+        </div>
       {console.log("doubtData:", doubtData)}
       {doubtData && doubtData.questions && doubtData.questions.length > 0 ? (
         doubtData.questions.map((item, index) => (

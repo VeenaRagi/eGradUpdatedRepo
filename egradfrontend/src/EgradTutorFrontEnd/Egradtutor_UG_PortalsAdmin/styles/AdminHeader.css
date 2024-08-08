@@ -26,16 +26,7 @@
     gap: 1rem;
     align-items: center;
     justify-content: center;
-    
 }
-
-/* ._fBetween.adminHeaderNavLinks.menu-link {
-display: flex;
-}
-._fBetween.adminHeaderNavLinks.menu-link.mobileMenuLink {
-    display: none;
-
-} */
 .adminHeaderhamburgerMenu{
     position: relative;
 }
@@ -43,7 +34,6 @@ display: flex;
 .adminHeaderNavLinks a {
     background-color: #0d2842;
     padding: 5px 10px;
-    /* width: 100%; */
     text-align: center;
     color: white;
     border-radius: 10px;
@@ -106,4 +96,99 @@ display: flex;
         width: 160px;
         /* border: 1px solid black; */
     }
+}
+
+/*  */
+/* .adminWithW80 {
+    width: 80%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 0 auto;
+} */
+.adminWithW80{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 4px 0;
+}
+.adminHeaderPC {
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    /* padding: 0 2rem; */
+    width: 80%;
+    background-color: white;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+    margin: auto;
+}
+
+.adminHeaderNavToToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+.adminHeaderNavToToggle  a,.logOutButton{
+    padding:  6px 10px ;
+    background-color: #0d2842;
+    color: white;
+    border-radius: 20px;
+    font-weight: 400;
+}
+.homeWithIconAH{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.adminHeaderSC{
+    width: 100%;
+}
+.adminHeaderNavRefBtn{
+    background-color: #0d2842;
+    cursor: pointer;
+    border: none;
+    display: none;
+    color: white;
+}
+@media only screen and (max-width: 1440px) {
+.adminHeaderPC {
+    width: 98%;
+}
+}
+@media only screen and (max-width: 920px) {
+        .adminHeaderPC .adminHeaderNavRefBtn{
+            display: block;
+            /* opacity: 1; */
+            z-index: 2;
+        }
+        .adminHeaderPC .adminHeaderNavToToggle {
+            position: fixed;
+            /* top: 0; */
+            right: 0;
+            /* height: 250px; */
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.4rem;
+            z-index: 1;
+            background-color: #0a2743;
+            transition: 1s;
+            transform: translateY(-100vh);
+            display: flex;
+            flex-direction: column;
+            padding-top: 4rem;
+            padding-bottom: 2rem;
+        }
+        .adminHeaderPC .adminHeaderNavToToggle a,.logOutButton{
+            background-color: transparent;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid white ;
+            border-radius: unset;
+            font-weight: 400;
+        }
+        .adminHeaderPC .navHeaderAdmin{
+            transform: none;
+        }
 }
