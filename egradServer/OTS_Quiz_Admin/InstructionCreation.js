@@ -21,8 +21,9 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+// const upload = multer({ storage });
 
+const upload = multer({ dest: 'uploads/' });
 
 
   
@@ -917,6 +918,34 @@ const upload = multer({ storage });
   });
   
 
+  
 
+
+  router.post("/InstructionsUpdate", upload.single("file"), async (req, res) => {
+    const docxFilePath = path.join('uploads', req.file.filename);
+  
+    try {
+      // Check if file is a .docx file
+      if (req.file.mimetype !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+        throw new Error('The uploaded file is not a .docx file');
+      }
+  
+      // Read the content of the Word document
+      const fileContent = await mammoth.extractRawText({ path: docxFilePath });
+      const result = await mammoth.convertToHtml({ path: docxFilePath });
+      const htmlContent = result.value;
+  
+      res.json({ success: true, message: "File and image uploaded successfully." });
+    } catch (error) {
+      console.error("Error uploading file and image:", error);
+      res.status(500).json({ success: false, message: "Failed to upload file and image.", error: error.message });
+    } finally {
+      // Cleanup uploaded file
+      fs.unlink(docxFilePath, (err) => {
+        if (err) console.error("Error deleting file:", err);
+      });
+    }
+  });
+  
 
   module.exports = router;
