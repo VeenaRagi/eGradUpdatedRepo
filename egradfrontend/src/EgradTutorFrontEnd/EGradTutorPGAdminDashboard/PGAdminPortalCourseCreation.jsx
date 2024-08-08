@@ -70,7 +70,7 @@ function PGAdminPortalCourseCreation() {
   //--------------------------------end------------------------------------------
   //-------------------------------------constant apis ----------------------
   useEffect(() => {
-    fetch(`${BASE_URL}/CoureseCreation/pgExams`)
+    fetch(`${BASE_URL}/CoureseCreation/courese-exams`)
       .then((response) => response.json())
       .then((data) => {
         setExams(data);
@@ -959,8 +959,8 @@ function PGAdminPortalCourseCreation() {
                   >
                     <option value="">Select exams</option>
                     {exams.map((exams) => (
-                      <option key={exams.examId} value={exams.EntranceExams_Id}>
-                        {exams.EntranceExams_name}
+                      <option key={exams.examId} value={exams.examId}>
+                        {exams.examName}
                       </option>
                     ))}
                   </select>

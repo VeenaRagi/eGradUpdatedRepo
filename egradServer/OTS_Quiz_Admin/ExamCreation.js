@@ -288,5 +288,25 @@ router.get('/subjectss', async (req, res) => {
   }
 });
 
+router.get('/createdExams', async (req, res) => {
+  // Display selected subjects in table
+  try {
+    const query = `
+     SELECT e.examId, e.examName, e.startDate, e.endDate, GROUP_CONCAT(pgd.departmentName) AS subjects
+        FROM exams AS e
+        JOIN exam_creation_table AS ec ON e.examId = ec.examId
+        JOIN pg_departments AS pgd ON ec.subjectId = pgd.departmentId
+        GROUP BY e.examId;
+    `;
+    const [rows] = await db.query(query);
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
 
 module.exports = router;
