@@ -1,6 +1,7 @@
 import React from 'react'
 import AdminHeader from '../EgradtutorPortalsAdmin/AdminHeader'
 import PGAdminDashBoardInLeftNav from './PGAdminDashBoardInLeftNav'
+import PGLeftNav from './PGLeftNav'
 
 const PGAdminDashboardIntegration = () => {
     return (
@@ -8,7 +9,7 @@ const PGAdminDashboardIntegration = () => {
             <AdminHeader/>
             <div>PGAdminDashboard</div>
             {/* <p>Need to create left nav</p> */}
-            <PGAdminDashBoardInLeftNav/>
+            <PGLeftNav/>
         </>
     )
 }
