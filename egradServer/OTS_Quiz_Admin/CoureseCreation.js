@@ -1595,17 +1595,7 @@ router.put(
   }
 );
 // for pg examss==========================================
-router.get('/pgExams', async (req, res) => {
-  const query = 'SELECT * FROM entrance_exams WHERE Branch_Id=2';
-  const examId = req.params.examId;
-  try {
-    const [result] = await db.query(query, [examId]);
-    res.json(result);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+
 
 router.get("/courese-exam-subjects/:examId/pgSubjects", async (req, res) => {
   const examId = req.params.examId;
@@ -1624,5 +1614,8 @@ router.get("/courese-exam-subjects/:examId/pgSubjects", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+
+
 
 module.exports = router;
