@@ -1594,5 +1594,35 @@ router.put(
     }
   }
 );
+// for pg examss==========================================
+router.get('/pgExams', async (req, res) => {
+  const query = 'SELECT * FROM entrance_exams WHERE Branch_Id=2';
+  const examId = req.params.examId;
+  try {
+    const [result] = await db.query(query, [examId]);
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.get("/courese-exam-subjects/:examId/pgSubjects", async (req, res) => {
+  const examId = req.params.examId;
+
+  try {
+    const query = `
+        SELECT s.subjectId, s.subjectName
+        FROM subjects AS s
+        JOIN exam_creation_table AS ec ON s.subjectId = ec.subjectId
+        WHERE ec.examId = ?
+      `;
+    const [rows] = await db.query(query, [examId]);
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 module.exports = router;
