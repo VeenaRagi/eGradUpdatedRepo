@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+// Import your images
+import greenBox from "../asserts/greenBox.png";
+import orangeBox from "../asserts/orangeBox.png";
+import purpleBox from "../asserts/purpleBox.png";
+import purpleTickBox from "../asserts/purpleTickBox.png";
+
+
+
 const OnlineTestSerices_pg = () => {
   const [testData, setTestData] = useState(null);
   const [selectedSubjectId, setSelectedSubjectId] = useState(null);
@@ -9,13 +17,15 @@ const OnlineTestSerices_pg = () => {
   const [inputValue, setInputValue] = useState("");
   const [markedForReview, setMarkedForReview] = useState([]);
   const [responses, setResponses] = useState({});
+  const [visitedQuestions, setVisitedQuestions] = useState([]);
+  const [savedQuestions, setSavedQuestions] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
           `http://localhost:5001/QuizPage/PG_QuestionOptions/5/55`
-        ); // Replace with actual IDs
+        );
         const data = response.data;
 
         // Set default subject, section, and question
@@ -59,6 +69,9 @@ const OnlineTestSerices_pg = () => {
 
   const handleQuestionClick = (questionId) => {
     setSelectedQuestionId(questionId);
+    if (!visitedQuestions.includes(questionId)) {
+      setVisitedQuestions([...visitedQuestions, questionId]);
+    }
   };
 
   const handleNextClick = () => {
@@ -69,17 +82,29 @@ const OnlineTestSerices_pg = () => {
     const subjectIndex = testData.subjects.findIndex(subject => subject.subjectId === selectedSubjectId);
 
     if (questionIndex < selectedSection.questions.length - 1) {
-      setSelectedQuestionId(selectedSection.questions[questionIndex + 1].question_id);
+      const nextQuestionId = selectedSection.questions[questionIndex + 1].question_id;
+      setSelectedQuestionId(nextQuestionId);
+      if (!visitedQuestions.includes(nextQuestionId)) {
+        setVisitedQuestions([...visitedQuestions, nextQuestionId]);
+      }
     } else if (sectionIndex < selectedSubject.sections.length - 1) {
       const nextSection = selectedSubject.sections[sectionIndex + 1];
       setSelectedSectionId(nextSection.sectionId);
-      setSelectedQuestionId(nextSection.questions[0].question_id);
+      const nextQuestionId = nextSection.questions[0].question_id;
+      setSelectedQuestionId(nextQuestionId);
+      if (!visitedQuestions.includes(nextQuestionId)) {
+        setVisitedQuestions([...visitedQuestions, nextQuestionId]);
+      }
     } else if (subjectIndex < testData.subjects.length - 1) {
       const nextSubject = testData.subjects[subjectIndex + 1];
       setSelectedSubjectId(nextSubject.subjectId);
       const nextSubjectFirstSection = nextSubject.sections[0];
       setSelectedSectionId(nextSubjectFirstSection.sectionId);
-      setSelectedQuestionId(nextSubjectFirstSection.questions[0].question_id);
+      const nextQuestionId = nextSubjectFirstSection.questions[0].question_id;
+      setSelectedQuestionId(nextQuestionId);
+      if (!visitedQuestions.includes(nextQuestionId)) {
+        setVisitedQuestions([...visitedQuestions, nextQuestionId]);
+      }
     }
   };
 
@@ -91,17 +116,29 @@ const OnlineTestSerices_pg = () => {
     const subjectIndex = testData.subjects.findIndex(subject => subject.subjectId === selectedSubjectId);
 
     if (questionIndex > 0) {
-      setSelectedQuestionId(selectedSection.questions[questionIndex - 1].question_id);
+      const prevQuestionId = selectedSection.questions[questionIndex - 1].question_id;
+      setSelectedQuestionId(prevQuestionId);
+      if (!visitedQuestions.includes(prevQuestionId)) {
+        setVisitedQuestions([...visitedQuestions, prevQuestionId]);
+      }
     } else if (sectionIndex > 0) {
       const previousSection = selectedSubject.sections[sectionIndex - 1];
       setSelectedSectionId(previousSection.sectionId);
-      setSelectedQuestionId(previousSection.questions[previousSection.questions.length - 1].question_id);
+      const prevQuestionId = previousSection.questions[previousSection.questions.length - 1].question_id;
+      setSelectedQuestionId(prevQuestionId);
+      if (!visitedQuestions.includes(prevQuestionId)) {
+        setVisitedQuestions([...visitedQuestions, prevQuestionId]);
+      }
     } else if (subjectIndex > 0) {
       const previousSubject = testData.subjects[subjectIndex - 1];
       setSelectedSubjectId(previousSubject.subjectId);
       const previousSubjectLastSection = previousSubject.sections[previousSubject.sections.length - 1];
       setSelectedSectionId(previousSubjectLastSection.sectionId);
-      setSelectedQuestionId(previousSubjectLastSection.questions[previousSubjectLastSection.questions.length - 1].question_id);
+      const prevQuestionId = previousSubjectLastSection.questions[previousSubjectLastSection.questions.length - 1].question_id;
+      setSelectedQuestionId(prevQuestionId);
+      if (!visitedQuestions.includes(prevQuestionId)) {
+        setVisitedQuestions([...visitedQuestions, prevQuestionId]);
+      }
     }
   };
 
@@ -128,6 +165,7 @@ const OnlineTestSerices_pg = () => {
       [selectedQuestionId]: undefined,
     }));
     setInputValue("");
+    setSavedQuestions(savedQuestions.filter(id => id !== selectedQuestionId));
   };
 
   const handleSubmit = () => {
@@ -144,8 +182,6 @@ const OnlineTestSerices_pg = () => {
   };
 
   const handleSaveAndNext = () => {
-    // Save the current response
-    // You can also add validation to ensure that a response is provided before moving to the next question.
     if (selectedQuestion) {
       const questionType = selectedQuestion.quesion_type[0].quesionTypeId;
       if ([1, 2, 7, 8].includes(questionType) && !responses[selectedQuestionId]) {
@@ -156,10 +192,9 @@ const OnlineTestSerices_pg = () => {
         alert("Please enter a response before proceeding.");
         return;
       }
+      setSavedQuestions([...savedQuestions, selectedQuestionId]);
+      handleNextClick();
     }
-
-    // Move to the next question
-    handleNextClick();
   };
 
   if (!testData) {
@@ -176,10 +211,21 @@ const OnlineTestSerices_pg = () => {
     ? selectedSection.questions.find((question) => question.question_id === selectedQuestionId)
     : selectedSubject.questions.find((question) => question.question_id === selectedQuestionId);
 
-  // Console logs for debugging
-  console.log("Selected Question:", selectedQuestion);
-  console.log("Selected Question Options:", selectedQuestion?.options);
-  console.log("Selected Question QType:", selectedQuestion?.quesion_type);
+  const getButtonStyle = (questionId) => {
+    if (savedQuestions.includes(questionId) && markedForReview.includes(questionId)) {
+      return { backgroundImage: `url(${purpleTickBox})` };
+    }
+    if (savedQuestions.includes(questionId)) {
+      return { backgroundImage: `url(${greenBox})` };
+    }
+    if (markedForReview.includes(questionId)) {
+      return { backgroundImage: `url(${purpleBox})` };
+    }
+    if (visitedQuestions.includes(questionId)) {
+      return { backgroundImage: `url(${orangeBox})` };
+    }
+    return {};
+  };
 
   return (
     <div>
@@ -190,9 +236,9 @@ const OnlineTestSerices_pg = () => {
             key={subject.subjectId}
             onClick={() => handleSubjectClick(subject.subjectId)}
             style={{
-              cursor: "pointer",
-              color: selectedSubjectId === subject.subjectId ? "blue" : "black",
-            }}
+                cursor: "pointer",
+                fontWeight: selectedSubjectId === subject.subjectId ? "bold" : "normal",
+              }}
           >
             {subject.SubjectName}
           </h2>
@@ -238,8 +284,11 @@ const OnlineTestSerices_pg = () => {
               key={question.question_id}
               onClick={() => handleQuestionClick(question.question_id)}
               style={{
-                backgroundColor: selectedQuestionId === question.question_id ? "blue" : "white",
-                color: selectedQuestionId === question.question_id ? "white" : "black",
+                ...getButtonStyle(question.question_id),
+                backgroundSize: "cover",
+                color: "black",
+                width: "50px",
+                height: "50px",
               }}
             >
               {index + 1}
@@ -325,7 +374,7 @@ const OnlineTestSerices_pg = () => {
           )}
         </div>
       )}
-      <div>
+       <div>
         <button onClick={handlePreviousClick}>Previous</button>
         <button onClick={handleNextClick}>Next</button>
         <button onClick={handleSaveAndNext}>Save and Next</button>
