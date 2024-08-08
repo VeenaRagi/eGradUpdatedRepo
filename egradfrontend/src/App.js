@@ -49,6 +49,7 @@ import axios from "axios";
 import { UserProvider } from "./UserContext";
 // import PGAdminDashboard from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminDashboardIntegration.jsx";
 import PGAdminDashboardIntegration from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminDashboardIntegration.jsx";
+import OnlineTestSerices_pg from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/OnlineTestSerices_pg.jsx";
 
 const App = () => {
   return (
@@ -327,6 +328,7 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                 />
                 {/* PGCourseAdmin */}
                 <Route path="/adminProfile" element={<AdminProfile />} />
+                <Route path="/ots" element={<OnlineTestSerices_pg/>}/>
               </Routes>
             </UserProvider>
         )}
