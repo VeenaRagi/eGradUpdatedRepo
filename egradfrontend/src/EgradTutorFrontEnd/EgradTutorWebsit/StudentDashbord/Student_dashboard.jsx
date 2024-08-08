@@ -108,34 +108,34 @@ useEffect(() => {
     
   // const { Branch_Id } = useParams();
 
-const Branch_Id =2
+// const Branch_Id =2
 // const BranchId
 
-const [branches, setBranches] = useState([]);
-const [loading, setLoading] = useState(true);
+// const [branches, setBranches] = useState([]);
+// const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  const fetchBranches = async () => {
-    if (!Branch_Id) return;
+// useEffect(() => {
+//   const fetchBranches = async () => {
+//     if (!Branch_Id) return;
 
-    try {
-      const response = await fetch(`${BASE_URL}/LandingPageExamData/branch/${Branch_Id}`);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      setBranches(data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching branches:', error);
-      setLoading(false);
-    }
-  };
+//     try {
+//       const response = await fetch(`${BASE_URL}/LandingPageExamData/branch/${Branch_Id}`);
+//       if (!response.ok) {
+//         throw new Error('Network response was not ok');
+//       }
+//       const data = await response.json();
+//       setBranches(data);
+//       setLoading(false);
+//     } catch (error) {
+//       console.error('Error fetching branches:', error);
+//       setLoading(false);
+//     }
+//   };
 
-  fetchBranches();
-}, [Branch_Id]);
-console.log("shinchannnnnnnnnn")
-console.log('Branch_Id', Branch_Id);
+//   fetchBranches();
+// }, [Branch_Id]);
+// console.log("shinchannnnnnnnnn")
+// console.log('Branch_Id', Branch_Id);
 
   return (
     <>
@@ -162,7 +162,7 @@ console.log('Branch_Id', Branch_Id);
 
             usersData={usersData}
             decryptedUserIdState={decryptedUserIdState}
-            Branch_Id={Branch_Id}
+            // Branch_Id={Branch_Id}
             branchIdFromLS={branchIdFromLS}
             // decryptedBranchId={decryptedBranchId}
           />
