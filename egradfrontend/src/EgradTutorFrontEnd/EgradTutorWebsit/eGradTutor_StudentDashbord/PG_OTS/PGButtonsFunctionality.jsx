@@ -104,119 +104,131 @@ const PGButtonsFunctionality = ({
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [isPaused, setIsPaused] = useState(false);
   const [testName, setTestName] = useState("");
-  // const renderQuestionButtons = Array.isArray(questionOptions.questions)
-  //   ? questionOptions.questions.map((question, index) => {
-  //       let className = "right_bar_Buttons ";
-  //       const questionKey = question.id || index;
-  //       // const questionStatusAtIndex = questionStatus && questionStatus[index];
-  //       let questionStatusAtIndex;
-  //       // Set the status of the first button to "notAnswered" by default
-  //       if (index === 0 && !questionStatus[index]) {
-  //         questionStatusAtIndex = "notAnswered";
-  //       } else {
-  //         questionStatusAtIndex = questionStatus[index];
-  //       }
-
-  //       if (questionStatusAtIndex === "answered") {
-  //         className += " instruction-btn1";
-  //       } else if (questionStatusAtIndex === "notAnswered") {
-  //         className += " instruction-btn2";
-  //       } else if (questionStatusAtIndex === "marked") {
-  //         className += " instruction-btn3";
-  //       } else if (questionStatusAtIndex === "Answered but marked for review") {
-  //         className += " instruction-btn4";
-  //       } else if (questionStatusAtIndex === "notVisited") {
-  //         className += " instruction-btn5";
-  //       }
-
-  //       // Highlight the current question being displayed
-  //       if (index === activeQuestion) {
-  //         className += " active-question";
-  //       }
-  //       // Different tooltip text for each button
-  //       let tooltipText = "";
-  //       if (questionStatusAtIndex === "answered") {
-  //         tooltipText = "Answered";
-  //       } else if (questionStatusAtIndex === "notAnswered") {
-  //         tooltipText = "Not Answered";
-  //       } else if (questionStatusAtIndex === "marked") {
-  //         tooltipText = "Marked for review";
-  //       } else if (questionStatusAtIndex === "Answered but marked for review") {
-  //         tooltipText = "Answered but marked for review";
-  //       } else if (questionStatusAtIndex === "notVisited") {
-  //         tooltipText = "Not Visited";
-  //       }
-
-  //       return (
-  //         <li key={questionKey}>
-  //           <button
-  //             onClick={() => handleButtonClick(index + 1)}
-  //             className={className}
-  //             title={tooltipText}
-  //           >
-  //             {index + 1}
-  //           </button>
-  //         </li>
-  //       );
-  //     })
-  //   : null;
-  const renderQuestionButtons = Array.isArray(questions)
-  ? questions.map((question, index) => {
-      let className = "right_bar_Buttons ";
-      const questionKey = question.question_id || index;
-      let questionStatusAtIndex;
+ 
+  // const renderQuestionButtons = Array.isArray(questions)
+  // ? questions.map((question, index) => {
+  //     let className = "right_bar_Buttons ";
+  //     const questionKey = question.question_id || index;
+  //     let questionStatusAtIndex;
       
-      // Set the status of the first button to "notAnswered" by default
-      if (index === 0 && !questionStatus[index]) {
-        questionStatusAtIndex = "notAnswered";
-      } else {
-        questionStatusAtIndex = questionStatus[index];
-      }
+  //     // Set the status of the first button to "notAnswered" by default
+  //     if (index === 0 && !questionStatus[index]) {
+  //       questionStatusAtIndex = "notAnswered";
+  //     } else {
+  //       questionStatusAtIndex = questionStatus[index];
+  //     }
 
-      if (questionStatusAtIndex === "answered") {
-        className += " instruction-btn1";
-      } else if (questionStatusAtIndex === "notAnswered") {
-        className += " instruction-btn2";
-      } else if (questionStatusAtIndex === "marked") {
-        className += " instruction-btn3";
-      } else if (questionStatusAtIndex === "Answered but marked for review") {
-        className += " instruction-btn4";
-      } else if (questionStatusAtIndex === "notVisited") {
-        className += " instruction-btn5";
-      }
+  //     if (questionStatusAtIndex === "answered") {
+  //       className += " instruction-btn1";
+  //     } else if (questionStatusAtIndex === "notAnswered") {
+  //       className += " instruction-btn2";
+  //     } else if (questionStatusAtIndex === "marked") {
+  //       className += " instruction-btn3";
+  //     } else if (questionStatusAtIndex === "Answered but marked for review") {
+  //       className += " instruction-btn4";
+  //     } else if (questionStatusAtIndex === "notVisited") {
+  //       className += " instruction-btn5";
+  //     }
 
-      // Highlight the current question being displayed
-      if (index === activeQuestion) {
-        className += " active-question";
-      }
+  //     // Highlight the current question being displayed
+  //     if (index === activeQuestion) {
+  //       className += " active-question";
+  //     }
       
-      // Different tooltip text for each button
-      let tooltipText = "";
-      if (questionStatusAtIndex === "answered") {
-        tooltipText = "Answered";
-      } else if (questionStatusAtIndex === "notAnswered") {
-        tooltipText = "Not Answered";
-      } else if (questionStatusAtIndex === "marked") {
-        tooltipText = "Marked for review";
-      } else if (questionStatusAtIndex === "Answered but marked for review") {
-        tooltipText = "Answered but marked for review";
-      } else if (questionStatusAtIndex === "notVisited") {
-        tooltipText = "Not Visited";
-      }
+  //     // Different tooltip text for each button
+  //     let tooltipText = "";
+  //     if (questionStatusAtIndex === "answered") {
+  //       tooltipText = "Answered";
+  //     } else if (questionStatusAtIndex === "notAnswered") {
+  //       tooltipText = "Not Answered";
+  //     } else if (questionStatusAtIndex === "marked") {
+  //       tooltipText = "Marked for review";
+  //     } else if (questionStatusAtIndex === "Answered but marked for review") {
+  //       tooltipText = "Answered but marked for review";
+  //     } else if (questionStatusAtIndex === "notVisited") {
+  //       tooltipText = "Not Visited";
+  //     }
 
-      return (
-        <li key={questionKey}>
-          <button
-            onClick={() => handleButtonClick(index + 1)}
-            className={className}
-            title={tooltipText}
-          >
-            {index + 1}
-          </button>
-        </li>
+  //     return (
+  //       <li key={questionKey}>
+  //         <button
+  //           onClick={() => handleButtonClick(index + 1)}
+  //           className={className}
+  //           title={tooltipText}
+  //         >
+  //           {index + 1}
+  //         </button>
+  //       </li>
+  //     );
+  //   })
+  // : null;
+
+  const renderQuestionButtons = () => {
+    const questions = (questionOptions && questionOptions.subjects)
+      ? questionOptions.subjects.flatMap(subject =>
+          subject.sections.flatMap(section =>
+            section.questions
+          )
+        )
+      : [];
+
+    // Filter questions based on selected subject and section
+    const filteredQuestions = questions
+      .filter(question =>
+        (selectedSubject ? question.subject_id === selectedSubject : true) &&
+        (selectedSection ? question.section_id === selectedSection : true)
       );
-    })
-  : null;
+
+    return Array.isArray(filteredQuestions)
+      ? filteredQuestions.map((question, index) => {
+          let className = "right_bar_Buttons ";
+          const questionKey = question.question_id || index;
+          let questionStatusAtIndex = questionStatus[index] || "notAnswered";
+
+          if (questionStatusAtIndex === "answered") {
+            className += " instruction-btn1";
+          } else if (questionStatusAtIndex === "notAnswered") {
+            className += " instruction-btn2";
+          } else if (questionStatusAtIndex === "marked") {
+            className += " instruction-btn3";
+          } else if (questionStatusAtIndex === "Answered but marked for review") {
+            className += " instruction-btn4";
+          } else if (questionStatusAtIndex === "notVisited") {
+            className += " instruction-btn5";
+          }
+
+          if (index === activeQuestion) {
+            className += " active-question";
+          }
+
+          let tooltipText = "";
+          if (questionStatusAtIndex === "answered") {
+            tooltipText = "Answered";
+          } else if (questionStatusAtIndex === "notAnswered") {
+            tooltipText = "Not Answered";
+          } else if (questionStatusAtIndex === "marked") {
+            tooltipText = "Marked for review";
+          } else if (questionStatusAtIndex === "Answered but marked for review") {
+            tooltipText = "Answered but marked for review";
+          } else if (questionStatusAtIndex === "notVisited") {
+            tooltipText = "Not Visited";
+          }
+
+          return (
+            <li key={questionKey}>
+              <button
+                onClick={() => handleButtonClick(index + 1)}
+                className={className}
+                title={tooltipText}
+              >
+                {index + 1}
+              </button>
+            </li>
+          );
+        })
+      : null;
+  };
+
   const [ setQuestionOptions] = useState({ questions: [] });
   useEffect(() => {
     // Check if testCreationTableId is defined before making the request
@@ -257,7 +269,8 @@ const PGButtonsFunctionality = ({
       console.error("Error fetching test name:", error);
     }
   };
-
+ const [selectedSubject, setSelectedSubject] = useState(null); 
+  const [selectedSection, setSelectedSection] = useState(null);
   const handleButtonClick = useCallback(
     async (questionNumber) => {
       const questionIndex = questionNumber - 1;
