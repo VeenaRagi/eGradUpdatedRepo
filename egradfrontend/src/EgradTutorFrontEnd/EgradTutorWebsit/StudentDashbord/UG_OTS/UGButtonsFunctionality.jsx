@@ -8,7 +8,7 @@ import { decryptData, encryptData } from "../utils/crypto";
 // import { useTIAuth } from "../../../../TechInfoContext/AuthContext";
 import UGQuestionPaper from "./UGQuestionPaper";
 // This component manages the functionality of buttons in the right sidebar
-const ButtonsFunctionality = ({
+const UGButtonsFunctionality = ({
   activeQuestion,
   onQuestionSelect,
   questionStatus,
@@ -340,7 +340,7 @@ const ButtonsFunctionality = ({
   );
 
   // Proptypes for button functionality component
-  ButtonsFunctionality.propTypes = {
+  UGButtonsFunctionality.propTypes = {
     onQuestionSelect: PropTypes.func.isRequired,
     questionStatus: PropTypes.arrayOf(PropTypes.string),
     seconds: PropTypes.number, // Add the appropriate prop type
@@ -509,4 +509,4 @@ const ButtonsFunctionality = ({
   );
 };
 
-export default ButtonsFunctionality;
+export default UGButtonsFunctionality;
