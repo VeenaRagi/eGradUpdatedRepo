@@ -6,12 +6,13 @@ const OnlineTestSerices_pg = () => {
   const [selectedSubjectId, setSelectedSubjectId] = useState(null);
   const [selectedSectionId, setSelectedSectionId] = useState(null);
   const [selectedQuestionId, setSelectedQuestionId] = useState(null);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5001/QuizPage/PG_QuestionOptions/2/55`
+          `http://localhost:5001/QuizPage/PG_QuestionOptions/5/55`
         ); // Replace with actual IDs
         const data = response.data;
 
@@ -102,6 +103,15 @@ const OnlineTestSerices_pg = () => {
     }
   };
 
+  const handleInput = (value) => {
+    setInputValue((prev) => {
+      if (value === "backspace") {
+        return prev.slice(0, -1);
+      }
+      return prev + value;
+    });
+  };
+
   if (!testData) {
     return <div>Loading...</div>;
   }
@@ -115,6 +125,11 @@ const OnlineTestSerices_pg = () => {
   const selectedQuestion = selectedSection
     ? selectedSection.questions.find((question) => question.question_id === selectedQuestionId)
     : selectedSubject.questions.find((question) => question.question_id === selectedQuestionId);
+
+  // Console logs for debugging
+  console.log("Selected Question:", selectedQuestion);
+  console.log("Selected Question Options:", selectedQuestion?.options);
+  console.log("Selected Question QType:", selectedQuestion?.quesion_type);
 
   return (
     <div>
@@ -188,14 +203,61 @@ const OnlineTestSerices_pg = () => {
             src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${selectedQuestion.questionImgName}`}
             alt={`Question ${selectedQuestion.question_id}`}
           />
-          {selectedQuestion.options.map((option) => (
-            <div key={option.option_id}>
-              <img
-                src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${option.optionImgName}`}
-                alt={`Option ${option.option_index}`}
-              />
+          {selectedQuestion.quesion_type.some(type => [1, 2, 7, 8].includes(type.quesionTypeId)) && (
+            <div>
+              {selectedQuestion.options.map((option) => (
+                <div key={option.option_id}>
+                  <input
+                    type="radio"
+                    name={`question_${selectedQuestion.question_id}`}
+                    value={option.option_id}
+                  />
+                  <img
+                    src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${option.optionImgName}`}
+                    alt={`Option ${option.option_index}`}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
+          )}
+          {selectedQuestion.quesion_type.some(type => [3, 4].includes(type.quesionTypeId)) && (
+            <div>
+              {selectedQuestion.options.map((option) => (
+                <div key={option.option_id}>
+                  <input
+                    type="checkbox"
+                    name={`question_${selectedQuestion.question_id}`}
+                    value={option.option_id}
+                  />
+                  <img
+                    src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${option.optionImgName}`}
+                    alt={`Option ${option.option_index}`}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+          {selectedQuestion.quesion_type.some(type => [5, 6].includes(type.quesionTypeId)) && (
+            <div>
+              <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                maxLength={1}
+              />
+              <button onClick={() => handleInput("backspace")}>Backspace</button>
+              <button onClick={() => handleInput("0")}>0</button>
+              <button onClick={() => handleInput("1")}>1</button>
+              <button onClick={() => handleInput("2")}>2</button>
+              <button onClick={() => handleInput("3")}>3</button>
+              <button onClick={() => handleInput("4")}>4</button>
+              <button onClick={() => handleInput("5")}>5</button>
+              <button onClick={() => handleInput("6")}>6</button>
+              <button onClick={() => handleInput("7")}>7</button>
+              <button onClick={() => handleInput("8")}>8</button>
+              <button onClick={() => handleInput("9")}>9</button>
+            </div>
+          )}
         </div>
       )}
       <div>
