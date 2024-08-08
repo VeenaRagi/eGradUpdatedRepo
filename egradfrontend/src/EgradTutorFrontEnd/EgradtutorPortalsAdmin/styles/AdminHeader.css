@@ -54,6 +54,55 @@ display: flex;
     border-radius: 10px;
     padding: 5px 10px;
 }
+
+
+
+/* ADMIN ACTIVE TA BUTTON PART */
+/* AdminHeader.css */
+
+.adminHeaderNavLinks a {
+    position: relative;
+    text-decoration: none;
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Dot styling */
+  .dot {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: transparent;
+    animation: blink 1.5s infinite;
+  }
+  
+  .adminHeaderNavLinks a.active{
+    background-color: rgb(64, 70, 64);
+  }
+  /* Active link styles */
+  .adminHeaderNavLinks a.active .dot {
+    background-color: rgb(21, 255, 0); /* Change to green if needed */
+  }
+  
+  /* Blinking animation */
+  @keyframes blink {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+
+
+
+
+
 @media (max-width:1024px){
     .adminHeaderSubContainer._dFlex {
         /* flex-direction: column; */
