@@ -38,7 +38,7 @@ const PGAdminInstructionPage = () => {
     const fetchExams = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/InstructionCreation/exams`
+          `${BASE_URL}/InstructionCreation/pgExams`
         );
         setExams(response.data);
       } catch (error) {
@@ -127,8 +127,8 @@ const PGAdminInstructionPage = () => {
                 >
                   <option value="">Select Exam:</option>
                   {exams.map((exam) => (
-                    <option key={exam.examId} value={[exam.examId]}>
-                      {exam.examName}
+                    <option key={exam.EntranceExams_Id} value={[exam.EntranceExams_Id]}>
+                      {exam.EntranceExams_name}
                     </option>
                   ))}
                 </select>

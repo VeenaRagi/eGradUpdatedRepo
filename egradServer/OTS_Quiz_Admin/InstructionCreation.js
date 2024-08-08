@@ -36,6 +36,7 @@ const upload = multer({ storage });
       res.status(500).json({ error: "Internal Server Error" });
     }
   });
+
   router.use((req, res, next) => {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     next();
@@ -867,4 +868,34 @@ const upload = multer({ storage });
   // });
   
   //______________________end __________________________
+
+
+
+
+
+
+
+
+
+
+// __________________________********* PG EXAMS RELATED API'S*********__________________________________//
+
+  router.get('/pgExams', async (req, res) => {
+    const query = 'SELECT * FROM entrance_exams WHERE Branch_Id=2';
+    const examId = req.params.examId;
+    try {
+      const [result] = await db.query(query, [examId]);
+      res.json(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+  
+
+
+
+
+
   module.exports = router;
