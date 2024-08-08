@@ -89,8 +89,8 @@ router.get('/subjects', async (req, res) => {
   
     try {
       const [examResult] = await db.query(
-        'INSERT INTO exams (examName, startDate, endDate) VALUES (?, ?, ?)',
-        [examName, startDate, endDate]
+        'INSERT INTO exams (examName, startDate, endDate,branchId) VALUES (?, ?, ?,?)',
+        [examName, startDate, endDate,1]
       );
   
       const insertedExamId = examResult.insertId;
@@ -282,6 +282,48 @@ router.get('/subjectss', async (req, res) => {
   try {
     const [rows] = await db.query('SELECT * FROM pg_departments');
     res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.get('/createdExams', async (req, res) => {
+  // Display selected subjects in table
+  try {
+    const query = `
+     SELECT e.examId, e.examName, e.startDate, e.endDate, GROUP_CONCAT(pgd.departmentName) AS subjects
+        FROM exams AS e
+        JOIN exam_creation_table AS ec ON e.examId = ec.examId
+        JOIN pg_departments AS pgd ON ec.subjectId = pgd.departmentId
+        GROUP BY e.examId;
+    `;
+    const [rows] = await db.query(query);
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.post('/pgExamsCreation', async (req, res) => {
+  // Create exams
+  const { examName, startDate, endDate, selectedSubjects } = req.body;
+
+  try {
+    const [examResult] = await db.query(
+      'INSERT INTO exams (examName, startDate, endDate,branchId) VALUES (?, ?, ?,?)',
+      [examName, startDate, endDate,2]
+    );
+
+    const insertedExamId = examResult.insertId;
+    for (const subjectId of selectedSubjects) {
+      await db.query(
+        'INSERT INTO exam_creation_table (examId, subjectId) VALUES (?, ?)',
+        [insertedExamId, subjectId]
+      );
+    }
+    res.json({ message: 'Exam created successfully', examId: insertedExamId });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });

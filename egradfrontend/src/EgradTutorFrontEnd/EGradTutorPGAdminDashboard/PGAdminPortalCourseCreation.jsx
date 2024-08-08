@@ -85,7 +85,7 @@ function PGAdminPortalCourseCreation() {
     console.log("Selected Exam ID (after setting):", selectedexams);
     try {
       const response = await fetch(
-        `${BASE_URL}/CoureseCreation/courese-exam-subjects/${selectedExamId}/subjects`
+        `${BASE_URL}/CoureseCreation/courese-exam-subjects/${selectedExamId}/pgSubjects`
       );
       const data = await response.json();
       console.log("Subjects Data:", data); // Log the fetched data

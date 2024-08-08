@@ -112,7 +112,7 @@ function PgAdminExamCreation() {
     if (validateForm()) {
       setSubmitting(true);
       axios
-        .post(`${BASE_URL}/ExamCreation/exams`, examData)
+        .post(`${BASE_URL}/ExamCreation/pgExamsCreation`, examData)
         .then((response) => {
           // console.log("Exam created:", response.data);
           // Reset form fields and state as needed
@@ -145,7 +145,7 @@ function PgAdminExamCreation() {
   function exams_with_subject() {
     // alert("hi")
     axios
-      .get(`${BASE_URL}/ExamCreation/exams-with-subjects`)
+      .get(`${BASE_URL}/ExamCreation/createdExams`)
       .then((response) => {
         setExamsWithSubjects(response.data);
       })
@@ -234,17 +234,11 @@ function PgAdminExamCreation() {
                   <div className="Exams_contant examSubjects_-contant examSubjects_-contant_exc">
                     <div className="formdiv_contaniner">
                       <label>Exam Name:</label>
-                      <select
-                        value={selectedExamName}
-                        onChange={(e) => setSelectedExamName(e.target.value)}
-                      >
-                        <option value="">Select Exam</option>
-                        {pgExams.map((exam) => (
-                          <option key={exam.examId} value={exam.examName}>
-                            {exam.EntranceExams_name}
-                          </option>
-                        ))}
-                      </select>
+                      <input
+                        type="text"
+                        value={examName}
+                        onChange={(e) => setExamName(e.target.value)}
+                      />{" "}
                       {formErrors.examName && (
                         <span className="error-message">
                           {formErrors.examName}
@@ -288,21 +282,21 @@ function PgAdminExamCreation() {
                     <div className="formdiv_contaniner_ch">
                       <ul className="examSubject_conten">
                         <label>Subjects:</label>
-                        {subjects.length > 0 ? (
-                          subjects.map((subject) => (
-                            <li key={subject.departmentId}>
-                              <label>{subject.departmentName}</label>
-                              <input
-                                className="inputLable"
-                                type="checkbox"
-                                checked={selectedSubjects.includes(subject.subjectId)}
-                                onChange={() => handleCheckboxChange(subject.subjectId)}
-                              />
-                            </li>
-                          ))
-                        ) : (
-                          <li>No subjects available</li>
-                        )}
+                         {subjects.map((subject) => (
+                          <li key={subject.departmentId}>
+                            <label> {subject.departmentName} </label>
+                            <input
+                              className="inputLable"
+                              type="checkbox"
+                              checked={selectedSubjects.includes(
+                                subject.departmentId
+                              )}
+                              onChange={() =>
+                                handleCheckboxChange(subject.departmentId)
+                              }
+                            />
+                          </li>
+                        ))}
                         {formErrors.subjects && (
                           <span className="error-message">{formErrors.subjects}</span>
                         )}
