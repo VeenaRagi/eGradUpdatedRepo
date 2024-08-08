@@ -215,10 +215,10 @@ async function checkExistence(userId, courseCreationId) {
 
 
 
-router.get("/purchasedCourses/:userId", async (req, res) => {
-  const { userId } = req.params;
+router.get("/purchasedCourses/:userId/:Branch_Id", async (req, res) => {
+  const { userId,Branch_Id } = req.params;
 
-  if (!userId) {
+  if (!userId && !Branch_Id) {
     return res.status(400).json({ error: "userId is required" });
   }
 
@@ -233,8 +233,11 @@ router.get("/purchasedCourses/:userId", async (req, res) => {
     cct.cardImage,
     cct.Portale_Id,
     e.examId,
-    e.examName,
+      cpe.coursesPortalExamsId,
+   cpe.coursesPortalExamname,
     p.Portale_Name,
+    brn.Branch_Id,
+    brn.Branch_Name,
     sbc.user_Id,
     sbc.payment_status,
     COUNT(DISTINCT ovl.OVL_Linke_Id) AS totalLectures,
@@ -244,6 +247,9 @@ router.get("/purchasedCourses/:userId", async (req, res) => {
 FROM
     course_creation_table AS cct
 LEFT JOIN exams AS e ON e.examId = cct.examId
+LEFT JOIN coursesportalexams AS cpe On e.coursesPortalExamsId=cpe.coursesPortalExamsId
+LEFT JOIN branches brn ON
+    brn.Branch_Id = cpe.Branch_Id AND brn.Branch_Id = e.Branch_Id
 LEFT JOIN portales AS p ON p.Portale_Id = cct.Portale_Id
 LEFT JOIN student_buy_courses AS sbc ON sbc.courseCreationId = cct.courseCreationId
 LEFT JOIN course_subjects cs ON cs.courseCreationId = cct.courseCreationId
@@ -253,13 +259,13 @@ LEFT JOIN topics t ON t.courseCreationId = cct.courseCreationId
 LEFT JOIN ovl_links AS ovl ON cct.courseCreationId = ovl.courseCreationId
 WHERE 
     sbc.user_Id = ?
-    AND sbc.payment_status = 1 
+    AND sbc.payment_status = 1 AND brn.Branch_Id = ?
 GROUP BY
     cct.courseCreationId;
 
     `;
 
-    const [results, fields] = await db.execute(query, [userId]);
+    const [results, fields] = await db.execute(query, [userId,Branch_Id]);
 
     // Ensure you're using a unique identifier for each course
     const organizedData = {};
@@ -281,7 +287,7 @@ GROUP BY
           totalPrice: result.totalPrice,
           courseCardImage: cardImage,
           examId: result.examId,
-          examName: result.examName,
+          examName: result.coursesPortalExamname,
           portalName: result.Portale_Name,
           specificPortal: result.Portale_Id,
           portal:result.Portale_Id,
@@ -402,8 +408,8 @@ GROUP BY
 
 
 
-router.get("/unPurchasedCourses/:userId", async (req, res) => {
-  const { userId } = req.params;
+router.get("/unPurchasedCourses/:userId/:Branch_Id", async (req, res) => {
+  const { userId,Branch_Id } = req.params;
   console.log("userId:", userId); // Log the userId for debugging purposes
 
   if (!userId) {
@@ -412,50 +418,61 @@ router.get("/unPurchasedCourses/:userId", async (req, res) => {
 
   try {
     const query = `
+    SELECT
+    cct.courseCreationId,
+    cct.Portale_Id,
+    cct.courseName,
+    cct.courseStartDate,
+    cct.courseEndDate,
+    cct.totalPrice,
+    cct.cost,
+    cct.Discount,    
+    cct.cardImage,
+    e.examId,
+    cpe.coursesPortalExamsId,
+    cpe.coursesPortalExamname,
+    p.Portale_Id,
+    p.Portale_Name,
+    brn.Branch_Id,
+    brn.Branch_Name,
+    COUNT(DISTINCT tct.testCreationTableId) AS testCount,
+    GROUP_CONCAT(s.subjectName) AS subjectNames,
+    t.topicName
+FROM
+    course_creation_table cct
+LEFT JOIN exams e ON
+    e.examId = cct.examId
+LEFT JOIN coursesportalexams cpe ON
+    cpe.coursesPortalExamsId = e.coursesPortalExamsId
+LEFT JOIN branches brn ON
+    brn.Branch_Id = cpe.Branch_Id AND brn.Branch_Id = e.Branch_Id
+LEFT JOIN portales p ON
+    p.Portale_Id = cct.Portale_Id
+LEFT JOIN course_subjects cs ON
+    cs.courseCreationId = cct.courseCreationId
+LEFT JOIN subjects s ON
+    cs.subjectId = s.subjectId 
+LEFT JOIN test_creation_table tct ON
+    tct.courseCreationId = cct.courseCreationId
+LEFT JOIN topics t ON
+    t.courseCreationId = cct.courseCreationId
+LEFT JOIN student_buy_courses sbc ON
+    sbc.courseCreationId = cct.courseCreationId
+WHERE
+    cct.courseCreationId NOT IN (
       SELECT
-        cct.courseCreationId,
-        cct.Portale_Id,
-        cct.courseName,
-        cct.courseStartDate,
-        cct.courseEndDate,
-        cct.totalPrice,
-        cct.cost,
-        cct.Discount,    
-        e.examId,
-        e.examName,
-        cct.cardImage,
-        p.Portale_Id,
-        p.Portale_Name,
-        COUNT(DISTINCT tct.testCreationTableId) AS testCount,
-        GROUP_CONCAT(s.subjectName) AS subjectNames,
-        t.topicName
+        sbc.courseCreationId
       FROM
-        course_creation_table cct
-      LEFT JOIN exams e ON
-        e.examId = cct.examId
-      LEFT JOIN portales p ON
-        p.Portale_Id = cct.Portale_Id
-      LEFT JOIN course_subjects cs ON
-        cs.courseCreationId = cct.courseCreationId
-      LEFT JOIN subjects s ON
-        cs.subjectId = s.subjectId 
-      LEFT JOIN test_creation_table tct ON
-        tct.courseCreationId = cct.courseCreationId
-      LEFT JOIN topics t ON
-        t.courseCreationId = cct.courseCreationId
+        student_buy_courses sbc
       WHERE
-        cct.courseCreationId NOT IN (
-          SELECT
-            sbc.courseCreationId
-          FROM
-            student_buy_courses sbc
-          WHERE
-            sbc.payment_status = 1 AND sbc.user_Id = ?
-        )
-      GROUP BY
-        cct.courseCreationId;
+        sbc.payment_status = 1 AND sbc.user_Id = ?
+    )
+AND brn.Branch_Id = ?
+GROUP BY
+    cct.courseCreationId;
+
     `;
-    const [results, fields] = await db.execute(query, [userId]);
+    const [results, fields] = await db.execute(query, [userId,Branch_Id]);
     const organizedData = {};
     results.forEach((result) => {
       const cardImage = result.cardImage ? `data:image/png;base64,${result.cardImage.toString("base64")}` : null;
@@ -468,7 +485,7 @@ router.get("/unPurchasedCourses/:userId", async (req, res) => {
         Portale_Id: portalId,
         portal: result.Portale_Name,
         examId: result.examId,
-        examName: result.examName,
+        coursesPortalExamname: result.coursesPortalExamname,
         courseCreationId: result.courseCreationId,
         courseName: result.courseName,
         courseStartDate: result.courseStartDate,
@@ -500,6 +517,7 @@ router.get("/unPurchasedCourses/:userId", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 
 

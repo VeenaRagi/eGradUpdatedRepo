@@ -942,94 +942,151 @@ router.get("/questionOptionsForPB/:testCreationTableId/:userId", async (req, res
 });
 
 
-// router.post("/submitTimeLeft", async (req, res) => {
-//   try {
-//     const { userId, testCreationTableId, timeLeft } = req.body;
 
-//     // Validate data types
-//     const userIdNumber = parseInt(userId, 10);
-//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+router.get("/PG_QuestionOptions/:testCreationTableId/:userId", async (req, res) => {
+  const { testCreationTableId, userId } = req.params;
+  try {
+    const [rows] = await db.query(
+      `SELECT 
+      q.question_id, q.questionImgName, 
+      o.option_id, o.optionImgName, o.option_index,
+      s.solution_id, s.solutionImgName, 
+      qt.qtypeId, qt.qtype_text,
+      ur.user_answer, ur.user_Sno, qts.typeofQuestion,
+      ans.answer_id, ans.answer_text,
+      m.markesId, m.marks_text,
+      si.sort_id, si.sortid_text,
+      doc.documen_name, doc.sectionId, 
+      doc.subjectId, doc.testCreationTableId,
+      p.paragraphImg, p.paragraph_Id,
+      pq.paragraphQNo_Id, pq.paragraphQNo, qts.quesionTypeId,
+      tct.TestName,
+      sub.SubjectName,
+      sec.SectionName
+  FROM 
+      questions q 
+      LEFT OUTER JOIN options o ON q.question_id = o.question_id
+      LEFT OUTER JOIN qtype qt ON q.question_id = qt.question_id 
+      LEFT OUTER JOIN quesion_type qts ON qt.quesionTypeId = qts.quesionTypeId 
+      LEFT OUTER JOIN answer ans ON q.question_id = ans.question_id 
+      LEFT OUTER JOIN marks m ON q.question_id = m.question_id 
+      LEFT OUTER JOIN sortid si ON q.question_id = si.question_id 
+      LEFT OUTER JOIN solution s ON q.question_id = s.solution_id 
+      LEFT OUTER JOIN paragraphqno pq ON q.question_id = pq.question_id
+      LEFT OUTER JOIN paragraph p ON pq.paragraph_Id = p.paragraph_Id
+      LEFT OUTER JOIN ots_document doc ON q.document_Id = doc.document_Id
+      LEFT OUTER JOIN user_responses ur ON q.question_id = ur.question_id 
+      LEFT OUTER JOIN test_creation_table tct ON doc.testCreationTableId = tct.testCreationTableId
+      LEFT OUTER JOIN subjects sub ON doc.subjectId = sub.subjectId
+      LEFT OUTER JOIN sections sec ON doc.sectionId = sec.sectionId
+      LEFT OUTER JOIN log l ON ur.user_Id = l.user_Id AND ur.user_Id = l.user_Id
+  WHERE 
+      doc.testCreationTableId = ? AND
+      (l.user_Id = ? OR ur.user_answer IS NULL)
+  ORDER BY 
+      q.question_id ASC, o.option_index ASC;`,
+      [testCreationTableId, userId]
+    );
 
-//     if (
-//       isNaN(userIdNumber) ||
-//       isNaN(testCreationTableIdNumber) ||
-//       typeof timeLeft !== "string"
-//     ) {
-//       console.error("Invalid data types");
-//       return res
-//         .status(400)
-//         .json({ success: false, message: "Invalid data types" });
-//     }
+    if (rows.length > 0) {
+      const testData = {
+        TestName: rows[0].TestName,
+        subjects: [],
+      };
 
-//     // Continue with processing
-//     const sql =
-//       "INSERT INTO time_left_submission_of_test (user_Id, testCreationTableId, time_left) VALUES (?,?,?)";
+      // Function to add data to a specific category (section or subject)
+      const addDataToCategory = (categoryId, categoryName, sectionId, sectionName, questionData) => {
+        let subject = testData.subjects.find(s => s.subjectId === categoryId);
+        if (!subject) {
+          subject = {
+            subjectId: categoryId,
+            SubjectName: categoryName,
+            sections: [],
+          };
+          testData.subjects.push(subject);
+        }
 
-//     const queryValues = [userIdNumber, testCreationTableIdNumber, timeLeft];
+        let section = subject.sections.find(s => s.sectionId === sectionId);
+        if (!section) {
+          section = {
+            sectionId: sectionId,
+            SectionName: sectionName,
+            questions: [],
+          };
+          subject.sections.push(section);
+        }
 
-//     console.log(
-//       "Executing SQL query for time left submission:",
-//       sql,
-//       queryValues
-//     );
+        let question = section.questions.find(q => q.question_id === questionData.question_id);
+        if (!question) {
+          question = {
+            question_id: questionData.question_id,
+            questionImgName: questionData.questionImgName,
+            documen_name: questionData.documen_name,
+            options: [],
+            qtype: [],
+            quesion_type: [],
+            answer: [],
+            useranswer: [],
+            marks: [],
+            sortid: [],
+            solution: [],
+            paragraph: [],
+            paragraphqno: [],
+          };
+          section.questions.push(question);
+        }
 
-//     await new Promise((resolve, reject) => {
-//       db.query(sql, queryValues, (err, result) => {
-//         if (err) {
-//           console.error("Error saving time left to the database:", err);
-//           reject(err);
-//         } else {
-//           console.log("Time left submission saved to the database");
-//           resolve(result);
-//         }
-//       });
-//     });
+        if (questionData.option_id) {
+          const optionExists = question.options.some(opt => opt.option_id === questionData.option_id);
+          if (!optionExists) {
+            question.options.push({
+              option_id: questionData.option_id,
+              option_index: questionData.option_index,
+              optionImgName: questionData.optionImgName,
+              ans: questionData.user_answer,
+            });
+          }
+        }
 
-//     res.json({
-//       success: true,
-//       message: "Time left submission saved successfully",
-//     });
-//   } catch (error) {
-//     console.error("Error handling time left submission:", error);
-//     res.status(500).json({ success: false, message: "Internal server error" });
-//   }
-// });
+        const addPropertyIfNotExists = (propertyArray, propertyData) => {
+          const propertyExists = propertyArray.some(prop => prop[Object.keys(propertyData)[0]] === propertyData[Object.keys(propertyData)[0]]);
+          if (!propertyExists) {
+            propertyArray.push(propertyData);
+          }
+        };
 
+        addPropertyIfNotExists(question.qtype, { qtypeId: questionData.qtypeId, qtype_text: questionData.qtype_text });
+        addPropertyIfNotExists(question.quesion_type, { quesionTypeId: questionData.quesionTypeId, typeofQuestion: questionData.typeofQuestion });
+        addPropertyIfNotExists(question.answer, { answer_id: questionData.answer_id, answer_text: questionData.answer_text });
+        addPropertyIfNotExists(question.useranswer, { urid: questionData.question_id, ans: questionData.user_answer });
+        addPropertyIfNotExists(question.marks, { markesId: questionData.markesId, marks_text: questionData.marks_text });
+        addPropertyIfNotExists(question.sortid, { sort_id: questionData.sort_id, sortid_text: questionData.sortid_text });
+        addPropertyIfNotExists(question.solution, { solution_id: questionData.solution_id, solutionImgName: questionData.solutionImgName });
 
-// router.post("/saveExamSummary", async (req, res) => {
-//   try {
-//     const {
-//       userId,
-//       totalUnattempted,
-//       totalAnswered,
-//       NotVisitedb,
-//       testCreationTableId,
-//     } = req.body;
+        if (questionData.paragraph_Id && questionData.paragraphQNo) {
+          addPropertyIfNotExists(question.paragraph, { paragraph_Id: questionData.paragraph_Id, paragraphImg: questionData.paragraphImg });
+          addPropertyIfNotExists(question.paragraphqno, { paragraphQNo_Id: questionData.paragraphQNo_Id, paragraphQNo: questionData.paragraphQNo });
+        }
+      };
 
-//     // Assuming you have a table called student_exam_summary with appropriate columns
-//     const insertQuery = `
-//     INSERT INTO student_exam_summery 
-//     (user_id, Total_unAttemted, Total_answered, Not_visited_count,testCreationTableId) 
-//     VALUES 
-//     (?, ?, ?, ?, ?)
-//   `;
-//   const values = [
-//     userId,
-//     totalUnattempted,
-//     totalAnswered,
-//     NotVisitedb,
-//     testCreationTableId,
-//   ];
-//     const result = await db.query(insertQuery, values);
-//     console.log("Generated query:", insertQuery);
+      rows.forEach(row => {
+        const categoryId = row.subjectId;
+        const categoryName = row.SubjectName;
+        const sectionId = row.sectionId;
+        const sectionName = row.SectionName;
 
-//     res.json({ success: true, message: "Exam summary saved successfully" });
-//   } catch (error) {
-//     console.error("Error saving exam summary:", error);
-//     res.status(500).json({ success: false, message: "Internal Server Error" });
-//   }
-// });
+        addDataToCategory(categoryId, categoryName, sectionId, sectionName, row);
+      });
 
+      res.json(testData);
+    } else {
+      res.status(404).json({ error: "No data found" });
+    }
+  } catch (error) {
+    console.error("Error fetching question data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 
 router.post("/saveExamSummary", async (req, res) => {
