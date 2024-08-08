@@ -197,7 +197,7 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                 {/* --------------------Student_dashboard_INTERFACE_ROUTES_START-------------------- */}
 
                 <Route
-                  path="/Student_dashboard/:userIdTesting"
+                  path="/Student_dashboard/:userIdTesting/:encryptedBranchId"
                   element={<Student_dashboard />}
                 />
 

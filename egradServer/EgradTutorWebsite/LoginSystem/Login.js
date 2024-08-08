@@ -8,11 +8,11 @@ const CryptoJS = require('crypto-js');
 const cors=require('cors');
 const { encryptData, decryptData } = require("../../CryptoUtils/Utils");
 router.use(cors());
-router.use(cors({
-  origin: 'http://localhost:3000', // Update to your client URL
-  methods: 'GET,POST,PUT,DELETE,OPTIONS',
-  allowedHeaders: 'Content-Type,Authorization'
-}));
+// router.use(cors({
+//   origin: 'http://localhost:3000', // Update to your client URL
+//   methods: 'GET,POST,PUT,DELETE,OPTIONS',
+//   allowedHeaders: 'Content-Type,Authorization'
+// }));y
 const secretKey=process.env.LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
 router.use(express.json());
 router.options('*', cors()); // Enable preflight requests
@@ -21,7 +21,7 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
       // Fetch user from the database by email
-      const sql = 'SELECT user_Id,email,password,role FROM log WHERE email = ?';
+      const sql = 'SELECT * FROM log  LEFT JOIN otsstudentregistation ots ON ots.studentregistationId=log.studentregistationId WHERE  log.email = ?';
       const [users] = await db.query(sql, [email]);
   
       if (users.length === 0) {
@@ -30,7 +30,7 @@ router.post('/login', async (req, res) => {
       }
   
       const user = users[0];
-    //   console.log('User found:', user);
+      // console.log('User found:', user);
   
       // Compare the provided password with the hashed password in the database
       const isMatch = await bcrypt.compare(password, user.password);
@@ -40,12 +40,15 @@ router.post('/login', async (req, res) => {
       }
       // Generate JWT token
       const accessToken = jwt.sign({ user_Id: user.user_Id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      console.log('Token generated for user:', user);
+      // console.log('Token generated for user:', user);
       const refreshToken = jwt.sign({ user_Id: user.user_Id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '7d' });
-      console.log("refreshToken:",refreshToken,"accessToken: ",accessToken )
+      // console.log("refreshToken:",refreshToken,"accessToken: ",accessToken )
       const encryptedUserId=encryptData(user.user_Id.toString())
-      console.log("sending detail are",encryptedUserId,refreshToken,accessToken)
-      res.json({user_Id: encryptedUserId,decryptedId:user.user_Id,refreshToken, accessToken, role: user.role ,userDetails:user});
+      // console.log("sending detail are",encryptedUserId,refreshToken,accessToken)
+      const encryptedBranchId=encryptData(user.Branch_Id.toString())
+      // console.log(encryptedBranchId,"This is the encrypted branch Id ")
+      console.log()
+      res.json({user_Id: encryptedUserId,decryptedId:user.user_Id,refreshToken, accessToken, role: user.role ,userDetails:user,Branch_Id:user.Branch_Id,encryptedBranchId:encryptedBranchId,branchId:user.Branch_Id});
     } catch (error) {
       console.error('Error during login:', error);
       res.status(500).json({ message: 'Server error' });
