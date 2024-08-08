@@ -12,6 +12,7 @@ import UserContext from '../../../UserContext';
 export const StudentDashbord_MyResults = ({
   usersData,
   decryptedUserIdState,
+  branchIdFromLS
 }) => {
   const user_Id =
     usersData.users && usersData.users.length > 0
@@ -22,6 +23,7 @@ export const StudentDashbord_MyResults = ({
   const [filteredTestData, setFilteredTestData] = useState([]);
   const [testPageHeading, setTestPageHeading] = useState([]);
   const { testCreationTableId, courseCreationId } = useParams();
+  const  Branch_Id= branchIdFromLS;
   useEffect(() => {
     const fetchTestDetails = async () => {
       try {
@@ -177,6 +179,7 @@ export const StudentDashbord_MyResults = ({
   return (
     <div className="card_container_dashbordflowtest">
       <div className="test_card_subcontainer">
+      <h1>Branch_Id:{Branch_Id}</h1>
         {" "}
         {/* {usersData.users && usersData.users.length > 0 && (
           <ul>

@@ -1,0 +1,65 @@
+.pg_Instructions{
+    background-color: #c1e8f6;
+    text-align: left;
+    padding: 1rem;
+    color: rgb(102, 100, 100);
+    font-size: 20px;
+    /* width: 80%; */
+    
+}
+.pg_Instructionspage{
+    display: flex;
+}
+.pg_Instructionsdiv1{
+    overflow-y: scroll;
+    height: 900px;
+    border: 2px soild black;
+}
+
+.pg_Instructionsdiv2{
+    overflow-y: scroll;
+    height: 750px;
+    border: 2px soild black;
+}
+
+.pg_readinstructions{
+    text-align: center;
+
+}
+.pg_readinstructionsdiv{
+    border: 2px solid black;
+    padding-top: 1rem;
+}
+.pg_siteheding{
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+
+.pg_StudentDetails img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.pg_StudentDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem;
+    border-left: 3px solid black;
+}
+
+.pg_StudentDetails p{
+    text-align: center;
+    font-weight: 700;
+    padding-top: 1rem;
+}
+
+.Instructions_containerdiv{
+    display: flex;
+}
+
+.Instructions_points li{
+    list-style: none;
+}

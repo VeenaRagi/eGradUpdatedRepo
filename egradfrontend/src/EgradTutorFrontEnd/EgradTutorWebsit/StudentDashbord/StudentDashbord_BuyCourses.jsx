@@ -3,11 +3,12 @@ import BASE_URL from "../../../apiConfig";
 import { PiHandTapBold, PiHandTapThin } from "react-icons/pi";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
+const StudentDashbord_BuyCourses = ({decryptedUserIdState,branchIdFromLS }) => {
   const navigate = useNavigate(); 
   const [unPurchasedCourses, setUnPurchasedCourses] = useState([]);
   const [popupContent, setPopupContent] = useState(null);
   const [selectedPortal, setSelectedPortal] = useState("");
+  const  Branch_Id= branchIdFromLS;
   const fetchUnPurchasedCourses = async () => {
     if (!decryptedUserIdState) {
       return;
@@ -15,11 +16,12 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
 
     try {
       const response = await fetch(
-        `${BASE_URL}/Exam_Course_Page/unPurchasedCourses/${decryptedUserIdState}`
+        `${BASE_URL}/Exam_Course_Page/unPurchasedCourses/${decryptedUserIdState}/${Branch_Id}`
       );
       if (response.ok) {
         const data = await response.json();
         setUnPurchasedCourses(data);
+        console.log("Fetched UnPurchased courses:", data);
       } else {
         console.error("Failed to fetch unPurchased courses");
       }
@@ -29,7 +31,7 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
   };
   useEffect(() => {
     fetchUnPurchasedCourses();
-  }, [decryptedUserIdState]);
+  }, [decryptedUserIdState,Branch_Id]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -42,17 +44,17 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
   const coursesByPortalAndExam = unPurchasedCourses.reduce(
     (portals, course) => {
       const portal = course.portal || "Unknown Portal"; // Default value
-      const examName = course.examName || "Unknown Exam"; // Default value
+      const coursesPortalExamname = course.coursesPortalExamname || "Unknown Exam"; // Default value
 
       if (!portals[portal]) {
         portals[portal] = {}; // Initialize portal if not present
       }
 
-      if (!portals[portal][examName]) {
-        portals[portal][examName] = []; // Initialize exam group if not present
+      if (!portals[portal][coursesPortalExamname]) {
+        portals[portal][coursesPortalExamname] = []; // Initialize exam group if not present
       }
 
-      portals[portal][examName].push(course); // Group courses by portal and exam name
+      portals[portal][coursesPortalExamname].push(course); // Group courses by portal and exam name
       return portals;
     },
     {}
@@ -116,7 +118,7 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
     // setPopupbeforelogin(true);
     try {
       const response = await fetch(
-        `${BASE_URL}/Exam_Course_Page/unPurchasedCourses/${decryptedUserIdState}`
+        `${BASE_URL}/Exam_Course_Page/unPurchasedCourses/${decryptedUserIdState}/${Branch_Id}`
       );
       const data = await response.json();
 
@@ -140,7 +142,7 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
             <div className="popupbeforeloginboxright">
               <p>{item.portal}</p>
               <p>
-                <b>Exam Name:</b> {item.examName}
+                <b>Exam Name:</b> {item.coursesPortalExamname}
               </p>
 
               <p>
@@ -181,6 +183,7 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
   return (
     <div className="QuizBUy_courses QuizBUy_coursesinstudentdB">
       {popupContent}
+      <h1>Branch_Id:{Branch_Id}</h1>
       <div className="QuizBUy_coursessub_conatiner QuizBUy_coursessub_conatinerinstudentdB">
         <div className="QuizBUy_coursesheaderwithfilteringcontainer">
           <div className="QuizBUy_coursesheaderwithfilteringcontainerwithtagline">
@@ -216,9 +219,9 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState }) => {
                 >
                   <h2 className="portal_group_h2">{portal}</h2>
                   {/* Display portal name */}
-                  {Object.entries(exams).map(([examName, courses]) => (
-                    <div key={examName} className="exam_group">
-                      <h2 className="subheadingbuycourse">{examName}</h2>
+                  {Object.entries(exams).map(([coursesPortalExamname, courses]) => (
+                    <div key={coursesPortalExamname} className="exam_group">
+                      <h2 className="subheadingbuycourse">{coursesPortalExamname}</h2>
                       <div className="courses_boxcontainer">
                         {courses.map((courseExamsDetails) => (
                           <div

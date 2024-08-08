@@ -8,11 +8,12 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import axios from "axios";
 
 const InstructionPage = () => {
-  const { param1, param2, param3 } = useParams();
+  const { param1, param2, param3,param4 } = useParams();
   const navigate = useNavigate();
   const [decryptedParam1, setDecryptedParam1] = useState("");
   const [decryptedParam2, setDecryptedParam2] = useState("");
   const [decryptedParam3, setDecryptedParam3] = useState("");
+  const [decryptedParam4, setDecryptedParam4] = useState("");
   const [userData, setUserData] = useState(null);
   useEffect(() => {
     const token = sessionStorage.getItem("navigationToken");
@@ -27,14 +28,17 @@ const InstructionPage = () => {
         const decrypted1 = await decryptData(param1);
         const decrypted2 = await decryptData(param2);
         const decrypted3 = await decryptData(param3);
+        const decrypted4 = await decryptData(param4);
 
         if (
           !decrypted1 ||
           !decrypted2 ||
           !decrypted3 ||
+          !decrypted4 ||
           isNaN(parseInt(decrypted1)) ||
           isNaN(parseInt(decrypted2)) ||
-          isNaN(parseInt(decrypted3))
+          isNaN(parseInt(decrypted3))||
+          isNaN(parseInt(decrypted4))
         ) {
           navigate("/Error");
           return;
@@ -43,6 +47,7 @@ const InstructionPage = () => {
         setDecryptedParam1(decrypted1);
         setDecryptedParam2(decrypted2);
         setDecryptedParam3(decrypted3);
+        setDecryptedParam4(decrypted4);
       } catch (error) {
         console.error("Error decrypting data:", error);
         navigate("/Error");
@@ -50,7 +55,7 @@ const InstructionPage = () => {
     };
 
     decryptParams();
-  }, [param1, param2, param3, navigate]);
+  }, [param1, param2, param3,param4, navigate]);
 
   const Header = () => {
     const [testDetails, setTestDetails] = useState([]);
@@ -178,13 +183,15 @@ const InstructionPage = () => {
     const openGenInstPopup = async (
       decryptedParam1,
       decryptedParam2,
-      decryptedParam3
+      decryptedParam3,
+      decryptedParam4
     ) => {
       try {
         const encryptedParam1 = await encryptData(decryptedParam1.toString());
         const encryptedParam2 = await encryptData(decryptedParam2.toString());
         const encryptedParam3 = await encryptData(decryptedParam3.toString());
-
+        const encryptedParam4 = await encryptData(decryptedParam4.toString());
+        
         const token = new Date().getTime().toString();
         sessionStorage.setItem("navigationToken", token);
 
@@ -192,6 +199,8 @@ const InstructionPage = () => {
           encryptedParam1
         )}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(
           encryptedParam3
+        )}/${encodeURIComponent(
+          encryptedParam4
         )}`;
 
         navigate(url,{ state: { userData } });
@@ -289,7 +298,8 @@ const InstructionPage = () => {
               openGenInstPopup(
                 decryptedParam1,
                 decryptedParam2,
-                decryptedParam3
+                decryptedParam3,
+                decryptedParam4
               );
             }}
             className="intro_next_btn"

@@ -4,7 +4,7 @@ const pool = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "",
-  database: "admin_project",
+  database: "egraddatabase",
   waitForConnections: true,
   connectionLimit: 1000,
   queueLimit: 0,

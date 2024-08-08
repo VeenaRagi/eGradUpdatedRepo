@@ -5,6 +5,7 @@ import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import { useTIAuth } from '../TechInfoContext/AuthContext';
 import '../styles/UserLoginPage/userLoginPageCss.css'
+
 const UserLogin = () => {
 
   const [tiAuth, settiAuth] = useTIAuth()
@@ -34,8 +35,8 @@ const UserLogin = () => {
 
       console.log("Response Data:", response.data);
 
-      const { user_Id, role, accessToken, decryptedId,userDetails } = response.data;
-      console.log("Extracted Data:", { user_Id, role, accessToken,userDetails });
+      const { user_Id, role, accessToken, decryptedId,userDetails,Branch_Id,encryptedBranchId,branchId} = response.data;
+      console.log("Extracted Data:", { user_Id, role, accessToken,userDetails,Branch_Id,encryptedBranchId,branchId });
       if (!user_Id) {
         throw new Error('User ID is missing');
       }
@@ -53,6 +54,8 @@ const UserLogin = () => {
           userDecryptedId: decryptedId,
           isLoggedIn: true,
           userData:userDetails,
+          userBranchId:encryptedBranchId,
+          decryptedBranchId:branchId
         };
         console.log("New Auth State:", newAuthState);
         settiAuth(newAuthState);
@@ -61,7 +64,9 @@ const UserLogin = () => {
 
         console.log("Stored in localStorage and useContext:", tiAuth);
         const encodedUserId = encodeURIComponent((user_Id));
-        navigate(`/Student_dashboard/${encodedUserId}`);
+        const encodedBranchId=encodeURIComponent((encryptedBranchId))
+        console.log("first")
+        navigate(`/Student_dashboard/${encodedUserId}/${encodedBranchId}`);
 
         // Get the current time
         const currentTime = new Date();

@@ -15,7 +15,7 @@ import { IoMenu } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import JSONClasses from '../../../../ThemesFolder/JSONForCSS/JSONClasses';
 import { ThemeContext } from '../../../../ThemesFolder/ThemeContext/Context';
-const CourseHeader2 = ({ isEditMode, userRole }) => {
+const CourseHeader2 = ({ isEditMode, userRole,Branch_Id }) => {
     const [image, setImage] = useState(null);
     const [showLinks, setShowLinks] = useState(false);
     const navigate = useNavigate();
@@ -56,29 +56,46 @@ const CourseHeader2 = ({ isEditMode, userRole }) => {
 
 
 
-    const renderNavItemInCoursePage = (headeritem) => {
-        // Check if the link should scroll or redirect
-        const isInternalLink = headeritem.HeaderItemLink.startsWith('PoopularCourses') || headeritem.HeaderItemLink.startsWith('WhyChooseUs');
+    // const renderNavItemInCoursePage = (headeritem) => {
+    //     // Check if the link should scroll or redirect
+    //     const isInternalLink = headeritem.HeaderItemLink.startsWith('PoopularCourses') || headeritem.HeaderItemLink.startsWith('WhyChooseUs');
 
+    //     if (isInternalLink) {
+    //         // Internal link for scrolling
+    //         return (
+    //             <ScrollLink to={headeritem.HeaderItemLink} smooth={true} duration={100}>
+    //                 {headeritem.HeaderItemName}
+    //             </ScrollLink>
+    //         );
+    //     } else {
+    //         // External link for navigation
+    //         return (
+    //             <span onClick={() => navigate(headeritem.HeaderItemLink)}>
+    //                 {headeritem.HeaderItemName}
+    //             </span>
+    //         );
+    //     }
+    // };
+
+
+    const renderNavItemInCoursePage = (headeritem, Branch_Id) => {
+        const isInternalLink = headeritem.HeaderItemLink.startsWith('PoopularCourses') || headeritem.HeaderItemLink.startsWith('WhyChooseUs');
+    
         if (isInternalLink) {
-            // Internal link for scrolling
             return (
                 <ScrollLink to={headeritem.HeaderItemLink} smooth={true} duration={100}>
                     {headeritem.HeaderItemName}
                 </ScrollLink>
             );
         } else {
-            // External link for navigation
+            const externalLink = Branch_Id ? `${headeritem.HeaderItemLink}?Branch_Id=${Branch_Id}` : headeritem.HeaderItemLink;
             return (
-                <span onClick={() => navigate(headeritem.HeaderItemLink)}>
+                <span onClick={() => navigate(externalLink)}>
                     {headeritem.HeaderItemName}
                 </span>
             );
         }
     };
-
-
-
 
     const themeFromContext = useContext(ThemeContext);
 
@@ -120,11 +137,12 @@ const CourseHeader2 = ({ isEditMode, userRole }) => {
             </div>
             {/* this should be hidden at mobile width and should be shown upon click  */}
             <nav className={`navDiv`} ref={navRef}>
+            <p>{Branch_Id}</p>
                 <ul className={`ulDiv ${themeDetails.themeulCPDiv}`}>
                     {headers.length > 0 ? (
                         headers.map((headeritem) => (
                             <li key={headeritem.HeaderItem_Id}>
-                                {renderNavItemInCoursePage(headeritem)}
+                                {renderNavItemInCoursePage(headeritem,Branch_Id)}
                             </li>
                         ))
                     ) : userRole === 'user' ? (

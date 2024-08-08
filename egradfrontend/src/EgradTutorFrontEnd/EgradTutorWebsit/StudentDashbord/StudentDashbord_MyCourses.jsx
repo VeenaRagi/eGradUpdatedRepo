@@ -9,7 +9,7 @@ import { FaBookOpenReader } from "react-icons/fa6";
 import ReactPlayer from "react-player";
 import ProgressPieChart from "../ProgressPieChart ";
 
-const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
+const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState,branchIdFromLS }) => {
   const [showQuizCourses, setShowQuizCourses] = useState(true);
   const [showtestContainer1, setShowtestContainer1] = useState(false);
   const [showtestContainer2, setShowtestContainer2] = useState(false);
@@ -45,12 +45,13 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     fetchTestDetails();
   }, [user_Id]);
 
+  const Branch_Id = branchIdFromLS;
   // Fetch purchased courses based on decryptedUserIdState
   useEffect(() => {
     const fetchPurchasedCourses = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/Exam_Course_Page/purchasedCourses/${user_Id}`
+          `${BASE_URL}/Exam_Course_Page/purchasedCourses/${user_Id}/${Branch_Id}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch purchased courses");
@@ -64,7 +65,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     };
 
     fetchPurchasedCourses();
-  }, [user_Id]);
+  }, [user_Id,Branch_Id]);
 
   // Function to check if a course is within the specified time frame
   const isCourseActive = (course) => {
@@ -154,11 +155,12 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
     }
   };
 
-  const openPopup = async (testCreationTableId, user_Id, Portale_Id) => {
+  const openPopup = async (testCreationTableId, user_Id, Portale_Id,branchIdFromLS) => {
     const userId = user_Id;
     let param1 = testCreationTableId;
     let param2 = user_Id;
     let param3 = Portale_Id;
+    let param4 = branchIdFromLS;
     const screenWidth = window.screen.width;
     const screenHeight = window.screen.height;
 
@@ -166,15 +168,27 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
       const encryptedParam1 = await encryptData(param1.toString());
       const encryptedParam2 = await encryptData(param2.toString());
       const encryptedParam3 = await encryptData(param3.toString());
+      const encryptedParam4 = await encryptData(param4.toString());
 
       const token = new Date().getTime().toString();
       sessionStorage.setItem("navigationToken", token);
 
-      const url = `/Instructions/${encodeURIComponent(
-        encryptedParam1
-      )}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(
-        encryptedParam3
-      )}`;
+      // const url = `/Instructions/${encodeURIComponent(
+      //   encryptedParam1
+      // )}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(
+      //   encryptedParam3
+      // )}/${encodeURIComponent(
+      //   encryptedParam4
+      // )}`;
+      let url;
+if (param4 === 1) {
+  url = `/UG_Instructions_Page/${encodeURIComponent(encryptedParam1)}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(encryptedParam3)}/${encodeURIComponent(encryptedParam4)}`;
+} else if (param4 === 2) {
+  url = `/PG_Instructions_Page/${encodeURIComponent(encryptedParam1)}/${encodeURIComponent(encryptedParam2)}/${encodeURIComponent(encryptedParam3)}/${encodeURIComponent(encryptedParam4)}`;
+}
+
+// Now 'url' will be set based on the value of param4
+
 
       const newWinRef = window.open(
         url,
@@ -416,7 +430,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
         className="span_style_start_button"
         to="#"
         onClick={() => {
-          openPopup(testCreationTableId, user_Id, Portale_Id);
+          openPopup(testCreationTableId, user_Id, Portale_Id,branchIdFromLS);
           handleSaveStartTime(user_Id, testCreationTableId, courseCreationId);
         }}
       >
@@ -581,6 +595,7 @@ const StudentDashbord_MyCourses = ({ usersData, decryptedUserIdState }) => {
 
   return (
     <div>
+       <h1>Branch_Id:{branchIdFromLS}</h1>
       {!showtestContainer1 &&
         !showtestContainer2 &&
         // !showCompletePackageContainer

@@ -6,6 +6,7 @@ import StudentDashbord_Header from "./StudentDashbord_Header";
 import Student_dashboard_Container from "./Student_dashboard_Container";
 import PasswordChangeForm from "../../../Login/PasswordChangeForm";
 import UserLogin from "../../../Login/UserLogin";
+import BASE_URL from "../../../apiConfig";
 
 const Student_dashboard = () => {
   // -----------------PARAMS_DECLARATION_START---------------
@@ -17,6 +18,7 @@ const Student_dashboard = () => {
   const [decryptedUserIdState, setDecryptedUserIdState] = useState("");
   const [tiAuth, settiAuth] = useTIAuth();
   const [usersData, setUsersData] = useState("");
+  const[branchIdFromLS,setBranchIdFromLS]=useState("")
   const [scrollPosition, setScrollPosition] = useState(0);
   const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
   // -----------------CONST_VARIABLES_DECLARATION_END---------------
@@ -29,9 +31,6 @@ const Student_dashboard = () => {
       try {
         const response = await axios.get(
           `http://localhost:5001/Login/userDecryptedId/${encodedUserId}`,
-          // {
-          //   params: { encryptedUserId },
-          // }
         );
         console.log(
           encryptedUserId,
@@ -58,10 +57,27 @@ const Student_dashboard = () => {
     }
   }, [userIdTesting]);
 
-  console.log(userIdTesting, "3222222222222222222222");
-  console.log(secretKey, "secret key while decoding");
-  console.log("hiiiiiiiiiiiiiii");
-  console.log(usersData);
+
+useEffect(() => {
+  // Assuming tiAuth contains the user object
+  if (tiAuth.userData) {
+    const { userId, role, users, decryptedTosendFrontEnd } = tiAuth.userData;
+
+    console.log("User ID:", userId);
+    console.log("Role:", role);
+    console.log("Decrypted ID to Send Frontend:", decryptedTosendFrontEnd);
+
+    // If users array contains the details you need
+    if (users && users.length > 0) {
+      const user = users[0]; // Assuming there's only one user or you want the first one
+      console.log("User Details:''''''''''''''''''''''''''''''''''''''''''''", user.Branch_Id);
+      setBranchIdFromLS(user.Branch_Id);
+      console.log(branchIdFromLS,)
+      // setUserDetails(user);
+    }
+  }
+}, [tiAuth]);
+
   const handleLogOut = () => {
     settiAuth({
       ...tiAuth,
@@ -73,6 +89,7 @@ const Student_dashboard = () => {
     localStorage.removeItem("tiAuth");
     navigate("/userlogin");
   };
+
   //----------------LOGIN_FUNCTIONALITY_END------------------
 
   useEffect(() => {
@@ -86,6 +103,39 @@ const Student_dashboard = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+
+    
+  // const { Branch_Id } = useParams();
+
+const Branch_Id =2
+// const BranchId
+
+const [branches, setBranches] = useState([]);
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  const fetchBranches = async () => {
+    if (!Branch_Id) return;
+
+    try {
+      const response = await fetch(`${BASE_URL}/LandingPageExamData/branch/${Branch_Id}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setBranches(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching branches:', error);
+      setLoading(false);
+    }
+  };
+
+  fetchBranches();
+}, [Branch_Id]);
+console.log("shinchannnnnnnnnn")
+console.log('Branch_Id', Branch_Id);
 
   return (
     <>
@@ -109,9 +159,12 @@ const Student_dashboard = () => {
             /> */}
           </div>
           <Student_dashboard_Container
+
             usersData={usersData}
             decryptedUserIdState={decryptedUserIdState}
-
+            Branch_Id={Branch_Id}
+            branchIdFromLS={branchIdFromLS}
+            // decryptedBranchId={decryptedBranchId}
           />
         </div>
       ) : (
