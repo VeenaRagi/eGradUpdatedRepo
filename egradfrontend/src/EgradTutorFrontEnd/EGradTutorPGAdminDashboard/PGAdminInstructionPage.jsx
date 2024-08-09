@@ -236,7 +236,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BASE_URL from "../../apiConfig";
 import '../EgradtutorPortalsAdmin/styles/InstructionPage_admin.css';
-import InstructionDisplay_admin from "../EgradtutorPortalsAdmin/InstructionDisplay_admin";
+import PGInstructionDisplay_admin from './PGInstructionDisplay_admin'
 
 const PGAdminInstructionPage = () => {
   const [instructionHeading, setInstructionHeading] = useState("");
@@ -260,7 +260,7 @@ const PGAdminInstructionPage = () => {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/InstructionCreation/exams`);
+        const response = await axios.get(`${BASE_URL}/InstructionCreation/examss`);
         setExams(response.data);
       } catch (error) {
         console.error("Error fetching exams:", error);
@@ -396,7 +396,7 @@ const PGAdminInstructionPage = () => {
           </div>
         )}
         <div className="instruction_content">
-          <InstructionDisplay_admin />
+          <PGInstructionDisplay_admin />
         </div>
       </div>
     </div>
