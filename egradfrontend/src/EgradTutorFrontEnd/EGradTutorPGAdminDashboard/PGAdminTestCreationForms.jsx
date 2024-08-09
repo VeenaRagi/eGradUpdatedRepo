@@ -187,7 +187,7 @@ function PGAdminTestCreationForms() {
   };
 
   useEffect(() => {
-    fetch(`${BASE_URL}/TestCreation/getDetailsForTestCreatedTablePG`)
+    fetch(`${BASE_URL}/TestCreation/testcourses`)
       .then((response) => response.json())
       .then((data) => setCourses(data))
       .catch((error) => console.error("Error fetching courses:", error));
