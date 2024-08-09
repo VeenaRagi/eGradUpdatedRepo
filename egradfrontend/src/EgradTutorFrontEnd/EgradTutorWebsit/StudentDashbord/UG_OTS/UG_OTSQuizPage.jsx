@@ -20,6 +20,13 @@ const UG_OTSQuizPage = () => {
   const [responses, setResponses] = useState({});
   const [visitedQuestions, setVisitedQuestions] = useState([]);
   const [savedQuestions, setSavedQuestions] = useState([]);
+  const [answeredQuestions, setAnsweredQuestions] = useState(new Set());
+  const [unansweredSavedQuestions, setUnansweredSavedQuestions] = useState(new Set());
+
+ // Separate states for different types of responses
+ const [singleChoiceResponses, setSingleChoiceResponses] = useState({});
+ const [multipleChoiceResponses, setMultipleChoiceResponses] = useState({});
+ const [textResponses, setTextResponses] = useState({});
 
   const location = useLocation();
   const { userData } = location.state || {};
@@ -136,13 +143,35 @@ const UG_OTSQuizPage = () => {
     }
   };
 
-  const handleInput = (value) => {
-    setInputValue((prev) => {
-      if (value === "backspace") {
-        return prev.slice(0, -1);
+  const handleSingleChoiceChange = (optionId) => {
+    setSingleChoiceResponses((prev) => ({
+      ...prev,
+      [selectedQuestionId]: optionId
+    }));
+  };
+
+  const handleMultipleChoiceChange = (optionId) => {
+    setMultipleChoiceResponses((prev) => {
+      const updatedResponse = prev[selectedQuestionId] || [];
+      if (updatedResponse.includes(optionId)) {
+        return {
+          ...prev,
+          [selectedQuestionId]: updatedResponse.filter(id => id !== optionId)
+        };
+      } else {
+        return {
+          ...prev,
+          [selectedQuestionId]: [...updatedResponse, optionId]
+        };
       }
-      return prev + value;
     });
+  };
+
+  const handleTextChange = (value) => {
+    setTextResponses((prev) => ({
+      ...prev,
+      [selectedQuestionId]: value
+    }));
   };
 
   const handleSubmit = () => {
@@ -229,7 +258,24 @@ const UG_OTSQuizPage = () => {
       }
     }
   };
-
+  // const handleInputChange = (e) => {
+  //   const value = e.target.value;
+  //   setInputValue(value);
+  
+  //   // Update responses with the new input value
+  //   setResponses((prevResponses) => ({
+  //     ...prevResponses,
+  //     [selectedQuestionId]: value
+  //   }));
+  // };
+  const handleInput = (value) => {
+    setInputValue((prev) => {
+      if (value === "backspace") {
+        return prev.slice(0, -1);
+      }
+      return prev + value;
+    });
+  };
   const handlePreviousClick = () => {
     const selectedSubject = testData.subjects.find(
       (subject) => subject.subjectId === selectedSubjectId
@@ -281,29 +327,45 @@ const UG_OTSQuizPage = () => {
     }
   };
 
-  const handleSaveAndNext = () => {
-    if (responses[selectedQuestionId] === undefined) {
-      alert("Please answer the current question before saving and proceeding.");
-      return;
-    }
-
-    // Update saved questions
-    setSavedQuestions([...savedQuestions, selectedQuestionId]);
-    handleNextClick();
-  };
 
 
+const handleSaveAndNext = () => {
+  const isAnswered = singleChoiceResponses[selectedQuestionId] !== undefined ||
+    multipleChoiceResponses[selectedQuestionId] !== undefined ||
+    textResponses[selectedQuestionId] !== undefined;
+
+  if (isAnswered) {
+    setUnansweredSavedQuestions((prev) => {
+      const updated = new Set(prev);
+      updated.delete(selectedQuestionId);
+      return updated;
+    });
+
+    setAnsweredQuestions((prev) => new Set(prev).add(selectedQuestionId));
+  } else {
+    setUnansweredSavedQuestions((prev) => new Set(prev).add(selectedQuestionId));
+    setAnsweredQuestions((prev) => {
+      const updated = new Set(prev);
+      updated.delete(selectedQuestionId);
+      return updated;
+    });
+  }
+
+  setSavedQuestions((prev) => [...prev, selectedQuestionId]);
+  handleNextClick();
+};
 
   const handleMarkForReview = () => {
-    if (responses[selectedQuestionId] !== undefined) {
-      // If the question is answered and marked for review, set to purpleTickBox
+    if (singleChoiceResponses[selectedQuestionId] !== undefined ||
+      multipleChoiceResponses[selectedQuestionId] !== undefined ||
+      textResponses[selectedQuestionId] !== undefined
+    ) {
       setMarkedForReview((prev) =>
         prev.includes(selectedQuestionId)
           ? prev.filter((id) => id !== selectedQuestionId)
           : [...prev, selectedQuestionId]
       );
     } else {
-      // If the question is not answered and marked for review, set to purpleBox
       setMarkedForReview((prev) =>
         prev.includes(selectedQuestionId)
           ? prev.filter((id) => id !== selectedQuestionId)
@@ -311,50 +373,92 @@ const UG_OTSQuizPage = () => {
       );
     }
   };
+
   const handleClearResponse = () => {
-    // Clear the response for the current question
-    setResponses((prevResponses) => {
+    setSingleChoiceResponses((prevResponses) => {
       const updatedResponses = { ...prevResponses };
       delete updatedResponses[selectedQuestionId];
       return updatedResponses;
     });
 
-    // Clear the "Mark for Review" status
-    setMarkedForReview(
-      markedForReview.filter((id) => id !== selectedQuestionId)
+    setMultipleChoiceResponses((prevResponses) => {
+      const updatedResponses = { ...prevResponses };
+      delete updatedResponses[selectedQuestionId];
+      return updatedResponses;
+    });
+
+    setTextResponses((prevResponses) => {
+      const updatedResponses = { ...prevResponses };
+      delete updatedResponses[selectedQuestionId];
+      return updatedResponses;
+    });
+
+    setAnsweredQuestions((prev) => {
+      const updated = new Set(prev);
+      updated.delete(selectedQuestionId);
+      return updated;
+    });
+
+    setSavedQuestions((prev) => prev.filter((id) => id !== selectedQuestionId));
+
+    setUnansweredSavedQuestions((prev) => {
+      const updated = new Set(prev);
+      updated.delete(selectedQuestionId);
+      return updated;
+    });
+
+    setMarkedForReview((prev) =>
+      prev.filter((id) => id !== selectedQuestionId)
     );
   };
 
-  const getButtonStyle = (questionId) => {
-    const isAnswered = responses[questionId] !== undefined;
-    const isMarkedForReview = markedForReview.includes(questionId);
+  
+const getButtonStyle = (questionId) => {
+  const isAnswered =
+    singleChoiceResponses[questionId] !== undefined ||
+    multipleChoiceResponses[questionId] !== undefined ||
+    textResponses[questionId] !== undefined;
+  const isMarkedForReview = markedForReview.includes(questionId);
+  const isSaved = savedQuestions.includes(questionId);
+  const isUnansweredSaved = unansweredSavedQuestions.has(questionId);
+  
+  const firstQuestionId = selectedSection
+    ? selectedSection.questions[0].question_id
+    : selectedSubject.questions[0].question_id;
 
-    // Get the first question ID of the current section or subject
-    const firstQuestionId = selectedSection
-      ? selectedSection.questions[0].question_id
-      : selectedSubject.questions[0].question_id;
+  if (questionId === firstQuestionId && !responses[questionId]) {
+    return { backgroundImage: `url(${orangeBox})` }; // First question not answered
+  }
 
-    // Default style for the first question of a section/subject
-    if (questionId === firstQuestionId && !responses[questionId]) {
-      return { backgroundImage: `url(${orangeBox})` };
-    }
+  if (isMarkedForReview) {
+    return isAnswered
+      ? { backgroundImage: `url(${purpleTickBox})` } // Answered and marked for review
+      : { backgroundImage: `url(${purpleBox})` }; // Not answered but marked for review
+  }
 
-    if (isMarkedForReview) {
-      return isAnswered
-        ? { backgroundImage: `url(${purpleTickBox})` } // Answered and marked for review
-        : { backgroundImage: `url(${purpleBox})` }; // Not answered but marked for review
-    }
+  if (isSaved) {
+    return isAnswered
+      ? { backgroundImage: `url(${greenBox})` } // Answered and saved
+      : { backgroundImage: `url(${orangeBox})` }; // Saved but not answered
+  }
 
-    if (isAnswered) {
-      return { backgroundImage: `url(${greenBox})` }; // Answered and saved
-    }
+  if (isUnansweredSaved) {
+    return { backgroundImage: `url(${orangeBox})` }; // Saved but not answered
+  }
 
-    if (visitedQuestions.includes(questionId)) {
-      return { backgroundImage: `url(${orangeBox})` }; // Answered or visited but not saved
-    }
+  if (isAnswered) {
+    return { backgroundImage: `url(${orangeBox})` }; // Answered but not saved
+  }
 
-    return {}; // Default style
-  };
+  if (visitedQuestions.includes(questionId)) {
+    return { backgroundImage: `url(${orangeBox})` }; // Visited but not answered
+  }
+
+  return {}; // Default style
+};
+
+  
+
  const questionNumber = selectedSection 
     ? selectedSection.questions.findIndex(q => q.question_id === selectedQuestionId) + 1
     : null;
@@ -522,6 +626,7 @@ const UG_OTSQuizPage = () => {
                     [selectedQuestionId]: e.target.value,
                   });
                 }}
+                // onChange={handleInputChange}
                 maxLength={1}
               />
               <button onClick={() => handleInput("backspace")}>
@@ -553,6 +658,7 @@ const UG_OTSQuizPage = () => {
                     [selectedQuestionId]: e.target.value,
                   });
                 }}
+                // onChange={handleInputChange}
                 maxLength={1}
               />
               <button onClick={() => handleInput("backspace")}>
@@ -589,5 +695,4 @@ const UG_OTSQuizPage = () => {
 };
 
 export default UG_OTSQuizPage;
-
 

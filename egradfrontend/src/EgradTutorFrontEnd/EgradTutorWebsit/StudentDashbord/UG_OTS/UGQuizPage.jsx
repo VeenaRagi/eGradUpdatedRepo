@@ -2250,26 +2250,6 @@ const QuizPage = () => {
       // onClick={enterFullscreen}
       // style={{ backgroundColor: "white" }}
     >
-      {/* {showMalPractisePopup && (
-        <div className="popup">
-          <div className="popup-content">
-            <h2>Malpractice Attempt</h2>
-            <p>You have attempted malpractice.</p>
-            <Link
-              // to='/student_dashboard'
-              // to={`/TestResultsPage/${decryptedParam1}/${decryptedParam2}`}
-              style={{ color: "red" }}
-              target="_blank"
-              onClick={() => {
-                setShowMalPractisePopup(false);
-                handleMalPractiseSubmit();
-              }}
-            >
-              OK
-            </Link>
-          </div>
-        </div>
-      )} */}
 
       {/* {showMalPractisePopup && (
         <div className="MalPracticePopup">
