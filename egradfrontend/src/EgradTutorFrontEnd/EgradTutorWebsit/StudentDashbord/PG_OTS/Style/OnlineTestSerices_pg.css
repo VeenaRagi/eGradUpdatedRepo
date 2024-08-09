@@ -1,0 +1,261 @@
+.Pg_OtsLogo img {
+  width: 200px;
+  padding-left: 1rem;
+}
+
+.Pg_otsheadin1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  padding: 0.3rem 0.5rem 0 0.5rem;
+}
+
+.Pg_TestName {
+  font-size: 15px;
+  color: yellow;
+}
+.Pg_otsheadin1 div {
+  display: flex;
+  color: #fff;
+  gap: 1rem;
+  align-items: center;
+}
+
+.Pg_justify {
+  border-radius: 50%;
+  background-color: #349b79;
+  width: 20px;
+  height: 20px;
+  font-size: 13px;
+  padding: 3px;
+  text-align: center;
+}
+
+.pg_info {
+  border-radius: 50%;
+  background-color: #44d0e9bd;
+  width: 20px;
+  height: 20px;
+  font-size: 13px;
+  padding: 3px;
+  text-align: center;
+}
+
+.pg_otsMaindiv {
+  display: flex;
+}
+
+.pg_subjectname {
+  display: flex;
+  justify-content: space-between;
+}
+
+.subject-title {
+  cursor: pointer;
+  font-weight: normal;
+
+  font-size: 15px !important;
+  text-align: center;
+  padding-top: 24px;
+}
+
+.subject-title.selected {
+  font-weight: bold;
+  font-size: 13px !important;
+}
+
+.subject-title1 {
+  font-size: 15px !important;
+}
+.containerpg {
+  clear: both;
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  padding-left: 1rem;
+  background-color: #eef1f1;
+}
+
+.containerpg .arrowpg {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #3db0f3; /* Change this color to match your box's background */
+  position: absolute;
+  bottom: -10px; /* Position the arrow below the box */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #eef1f1;
+}
+
+.containerpg .arrowpg .outer {
+  width: 0;
+  height: 0;
+  border-right: 20px solid #000000;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.containerpg .arrowpg .inner {
+  width: 0;
+  height: 0;
+  border-right: 20px solid #ffffff;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  position: absolute;
+  top: 0;
+  left: 2px;
+}
+
+.containerpg .message-body {
+  width: auto;
+  height: 2rem;
+  display: inline-block;
+  background-color: #3db0f3; /* Change this color to match your box's background */
+  color: white;
+  border-radius: 5px;
+  padding: 4px;
+  position: relative;
+  text-align: center;
+}
+
+.containerpg .message-body h2 {
+  margin: 0;
+  display: inline-block;
+  text-align: center;
+}
+
+.pg_Sectionsdiv {
+  border-bottom: 1px solid #eef1f1;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px !important;
+  padding-left: 0.5rem 0.5rem;
+  align-items: center;
+  text-align: center;
+}
+
+.pg_Sectionsdiv p {
+  margin-bottom: 5px !important;
+}
+
+.Pg_otsheadin1 p {
+  margin-bottom: 0rem !important;
+}
+
+.Pg_section.selected {
+  background-color: #3db0f3;
+  color: #fff;
+}
+
+.Pg_section {
+  border: 1px solid #eef1f1;
+  height: 2rem;
+  margin-top: 1rem;
+  color: #3db0f3;
+}
+
+.Pg_sectiondiv {
+  display: flex;
+  border: 1px solid #eef1f1;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 0rem !important;
+  height: 2rem;
+}
+
+.Pg_sectiondiv p {
+  padding: 5px;
+  text-align: center;
+}
+
+.pg_Questiontypediv {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eef1f1;
+  margin-bottom: 0rem !important;
+  text-align: center;
+  align-items: center;
+}
+
+.pg_markingdiv {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.pg_Questionnodiv {
+  border-bottom: 1px solid #eef1f1;
+  margin-bottom: 0rem !important;
+}
+
+.pg_quizpageots {
+  height: 38rem;
+  /* background-color: aliceblue; */
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pg_handlebuttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.pg_handleReview button {
+  border: 1px solid #979797;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;
+}
+
+.pg_handleReview button:hover {
+  background: #5bbef7cc;
+  border: 1px solid #000000;
+  color: #fff;
+}
+
+.pg_handleReview {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pg_saveandnextots {
+  background-color: #3db0f3;
+  color: #fff;
+  border: 1px solid #cecece;
+}
+
+.pg_saveandnextots:hover {
+  border: 1px solid #000000;
+  background-color: #3db0f3;
+  color: #fff;
+}
+
+.pg_saveprevious {
+  display: flex;
+  gap: 1rem;
+}
+.pg_norightdiv{
+    width: 15%;
+}
+/* .pg_quizotsQuestion{
+    position: fixed;
+} */
+
+/* .pg_quizotsoptions{
+    position: absolute;
+   
+    top: 35rem;
+    height: 20rem;
+    z-index: 0;
+    width: 63%;
+} */
