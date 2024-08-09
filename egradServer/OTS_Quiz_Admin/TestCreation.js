@@ -313,7 +313,6 @@ router.get("/instructions", async (req, res) => {
 // Add this new API endpoint
 router.get("/course-typeoftests/:courseCreationId", async (req, res) => {
   const { courseCreationId } = req.params;
-
   try {
     const [rows] = await db.query(
       "SELECT type_of_test.TypeOfTestId, type_of_test.TypeOfTestName,course_typeoftests.courseTypeOfTestId " +
@@ -332,7 +331,7 @@ router.get("/course-typeoftests/:courseCreationId", async (req, res) => {
 
 router.get("/test_creation_table", async (req, res) => {
   try {
-    const query = ` SELECT tt.testCreationTableId,tt.TestName,cc.courseName,cc.Portale_Id,tt.testStartDate,tt.testEndDate,tt.testStartTime,tt.testEndTime,tt.status,tt.TotalQuestions,tt.opt_pattern_id,TT.TestForm_Id FROM test_creation_table tt JOIN  course_creation_table cc ON tt.courseCreationId=cc.courseCreationId `;
+    const query = ` SELECT tt.testCreationTableId,tt.TestName,cc.courseName,cc.Portale_Id,tt.testStartDate,tt.testEndDate,tt.testStartTime,tt.testEndTime,tt.status,tt.TotalQuestions,tt.opt_pattern_id,TT.TestForm_Id FROM test_creation_table tt JOIN  course_creation_table cc ON tt.courseCreationId=cc.courseCreationId LEFT JOIN exams e ON e.examId=cc.examId WHERE e.branchId=1; `;
     const [rows] = await db.query(query);
     res.json(rows);
   } catch (error) {
@@ -1114,6 +1113,27 @@ router.get("/testCoursesForPG", async (req, res) => {
       error: "Internal Server Error",
     });
 
+  }
+});
+
+router.get('/pgSubjects', async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM pg_departments');
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.get("/detailsOfTestsCreated", async (req, res) => {
+  try {
+    const query = ` SELECT tt.testCreationTableId,tt.TestName,cc.courseName,cc.Portale_Id,tt.testStartDate,tt.testEndDate,tt.testStartTime,tt.testEndTime,tt.status,tt.TotalQuestions,tt.opt_pattern_id,TT.TestForm_Id FROM test_creation_table tt JOIN  course_creation_table cc ON tt.courseCreationId=cc.courseCreationId LEFT JOIN exams e ON e.examId=cc.examId WHERE e.branchId=2; `;
+    const [rows] = await db.query(query);
+    res.json(rows);
+  } catch (error) {
+    console.error("Error creating sections:", error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 });
 

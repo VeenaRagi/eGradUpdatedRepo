@@ -246,6 +246,7 @@ function PGAdminTestCreationForms() {
 
   useEffect(() => {
     if (selectedCourse) {
+      // asdffff
       fetch(`${BASE_URL}/TestCreation/course-subjects/${selectedCourse}`)
         .then((response) => response.json())
         .then((data) => {
@@ -259,69 +260,76 @@ function PGAdminTestCreationForms() {
   }, [selectedCourse]);
   //------------------------form1-------------------------------------
   const { TestForm_Id } = useParams();
+
   const handleSubmit = async (e, selectedFormId) => {
     e.preventDefault();
-    // if (validateForm()) {
+    
+    // Perform field validation
+    if (!testName || !selectedCourse || !selectedtypeOfTest || !startDate || !startTime || !endDate || !endTime || !duration || !totalQuestions || !totalMarks || !sectionsData.length || !selectedInstruction || !selectedoptions || !selectedFormId) {
+      alert("Please fill out all required fields.");
+      return;  
+    }
+  
     let isValid = true;
-    console.log("hiiiiiiiiiiii");
     console.log("Selected FormId", selectedFormId);
     setSubmitting(true);
+  
     try {
       console.log("Sections Data Before Request:", sectionsData);
-      const response = await fetch(
-        `${BASE_URL}/TestCreation/create_test_form1`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            testName,
-            selectedCourse,
-            selectedtypeOfTest,
-            startDate,
-            startTime,
-            endDate,
-            endTime,
-            duration,
-            totalQuestions,
-            totalMarks,
-            sectionsData,
-            selectedInstruction,
-            selectedoptions,
-            selectedFormId,
-          }),
-        }
-      );
-
+      const response = await fetch(`${BASE_URL}/TestCreation/create_test_form1`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          testName,
+          selectedCourse,
+          selectedtypeOfTest,
+          startDate,
+          startTime,
+          endDate,
+          endTime,
+          duration,
+          totalQuestions,
+          totalMarks,
+          sectionsData,
+          selectedInstruction,
+          selectedoptions,
+          selectedFormId,
+        }),
+      });
+  
       const data = await response.json();
-      if(data.success){
-        alert(data.message)
-        window.location.href('/Adminpage')
+      if (data.success) {
+        alert(data.message);
+        setIsFormVisible(false);  // Close the form upon success
+        fetchTestData();
+        setSubmitting(false);
+        window.location.href = "/PGCourseAdmin";
+        // Redirect to PGCourseAdmin after clicking OK on the alert
+        // navigate("/PGCourseAdmin");
+      } else {
+        alert(data.error);
+        setSubmitting(false);
       }
-      else{
-        alert(data.error)
-      }
+  
       console.log(data);
-      setIsFormVisible(false);
-      fetchTestData();
-      setSubmitting(false);
-      navigate("/Adminpage");
     } catch (error) {
       console.error("Error submitting form:", error);
       isValid = false;
+      setSubmitting(false);
     }
+  
     console.log("Validation Result:", isValid);
-
     return isValid;
-    // setIsFormVisible(false);
-    // setSubmitting(false);
-    //   }
   };
-
+  
+ 
   //------------------------form1 end---------------------------------------
 
   //------------------------------form 2-----------------------------
+ 
+ 
   const handleSubmitcp = async (e) => {
     e.preventDefault();
     // if (validateForm()) {
@@ -374,7 +382,7 @@ function PGAdminTestCreationForms() {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `${BASE_URL}/TestCreation/test_creation_table`
+        `${BASE_URL}/TestCreation/detailsOfTestsCreated`
       );
       setTestData(response.data);
 
