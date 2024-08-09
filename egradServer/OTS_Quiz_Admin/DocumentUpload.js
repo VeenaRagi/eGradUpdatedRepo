@@ -766,7 +766,7 @@ router.delete("/DocumentDelete", async (req, res) => {
 });
 //  end for document section code ------------------------------------------/
 
-module.exports = router;
+
 
 // doc upload code -----------------
 // router.post("/upload", upload.single("document"), async (req, res) => {
@@ -843,3 +843,19 @@ module.exports = router;
 //       .send("Error extracting content and saving it to the database.");
 //   }
 // });
+
+
+
+
+
+
+
+
+
+
+// __________________________********* PG EXAMS RELATED API'S*********__________________________________//
+
+
+
+
+module.exports = router;

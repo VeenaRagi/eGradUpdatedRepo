@@ -32,8 +32,8 @@ import TestUpdateadmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/TestUpd
 import UG_Instructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_Instructions_Page.jsx";
 import PG_Instructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_Instructions_Page.jsx";
 import General_Intructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/General_intructions_page.jsx";
-import UGQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UGQuizPage.jsx";
-import PGQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/PGQuizPage.jsx";
+// import UGQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UGQuizPage.jsx";
+// import PGQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/PGQuizPage.jsx";
 import UGQuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UGQuestionPaper.jsx";
 import PGQuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/PGQuestionPaper.jsx";
 import UGQuestionBankQuiz from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_PQB/UGQuestionBankQuiz.jsx";
@@ -49,7 +49,7 @@ import axios from "axios";
 import { UserProvider } from "./UserContext";
 // import PGAdminDashboard from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminDashboardIntegration.jsx";
 import PGAdminDashboardIntegration from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminDashboardIntegration.jsx";
-import OnlineTestSerices_pg from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/OnlineTestSerices_pg.jsx";
+import PG_OTSQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/PG_OTSQuizPage.jsx";
 import UG_OTSQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UG_OTSQuizPage.jsx";
 const App = () => {
   return (
@@ -270,22 +270,24 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                   path="/General_intructions_page/:param1/:param2/:param3"
                   element={<PrivateRoute element={<General_Intructions_Page />} />}
                 /> */}
-                 <Route
+                 {/* <Route
                   path="/UGQuizPage/questionOptions/:param1/:param2"
                   element={
                     <PrivateRoute element={<UGQuizPage seconds={20} />} />
                   }
-                />
+                /> */}
+                     <Route path="/UG_OTSQuizPage/:param1/:param2" element={<UG_OTSQuizPage  seconds={20}/>}/>
                 <Route
                   path="/UGQuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<UGQuestionBankQuiz />} />}
                 />
-                <Route
+                {/* <Route
                   path="/PGQuizPage/questionOptions/:param1/:param2"
                   element={
                     <PrivateRoute element={<PGQuizPage seconds={20} />} />
                   }
-                />
+                /> */}
+                  <Route path="/PG_OTSQuizPage/:param1/:param2" element={<PG_OTSQuizPage  seconds={20}/>}/>
                 <Route
                   path="/PGQuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<PGQuestionBankQuiz />} />}
@@ -328,8 +330,8 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                 />
                 {/* PGCourseAdmin */}
                 <Route path="/adminProfile" element={<AdminProfile />} />
-                <Route path="/ots" element={<OnlineTestSerices_pg/>}/>
-                <Route path="/ugots" element={<UG_OTSQuizPage/>}/>
+              
+           
               </Routes>
             </UserProvider>
         )}

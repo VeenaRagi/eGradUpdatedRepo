@@ -211,7 +211,7 @@ function PGAdminPortalCourseCreation() {
   const fetchCourseData = async () => {
     try {
       const response = await fetch(
-        `${BASE_URL}/CoureseCreation/course_creation_table`
+        `${BASE_URL}/CoureseCreation/getDetailsForCourseCreatedTable`
       ); // api for getting the data to display on the table
       const result = await response.json();
       const coursesWithArrays = result.map((course) => ({
@@ -973,7 +973,10 @@ function PGAdminPortalCourseCreation() {
                       <div
                         className="course_frominput_container "
                         id="course_frominput_container_media"
-                        key={subject.departmentId}
+                        key={subject.departmentId
+
+
+                        }
                       >
                         <label htmlFor={`subject-${subject.departmentId}`}>
                           {subject.departmentName}
@@ -981,12 +984,12 @@ function PGAdminPortalCourseCreation() {
                         <input
                           className="inputLable"
                           type="checkbox"
-                          id={`subject-${subject.subjectId}`}
-                          name={`subject-${subject.subjectId}`}
-                          value={subject.subjectId}
-                          checked={selectedSubjects.includes(subject.subjectId)}
+                          id={`subject-${subject.departmentId}`}
+                          name={`subject-${subject.departmentId}`}
+                          value={subject.departmentId}
+                          checked={selectedSubjects.includes(subject.departmentId)}
                           onChange={(e) =>
-                            handleSubjectChange(e, subject.subjectId)
+                            handleSubjectChange(e, subject.departmentId)
                           }
                         />
                       </div>

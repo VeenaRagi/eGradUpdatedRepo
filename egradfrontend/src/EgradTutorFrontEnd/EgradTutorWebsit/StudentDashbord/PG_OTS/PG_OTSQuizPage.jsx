@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Style/OnlineTestSerices_pg.css";
+import { useParams, Link, useNavigate,useLocation } from "react-router-dom";
+import { decryptData, encryptData } from "../utils/crypto";
 // Import your images
 import greenBox from "../asserts/greenBox.png";
 import orangeBox from "../asserts/orangeBox.png";
@@ -8,7 +10,7 @@ import purpleBox from "../asserts/purpleBox.png";
 import purpleTickBox from "../asserts/purpleTickBox.png";
 import BASE_URL from "../../../../apiConfig";
 
-const OnlineTestSerices_pg = () => {
+const PG_OTSQuizPage = () => {
   const [testData, setTestData] = useState(null);
   const [selectedSubjectId, setSelectedSubjectId] = useState(null);
   const [selectedSectionId, setSelectedSectionId] = useState(null);
@@ -18,6 +20,7 @@ const OnlineTestSerices_pg = () => {
   const [responses, setResponses] = useState({});
   const [visitedQuestions, setVisitedQuestions] = useState([]);
   const [savedQuestions, setSavedQuestions] = useState([]);
+
   const [image, setImage] = useState(null);
   const fetchImage = async () => {
     try {
@@ -34,11 +37,66 @@ const OnlineTestSerices_pg = () => {
   useEffect(() => {
     fetchImage();
   }, []);
+
+
+  const location = useLocation();
+  const { userData } = location.state || {};
+
+  const navigate = useNavigate();
+
+  const { param1, param2 } = useParams();
+
+  const [decryptedParam1, setDecryptedParam1] = useState("");
+  const [decryptedParam2, setDecryptedParam2] = useState("");
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("navigationToken");
+
+    // If token doesn't exist, navigate to the error page
+    if (!token) {
+      navigate("/Error");
+      return;
+    }
+
+    const decryptParams = async () => {
+      try {
+        // Decrypt parameters
+        const decrypted1 = await decryptData(param1);
+        const decrypted2 = await decryptData(param2);
+
+        // Example validation (you can modify this based on your actual requirements)
+        if (
+          !decrypted1 ||
+          !decrypted2 ||
+          isNaN(parseInt(decrypted1)) ||
+          isNaN(parseInt(decrypted2))
+        ) {
+          // If parameters are not valid, navigate to the error page or handle as needed
+          navigate("/Error");
+          return;
+        }
+
+        setDecryptedParam1(decrypted1);
+        setDecryptedParam2(decrypted2);
+      } catch (error) {
+        console.error("Error decrypting data:", error);
+        navigate("/Error");
+      }
+    };
+
+    decryptParams();
+  }, [param1, param2, navigate]);
+
+  console.log("helloooooo shichann");
+  console.log("decryptedParam1", decryptedParam1);
+  console.log("decryptedParam2", decryptedParam2);
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5001/QuizPage/PG_QuestionOptions/6/55`
+          `${BASE_URL}/QuizPage/PG_QuestionOptions/${decryptedParam1}/${decryptedParam2}`
         );
         const data = response.data;
 
@@ -565,4 +623,4 @@ const OnlineTestSerices_pg = () => {
   );
 };
 
-export default OnlineTestSerices_pg;
+export default PG_OTSQuizPage;
