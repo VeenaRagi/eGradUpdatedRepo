@@ -97,7 +97,7 @@ const General_intructions_page_container = () => {
       const token = new Date().getTime().toString();
       sessionStorage.setItem("navigationToken", token);
 
-      const url1 = `/UGQuizPage/questionOptions/${encodeURIComponent(
+      const url1 = `/UG_OTSQuizPage/questionOptions/${encodeURIComponent(
         encryptedParam1
       )}/${encodeURIComponent(encryptedParam2)}`;
 

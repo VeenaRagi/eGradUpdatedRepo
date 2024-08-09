@@ -270,12 +270,13 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                   path="/General_intructions_page/:param1/:param2/:param3"
                   element={<PrivateRoute element={<General_Intructions_Page />} />}
                 /> */}
-                 <Route
+                 {/* <Route
                   path="/UGQuizPage/questionOptions/:param1/:param2"
                   element={
                     <PrivateRoute element={<UGQuizPage seconds={20} />} />
                   }
-                />
+                /> */}
+                     <Route path="/UG_OTSQuizPagequestionOptions/:param1/:param2" element={<UG_OTSQuizPage  seconds={20}/>}/>
                 <Route
                   path="/UGQuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<UGQuestionBankQuiz />} />}
@@ -329,7 +330,7 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                 {/* PGCourseAdmin */}
                 <Route path="/adminProfile" element={<AdminProfile />} />
                 <Route path="/ots" element={<OnlineTestSerices_pg/>}/>
-                <Route path="/ugots" element={<UG_OTSQuizPage/>}/>
+           
               </Routes>
             </UserProvider>
         )}
