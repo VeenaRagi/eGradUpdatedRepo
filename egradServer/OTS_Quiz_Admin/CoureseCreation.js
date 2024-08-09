@@ -642,6 +642,7 @@ router.get("/course_creation_table", async (req, res) => {
     selected_test_pattern stp ON stp.courseCreationId = cc.courseCreationId
     LEFT JOIN topics tp ON
     cc.courseCreationId= tp.courseCreationId
+    WHERE e.branchId=1
   GROUP BY
     cc.courseCreationId;
     `;
@@ -1623,7 +1624,87 @@ router.get("/getCourseExams", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+// ====pg section=====================================
+//---------------------get the course details----------------
+router.get("/getDetailsForCourseCreatedTable", async (req, res) => {
+  try {
+    const query = `
+    SELECT
+    cc.courseCreationId,
+    cc.courseName,
+    cc.courseYear,
+    cc.courseStartDate,
+    cc.courseEndDate,
+    cc.cost,
+    cc.Discount,
+    cc.totalPrice,
+    cc.paymentlink,
+    cc.Portale_Id,
+    p.Portale_Name,
+    e.examName,
+    e.branchId,
+    subjects.subjects AS subjects,
+    questions.quesion_types AS question_types,
+    typeOfTests.type_of_test AS type_of_test,
+    tp.topicName 
+  FROM
+    course_creation_table cc
+   LEFT JOIN exams e ON
+    cc.examId = e.examId
+    LEFT JOIN portales p ON
+    cc.Portale_Id = p.Portale_Id
+  LEFT JOIN (
+    SELECT cs.courseCreationId,
+      GROUP_CONCAT(s.subjectName) AS subjects
+    FROM
+      course_subjects cs
+    LEFT JOIN subjects s ON
+      cs.subjectId = s.subjectId
+    GROUP BY
+      cs.courseCreationId
+  ) AS subjects
+  ON
+    cc.courseCreationId = subjects.courseCreationId
+  LEFT JOIN (
+    SELECT ct.courseCreationId,
+      GROUP_CONCAT(q.typeofQuestion) AS quesion_types
+    FROM
+      course_type_of_question ct
+    LEFT JOIN quesion_type q ON
+      ct.quesionTypeId = q.quesionTypeId
+    GROUP BY
+      ct.courseCreationId
+  ) AS questions
+  ON
+    cc.courseCreationId = questions.courseCreationId
+  LEFT JOIN (
+    SELECT ctt.courseCreationId,
+      GROUP_CONCAT(t.typeOfTestName) AS type_of_test
+    FROM
+      course_typeoftests ctt
+    LEFT JOIN type_of_test t ON
+      ctt.typeOfTestId = t.typeOfTestId
+    GROUP BY
+      ctt.courseCreationId
+  ) AS typeOfTests
+  ON
+    cc.courseCreationId = typeOfTests.courseCreationId
+  LEFT JOIN
+    selected_test_pattern stp ON stp.courseCreationId = cc.courseCreationId
+    LEFT JOIN topics tp ON
+    cc.courseCreationId= tp.courseCreationId
+        WHERE e.branchId=2
+  GROUP BY
+    cc.courseCreationId;
+    `;
 
+    const [rows] = await db.query(query);
+    res.json(rows);
+  } catch (error) {
+    console.error("Error fetching course data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 
 module.exports = router;

@@ -100,7 +100,6 @@ const PGLeftNav = ({ decryptedUserIdState }) => {
 
     return (
         <>
-        <h1>PG Dashboarddd</h1>
             <div className="left_nav_bar_container">
                 <div
                     className={

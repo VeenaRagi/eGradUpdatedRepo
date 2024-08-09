@@ -171,14 +171,14 @@ const PGDocumentUploadAdmin = () => {
       </form>
 
       {/* document info section */}
-      <UploadedDoc />
+      <PGUploadedDoc />
     </div>
   );
 };
 
 export default PGDocumentUploadAdmin;
 
-export const UploadedDoc = () => {
+export const PGUploadedDoc = () => {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
