@@ -355,7 +355,9 @@ const UG_OTSQuizPage = () => {
 
     return {}; // Default style
   };
-
+ const questionNumber = selectedSection 
+    ? selectedSection.questions.findIndex(q => q.question_id === selectedQuestionId) + 1
+    : null;
   return (
     <div>
       <h1>{testData.TestName}</h1>
@@ -435,6 +437,9 @@ const UG_OTSQuizPage = () => {
       )}
       {selectedQuestion && (
         <div>
+          <div style={{ fontSize: '1.2em', fontWeight: 'bold' }}>
+            Question {questionNumber}
+          </div>
           <img
             src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${selectedQuestion.questionImgName}`}
             alt={`Question ${selectedQuestion.question_id}`}
@@ -504,7 +509,38 @@ const UG_OTSQuizPage = () => {
             </div>
           )}
           {selectedQuestion.quesion_type.some((type) =>
-            [5, 6].includes(type.quesionTypeId)
+            [5].includes(type.quesionTypeId)
+          ) && (
+            <div>
+              <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                  setResponses({
+                    ...responses,
+                    [selectedQuestionId]: e.target.value,
+                  });
+                }}
+                maxLength={1}
+              />
+              <button onClick={() => handleInput("backspace")}>
+                Backspace
+              </button>
+              <button onClick={() => handleInput("0")}>0</button>
+              <button onClick={() => handleInput("1")}>1</button>
+              <button onClick={() => handleInput("2")}>2</button>
+              <button onClick={() => handleInput("3")}>3</button>
+              <button onClick={() => handleInput("4")}>4</button>
+              <button onClick={() => handleInput("5")}>5</button>
+              <button onClick={() => handleInput("6")}>6</button>
+              <button onClick={() => handleInput("7")}>7</button>
+              <button onClick={() => handleInput("8")}>8</button>
+              <button onClick={() => handleInput("9")}>9</button>
+            </div>
+          )}
+            {selectedQuestion.quesion_type.some((type) =>
+            [6].includes(type.quesionTypeId)
           ) && (
             <div>
               <input
@@ -553,3 +589,5 @@ const UG_OTSQuizPage = () => {
 };
 
 export default UG_OTSQuizPage;
+
+
