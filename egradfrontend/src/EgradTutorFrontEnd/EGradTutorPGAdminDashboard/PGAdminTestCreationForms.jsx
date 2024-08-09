@@ -382,7 +382,7 @@ function PGAdminTestCreationForms() {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `${BASE_URL}/TestCreation/test_creation_table`
+        `${BASE_URL}/TestCreation/detailsOfTestsCreated`
       );
       setTestData(response.data);
 
