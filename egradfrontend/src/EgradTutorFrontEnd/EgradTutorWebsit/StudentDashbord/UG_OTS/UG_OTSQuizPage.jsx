@@ -110,7 +110,7 @@ const UG_OTSQuizPage = () => {
     fetchData();
   }, [decryptedParam1, decryptedParam2]);
   
-  
+
 
   const handleSubjectClick = (subjectId) => {
     setSelectedSubjectId(subjectId);
