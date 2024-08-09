@@ -70,6 +70,7 @@ const PGDocumentUploadAdmin = () => {
 
   const handleUpload = (e) => {
     e.preventDefault();
+    
     // if (validateForm()) {
     //   setSubmitting(true);
     const formData = new FormData();
@@ -112,6 +113,7 @@ const PGDocumentUploadAdmin = () => {
               id="testSelect"
               onChange={handleTestChange}
               value={selectedTest}
+              required
             >
               <option value="">Select a Test</option>
               {tests.map((test) => (
