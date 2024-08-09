@@ -29,7 +29,7 @@ const upload = multer({ dest: 'uploads/' });
   
   router.get("/exams", async (req, res) => {
     try {
-      const query = "SELECT examId,examName FROM exams";
+      const query = "SELECT examId,examName FROM exams where branchId=1";
       const [rows] = await db.query(query);
       res.json(rows);
     } catch (error) {
@@ -125,7 +125,7 @@ const upload = multer({ dest: 'uploads/' });
   
   router.get("/exams", async (req, res) => {
     try {
-      const query = "SELECT examId,examName FROM exams";
+      const query = "SELECT examId,examName FROM exams ";
       const [rows] = await db.query(query);
       res.json(rows);
     } catch (error) {
@@ -567,7 +567,7 @@ const upload = multer({ dest: 'uploads/' });
       // Extract examId from request parameters
   
       // Select all points for the specified examId from the instructions_points table
-      const query = "SELECT i.*,e.* FROM instruction AS i LEFT JOIN exams AS e ON i.examId=e.examId";
+      const query = "SELECT i.*,e.* FROM instruction AS i LEFT JOIN exams AS e ON i.examId=e.examId where branchId=1";
       const [rows] = await db.query(query);
   
       // Send the fetched data in the response
@@ -881,17 +881,17 @@ const upload = multer({ dest: 'uploads/' });
 
 // __________________________********* PG EXAMS RELATED API'S*********__________________________________//
 
-  router.get('/pgExams', async (req, res) => {
-    const query = 'SELECT * FROM entrance_exams WHERE Branch_Id=2';
-    const examId = req.params.examId;
-    try {
-      const [result] = await db.query(query, [examId]);
-      res.json(result);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+  // router.get('/pgExams', async (req, res) => {
+  //   const query = 'SELECT * FROM exams WHERE BranchId=2';
+  //   const examId = req.params.examId;
+  //   try {
+  //     const [result] = await db.query(query, [examId]);
+  //     res.json(result);
+  //   } catch (error) {
+  //     console.error(error);
+  //     res.status(500).json({ error: 'Internal Server Error' });
+  //   }
+  // });
   
   
 
@@ -900,7 +900,7 @@ const upload = multer({ dest: 'uploads/' });
   
     try {
       // Select all points for a specific instructionId from the instructions_points table
-      const query = "SELECT * FROM points WHERE instructionId = ?";
+      const query = "SELECT * FROM instruction WHERE instructionId = ?";
       const [rows] = await db.query(query, [instructionId]);
   
       // Send the fetched data in the response
@@ -946,6 +946,73 @@ const upload = multer({ dest: 'uploads/' });
       });
     }
   });
+
+
+// Instruction page exams get in the dropdown from PGexam creation page
+  router.get("/examss", async (req, res) => {
+    try {
+      const query = "SELECT examId,examName FROM exams where branchId=2";
+      const [rows] = await db.query(query);
+      res.json(rows);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  });
   
 
+
+
+
+
+
+
+
+  router.get("/instructionDataPg", async (req, res) => {
+    try {
+      // Extract examId from request parameters
+  
+      // Select all points for the specified examId from the instructions_points table
+      const query = "SELECT i.*,e.* FROM instruction AS i LEFT JOIN exams AS e ON i.examId=e.examId where branchId=2";
+      const [rows] = await db.query(query);
+  
+      // Send the fetched data in the response
+      res.json({ success: true, points: rows });
+    } catch (error) {
+      console.error("Error fetching instruction points:", error);
+  
+      // Send a consistent error response
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch instruction points.",
+        error: error.message,
+      });
+    }
+  });
+
+
+
+
+  router.get("/instructionpointsGet", async (req, res) => {
+    try {
+      // Extract examId from request parameters
+      const { instructionId } = req.params;
+  
+      // Select all points for the specified examId from the instructions_points table
+      const query = "SELECT * FROM instructions_points";
+      const [rows] = await db.query(query, [instructionId]);
+  
+      // Send the fetched data in the response
+      res.json({ success: true, points: rows });
+    } catch (error) {
+      console.error("Error fetching instruction points:", error);
+  
+      // Send a consistent error response
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch instruction points.",
+        error: error.message,
+      });
+    }
+  });
   module.exports = router;
