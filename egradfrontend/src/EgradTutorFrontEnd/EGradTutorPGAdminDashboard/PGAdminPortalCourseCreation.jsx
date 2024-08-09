@@ -1231,20 +1231,20 @@ function PGAdminPortalCourseCreation() {
                     <div
                       className="course_frominput_container "
                       id="course_frominput_container_media"
-                      key={subject.subjectId}
+                      key={subject.departmentId}
                     >
-                      <label htmlFor={`subject-${subject.subjectId}`}>
-                        {subject.subjectName}
+                      <label htmlFor={`subject-${subject.departmentId}`}>
+                        {subject.departmentName}
                       </label>
                       <input
                         className="inputLable"
                         type="checkbox"
-                        id={`subject-${subject.subjectId}`}
-                        name={`subject-${subject.subjectId}`}
-                        value={subject.subjectId}
-                        checked={selectedSubjects.includes(subject.subjectId)}
+                        id={`subject-${subject.departmentId}`}
+                        name={`subject-${subject.departmentId}`}
+                        value={subject.departmentId}
+                        checked={selectedSubjects.includes(subject.departmentId)}
                         onChange={(e) =>
-                          handleSubjectChange(e, subject.subjectId)
+                          handleSubjectChange(e, subject.departmentId)
                         }
                       />
                     </div>
@@ -1449,20 +1449,20 @@ function PGAdminPortalCourseCreation() {
                       <div
                         className="course_frominput_container "
                         id="course_frominput_container_media"
-                        key={subject.subjectId}
+                        key={subject.departmentId}
                       >
-                        <label htmlFor={`subject-${subject.subjectId}`}>
-                          {subject.subjectName}
+                        <label htmlFor={`subject-${subject.departmentId}`}>
+                          {subject.departmentName}
                         </label>
                         <input
                           className="inputLable"
                           type="checkbox"
-                          id={`subject-${subject.subjectId}`}
-                          name={`subject-${subject.subjectId}`}
-                          value={subject.subjectId}
-                          checked={selectedSubjects.includes(subject.subjectId)}
+                          id={`subject-${subject.departmentId}`}
+                          name={`subject-${subject.departmentId}`}
+                          value={subject.departmentId}
+                          checked={selectedSubjects.includes(subject.departmentId)}
                           onChange={(e) =>
-                            handleSubjectChange(e, subject.subjectId)
+                            handleSubjectChange(e, subject.departmentId)
                           }
                         />
                       </div>

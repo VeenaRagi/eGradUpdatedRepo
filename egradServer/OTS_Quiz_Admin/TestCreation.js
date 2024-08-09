@@ -313,7 +313,6 @@ router.get("/instructions", async (req, res) => {
 // Add this new API endpoint
 router.get("/course-typeoftests/:courseCreationId", async (req, res) => {
   const { courseCreationId } = req.params;
-
   try {
     const [rows] = await db.query(
       "SELECT type_of_test.TypeOfTestId, type_of_test.TypeOfTestName,course_typeoftests.courseTypeOfTestId " +
@@ -1114,6 +1113,16 @@ router.get("/testCoursesForPG", async (req, res) => {
       error: "Internal Server Error",
     });
 
+  }
+});
+
+router.get('/pgSubjects', async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM pg_departments');
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
