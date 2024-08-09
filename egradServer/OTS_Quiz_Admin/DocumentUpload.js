@@ -869,40 +869,14 @@ router.get("/testss", async (req, res) => {
   }
 });
 
-
-
-router.get("/subjects/:testCreationTableId", async (req, res) => {
+router.get("/pgSubjectsForSelectedTest/:testCreationTableId", async (req, res) => {
   const { testCreationTableId } = req.params;
-
-  try {
-    const [subjects] = await db.query(
-      `
-        SELECT s.subjectName,s.subjectId
-        FROM test_creation_table tt
-        INNER JOIN course_subjects AS cs ON tt.courseCreationId = cs.courseCreationId
-        INNER JOIN subjects AS s ON cs.subjectId = s.subjectId
-        WHERE tt.testCreationTableId = ?
-      `,
-      [testCreationTableId]
-    );
-
-    res.json(subjects);
-  } catch (error) {
-    console.error("Error fetching subjects:", error);
-    res.status(500).send("Error fetching subjects.");
-  }
-});
-
-
-
-
-router.get("/Pg_subjects/:testCreationTableId", async (req, res) => {
-  const { testCreationTableId } = req.params;
-
+ 
   try {
     const [subjects] = await db.query(
       `SELECT
-    cs.courseCreationId,pd.departmentName
+    cs.courseCreationId,pd.departmentName,
+    pd.departmentId
 FROM
     test_creation_table tct
 LEFT JOIN course_creation_table cct ON
@@ -915,7 +889,7 @@ WHERE
       `,
       [testCreationTableId]
     );
-
+ 
     res.json(subjects);
   } catch (error) {
     console.error("Error fetching subjects:", error);
@@ -923,4 +897,17 @@ WHERE
   }
 });
 
-module.exports = router;
+router.get("/pgDocumentName", async (req, res) => {
+  try {
+    const query =
+      "SELECT o.document_Id,o.documen_name,o.testCreationTableId,o.subjectId,o.sectionId ,tt.TestName,pgd.departmentId,pgd.departmentName FROM ots_document AS o INNER JOIN test_creation_table AS tt ON o.testCreationTableId=tt.testCreationTableId INNER JOIN pg_departments AS pgd ON pgd.departmentId=o.subjectId";
+    const [rows] = await db.query(query);
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+module.exports = router;         

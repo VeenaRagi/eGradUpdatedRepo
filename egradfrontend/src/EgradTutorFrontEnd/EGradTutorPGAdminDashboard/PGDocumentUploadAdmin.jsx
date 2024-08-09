@@ -31,10 +31,12 @@ const PGDocumentUploadAdmin = () => {
     // Fetch subjects data based on the selected test
     try {
       const response = await fetch(
-        `${BASE_URL}/DocumentUpload/Pg_subjects/${testCreationTableId}`
+        `${BASE_URL}/DocumentUpload/pgSubjectsForSelectedTest/${testCreationTableId}`
       );
 
       const data = await response.json();
+      
+      
       setSubjects(data);
     } catch (error) {
       console.error("Error fetching subjects data:", error);
@@ -43,6 +45,8 @@ const PGDocumentUploadAdmin = () => {
   const handleSubjectChange = async (event) => {
     const selectedSubject = event.target.value;
     setSelectedSubject(selectedSubject);
+    console.log(event.target.value,selectedSubject,"this is the selected subjeeeeeecccccccccttttttt instead we need to set id ");
+
 
     // Fetch sections data based on the selected subject
     try {
@@ -66,12 +70,12 @@ const PGDocumentUploadAdmin = () => {
 
   const handleUpload = (e) => {
     e.preventDefault();
-    
     // if (validateForm()) {
     //   setSubmitting(true);
     const formData = new FormData();
     formData.append("document", file);
     formData.append("subjectId", selectedSubject);
+    console.log(selectedSubject,"444444444444444444444")
     formData.append("sectionId", selectedSection);
     formData.append("testCreationTableId", selectedTest);
 
@@ -108,7 +112,6 @@ const PGDocumentUploadAdmin = () => {
               id="testSelect"
               onChange={handleTestChange}
               value={selectedTest}
-              required
             >
               <option value="">Select a Test</option>
               {tests.map((test) => (
@@ -132,7 +135,9 @@ const PGDocumentUploadAdmin = () => {
             >
               <option value="">Select a Subject</option>
               {subjects.map((subject) => (
-                <option key={subject.departmentId} value={subject.departmentId}>
+                <option key={subject.departmentId}
+                 value={subject.departmentId}
+                 >
                   {subject.departmentName}
                 </option>
               ))}
@@ -193,7 +198,7 @@ export const PGUploadedDoc = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/DocumentUpload/documentName`);
+      const response = await fetch(`${BASE_URL}/DocumentUpload/pgDocumentName`);
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {
