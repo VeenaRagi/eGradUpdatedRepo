@@ -70,7 +70,7 @@ function PGAdminPortalCourseCreation() {
   //--------------------------------end------------------------------------------
   //-------------------------------------constant apis ----------------------
   useEffect(() => {
-    fetch(`${BASE_URL}/CoureseCreation/courese-exams`)
+    fetch(`${BASE_URL}/CoureseCreation/getCourseExams`)
       .then((response) => response.json())
       .then((data) => {
         setExams(data);
@@ -85,7 +85,7 @@ function PGAdminPortalCourseCreation() {
     console.log("Selected Exam ID (after setting):", selectedexams);
     try {
       const response = await fetch(
-        `${BASE_URL}/CoureseCreation/courese-exam-subjects/${selectedExamId}/subjects`
+        `${BASE_URL}/CoureseCreation/courese-exam-subjects/${selectedExamId}/pgSubjects`
       );
       const data = await response.json();
       console.log("Subjects Data:", data); // Log the fetched data
@@ -973,10 +973,10 @@ function PGAdminPortalCourseCreation() {
                       <div
                         className="course_frominput_container "
                         id="course_frominput_container_media"
-                        key={subject.subjectId}
+                        key={subject.departmentId}
                       >
-                        <label htmlFor={`subject-${subject.subjectId}`}>
-                          {subject.subjectName}
+                        <label htmlFor={`subject-${subject.departmentId}`}>
+                          {subject.departmentName}
                         </label>
                         <input
                           className="inputLable"

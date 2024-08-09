@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import './styles/ChangePasswordCss.css';
+import { PiLockKeyOpenFill } from "react-icons/pi";
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
@@ -32,16 +33,50 @@ const ForgotPassword = () => {
     }
   };
 
+  // const handleResetPassword = async (e) => {
+  //   e.preventDefault();
+
+  //   // if (newPassword !== confirmPassword) {
+  //   //   alert('Passwords do not match');
+  //   //   return;
+  //   // }
+
+  //   // console.log('Reset password request:', { email, code, newPassword });
+
+  //   try {
+  //     const response = await fetch('http://localhost:5001/StudentRegistationPage/reset-password', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ email, code, newPassword }),
+  //     });
+
+  //     if (response.ok) {
+  //       alert('Password reset successfully');
+  //       navigate('/UserLogin');
+  //     } else {
+  //       const errorMessage = await response.text();
+  //       alert(errorMessage);
+  //     }
+  //   } catch (error) {
+  //   //   console.error('Error resetting password:', error);
+  //     alert('Error resetting password');
+  //   }
+  // };
+
+
+
   const handleResetPassword = async (e) => {
     e.preventDefault();
-
+  
     if (newPassword !== confirmPassword) {
       alert('Passwords do not match');
       return;
     }
-
-    // console.log('Reset password request:', { email, code, newPassword });
-
+  
+    console.log('Reset password request data:', { email, code, newPassword });
+  
     try {
       const response = await fetch('http://localhost:5001/StudentRegistationPage/reset-password', {
         method: 'POST',
@@ -50,25 +85,36 @@ const ForgotPassword = () => {
         },
         body: JSON.stringify({ email, code, newPassword }),
       });
-
+  
       if (response.ok) {
         alert('Password reset successfully');
         navigate('/UserLogin');
       } else {
         const errorMessage = await response.text();
-        alert(errorMessage);
+        alert(`Error: ${errorMessage}`);
       }
     } catch (error) {
-    //   console.error('Error resetting password:', error);
+      console.error('Error resetting password:', error);
       alert('Error resetting password');
     }
   };
+  
+
+
+
+
 
   return (
-    <div className="container mt-4">
-      <h1>Forgot Password</h1>
+
+    <div className='Forget_password_page_Main_container'>
+
+
+  <div className="ResetPassword_container">
+
+      <h1>Reset Password   <PiLockKeyOpenFill /></h1>
       {!codeSent ? (
-        <div>
+        <div className='Email_input_field'>
+          <div className='Password_email_container'>
           <label>Email</label>
           <input
             type="email"
@@ -76,11 +122,15 @@ const ForgotPassword = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <button onClick={handleSendCode}>Send Code</button>
+          </div>
+          <div className='Reset_password_submit_btn_container'>
+          <button  className = "Reset_Password_Code_sent_container" onClick={handleSendCode}>Send Code</button>
+          </div>
         </div>
+        
       ) : (
-        <form onSubmit={handleResetPassword}>
-          <div>
+        <form className='Reset_password_form_container' onSubmit={handleResetPassword}>
+          <div className='Password_code_container'>
             <label>Code</label>
             <input
               type="text"
@@ -89,7 +139,7 @@ const ForgotPassword = () => {
               required
             />
           </div>
-          <div>
+          <div className='Password_container'>
             <label>New Password</label>
             <input
               type="password"
@@ -98,7 +148,7 @@ const ForgotPassword = () => {
               required
             />
           </div>
-          <div>
+          <div className='Confirm_password_container'>
             <label>Confirm New Password</label>
             <input
               type="password"
@@ -107,10 +157,15 @@ const ForgotPassword = () => {
               required
             />
           </div>
-          <button type="submit">Reset Password</button>
+          <div className='Reset_password_submit_btn_container'> 
+          <button className = "Reset_password_submit_btn" type="submit">Reset Password</button>
+          </div>
+       
         </form>
       )}
     </div>
+    </div>
+  
   );
 };
 
