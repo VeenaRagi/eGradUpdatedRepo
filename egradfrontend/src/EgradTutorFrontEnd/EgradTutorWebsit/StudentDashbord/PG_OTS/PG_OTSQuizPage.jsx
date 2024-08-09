@@ -96,10 +96,10 @@ const PG_OTSQuizPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/QuizPage/PG_QuestionOptions/${decryptedParam1}/${decryptedParam2}`
+          `${BASE_URL}/QuizPage/UG_QuestionOptions/${decryptedParam1}/${decryptedParam2}`
         );
         const data = response.data;
-
+  
         // Set default subject, section, and question
         if (data.subjects.length > 0) {
           setSelectedSubjectId(data.subjects[0].subjectId);
@@ -112,15 +112,15 @@ const PG_OTSQuizPage = () => {
             setSelectedQuestionId(data.subjects[0].questions[0].question_id);
           }
         }
-
+  
         setTestData(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
+  
     fetchData();
-  }, []);
+  }, [decryptedParam1, decryptedParam2]);
 
   const handleSubjectClick = (subjectId) => {
     setSelectedSubjectId(subjectId);
