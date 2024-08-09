@@ -18,7 +18,7 @@ const PGDocumentUploadAdmin = () => {
 
   useEffect(() => {
     // Fetch tests data
-    fetch(`${BASE_URL}/DocumentUpload/tests`)
+    fetch(`${BASE_URL}/DocumentUpload/testss`)
       .then((response) => response.json())
       .then((data) => setTests(data))
       .catch((error) => console.error("Error fetching tests data:", error));
@@ -99,7 +99,7 @@ const PGDocumentUploadAdmin = () => {
       <div className="" >
         <h2 className="textColor">Document Upload Form </h2>
       </div>
-      <form className="admin_document_upload_formm">
+      <form className="admin_document_upload_formm" >
         <div className="uploadedDocument_container examSubjects_-contant ">
           <div className="uploadedDocumentFilds  ">
             <label htmlFor="testSelect">Select Test:</label>
