@@ -882,7 +882,7 @@ const upload = multer({ dest: 'uploads/' });
 // __________________________********* PG EXAMS RELATED API'S*********__________________________________//
 
   router.get('/pgExams', async (req, res) => {
-    const query = 'SELECT * FROM entrance_exams WHERE Branch_Id=2';
+    const query = 'SELECT * FROM exams WHERE BranchId=2';
     const examId = req.params.examId;
     try {
       const [result] = await db.query(query, [examId]);
