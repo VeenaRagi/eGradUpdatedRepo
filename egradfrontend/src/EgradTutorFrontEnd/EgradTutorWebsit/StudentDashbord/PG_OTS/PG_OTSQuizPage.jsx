@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Style/OnlineTestSerices_pg.css";
-import { useParams, Link, useNavigate,useLocation } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { decryptData, encryptData } from "../utils/crypto";
 // Import your images
 import greenBox from "../asserts/greenBox.png";
@@ -20,8 +20,16 @@ const PG_OTSQuizPage = () => {
   const [responses, setResponses] = useState({});
   const [visitedQuestions, setVisitedQuestions] = useState([]);
   const [savedQuestions, setSavedQuestions] = useState([]);
-
+  const [studentDetails, setStudentDetails] = useState(null);
   const [image, setImage] = useState(null);
+  const [error, setError] = useState(null);
+  const location = useLocation();
+  const { userData } = location.state || {};
+  const navigate = useNavigate();
+  const { param1, param2 } = useParams();
+  const [decryptedParam1, setDecryptedParam1] = useState("");
+  const [decryptedParam2, setDecryptedParam2] = useState("");
+
   const fetchImage = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/Logo/image`, {
@@ -37,17 +45,6 @@ const PG_OTSQuizPage = () => {
   useEffect(() => {
     fetchImage();
   }, []);
-
-
-  const location = useLocation();
-  const { userData } = location.state || {};
-
-  const navigate = useNavigate();
-
-  const { param1, param2 } = useParams();
-
-  const [decryptedParam1, setDecryptedParam1] = useState("");
-  const [decryptedParam2, setDecryptedParam2] = useState("");
 
   useEffect(() => {
     const token = sessionStorage.getItem("navigationToken");
@@ -91,7 +88,6 @@ const PG_OTSQuizPage = () => {
   console.log("decryptedParam1", decryptedParam1);
   console.log("decryptedParam2", decryptedParam2);
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -99,7 +95,7 @@ const PG_OTSQuizPage = () => {
           `${BASE_URL}/QuizPage/UG_QuestionOptions/${decryptedParam1}/${decryptedParam2}`
         );
         const data = response.data;
-  
+
         // Set default subject, section, and question
         if (data.subjects.length > 0) {
           setSelectedSubjectId(data.subjects[0].subjectId);
@@ -112,15 +108,35 @@ const PG_OTSQuizPage = () => {
             setSelectedQuestionId(data.subjects[0].questions[0].question_id);
           }
         }
-  
+
         setTestData(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchData();
   }, [decryptedParam1, decryptedParam2]);
+
+  useEffect(() => {
+    if (!decryptedParam2) {
+      return; // Early return if decryptedParam2 is not available
+    }
+
+    const fetchStudentDetails = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/StudentSettings/fetchStudentDetailstest/${decryptedParam2}`
+        );
+        setStudentDetails(response.data);
+      } catch (err) {
+        setError("Error fetching student details");
+        console.error(err);
+      }
+    };
+
+    fetchStudentDetails();
+  }, [decryptedParam2]);
 
   const handleSubjectClick = (subjectId) => {
     setSelectedSubjectId(subjectId);
@@ -364,6 +380,14 @@ const PG_OTSQuizPage = () => {
         (question) => question.question_id === selectedQuestionId
       );
 
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!studentDetails) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <div className="Pg_OtsLogo">
@@ -589,7 +613,9 @@ const PG_OTSQuizPage = () => {
               <div className="pg_handleReview">
                 <button onClick={handlePreviousClick}>Previous</button>
               </div>
-              <button onClick={handleSaveAndNext} className="pg_saveandnextots">Save and Next</button>
+              <button onClick={handleSaveAndNext} className="pg_saveandnextots">
+                Save and Next
+              </button>
             </div>
 
             {/* <button onClick={handleNextClick}>Next</button> */}
@@ -597,6 +623,23 @@ const PG_OTSQuizPage = () => {
         </div>
 
         <div className="pg_norightdiv">
+          <div className="pg_StudentDetails">
+            {studentDetails.map((student, index) => (
+              <div key={student.id || index}>
+                <img
+                  className="users_profile_img"
+                  src={`${BASE_URL}/uploads/studentinfoimeages/${student.UplodadPhto}`}
+                  alt={`Profile of ${student.candidateName}`}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/path/to/placeholder-image.png"; // Fallback image path
+                  }}
+                />
+                <p>{student.candidateName}</p>
+              </div>
+            ))}
+          </div>
+
           {selectedSection && (
             <div>
               {selectedSection.questions.map((question, index) => (
