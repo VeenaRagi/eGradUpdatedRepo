@@ -856,6 +856,41 @@ router.delete("/DocumentDelete", async (req, res) => {
 // __________________________********* PG EXAMS RELATED API'S*********__________________________________//
 
 
+// ******** GET TESTS TO UPLOAD DOECUMENT IN DROPDOWN**********//
+router.get("/testss", async (req, res) => {
+  try {
+    const [rows] = await db.query(
+      "SELECT * FROM test_creation_table as tct LEFT JOIN course_creation_table as cct ON tct.courseCreationId=cct.courseCreationId LEFT JOIN exams as e ON cct.examId=e.examId WHERE branchId=2;"
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error("Error fetching test data:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
+
+
+router.get("/subjects/:testCreationTableId", async (req, res) => {
+  const { testCreationTableId } = req.params;
+
+  try {
+    const [subjects] = await db.query(
+      `
+        SELECT s.subjectName,s.subjectId
+        FROM test_creation_table tt
+        INNER JOIN course_subjects AS cs ON tt.courseCreationId = cs.courseCreationId
+        INNER JOIN subjects AS s ON cs.subjectId = s.subjectId
+        WHERE tt.testCreationTableId = ?
+      `,
+      [testCreationTableId]
+    );
+
+    res.json(subjects);
+  } catch (error) {
+    console.error("Error fetching subjects:", error);
+    res.status(500).send("Error fetching subjects.");
+  }
+});
 
 module.exports = router;
