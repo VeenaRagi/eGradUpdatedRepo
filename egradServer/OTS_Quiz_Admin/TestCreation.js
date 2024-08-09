@@ -1097,7 +1097,7 @@ router.get("/testformname_feaching", async (req, res) => {
 router.get("/dropDownTestCoursesForPG", async (req, res) => {
   try {
     const query = `SELECT courseCreationId,courseName FROM  course_creation_table WHERE  Portale_Id IN (1, 2)`;
-    const [rows] = await db.query(query);
+    const [rows] = await db.query(query); 
     // Execute the query// Check if there are results
     if (rows.length === 0) {
       return res
