@@ -49,7 +49,7 @@ import axios from "axios";
 import { UserProvider } from "./UserContext";
 // import PGAdminDashboard from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminDashboardIntegration.jsx";
 import PGAdminDashboardIntegration from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminDashboardIntegration.jsx";
-import OnlineTestSerices_pg from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/OnlineTestSerices_pg.jsx";
+import PG_OTSQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/PG_OTSQuizPage.jsx";
 import UG_OTSQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UG_OTSQuizPage.jsx";
 const App = () => {
   return (
@@ -281,12 +281,13 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                   path="/UGQuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<UGQuestionBankQuiz />} />}
                 />
-                <Route
+                {/* <Route
                   path="/PGQuizPage/questionOptions/:param1/:param2"
                   element={
                     <PrivateRoute element={<PGQuizPage seconds={20} />} />
                   }
-                />
+                /> */}
+                  <Route path="/PG_OTSQuizPage/questionOptions/:param1/:param2" element={<PG_OTSQuizPage  seconds={20}/>}/>
                 <Route
                   path="/PGQuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<PGQuestionBankQuiz />} />}
@@ -329,7 +330,7 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                 />
                 {/* PGCourseAdmin */}
                 <Route path="/adminProfile" element={<AdminProfile />} />
-                <Route path="/ots" element={<OnlineTestSerices_pg/>}/>
+              
            
               </Routes>
             </UserProvider>
