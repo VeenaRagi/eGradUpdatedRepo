@@ -31,7 +31,7 @@ const PGDocumentUploadAdmin = () => {
     // Fetch subjects data based on the selected test
     try {
       const response = await fetch(
-        `${BASE_URL}/DocumentUpload/subjects/${testCreationTableId}`
+        `${BASE_URL}/DocumentUpload/Pg_subjects/${testCreationTableId}`
       );
 
       const data = await response.json();
@@ -130,8 +130,8 @@ const PGDocumentUploadAdmin = () => {
             >
               <option value="">Select a Subject</option>
               {subjects.map((subject) => (
-                <option key={subject.subjectId} value={subject.subjectId}>
-                  {subject.subjectName}
+                <option key={subject.departmentId} value={subject.departmentId}>
+                  {subject.departmentName}
                 </option>
               ))}
             </select>

@@ -893,4 +893,34 @@ router.get("/subjects/:testCreationTableId", async (req, res) => {
   }
 });
 
+
+
+
+router.get("/Pg_subjects/:testCreationTableId", async (req, res) => {
+  const { testCreationTableId } = req.params;
+
+  try {
+    const [subjects] = await db.query(
+      `SELECT
+    cs.courseCreationId,pd.departmentName
+FROM
+    test_creation_table tct
+LEFT JOIN course_creation_table cct ON
+    cct.courseCreationId = tct.courseCreationId
+LEFT JOIN course_subjects cs ON
+    cct.courseCreationId = cs.courseCreationId
+    Left JOIN pg_departments pd on pd.departmentId=cs.subjectId
+WHERE
+    tct.testCreationTableId =  ?
+      `,
+      [testCreationTableId]
+    );
+
+    res.json(subjects);
+  } catch (error) {
+    console.error("Error fetching subjects:", error);
+    res.status(500).send("Error fetching subjects.");
+  }
+});
+
 module.exports = router;
