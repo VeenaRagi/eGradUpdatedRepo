@@ -14,7 +14,8 @@ const db = require("../DataBase/db2");
 
 router.get("/testcourses", async (req, res) => {
   try {
-    const query = `SELECT courseCreationId,courseName FROM  course_creation_table WHERE  Portale_Id IN (1, 2)`;
+    // const query = `SELECT courseCreationId,courseName FROM  course_creation_table WHERE  Portale_Id IN (1, 2)`;
+    const  query=`SELECT * FROM course_creation_table as cct LEFT JOIN exams as e ON e.examId=cct.examId WHERE e.branchId=1;`
     const [rows] = await db.query(query);
     // Execute the query// Check if there are results
     if (rows.length === 0) {
@@ -1093,11 +1094,11 @@ router.get("/testformname_feaching", async (req, res) => {
 
 // for pg
 // ========================To get the details of test created table ================================================
-
-router.get("/dropDownTestCoursesForPG", async (req, res) => {
+router.get("/testCoursesForPG", async (req, res) => {
   try {
-    const query = `SELECT courseCreationId,courseName FROM  course_creation_table WHERE  Portale_Id IN (1, 2)`;
-    const [rows] = await db.query(query); 
+    // const query = `SELECT courseCreationId,courseName FROM  course_creation_table WHERE  Portale_Id IN (1, 2)`;
+    const  query=`SELECT * FROM course_creation_table as cct LEFT JOIN exams as e ON e.examId=cct.examId WHERE e.branchId=2;`
+    const [rows] = await db.query(query);
     // Execute the query// Check if there are results
     if (rows.length === 0) {
       return res
@@ -1115,5 +1116,6 @@ router.get("/dropDownTestCoursesForPG", async (req, res) => {
 
   }
 });
+
 
 module.exports = router;
