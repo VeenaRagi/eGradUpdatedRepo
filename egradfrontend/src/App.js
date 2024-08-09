@@ -32,8 +32,8 @@ import TestUpdateadmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/TestUpd
 import UG_Instructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_Instructions_Page.jsx";
 import PG_Instructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_Instructions_Page.jsx";
 import General_Intructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/General_intructions_page.jsx";
-import UGQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UGQuizPage.jsx";
-import PGQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/PGQuizPage.jsx";
+// import UGQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UGQuizPage.jsx";
+// import PGQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/PGQuizPage.jsx";
 import UGQuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UGQuestionPaper.jsx";
 import PGQuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/PGQuestionPaper.jsx";
 import UGQuestionBankQuiz from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_PQB/UGQuestionBankQuiz.jsx";
@@ -276,7 +276,7 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                     <PrivateRoute element={<UGQuizPage seconds={20} />} />
                   }
                 /> */}
-                     <Route path="/UG_OTSQuizPage/questionOptions/:param1/:param2" element={<UG_OTSQuizPage  seconds={20}/>}/>
+                     <Route path="/UG_OTSQuizPage/:param1/:param2" element={<UG_OTSQuizPage  seconds={20}/>}/>
                 <Route
                   path="/UGQuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<UGQuestionBankQuiz />} />}
@@ -287,7 +287,7 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                     <PrivateRoute element={<PGQuizPage seconds={20} />} />
                   }
                 /> */}
-                  <Route path="/PG_OTSQuizPage/questionOptions/:param1/:param2" element={<PG_OTSQuizPage  seconds={20}/>}/>
+                  <Route path="/PG_OTSQuizPage/:param1/:param2" element={<PG_OTSQuizPage  seconds={20}/>}/>
                 <Route
                   path="/PGQuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<PGQuestionBankQuiz />} />}
