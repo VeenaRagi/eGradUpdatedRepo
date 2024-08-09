@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link, useNavigate,useLocation } from "react-router-dom";
 // Import your images
+import BASE_URL from "../../../../apiConfig";
 import { decryptData, encryptData } from "../utils/crypto";
 import greenBox from "../asserts/greenBox.png";
 import orangeBox from "../asserts/orangeBox.png";
@@ -77,7 +78,7 @@ const UG_OTSQuizPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5001/QuizPage/PG_QuestionOptions/1/56`
+          `${BASE_URL}/QuizPage/PG_QuestionOptions/${decryptedParam1}/${decryptedParam2}`
         );
         const data = response.data;
 

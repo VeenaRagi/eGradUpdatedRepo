@@ -276,7 +276,7 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                     <PrivateRoute element={<UGQuizPage seconds={20} />} />
                   }
                 /> */}
-                     <Route path="/UG_OTSQuizPagequestionOptions/:param1/:param2" element={<UG_OTSQuizPage  seconds={20}/>}/>
+                     <Route path="/UG_OTSQuizPage/questionOptions/:param1/:param2" element={<UG_OTSQuizPage  seconds={20}/>}/>
                 <Route
                   path="/UGQuestionBankQuiz/questionOptions/:param1/:param2"
                   element={<PrivateRoute element={<UGQuestionBankQuiz />} />}
