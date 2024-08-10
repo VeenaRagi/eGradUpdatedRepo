@@ -333,8 +333,8 @@ function PgAdminExamCreation() {
                     <form class="searchbox" action="http://thecodeblock.com">
                         <input type="search" placeholder="Search Subjects" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                       </form>
-                    <div className="formdiv_contaniner_ch">
-                      <ul className="examSubject_conten">
+                    <div className="formdiv_contaniner_ch  examCreationSubjectsPG">
+                      <ul className="examSubject_conten ">
                         {filteredSubjects.map((subject) => (
                           <li key={subject.departmentId}>
                             <label> {subject.departmentName} </label>
