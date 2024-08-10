@@ -267,7 +267,7 @@ function PGAdminTestCreationForms() {
     // Perform field validation
     if (!testName || !selectedCourse || !selectedtypeOfTest || !startDate || !startTime || !endDate || !endTime || !duration || !totalQuestions || !totalMarks || !sectionsData.length || !selectedInstruction || !selectedoptions || !selectedFormId) {
       alert("Please fill out all required fields.");
-      return;  // Prevent submission if any required fields are empty
+      return;  
     }
   
     let isValid = true;
