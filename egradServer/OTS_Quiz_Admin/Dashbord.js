@@ -1022,7 +1022,7 @@ router.get('/pgExamsList', async (req, res) => {
 router.get('/pgCoursesListInDashboard', async (req, res) => {
   try {
     const [results, fields] = await db.execute(
-      'SELECT cct.courseName FROM course_creation_table cct  LEFT JOIN exams e ON cct.examId=e.examId WHERE e.branchId=1 ORDER BY cct.courseName;'
+      'SELECT cct.courseName FROM course_creation_table cct  LEFT JOIN exams e ON cct.examId=e.examId WHERE e.branchId=2 ORDER BY cct.courseName;'
     );
     res.json(results);
   } catch (error) {

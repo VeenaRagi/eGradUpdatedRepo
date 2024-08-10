@@ -58,7 +58,7 @@ const GettinggInstructions = () => {
     <div className=" Instruction_points otsMainPages ">
     <button
             type="button"
-            onClick={() => navigate("/Adminpage")}
+            onClick={() => navigate("/PGCourseAdmin")}
             className="ots_-createBtn b_to_H"
           >
             Back to Home

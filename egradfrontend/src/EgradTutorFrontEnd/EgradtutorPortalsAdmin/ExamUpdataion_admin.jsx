@@ -208,7 +208,7 @@ const ExamUpdataion_admin = () => {
         <div cclassName="create_exam_header">
           <button
             type="button"
-            onClick={() => navigate("/Adminpage")}
+            onClick={() => navigate("/PGCourseAdmin")}
             className="ots_-createBtn"
             style={{ background: "#ff8080", color: "#fff", margin: "0 9px" }}
           >

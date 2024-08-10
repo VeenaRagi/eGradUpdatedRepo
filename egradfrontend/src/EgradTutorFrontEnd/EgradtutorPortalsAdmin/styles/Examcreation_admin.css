@@ -275,8 +275,11 @@
   margin: 7px 1rem;
   padding: 6px;
   width: 100%;
-  height: 200px;
+  /* height: 200px; */
   margin: 0 auto;
+}
+.examCreationSubjectsPG{
+  height: 200px;
 }
 .examSubjects_-contant_exc {
   display: grid;
@@ -405,7 +408,7 @@
     margin: 7px 1rem;
     padding: 6px;
     width: 100%;
-    height: 200px;
+    /* height: 200px; */
     margin: 20px auto;
 }
 }
