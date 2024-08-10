@@ -1655,11 +1655,11 @@ router.get("/getDetailsForCourseCreatedTable", async (req, res) => {
     cc.Portale_Id = p.Portale_Id
   LEFT JOIN (
     SELECT cs.courseCreationId,
-      GROUP_CONCAT(s.subjectName) AS subjects
+      GROUP_CONCAT(pgd.departmentName) AS subjects
     FROM
       course_subjects cs
-    LEFT JOIN subjects s ON
-      cs.subjectId = s.subjectId
+    LEFT JOIN pg_departments pgd ON
+      cs.subjectId = pgd.departmentId
     GROUP BY
       cs.courseCreationId
   ) AS subjects
