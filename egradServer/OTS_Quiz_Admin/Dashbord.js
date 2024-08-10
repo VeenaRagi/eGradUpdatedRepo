@@ -93,7 +93,7 @@ const db = require('../DataBase/db2');
   router.get('/user/count', async (req, res) => {
     try {
       const [results, fields] = await db.execute(
-        "SELECT COUNT(user_Id) AS count FROM log WHERE role = 'viewer'"
+        "SELECT COUNT(user_Id) AS count FROM log WHERE role = 'user' AND branchId=1 "
       );
       res.json(results);
     } catch (error) {
@@ -1038,6 +1038,18 @@ router.get('/pgAdminTestList', async (req, res) => {
     res.json(results);
   } catch (error) {
     console.error('Error fetching test list:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.get('/user/pgUserCount', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      "SELECT COUNT(user_Id) AS count FROM log WHERE role = 'user' AND branchId=2"
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching course count:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });

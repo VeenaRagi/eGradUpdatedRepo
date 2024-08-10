@@ -16,7 +16,7 @@ const ExamUpdataion_admin = () => {
 
   useEffect(() => {
     // Fetch subjects from the API
-    fetch(`${BASE_URL}/ExamCreation/subjects`)
+    fetch(`${BASE_URL}/ExamCreation/subjectss`)
       .then((response) => response.json())
       .then((data) => setSubjects(data))
       .catch((error) => console.error("Error fetching subjects:", error));
@@ -188,18 +188,18 @@ const ExamUpdataion_admin = () => {
 
           {subjects.map((subject) => (
             <div
-              key={subject.subjectId}
+              key={subject.departmentId }
               className="examUpdate_-contant examSubjects_-contant"
             >
-              <label htmlFor={subject.subjectId}>{subject.subjectName}</label>
+              <label htmlFor={subject.departmentId }>{subject.departmentName}</label>
 
               <input
                 className="inputLable  "
                 type="checkbox"
-                id={subject.subjectId}
-                value={subject.subjectId}
-                checked={selectedSubjects.includes(subject.subjectId)}
-                onChange={() => handleSubjectChange(subject.subjectId)}
+                id={subject.departmentId }
+                value={subject.departmentId }
+                checked={selectedSubjects.includes(subject.departmentId )}
+                onChange={() => handleSubjectChange(subject.departmentId )}
               />
             </div>
           ))}
