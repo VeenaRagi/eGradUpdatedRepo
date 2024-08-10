@@ -1037,9 +1037,9 @@ const PGAdminCourseUpdate = () => {
   }, [cost, discount]);
 
   return (
-    <div className="examUpdate_-container">
+    <div className="examUpdate_-container pgExamUpdateContainer">
       {portalId === "1" && (
-        <form onSubmit={handleSubmitots}>
+        <form className="pgFormExamUpdates" onSubmit={handleSubmitots}>
           <h3 className="textColor">PG ONLINE TEST SERIES COURSE CREATION FORM</h3>
 
           <div className="coures-contant_-flexCOntantc examSubjects_-contant">
