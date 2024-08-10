@@ -53,6 +53,7 @@ import PG_OTSQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbor
 import UG_OTSQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UG_OTSQuizPage.jsx";
 import PGAdminExamUpdate from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminExamUpdate.jsx";
 import PGAdminCourseUpdate from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminCourseUpdate.jsx";
+import PGAdminTestUpdate from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminTestUpdate.jsx";
 const App = () => {
   return (
     <ThemeProvider>
@@ -340,6 +341,10 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                 <Route
                   path="/pgCourseUpdateByAdmin/:courseCreationId/:portalId"
                   element={<PGAdminCourseUpdate />}
+                />
+                <Route
+                  path="/pgTestUpdateByAdmin/:testCreationTableId/:TestForm_Id"
+                  element={<PGAdminTestUpdate />}
                 />
            
               </Routes>
