@@ -74,7 +74,9 @@ ON
 router.get("/videos/count", async (req, res) => {
   try {
     const [results, fields] = await db.execute(
-      "SELECT * FROM `ovl_links` ovl LEFT JOIN course_creation_table cct ON cct.courseCreationId=ovl.courseCreationId LEFT JOIN exams e ON e.examId=cct.examId WHERE e.branchId=1;"
+      // "SELECT * FROM `ovl_links` ovl LEFT JOIN course_creation_table cct ON cct.courseCreationId=ovl.courseCreationId LEFT JOIN exams e ON e.examId=cct.examId WHERE e.branchId=1;"
+      `SELECT COUNT(OVL_Linke_Id) as count FROM ovl_links ovl LEFT JOIN course_creation_table cct ON cct.courseCreationId=ovl.courseCreationId LEFT JOIN exams e ON e.examId=cct.examId WHERE e.branchId=1`
+
     );
     res.json(results);
   } catch (error) {
@@ -82,6 +84,7 @@ router.get("/videos/count", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 router.get("/Test", async (req, res) => {
   try {
     const [results, fields] = await db.execute(
@@ -997,17 +1000,7 @@ router.get("/courses/pgCount", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-router.get("/videos/pgVideoCount", async (req, res) => {
-  try {
-    const [results, fields] = await db.execute(
-      "SELECT COUNT(OVL_Linke_Id) FROM `ovl_links` ovl LEFT JOIN course_creation_table cct ON cct.courseCreationId=ovl.courseCreationId LEFT JOIN exams e ON e.examId=cct.examId WHERE e.branchId=2"
-    );
-    res.json(results);
-  } catch (error) {
-    console.error("Error fetching videos count:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+
 
 router.get("/pgExamsList", async (req, res) => {
   try {
@@ -1064,7 +1057,7 @@ router.get("/user/pgUserCount", async (req, res) => {
   }
 });
 
-router.get("/test/countPg", async (req, res) => {
+router.get("/test/PGTestCount", async (req, res) => {
   try {
     const [results, fields] = await db.execute(
       `SELECT
@@ -1103,6 +1096,18 @@ WHERE
     res.json(results);
   } catch (error) {
     console.error("Error fetching course count:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/videos/pgVideoCount", async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      `SELECT COUNT(OVL_Linke_Id) as count FROM ovl_links ovl LEFT JOIN course_creation_table cct ON cct.courseCreationId=ovl.courseCreationId LEFT JOIN exams e ON e.examId=cct.examId WHERE e.branchId=2`
+    );
+    res.json(results);
+  } catch (error) {
+    console.error("Error fetching videos count:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
