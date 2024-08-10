@@ -481,7 +481,7 @@ const PGAdminCourseUpdate = () => {
       // console.log(courseImage); // Assuming courseImage is defined elsewhere
 
       // navigate("/UgadminHome");
-      window.location.href = "/UgadminHome";
+      window.location.href = "/pgCourseUpdateByAdmin";
     } catch (error) {
       console.error("Error updating course:", error);
       alert("Failed to update course. Please try again.");
@@ -530,7 +530,7 @@ const PGAdminCourseUpdate = () => {
       if (response.data.success) {
         // console.log("update succcessfull ", response.data.message);
         // window.history.go(-1);
-        window.location.href = "/UgadminHome";
+        window.location.href = "/pgCourseUpdateByAdmin";
       }
       // console.log(result === "Updated successfully");
       // console.log(result, "result");
@@ -815,7 +815,7 @@ const PGAdminCourseUpdate = () => {
       if (response.data.success) {
         // console.log("update successful ", response.data.message);
         // window.history.go(-1); // Go back in history
-        window.location.href = "/UgadminHome"; // Redirect to "/UgadminHome"
+        window.location.href = "/pgCourseUpdateByAdmin"; // Redirect to "/UgadminHome"
       }
     } catch (error) {
       console.error("Error submitting course data:", error);
@@ -1040,7 +1040,7 @@ const PGAdminCourseUpdate = () => {
     <div className="examUpdate_-container">
       {portalId === "1" && (
         <form onSubmit={handleSubmitots}>
-          <h3 className="textColor">ONLINE TEST SERIES COURSE CREATION FORM</h3>
+          <h3 className="textColor">PG ONLINE TEST SERIES COURSE CREATION FORM</h3>
 
           <div className="coures-contant_-flexCOntantc examSubjects_-contant">
             <div className="testCreation_-list">
@@ -1289,7 +1289,7 @@ const PGAdminCourseUpdate = () => {
       {portalId === "2" && (
         <form onSubmit={handleSubmitpqb}>
           <h3 className="textColor">
-            PRACTICES QUESTION BANK COURSE CREATION FORM
+           PG PRACTICES QUESTION BANK COURSE CREATION FORM
           </h3>
           <div className="coures-contant_-flexCOntantc examSubjects_-contant">
             <div className="testCreation_-list">
@@ -1531,7 +1531,7 @@ const PGAdminCourseUpdate = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/UgadminHome")}
+              onClick={() => navigate("/pgCourseUpdateByAdmin")}
               className="ots_btnClose"
             >
               Close
@@ -1541,7 +1541,7 @@ const PGAdminCourseUpdate = () => {
       )}
       {portalId === "3" && (
         <form onSubmit={handleSubmit}>
-          <h3 className="textColor">Course Update</h3>
+          <h3 className="textColor">PG Course Update</h3>
           <div className="courseupdate_frominput_container examSubjects_-contant"></div>
           <div className="courseupdate_frominput_container">
             <label> Course Name:</label>
@@ -1686,7 +1686,7 @@ const PGAdminCourseUpdate = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/UgadminHome")}
+              onClick={() => navigate("/pgCourseUpdateByAdmin")}
               className="ots_btnClose"
             >
               Close
@@ -1697,7 +1697,7 @@ const PGAdminCourseUpdate = () => {
       {portalId === "4" && (
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
           <form onSubmit={handleSubmitCP} className="ots_-Form">
-            <h3 className="textColor">COMPLETE PACKAGE COURSE CREATION FORM</h3>
+            <h3 className="textColor">PG COMPLETE PACKAGE COURSE CREATION FORM</h3>
 
             <div>
               <div className="coures-contant_-flexCOntantc examSubjects_-contant">
@@ -1894,7 +1894,7 @@ const PGAdminCourseUpdate = () => {
               </button>
               <button
                 type="button"
-                onClick={() => navigate("/UgadminHome")}
+                onClick={() => navigate("/pgCourseUpdateByAdmin")}
                 className="ots_btnClose"
            
               >

@@ -883,7 +883,7 @@ function PGAdminPortalCourseCreation() {
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
           <form onSubmit={handleSubmitots} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
-              ONLINE TEST SERIES COURSE CREATION FORM
+              PG ONLINE TEST SERIES COURSE CREATION FORM
             </h2>
             <div className="otsCloseBtn_Mar">
               <button
@@ -1139,7 +1139,7 @@ function PGAdminPortalCourseCreation() {
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
           <form onSubmit={handleSubmitpqb} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
-              PRACTICES QUESTION BANK COURSE CREATION FORM
+             PG PRACTICES QUESTION BANK COURSE CREATION FORM
             </h2>
             <div className="otsCloseBtn_Mar">
               <button
@@ -1395,7 +1395,7 @@ function PGAdminPortalCourseCreation() {
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
           <form onSubmit={OVLhandleSubmit} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
-              ONLINE VIDEO LECTURE COURSE CREATION FORM
+            PG  ONLINE VIDEO LECTURE COURSE CREATION FORM
             </h2>
 
             <div
@@ -1582,7 +1582,7 @@ function PGAdminPortalCourseCreation() {
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
           <form onSubmit={handleSubmitCP} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
-              COMPLETE PACKAGE COURSE CREATION FORM
+             PG COMPLETE PACKAGE COURSE CREATION FORM
             </h2>
             <div className="otsCloseBtn_Mar">
               <button
@@ -1870,7 +1870,7 @@ function PGAdminPortalCourseCreation() {
                     <div className="EditDelete_-btns">
                       <Link
                         className="Ots_-edit"
-                        to={`/UpdatingCourseInAdmin/${course.courseCreationId}/${course.Portale_Id}`}
+                        to={`/pgCourseUpdateByAdmin/${course.courseCreationId}/${course.Portale_Id}`}
                       >
                         <i className="fa-solid fa-pencil"></i>
                       </Link>
