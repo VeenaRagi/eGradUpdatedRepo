@@ -1274,7 +1274,7 @@ const UpdatingCourseInAdmin = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/Adminpage")}
+              onClick={() => navigate("/PGCourseAdmin")}
               className="ots_btnClose"
             >
               Close
