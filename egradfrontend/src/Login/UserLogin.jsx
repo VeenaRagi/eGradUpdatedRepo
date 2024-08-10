@@ -97,9 +97,9 @@ const UserLogin = () => {
   };
 
 
-  // const handleForgotPassword = () => {
-  //   navigate('/forgot-password');
-  // };
+  const handleForgotPassword = () => {
+    navigate('/forgot-password');
+  };
 
   const [welcomeimage, setWelcomeImage] = useState(null);
 
@@ -161,10 +161,7 @@ const UserLogin = () => {
                 </div>
               </form>
               <div className='userLoginFPDiv'>
-              
-              <a href='/forgot-password'>Forgot Password?</a>
-
-                </div>
+                <Link onClick={handleForgotPassword} >Forgot Password?</Link></div>
 
             </div>
 
