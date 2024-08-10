@@ -175,8 +175,7 @@ const PGAdminExamUpdate = () => {
             required
           />
         </div>
-        <div>
-          <label
+        <label
             style={{
               paddingBottom: "10px",
               display: "block",
@@ -185,7 +184,7 @@ const PGAdminExamUpdate = () => {
           >
             Subjects:
           </label>
-
+        <div className="examUpdatePgForm">
           {subjects.map((subject) => (
             <div
               key={subject.departmentId }

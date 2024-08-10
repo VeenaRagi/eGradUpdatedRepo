@@ -85,7 +85,7 @@ display: flex;
   }
   /* Active link styles */
   .adminHeaderNavLinks a.active .dot {
-    background-color: green; /* Change to green if needed */
+    background-color: rgb(3, 255, 3); /* Change to green if needed */
   }
   
   /* Blinking animation */
