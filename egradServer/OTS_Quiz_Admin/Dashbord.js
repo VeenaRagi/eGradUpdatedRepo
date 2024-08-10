@@ -18,7 +18,7 @@ const db = require('../DataBase/db2');
   router.get('/exam', async (req, res) => {
     try {
       const [results, fields] = await db.execute(
-        'SELECT examName FROM exams ORDER BY examName'
+        'SELECT examName FROM exams WHERE branchId=1 ORDER BY examName;'
       );
       res.json(results);
     } catch (error) {
@@ -44,7 +44,7 @@ const db = require('../DataBase/db2');
   router.get('/course', async (req, res) => {
     try {
       const [results, fields] = await db.execute(
-        'SELECT courseName FROM course_creation_table ORDER BY courseName'
+        'SELECT cct.courseName FROM course_creation_table cct  LEFT JOIN exams e ON cct.examId=e.examId WHERE e.branchId=1 ORDER BY cct.courseName;'
       );
       res.json(results);
     } catch (error) {
@@ -996,6 +996,30 @@ router.get('/videos/pgVideoCount', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+
   
+router.get('/pgExamsList', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      'SELECT examName FROM exams WHERE branchId=2 ORDER BY examName;'
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching exam names:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+router.get('/pgCoursesListInDashboard', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      'SELECT cct.courseName FROM course_creation_table cct  LEFT JOIN exams e ON cct.examId=e.examId WHERE e.branchId=2 ORDER BY cct.courseName;'
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching Courses:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 module.exports = router;

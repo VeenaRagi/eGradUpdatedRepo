@@ -158,7 +158,7 @@ const PGAdminDashBoardInLeftNav = () => {
 
   
   const handleViewExams = () => {
-    fetch(`${BASE_URL}/Dashboard/exam`)
+    fetch(`${BASE_URL}/Dashboard/pgExamsList`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
