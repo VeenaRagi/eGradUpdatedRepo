@@ -153,7 +153,7 @@ const PGAdminDashBoardInLeftNav = () => {
   const userCount = useFetchCount(`${BASE_URL}/Dashboard/user/pgUserCount`);
   const videosCount = useFetchCount(`${BASE_URL}/Dashboard/videos/pgVideoCount`);
 
-  const questionCount = useFetchCount(`${BASE_URL}/Dashboard/question/count`);
+  const questionCount = useFetchCount(`${BASE_URL}/Dashboard/question/pgQuestionCount`);
 
 
   
