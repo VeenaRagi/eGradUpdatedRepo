@@ -28,7 +28,8 @@ const upload = multer({ storage });
 router.get("/tests", async (req, res) => {
   try {
     const [rows] = await db.query(
-      "SELECT testCreationTableId, TestName FROM test_creation_table"
+      // "SELECT testCreationTableId, TestName FROM test_creation_table"
+      "SELECT * FROM test_creation_table as tct LEFT JOIN course_creation_table as cct ON tct.courseCreationId=cct.courseCreationId LEFT JOIN exams as e ON cct.examId=e.examId WHERE branchId=1;"
     );
     res.json(rows);
   } catch (error) {
