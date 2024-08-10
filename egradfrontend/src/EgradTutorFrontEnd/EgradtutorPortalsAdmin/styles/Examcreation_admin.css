@@ -52,20 +52,21 @@
   /* width: 100%; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center; /* added this line */
+  /* justify-content: center; */
+  align-items: center;
   gap: 1rem;
-  position: fixed; /* changed to fixed for centering */
+  position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centering trick */
+  transform: translate(-50%, -50%);
   max-width: 100%;
   width: 420px;
-  height: 70%;
+  height: 640px;
   margin: 0 auto;
   background: #ffffff;
   padding: 3rem 0.5rem;
   box-shadow: 0px 0px 40px 0px;
+
 
   button {
     position: absolute;
@@ -96,6 +97,8 @@
     }
   }
 }
+
+
 
 .examContainer {
   /* background: #c9d4dd; */
@@ -149,6 +152,7 @@
 }
 .formdiv_contaniner_ch {
   height: 100%;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   overflow: auto; /* Enable both vertical and horizontal scrolling */
@@ -271,7 +275,7 @@
   margin: 7px 1rem;
   padding: 6px;
   width: 100%;
-  height: 50%;
+  height: 200px;
   margin: 0 auto;
 }
 .examSubjects_-contant_exc {
@@ -311,7 +315,7 @@
   .examForm_Contant-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     gap: 1rem;
     position: fixed;
@@ -320,7 +324,7 @@
     transform: translate(-50%, -50%);
     max-width: 90%; /* Adjusted for mobile */
     width: 90%; /* Adjusted for mobile */
-    /* height: 90vh; */
+    height: 42vh;
     margin: 0 auto;
     background: #ffffff;
     padding: 2rem 0.5rem;
@@ -349,6 +353,7 @@
     .examSubject_conten {
       label {
         font-size: 12px;
+        padding-left: 0px;
       }
     }
   }
@@ -395,4 +400,71 @@
     border: none;
     box-shadow: 1px 4px 11px 0px #1a374d;
   }
+  .examSubjects_-contant {
+    background: #ffffff;
+    margin: 7px 1rem;
+    padding: 6px;
+    width: 100%;
+    height: 200px;
+    margin: 20px auto;
+}
+}
+
+
+@media (max-width: 638px) {
+  .formdiv_contaniner {
+      display: block;
+      /* padding: 0.2rem; */
+      /* height: inherit; */
+      width: inherit;
+  }
+}
+
+
+.searchbox {
+  background-color: #fffbf8;
+  padding: 13px;
+  width: 330px;
+  margin: 10px auto;
+  box-sizing: border-box;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px 0 rgba(72, 72, 72, 0.83),
+    0 10px 15px 0 rgba(126, 126, 126, 0.12),
+    0 -2px 6px 1px rgba(199, 199, 199, 0.55) inset, 
+    0 2px 4px 2px rgba(255, 255, 255, 0.83) inset;
+}
+input[type="search"]{
+  width:300px;
+  height:30px;
+  padding-left:15px;
+  border-radius:6px;
+  border:none;
+  color:#939393;
+  font-weight:500;
+  background-color:#fffbf8;
+  -webkit-box-shadow:
+      0 -2px 2px 0 rgba(199, 199, 199, 0.55),
+      0 1px 1px 0 #fff,
+      0 2px 2px 1px #fafafa,
+      0 2px 4px 0 #b2b2b2 inset,
+      0 -1px 1px 0 #f2f2f2 inset,
+      0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+  -moz-box-shadow: 
+      0 -2px 2px 0 rgba(199, 199, 199, 0.55),
+      0 1px 1px 0 #fff,
+      0 2px 2px 1px #fafafa,
+      0 2px 4px 0 #b2b2b2 inset,
+      0 -1px 1px 0 #f2f2f2 inset,
+      0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+  box-shadow:
+      0 -2px 2px 0 rgba(199, 199, 199, 0.55),
+      0 1px 1px 0 #fff,
+      0 2px 2px 1px #fafafa,
+      0 2px 4px 0 #b2b2b2 inset,
+      0 -1px 1px 0 #f2f2f2 inset,
+      0 15px 15px 0 rgba(41, 41, 41, 0.09) inset;
+}
+
+input[type="search"]:focus{
+  outline:0;
 }
