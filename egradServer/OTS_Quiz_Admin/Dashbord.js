@@ -78,8 +78,6 @@ const db = require('../DataBase/db2');
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
-
-  
   router.get('/Test', async (req, res) => {
     try {
       const [results, fields] = await db.execute(
@@ -119,13 +117,13 @@ const db = require('../DataBase/db2');
     try {
       const [results, fields] = await db.execute(
         `
-        SELECT tc.*, cc.courseName, 
+      SELECT tc.*, cc.courseName, 
         DATE_FORMAT(tc.testEndDate, '%d-%m-%y') AS formatted_EndDate, 
         DATE_FORMAT(tc.testEndTime, '%H:%i:%s') AS formatted_EndTime, 
         DATE_FORMAT(tc.testStartDate, '%d-%m-%y') AS formatted_StartDate, 
         DATE_FORMAT(tc.testStartTime, '%H:%i:%s') AS formatted_StartTime
         FROM test_creation_table tc
-        JOIN course_creation_table cc ON tc.courseCreationId = cc.courseCreationId;
+        JOIN course_creation_table cc ON tc.courseCreationId = cc.courseCreationId LEFT JOIN exams e ON e.examId=cc.examId WHERE e.branchId=1;
       `
       );
       res.json(results);
@@ -1015,7 +1013,7 @@ router.get('/pgExamsList', async (req, res) => {
 router.get('/pgCoursesListInDashboard', async (req, res) => {
   try {
     const [results, fields] = await db.execute(
-      'SELECT cct.courseName FROM course_creation_table cct  LEFT JOIN exams e ON cct.examId=e.examId WHERE e.branchId=2 ORDER BY cct.courseName;'
+      'SELECT cct.courseName FROM course_creation_table cct  LEFT JOIN exams e ON cct.examId=e.examId WHERE e.branchId=1 ORDER BY cct.courseName;'
     );
     res.json(results);
   } catch (error) {
@@ -1024,4 +1022,23 @@ router.get('/pgCoursesListInDashboard', async (req, res) => {
   }
 });
 
+router.get('/pgAdminTestList', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      `
+    SELECT tc.*, cc.courseName, 
+      DATE_FORMAT(tc.testEndDate, '%d-%m-%y') AS formatted_EndDate, 
+      DATE_FORMAT(tc.testEndTime, '%H:%i:%s') AS formatted_EndTime, 
+      DATE_FORMAT(tc.testStartDate, '%d-%m-%y') AS formatted_StartDate, 
+      DATE_FORMAT(tc.testStartTime, '%H:%i:%s') AS formatted_StartTime
+      FROM test_creation_table tc
+      JOIN course_creation_table cc ON tc.courseCreationId = cc.courseCreationId LEFT JOIN exams e ON e.examId=cc.examId WHERE e.branchId=2;
+    `
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching test list:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 module.exports = router;

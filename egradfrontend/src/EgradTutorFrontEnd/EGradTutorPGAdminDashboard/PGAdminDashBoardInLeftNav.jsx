@@ -177,7 +177,7 @@ const PGAdminDashBoardInLeftNav = () => {
   };
 
   const handleViewCourse = () => {
-    fetch(` ${BASE_URL}/Dashboard/course`)
+    fetch(` ${BASE_URL}/Dashboard/pgCoursesListInDashboard`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -196,7 +196,7 @@ const PGAdminDashBoardInLeftNav = () => {
   };
 
   useEffect(() => {
-    fetch(`${BASE_URL}/Dashboard/AdminTestList`)
+    fetch(`${BASE_URL}/Dashboard/pgAdminTestList`)
       .then((response) => response.json())
       .then((data) => setAdminTestList(data));
   }, []);
