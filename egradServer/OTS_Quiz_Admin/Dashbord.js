@@ -78,6 +78,8 @@ const db = require('../DataBase/db2');
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+
+  
   router.get('/Test', async (req, res) => {
     try {
       const [results, fields] = await db.execute(
