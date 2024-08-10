@@ -12,7 +12,8 @@ router.use(express.urlencoded({ extended: false }));
 
 router.get("/OVL_courses", async (req, res) => {
   const query =
-    "SELECT courseCreationId,courseName,Portale_Id FROM course_creation_table WHERE Portale_Id= 3  ";
+    // "SELECT courseCreationId,courseName,Portale_Id FROM course_creation_table WHERE Portale_Id= 3  ";
+    "SELECT * FROM course_creation_table cct LEFT JOIN exams e ON cct.examId=e.examId WHERE cct.Portale_Id=3 AND e.branchId=1 ";
   try {
     const [result] = await db.query(query);
     res.json(result);

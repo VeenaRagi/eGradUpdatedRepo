@@ -1055,7 +1055,7 @@ router.get("/pgAdminTestList", async (req, res) => {
 router.get("/user/pgUserCount", async (req, res) => {
   try {
     const [results, fields] = await db.execute(
-      "SELECT COUNT(user_Id) AS count FROM log WHERE role = 'user' AND branchId=2"
+      "SELECT COUNT(studentregistationId) AS count FROM otsstudentregistation WHERE role = 'user' AND branchId=2"
     );
     res.json(results);
   } catch (error) {
