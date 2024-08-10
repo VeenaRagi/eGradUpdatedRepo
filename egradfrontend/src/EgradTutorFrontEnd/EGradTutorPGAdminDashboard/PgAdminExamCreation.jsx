@@ -425,7 +425,7 @@ function PgAdminExamCreation() {
                             className="Ots_-edit "
                             style={{ background: "#00aff0" }}
                           >
-                            <Link to={`/ExamUpdataion_admin/${exam.examId}`}>
+                            <Link to={`/pgExamUpdateByAdmin/${exam.examId}`}>
                               <i
                                 className="fa-solid fa-pencil"
                                 style={{ color: "#fff" }}

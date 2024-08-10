@@ -3,8 +3,10 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import BASE_URL from "../../apiConfig";
 import { useLocation } from "react-router-dom";
-import "./styles/ResponsiveForAdmin.css";
-const UpdatingCourseInAdmin = () => {
+// import "./styles/ResponsiveForAdmin.css";
+// import '../EgradtutorPortalsAdmin/styles/ResponsiveForAdmin'
+import '../EgradtutorPortalsAdmin/styles/ResponsiveForAdmin.css'
+const PGAdminCourseUpdate = () => {
   const { portalId } = useParams();
   // console.log(portalId, "portal id ");
   const navigate = useNavigate();
@@ -1906,4 +1908,4 @@ const UpdatingCourseInAdmin = () => {
   );
 };
 
-export default UpdatingCourseInAdmin;
+export default PGAdminCourseUpdate;
