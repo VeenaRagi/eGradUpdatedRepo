@@ -22,7 +22,6 @@ const useFetchCount = (url) => {
       .then((data) => {
         const firstObject = data[0];
         const totalCount = firstObject ? firstObject.count : 0;
-
         // console.log("Data received:", totalCount);
         setCount(totalCount);
       })
@@ -149,13 +148,15 @@ const PGAdminDashBoardInLeftNav = () => {
   const [gototest_review, setGototest_review] = useState(true);
 
   const courseCount = useFetchCount(`${BASE_URL}/Dashboard/courses/count`);
-  const examCount = useFetchCount(`${BASE_URL}/Dashboard/exam/count`);
+  const examCount = useFetchCount(`${BASE_URL}/Dashboard/exam/pgCount`);
   const testCount = useFetchCount(`${BASE_URL}/Dashboard/test/count`);
   const userCount = useFetchCount(`${BASE_URL}/Dashboard/user/count`);
-  const videosCount = useFetchCount(`${BASE_URL}/Dashboard/videos/count`);
+  const videosCount = useFetchCount(`${BASE_URL}/Dashboard/videos/pgVideoCount`);
 
   const questionCount = useFetchCount(`${BASE_URL}/Dashboard/question/count`);
 
+
+  
   const handleViewExams = () => {
     fetch(`${BASE_URL}/Dashboard/exam`)
       .then((response) => {

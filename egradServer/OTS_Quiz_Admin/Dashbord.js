@@ -6,7 +6,7 @@ const db = require('../DataBase/db2');
   router.get('/exam/count', async (req, res) => {
     try {
       const [results, fields] = await db.execute(
-        'SELECT examName, COUNT(*) AS count FROM exams'
+        'SELECT examName, COUNT(*) AS count FROM exams WHERE branchId=1'
       );
       res.json(results);
     } catch (error) {
@@ -32,7 +32,7 @@ const db = require('../DataBase/db2');
   router.get('/courses/count', async (req, res) => {
     try {
       const [results, fields] = await db.execute(
-        'SELECT COUNT(courseCreationId) AS count FROM course_creation_table'
+        'SELECT COUNT(courseCreationId) AS count FROM course_creation_table cct LEFT JOIN exams e ON cct.examId=e.examId WHERE e.branchId=1'
       );
       res.json(results);
     } catch (error) {
@@ -70,7 +70,7 @@ const db = require('../DataBase/db2');
   router.get('/videos/count', async (req, res) => {
     try {
       const [results, fields] = await db.execute(
-        'SELECT COUNT(OVL_Linke_Id) AS count FROM ovl_links'
+        'SELECT * FROM `ovl_links` ovl LEFT JOIN course_creation_table cct ON cct.courseCreationId=ovl.courseCreationId LEFT JOIN exams e ON e.examId=cct.examId WHERE e.branchId=1;'
       );
       res.json(results);
     } catch (error) {
@@ -962,7 +962,42 @@ router.get("/AdminDcUsermarks/:testCreationTableId", async (req, res) => {
   }
 });
 
+//----------------------for pg APIs---------------------------
+router.get('/exam/pgCount', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      'SELECT examName, COUNT(*) AS count FROM exams WHERE branchId=2'
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching exam count:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
+// -------------pg count---------------
+router.get('/courses/pgCount', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      'SELECT COUNT(courseCreationId) AS count FROM course_creation_table cct LEFT JOIN exams e ON cct.examId=e.examId WHERE e.branchId=2'
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching course count:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+router.get('/videos/pgVideoCount', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      'SELECT COUNT(OVL_Linke_Id) FROM `ovl_links` ovl LEFT JOIN course_creation_table cct ON cct.courseCreationId=ovl.courseCreationId LEFT JOIN exams e ON e.examId=cct.examId WHERE e.branchId=2'
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching videos count:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+  
 
-
-  module.exports = router;
+module.exports = router;
