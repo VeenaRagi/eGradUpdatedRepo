@@ -149,7 +149,7 @@ const PGAdminDashBoardInLeftNav = () => {
 
   const courseCount = useFetchCount(`${BASE_URL}/Dashboard/courses/count`);
   const examCount = useFetchCount(`${BASE_URL}/Dashboard/exam/pgCount`);
-  const testCount = useFetchCount(`${BASE_URL}/Dashboard/test/count`);
+  const testCount = useFetchCount(`${BASE_URL}/Dashboard/test/countPg`);
   const userCount = useFetchCount(`${BASE_URL}/Dashboard/user/pgUserCount`);
   const videosCount = useFetchCount(`${BASE_URL}/Dashboard/videos/pgVideoCount`);
 

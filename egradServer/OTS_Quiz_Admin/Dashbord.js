@@ -3,120 +3,129 @@ const router = express.Router();
 const db = require('../DataBase/db2');
 
 
-  router.get('/exam/count', async (req, res) => {
-    try {
-      const [results, fields] = await db.execute(
-        'SELECT examName, COUNT(*) AS count FROM exams WHERE branchId=1'
-      );
-      res.json(results);
-    } catch (error) {
-      console.error('Error fetching exam count:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
-  
-  router.get('/exam', async (req, res) => {
-    try {
-      const [results, fields] = await db.execute(
-        'SELECT examName FROM exams WHERE branchId=1 ORDER BY examName;'
-      );
-      res.json(results);
-    } catch (error) {
-      console.error('Error fetching exam names:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
-  
+router.get('/exam/count', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      'SELECT examName, COUNT(*) AS count FROM exams WHERE branchId=1'
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching exam count:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.get('/exam', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      'SELECT examName FROM exams WHERE branchId=1 ORDER BY examName;'
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching exam names:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
-  router.get('/courses/count', async (req, res) => {
-    try {
-      const [results, fields] = await db.execute(
-        'SELECT COUNT(courseCreationId) AS count FROM course_creation_table cct LEFT JOIN exams e ON cct.examId=e.examId WHERE e.branchId=1'
-      );
-      res.json(results);
-    } catch (error) {
-      console.error('Error fetching course count:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
-  
-  router.get('/course', async (req, res) => {
-    try {
-      const [results, fields] = await db.execute(
-        'SELECT cct.courseName FROM course_creation_table cct  LEFT JOIN exams e ON cct.examId=e.examId WHERE e.branchId=1 ORDER BY cct.courseName;'
-      );
-      res.json(results);
-    } catch (error) {
-      console.error('Error fetching Courses:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+
+router.get('/courses/count', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      'SELECT COUNT(courseCreationId) AS count FROM course_creation_table cct LEFT JOIN exams e ON cct.examId=e.examId WHERE e.branchId=1'
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching course count:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.get('/course', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      'SELECT cct.courseName FROM course_creation_table cct  LEFT JOIN exams e ON cct.examId=e.examId WHERE e.branchId=1 ORDER BY cct.courseName;'
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching Courses:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
-  router.get('/test/count', async (req, res) => {
-    try {
-      const [results, fields] = await db.execute(
-        'SELECT COUNT(testCreationTableId) AS count FROM test_creation_table'
-      );
-      res.json(results);
-    } catch (error) {
-      console.error('Error fetching test count:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+router.get('/test/count', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      `SELECT
+    COUNT(testCreationTableId) AS count
+FROM
+    test_creation_table AS tct
+LEFT JOIN course_creation_table AS cct
+ON
+    cct.courseCreationId = tct.courseCreationId
+LEFT JOIN exams AS e
+ON
+    e.examId = cct.examId WHERE e.branchId=1`
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching test count:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
-  router.get('/videos/count', async (req, res) => {
-    try {
-      const [results, fields] = await db.execute(
-        'SELECT * FROM `ovl_links` ovl LEFT JOIN course_creation_table cct ON cct.courseCreationId=ovl.courseCreationId LEFT JOIN exams e ON e.examId=cct.examId WHERE e.branchId=1;'
-      );
-      res.json(results);
-    } catch (error) {
-      console.error('Error fetching videos count:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
-  router.get('/Test', async (req, res) => {
-    try {
-      const [results, fields] = await db.execute(
-        'SELECT TestName FROM test_creation_table ORDER BY  TestName '
-      );
-      res.json(results);
-    } catch (error) {
-      console.error('Error fetching test:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+router.get('/videos/count', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      'SELECT * FROM `ovl_links` ovl LEFT JOIN course_creation_table cct ON cct.courseCreationId=ovl.courseCreationId LEFT JOIN exams e ON e.examId=cct.examId WHERE e.branchId=1;'
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching videos count:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+router.get('/Test', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      'SELECT TestName FROM test_creation_table ORDER BY  TestName '
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching test:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
-  router.get('/user/count', async (req, res) => {
-    try {
-      const [results, fields] = await db.execute(
-        "SELECT COUNT(user_Id) AS count FROM log WHERE role = 'user' AND branchId=1 "
-      );
-      res.json(results);
-    } catch (error) {
-      console.error('Error fetching course count:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
-  router.get('/question/count', async (req, res) => {
-    try {
-      const [results, fields] = await db.execute(
-        'SELECT COUNT(question_id) AS count FROM questions'
-      );
-      res.json(results);
-    } catch (error) {
-      console.error('Error fetching course count:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+router.get('/user/count', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      "SELECT COUNT(user_Id) AS count FROM log WHERE role = 'user' AND branchId=1 "
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching course count:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+router.get('/question/count', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      'SELECT COUNT(question_id) AS count FROM questions'
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching course count:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
-  router.get('/AdminTestList', async (req, res) => {
-    try {
-      const [results, fields] = await db.execute(
-        `
+router.get('/AdminTestList', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      `
       SELECT tc.*, cc.courseName, 
         DATE_FORMAT(tc.testEndDate, '%d-%m-%y') AS formatted_EndDate, 
         DATE_FORMAT(tc.testEndTime, '%H:%i:%s') AS formatted_EndTime, 
@@ -125,57 +134,57 @@ const db = require('../DataBase/db2');
         FROM test_creation_table tc
         JOIN course_creation_table cc ON tc.courseCreationId = cc.courseCreationId LEFT JOIN exams e ON e.examId=cc.examId WHERE e.branchId=1;
       `
-      );
-      res.json(results);
-    } catch (error) {
-      console.error('Error fetching test list:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching test list:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 //   @desc Get Test by ID from Admin
-  // router.get("/AdminDcUsermarks/:userId/:testCreationTableId", async (req, res) => {
-  //   const testCreationTableId = req.params.testCreationTableId;
-  //   const userId = req.params.userId;
-  //   console.log("ids:", userId, testCreationTableId);
-  //   try {
-  //     const [usermarks] = await db.query(
-  //       `
-  //       SELECT
-  //     sm.user_Id,
-  //     sm.testCreationTableId,
-  //     tc.totalMarks,
-  //     SUM(CASE WHEN sm.status = 1 THEN sm.std_marks ELSE 0 END) AS sumStatus1,
-  //     SUM(CASE WHEN sm.status = 0 THEN sm.std_marks ELSE 0 END) AS sumStatus0
-  // FROM
-  //     student_marks sm
-  // JOIN
-  //     test_creation_table tc ON sm.testCreationTableId = tc.testCreationTableId
-  // WHERE
-  //     sm.testCreationTableId = ? AND sm.user_Id = ?
-  // GROUP BY
-  //     sm.user_Id, sm.testCreationTableId, tc.totalMarks;
-  
-  //       `,
-  //       [testCreationTableId, userId]
-  //     );
-  
-  //     if (usermarks.length > 0) {
-  //       const totalDifference = usermarks[0].sumStatus1 - usermarks[0].sumStatus0;
-  //       const percentage = (
-  //         (totalDifference / usermarks[0].totalMarks) *
-  //         100
-  //       ).toFixed(2);
-  
-  //       res.json({ usermarks, totalDifference, percentage });
-  //     } else {
-  //       res.json({ message: "No data available." });
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     res.status(500).json({ error: "Internal Server Error" });
-  //   }
-  // });
+// router.get("/AdminDcUsermarks/:userId/:testCreationTableId", async (req, res) => {
+//   const testCreationTableId = req.params.testCreationTableId;
+//   const userId = req.params.userId;
+//   console.log("ids:", userId, testCreationTableId);
+//   try {
+//     const [usermarks] = await db.query(
+//       `
+//       SELECT
+//     sm.user_Id,
+//     sm.testCreationTableId,
+//     tc.totalMarks,
+//     SUM(CASE WHEN sm.status = 1 THEN sm.std_marks ELSE 0 END) AS sumStatus1,
+//     SUM(CASE WHEN sm.status = 0 THEN sm.std_marks ELSE 0 END) AS sumStatus0
+// FROM
+//     student_marks sm
+// JOIN
+//     test_creation_table tc ON sm.testCreationTableId = tc.testCreationTableId
+// WHERE
+//     sm.testCreationTableId = ? AND sm.user_Id = ?
+// GROUP BY
+//     sm.user_Id, sm.testCreationTableId, tc.totalMarks;
+
+//       `,
+//       [testCreationTableId, userId]
+//     );
+
+//     if (usermarks.length > 0) {
+//       const totalDifference = usermarks[0].sumStatus1 - usermarks[0].sumStatus0;
+//       const percentage = (
+//         (totalDifference / usermarks[0].totalMarks) *
+//         100
+//       ).toFixed(2);
+
+//       res.json({ usermarks, totalDifference, percentage });
+//     } else {
+//       res.json({ message: "No data available." });
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
 
 
 // router.get("/AdminDcUsermarks/:testCreationTableId", async (req, res) => {
@@ -616,7 +625,7 @@ const db = require('../DataBase/db2');
 //         questionStats,
 //         userStats,
 //         usermarks3,
-       
+
 //       });
 //     } else {
 //       res.json({ message: "No data available." });
@@ -949,7 +958,7 @@ router.get("/AdminDcUsermarks/:testCreationTableId", async (req, res) => {
         questionStats,
         userStats,
         usermarks3,
-       
+
       });
     } else {
       res.json({ message: "No data available." });
@@ -998,7 +1007,7 @@ router.get('/videos/pgVideoCount', async (req, res) => {
 });
 
 
-  
+
 router.get('/pgExamsList', async (req, res) => {
   try {
     const [results, fields] = await db.execute(
@@ -1053,4 +1062,26 @@ router.get('/user/pgUserCount', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+router.get('/test/countPg', async (req, res) => {
+  try {
+    const [results, fields] = await db.execute(
+      `SELECT
+    COUNT(testCreationTableId) AS count
+FROM
+    test_creation_table AS tct
+LEFT JOIN course_creation_table AS cct
+ON
+    cct.courseCreationId = tct.courseCreationId
+LEFT JOIN exams AS e
+ON
+    e.examId = cct.examId WHERE e.branchId=2`
+    );
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching test count:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 module.exports = router;
