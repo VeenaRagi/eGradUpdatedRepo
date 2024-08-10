@@ -284,7 +284,7 @@ const PGAdminTestUpdate = () => {
         {TestForm_Id === "1" ? (
          <form onSubmit={handleSubmitOTS_PQB}>
          <div className="testCreation_-contant">
-           <h3 className="textColor">Test Update Form</h3>
+           <h3 className="textColor"> PG Test Update Form</h3>
            <div className="testCreation_-contant_-flexCOntant examSubjects_-contant">
              {/* <div className="testCreation_-list">
              <label>Test Pattern:</label>

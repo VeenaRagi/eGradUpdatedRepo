@@ -1321,7 +1321,7 @@ function PGAdminTestCreationForms() {
                       </button> */}
                       <Link
                         className="Ots_-edit"
-                        to={`/TestUpdateForm/${test.testCreationTableId}/${test.TestForm_Id}`}
+                        to={`/pgTestUpdateByAdmin/${test.testCreationTableId}/${test.TestForm_Id}`}
                       >
                         <i className="fa-solid fa-pencil"></i>
                       </Link>
