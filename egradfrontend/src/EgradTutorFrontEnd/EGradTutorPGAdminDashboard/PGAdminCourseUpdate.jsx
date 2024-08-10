@@ -1276,7 +1276,7 @@ const PGAdminCourseUpdate = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/CourseAdmin")}
+              onClick={() => navigate("/PGCourseAdmin")}
               className="ots_btnClose"
             >
               Close
