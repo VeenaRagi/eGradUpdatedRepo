@@ -59,7 +59,7 @@ const PGAdminTestUpdate = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/TestCreation/testcourses`)
+    fetch(`${BASE_URL}/TestCreation/testCoursesForPG`)
       .then((response) => response.json())
       .then((data) => setCourses(data))
       .catch((error) => console.error("Error fetching courses:", error));
@@ -100,7 +100,7 @@ const PGAdminTestUpdate = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/TestCreation/testupdate/${TestForm_Id}/${testCreationTableId}`
+          `${BASE_URL}/TestCreation/pgTestupdate/${TestForm_Id}/${testCreationTableId}`
         );
         const data = await response.json();
 

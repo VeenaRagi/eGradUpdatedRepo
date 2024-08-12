@@ -208,7 +208,7 @@ const TestUpdateForm = () => {
         alert(data.error)
       }
       console.log("send", data);
-      navigate("/PGCourseAdmin");
+      navigate("/CourseAdmin");
       console.log("successfully updated TEST");
     } catch (error) {
       console.error("Error sending request:", error);
@@ -245,7 +245,7 @@ const TestUpdateForm = () => {
 
       const data = await response.json();
       console.log("send", data);
-      navigate("/PGCourseAdmin");
+      navigate("/CourseAdmin");
       console.log("successfully updated TEST");
     } catch (error) {
       console.error("Error sending request:", error);
@@ -468,7 +468,7 @@ const TestUpdateForm = () => {
               <div className="create_exam_header">
                   <button
              type="button"
-             onClick={() => navigate("/PGCourseAdmin")}
+             onClick={() => navigate("/CourseAdmin")}
              className="ots_-createBtn"
            >
              Cancel
@@ -653,7 +653,7 @@ const TestUpdateForm = () => {
                  <div className="create_exam_header">
                      <button
                 type="button"
-                onClick={() => navigate("/PGCourseAdmin")}
+                onClick={() => navigate("/CourseAdmin")}
                 className="ots_-createBtn"
               >
                 Cancel
