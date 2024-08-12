@@ -393,7 +393,38 @@ const UpdatingCourseInAdmin = () => {
 
     fetchData();
   }, [portalId, typeOfTest, typeofQuestion, courseCreationId]);
+const handleCloseAndNavigate=()=>{
+  setOtsFormData({
+    courseName: "",
+courseYear: "",
+examId: "",
+typeofQuestion: "",
+courseStartDate: "",
+courseEndDate: "",
+cost: "",
+discount: "",
+discountAmount: "",
+totalPrice: "",
+paymentlink: "",
+cardImage: "",
+})
+setPqbFormData({
+    courseName: "",
+    courseYear: "",
+    examId: "",
+    typeofQuestion: "",
+    courseStartDate: "",
+    courseEndDate: "",
+    cost: "",
+    discount: "",
+    discountAmount: "",
+    totalPrice: "",
+    paymentlink: "",
+    cardImage: "",
+})
+navigate("/CourseAdmin")
 
+}
   const handleQuestionTypeCheckboxChange = (quesionTypeId) => {
     const updatedSelectedTypes = [...selectedQuestionTypes];
     const index = updatedSelectedTypes.indexOf(quesionTypeId);
@@ -1274,7 +1305,7 @@ const UpdatingCourseInAdmin = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/CourseAdmin")}
+              onClick={handleCloseAndNavigate}
               className="ots_btnClose"
             >
               Close
@@ -1529,7 +1560,7 @@ const UpdatingCourseInAdmin = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/CourseAdmin")}
+              onClick={handleCloseAndNavigate}
               className="ots_btnClose"
             >
               Close
@@ -1684,7 +1715,7 @@ const UpdatingCourseInAdmin = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/CourseAdmin")}
+              onClick={handleCloseAndNavigate}
               className="ots_btnClose"
             >
               Close
@@ -1892,7 +1923,7 @@ const UpdatingCourseInAdmin = () => {
               </button>
               <button
                 type="button"
-                onClick={() => navigate("/CourseAdmin")}
+                onClick={handleCloseAndNavigate}
                 className="ots_btnClose"
            
               >

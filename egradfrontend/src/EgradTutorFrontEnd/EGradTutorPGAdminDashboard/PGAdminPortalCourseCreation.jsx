@@ -132,7 +132,7 @@ function PGAdminPortalCourseCreation() {
     const fetchTypeOfQuestion = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/CoureseCreation/type_of_questions`
+          `${BASE_URL}/CoureseCreation/pgTypeOfQuestions`
         );
         const result = await response.json();
         // console.log("Type of Questions Data:", result); // Add this line to log the data

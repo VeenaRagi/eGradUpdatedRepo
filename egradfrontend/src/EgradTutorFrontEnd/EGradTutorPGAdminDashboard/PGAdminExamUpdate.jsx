@@ -121,7 +121,7 @@ const PGAdminExamUpdate = () => {
       .then((response) => {
         // console.log(response.data);
         // Handle success, e.g., show a success message to the user
-        navigate("/UgadminHome");
+        navigate("/PGCourseAdmin");
       })
       .catch((error) => console.error("Error updating exam data:", error));
     // console.log("Exam Id:", examId);

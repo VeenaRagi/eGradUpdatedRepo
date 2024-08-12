@@ -159,7 +159,38 @@ const PGAdminCourseUpdate = () => {
   useEffect(() => {
     // console.log(selectedSubjects);
   }, [selectedSubjects]);
-
+  const handleCloseAndNavigate=()=>{
+    setOtsFormData({
+        courseName: "",
+    courseYear: "",
+    examId: "",
+    typeofQuestion: "",
+    courseStartDate: "",
+    courseEndDate: "",
+    cost: "",
+    discount: "",
+    discountAmount: "",
+    totalPrice: "",
+    paymentlink: "",
+    cardImage: "",
+    })
+    setPqbFormData({
+        courseName: "",
+        courseYear: "",
+        examId: "",
+        typeofQuestion: "",
+        courseStartDate: "",
+        courseEndDate: "",
+        cost: "",
+        discount: "",
+        discountAmount: "",
+        totalPrice: "",
+        paymentlink: "",
+        cardImage: "",
+    })
+    
+    navigate("/pgCourseAdmin")
+  }
   //   impp
   useEffect(() => {
     const fetchData = async () => {
@@ -172,7 +203,7 @@ const PGAdminCourseUpdate = () => {
           `${BASE_URL}/CoureseCreation/courese-exams`
         );
         const courseData = response.data;
-        // console.log(courseData, "courseeeeeeeeeee");
+        console.log(courseData, "courseeeeeeeeeee");
         // console.log("course data's image ", courseData.cardImage, '...................')
         setExams(examsResponse.data);
         if (portalId === "1") {
@@ -487,7 +518,7 @@ const PGAdminCourseUpdate = () => {
       // console.log(courseImage); // Assuming courseImage is defined elsewhere
 
       // navigate("/UgadminHome");
-      window.location.href = "/pgCourseUpdateByAdmin";
+      window.location.href = "/PGCourseAdmin";
     } catch (error) {
       console.error("Error updating course:", error);
       alert("Failed to update course. Please try again.");
@@ -536,7 +567,7 @@ const PGAdminCourseUpdate = () => {
       if (response.data.success) {
         // console.log("update succcessfull ", response.data.message);
         // window.history.go(-1);
-        window.location.href = "/pgCourseUpdateByAdmin";
+        window.location.href = "/PGCourseAdmin";
       }
       // console.log(result === "Updated successfully");
       // console.log(result, "result");
@@ -821,7 +852,7 @@ const PGAdminCourseUpdate = () => {
       if (response.data.success) {
         // console.log("update successful ", response.data.message);
         // window.history.go(-1); // Go back in history
-        window.location.href = "/pgCourseUpdateByAdmin"; // Redirect to "/UgadminHome"
+        window.location.href = "/PGCourseAdmin"; // Redirect to "/UgadminHome"
       }
     } catch (error) {
       console.error("Error submitting course data:", error);
@@ -1282,7 +1313,10 @@ const PGAdminCourseUpdate = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/PGCourseAdmin")}
+              onClick={
+                // () => navigate("/PGCourseAdmin")
+                handleCloseAndNavigate
+            }
               className="ots_btnClose"
             >
               Close
@@ -1537,7 +1571,10 @@ const PGAdminCourseUpdate = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/pgCourseUpdateByAdmin")}
+              onClick={
+                // () => navigate("/PGCourseAdmin")
+                handleCloseAndNavigate
+            }
               className="ots_btnClose"
             >
               Close
@@ -1692,7 +1729,10 @@ const PGAdminCourseUpdate = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/pgCourseUpdateByAdmin")}
+              onClick={
+                // () => navigate("/PGCourseAdmin")
+                handleCloseAndNavigate
+            }
               className="ots_btnClose"
             >
               Close
@@ -1900,7 +1940,10 @@ const PGAdminCourseUpdate = () => {
               </button>
               <button
                 type="button"
-                onClick={() => navigate("/pgCourseUpdateByAdmin")}
+                onClick={
+                    // () => navigate("/PGCourseAdmin")
+                    handleCloseAndNavigate
+                }
                 className="ots_btnClose"
            
               >
