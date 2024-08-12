@@ -153,19 +153,19 @@ const PGAdminTestUpdate = () => {
   };
   const [completeSubjects, setCompleteSubjects] = useState([]);
 
-  useEffect(() => {
-    const fetchSubjects = async () => {
-      try {
-        const response = await fetch("YOUR_API_ENDPOINT_TO_FETCH_SUBJECTS");
-        const data = await response.json();
-        setCompleteSubjects(data);
-      } catch (error) {
-        console.error("Error fetching subjects:", error);
-      }
-    };
+//   useEffect(() => {
+//     const fetchSubjects = async () => {
+//       try {
+//         const response = await fetch("YOUR_API_ENDPOINT_TO_FETCH_SUBJECTS");
+//         const data = await response.json();
+//         setCompleteSubjects(data);
+//       } catch (error) {
+//         console.error("Error fetching subjects:", error);
+//       }
+//     };
   
-    fetchSubjects();
-  }, []);
+//     fetchSubjects();
+//   }, []);
   
   const handleSubmitOTS_PQB = async (e) => {
     e.preventDefault();
