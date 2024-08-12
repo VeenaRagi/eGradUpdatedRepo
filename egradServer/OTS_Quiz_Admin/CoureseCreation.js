@@ -1624,6 +1624,9 @@ router.get("/getCourseExams", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+
+
 // ====pg section=====================================
 //---------------------get the course details----------------
 router.get("/getDetailsForCourseCreatedTable", async (req, res) => {
@@ -1702,6 +1705,20 @@ router.get("/getDetailsForCourseCreatedTable", async (req, res) => {
     res.json(rows);
   } catch (error) {
     console.error("Error fetching course data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+
+router.get("/type_of_PGtests", async (req, res) => {
+  try {
+    const [rows] = await db.query(
+      "SELECT typeOfTestId, typeOfTestName FROM type_of_test"
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });

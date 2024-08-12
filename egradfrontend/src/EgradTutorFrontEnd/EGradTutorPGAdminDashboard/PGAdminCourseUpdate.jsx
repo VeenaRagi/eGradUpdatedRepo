@@ -100,7 +100,7 @@ const PGAdminCourseUpdate = () => {
     const fetchTypeOfTest = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/CoureseCreation/type_of_tests`
+          `${BASE_URL}/CoureseCreation/type_of_PGtests`
         );
         const result = await response.json();
         setTypeOfTest(result);
@@ -111,6 +111,8 @@ const PGAdminCourseUpdate = () => {
 
     fetchTypeOfTest();
   }, []);
+
+
 
   useEffect(() => {
     const fetchTypeOfQuestion = async () => {
@@ -175,7 +177,7 @@ const PGAdminCourseUpdate = () => {
         setExams(examsResponse.data);
         if (portalId === "1") {
           setOtsFormData({
-            courseName: courseData.courseName || "",
+            courseName: courseData.courseName,
             courseYear: courseData.courseYear || "",
             examId: courseData.examId.toString() || "",
             typeofQuestion: courseData.question_types || "",
@@ -183,11 +185,15 @@ const PGAdminCourseUpdate = () => {
             courseEndDate: courseData.courseEndDate || "",
             cost: courseData.cost || "",
             discount: courseData.Discount || "",
-            discountAmount: "",
+            // discountAmount:courseData.cost/100 * (courseData.discount=courseData.totalPrice)|| "",
+            discountAmount :courseData.cost && courseData.discount 
+            ? (courseData.cost / 100) * courseData.discount 
+            : "",
             totalPrice: courseData.totalPrice || "",
             paymentlink: courseData.paymentlink || "",
             // cardImage: "",
           });
+          console.log(otsformData)
           setBase64Image(courseData.cardImage);
           setStartDate(courseData.courseStartDate.toString());
           setEndDate(courseData.courseEndDate.toString());
@@ -353,7 +359,7 @@ const PGAdminCourseUpdate = () => {
             courseEndDate: courseData.courseEndDate || "",
             cost: courseData.cost || "",
             discount: courseData.discount || "",
-            discountAmount: "",
+            discountAmount:courseData.cost-totalPrice || "",
             totalPrice: courseData.totalPrice || "",
             paymentlink: courseData.paymentlink || "",
             cardImage: "",
