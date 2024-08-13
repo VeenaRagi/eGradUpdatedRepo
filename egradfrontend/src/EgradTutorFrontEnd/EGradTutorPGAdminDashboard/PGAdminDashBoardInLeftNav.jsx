@@ -22,7 +22,6 @@ const useFetchCount = (url) => {
       .then((data) => {
         const firstObject = data[0];
         const totalCount = firstObject ? firstObject.count : 0;
-
         // console.log("Data received:", totalCount);
         setCount(totalCount);
       })
@@ -149,15 +148,17 @@ const PGAdminDashBoardInLeftNav = () => {
   const [gototest_review, setGototest_review] = useState(true);
 
   const courseCount = useFetchCount(`${BASE_URL}/Dashboard/courses/count`);
-  const examCount = useFetchCount(`${BASE_URL}/Dashboard/exam/count`);
-  const testCount = useFetchCount(`${BASE_URL}/Dashboard/test/count`);
-  const userCount = useFetchCount(`${BASE_URL}/Dashboard/user/count`);
-  const videosCount = useFetchCount(`${BASE_URL}/Dashboard/videos/count`);
+  const examCount = useFetchCount(`${BASE_URL}/Dashboard/exam/pgCount`);
+  const testCount = useFetchCount(`${BASE_URL}/Dashboard/test/PGTestCount`);
+  const userCount = useFetchCount(`${BASE_URL}/Dashboard/user/pgUserCount`);
+  const videosCount = useFetchCount(`${BASE_URL}/Dashboard/videos/pgVideoCount`);
 
-  const questionCount = useFetchCount(`${BASE_URL}/Dashboard/question/count`);
+  const questionCount = useFetchCount(`${BASE_URL}/Dashboard/question/pgQuestionCount`);
+ 
 
+  
   const handleViewExams = () => {
-    fetch(`${BASE_URL}/Dashboard/exam`)
+    fetch(`${BASE_URL}/Dashboard/pgExamsList`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -176,7 +177,7 @@ const PGAdminDashBoardInLeftNav = () => {
   };
 
   const handleViewCourse = () => {
-    fetch(` ${BASE_URL}/Dashboard/course`)
+    fetch(` ${BASE_URL}/Dashboard/pgCoursesListInDashboard`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -195,7 +196,7 @@ const PGAdminDashBoardInLeftNav = () => {
   };
 
   useEffect(() => {
-    fetch(`${BASE_URL}/Dashboard/AdminTestList`)
+    fetch(`${BASE_URL}/Dashboard/pgAdminTestList`)
       .then((response) => response.json())
       .then((data) => setAdminTestList(data));
   }, []);
@@ -386,29 +387,29 @@ const PGAdminDashBoardInLeftNav = () => {
                         <i class="fa-solid fa-video"></i>
                         <h2>Total Videos</h2>
                         <VideosCount videosCount={videosCount} />
-                        <button>
+                        {/* <button>
                           {" "}
                           More Info <FaCircleArrowRight />
-                        </button>
+                        </button> */}
                       </div>
 
                       <div className="Dashboard_contant">
                         <i class="fa-solid fa-users"></i>
                         <h2>User Registrations </h2>
                         <UserCount userCount={userCount} />
-                        <button>
+                        {/* <button>
                           {" "}
                           More Info <FaCircleArrowRight />
-                        </button>
+                        </button> */}
                       </div>
                       <div className="Dashboard_contant">
                         <i class="fa-solid fa-clipboard-question"></i>
                         <h2>Total Questions </h2>
                         <QuestionCount questionCount={questionCount} />
-                        <button>
+                        {/* <button>
                           {" "}
                           More Info <FaCircleArrowRight />
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   </div>

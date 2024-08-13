@@ -386,29 +386,29 @@ const Exam_portal_admin_Dashboard = () => {
                         <i class="fa-solid fa-video"></i>
                         <h2>Total Videos</h2>
                         <VideosCount videosCount={videosCount} />
-                        <button>
+                        {/* <button>
                           {" "}
                           More Info <FaCircleArrowRight />
-                        </button>
+                        </button> */}
                       </div>
 
                       <div className="Dashboard_contant">
                         <i class="fa-solid fa-users"></i>
                         <h2>User Registrations </h2>
                         <UserCount userCount={userCount} />
-                        <button>
+                        {/* <button>
                           {" "}
                           More Info <FaCircleArrowRight />
-                        </button>
+                        </button> */}
                       </div>
                       <div className="Dashboard_contant">
                         <i class="fa-solid fa-clipboard-question"></i>
                         <h2>Total Questions </h2>
                         <QuestionCount questionCount={questionCount} />
-                        <button>
+                        {/* <button>
                           {" "}
                           More Info <FaCircleArrowRight />
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   </div>

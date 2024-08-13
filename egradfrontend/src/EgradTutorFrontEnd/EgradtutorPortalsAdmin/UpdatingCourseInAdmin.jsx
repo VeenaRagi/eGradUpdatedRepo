@@ -393,7 +393,38 @@ const UpdatingCourseInAdmin = () => {
 
     fetchData();
   }, [portalId, typeOfTest, typeofQuestion, courseCreationId]);
+const handleCloseAndNavigate=()=>{
+  setOtsFormData({
+    courseName: "",
+courseYear: "",
+examId: "",
+typeofQuestion: "",
+courseStartDate: "",
+courseEndDate: "",
+cost: "",
+discount: "",
+discountAmount: "",
+totalPrice: "",
+paymentlink: "",
+cardImage: "",
+})
+setPqbFormData({
+    courseName: "",
+    courseYear: "",
+    examId: "",
+    typeofQuestion: "",
+    courseStartDate: "",
+    courseEndDate: "",
+    cost: "",
+    discount: "",
+    discountAmount: "",
+    totalPrice: "",
+    paymentlink: "",
+    cardImage: "",
+})
+navigate("/CourseAdmin")
 
+}
   const handleQuestionTypeCheckboxChange = (quesionTypeId) => {
     const updatedSelectedTypes = [...selectedQuestionTypes];
     const index = updatedSelectedTypes.indexOf(quesionTypeId);
@@ -478,8 +509,8 @@ const UpdatingCourseInAdmin = () => {
 
       // console.log(courseImage); // Assuming courseImage is defined elsewhere
 
-      // navigate("/UgadminHome");
-      window.location.href = "/UgadminHome";
+      // navigate("/CourseAdmin");
+      window.location.href = "/CourseAdmin";
     } catch (error) {
       console.error("Error updating course:", error);
       alert("Failed to update course. Please try again.");
@@ -528,7 +559,7 @@ const UpdatingCourseInAdmin = () => {
       if (response.data.success) {
         // console.log("update succcessfull ", response.data.message);
         // window.history.go(-1);
-        window.location.href = "/UgadminHome";
+        window.location.href = "/CourseAdmin";
       }
       // console.log(result === "Updated successfully");
       // console.log(result, "result");
@@ -813,7 +844,7 @@ const UpdatingCourseInAdmin = () => {
       if (response.data.success) {
         // console.log("update successful ", response.data.message);
         // window.history.go(-1); // Go back in history
-        window.location.href = "/UgadminHome"; // Redirect to "/UgadminHome"
+        window.location.href = "/CourseAdmin"; // Redirect to "/CourseAdmin"
       }
     } catch (error) {
       console.error("Error submitting course data:", error);
@@ -948,7 +979,7 @@ const UpdatingCourseInAdmin = () => {
         fetchCourseData(); // Fetch updated data or redirect, as needed
         cpresetFormFields(); // Reset the form fields
         // window.history.go(-1);
-        // window.location.href = '/UgadminHome';
+        // window.location.href = '/CourseAdmin';
         // asdf
       } else {
         console.error("Failed to update the  course:", await response.text());
@@ -1274,7 +1305,7 @@ const UpdatingCourseInAdmin = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/Adminpage")}
+              onClick={handleCloseAndNavigate}
               className="ots_btnClose"
             >
               Close
@@ -1529,7 +1560,7 @@ const UpdatingCourseInAdmin = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/UgadminHome")}
+              onClick={handleCloseAndNavigate}
               className="ots_btnClose"
             >
               Close
@@ -1684,7 +1715,7 @@ const UpdatingCourseInAdmin = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/UgadminHome")}
+              onClick={handleCloseAndNavigate}
               className="ots_btnClose"
             >
               Close
@@ -1892,7 +1923,7 @@ const UpdatingCourseInAdmin = () => {
               </button>
               <button
                 type="button"
-                onClick={() => navigate("/UgadminHome")}
+                onClick={handleCloseAndNavigate}
                 className="ots_btnClose"
            
               >

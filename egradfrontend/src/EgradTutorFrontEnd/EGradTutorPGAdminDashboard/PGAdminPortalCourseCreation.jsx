@@ -132,7 +132,7 @@ function PGAdminPortalCourseCreation() {
     const fetchTypeOfQuestion = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/CoureseCreation/type_of_questions`
+          `${BASE_URL}/CoureseCreation/pgTypeOfQuestions`
         );
         const result = await response.json();
         // console.log("Type of Questions Data:", result); // Add this line to log the data
@@ -883,7 +883,7 @@ function PGAdminPortalCourseCreation() {
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
           <form onSubmit={handleSubmitots} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
-              ONLINE TEST SERIES COURSE CREATION FORM
+              PG ONLINE TEST SERIES COURSE CREATION FORM
             </h2>
             <div className="otsCloseBtn_Mar">
               <button
@@ -1139,7 +1139,7 @@ function PGAdminPortalCourseCreation() {
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
           <form onSubmit={handleSubmitpqb} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
-              PRACTICES QUESTION BANK COURSE CREATION FORM
+             PG PRACTICES QUESTION BANK COURSE CREATION FORM
             </h2>
             <div className="otsCloseBtn_Mar">
               <button
@@ -1231,20 +1231,20 @@ function PGAdminPortalCourseCreation() {
                     <div
                       className="course_frominput_container "
                       id="course_frominput_container_media"
-                      key={subject.subjectId}
+                      key={subject.departmentId}
                     >
-                      <label htmlFor={`subject-${subject.subjectId}`}>
-                        {subject.subjectName}
+                      <label htmlFor={`subject-${subject.departmentId}`}>
+                        {subject.departmentName}
                       </label>
                       <input
                         className="inputLable"
                         type="checkbox"
-                        id={`subject-${subject.subjectId}`}
-                        name={`subject-${subject.subjectId}`}
-                        value={subject.subjectId}
-                        checked={selectedSubjects.includes(subject.subjectId)}
+                        id={`subject-${subject.departmentId}`}
+                        name={`subject-${subject.departmentId}`}
+                        value={subject.departmentId}
+                        checked={selectedSubjects.includes(subject.departmentId)}
                         onChange={(e) =>
-                          handleSubjectChange(e, subject.subjectId)
+                          handleSubjectChange(e, subject.departmentId)
                         }
                       />
                     </div>
@@ -1395,7 +1395,7 @@ function PGAdminPortalCourseCreation() {
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
           <form onSubmit={OVLhandleSubmit} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
-              ONLINE VIDEO LECTURE COURSE CREATION FORM
+            PG  ONLINE VIDEO LECTURE COURSE CREATION FORM
             </h2>
 
             <div
@@ -1449,20 +1449,20 @@ function PGAdminPortalCourseCreation() {
                       <div
                         className="course_frominput_container "
                         id="course_frominput_container_media"
-                        key={subject.subjectId}
+                        key={subject.departmentId}
                       >
-                        <label htmlFor={`subject-${subject.subjectId}`}>
-                          {subject.subjectName}
+                        <label htmlFor={`subject-${subject.departmentId}`}>
+                          {subject.departmentName}
                         </label>
                         <input
                           className="inputLable"
                           type="checkbox"
-                          id={`subject-${subject.subjectId}`}
-                          name={`subject-${subject.subjectId}`}
-                          value={subject.subjectId}
-                          checked={selectedSubjects.includes(subject.subjectId)}
+                          id={`subject-${subject.departmentId}`}
+                          name={`subject-${subject.departmentId}`}
+                          value={subject.departmentId}
+                          checked={selectedSubjects.includes(subject.departmentId)}
                           onChange={(e) =>
-                            handleSubjectChange(e, subject.subjectId)
+                            handleSubjectChange(e, subject.departmentId)
                           }
                         />
                       </div>
@@ -1582,7 +1582,7 @@ function PGAdminPortalCourseCreation() {
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
           <form onSubmit={handleSubmitCP} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
-              COMPLETE PACKAGE COURSE CREATION FORM
+             PG COMPLETE PACKAGE COURSE CREATION FORM
             </h2>
             <div className="otsCloseBtn_Mar">
               <button
@@ -1870,7 +1870,7 @@ function PGAdminPortalCourseCreation() {
                     <div className="EditDelete_-btns">
                       <Link
                         className="Ots_-edit"
-                        to={`/UpdatingCourseInAdmin/${course.courseCreationId}/${course.Portale_Id}`}
+                        to={`/pgCourseUpdateByAdmin/${course.courseCreationId}/${course.Portale_Id}`}
                       >
                         <i className="fa-solid fa-pencil"></i>
                       </Link>

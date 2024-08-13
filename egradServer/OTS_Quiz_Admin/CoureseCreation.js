@@ -1624,6 +1624,9 @@ router.get("/getCourseExams", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+
+
 // ====pg section=====================================
 //---------------------get the course details----------------
 router.get("/getDetailsForCourseCreatedTable", async (req, res) => {
@@ -1655,11 +1658,11 @@ router.get("/getDetailsForCourseCreatedTable", async (req, res) => {
     cc.Portale_Id = p.Portale_Id
   LEFT JOIN (
     SELECT cs.courseCreationId,
-      GROUP_CONCAT(s.subjectName) AS subjects
+      GROUP_CONCAT(pgd.departmentName) AS subjects
     FROM
       course_subjects cs
-    LEFT JOIN subjects s ON
-      cs.subjectId = s.subjectId
+    LEFT JOIN pg_departments pgd ON
+      cs.subjectId = pgd.departmentId
     GROUP BY
       cs.courseCreationId
   ) AS subjects
@@ -1706,5 +1709,56 @@ router.get("/getDetailsForCourseCreatedTable", async (req, res) => {
   }
 });
 
+router.get("/type_of_PGtests", async (req, res) => {
+  try {
+    const [rows] = await db.query(
+      "SELECT typeOfTestId, typeOfTestName FROM type_of_test"
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
+
+
+router.get("/type_of_PGtestss", async (req, res) => {
+  const { selectedTypeId } = req.query; 
+
+  try {
+    const query = `
+      SELECT
+        cct.courseName,
+        tot.typeOfTestName
+      FROM
+        type_of_test AS tot
+      LEFT JOIN course_typeoftests AS ctot
+      ON
+        ctot.typeOfTestId = tot.typeOfTestId
+      LEFT JOIN course_creation_table AS cct
+      ON
+        cct.courseCreationId = ctot.courseCreationId
+      ${selectedTypeId ? 'WHERE tot.typeOfTestId = ?' : ''}
+    `;
+    
+    const [rows] = await db.query(query, [selectedTypeId].filter(Boolean));
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/pgTypeOfQuestions", async (req, res) => {
+  try {
+    const [rows] = await db.query(
+      "SELECT quesionTypeId, typeofQuestion FROM quesion_type WHERE quesionTypeId IN(1,2,6) "
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 module.exports = router;

@@ -18,7 +18,7 @@ const PGDocumentUploadAdmin = () => {
 
   useEffect(() => {
     // Fetch tests data
-    fetch(`${BASE_URL}/DocumentUpload/tests`)
+    fetch(`${BASE_URL}/DocumentUpload/testss`)
       .then((response) => response.json())
       .then((data) => setTests(data))
       .catch((error) => console.error("Error fetching tests data:", error));
@@ -31,10 +31,12 @@ const PGDocumentUploadAdmin = () => {
     // Fetch subjects data based on the selected test
     try {
       const response = await fetch(
-        `${BASE_URL}/DocumentUpload/subjects/${testCreationTableId}`
+        `${BASE_URL}/DocumentUpload/pgSubjectsForSelectedTest/${testCreationTableId}`
       );
 
       const data = await response.json();
+      
+      
       setSubjects(data);
     } catch (error) {
       console.error("Error fetching subjects data:", error);
@@ -43,6 +45,8 @@ const PGDocumentUploadAdmin = () => {
   const handleSubjectChange = async (event) => {
     const selectedSubject = event.target.value;
     setSelectedSubject(selectedSubject);
+    console.log(event.target.value,selectedSubject,"this is the selected subjeeeeeecccccccccttttttt instead we need to set id ");
+
 
     // Fetch sections data based on the selected subject
     try {
@@ -71,6 +75,7 @@ const PGDocumentUploadAdmin = () => {
     const formData = new FormData();
     formData.append("document", file);
     formData.append("subjectId", selectedSubject);
+    console.log(selectedSubject,"444444444444444444444")
     formData.append("sectionId", selectedSection);
     formData.append("testCreationTableId", selectedTest);
 
@@ -99,7 +104,7 @@ const PGDocumentUploadAdmin = () => {
       <div className="" >
         <h2 className="textColor">Document Upload Form </h2>
       </div>
-      <form className="admin_document_upload_formm">
+      <form className="admin_document_upload_formm" >
         <div className="uploadedDocument_container examSubjects_-contant ">
           <div className="uploadedDocumentFilds  ">
             <label htmlFor="testSelect">Select Test:</label>
@@ -130,8 +135,10 @@ const PGDocumentUploadAdmin = () => {
             >
               <option value="">Select a Subject</option>
               {subjects.map((subject) => (
-                <option key={subject.subjectId} value={subject.subjectId}>
-                  {subject.subjectName}
+                <option key={subject.departmentId}
+                 value={subject.departmentId}
+                 >
+                  {subject.departmentName}
                 </option>
               ))}
             </select>
@@ -191,7 +198,7 @@ export const PGUploadedDoc = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/DocumentUpload/documentName`);
+      const response = await fetch(`${BASE_URL}/DocumentUpload/pgDocumentName`);
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {

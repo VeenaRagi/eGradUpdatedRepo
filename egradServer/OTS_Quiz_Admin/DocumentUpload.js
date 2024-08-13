@@ -28,7 +28,8 @@ const upload = multer({ storage });
 router.get("/tests", async (req, res) => {
   try {
     const [rows] = await db.query(
-      "SELECT testCreationTableId, TestName FROM test_creation_table"
+      // "SELECT testCreationTableId, TestName FROM test_creation_table"
+      "SELECT * FROM test_creation_table as tct LEFT JOIN course_creation_table as cct ON tct.courseCreationId=cct.courseCreationId LEFT JOIN exams as e ON cct.examId=e.examId WHERE branchId=1;"
     );
     res.json(rows);
   } catch (error) {
@@ -856,6 +857,58 @@ router.delete("/DocumentDelete", async (req, res) => {
 // __________________________********* PG EXAMS RELATED API'S*********__________________________________//
 
 
+// ******** GET TESTS TO UPLOAD DOECUMENT IN DROPDOWN**********//
+router.get("/testss", async (req, res) => {
+  try {
+    const [rows] = await db.query(
+      "SELECT * FROM test_creation_table as tct LEFT JOIN course_creation_table as cct ON tct.courseCreationId=cct.courseCreationId LEFT JOIN exams as e ON cct.examId=e.examId WHERE branchId=2;"
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error("Error fetching test data:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.get("/pgSubjectsForSelectedTest/:testCreationTableId", async (req, res) => {
+  const { testCreationTableId } = req.params;
+ 
+  try {
+    const [subjects] = await db.query(
+      `SELECT
+    cs.courseCreationId,pd.departmentName,
+    pd.departmentId
+FROM
+    test_creation_table tct
+LEFT JOIN course_creation_table cct ON
+    cct.courseCreationId = tct.courseCreationId
+LEFT JOIN course_subjects cs ON
+    cct.courseCreationId = cs.courseCreationId
+    Left JOIN pg_departments pd on pd.departmentId=cs.subjectId
+WHERE
+    tct.testCreationTableId =  ?
+      `,
+      [testCreationTableId]
+    );
+ 
+    res.json(subjects);
+  } catch (error) {
+    console.error("Error fetching subjects:", error);
+    res.status(500).send("Error fetching subjects.");
+  }
+});
+
+router.get("/pgDocumentName", async (req, res) => {
+  try {
+    const query =
+      "SELECT o.document_Id,o.documen_name,o.testCreationTableId,o.subjectId,o.sectionId ,tt.TestName,pgd.departmentId,pgd.departmentName FROM ots_document AS o INNER JOIN test_creation_table AS tt ON o.testCreationTableId=tt.testCreationTableId INNER JOIN pg_departments AS pgd ON pgd.departmentId=o.subjectId";
+    const [rows] = await db.query(query);
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 
-module.exports = router;
+module.exports = router;         

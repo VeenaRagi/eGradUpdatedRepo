@@ -23,6 +23,8 @@ function PgAdminExamCreation() {
   const [pgExams, setPgExams] = useState('')
   const [selectedExamName, setSelectedExamName] = useState("");
 
+  const [searchTerm, setSearchTerm] = useState("");
+
 
   const validateForm = () => {
     const errors = {};
@@ -85,13 +87,26 @@ function PgAdminExamCreation() {
       });
   }, []);
 
-  const handleCheckboxChange = (subjectId) => {
+  // const handleCheckboxChange = (subjectId) => {
+  //   setSelectedSubjects((prevSelected) =>
+  //     prevSelected.includes(subjectId)
+  //       ? prevSelected.filter((id) => id !== subjectId)
+  //       : [...prevSelected, subjectId]
+  //   );
+  // };
+
+
+  const handleCheckboxChange = (departmentId) => {
     setSelectedSubjects((prevSelected) =>
-      prevSelected.includes(subjectId)
-        ? prevSelected.filter((id) => id !== subjectId)
-        : [...prevSelected, subjectId]
+      prevSelected.includes(departmentId)
+        ? prevSelected.filter((id) => id !== departmentId)
+        : [...prevSelected, departmentId]
     );
   };
+
+  const filteredSubjects = subjects.filter((subject) =>
+    subject.departmentName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   //....................................END...............................//
 
@@ -278,10 +293,10 @@ function PgAdminExamCreation() {
                     </div>
                   </div>
 
-                  <div className="exam_SubjectCOnatiner examSubjects_-contant">
+                  {/* <div className="exam_SubjectCOnatiner examSubjects_-contant">
+                  <label>Subjects:</label>
                     <div className="formdiv_contaniner_ch">
                       <ul className="examSubject_conten">
-                        <label>Subjects:</label>
                          {subjects.map((subject) => (
                           <li key={subject.departmentId}>
                             <label> {subject.departmentName} </label>
@@ -294,6 +309,40 @@ function PgAdminExamCreation() {
                               onChange={() =>
                                 handleCheckboxChange(subject.departmentId)
                               }
+                            />
+                          </li>
+                        ))}
+                        {formErrors.subjects && (
+                          <span className="error-message">{formErrors.subjects}</span>
+                        )}
+                      </ul>
+                    </div>
+                    <div>
+                      <button
+                        className="ots_-createBtn"
+                        type="submit"
+                        disabled={submitting}
+                      >
+                        Create Exam
+                      </button>
+                    </div>
+                  </div> */}
+
+                  <div className="exam_SubjectCOnatiner examSubjects_-contant">
+                    <label>Subjects:</label>
+                    <form class="searchbox" action="http://thecodeblock.com">
+                        <input type="search" placeholder="Search Subjects" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                      </form>
+                    <div className="formdiv_contaniner_ch  examCreationSubjectsPG">
+                      <ul className="examSubject_conten ">
+                        {filteredSubjects.map((subject) => (
+                          <li key={subject.departmentId}>
+                            <label> {subject.departmentName} </label>
+                            <input
+                              className="inputLable"
+                              type="checkbox"
+                              checked={selectedSubjects.includes(subject.departmentId)}
+                              onChange={() => handleCheckboxChange(subject.departmentId)}
                             />
                           </li>
                         ))}
@@ -376,7 +425,7 @@ function PgAdminExamCreation() {
                             className="Ots_-edit "
                             style={{ background: "#00aff0" }}
                           >
-                            <Link to={`/ExamUpdataion_admin/${exam.examId}`}>
+                            <Link to={`/pgExamUpdateByAdmin/${exam.examId}`}>
                               <i
                                 className="fa-solid fa-pencil"
                                 style={{ color: "#fff" }}
