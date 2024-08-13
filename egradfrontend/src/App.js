@@ -51,6 +51,9 @@ import { UserProvider } from "./UserContext";
 import PGAdminDashboardIntegration from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminDashboardIntegration.jsx";
 import PG_OTSQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/PG_OTSQuizPage.jsx";
 import UG_OTSQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UG_OTSQuizPage.jsx";
+import PGAdminExamUpdate from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminExamUpdate.jsx";
+import PGAdminCourseUpdate from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminCourseUpdate.jsx";
+import PGAdminTestUpdate from "./EgradTutorFrontEnd/EGradTutorPGAdminDashboard/PGAdminTestUpdate.jsx";
 const App = () => {
   return (
     <ThemeProvider>
@@ -329,8 +332,20 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                   element={<PGAdminDashboardIntegration/>}
                 />
                 {/* PGCourseAdmin */}
+                {/* ASDF */}
                 <Route path="/adminProfile" element={<AdminProfile />} />
-              
+                <Route
+                  path="/pgExamUpdateByAdmin/:examId"
+                  element={<PGAdminExamUpdate />}
+                />
+                <Route
+                  path="/pgCourseUpdateByAdmin/:courseCreationId/:portalId"
+                  element={<PGAdminCourseUpdate />}
+                />
+                <Route
+                  path="/pgTestUpdateByAdmin/:testCreationTableId/:TestForm_Id"
+                  element={<PGAdminTestUpdate />}
+                />
            
               </Routes>
             </UserProvider>

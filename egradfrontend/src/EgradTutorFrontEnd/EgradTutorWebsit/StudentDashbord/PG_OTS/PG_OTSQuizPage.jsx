@@ -8,6 +8,8 @@ import greenBox from "../asserts/greenBox.png";
 import orangeBox from "../asserts/orangeBox.png";
 import purpleBox from "../asserts/purpleBox.png";
 import purpleTickBox from "../asserts/purpleTickBox.png";
+import grayBox from "../asserts/grayBox.png";
+
 import BASE_URL from "../../../../apiConfig";
 
 const PG_OTSQuizPage = () => {
@@ -480,14 +482,14 @@ const PG_OTSQuizPage = () => {
             )}
           </div>
           <div className="pg_Questiontypediv">
-            <p>Question Type:MCQ</p>
+            <p className="pg_Questiontypep">Question Type:MCQ</p>
             <div className="pg_markingdiv">
               <p>Marks for correct answer:1</p>
               <p>Nagative Marks:1/3</p>
             </div>
           </div>
           <div className="pg_Questionnodiv">
-            <p>Question No.1</p>
+            <p className="pg_Questionnop" >Question No.1</p>
           </div>
           <div>
             {selectedQuestion && (
@@ -623,11 +625,11 @@ const PG_OTSQuizPage = () => {
         </div>
 
         <div className="pg_norightdiv">
-          <div className="pg_StudentDetails">
+          <div className="pg_StudentDetailsots">
             {studentDetails.map((student, index) => (
-              <div key={student.id || index}>
+              <div key={student.id || index} className="studentdata_pgots">
                 <img
-                  className="users_profile_img"
+                  className="users_profile_imgots"
                   src={`${BASE_URL}/uploads/studentinfoimeages/${student.UplodadPhto}`}
                   alt={`Profile of ${student.candidateName}`}
                   onError={(e) => {
@@ -639,9 +641,56 @@ const PG_OTSQuizPage = () => {
               </div>
             ))}
           </div>
-
-          {selectedSection && (
-            <div>
+<div className="pg_legenddiv">
+  <div className="pg_colorboxes">
+   <div className="pg_colorboxots"><img src={greenBox} /><p>Answered</p></div> 
+   <div className="pg_colorboxots"><img src={orangeBox} /><p>Not Answered</p></div> 
+   <div className="pg_colorboxots"><img src={grayBox} /><p>not Visited</p></div> 
+   <div className="pg_colorboxots"><img src={purpleBox} /><p>Marked for Review</p></div> 
+   <div className="pg_colorboxots pg_colorboxes5"><img src={purpleTickBox} />Answered & Marked for Review(will also be evaluted)</div> 
+  </div>
+  <div> {selectedSubject && (
+  <div className="Pg_sectiondivno">
+    {selectedSubject.sections.length > 0 ? (
+      selectedSubject.sections.map((section) => (
+        selectedSectionId === section.sectionId && ( // Ensure only selected section is displayed
+          <p
+            key={section.sectionId}
+            onClick={() => handleSectionClick(section.sectionId)}
+            className={`Pg_sectiondiv ${
+              selectedSectionId === section.sectionId ? "selected" : ""
+            } important-padding`}
+            style={{
+              cursor: "pointer",
+              
+            }}
+            
+          >
+            {section.SectionName}
+          </p>
+        )
+      ))
+    ) : (
+      <div>
+        {selectedSubject.questions.map((question, index) => (
+          selectedQuestionId === question.question_id && ( // Ensure only selected question is displayed
+            <button
+              key={question.question_id}
+              onClick={() => handleQuestionClick(question.question_id)}
+            >
+              {index + 1}
+            </button>
+          )
+        ))}
+      </div>
+    )}
+  </div>
+)}
+</div>
+{selectedSection && (
+            <div className="pg_divotsnumber">
+              <p>Choose a Question</p>
+              <div className="pg_numberpaletdiv">
               {selectedSection.questions.map((question, index) => (
                 <button
                   key={question.question_id}
@@ -650,15 +699,20 @@ const PG_OTSQuizPage = () => {
                     ...getButtonStyle(question.question_id),
                     backgroundSize: "cover",
                     color: "black",
-                    width: "50px",
-                    height: "50px",
+                    width: "40px",
+                    height: "40px",
+                    border:"1px solid black",
                   }}
                 >
                   {index + 1}
                 </button>
               ))}
+              </div>
+             
             </div>
           )}
+</div>
+          
           <button onClick={handleSubmit}>Submit</button>
         </div>
       </div>

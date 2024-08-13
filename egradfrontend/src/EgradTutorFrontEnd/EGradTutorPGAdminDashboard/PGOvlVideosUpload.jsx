@@ -20,9 +20,7 @@ function PGOvlVideosUpload() {
   const [selectedIds, setSelectedIds] = useState([]);
   const [lectureName, setLectureName] = useState("");
   const [lectureOrder, setLectureOrder] = useState(0);
-
   const usersPerPage = 15;
-
   useEffect(() => {
     fetchCourses();
     fetchOvlData();
@@ -30,7 +28,7 @@ function PGOvlVideosUpload() {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/OtsvidesUploads/OVL_courses`);
+      const response = await axios.get(`${BASE_URL}/OtsvidesUploads/pgOvlSection`);
       setCourses(response.data);
     } catch (error) {
       console.error("Error fetching courses:", error);
@@ -82,7 +80,7 @@ function PGOvlVideosUpload() {
 
   const fetchOvlData = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/OtsvidesUploads/videos`);
+      const response = await axios.get(`${BASE_URL}/OtsvidesUploads/pgOVLVideosDisplay`);
       console.log(response)
       console.log("Fetched OVL data:", response.data); // Debug statement
       setOvlData(response.data);

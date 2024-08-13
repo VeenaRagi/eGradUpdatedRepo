@@ -211,9 +211,10 @@
 }
 
 .create_exam_header {
-  /* display: flex;
-    justify-content: space-between; */
   /* height: 40px; */
+  gap: 20px;
+  justify-content: end;
+  display: flex;
   /* background: #f30000; */
 }
 

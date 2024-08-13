@@ -15,7 +15,7 @@ const db = require("../DataBase/db2");
 router.get("/testcourses", async (req, res) => {
   try {
     // const query = `SELECT courseCreationId,courseName FROM  course_creation_table WHERE  Portale_Id IN (1, 2)`;
-    const  query=`SELECT * FROM course_creation_table as cct LEFT JOIN exams as e ON e.examId=cct.examId WHERE e.branchId=1;`
+    const query = `SELECT * FROM course_creation_table as cct LEFT JOIN exams as e ON e.examId=cct.examId WHERE e.branchId=1;`;
     const [rows] = await db.query(query);
     // Execute the query// Check if there are results
     if (rows.length === 0) {
@@ -31,10 +31,8 @@ router.get("/testcourses", async (req, res) => {
     res.status(500).json({
       error: "Internal Server Error",
     });
-
   }
 });
-
 
 router.get("/completetestcourses", async (req, res) => {
   try {
@@ -54,10 +52,8 @@ router.get("/completetestcourses", async (req, res) => {
     res.status(500).json({
       error: "Internal Server Error",
     });
-
   }
 });
-
 
 router.get("/options_pattern", async (req, res) => {
   try {
@@ -113,7 +109,7 @@ router.post("/create_test_form1", async (req, res) => {
     sectionsData,
     selectedInstruction,
     selectedoptions,
-    selectedFormId
+    selectedFormId,
   } = req.body;
 
   try {
@@ -132,7 +128,7 @@ router.post("/create_test_form1", async (req, res) => {
         totalMarks,
         selectedInstruction,
         selectedoptions,
-        selectedFormId
+        selectedFormId,
       ]
     );
 
@@ -157,7 +153,7 @@ router.post("/create_test_form1", async (req, res) => {
           return sectionResult;
         })
       );
-      console.log(results,"ppppppppppppppppppppppppppppppppp")
+      console.log(results, "ppppppppppppppppppppppppppppppppp");
       res.json({
         success: true,
         testCreationTableId,
@@ -165,7 +161,7 @@ router.post("/create_test_form1", async (req, res) => {
         message: "Test created successfully",
       });
     } else {
-      console.log(result,"result objjjjjjjj ")
+      console.log(result, "result objjjjjjjj ");
       res.status(400).json({ success: false, error: "Unable to create test" });
     }
   } catch (error) {
@@ -313,13 +309,27 @@ router.get("/instructions", async (req, res) => {
 // Add this new API endpoint
 router.get("/course-typeoftests/:courseCreationId", async (req, res) => {
   const { courseCreationId } = req.params;
-
   try {
+    // const [rows] = await db.query(
+    //   "SELECT type_of_test.TypeOfTestId, type_of_test.TypeOfTestName,course_typeoftests.courseTypeOfTestId " +
+    //   "FROM course_typeoftests " +
+    //   "INNER JOIN type_of_test ON course_typeoftests.TypeOfTestId = type_of_test.TypeOfTestId " +
+    //   "WHERE course_typeoftests.courseCreationId = ?",
+    //   [courseCreationId]
+    // );
     const [rows] = await db.query(
-      "SELECT type_of_test.TypeOfTestId, type_of_test.TypeOfTestName,course_typeoftests.courseTypeOfTestId " +
-      "FROM course_typeoftests " +
-      "INNER JOIN type_of_test ON course_typeoftests.TypeOfTestId = type_of_test.TypeOfTestId " +
-      "WHERE course_typeoftests.courseCreationId = ?",
+      `SELECT 
+    type_of_test.TypeOfTestId, 
+    type_of_test.TypeOfTestName, 
+    course_typeoftests.courseTypeOfTestId
+  FROM 
+    course_typeoftests
+  INNER JOIN 
+    type_of_test 
+  ON 
+    course_typeoftests.TypeOfTestId = type_of_test.TypeOfTestId
+  WHERE 
+    course_typeoftests.courseCreationId = ?`,
       [courseCreationId]
     );
 
@@ -332,7 +342,7 @@ router.get("/course-typeoftests/:courseCreationId", async (req, res) => {
 
 router.get("/test_creation_table", async (req, res) => {
   try {
-    const query = ` SELECT tt.testCreationTableId,tt.TestName,cc.courseName,cc.Portale_Id,tt.testStartDate,tt.testEndDate,tt.testStartTime,tt.testEndTime,tt.status,tt.TotalQuestions,tt.opt_pattern_id,TT.TestForm_Id FROM test_creation_table tt JOIN  course_creation_table cc ON tt.courseCreationId=cc.courseCreationId `;
+    const query = `SELECT tt.testCreationTableId,tt.TestName,cc.courseName,cc.Portale_Id,tt.testStartDate,tt.testEndDate,tt.testStartTime,tt.testEndTime,tt.status,tt.TotalQuestions,tt.opt_pattern_id,TT.TestForm_Id FROM test_creation_table tt JOIN  course_creation_table cc ON tt.courseCreationId=cc.courseCreationId LEFT JOIN exams e ON e.examId=cc.examId WHERE e.branchId=1`;
     const [rows] = await db.query(query);
     res.json(rows);
   } catch (error) {
@@ -421,29 +431,22 @@ router.delete(
 //   }
 // });
 
-
-
-
-
-
-
-
-
-// SELECT * 
+// SELECT *
 // FROM test_creation_table AS tc
 //   WHERE
 //       tc.testCreationTableId = 17 AND courseTypeOfTestId = 0;
 
+router.get(
+  "/testupdate/:TestForm_Id/:testCreationTableId",
+  async (req, res) => {
+    const { testCreationTableId, TestForm_Id } = req.params;
 
-router.get("/testupdate/:TestForm_Id/:testCreationTableId", async (req, res) => {
-  const { testCreationTableId, TestForm_Id } = req.params;
+    try {
+      let query;
+      let queryParams;
 
-  try {
-    let query;
-    let queryParams;
-
-    if (TestForm_Id === '1') {
-      query = `
+      if (TestForm_Id === "1") {
+        query = `
         SELECT
             tc.testCreationTableId,
             tc.TestForm_Id,
@@ -475,9 +478,9 @@ router.get("/testupdate/:TestForm_Id/:testCreationTableId", async (req, res) => 
         WHERE
             tc.testCreationTableId = ? AND tc.TestForm_Id = ?
       `;
-      queryParams = [testCreationTableId, TestForm_Id];
-    } else if (TestForm_Id === '2') {
-      query = `
+        queryParams = [testCreationTableId, TestForm_Id];
+      } else if (TestForm_Id === "2") {
+        query = `
         SELECT
             tc.testCreationTableId,
             tc.TestForm_Id,
@@ -501,60 +504,31 @@ router.get("/testupdate/:TestForm_Id/:testCreationTableId", async (req, res) => 
         WHERE
             tc.testCreationTableId = ? AND tc.TestForm_Id = ?
       `;
-      queryParams = [testCreationTableId, TestForm_Id];
-    } else {
-      return res.status(400).json({ error: "Invalid TestForm_Id" });
-    }
+        queryParams = [testCreationTableId, TestForm_Id];
+      } else {
+        return res.status(400).json({ error: "Invalid TestForm_Id" });
+      }
 
-    const [rows] = await db.query(query, queryParams);
+      const [rows] = await db.query(query, queryParams);
 
-    if (rows.length > 0) {
-      res.json(rows[0]);
-    } else {
-      res.status(404).json({ error: "Test not found" });
+      if (rows.length > 0) {
+        res.json(rows[0]);
+      } else {
+        res.status(404).json({ error: "Test not found" });
+      }
+    } catch (error) {
+      console.error("Error fetching test data:", error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-  } catch (error) {
-    console.error("Error fetching test data:", error);
-    res.status(500).json({ error: "Internal Server Error" });
   }
-});
+);
 
-
-
-
-
-router.put("/test-update/:testCreationTableId/:TestForm_Id", async (req, res) => {
-  const testCreationTableId = req.params.testCreationTableId;
-  const TestForm_Id = req.params.TestForm_Id; // Use req.params.TestForm_Id instead of req.params.portalId
-  const {
-    TestName,
-    selectedCourse,
-    selectedTypeOfTests,
-    testStartDate,
-    testEndDate,
-    testStartTime,
-    testEndTime,
-    Duration,
-    TotalQuestions,
-    totalMarks,
-    calculator,
-    sectionId,
-    sectionName,
-    noOfQuestions,
-    QuestionLimit,
-    selectedInstruction,
-  } = req.body;
-
-  const updateQuery = `UPDATE test_creation_table
-                         SET TestName=?, courseCreationId=?, courseTypeOfTestId=?,
-                             testStartDate=?, testEndDate=?, testStartTime=?,
-                             testEndTime=?, Duration=?, TotalQuestions=?,
-                             totalMarks=?, calculator=?, instructionId=?
-                             
-                         WHERE testCreationTableId=? and TestForm_Id =?`;
-
-  try {
-    await db.query(updateQuery, [
+router.put(
+  "/test-update/:testCreationTableId/:TestForm_Id",
+  async (req, res) => {
+    const testCreationTableId = req.params.testCreationTableId;
+    const TestForm_Id = req.params.TestForm_Id; // Use req.params.TestForm_Id instead of req.params.portalId
+    const {
       TestName,
       selectedCourse,
       selectedTypeOfTests,
@@ -566,39 +540,68 @@ router.put("/test-update/:testCreationTableId/:TestForm_Id", async (req, res) =>
       TotalQuestions,
       totalMarks,
       calculator,
-      selectedInstruction,
-      testCreationTableId,
-      TestForm_Id,
-    ]);
-
-    // Log the update result
-    const updateResult = await db.query(
-      "SELECT * FROM test_creation_table WHERE testCreationTableId = ?",
-      [testCreationTableId]
-    );
-    console.log("Update Result:", updateResult);
-
-    // Update section
-    const updateSectionQuery = `UPDATE sections
-                                  SET sectionName=?, noOfQuestions=?, QuestionLimit=?
-                                  WHERE testCreationTableId=? AND sectionId=?`;
-
-    await db.query(updateSectionQuery, [
+      sectionId,
       sectionName,
       noOfQuestions,
       QuestionLimit,
-      testCreationTableId,
-      sectionId,
-    ]);
+      selectedInstruction,
+    } = req.body;
 
-    res.status(200).json({ message: "Test and section updated successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    const updateQuery = `UPDATE test_creation_table
+                         SET TestName=?, courseCreationId=?, courseTypeOfTestId=?,
+                             testStartDate=?, testEndDate=?, testStartTime=?,
+                             testEndTime=?, Duration=?, TotalQuestions=?,
+                             totalMarks=?, calculator=?, instructionId=?
+                             
+                         WHERE testCreationTableId=? and TestForm_Id =?`;
+
+    try {
+      await db.query(updateQuery, [
+        TestName,
+        selectedCourse,
+        selectedTypeOfTests,
+        testStartDate,
+        testEndDate,
+        testStartTime,
+        testEndTime,
+        Duration,
+        TotalQuestions,
+        totalMarks,
+        calculator,
+        selectedInstruction,
+        testCreationTableId,
+        TestForm_Id,
+      ]);
+
+      // Log the update result
+      const updateResult = await db.query(
+        "SELECT * FROM test_creation_table WHERE testCreationTableId = ?",
+        [testCreationTableId]
+      );
+      console.log("Update Result:", updateResult);
+
+      // Update section
+      const updateSectionQuery = `UPDATE sections
+                                  SET sectionName=?, noOfQuestions=?, QuestionLimit=?
+                                  WHERE testCreationTableId=? AND sectionId=?`;
+
+      await db.query(updateSectionQuery, [
+        sectionName,
+        noOfQuestions,
+        QuestionLimit,
+        testCreationTableId,
+        sectionId,
+      ]);
+
+      res
+        .status(200)
+        .json({ message: "Test and section updated successfully" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
   }
-});
-
-
+);
 
 // router.put("/test-update/:testCreationTableId/:TestForm_Id", async (req, res) => {
 //   const testCreationTableId = req.params.testCreationTableId;
@@ -627,7 +630,7 @@ router.put("/test-update/:testCreationTableId/:TestForm_Id", async (req, res) =>
 //                              testStartDate=?, testEndDate=?, testStartTime=?,
 //                              testEndTime=?, Duration=?, TotalQuestions=?,
 //                              totalMarks=?, calculator=?, instructionId=?
-                             
+
 //                          WHERE testCreationTableId=? and TestForm_Id =?`;
 
 //   try {
@@ -675,7 +678,6 @@ router.put("/test-update/:testCreationTableId/:TestForm_Id", async (req, res) =>
 //   }
 // });
 
-
 // router.put("/CP_test-update/:testCreationTableId/:TestForm_Id", async (req, res) => {
 //   const testCreationTableId = req.params.testCreationTableId;
 //   const TestForm_Id=req.params.TestForm_Id;
@@ -698,7 +700,7 @@ router.put("/test-update/:testCreationTableId/:TestForm_Id", async (req, res) =>
 //                              testStartDate=?, testEndDate=?, testStartTime=?,
 //                              testEndTime=?, Duration=?, TotalQuestions=?,
 //                              totalMarks=?, calculator=?, instructionId=?
-                             
+
 //                          WHERE testCreationTableId=? and TestForm_Id =?`;
 
 //   try {
@@ -725,8 +727,6 @@ router.put("/test-update/:testCreationTableId/:TestForm_Id", async (req, res) =>
 //     );
 //     console.log("Update Result:", updateResult);
 
-   
-
 //     res.json({ message: "Test and section updated successfully" });
 //   } catch (error) {
 //     console.error(error);
@@ -734,33 +734,12 @@ router.put("/test-update/:testCreationTableId/:TestForm_Id", async (req, res) =>
 //   }
 // });
 
-router.put("/CP_test-update/:testCreationTableId/:TestForm_Id", async (req, res) => {
-  const testCreationTableId = req.params.testCreationTableId;
-  const TestForm_Id = req.params.TestForm_Id;
-  const {
-    TestName,
-    selectedCourse,
-    testStartDate,
-    testEndDate,
-    testStartTime,
-    testEndTime,
-    Duration,
-    TotalQuestions,
-    totalMarks,
-    calculator,
-    selectedInstruction,
-  } = req.body;
-
-  const updateQuery = `UPDATE test_creation_table
-                         SET TestName=?, courseCreationId=?,
-                             testStartDate=?, testEndDate=?, testStartTime=?,
-                             testEndTime=?, Duration=?, TotalQuestions=?,
-                             totalMarks=?, calculator=?, instructionId=?
-                             
-                         WHERE testCreationTableId=? and TestForm_Id =?`;
-
-  try {
-    await db.query(updateQuery, [
+router.put(
+  "/CP_test-update/:testCreationTableId/:TestForm_Id",
+  async (req, res) => {
+    const testCreationTableId = req.params.testCreationTableId;
+    const TestForm_Id = req.params.TestForm_Id;
+    const {
       TestName,
       selectedCourse,
       testStartDate,
@@ -772,23 +751,47 @@ router.put("/CP_test-update/:testCreationTableId/:TestForm_Id", async (req, res)
       totalMarks,
       calculator,
       selectedInstruction,
-      testCreationTableId,
-      TestForm_Id,
-    ]);
+    } = req.body;
 
-    // Log the update result
-    const updateResult = await db.query(
-      "SELECT * FROM test_creation_table WHERE testCreationTableId = ?",
-      [testCreationTableId]
-    );
-    console.log("Update Result:", updateResult);
+    const updateQuery = `UPDATE test_creation_table
+                         SET TestName=?, courseCreationId=?,
+                             testStartDate=?, testEndDate=?, testStartTime=?,
+                             testEndTime=?, Duration=?, TotalQuestions=?,
+                             totalMarks=?, calculator=?, instructionId=?
+                             
+                         WHERE testCreationTableId=? and TestForm_Id =?`;
 
-    res.json({ message: "Test and section updated successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    try {
+      await db.query(updateQuery, [
+        TestName,
+        selectedCourse,
+        testStartDate,
+        testEndDate,
+        testStartTime,
+        testEndTime,
+        Duration,
+        TotalQuestions,
+        totalMarks,
+        calculator,
+        selectedInstruction,
+        testCreationTableId,
+        TestForm_Id,
+      ]);
+
+      // Log the update result
+      const updateResult = await db.query(
+        "SELECT * FROM test_creation_table WHERE testCreationTableId = ?",
+        [testCreationTableId]
+      );
+      console.log("Update Result:", updateResult);
+
+      res.json({ message: "Test and section updated successfully" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
   }
-});
+);
 
 // router.get('/TestActivation', async (req, res) => {
 //   // Fetch subjects
@@ -1079,12 +1082,11 @@ router.put("/activate/:testCreationTableId", async (req, res) => {
   }
 });
 
-
-
-
 router.get("/testformname_feaching", async (req, res) => {
   try {
-    const [rows] = await db.query("SELECT  TestForm_Id,TestForm_name FROM testform_types");
+    const [rows] = await db.query(
+      "SELECT  TestForm_Id,TestForm_name FROM testform_types"
+    );
     res.json(rows);
   } catch (error) {
     console.error(error);
@@ -1097,7 +1099,7 @@ router.get("/testformname_feaching", async (req, res) => {
 router.get("/testCoursesForPG", async (req, res) => {
   try {
     // const query = `SELECT courseCreationId,courseName FROM  course_creation_table WHERE  Portale_Id IN (1, 2)`;
-    const  query=`SELECT * FROM course_creation_table as cct LEFT JOIN exams as e ON e.examId=cct.examId WHERE e.branchId=2;`
+    const query = `SELECT * FROM course_creation_table as cct LEFT JOIN exams as e ON e.examId=cct.examId WHERE e.branchId=2;`;
     const [rows] = await db.query(query);
     // Execute the query// Check if there are results
     if (rows.length === 0) {
@@ -1113,9 +1115,126 @@ router.get("/testCoursesForPG", async (req, res) => {
     res.status(500).json({
       error: "Internal Server Error",
     });
-
   }
 });
+
+router.get("/pgSubjects", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT * FROM pg_departments");
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/detailsOfTestsCreated", async (req, res) => {
+  try {
+    const query = ` SELECT tt.testCreationTableId,tt.TestName,cc.courseName,cc.Portale_Id,tt.testStartDate,tt.testEndDate,tt.testStartTime,tt.testEndTime,tt.status,tt.TotalQuestions,tt.opt_pattern_id,TT.TestForm_Id FROM test_creation_table tt JOIN  course_creation_table cc ON tt.courseCreationId=cc.courseCreationId LEFT JOIN exams e ON e.examId=cc.examId WHERE e.branchId=2; `;
+    const [rows] = await db.query(query);
+    res.json(rows);
+  } catch (error) {
+    console.error("Error creating sections:", error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+});
+
+router.get(
+  "/pgTestupdate/:TestForm_Id/:testCreationTableId",
+  async (req, res) => {
+    const { testCreationTableId, TestForm_Id } = req.params;
+
+    try {
+      let query;
+      let queryParams;
+
+      if (TestForm_Id === "1") {
+        query = `
+        SELECT
+    tc.testCreationTableId,
+    tc.TestForm_Id,
+    tc.TestName,
+    tc.testStartDate,
+    tc.testEndDate,
+    tc.testStartTime,
+    tc.testEndTime,
+    tc.Duration,
+    tc.TotalQuestions,
+    tc.totalMarks,
+    tc.calculator,
+    cc.courseCreationId,
+    cc.courseName,
+    ctt.courseTypeOfTestId,
+    tt.TypeOfTestName,
+    i.instructionId,
+    i.instructionHeading,
+    s.sectionName,
+    s.noOfQuestions,
+    s.QuestionLimit
+FROM
+    test_creation_table AS tc
+INNER JOIN 
+    course_creation_table AS cc ON tc.courseCreationId = cc.courseCreationId
+INNER JOIN 
+    course_typeoftests AS ctt ON tc.courseCreationId = ctt.courseCreationId
+INNER JOIN 
+    type_of_test AS tt ON ctt.TypeOfTestId = tt.TypeOfTestId
+INNER JOIN 
+    instruction AS i ON tc.instructionId = i.instructionId
+INNER JOIN 
+    sections AS s ON tc.testCreationTableId = s.testCreationTableId
+LEFT JOIN 
+    exams e ON e.examId = cc.examId
+WHERE 
+    e.branchId = 2 AND
+    tc.testCreationTableId = ? AND 
+    tc.TestForm_Id = ?;
+      `;
+        queryParams = [testCreationTableId, TestForm_Id];
+      } else if (TestForm_Id === "2") {
+        query = `
+        SELECT
+            tc.testCreationTableId,
+            tc.TestForm_Id,
+            tc.TestName,
+            tc.testStartDate,
+            tc.testEndDate,
+            tc.testStartTime,
+            tc.testEndTime,
+            tc.Duration,
+            tc.TotalQuestions,
+            tc.totalMarks,
+            tc.calculator,
+            cc.courseCreationId,
+            cc.courseName,
+            i.instructionId,
+            i.instructionHeading
+        FROM
+            test_creation_table AS tc
+        INNER JOIN course_creation_table AS cc ON tc.courseCreationId = cc.courseCreationId
+        INNER JOIN instruction AS i ON tc.instructionId = i.instructionId
+        WHERE
+            tc.testCreationTableId = ? AND tc.TestForm_Id = ?
+      `;
+        queryParams = [testCreationTableId, TestForm_Id];
+      } else {
+        return res.status(400).json({ error: "Invalid TestForm_Id" });
+      }
+
+      const [rows] = await db.query(query, queryParams);
+
+      if (rows.length > 0) {
+        res.json(rows[0]);
+      } else {
+        res.status(404).json({ error: "Test not found" });
+      }
+    } catch (error) {
+      console.error("Error fetching test data:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+);
+
 
 
 module.exports = router;
