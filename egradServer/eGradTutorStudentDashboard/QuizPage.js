@@ -947,7 +947,7 @@ router.get("/questionpaper/:testCreationTableId", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
- 
+
 
 router.get("/questionOptionsForPB/:testCreationTableId/:userId", async (req, res) => {
   const { testCreationTableId, userId } = req.params;
@@ -1939,6 +1939,101 @@ module.exports = { calculateMarks };
 //   }
 // });
 
+//main before pg
+// router.post("/response", async (req, res) => {
+//   try {
+//     console.log("Request Body:", req.body);
+//     const { userId, questionId, testCreationTableId, subjectId, sectionId } = req.body;
+//     console.log(`Response for question ${questionId} saved to the database`);
+
+//     // Validate data types
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Check if the values already exist in the database
+//     const checkQuery =
+//       "SELECT * FROM user_responses WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+
+//     // Initialize questionIdNumber here
+//     const questionIdNumber = parseInt(questionId, 10);
+
+//     const checkValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       questionIdNumber,
+//     ];
+
+//     const existingResponse = await db.query(checkQuery, checkValues);
+
+//     if (existingResponse.length > 0 && existingResponse[0].length > 0) {
+//       console.log("Response already exists in the database");
+
+//       // Handle existing response logic here...
+//     } else {
+//       // If the response does not already exist, proceed with insertion
+//       const sql =
+//         "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, user_answer, option_id) " +
+//         "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+//       const response = req.body[questionId];
+
+//       const optionIndexes1 = response.optionIndexes1.join(",");
+//       const optionIndexes2 = response.optionIndexes2.join(",");
+//       const optionIndexes1CharCodes = response.optionIndexes1CharCodes.join(",");
+//       const optionIndexes2CharCodes = response.optionIndexes2CharCodes.join(",");
+//       const calculatorInputValue = response.calculatorInputValue;
+
+//       const queryValues = [
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         subjectIdNumber,
+//         sectionIdNumber,
+//         questionIdNumber,
+//         optionIndexes1CharCodes + optionIndexes2CharCodes + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//       ];
+
+//       console.log("Executing SQL query:", sql, queryValues);
+
+//       try {
+//         const result = await db.query(sql, queryValues);
+
+//         if (!result) {
+//           console.error("Error saving response to the database");
+//           res
+//             .status(500)
+//             .json({ success: false, message: "Internal server error" });
+//           return;
+//         }
+
+//         console.log(`Response for question ${questionIdNumber} saved to the database`);
+//         res.json({ success: true, message: "Response saved successfully" });
+//       } catch (dbError) {
+//         console.error("Database query error:", dbError);
+//         res.status(500).json({
+//           success: false,
+//           message: "Error saving response to the database",
+//           dbError: dbError.message,
+//         });
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Error handling the request:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
 
 router.post("/response", async (req, res) => {
   try {
@@ -1989,11 +2084,12 @@ router.post("/response", async (req, res) => {
 
       const response = req.body[questionId];
 
-      const optionIndexes1 = response.optionIndexes1.join(",");
-      const optionIndexes2 = response.optionIndexes2.join(",");
+      // Make sure to handle these fields correctly
+      const optionIndexes1 = response.optionIndexes1 || "";
+      const optionIndexes2 = response.optionIndexes2 || "";
       const optionIndexes1CharCodes = response.optionIndexes1CharCodes.join(",");
       const optionIndexes2CharCodes = response.optionIndexes2CharCodes.join(",");
-      const calculatorInputValue = response.calculatorInputValue;
+      const calculatorInputValue = response.calculatorInputValue || "";
 
       const queryValues = [
         userIdNumber,
@@ -2034,6 +2130,10 @@ router.post("/response", async (req, res) => {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 });
+
+
+
+
 
 
 // router.post("/response", async (req, res) => {
@@ -2393,17 +2493,25 @@ router.put("/updateResponse/:questionId", async (req, res) => {
 // });
 
 
-router.put("/clearResponse/:questionId", async (req, res) => {
-  try {
-    const { questionId } = req.params;
+
  
-    const updateQuery = "UPDATE user_responses SET user_answer = NULL WHERE question_id = ?";
-    db.query(updateQuery, [questionId], (err, result) => {
+router.put("/clearResponse/:userId/:testCreationTableId/:questionId", async (req, res) => {
+  try {
+    const { userId, testCreationTableId, questionId } = req.params;
+
+    // SQL query to clear the response
+    const updateQuery = `
+      UPDATE user_responses
+      SET user_answer = NULL
+      WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?
+    `;
+
+    db.query(updateQuery, [userId, testCreationTableId, questionId], (err, result) => {
       if (err) {
         console.error("Error clearing user response:", err);
         res.status(500).json({ success: false, message: "Internal server error" });
       } else {
-        console.log(`User response for question ${questionId} cleared`);
+        console.log(`User response for question ${questionId} cleared for user ${userId} and test ${testCreationTableId}`);
         res.status(200).json({ success: true, message: "User response cleared successfully" });
       }
     });
@@ -2412,8 +2520,6 @@ router.put("/clearResponse/:questionId", async (req, res) => {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 });
- 
-
 
 // router.post('/insertTestAttemptStatus', (req, res) => {
 //   const { userId, courseCreationId, testCreationTableId, test_status } = req.body;
