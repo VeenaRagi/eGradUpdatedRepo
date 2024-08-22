@@ -136,9 +136,9 @@
   display: flex;
   justify-content: space-between;
   font-size: 16px !important;
-  padding-left: 0.5rem 0.5rem;
   align-items: center;
   text-align: center;
+  padding-left: 15px;
 }
 
 .pg_Sectionsdiv p {
@@ -168,8 +168,13 @@
   text-align: center;
   margin-bottom: 0rem !important;
   height: 2rem;
+  padding-left: 12px;
 }
 
+.pg_Questiontypep {
+  padding-left: 10px;
+  margin-bottom: 0px !important;
+}
 .Pg_sectiondiv p {
   padding: 5px;
   text-align: center;
@@ -203,12 +208,14 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  border: 1px solid #eef1f1;
 }
 
 .pg_handlebuttons {
   display: flex;
   justify-content: space-between;
   padding: 10px;
+  border: 1px solid #eef1f1;
 }
 
 .pg_handleReview button {
@@ -244,9 +251,102 @@
   display: flex;
   gap: 1rem;
 }
-.pg_norightdiv{
-    width: 15%;
+.pg_norightdiv {
+  width: 15%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  background-color: #eaf6fd;
 }
+.pg_colorboxes {
+  display: grid;
+  /* grid-template-columns: auto auto; */
+  font-size: 13px !important;
+  margin-bottom: 0px !important;
+  padding: 3px;
+  padding-left: 10px;
+  background-color: #fff;
+}
+.pg_colorboxes5 {
+  grid-column: 1/3;
+  margin-top: -1rem;
+}
+.important-padding {
+  padding-left: 10px !important;
+  color: #fff;
+  font-weight: 600;
+}
+
+.pg_colorboxots {
+  display: flex;
+  gap: 10px;
+}
+.pg_colorboxots img {
+  width: 30px;
+  height: 30px;
+}
+
+.pg_legenddiv {
+  display: flex;
+  flex-direction: column;
+  /* gap: 1rem; */
+  border: 2px solid black;
+}
+
+.pg_Questionnop {
+  font-weight: 600;
+  padding-left: 10px !important;
+  margin-bottom: 0px !important;
+}
+.pg_numberpaletdiv {
+  display: grid;
+  grid-template-columns: 40px 40px 40px 40px;
+  grid-template-rows: 30px 30px 30px 30px;
+  column-gap: 15px;
+  row-gap: 20px !important;
+  padding: 0.5rem;
+  height: 29rem;
+  overflow-y: auto;
+}
+
+.pg_divotsnumber {
+  background-color: #e9f6fd;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  text-align: left;
+  font-weight: 700;
+}
+.Pg_sectiondivno {
+  background-color: #5e87c9;
+}
+/* .pg_StudentDetailsots{
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: row;
+    padding-top: 5px;
+} */
+
+.studentdata_pgots {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-top: 15px;
+  text-align: center;
+}
+.pg_StudentDetailsots img {
+  width: 100px;
+  height: 100px;
+}
+.pg_StudentDetailsots p {
+  text-align: center;
+  padding-top: 30px;
+  font-weight: 700;
+}
+
 /* .pg_quizotsQuestion{
     position: fixed;
 } */

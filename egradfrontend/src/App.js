@@ -32,7 +32,7 @@ import TestUpdateadmin from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/TestUpd
 import UG_Instructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_Instructions_Page.jsx";
 import PG_Instructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_Instructions_Page.jsx";
 import General_Intructions_Page from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/General_intructions_page.jsx";
-// import UGQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UGQuizPage.jsx";
+import UGQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UGQuizPage.jsx";
 // import PGQuizPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/PGQuizPage.jsx";
 import UGQuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_OTS/UGQuestionPaper.jsx";
 import PGQuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_OTS/PGQuestionPaper.jsx";
@@ -273,12 +273,12 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                   path="/General_intructions_page/:param1/:param2/:param3"
                   element={<PrivateRoute element={<General_Intructions_Page />} />}
                 /> */}
-                 {/* <Route
+                 <Route
                   path="/UGQuizPage/questionOptions/:param1/:param2"
                   element={
                     <PrivateRoute element={<UGQuizPage seconds={20} />} />
                   }
-                /> */}
+                />
                      <Route path="/UG_OTSQuizPage/:param1/:param2" element={<UG_OTSQuizPage  seconds={20}/>}/>
                 <Route
                   path="/UGQuestionBankQuiz/questionOptions/:param1/:param2"

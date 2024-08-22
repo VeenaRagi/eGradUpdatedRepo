@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require("../DataBase/db2");
 const jwt = require("jsonwebtoken");
 
+
 router.get("/questionType/:questionId", async (req, res) => {
   try {
     const { questionId } = req.params;
@@ -947,7 +948,7 @@ router.get("/questionpaper/:testCreationTableId", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
- 
+
 
 router.get("/questionOptionsForPB/:testCreationTableId/:userId", async (req, res) => {
   const { testCreationTableId, userId } = req.params;
@@ -1939,101 +1940,1346 @@ module.exports = { calculateMarks };
 //   }
 // });
 
+//main before pg
+// router.post("/response", async (req, res) => {
+//   try {
+//     console.log("Request Body:", req.body);
+//     const { userId, questionId, testCreationTableId, subjectId, sectionId } = req.body;
+//     console.log(`Response for question ${questionId} saved to the database`);
 
-router.post("/response", async (req, res) => {
+//     // Validate data types
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Check if the values already exist in the database
+//     const checkQuery =
+//       "SELECT * FROM user_responses WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+
+//     // Initialize questionIdNumber here
+//     const questionIdNumber = parseInt(questionId, 10);
+
+//     const checkValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       questionIdNumber,
+//     ];
+
+//     const existingResponse = await db.query(checkQuery, checkValues);
+
+//     if (existingResponse.length > 0 && existingResponse[0].length > 0) {
+//       console.log("Response already exists in the database");
+
+//       // Handle existing response logic here...
+//     } else {
+//       // If the response does not already exist, proceed with insertion
+//       const sql =
+//         "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, user_answer, option_id) " +
+//         "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+//       const response = req.body[questionId];
+
+//       const optionIndexes1 = response.optionIndexes1.join(",");
+//       const optionIndexes2 = response.optionIndexes2.join(",");
+//       const optionIndexes1CharCodes = response.optionIndexes1CharCodes.join(",");
+//       const optionIndexes2CharCodes = response.optionIndexes2CharCodes.join(",");
+//       const calculatorInputValue = response.calculatorInputValue;
+
+//       const queryValues = [
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         subjectIdNumber,
+//         sectionIdNumber,
+//         questionIdNumber,
+//         optionIndexes1CharCodes + optionIndexes2CharCodes + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//       ];
+
+//       console.log("Executing SQL query:", sql, queryValues);
+
+//       try {
+//         const result = await db.query(sql, queryValues);
+
+//         if (!result) {
+//           console.error("Error saving response to the database");
+//           res
+//             .status(500)
+//             .json({ success: false, message: "Internal server error" });
+//           return;
+//         }
+
+//         console.log(`Response for question ${questionIdNumber} saved to the database`);
+//         res.json({ success: true, message: "Response saved successfully" });
+//       } catch (dbError) {
+//         console.error("Database query error:", dbError);
+//         res.status(500).json({
+//           success: false,
+//           message: "Error saving response to the database",
+//           dbError: dbError.message,
+//         });
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Error handling the request:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
+
+//main
+// router.post("/response", async (req, res) => {
+//   try {
+//     console.log("Request Body:", req.body);
+//     const { userId, questionId, testCreationTableId, subjectId, sectionId } = req.body;
+//     console.log(`Response for question ${questionId} saved to the database`);
+
+//     // Validate data types
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Check if the values already exist in the database
+//     const checkQuery =
+//       "SELECT * FROM user_responses WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+
+//     // Initialize questionIdNumber here
+//     const questionIdNumber = parseInt(questionId, 10);
+
+//     const checkValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       questionIdNumber,
+//     ];
+
+//     const existingResponse = await db.query(checkQuery, checkValues);
+
+//     if (existingResponse.length > 0 && existingResponse[0].length > 0) {
+//       console.log("Response already exists in the database");
+
+//       // Handle existing response logic here...
+//     } else {
+//       // If the response does not already exist, proceed with insertion
+//       const sql =
+//         "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, user_answer, option_id) " +
+//         "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+//       const response = req.body[questionId];
+
+//       // Make sure to handle these fields correctly
+//       const optionIndexes1 = response.optionIndexes1 || "";
+//       const optionIndexes2 = response.optionIndexes2 || "";
+//       const optionIndexes1CharCodes = response.optionIndexes1CharCodes.join(",");
+//       const optionIndexes2CharCodes = response.optionIndexes2CharCodes.join(",");
+//       const calculatorInputValue = response.calculatorInputValue || "";
+
+//       const queryValues = [
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         subjectIdNumber,
+//         sectionIdNumber,
+//         questionIdNumber,
+//         optionIndexes1CharCodes + optionIndexes2CharCodes + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//       ];
+
+//       console.log("Executing SQL query:", sql, queryValues);
+
+//       try {
+//         const result = await db.query(sql, queryValues);
+
+//         if (!result) {
+//           console.error("Error saving response to the database");
+//           res
+//             .status(500)
+//             .json({ success: false, message: "Internal server error" });
+//           return;
+//         }
+
+//         console.log(`Response for question ${questionIdNumber} saved to the database`);
+//         res.json({ success: true, message: "Response saved successfully" });
+//       } catch (dbError) {
+//         console.error("Database query error:", dbError);
+//         res.status(500).json({
+//           success: false,
+//           message: "Error saving response to the database",
+//           dbError: dbError.message,
+//         });
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Error handling the request:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
+
+
+// router.post("/response", async (req, res) => {
+//   try {
+//     console.log("Request Body:", req.body);
+//     const { userId, questionId, testCreationTableId, subjectId, sectionId } = req.body;
+
+//     // Validate data types
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+//     const questionIdNumber = parseInt(questionId, 10);
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber) ||
+//       isNaN(questionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, subjectId, sectionId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Check if the values already exist in the database
+//     const checkQuery =
+//       "SELECT * FROM user_responses WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+//     const checkValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       questionIdNumber,
+//     ];
+
+//     const existingResponse = await db.query(checkQuery, checkValues);
+
+//     if (existingResponse.length > 0 && existingResponse[0].length > 0) {
+//       console.log("Response already exists in the database, updating...");
+
+//       // Call the update API logic directly
+//       const updateData = {
+//         updatedResponse: {
+//           optionIndexes1: req.body[questionId].optionIndexes1 || [],
+//           optionIndexes2: req.body[questionId].optionIndexes2 || [],
+//           optionId: req.body[questionId].optionId || null,
+//           calculatorInputValue: req.body[questionId].calculatorInputValue || "",
+//         },
+//       };
+
+//       await axios.put(
+//         `/updateResponse/${userIdNumber}/${testCreationTableIdNumber}/${subjectIdNumber}/${sectionIdNumber}/${questionIdNumber}`,
+//         updateData
+//       );
+
+//       res.json({ success: true, message: "Response updated successfully" });
+
+//     } else {
+//       // If the response does not already exist, proceed with insertion
+//       const sql =
+//         "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, user_answer, option_id) " +
+//         "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+//       const response = req.body[questionId];
+//       const optionIndexes1 = response.optionIndexes1 || "";
+//       const optionIndexes2 = response.optionIndexes2 || "";
+//       const optionIndexes1CharCodes = response.optionIndexes1CharCodes.join(",");
+//       const optionIndexes2CharCodes = response.optionIndexes2CharCodes.join(",");
+//       const calculatorInputValue = response.calculatorInputValue || "";
+
+//       const queryValues = [
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         subjectIdNumber,
+//         sectionIdNumber,
+//         questionIdNumber,
+//         optionIndexes1CharCodes + optionIndexes2CharCodes + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//       ];
+
+//       console.log("Executing SQL query:", sql, queryValues);
+
+//       const result = await db.query(sql, queryValues);
+
+//       if (!result) {
+//         console.error("Error saving response to the database");
+//         res.status(500).json({ success: false, message: "Internal server error" });
+//         return;
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} saved to the database`);
+//       res.json({ success: true, message: "Response saved successfully" });
+//     }
+//   } catch (error) {
+//     console.error("Error handling the request:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
+
+// router.post("/response", async (req, res) => {
+//   try {
+//     console.log("Request Body:", req.body);
+//     const { userId, questionId, testCreationTableId, subjectId, sectionId } = req.body;
+
+//     // Validate data types
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+//     const questionIdNumber = parseInt(questionId, 10);
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber) ||
+//       isNaN(questionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, subjectId, sectionId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Check if the values already exist in the database
+//     const checkQuery =
+//       "SELECT * FROM user_responses WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+//     const checkValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       questionIdNumber,
+//     ];
+
+//     const existingResponse = await db.query(checkQuery, checkValues);
+
+//     if (existingResponse.length > 0 && existingResponse[0].length > 0) {
+//       console.log("Response already exists in the database, updating...");
+
+//       // Prepare the data for the update
+//       const updateData = {
+//         updatedResponse: {
+//           optionIndexes1: req.body[questionId].optionIndexes1 || [],
+//           optionIndexes2: req.body[questionId].optionIndexes2 || [],
+//           optionId: req.body[questionId].optionIndexes1 || null, // Adjusted to include option_id
+//           calculatorInputValue: req.body[questionId].calculatorInputValue || "",
+//         },
+//       };
+
+//       // Call the update API
+//       try {
+//         const updateResponse = await axios.put(
+//           `/updateResponse/${userIdNumber}/${testCreationTableIdNumber}/${subjectIdNumber}/${sectionIdNumber}/${questionIdNumber}`,
+//           updateData
+//         );
+
+//         res.json({ success: true, message: "Response updated successfully" });
+//       } catch (axiosError) {
+//         console.error("Error updating response via API:", axiosError);
+//         res.status(500).json({ success: false, message: "Failed to update response" });
+//       }
+
+//     } else {
+//       // If the response does not already exist, proceed with insertion
+//       const sql =
+//         "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, user_answer, option_id) " +
+//         "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+//       const response = req.body[questionId];
+//       const optionIndexes1 = response.optionIndexes1 || "";
+//       const optionIndexes2 = response.optionIndexes2 || "";
+//       const optionIndexes1CharCodes = response.optionIndexes1CharCodes.join(",");
+//       const optionIndexes2CharCodes = response.optionIndexes2CharCodes.join(",");
+//       const calculatorInputValue = response.calculatorInputValue || "";
+
+//       const queryValues = [
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         subjectIdNumber,
+//         sectionIdNumber,
+//         questionIdNumber,
+//         optionIndexes1CharCodes + optionIndexes2CharCodes + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//       ];
+
+//       console.log("Executing SQL query:", sql, queryValues);
+
+//       const result = await db.query(sql, queryValues);
+
+//       if (!result) {
+//         console.error("Error saving response to the database");
+//         res.status(500).json({ success: false, message: "Internal server error" });
+//         return;
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} saved to the database`);
+//       res.json({ success: true, message: "Response saved successfully" });
+//     }
+//   } catch (error) {
+//     console.error("Error handling the request:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
+
+//main working 14-08-2024
+// router.post("/response", async (req, res) => {
+//   try {
+//     console.log("Request Body:", req.body);
+//     const { userId, questionId, testCreationTableId, subjectId, sectionId } = req.body;
+
+//     // Validate data types
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+//     const questionIdNumber = parseInt(questionId, 10);
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber) ||
+//       isNaN(questionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, subjectId, sectionId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Check if the values already exist in the database
+//     const checkQuery =
+//       "SELECT * FROM user_responses WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+//     const checkValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       questionIdNumber,
+//     ];
+
+//     const [existingResponse] = await db.query(checkQuery, checkValues);
+
+//     if (existingResponse.length > 0) {
+//       console.log("Response already exists in the database, updating...");
+
+//       // Prepare the data for the update
+//       const updateQuery =
+//         "UPDATE user_responses SET user_answer = ?, option_id = ? WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+//       const response = req.body[questionId];
+//       const optionIndexes1 = response.optionIndexes1 || "";
+//       const optionIndexes2 = response.optionIndexes2 || "";
+//       const optionIndexes1CharCodes = response.optionIndexes1CharCodes.join(",");
+//       const optionIndexes2CharCodes = response.optionIndexes2CharCodes.join(",");
+//       const calculatorInputValue = response.calculatorInputValue || "";
+
+//       const updateValues = [
+//         optionIndexes1CharCodes + optionIndexes2CharCodes + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         questionIdNumber,
+//       ];
+
+//       console.log("Executing update SQL query:", updateQuery, updateValues);
+
+//       const updateResult = await db.query(updateQuery, updateValues);
+
+//       if (updateResult.affectedRows === 0) {
+//         console.error("No rows updated, but should have been.");
+//         return res.status(500).json({ success: false, message: "Failed to update response" });
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} updated successfully`);
+//       res.json({ success: true, message: "Response updated successfully" });
+//     } else {
+//       // If the response does not already exist, proceed with insertion
+//       const insertQuery =
+//         "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, user_answer, option_id) " +
+//         "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+//       const response = req.body[questionId];
+//       const optionIndexes1 = response.optionIndexes1 || "";
+//       const optionIndexes2 = response.optionIndexes2 || "";
+//       const optionIndexes1CharCodes = response.optionIndexes1CharCodes.join(",");
+//       const optionIndexes2CharCodes = response.optionIndexes2CharCodes.join(",");
+//       const calculatorInputValue = response.calculatorInputValue || "";
+
+//       const insertValues = [
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         subjectIdNumber,
+//         sectionIdNumber,
+//         questionIdNumber,
+//         optionIndexes1CharCodes + optionIndexes2CharCodes + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//       ];
+
+//       console.log("Executing INSERT SQL query:", insertQuery, insertValues);
+
+//       const insertResult = await db.query(insertQuery, insertValues);
+
+//       if (!insertResult) {
+//         console.error("Error saving response to the database");
+//         res.status(500).json({ success: false, message: "Internal server error" });
+//         return;
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} saved to the database`);
+//       res.json({ success: true, message: "Response saved successfully" });
+//     }
+//   } catch (error) {
+//     console.error("Error handling the request:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
+
+// router.post("/response", async (req, res) => {
+//   try {
+//     console.log("Request Body:", req.body);
+//     const { userId, questionId, testCreationTableId, subjectId, sectionId } = req.body;
+
+//     // Validate data types
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+//     const questionIdNumber = parseInt(questionId, 10);
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber) ||
+//       isNaN(questionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, subjectId, sectionId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Check if the values already exist in the database
+//     const checkQuery =
+//       "SELECT * FROM user_responses WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+//     const checkValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       questionIdNumber,
+//     ];
+
+//     const [existingResponse] = await db.query(checkQuery, checkValues);
+
+//     const response = req.body[questionId];
+//     const optionIndexes1 = response.optionIndexes1 || "";
+//     const optionIndexes2 = response.optionIndexes2 || "";
+//     const optionIndexes1CharCodes = response.optionIndexes1CharCodes.join(",");
+//     const optionIndexes2CharCodes = response.optionIndexes2CharCodes.join(",");
+//     const calculatorInputValue = response.calculatorInputValue || "";
+
+//     if (existingResponse.length > 0) {
+//       console.log("Response already exists in the database, updating...");
+
+//       // Prepare the data for the update
+//       const updateQuery =
+//         "UPDATE user_responses SET user_answer = ?, option_id = ? WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+      
+//       const updateValues = [
+//         optionIndexes1CharCodes + optionIndexes2CharCodes + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         questionIdNumber,
+//       ];
+
+//       console.log("Executing update SQL query:", updateQuery, updateValues);
+
+//       const updateResult = await db.query(updateQuery, updateValues);
+
+//       if (updateResult.affectedRows === 0) {
+//         console.error("No rows updated, but should have been.");
+//         return res.status(500).json({ success: false, message: "Failed to update response" });
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} updated successfully`);
+//       res.json({ success: true, message: "Response updated successfully" });
+//     } else {
+//       // If the response does not already exist, proceed with insertion
+//       const insertQuery =
+//         "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, user_answer, option_id) " +
+//         "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+//       const insertValues = [
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         subjectIdNumber,
+//         sectionIdNumber,
+//         questionIdNumber,
+//         optionIndexes1CharCodes + optionIndexes2CharCodes + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//       ];
+
+//       console.log("Executing INSERT SQL query:", insertQuery, insertValues);
+
+//       const insertResult = await db.query(insertQuery, insertValues);
+
+//       if (!insertResult) {
+//         console.error("Error saving response to the database");
+//         res.status(500).json({ success: false, message: "Internal server error" });
+//         return;
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} saved to the database`);
+//       res.json({ success: true, message: "Response saved successfully" });
+//     }
+//   } catch (error) {
+//     console.error("Error handling the request:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
+
+// router.post("/response", async (req, res) => {
+//   try {
+//     console.log("Request Body:", req.body);
+//     const { userId, questionId, testCreationTableId, subjectId, sectionId, optionIndexes1, optionIndexes2, optionIndexes1CharCodes, optionIndexes2CharCodes, calculatorInputValue } = req.body;
+
+//     // Validate data types
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+//     const questionIdNumber = parseInt(questionId, 10);
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber) ||
+//       isNaN(questionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, subjectId, sectionId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Check if the values already exist in the database
+//     const checkQuery =
+//       "SELECT * FROM user_responses WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+//     const checkValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       questionIdNumber,
+//     ];
+
+//     const [existingResponse] = await db.query(checkQuery, checkValues);
+
+//     if (existingResponse.length > 0) {
+//       console.log("Response already exists in the database, updating...");
+
+//       // Prepare the data for the update
+//       const updateQuery =
+//         "UPDATE user_responses SET user_answer = ?, option_id = ? WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+      
+//       const updateValues = [
+//         optionIndexes1CharCodes.join(",") + optionIndexes2CharCodes.join(",") + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         questionIdNumber,
+//       ];
+
+//       console.log("Executing update SQL query:", updateQuery, updateValues);
+
+//       const updateResult = await db.query(updateQuery, updateValues);
+
+//       if (updateResult.affectedRows === 0) {
+//         console.error("No rows updated, but should have been.");
+//         return res.status(500).json({ success: false, message: "Failed to update response" });
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} updated successfully`);
+//       res.json({ success: true, message: "Response updated successfully" });
+//     } else {
+//       // If the response does not already exist, proceed with insertion
+//       const insertQuery =
+//         "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, user_answer, option_id) " +
+//         "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+//       const insertValues = [
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         subjectIdNumber,
+//         sectionIdNumber,
+//         questionIdNumber,
+//         optionIndexes1CharCodes.join(",") + optionIndexes2CharCodes.join(",") + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//       ];
+
+//       console.log("Executing insert SQL query:", insertQuery, insertValues);
+
+//       const insertResult = await db.query(insertQuery, insertValues);
+
+//       if (insertResult.affectedRows === 0) {
+//         console.error("No rows inserted, but should have been.");
+//         return res.status(500).json({ success: false, message: "Failed to insert response" });
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} saved successfully`);
+//       res.json({ success: true, message: "Response saved successfully" });
+//     }
+//   } catch (error) {
+//     console.error("Error handling response:", error);
+//     res.status(500).json({ success: false, message: "Server error" });
+//   }
+// });
+
+// Route to update or insert a response
+// router.put("/updateResponse/:userId/:testCreationTableId/:subjectId/:sectionId/:questionId", async (req, res) => {
+//   try {
+//     const { userId, testCreationTableId, subjectId, sectionId, questionId } = req.params;
+//     const { optionIndexes1, optionIndexes2, optionIndexes1CharCodes, optionIndexes2CharCodes, calculatorInputValue } = req.body;
+
+//     // Validate data types
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+//     const questionIdNumber = parseInt(questionId, 10);
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber) ||
+//       isNaN(questionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, subjectId, sectionId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Check if the response already exists in the database
+//     const checkQuery =
+//       "SELECT * FROM user_responses WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+//     const checkValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       questionIdNumber,
+//     ];
+
+//     const [existingResponse] = await db.query(checkQuery, checkValues);
+
+//     if (existingResponse.length > 0) {
+//       console.log("Response already exists in the database, updating...");
+
+//       // Prepare data for update
+//       const updateQuery =
+//         "UPDATE user_responses SET user_answer = ?, option_id = ? WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+      
+//       const updateValues = [
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         questionIdNumber,
+//         optionIndexes1CharCodes.join(",") + optionIndexes2CharCodes.join(",") + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//       ];
+
+//       console.log("Executing update SQL query:", updateQuery, updateValues);
+
+//       const updateResult = await db.query(updateQuery, updateValues);
+
+//       if (updateResult.affectedRows === 0) {
+//         console.error("No rows updated, but should have been.");
+//         return res.status(500).json({ success: false, message: "Failed to update response" });
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} updated successfully`);
+//       return res.json({ success: true, message: "Response updated successfully" });
+
+//     } else {
+//       console.log("Response does not exist in the database, inserting...");
+
+//       // Prepare data for insertion
+//       const insertQuery =
+//         "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, user_answer,option_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      
+//       const insertValues = [
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         subjectIdNumber,
+//         sectionIdNumber,
+//         questionIdNumber,
+//         optionIndexes1CharCodes.join(",") + optionIndexes2CharCodes.join(",") + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//       ];
+
+//       console.log("Executing insert SQL query:", insertQuery, insertValues);
+
+//       const insertResult = await db.query(insertQuery, insertValues);
+
+//       if (insertResult.affectedRows === 0) {
+//         console.error("No rows inserted, but should have been.");
+//         return res.status(500).json({ success: false, message: "Failed to insert response" });
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} inserted successfully`);
+//       return res.json({ success: true, message: "Response saved successfully" });
+//     }
+//   } catch (error) {
+//     console.error("Error updating or inserting response:", error);
+//     res.status(500).json({ success: false, message: "Server error" });
+//   }
+// });
+
+// router.post('/response', async (req, res) => {
+//   try {
+//     const {
+//       userId,
+//       questionId,
+//       testCreationTableId,
+//       subjectId,
+//       sectionId,
+//       optionIndexes1 = "",
+//       optionIndexes2 = "",
+//       optionIndexes1CharCodes = [],
+//       optionIndexes2CharCodes = [],
+//       calculatorInputValue = ""
+//     } = req.body;
+
+//     // Validate and convert IDs to integers
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+//     const questionIdNumber = parseInt(questionId, 10);
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber) ||
+//       isNaN(questionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, subjectId, sectionId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Prepare data for insertion
+//     const insertQuery =
+//       "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, user_answer,option_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    
+//     const optionIndexes1CharCodesString = optionIndexes1CharCodes.join(",");
+//     const optionIndexes2CharCodesString = optionIndexes2CharCodes.join(",");
+
+//     const insertValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       subjectIdNumber,
+//       sectionIdNumber,
+//       questionIdNumber,
+//       optionIndexes1CharCodesString + optionIndexes2CharCodesString + calculatorInputValue, 
+//       optionIndexes1 + optionIndexes2,
+//     ];
+
+//     console.log("Executing insert SQL query:", insertQuery, insertValues);
+
+//     // Execute the insert query
+//     const insertResult = await db.query(insertQuery, insertValues);
+
+//     if (insertResult.affectedRows === 0) {
+//       console.error("No rows inserted.");
+//       return res.status(500).json({ success: false, message: "Failed to insert response" });
+//     }
+
+//     console.log(`Response for question ${questionIdNumber} inserted successfully`);
+//     return res.json({ success: true, message: "Response saved successfully" });
+//   } catch (error) {
+//     console.error("Error inserting response:", error);
+//     res.status(500).json({ success: false, message: "Server error" });
+//   }
+// });
+
+
+//--------------------------------
+// router.put("/updateResponse/:userId/:testCreationTableId/:subjectId/:sectionId/:questionId", async (req, res) => {
+//   try {
+//     const { userId, testCreationTableId, subjectId, sectionId, questionId } = req.params;
+//     const { optionIndexes1, optionIndexes2, optionIndexes1CharCodes, optionIndexes2CharCodes, calculatorInputValue } = req.body;
+
+//     // Validate data types
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+//     const questionIdNumber = parseInt(questionId, 10);
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber) ||
+//       isNaN(questionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, subjectId, sectionId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Check if the response already exists in the database
+//     const checkQuery =
+//       "SELECT * FROM user_responses WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+//     const checkValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       questionIdNumber,
+//     ];
+
+//     const [existingResponse] = await db.query(checkQuery, checkValues);
+
+//     if (existingResponse.length > 0) {
+//       console.log("Response already exists in the database, updating...");
+
+//       // Prepare data for update
+//       const updateQuery =
+//         "UPDATE user_responses SET user_answer = ?, option_id = ? WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+      
+//       const updateValues = [
+//         optionIndexes1CharCodes.join(",") + optionIndexes2CharCodes.join(",") + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         questionIdNumber,
+//       ];
+
+//       console.log("Executing update SQL query:", updateQuery, updateValues);
+
+//       const updateResult = await db.query(updateQuery, updateValues);
+
+//       if (updateResult.affectedRows === 0) {
+//         console.error("No rows updated, but should have been.");
+//         return res.status(500).json({ success: false, message: "Failed to update response" });
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} updated successfully`);
+//       return res.json({ success: true, message: "Response updated successfully" });
+
+//     } else {
+//       console.log("Response does not exist in the database, inserting...");
+
+//       // Prepare data for insertion
+//       const insertQuery =
+//         "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, option_id, user_answer) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      
+//       const insertValues = [
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         subjectIdNumber,
+//         sectionIdNumber,
+//         questionIdNumber,
+//         optionIndexes1CharCodes.join(",") + optionIndexes2CharCodes.join(","),
+//         calculatorInputValue,
+//       ];
+
+//       console.log("Executing insert SQL query:", insertQuery, insertValues);
+
+//       const insertResult = await db.query(insertQuery, insertValues);
+
+//       if (insertResult.affectedRows === 0) {
+//         console.error("No rows inserted, but should have been.");
+//         return res.status(500).json({ success: false, message: "Failed to insert response" });
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} inserted successfully`);
+//       return res.json({ success: true, message: "Response saved successfully" });
+//     }
+//   } catch (error) {
+//     console.error("Error updating or inserting response:", error);
+//     res.status(500).json({ success: false, message: "Server error" });
+//   }
+// });
+
+// router.post('/response', async (req, res) => {
+//   try {
+//     const {
+//       userId,
+//       questionId,
+//       testCreationTableId,
+//       subjectId,
+//       sectionId,
+//       optionIndexes1 = "",
+//       optionIndexes2 = "",
+//       optionIndexes1CharCodes = [],
+//       optionIndexes2CharCodes = [],
+//       calculatorInputValue = ""
+//     } = req.body;
+
+//     // Validate and convert IDs to integers
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+//     const questionIdNumber = parseInt(questionId, 10);
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber) ||
+//       isNaN(questionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, subjectId, sectionId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Prepare data for insertion
+//     const insertQuery =
+//       "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, option_id, user_answer) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    
+//     const optionIndexes1CharCodesString = optionIndexes1CharCodes.join(",");
+//     const optionIndexes2CharCodesString = optionIndexes2CharCodes.join(",");
+
+//     const insertValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       subjectIdNumber,
+//       sectionIdNumber,
+//       questionIdNumber,
+//       optionIndexes1CharCodesString + optionIndexes2CharCodesString + calculatorInputValue,
+//       optionIndexes1 + optionIndexes2
+//     ];
+
+//     console.log("Executing insert SQL query:", insertQuery, insertValues);
+
+//     // Execute the insert query
+//     const insertResult = await db.query(insertQuery, insertValues);
+
+//     if (insertResult.affectedRows === 0) {
+//       console.error("No rows inserted.");
+//       return res.status(500).json({ success: false, message: "Failed to insert response" });
+//     }
+
+//     console.log(`Response for question ${questionIdNumber} inserted successfully`);
+//     return res.json({ success: true, message: "Response saved successfully" });
+//   } catch (error) {
+//     console.error("Error inserting response:", error);
+//     res.status(500).json({ success: false, message: "Server error" });
+//   }
+// });
+//--------------------------------
+
+// router.put("/updateResponse/:userId/:testCreationTableId/:subjectId/:sectionId/:questionId", async (req, res) => {
+//   try {
+//     const { userId, testCreationTableId, subjectId, sectionId, questionId } = req.params;
+//     const { optionIndexes1, optionIndexes2, optionIndexes1CharCodes, optionIndexes2CharCodes, calculatorInputValue } = req.body;
+
+//     // Validate data types
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+//     const questionIdNumber = parseInt(questionId, 10);
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber) ||
+//       isNaN(questionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, subjectId, sectionId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Check if the response already exists in the database
+//     const checkQuery =
+//       "SELECT * FROM user_responses WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+//     const checkValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       questionIdNumber,
+//     ];
+
+//     const [existingResponse] = await db.query(checkQuery, checkValues);
+
+//     if (existingResponse.length > 0) {
+//       console.log("Response already exists in the database, updating...");
+
+//       // Prepare data for update
+//       const updateQuery =
+//         "UPDATE user_responses SET user_answer = ?, option_id = ? WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+      
+//       const updateValues = [
+//         optionIndexes1CharCodes.join(",") + optionIndexes2CharCodes.join(",") + calculatorInputValue,
+//         optionIndexes1 + optionIndexes2,
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         questionIdNumber,
+//       ];
+
+//       console.log("Executing update SQL query:", updateQuery, updateValues);
+
+//       const updateResult = await db.query(updateQuery, updateValues);
+
+//       if (updateResult.affectedRows === 0) {
+//         console.error("No rows updated, but should have been.");
+//         return res.status(500).json({ success: false, message: "Failed to update response" });
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} updated successfully`);
+//       return res.json({ success: true, message: "Response updated successfully" });
+
+//     } else {
+//       console.log("Response does not exist in the database, inserting...");
+
+//       // Prepare data for insertion
+//       const insertQuery =
+//         "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, option_id, user_answer) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      
+//       const insertValues = [
+//         userIdNumber,
+//         testCreationTableIdNumber,
+//         subjectIdNumber,
+//         sectionIdNumber,
+//         questionIdNumber,
+//         optionIndexes1CharCodes.join(",") + optionIndexes2CharCodes.join(","),
+//         calculatorInputValue,
+//       ];
+
+//       console.log("Executing insert SQL query:", insertQuery, insertValues);
+
+//       const insertResult = await db.query(insertQuery, insertValues);
+
+//       if (insertResult.affectedRows === 0) {
+//         console.error("No rows inserted, but should have been.");
+//         return res.status(500).json({ success: false, message: "Failed to insert response" });
+//       }
+
+//       console.log(`Response for question ${questionIdNumber} inserted successfully`);
+//       return res.json({ success: true, message: "Response saved successfully" });
+//     }
+//   } catch (error) {
+//     console.error("Error updating or inserting response:", error);
+//     res.status(500).json({ success: false, message: "Server error" });
+//   }
+// });
+
+
+// Update Response
+router.put("/updateResponse/:userId/:testCreationTableId/:subjectId/:sectionId/:questionId", async (req, res) => {
   try {
-    console.log("Request Body:", req.body);
-    const { userId, questionId, testCreationTableId, subjectId, sectionId } = req.body;
-    console.log(`Response for question ${questionId} saved to the database`);
+    const { userId, testCreationTableId, subjectId, sectionId, questionId } = req.params;
+    const { optionIndexes1, optionIndexes2, optionIndexes1CharCodes, optionIndexes2CharCodes, calculatorInputValue } = req.body;
 
-    // Validate data types
+    // Validate and convert IDs
     const userIdNumber = parseInt(userId, 10);
     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
     const subjectIdNumber = parseInt(subjectId, 10);
     const sectionIdNumber = parseInt(sectionId, 10);
+    const questionIdNumber = parseInt(questionId, 10);
 
     if (
       isNaN(userIdNumber) ||
       isNaN(testCreationTableIdNumber) ||
       isNaN(subjectIdNumber) ||
-      isNaN(sectionIdNumber)
+      isNaN(sectionIdNumber) ||
+      isNaN(questionIdNumber)
     ) {
-      console.error("Invalid integer value for userId, testCreationTableId, or questionId");
+      console.error("Invalid integer values:", { userIdNumber, testCreationTableIdNumber, subjectIdNumber, sectionIdNumber, questionIdNumber });
       return res.status(400).json({ success: false, message: "Invalid data types" });
     }
 
-    // Check if the values already exist in the database
-    const checkQuery =
-      "SELECT * FROM user_responses WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+    // Check if the response already exists
+    const checkQuery = "SELECT * FROM user_responses WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+    const checkValues = [userIdNumber, testCreationTableIdNumber, questionIdNumber];
+    const [existingResponse] = await db.query(checkQuery, checkValues);
 
-    // Initialize questionIdNumber here
-    const questionIdNumber = parseInt(questionId, 10);
-
-    const checkValues = [
-      userIdNumber,
-      testCreationTableIdNumber,
-      questionIdNumber,
-    ];
-
-    const existingResponse = await db.query(checkQuery, checkValues);
-
-    if (existingResponse.length > 0 && existingResponse[0].length > 0) {
-      console.log("Response already exists in the database");
-
-      // Handle existing response logic here...
+    if (existingResponse.length > 0) {
+      console.log("Updating response:", { checkValues });
+      const updateQuery = "UPDATE user_responses SET user_answer = ?, option_id = ? WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+      const updateValues = [
+        optionIndexes1CharCodes.join(",") + optionIndexes2CharCodes.join(",") + calculatorInputValue,
+        optionIndexes1 + optionIndexes2,
+        userIdNumber,
+        testCreationTableIdNumber,
+        questionIdNumber,
+      ];
+      console.log("Executing update query:", updateQuery, updateValues);
+      const updateResult = await db.query(updateQuery, updateValues);
+      if (updateResult.affectedRows === 0) {
+        console.error("No rows updated for update query.");
+        return res.status(500).json({ success: false, message: "Failed to update response" });
+      }
+      return res.json({ success: true, message: "Response updated successfully" });
     } else {
-      // If the response does not already exist, proceed with insertion
-      const sql =
-        "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, user_answer, option_id) " +
-        "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-      const response = req.body[questionId];
-
-      const optionIndexes1 = response.optionIndexes1.join(",");
-      const optionIndexes2 = response.optionIndexes2.join(",");
-      const optionIndexes1CharCodes = response.optionIndexes1CharCodes.join(",");
-      const optionIndexes2CharCodes = response.optionIndexes2CharCodes.join(",");
-      const calculatorInputValue = response.calculatorInputValue;
-
-      const queryValues = [
+      console.log("Inserting new response:", { checkValues });
+      const insertQuery = "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, user_answer,option_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      const insertValues = [
         userIdNumber,
         testCreationTableIdNumber,
         subjectIdNumber,
         sectionIdNumber,
         questionIdNumber,
-        optionIndexes1CharCodes + optionIndexes2CharCodes + calculatorInputValue,
-        optionIndexes1 + optionIndexes2,
+        optionIndexes1CharCodes.join(",") + optionIndexes2CharCodes.join(",")+
+        calculatorInputValue,
+        optionIndexes1 + optionIndexes2
       ];
-
-      console.log("Executing SQL query:", sql, queryValues);
-
-      try {
-        const result = await db.query(sql, queryValues);
-
-        if (!result) {
-          console.error("Error saving response to the database");
-          res
-            .status(500)
-            .json({ success: false, message: "Internal server error" });
-          return;
-        }
-
-        console.log(`Response for question ${questionIdNumber} saved to the database`);
-        res.json({ success: true, message: "Response saved successfully" });
-      } catch (dbError) {
-        console.error("Database query error:", dbError);
-        res.status(500).json({
-          success: false,
-          message: "Error saving response to the database",
-          dbError: dbError.message,
-        });
+      console.log("Executing insert query:", insertQuery, insertValues);
+      const insertResult = await db.query(insertQuery, insertValues);
+      if (insertResult.affectedRows === 0) {
+        console.error("No rows inserted for insert query.");
+        return res.status(500).json({ success: false, message: "Failed to insert response" });
       }
+      return res.json({ success: true, message: "Response saved successfully" });
     }
   } catch (error) {
-    console.error("Error handling the request:", error);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.error("Server error:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
+
+
+router.post('/response', async (req, res) => {
+  try {
+    const {
+      userId,
+      questionId,
+      testCreationTableId,
+      subjectId,
+      sectionId,
+      optionIndexes1 = "",
+      optionIndexes2 = "",
+      optionIndexes1CharCodes = [],
+      optionIndexes2CharCodes = [],
+      calculatorInputValue = ""
+    } = req.body;
+
+    // Validate and convert IDs to integers
+    const userIdNumber = parseInt(userId, 10);
+    const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+    const subjectIdNumber = parseInt(subjectId, 10);
+    const sectionIdNumber = parseInt(sectionId, 10);
+    const questionIdNumber = parseInt(questionId, 10);
+
+    if (
+      isNaN(userIdNumber) ||
+      isNaN(testCreationTableIdNumber) ||
+      isNaN(subjectIdNumber) ||
+      isNaN(sectionIdNumber) ||
+      isNaN(questionIdNumber)
+    ) {
+      console.error("Invalid integer value for userId, testCreationTableId, subjectId, sectionId, or questionId");
+      return res.status(400).json({ success: false, message: "Invalid data types" });
+    }
+
+    // Prepare data for insertion
+    const insertQuery =
+      "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id,user_answer, option_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    
+    const optionIndexes1CharCodesString = optionIndexes1CharCodes.join(",");
+    const optionIndexes2CharCodesString = optionIndexes2CharCodes.join(",");
+
+    const insertValues = [
+      userIdNumber,
+      testCreationTableIdNumber,
+      subjectIdNumber,
+      sectionIdNumber,
+      questionIdNumber,
+      optionIndexes1CharCodesString + optionIndexes2CharCodesString + calculatorInputValue,
+      optionIndexes1 + optionIndexes2
+    ];
+
+    console.log("Executing insert SQL query:", insertQuery, insertValues);
+
+    // Execute the insert query
+    const insertResult = await db.query(insertQuery, insertValues);
+
+    if (insertResult.affectedRows === 0) {
+      console.error("No rows inserted.");
+      return res.status(500).json({ success: false, message: "Failed to insert response" });
+    }
+
+    console.log(`Response for question ${questionIdNumber} inserted successfully`);
+    return res.json({ success: true, message: "Response saved successfully" });
+  } catch (error) {
+    console.error("Error inserting response:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+
+
+
+// router.post('/response', async (req, res) => {
+//   try {
+//     const {
+//       userId,
+//       questionId,
+//       testCreationTableId,
+//       subjectId,
+//       sectionId,
+//     } = req.body;
+
+//     // Validate data types
+//     const userIdNumber = parseInt(userId, 10);
+//     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
+//     const subjectIdNumber = parseInt(subjectId, 10);
+//     const sectionIdNumber = parseInt(sectionId, 10);
+//     const questionIdNumber = parseInt(questionId, 10);
+
+
+//       const optionIndexes1 = response.optionIndexes1 || "";
+//       const optionIndexes2 = response.optionIndexes2 || "";
+//       const optionIndexes1CharCodes = response.optionIndexes1CharCodes.join(",");
+//       const optionIndexes2CharCodes = response.optionIndexes2CharCodes.join(",");
+//       const calculatorInputValue = response.calculatorInputValue || "";
+
+//     if (
+//       isNaN(userIdNumber) ||
+//       isNaN(testCreationTableIdNumber) ||
+//       isNaN(subjectIdNumber) ||
+//       isNaN(sectionIdNumber) ||
+//       isNaN(questionIdNumber)
+//     ) {
+//       console.error("Invalid integer value for userId, testCreationTableId, subjectId, sectionId, or questionId");
+//       return res.status(400).json({ success: false, message: "Invalid data types" });
+//     }
+
+//     // Prepare data for insertion
+//     const insertQuery =
+//       "INSERT INTO user_responses (user_Id, testCreationTableId, subjectId, sectionId, question_id, option_id, user_answer) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    
+      
+//     const insertValues = [
+//       userIdNumber,
+//       testCreationTableIdNumber,
+//       subjectIdNumber,
+//       sectionIdNumber,
+//       questionIdNumber,
+//       optionIndexes1CharCodes + optionIndexes2CharCodes + calculatorInputValue,
+//               optionIndexes1 + optionIndexes2,
+//       // optionIndexes1CharCodes.join(",") + optionIndexes2CharCodes.join(","),
+//       // calculatorInputValue,
+//     ];
+
+//     console.log("Executing insert SQL query:", insertQuery, insertValues);
+
+//     // Execute the insert query
+//     const insertResult = await db.query(insertQuery, insertValues);
+
+//     if (insertResult.affectedRows === 0) {
+//       console.error("No rows inserted.");
+//       return res.status(500).json({ success: false, message: "Failed to insert response" });
+//     }
+
+//     console.log(`Response for question ${questionIdNumber} inserted successfully`);
+//     return res.json({ success: true, message: "Response saved successfully" });
+//   } catch (error) {
+//     console.error("Error inserting response:", error);
+//     res.status(500).json({ success: false, message: "Server error" });
+//   }
+// });
 
 
 // router.post("/response", async (req, res) => {
@@ -2124,57 +3370,254 @@ router.post("/response", async (req, res) => {
 
 
 
-router.put("/updateResponse/:questionId", async (req, res) => {
-  try {
-    const questionId = parseInt(req.params.questionId, 10);
-    const { updatedResponse, userId, testCreationTableId } = req.body;
+// router.put("/updateResponse/:questionId", async (req, res) => {
+//   try {
+//     const questionId = parseInt(req.params.questionId, 10);
+//     const { updatedResponse, userId, testCreationTableId } = req.body;
 
-    if (
-      updatedResponse &&
-      (updatedResponse.optionIndexes1 || updatedResponse.optionIndexes2)
-    ) {
-      let userAnswer = "";
+//     if (
+//       updatedResponse &&
+//       (updatedResponse.optionIndexes1 || updatedResponse.optionIndexes2)
+//     ) {
+//       let userAnswer = "";
 
-      if (updatedResponse.optionIndexes1) {
-        userAnswer += updatedResponse.optionIndexes1.join(",");
-      }
+//       if (updatedResponse.optionIndexes1) {
+//         userAnswer += updatedResponse.optionIndexes1.join(",");
+//       }
 
-      if (updatedResponse.optionIndexes2) {
-        userAnswer += updatedResponse.optionIndexes2.join(",");
-      }
+//       if (updatedResponse.optionIndexes2) {
+//         userAnswer += updatedResponse.optionIndexes2.join(",");
+//       }
 
-      if (updatedResponse.calculatorInputValue) {
-        userAnswer += updatedResponse.calculatorInputValue;
-      }
+//       if (updatedResponse.calculatorInputValue) {
+//         userAnswer += updatedResponse.calculatorInputValue;
+//       }
 
-      const sql =
-        "UPDATE user_responses SET user_answer = ? WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+//       const sql =
+//         "UPDATE user_responses SET user_answer = ? WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
 
-      db.query(sql, [userAnswer, userId, testCreationTableId, questionId], (err, result) => {
-        if (err) {
-          console.error("Error updating response in the database:", err);
-          res.status(500).json({ success: false, message: "Internal server error" });
-        } else {
-          if (result.affectedRows > 0) {
-            console.log(`Response for question ${questionId} updated successfully`);
-            res.json({ success: true, message: "Response updated successfully" });
-          } else {
-            console.error(`No records found for question ${questionId}`);
-            res.status(404).json({ success: false, message: "Response not found" });
-          }
-        }
-      });
-    } else {
-      console.error(`Invalid updated response data for question ${questionId}`);
-      res.status(400).json({ success: false, message: "Invalid updated response data" });
-    }
-  } catch (error) {
-    console.error("Error handling the request:", error);
-    res.status(500).json({ success: false, message: "Internal server error" });
-  }
-});
+//       db.query(sql, [userAnswer, userId, testCreationTableId, questionId], (err, result) => {
+//         if (err) {
+//           console.error("Error updating response in the database:", err);
+//           res.status(500).json({ success: false, message: "Internal server error" });
+//         } else {
+//           if (result.affectedRows > 0) {
+//             console.log(`Response for question ${questionId} updated successfully`);
+//             res.json({ success: true, message: "Response updated successfully" });
+//           } else {
+//             console.error(`No records found for question ${questionId}`);
+//             res.status(404).json({ success: false, message: "Response not found" });
+//           }
+//         }
+//       });
+//     } else {
+//       console.error(`Invalid updated response data for question ${questionId}`);
+//       res.status(400).json({ success: false, message: "Invalid updated response data" });
+//     }
+//   } catch (error) {
+//     console.error("Error handling the request:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
+
+// router.put("/updateResponse/:userId/:testCreationTableId/:subjectId/:sectionId/:questionId", async (req, res) => {
+//   try {
+//     const userId = parseInt(req.params.userId, 10);
+//     const testCreationTableId = parseInt(req.params.testCreationTableId, 10);
+//     const subjectId = parseInt(req.params.subjectId, 10);
+//     const sectionId = parseInt(req.params.sectionId, 10);
+//     const questionId = parseInt(req.params.questionId, 10);
+//     const { updatedResponse } = req.body;
+
+//     console.log("Received update request:", {
+//       userId,
+//       testCreationTableId,
+//       subjectId,
+//       sectionId,
+//       questionId,
+//       updatedResponse
+//     });
+
+//     if (updatedResponse) {
+//       const userAnswerParts = [];
+//       let optionId = null;
+
+//       if (updatedResponse.optionId) {
+//         optionId = updatedResponse.optionId;
+//       }
+
+//       if (updatedResponse.optionIndexes1) {
+//         userAnswerParts.push(...updatedResponse.optionIndexes1);
+//       }
+
+//       if (updatedResponse.optionIndexes2) {
+//         userAnswerParts.push(...updatedResponse.optionIndexes2);
+//       }
+
+//       if (updatedResponse.calculatorInputValue) {
+//         userAnswerParts.push(updatedResponse.calculatorInputValue);
+//       }
+
+//       const userAnswer = userAnswerParts.join(",");
+
+//       console.log("Prepared userAnswer:", userAnswer);
+//       console.log("Prepared optionId:", optionId);
+
+//       // Create SQL query with both user_answer and option_id
+//       const sql = `
+//         UPDATE user_responses
+//         SET user_answer = ?, option_id = ?
+//         WHERE user_Id = ? AND testCreationTableId = ? AND subjectId = ? AND sectionId = ? AND question_id = ?
+//       `;
+
+//       db.query(sql, [userAnswer || null, optionId || null, userId, testCreationTableId, subjectId, sectionId, questionId], (err, result) => {
+//         if (err) {
+//           console.error("Error updating response in the database:", err);
+//           res.status(500).json({ success: false, message: "Internal server error" });
+//         } else {
+//           if (result.affectedRows > 0) {
+//             console.log(`Response for question ${questionId} updated successfully`);
+//             res.json({ success: true, message: "Response updated successfully" });
+//           } else {
+//             console.error(`No records found for question ${questionId}`);
+//             res.status(404).json({ success: false, message: "Response not found" });
+//           }
+//         }
+//       });
+//     } else {
+//       console.error(`Invalid updated response data for question ${questionId}`);
+//       res.status(400).json({ success: false, message: "Invalid updated response data" });
+//     }
+//   } catch (error) {
+//     console.error("Error handling the request:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
+
+// router.put("/updateResponse/:userId/:testCreationTableId/:questionId", async (req, res) => {
+//   try {
+//     const userId = parseInt(req.params.userId, 10);
+//     const testCreationTableId = parseInt(req.params.testCreationTableId, 10);
+//     const questionId = parseInt(req.params.questionId, 10);
+//     const { updatedResponse } = req.body;
+
+//     console.log("Received update request:", {
+//       userId,
+//       testCreationTableId,
+//       questionId,
+//       updatedResponse
+//     });
+
+//     if (updatedResponse) {
+//       const userAnswerParts = [];
+//       let optionId = null;
+
+//       if (updatedResponse.optionId) {
+//         optionId = updatedResponse.optionId;
+//       }
+
+//       if (updatedResponse.optionIndexes1) {
+//         userAnswerParts.push(...updatedResponse.optionIndexes1);
+//       }
+
+//       if (updatedResponse.optionIndexes2) {
+//         userAnswerParts.push(...updatedResponse.optionIndexes2);
+//       }
+
+//       if (updatedResponse.calculatorInputValue) {
+//         userAnswerParts.push(updatedResponse.calculatorInputValue);
+//       }
+
+//       const userAnswer = userAnswerParts.join(",");
+
+//       console.log("Prepared userAnswer:", userAnswer);
+//       console.log("Prepared optionId:", optionId);
+
+//       // Create SQL query with both user_answer and option_id
+//       const sql = `
+//         UPDATE user_responses
+//         SET user_answer = ?, option_id = ?
+//         WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?
+//       `;
+
+//       db.query(sql, [userAnswer, optionId, userId, testCreationTableId, questionId], (err, result) => {
+//         if (err) {
+//           console.error("Error updating response in the database:", err);
+//           res.status(500).json({ success: false, message: "Internal server error" });
+//         } else {
+//           if (result.affectedRows > 0) {
+//             console.log(`Response for question ${questionId} updated successfully`);
+//             res.json({ success: true, message: "Response updated successfully" });
+//           } else {
+//             console.error(`No records found for question ${questionId}`);
+//             res.status(404).json({ success: false, message: "Response not found" });
+//           }
+//         }
+//       });
+//     } else {
+//       console.error(`Invalid updated response data for question ${questionId}`);
+//       res.status(400).json({ success: false, message: "Invalid updated response data" });
+//     }
+//   } catch (error) {
+//     console.error("Error handling the request:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
 
 
+
+
+// router.put("/updateResponse/:userId/:testCreationTableId/:questionId", async (req, res) => {
+//   try {
+//     const userId = parseInt(req.params.userId, 10);
+//     const testCreationTableId = parseInt(req.params.testCreationTableId, 10);
+//     const questionId = parseInt(req.params.questionId, 10);
+//     const { updatedResponse } = req.body;
+
+//     if (
+//       updatedResponse &&
+//       (updatedResponse.optionIndexes1 || updatedResponse.optionIndexes2)
+//     ) {
+//       let userAnswer = "";
+
+//       if (updatedResponse.optionIndexes1) {
+//         userAnswer += updatedResponse.optionIndexes1.join(",");
+//       }
+
+//       if (updatedResponse.optionIndexes2) {
+//         userAnswer += updatedResponse.optionIndexes2.join(",");
+//       }
+
+//       if (updatedResponse.calculatorInputValue) {
+//         userAnswer += updatedResponse.calculatorInputValue;
+//       }
+
+//       const sql =
+//         "UPDATE user_responses SET user_answer = ? WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?";
+
+//       db.query(sql, [userAnswer, userId, testCreationTableId, questionId], (err, result) => {
+//         if (err) {
+//           console.error("Error updating response in the database:", err);
+//           res.status(500).json({ success: false, message: "Internal server error" });
+//         } else {
+//           if (result.affectedRows > 0) {
+//             console.log(`Response for question ${questionId} updated successfully`);
+//             res.json({ success: true, message: "Response updated successfully" });
+//           } else {
+//             console.error(`No records found for question ${questionId}`);
+//             res.status(404).json({ success: false, message: "Response not found" });
+//           }
+//         }
+//       });
+//     } else {
+//       console.error(`Invalid updated response data for question ${questionId}`);
+//       res.status(400).json({ success: false, message: "Invalid updated response data" });
+//     }
+//   } catch (error) {
+//     console.error("Error handling the request:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
 
 
 
@@ -2393,26 +3836,89 @@ router.put("/updateResponse/:questionId", async (req, res) => {
 // });
 
 
-router.put("/clearResponse/:questionId", async (req, res) => {
-  try {
-    const { questionId } = req.params;
+
  
-    const updateQuery = "UPDATE user_responses SET user_answer = NULL WHERE question_id = ?";
-    db.query(updateQuery, [questionId], (err, result) => {
+// router.put("/clearResponse/:userId/:testCreationTableId/:questionId", async (req, res) => {
+//   try {
+//     const { userId, testCreationTableId, questionId } = req.params;
+
+//     // SQL query to clear the response
+//     const updateQuery = `
+//       UPDATE user_responses
+//       SET user_answer = NULL
+//       WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?
+//     `;
+
+//     db.query(updateQuery, [userId, testCreationTableId, questionId], (err, result) => {
+//       if (err) {
+//         console.error("Error clearing user response:", err);
+//         res.status(500).json({ success: false, message: "Internal server error" });
+//       } else {
+//         console.log(`User response for question ${questionId} cleared for user ${userId} and test ${testCreationTableId}`);
+//         res.status(200).json({ success: true, message: "User response cleared successfully" });
+//       }
+//     });
+//   } catch (error) {
+//     console.error("Error clearing user response:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
+
+// router.put("/clearResponse/:userId/:testCreationTableId/:questionId", async (req, res) => {
+//   try {
+//     const { userId, testCreationTableId, questionId } = req.params;
+
+//     const updateQuery = `
+//       UPDATE user_responses
+//       SET user_answer = NULL, option_id = NULL
+//       WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?
+//     `;
+
+//     db.query(updateQuery, [userId, testCreationTableId, questionId], (err, result) => {
+//       if (err) {
+//         console.error("Error clearing user response:", err);
+//         res.status(500).json({ success: false, message: "Internal server error" });
+//       } else {
+//         console.log(`User response for question ${questionId} cleared for user ${userId} and test ${testCreationTableId}`);
+//         res.status(200).json({ success: true, message: "User response cleared successfully" });
+//       }
+//     });
+//   } catch (error) {
+//     console.error("Error clearing user response:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
+
+
+router.delete('/deleteResponse/:userId/:testCreationTableId/:questionId', async (req, res) => {
+  try {
+    const { userId, testCreationTableId, questionId } = req.params;
+
+    // SQL query to delete the response
+    const deleteQuery = `
+      DELETE FROM user_responses
+      WHERE user_Id = ? AND testCreationTableId = ? AND question_id = ?
+    `;
+
+    db.query(deleteQuery, [userId, testCreationTableId, questionId], (err, result) => {
       if (err) {
-        console.error("Error clearing user response:", err);
-        res.status(500).json({ success: false, message: "Internal server error" });
-      } else {
-        console.log(`User response for question ${questionId} cleared`);
-        res.status(200).json({ success: true, message: "User response cleared successfully" });
+        console.error("Error deleting user response:", err);
+        return res.status(500).json({ success: false, message: "Internal server error" });
       }
+
+      if (result.affectedRows === 0) {
+        console.warn("No response found to delete");
+        return res.status(404).json({ success: false, message: "Response not found" });
+      }
+
+      console.log(`User response for question ${questionId} deleted for user ${userId} and test ${testCreationTableId}`);
+      res.status(200).json({ success: true, message: "User response deleted successfully" });
     });
   } catch (error) {
-    console.error("Error clearing user response:", error);
+    console.error("Error deleting user response:", error);
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 });
- 
 
 
 // router.post('/insertTestAttemptStatus', (req, res) => {
