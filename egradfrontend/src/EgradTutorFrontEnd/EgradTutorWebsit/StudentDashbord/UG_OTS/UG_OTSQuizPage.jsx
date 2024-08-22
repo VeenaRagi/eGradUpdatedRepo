@@ -2048,7 +2048,8 @@ const UG_OTSQuizPage = () => {
 
   const [markedForReviewQuestions, setMarkedForReviewQuestions] = useState([]);
   const [activeQuestionId, setActiveQuestionId] = useState(null);
-  const [questionss, setQuestions] = useState([]);
+  const [allQuestions, setAllQuestions] = useState([]);
+  const [currentQuestions, setCurrentQuestions] = useState([]);
 
   const location = useLocation();
   const { userData } = location.state || {};
@@ -2061,43 +2062,53 @@ const UG_OTSQuizPage = () => {
   useEffect(() => {
     if (testData?.subjects?.length) {
       // Flatten questions from all subjects and sections
-      const allQuestions = testData.subjects.flatMap(subject =>
+      const allFlattenedQuestions = testData.subjects.flatMap(subject =>
         subject.sections.flatMap(section => section.questions)
       );
-      setQuestions(allQuestions);
-
+      setAllQuestions(allFlattenedQuestions);
+  
       // Set the first question as the selected question
-      const firstQuestion = allQuestions[0];
+      const firstQuestion = allFlattenedQuestions[0];
       if (firstQuestion) {
         setSelectedQuestionId(firstQuestion.question_id);
-
+  
         // Set the first question as visited but not answered
         setVisitedQuestions([firstQuestion.question_id]);
         setNotAnsweredQuestions([firstQuestion.question_id]);
       }
     }
   }, [testData]);
-
+  
   const handleSectionClick = (sectionId) => {
     setSelectedSectionId(sectionId);
+  
     const selectedSection = testData.subjects
       .find((subject) => subject.subjectId === selectedSubjectId)
       .sections.find((section) => section.sectionId === sectionId);
-
+  
     if (selectedSection) {
-      setQuestions(selectedSection.questions);
+      setCurrentQuestions(selectedSection.questions);
+  
       const firstQuestion = selectedSection.questions[0];
       if (firstQuestion) {
         setSelectedQuestionId(firstQuestion.question_id);
+  
+        // Check if the first question is already in visitedQuestions
         if (!visitedQuestions.includes(firstQuestion.question_id)) {
-          setVisitedQuestions([...visitedQuestions, firstQuestion.question_id]);
-          setNotAnsweredQuestions([firstQuestion.question_id]);
+          setVisitedQuestions((prevVisited) => [
+            ...prevVisited,
+            firstQuestion.question_id,
+          ]);
+          setNotAnsweredQuestions((prevNotAnswered) => [
+            ...prevNotAnswered,
+            firstQuestion.question_id,
+          ]);
         }
       }
     }
   };
-
-
+  
+ 
   useEffect(() => {
     const token = sessionStorage.getItem("navigationToken");
 
