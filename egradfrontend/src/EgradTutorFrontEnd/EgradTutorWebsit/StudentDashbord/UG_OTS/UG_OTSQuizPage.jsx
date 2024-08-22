@@ -3028,8 +3028,9 @@ const UG_OTSQuizPage = () => {
       <button onClick={handleSubmit}>Submit</button>
       <div className="counts">
         <h3>Over all Counts</h3>
+        <p>Total Questions: {totalQuestions}</p>
         <p>Visited: {visitedCount}</p>
-        <p>Not Visited: {questions.length - visitedQuestions.length}</p>
+        <p>Not Visited: {totalQuestions - visitedQuestions.length}</p>
         <p>Answered: {answeredOnlyCount}</p>
         <p>Not Answered: {notAnsweredButVisitedCount}</p>
         <p>Marked for Review: {markForReviewOnlyCount}</p>
