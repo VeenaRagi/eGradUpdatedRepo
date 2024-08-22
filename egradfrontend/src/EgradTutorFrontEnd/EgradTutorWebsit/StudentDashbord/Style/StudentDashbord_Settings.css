@@ -10,26 +10,31 @@
   max-width: 600px;
   margin: 50px auto;
 }
-.buttonsToBeFlex{
+
+.buttonsToBeFlex {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.studentNameUpdateForm .submitButton{
+
+.studentNameUpdateForm .submitButton {
   /* width: ; */
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0;
 }
+
 .studentNameUpdateForm span {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.dashboard_settings .buttonsToBeFlex>button{
+
+.dashboard_settings .buttonsToBeFlex>button {
   margin: 20px;
 }
+
 .centerDivForForm {
   display: flex;
   flex-direction: column;
@@ -39,29 +44,35 @@
   gap: 2rem;
   /* border: 1px solid; */
 }
-.emailDisabledInStudentSetting{
-    width: 350px;
-    padding: 6px;
-    border: none;
-    box-shadow: 1px 4px 11px 0px #1a374d;
+
+.emailDisabledInStudentSetting {
+  width: 350px;
+  padding: 6px;
+  border: none;
+  box-shadow: 1px 4px 11px 0px #1a374d;
 }
+
 form.studentNameUpdateForm {
   border: 1px solid;
   padding: 1rem 2rem;
   gap: 1rem;
 }
+
 .centerDivForForm div {
   display: grid;
   grid-template-columns: 200px 1fr 1fr;
   /* justify-items: center; */
 }
-.centerDivForForm div label{
+
+.centerDivForForm div label {
   font-weight: 600;
 
 }
-.centerDivForForm input{
+
+.centerDivForForm input {
   margin: 0;
 }
+
 /* Form styling */
 .change-password-form {
   width: 100%;
@@ -98,7 +109,8 @@ form.studentNameUpdateForm {
   color: red;
   margin-bottom: 15px;
 }
-.studentNameUpdateForm{
+
+.studentNameUpdateForm {
   display: flex;
   flex-direction: column;
 }
@@ -171,25 +183,71 @@ form.studentNameUpdateForm {
   display: flex;
   justify-content: center;
   text-align: center;
-  background:  #007bff;
-    border: 1px solid  #007bff;
-    color: white;
+  background: #007bff;
+  border: 1px solid #007bff;
+  color: white;
   margin: 100px auto;
   align-items: center;
 }
 
 .dashboard_settings button:hover {
-  background:  #02740c;
-  border: 1px solid  #007bff;
+  background: #02740c;
+  border: 1px solid #007bff;
 }
 
-.users_user_profile_container{
+.users_user_profile_container {
   height: 150px;
   width: 150px;
 }
 
-@media (max-width:768px){
-  .users_profile_img{
+@media (max-width:600px) {
+  .dashboard_settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dashboard_settings_user_details {
+    width: 360px;
+  }
+
+  .buttonsToBeFlex {
+    width: 300px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .centerDivForForm {
+    width: 360px;
+  }
+
+  .emailDisabledInStudentSetting {
+    width: 100px;
+  }
+
+  form.studentNameUpdateForm {
+    padding: 0px;
+  }
+
+  .centerDivForForm {
+    padding: 10px;
+    text-align: start;
+  }
+
+.studentNameUpdateForm input[type="text"] {
+    width: 130px;
+} 
+.studentNameUpdateForm input[type="email"] {
+  width: 130px;
+}
+.studentNameUpdateForm input[type="number"] {
+  width: 130px;
+}
+}
+
+@media (max-width:768px) {
+  .users_profile_img {
     /* width: 200px;
     height: 200px; */
     width: 100%;
@@ -204,6 +262,3 @@ form.studentNameUpdateForm {
     width: 100%;
   }
 }
-
-
-
