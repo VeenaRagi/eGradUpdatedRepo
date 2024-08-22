@@ -74,7 +74,7 @@ const StudentDashbord_Bookmarks = ({branchIdFromLS}) => {
     return (
       <div className="container">
         <div className="bookmark_subheading">You haven't bookmarked anything yet.</div>
-        <h1>Branch_Id:{Branch_Id}</h1>
+        {/* <h1>Branch_Id:{Branch_Id}</h1> */}
       </div>
     );
   }

@@ -282,7 +282,7 @@ margin-top: -10px;
 
 .calculator_div {
   margin-top: 2rem;
-  width: 250px;
+  width: 235px;
   border: 2px solid #ccc;
   border-radius: 5px;
   padding: 10px;
@@ -309,7 +309,6 @@ input[type="button"] {
   width: 50px;
   height: 34px;
   margin: 5px;
-  /* padding: 10px; */
   font-size: 18px;
   border: none;
   border-radius: 5px;
@@ -349,6 +348,7 @@ input[type="number"][value="0"] {
 input[type="button"][value="."] {
   background-color: #79b9ee;
 }
+
 .time_left_tag {
   padding-top: 1rem;
   font-size: large;
@@ -377,9 +377,7 @@ input[type="button"][value="."] {
 #input_number_text_box {
   width: 13rem;
 }
-.input_numbers_div {
-  margin-top: 1rem;
-  display: grid;
+ /* display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
   grid-template-areas: 
@@ -387,15 +385,21 @@ input[type="button"][value="."] {
     "num1 num2 num3"
     "num4 num5 num6"
     "num7 num8 num9"
-    "num0 num01 numdot";
+    "num0 numminus numdot"; */
+.input_numbers_div {
+  margin-top: 1rem;
+ font-size: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .del_button {
-  background-color: #ff4d4d; /* Style for the DEL button */
+  background-color: #ff4d4d; 
   color: white;
   grid-area: del;
   width: 3rem;
-
+margin-right: 8rem;
 }
 
 .number_btn {
@@ -406,11 +410,11 @@ input[type="button"][value="."] {
 /* Custom button size if needed */
 .input_numbers_div .number_btn {
   padding: 10px;
-  font-size: 16px;
+  font-size: 20px;
   border: none;
   cursor: pointer;
-  width: 3rem;
-
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 /* Adjust layout to align the "0" button properly */

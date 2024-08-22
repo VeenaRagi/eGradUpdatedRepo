@@ -404,7 +404,7 @@ const StudentDashbord_Settings = ({ usersData, decryptedUserIdState,branchIdFrom
 
   return (
     <div className="dashboard_settings">
-              <h1>Branch_Id:{Branch_Id}</h1>
+              {/* <h1>Branch_Id:{Branch_Id}</h1> */}
       {usersData.users && usersData.users.length > 0 && (
         <ul className="dashboard_settings_user_details">
           {usersData.users.map((user) => (

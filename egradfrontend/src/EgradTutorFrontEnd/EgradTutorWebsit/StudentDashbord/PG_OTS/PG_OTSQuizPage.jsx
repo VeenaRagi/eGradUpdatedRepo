@@ -94,7 +94,7 @@ const PG_OTSQuizPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/QuizPage/UG_QuestionOptions/${decryptedParam1}/${decryptedParam2}`
+          `${BASE_URL}/QuizPage/PG_QuestionOptions/${decryptedParam1}/${decryptedParam2}`
         );
         const data = response.data;
 
@@ -489,7 +489,7 @@ const PG_OTSQuizPage = () => {
             </div>
           </div>
           <div className="pg_Questionnodiv">
-            <p className="pg_Questionnop" >Question No.1</p>
+            <p className="pg_Questionnop">Question No.1</p>
           </div>
           <div>
             {selectedQuestion && (
@@ -641,78 +641,100 @@ const PG_OTSQuizPage = () => {
               </div>
             ))}
           </div>
-<div className="pg_legenddiv">
-  <div className="pg_colorboxes">
-   <div className="pg_colorboxots"><img src={greenBox} /><p>Answered</p></div> 
-   <div className="pg_colorboxots"><img src={orangeBox} /><p>Not Answered</p></div> 
-   <div className="pg_colorboxots"><img src={grayBox} /><p>not Visited</p></div> 
-   <div className="pg_colorboxots"><img src={purpleBox} /><p>Marked for Review</p></div> 
-   <div className="pg_colorboxots pg_colorboxes5"><img src={purpleTickBox} />Answered & Marked for Review(will also be evaluted)</div> 
-  </div>
-  <div> {selectedSubject && (
-  <div className="Pg_sectiondivno">
-    {selectedSubject.sections.length > 0 ? (
-      selectedSubject.sections.map((section) => (
-        selectedSectionId === section.sectionId && ( // Ensure only selected section is displayed
-          <p
-            key={section.sectionId}
-            onClick={() => handleSectionClick(section.sectionId)}
-            className={`Pg_sectiondiv ${
-              selectedSectionId === section.sectionId ? "selected" : ""
-            } important-padding`}
-            style={{
-              cursor: "pointer",
-              
-            }}
-            
-          >
-            {section.SectionName}
-          </p>
-        )
-      ))
-    ) : (
-      <div>
-        {selectedSubject.questions.map((question, index) => (
-          selectedQuestionId === question.question_id && ( // Ensure only selected question is displayed
-            <button
-              key={question.question_id}
-              onClick={() => handleQuestionClick(question.question_id)}
-            >
-              {index + 1}
-            </button>
-          )
-        ))}
-      </div>
-    )}
-  </div>
-)}
-</div>
-{selectedSection && (
-            <div className="pg_divotsnumber">
-              <p>Choose a Question</p>
-              <div className="pg_numberpaletdiv">
-              {selectedSection.questions.map((question, index) => (
-                <button
-                  key={question.question_id}
-                  onClick={() => handleQuestionClick(question.question_id)}
-                  style={{
-                    ...getButtonStyle(question.question_id),
-                    backgroundSize: "cover",
-                    color: "black",
-                    width: "40px",
-                    height: "40px",
-                    border:"1px solid black",
-                  }}
-                >
-                  {index + 1}
-                </button>
-              ))}
+          <div className="pg_legenddiv">
+            <div className="pg_colorboxes">
+              <div className="pg_colorboxots">
+                <img src={greenBox} />
+                <p>Answered</p>
               </div>
-             
+              <div className="pg_colorboxots">
+                <img src={orangeBox} />
+                <p>Not Answered</p>
+              </div>
+              <div className="pg_colorboxots">
+                <img src={grayBox} />
+                <p>not Visited</p>
+              </div>
+              <div className="pg_colorboxots">
+                <img src={purpleBox} />
+                <p>Marked for Review</p>
+              </div>
+              <div className="pg_colorboxots pg_colorboxes5">
+                <img src={purpleTickBox} />
+                Answered & Marked for Review(will also be evaluted)
+              </div>
             </div>
-          )}
-</div>
-          
+            <div>
+              {" "}
+              {selectedSubject && (
+                <div className="Pg_sectiondivno">
+                  {selectedSubject.sections.length > 0 ? (
+                    selectedSubject.sections.map(
+                      (section) =>
+                        selectedSectionId === section.sectionId && ( // Ensure only selected section is displayed
+                          <p
+                            key={section.sectionId}
+                            onClick={() =>
+                              handleSectionClick(section.sectionId)
+                            }
+                            className={`Pg_sectiondiv ${
+                              selectedSectionId === section.sectionId
+                                ? "selected"
+                                : ""
+                            } important-padding`}
+                            style={{
+                              cursor: "pointer",
+                            }}
+                          >
+                            {section.SectionName}
+                          </p>
+                        )
+                    )
+                  ) : (
+                    <div>
+                      {selectedSubject.questions.map(
+                        (question, index) =>
+                          selectedQuestionId === question.question_id && ( // Ensure only selected question is displayed
+                            <button
+                              key={question.question_id}
+                              onClick={() =>
+                                handleQuestionClick(question.question_id)
+                              }
+                            >
+                              {index + 1}
+                            </button>
+                          )
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+            {selectedSection && (
+              <div className="pg_divotsnumber">
+                <p>Choose a Question</p>
+                <div className="pg_numberpaletdiv">
+                  {selectedSection.questions.map((question, index) => (
+                    <button
+                      key={question.question_id}
+                      onClick={() => handleQuestionClick(question.question_id)}
+                      style={{
+                        ...getButtonStyle(question.question_id),
+                        backgroundSize: "cover",
+                        color: "black",
+                        width: "40px",
+                        height: "40px",
+                        border: "1px solid black",
+                      }}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
           <button onClick={handleSubmit}>Submit</button>
         </div>
       </div>
