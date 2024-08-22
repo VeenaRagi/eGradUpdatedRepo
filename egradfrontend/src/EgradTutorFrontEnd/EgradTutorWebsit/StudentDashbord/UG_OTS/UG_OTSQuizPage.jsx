@@ -2078,6 +2078,24 @@ const UG_OTSQuizPage = () => {
     }
   }, [testData]);
 
+  const handleSectionClick = (sectionId) => {
+    setSelectedSectionId(sectionId);
+    const selectedSection = testData.subjects
+      .find((subject) => subject.subjectId === selectedSubjectId)
+      .sections.find((section) => section.sectionId === sectionId);
+
+    if (selectedSection) {
+      setQuestions(selectedSection.questions);
+      const firstQuestion = selectedSection.questions[0];
+      if (firstQuestion) {
+        setSelectedQuestionId(firstQuestion.question_id);
+        if (!visitedQuestions.includes(firstQuestion.question_id)) {
+          setVisitedQuestions([...visitedQuestions, firstQuestion.question_id]);
+          setNotAnsweredQuestions([firstQuestion.question_id]);
+        }
+      }
+    }
+  };
 
 
   useEffect(() => {
@@ -2159,13 +2177,13 @@ const UG_OTSQuizPage = () => {
     }
   };
 
-  const handleSectionClick = (sectionId) => {
-    setSelectedSectionId(sectionId);
-    const selectedSection = testData.subjects
-      .find((subject) => subject.subjectId === selectedSubjectId)
-      .sections.find((section) => section.sectionId === sectionId);
-    setSelectedQuestionId(selectedSection.questions[0].question_id);
-  };
+  // const handleSectionClick = (sectionId) => {
+  //   setSelectedSectionId(sectionId);
+  //   const selectedSection = testData.subjects
+  //     .find((subject) => subject.subjectId === selectedSubjectId)
+  //     .sections.find((section) => section.sectionId === sectionId);
+  //   setSelectedQuestionId(selectedSection.questions[0].question_id);
+  // };
 
   const handleQuestionClick = (questionId) => {
     // Set the active and selected question IDs
