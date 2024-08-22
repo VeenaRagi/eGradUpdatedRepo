@@ -258,8 +258,10 @@ router.get('/fetchData', async (req, res) => {
       p.paragraph_Id = pq.paragraph_Id AND q.question_id = pq.question_id
   LEFT OUTER JOIN ots_document doc ON
       q.document_Id = doc.document_Id
+      where dd.BranchId=2
   ORDER BY
       q.question_id ASC;
+
       `);
 
         // Check if rows is not empty
@@ -416,96 +418,96 @@ router.get("/fetchData", async (req, res) => {
 
 
 
-// router.post('/sendSolution', async (req, res) => {
-//     try {
-//         const { doubtId, solutionText, solutionImage } = req.body;
-//       console.log('Received request with doubtId:', doubtId);
-//       // Fetch user email based on doubtId (you might need to modify your query to include user email)
-//       const [user] = await db.query(`
-//         SELECT l.email
-//         FROM stutedntdoubtsectiondata dd
-//         JOIN LOG l ON dd.user_Id = l.user_Id
-//         WHERE dd.Doubt_Id = ?;
-//       `, [doubtId]);
+router.post('/sendSolution', async (req, res) => {
+    try {
+        const { doubtId, solutionText, solutionImage } = req.body;
+      console.log('Received request with doubtId:', doubtId);
+      // Fetch user email based on doubtId (you might need to modify your query to include user email)
+      const [user] = await db.query(`
+        SELECT l.email
+        FROM stutedntdoubtsectiondata dd
+        JOIN LOG l ON dd.user_Id = l.user_Id
+        WHERE dd.Doubt_Id = ?;
+      `, [doubtId]);
       
-//       const userEmail = user && user.length > 0 ? user[0].email : null;
-//       console.log('User Email:', userEmail);
-//       if (userEmail) {
-//         // Configure Nodemailer transporter (use your email service credentials)
-//         const transporter = nodemailer.createTransport({
-//             service: "gmail",
-//             host: "smtp.gmail.com",
-//             auth: {
-//               user: "egradtutorweb@gmail.com", // Your email address
-//               pass: "zzwj ffce jrbn tlhs", // Your email password
-//             },
-//           });
+      const userEmail = user && user.length > 0 ? user[0].email : null;
+      console.log('User Email:', userEmail);
+      if (userEmail) {
+        // Configure Nodemailer transporter (use your email service credentials)
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            host: "smtp.gmail.com",
+            auth: {
+              user: "egradtutorweb@gmail.com", // Your email address
+              pass: "zzwj ffce jrbn tlhs", // Your email password
+            },
+          });
   
-//         // Define email options
-//         // const mailOptions = {
-//         //   from: "egradtutorweb@gmail.com",
-//         //   to: userEmail,
-//         //   subject: "Doubt Solution",
-//         //   text: `Doubt ID: ${doubtId}\nSolution: ${solutionText}`,
+        // Define email options
+        // const mailOptions = {
+        //   from: "egradtutorweb@gmail.com",
+        //   to: userEmail,
+        //   subject: "Doubt Solution",
+        //   text: `Doubt ID: ${doubtId}\nSolution: ${solutionText}`,
 
-//         //   html: `   <img src="cid:defaultLogo" alt="egradtutor" style="width: 150px;margin: 20px auto; margin-left:0; height: auto; display: block;">`,
-//         //   attachments: [
-//         //     {
-//         //       filename: "solutionImage.png", // You can customize the filename
-//         //       content: solutionImage.split(";base64,").pop(), // Extract base64 cid
-//         //       cid:solutionImage.split(";base64,").pop(),
-//         //       encoding: "base64",
-//         //     },
-//         //   ],
-//         // };
-// const mailOptions = {
-//   from: "egradtutorweb@gmail.com",
-//   to: userEmail,
-//   subject: "Doubt Solution",
-//   text: `Doubt ID: ${doubtId}\nSolution: ${solutionText}`,
-//   html: `
-//     <html>
-//       <head>
-//         <style>
-//           img {
-//             width: 150px;
-//             margin: 20px auto;
-//             margin-left: 0;
-//             height: auto;
-//             display: block;
-//           }
-//         </style>
-//       </head>
-//       <body>
-//         <img src="cid:${solutionImage.split(";base64,")[1]}" alt="egradtutor">
-//       </body>
-//     </html>
-//   `,
-//   attachments: [
-//     {
-//       filename: "solutionImage.png",
-//       content: solutionImage.split(";base64,")[1],
-//       encoding: "base64",
-//       cid: solutionImage.split(";base64,")[1],
-//     },
-//   ],
-// };
+        //   html: `   <img src="cid:defaultLogo" alt="egradtutor" style="width: 150px;margin: 20px auto; margin-left:0; height: auto; display: block;">`,
+        //   attachments: [
+        //     {
+        //       filename: "solutionImage.png", // You can customize the filename
+        //       content: solutionImage.split(";base64,").pop(), // Extract base64 cid
+        //       cid:solutionImage.split(";base64,").pop(),
+        //       encoding: "base64",
+        //     },
+        //   ],
+        // };
+const mailOptions = {
+  from: "egradtutorweb@gmail.com",
+  to: userEmail,
+  subject: "Doubt Solution",
+  text: `Doubt ID: ${doubtId}\nSolution: ${solutionText}`,
+  html: `
+    <html>
+      <head>
+        <style>
+          img {
+            width: 150px;
+            margin: 20px auto;
+            margin-left: 0;
+            height: auto;
+            display: block;
+          }
+        </style>
+      </head>
+      <body>
+        <img src="cid:${solutionImage.split(";base64,")[1]}" alt="egradtutor">
+      </body>
+    </html>
+  `,
+  attachments: [
+    {
+      filename: "solutionImage.png",
+      content: solutionImage.split(";base64,")[1],
+      encoding: "base64",
+      cid: solutionImage.split(";base64,")[1],
+    },
+  ],
+};
 
 
-//         // Send email
-//         await transporter.sendMail(mailOptions);
+        // Send email
+        await transporter.sendMail(mailOptions);
   
-//         console.log('Solution email sent successfully');
-//         res.json({ success: true });
-//       } else {
-//         console.error('User email not found');
-//         res.status(404).json({ error: 'User email not found' });
-//       }
-//     } catch (error) {
-//       console.error('Error sending email:', error);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//     }
-//   });
+        console.log('Solution email sent successfully');
+        res.json({ success: true });
+      } else {
+        console.error('User email not found');
+        res.status(404).json({ error: 'User email not found' });
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
 router.post("/sendSolution", async (req, res) => {
   try {

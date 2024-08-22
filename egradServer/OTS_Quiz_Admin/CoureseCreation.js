@@ -1595,7 +1595,20 @@ router.put(
     }
   }
 );
-// for pg examss==========================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =================FOR PG EXAMSS==========================================
 
 
 router.get("/courese-exam-subjects/:examId/pgSubjects", async (req, res) => {
@@ -1761,4 +1774,53 @@ router.get("/pgTypeOfQuestions", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+
+router.get("/courese-examsPg", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT  examId,examName FROM exams WHERE branchId=2");
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/courese-exam-subjects/:examId/subjects", async (req, res) => {
+  const examId = req.params.examId;
+
+  try {
+    const query = `
+        SELECT s.subjectId, s.subjectName
+        FROM subjects AS s
+        JOIN exam_creation_table AS ec ON s.subjectId = ec.subjectId
+        WHERE ec.examId = ?
+      `;
+    const [rows] = await db.query(query, [examId]);
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = router;

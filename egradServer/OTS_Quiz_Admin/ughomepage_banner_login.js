@@ -1691,7 +1691,7 @@ router.get('/fetchStudentDetailsForPG', async (req, res) => {
   try {
     const sql = `SELECT ots.*,log.user_Id ,log.username,log.role,log.studentregistationId,log.email FROM otsstudentregistation ots 
                  LEFT JOIN log ON ots.studentregistationId = log.studentregistationId 
-                 WHERE role = 'User' AND branchId=2 `;
+                 WHERE role = 'User' AND branchId=2`;
     const [rows] = await db.query(sql);
     console.log(rows)
     res.send(rows);

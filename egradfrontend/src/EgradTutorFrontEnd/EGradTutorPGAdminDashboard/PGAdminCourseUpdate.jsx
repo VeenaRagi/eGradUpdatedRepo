@@ -3,15 +3,11 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import BASE_URL from "../../apiConfig";
 import { useLocation } from "react-router-dom";
-// import "./styles/ResponsiveForAdmin.css";
-// import '../EgradtutorPortalsAdmin/styles/ResponsiveForAdmin'
 import '../EgradtutorPortalsAdmin/styles/ResponsiveForAdmin.css'
 const PGAdminCourseUpdate = () => {
   const { portalId } = useParams();
-  // console.log(portalId, "portal id ");
   const navigate = useNavigate();
   const { courseCreationId } = useParams();
-  // console.log(courseCreationId, "courseCreationId from the params ");
   //   ===========================================
   const [courseData, setCourseData] = useState([]);
   const [base64Image, setBase64Image] = useState(null);
@@ -23,16 +19,13 @@ const PGAdminCourseUpdate = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [subjectsData, setSubjectsData] = useState([]);
-  const [courseImageForm1, setCourseImageForm1] = useState(null);
   const [portaleId, setPortaleId] = useState(null);
   const [typeOfTest, setTypeOfTest] = useState([]);
   const [selectedtypeOfTest, setSelectedtypeOfTest] = useState([]);
   const [typeofQuestion, setTypeofQuestion] = useState([]);
   const [selectedtypeofQuestion, setSelectedtypeofQuestion] = useState([]);
   const [showPortalButtons, setShowPortalButtons] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const location = useLocation();
-  // console.log(location, "location of the page ");
+  
 
   // ================================================
   const [courseName, setCourseName] = useState("");
@@ -42,23 +35,20 @@ const PGAdminCourseUpdate = () => {
   const [cost, setCost] = useState("");
   const [discount, setDiscount] = useState("");
   const [totalPrice, setTotalPrice] = useState("");
-  const [exams3, setExams3] = useState([]);
   const [selectedExam, setSelectedExam] = useState("");
   const [typeOfTests, setTypeOfTests] = useState([]);
   const [selectedTypeOfTests, setSelectedTypeOfTests] = useState("");
   const [subjects, setSubjects] = useState([]);
-  const [selectedSubjects3, setSelectedSubjects3] = useState([]);
   const [questionTypes, setQuestionTypes] = useState([]);
   const [selectedQuestionTypes, setSelectedQuestionTypes] = useState([]);
   const [paymentlink, setPaymentlink] = useState("");
   const [courseImage, setCourseImage] = useState([]);
-  const [subArray, setSubArray] = useState([]);
   const handleCourseImageChange = (event) => {
     const file = event.target.files[0];
     setCourseImage(file);
   };
-  // console.log(paymentlink);
-  // console.log(courseImage);
+  
+
   const generateYearOptions = () => {
     const currentYear = new Date().getFullYear();
     const startYear = 2000;
@@ -80,7 +70,6 @@ const PGAdminCourseUpdate = () => {
     axios
       .get(`${BASE_URL}/Portal_coures_creation_admin/Portal_feaching`)
       .then((response) => {
-        // console.log("Fetched portals:", response.data);
         setPortals(response.data);
       })
       .catch((error) => {
@@ -88,7 +77,7 @@ const PGAdminCourseUpdate = () => {
       });
   }, []);
   useEffect(() => {
-    fetch(`${BASE_URL}/CoureseCreation/courese-exams`)
+    fetch(`${BASE_URL}/CoureseCreation/courese-examsPg`)
       .then((response) => response.json())
       .then((data) => {
         setExams(data);
@@ -96,40 +85,94 @@ const PGAdminCourseUpdate = () => {
       .catch((error) => console.error("Error fetching exams:", error));
   }, []);
 
+  // useEffect(() => {
+  //   const fetchTypeOfTest = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${BASE_URL}/CoureseCreation/type_of_PGtests`
+  //       );
+  //       const result = await response.json();
+  //       setTypeOfTest(result);
+  //     } catch (error) {
+  //       console.error("Error fetching Type of questions:", error);
+  //     }
+  //   };
+
+  //   fetchTypeOfTest();
+  // }, []);
+
+
+
   useEffect(() => {
     const fetchTypeOfTest = async () => {
       try {
-        const response = await fetch(
-          `${BASE_URL}/CoureseCreation/type_of_PGtests`
-        );
+        const response = await fetch(`${BASE_URL}/CoureseCreation/type_of_PGtests`);
         const result = await response.json();
         setTypeOfTest(result);
       } catch (error) {
-        console.error("Error fetching Type of questions:", error);
+        console.error("Error fetching types of tests:", error);
       }
     };
-
+  
+    const fetchCourseData = async () => {
+      try {
+        const response = await fetch(
+          `${BASE_URL}/CoureseCreation/type_of_PGtests/${portalId}/${courseCreationId}`
+        );
+        const courseData = await response.json();
+        setSelectedTypeOfTests(courseData.type_of_test.split(","));
+        console.log(selectedTypeOfTests)
+      } catch (error) {
+        console.error("Error fetching course data:", error);
+      }
+    };
+  
     fetchTypeOfTest();
-  }, []);
+    fetchCourseData();
+  }, [portalId, courseCreationId]);
+  
+
+
+  // useEffect(() => {
+  //   const fetchTypeOfQuestion = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${BASE_URL}/CoureseCreation/type_of_questions`
+  //       );
+  //       const result = await response.json();
+  //       setTypeofQuestion(result);
+  //     } catch (error) {
+  //       console.error("Error fetching Type of questions:", error);
+  //     }
+  //   };
+
+  //   fetchTypeOfQuestion();
+  // }, []);
 
 
 
   useEffect(() => {
-    const fetchTypeOfQuestion = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch(
-          `${BASE_URL}/CoureseCreation/type_of_questions`
+        // Fetch types of questions
+        const questionsResponse = await fetch(`${BASE_URL}/CoureseCreation/type_of_questions`);
+        const questionsData = await questionsResponse.json();
+        setTypeofQuestion(questionsData);
+  
+        // Fetch course data to get preselected question types
+        const courseResponse = await fetch(
+          `${BASE_URL}/CoureseCreation/courseupdate/${portalId}/${courseCreationId}`
         );
-        const result = await response.json();
-        // console.log("Type of Questions Data:", result); // Add this line to log the data
-        setTypeofQuestion(result);
+        const courseData = await courseResponse.json();
+        setSelectedtypeofQuestion(courseData.question_types.split(","));
       } catch (error) {
-        console.error("Error fetching Type of questions:", error);
+        console.error("Error fetching data:", error);
       }
     };
-
-    fetchTypeOfQuestion();
-  }, []);
+  
+    fetchData();
+  }, [portalId, courseCreationId]);
+  
 
   const fetchCourseData = async () => {
     try {
@@ -157,7 +200,6 @@ const PGAdminCourseUpdate = () => {
   }, []);
 
   useEffect(() => {
-    // console.log(selectedSubjects);
   }, [selectedSubjects]);
   const handleCloseAndNavigate=()=>{
     setOtsFormData({
@@ -199,13 +241,9 @@ const PGAdminCourseUpdate = () => {
           `${BASE_URL}/CoureseCreation/courseupdate/${portalId}/${courseCreationId}`
         );
 
-        const examsResponse = await axios.get(
-          `${BASE_URL}/CoureseCreation/courese-exams`
-        );
         const courseData = response.data;
         console.log(courseData, "courseeeeeeeeeee");
-        // console.log("course data's image ", courseData.cardImage, '...................')
-        setExams(examsResponse.data);
+        // setExams(examsResponse.data);
         if (portalId === "1") {
           setOtsFormData({
             courseName: courseData.courseName,
@@ -216,10 +254,7 @@ const PGAdminCourseUpdate = () => {
             courseEndDate: courseData.courseEndDate || "",
             cost: courseData.cost || "",
             discount: courseData.Discount || "",
-            // discountAmount:courseData.cost/100 * (courseData.discount=courseData.totalPrice)|| "",
-            discountAmount :courseData.cost && courseData.discount 
-            ? (courseData.cost / 100) * courseData.discount 
-            : "",
+            discountAmount:courseData.cost/100 * (courseData.discount)|| "",
             totalPrice: courseData.totalPrice || "",
             paymentlink: courseData.paymentlink || "",
             // cardImage: "",
@@ -230,57 +265,35 @@ const PGAdminCourseUpdate = () => {
           setEndDate(courseData.courseEndDate.toString());
           setSelectedexams(courseData.examId.toString());
           const response = await fetch(
-            `${BASE_URL}/CoureseCreation/courese-exam-subjects/${courseData.examId}/subjects`
+            `${BASE_URL}/CoureseCreation/courese-exam-subjects/${courseData.examId}/pgSubjects`
           );
           const data = await response.json();
-          // console.log("Subjects Data:", data); // Log the fetched data
           setSubjectsData(data);
-          // console.log(subjectsData, "subjects data check");
           const subArray = courseData.subjects.split(",");
-          // console.log(`subArray`, subArray);
-          data.forEach((subject) => {
-            // console.log(subject.subjectId, subject.subjectName);
-          });
+       
           data.forEach((subject) => {
             if (subArray.includes(subject.subjectName)) {
-              // console.log(
-              //   `${subject.subjectName} is included hereeeee at id ${subject.subjectId}`
-              // );
+            
               setSelectedSubjects((prev) => [...prev, subject.subjectId]);
+              console.log(selectedSubjects)
             }
           });
           const arrayOfTypeOfTest = courseData.type_of_test.split(",");
-          // console.log(arrayOfTypeOfTest, "this is the array after splitting");
-          // console.log(
-          //   typeOfTest,
-          //   "useEffect's type of test..................."
-          // );
+
+
           typeOfTest.forEach((element) => {
             if (arrayOfTypeOfTest.includes(element.typeOfTestName)) {
               setSelectedtypeOfTest((prev) => [...prev, element.typeOfTestId]);
-              // console.log(
-              //   `${element.typeOfTestName} is included in the typeOfTest object`
-              // );
-            } else {
-              // console.log("nope");
             }
           });
-          // console.log(typeofQuestion, "typeofQuestion from database ");
+          
           const typeOfQuestionsArray = courseData.question_types.split(",");
-          // console.log(typeOfQuestionsArray, "user selected ones");
-          typeOfQuestionsArray.forEach((type) => {
-            // console.log(type, "type in typeOfQuestionsArray");
-          });
-          typeofQuestion.forEach((ele) => {
-            if (typeOfQuestionsArray.includes(ele.typeofQuestion)) {
-              setSelectedtypeofQuestion((prev) => [...prev, ele.quesionTypeId]);
-              // console.log(
-              //   `${ele.typeOfTestName} which is included in the ${ele.typeOfTestId}`
-              // );
-            } else {
-              // console.log(`nope`);
+          typeOfQuestionsArray.forEach((element) => {
+            if (arrayOfTypeOfTest.includes(element.typeOfTestName)) {
+              setSelectedtypeOfTest((prev) => [...prev, element.typeOfTestId]);
             }
           });
+          
           // asdf
         } else if (portalId === "2") {
           setPqbFormData({
@@ -302,42 +315,35 @@ const PGAdminCourseUpdate = () => {
           setStartDate(courseData.courseStartDate.toString());
           setEndDate(courseData.courseEndDate.toString());
           const response = await fetch(
-            `${BASE_URL}/CoureseCreation/courese-exam-subjects/${courseData.examId}/subjects`
+            `${BASE_URL}/CoureseCreation/courese-exam-subjects/${courseData.examId}/pgSubjects`
           );
           const data = await response.json();
           setSubjectsData(data);
-          // console.log("Subjects Data:", data); // Log the fetched data
+          setSelectedTypeOfTests(data.departmentId)
+          console.log(subjectsData)
+          console.log(selectedTypeOfTests)
           const subArray = courseData.subjects.split(",");
-          // console.log(`subArray`, subArray);
           data.forEach((subject) => {
             if (subArray.includes(subject.subjectName)) {
-              // console.log(
-              //   `${subject.subjectName} is included hereeeee at id ${subject.subjectId}`
-              // );
               setSelectedSubjects((prev) => [...prev, subject.subjectId]);
             }
           });
           const arrayOfTypeOfTest = courseData.type_of_test.split(",");
-          // console.log(arrayOfTypeOfTest, "this is the array after splitting");
-          // console.log(
-          //   typeOfTest,
-          //   "useEffect's type of test..................."
-          // );
-          typeOfTest.forEach((element) => {
+                    typeOfTest.forEach((element) => {
             if (arrayOfTypeOfTest.includes(element.typeOfTestName)) {
               setSelectedtypeOfTest((prev) => [...prev, element.typeOfTestId]);
-              // console.log(
-              //   `${element.typeOfTestName} is included in the typeOfTest object`
-              // );
             } else {
-              // console.log("nope");
             }
           });
-          // console.log(typeofQuestion, "typeofQuestion from database ");
+
           const typeOfQuestionsArray = courseData.question_types.split(",");
-          // console.log(typeOfQuestionsArray, "user selected ones");
-          typeOfQuestionsArray.forEach((type) => {
-            // console.log(type, "type in typeOfQuestionsArray");
+          typeOfQuestionsArray.forEach((ele) => {
+            if (typeOfQuestionsArray.includes(ele.typeofQuestion)) {
+              setSelectedtypeofQuestion((prev) => [...prev, ele.quesionTypeId]);
+              
+            } else {
+              // console.log(`nope ${ele.typeOfTestName} `);
+            }
           });
           typeofQuestion.forEach((ele) => {
             if (typeOfQuestionsArray.includes(ele.typeofQuestion)) {
@@ -402,31 +408,22 @@ const PGAdminCourseUpdate = () => {
           setEndDate(courseData.courseEndDate.toString());
           setSelectedexams(courseData.examId); //BITSAT OR JEE
           const response = await fetch(
-            `${BASE_URL}/CoureseCreation/courese-exam-subjects/${courseData.examId}/subjects`
+            `${BASE_URL}/CoureseCreation/courese-exam-subjects/${courseData.examId}/pgSubjects`
           );
           const data = await response.json(); // GETTING CORRECTLY
           setSubjectsData(data);
-          // console.log(data, "data from the subjects api ");
           Object.values(data).forEach((value) => {
             if (courseData.subjects.includes(value.subjectName)) {
-              // console.log(
-              //   `${value.subjectName}is included in the object at ${value.subjectId}`
-              // );
-              // console.log(
-              //   `${value.subjectId} which i have to include in the array `
-              // );
+              
               setSelectedSubject([value.subjectId]);
-
-              // console.log(selectedSubject, "selectedSubject ");
             } else {
-              // console.log("not included .....");
+           
             }
           });
         } else {
-          // console.error("Course data not found.");
+         
         }
       } catch (error) {
-        // console.error("Error fetching course data:", error);
       }
     };
 
@@ -471,6 +468,7 @@ const PGAdminCourseUpdate = () => {
 
     setSelectedSubjects(updatedSubjects);
   };
+  
   const handleCalculateTotal = () => {
     // Assuming cost and discount are numbers
     const costValue = parseFloat(cost);
@@ -489,7 +487,6 @@ const PGAdminCourseUpdate = () => {
     e.preventDefault();
 
     const formDataObj = new FormData();
-    //  formDataObj.append("selectedTestpattern", selectedTestpattern);
     formDataObj.append("courseName", courseName);
     formDataObj.append("courseYear", courseYear);
     formDataObj.append("selectedTypeOfTests", selectedTypeOfTests);
@@ -515,9 +512,6 @@ const PGAdminCourseUpdate = () => {
         }
       );
 
-      // console.log(courseImage); // Assuming courseImage is defined elsewhere
-
-      // navigate("/UgadminHome");
       window.location.href = "/PGCourseAdmin";
     } catch (error) {
       console.error("Error updating course:", error);
@@ -537,7 +531,6 @@ const PGAdminCourseUpdate = () => {
     formDataObj.append("courseName", otsformData.courseName);
     formDataObj.append("courseYear", otsformData.courseYear);
     formDataObj.append("examId", selectedexams);
-    // formDataObj.append("courseStartDate", otsformData.courseStartDate);
     formDataObj.append("courseStartDate", startDate);
     formDataObj.append("courseEndDate", endDate);
     formDataObj.append("cost", otsformData.cost);
@@ -550,10 +543,7 @@ const PGAdminCourseUpdate = () => {
       "typeofQuestion",
       JSON.stringify(selectedtypeofQuestion)
     );
-
-    // console.log(formDataObj);
     try {
-      // console.log("entered into try catch block");
       const response = await axios.put(
         `${BASE_URL}/CoureseCreation/update-course-form1/${courseCreationId}/${portalId}`,
         formDataObj,
@@ -565,37 +555,22 @@ const PGAdminCourseUpdate = () => {
       );
       const result = await response.data.success;
       if (response.data.success) {
-        // console.log("update succcessfull ", response.data.message);
-        // window.history.go(-1);
         window.location.href = "/PGCourseAdmin";
       }
-      // console.log(result === "Updated successfully");
-      // console.log(result, "result");
-      // Convert selectedSubjects to a Set to remove duplicates
       const uniqueSelectedSubjects = new Set(selectedSubjects);
-
-      // Convert the Set back to an array
       const uniqueSelectedSubjectsArray = Array.from(uniqueSelectedSubjects);
-
-      // Similarly, do the same for selectedtypeofQuestion and selectedtypeOfTest
-
-      // Convert selectedtypeofQuestion to a Set
       const uniqueSelectedTypeOfQuestion = new Set(selectedtypeofQuestion);
-      // Convert it back to an array
       const uniqueSelectedTypeOfQuestionArray = Array.from(
         uniqueSelectedTypeOfQuestion
       );
-      // Convert selectedtypeOfTest to a Set
       const uniqueSelectedTypeOfTest = new Set(selectedtypeOfTest);
-      // Convert it back to an array
       const uniqueSelectedTypeOfTestArray = Array.from(
         uniqueSelectedTypeOfTest
       );
 
       if (result === true) {
         const subjectUpdating = await fetch(
-          `${BASE_URL}/CoureseCreation/course_type_of_questionUpdation/${courseCreationId}
-        `,
+          `${BASE_URL}/CoureseCreation/course_type_of_questionUpdation/${courseCreationId} `,
           {
             method: "PUT",
             headers: {
@@ -608,26 +583,17 @@ const PGAdminCourseUpdate = () => {
             }),
           }
         );
-        // console.log(subjectUpdating, "subjectUpdating............");
       }
-      // console.log("out of if block");
     } catch (error) {
       console.error("Error submitting course data:", error);
     }
-    // otsresetFormFields()
-    // setBase64Image("")
-    // setStartDate("")
-    // setEndDate("")
-    // setSelectedexams("")
-    // setSubjectsData("")
-    // setSelectedtypeOfTest("")
-    // setSelectedtypeofQuestion("")
-  };
+     };
 
   const [otsformData, setOtsFormData] = useState({
     courseName: "",
     courseYear: "",
     examId: "",
+    typeOfTests:"",
     typeofQuestion: "",
     courseStartDate: "",
     courseEndDate: "",
@@ -638,6 +604,7 @@ const PGAdminCourseUpdate = () => {
     paymentlink: "",
     cardImage: "",
   });
+
   const handleChangeots = (e) => {
     const { name, value } = e.target;
     if (name === "cost" || name === "discount") {
@@ -668,18 +635,15 @@ const PGAdminCourseUpdate = () => {
     }
   };
 
-  const handletypeoftest = (event, typeOfTestId) => {
-    const { checked } = event.target;
-
-    setSelectedtypeOfTest((prevSelectedTest) => {
-      const updatedSelectedTest = checked
-        ? [...prevSelectedTest, typeOfTestId]
-        : prevSelectedTest.filter((id) => id !== typeOfTestId);
-
-      // console.log("Selected Type of Test:", updatedSelectedTest);
-      return updatedSelectedTest;
-    });
+  const handletypeoftest = (e, typeOfTestId) => {
+    const { checked } = e.target;
+    if (checked) {
+      setSelectedtypeOfTest((prev) => [...prev, typeOfTestId]);
+    } else {
+      setSelectedtypeOfTest((prev) => prev.filter(id => id !== typeOfTestId));
+    }
   };
+  
   const otsresetFormFields = () => {
     setOtsFormData({
       courseName: "",
@@ -702,19 +666,15 @@ const PGAdminCourseUpdate = () => {
 
   const handleexams = async (event) => {
     const selectedExamId = event.target.value;
-    // console.log("Selected Exam ID:", selectedExamId);
     setSelectedexams(selectedExamId);
-    // console.log("Selected Exam ID (after setting):", selectedexams);
     try {
       const response = await fetch(
-        `${BASE_URL}/CoureseCreation/courese-exam-subjects/${selectedExamId}/subjects`
+        `${BASE_URL}/CoureseCreation/courese-exam-subjects/${selectedExamId}/pgSubjects`
       );
       const data = await response.json();
-      // console.log("Subjects Data:", data); // Log the fetched data
       setSubjectsData(data); // Update subjectsData state
       setSelectedSubjects([]); // Reset selected subjects
     } catch (error) {
-      // console.error("Error fetching subjects:", error);
     }
 
     setSelectedexams(selectedExamId);
@@ -725,24 +685,21 @@ const PGAdminCourseUpdate = () => {
 
     setSelectedSubjects((prevSelectedSubjects) => {
       if (checked) {
-        // Add the subjectId to the array if it's not already present
         return [...new Set([...prevSelectedSubjects, subjectId])];
       } else {
-        // Remove the subjectId from the array
         return prevSelectedSubjects.filter((id) => id !== subjectId);
       }
     });
   };
+  
 
   const handleQuestionChange = (event, questionTypeId) => {
     const { checked } = event.target;
-
+  
     setSelectedtypeofQuestion((prevSelectedQuestions) => {
       const updatedSelectedQuestions = checked
         ? [...prevSelectedQuestions, questionTypeId]
         : prevSelectedQuestions.filter((id) => id !== questionTypeId);
-
-      // console.log("Selected Type of Questions:", updatedSelectedQuestions);
       return updatedSelectedQuestions;
     });
   };
@@ -756,7 +713,18 @@ const PGAdminCourseUpdate = () => {
     const formattedDate = e.target.value;
     setEndDate(formattedDate);
   };
+
+
+  
   // ============================================
+  
+
+
+
+
+
+
+
   // ============form2=============================
 
   const handleSubmitpqb = async (e) => {
@@ -767,9 +735,6 @@ const PGAdminCourseUpdate = () => {
     formDataObj.append("courseName", pqbformData.courseName);
     formDataObj.append("courseYear", pqbformData.courseYear);
     formDataObj.append("examId", selectedexams);
-    // formDataObj.append("courseStartDate", pqbformData.courseStartDate);
-    // formDataObj.append("courseEndDate", pqbformData.courseEndDate);
-    // Note that previously they handled with the startDate and endDate so i took startDate endDate instead of formData.
     formDataObj.append("courseStartDate", startDate);
     formDataObj.append("courseEndDate", endDate);
     formDataObj.append("cost", pqbformData.cost);
@@ -777,43 +742,26 @@ const PGAdminCourseUpdate = () => {
     formDataObj.append("totalPrice", pqbformData.totalPrice);
     formDataObj.append("Portale_Id", portaleId);
     formDataObj.append("cardImage", courseImage); // Append image file
-    // Convert selectedtypeOfTest to a Set to remove duplicates
     const uniqueSelectedTypeOfTest = new Set(selectedtypeOfTest);
-    // Convert the Set back to an array
     const uniqueSelectedTypeOfTestArray = Array.from(uniqueSelectedTypeOfTest);
-    // Now you can send uniqueSelectedTypeOfTestArray to your API or use it as needed
-    //  i have to set
     formDataObj.append(
       "typeOfTest",
       JSON.stringify(uniqueSelectedTypeOfTestArray)
     );
-    // for selectedSubjects
     const uniqueSelectedSubjects = new Set(selectedSubjects);
     const uniqueSelectedSubjectsArray = Array.from(uniqueSelectedSubjects);
     // ===================================
     formDataObj.append("subjects", JSON.stringify(uniqueSelectedSubjectsArray));
-    // for selectedtypeofQuestion
     const uniqueSelectedtypeofQuestion = new Set(selectedtypeofQuestion);
     const uniqueSelectedtypeofQuestionArray = Array.from(
       uniqueSelectedtypeofQuestion
     );
-    // console.log(
-    //   uniqueSelectedtypeofQuestionArray,
-    //   "uniqueSelectedtypeofQuestionArray"
-    // );
-    // ==================================
+   
     formDataObj.append(
       "typeofQuestion",
       JSON.stringify(uniqueSelectedtypeofQuestionArray)
     );
-
-    // console.log(formDataObj);
-    // console.log(
-    //   "form data we are sending isssssssssssssssssssssssssssssssssssss",
-    //   formDataObj
-    // );
     try {
-      // console.log("entered into try catch block");
       const response = await axios.put(
         `${BASE_URL}/CoureseCreation/update-course-form1/${courseCreationId}/${portalId}`,
         formDataObj,
@@ -825,10 +773,7 @@ const PGAdminCourseUpdate = () => {
       );
       const result = await response.data.success;
       if (response.data.success) {
-        // console.log("update succcessfull ", response.data.message);
       }
-      // console.log(result === "Updated successfully");
-      // console.log(result, "result");
       if (result === true) {
         const subjectUpdating = await fetch(
           `${BASE_URL}/CoureseCreation/course_type_of_questionUpdation/${courseCreationId}
@@ -845,13 +790,11 @@ const PGAdminCourseUpdate = () => {
             }),
           }
         );
-        // console.log(subjectUpdating, "subjectUpdating............");
+        
       }
-      // console.log("out of if block");
-      // window.history.go(-1);
+     
       if (response.data.success) {
-        // console.log("update successful ", response.data.message);
-        // window.history.go(-1); // Go back in history
+        
         window.location.href = "/PGCourseAdmin"; // Redirect to "/UgadminHome"
       }
     } catch (error) {
@@ -1013,10 +956,8 @@ const PGAdminCourseUpdate = () => {
     setSelectedSubjects([]);
   };
   const handleCloseForm = () => {
-    // console.log("Closing form"); // Log when closing a form
     setActiveForm(null); // Reset active form
     setShowPortalButtons(true);
-    // setPortaleId(null);
   };
 
   const handleSubjectChangecp = (event, subjectId) => {
@@ -1024,8 +965,6 @@ const PGAdminCourseUpdate = () => {
 
     setSelectedSubject((prevSelectedSubjects) => {
       if (checked) {
-        // Add the subjectId to the array if it's not already present
-        return [...new Set([subjectId])];
       } else {
         // Remove the subjectId from the array
         return prevSelectedSubjects.filter((id) => id !== subjectId);
@@ -1065,9 +1004,6 @@ const PGAdminCourseUpdate = () => {
 
   // =====================================================
 
-  useEffect(() => {
-    // console.log(selectedSubject, "selectedSubject");
-  }, [selectedSubject]);
   //   asdf
   useEffect(() => {
     handleCalculateTotal();
@@ -1103,36 +1039,35 @@ const PGAdminCourseUpdate = () => {
               </select>
             </div>
           </div>
+
           <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-            <div className="testCreation_list">
-              <label>Type of test:</label>
-              <div className="coures_-typeOfTest">
-                {typeOfTest.map((typeofTest) => (
-                  <div
-                    className="course_checkbox_continer course_frominput_container_media"
-                    key={typeofTest.typeOfTestId}
-                  >
-                    <label htmlFor={`question-${typeofTest.typeOfTestId}`}>
-                      {typeofTest.typeOfTestName}
-                    </label>
-                    <input
-                      className="inputLable"
-                      type="checkbox"
-                      id={`typeofTest-${typeofTest.typeOfTestId}`}
-                      name={`typeofTest-${typeofTest.typeOfTestId}`}
-                      value={typeofTest.typeOfTestId}
-                      checked={selectedtypeOfTest.includes(
-                        typeofTest.typeOfTestId
-                      )}
-                      onChange={(e) =>
-                        handletypeoftest(e, typeofTest.typeOfTestId)
-                      }
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>{" "}
-          </div>
+      <div className="testCreation_list">
+        <label>Type of test:</label>
+        <div className="coures_-typeOfTest">
+          {typeOfTest.map((typeofTest) => (
+            <div
+              className="course_checkbox_continer course_frominput_container_media"
+              key={typeofTest.typeOfTestId}
+            >
+              <label htmlFor={`typeofTest-${typeofTest.typeOfTestId}`}>
+                {typeofTest.typeOfTestName}
+              </label>
+              <input
+                className="inputLable"
+                type="checkbox"
+                id={`typeofTest-${typeofTest.typeOfTestId}`}
+                name={`typeofTest-${typeofTest.typeOfTestId}`}
+                value={typeofTest.typeOfTestId}
+                checked={selectedtypeOfTest.includes(typeofTest.typeOfTestId)}
+                onChange={(e) => handletypeoftest(e, typeofTest.typeOfTestId)}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+          
           <div className="coures-contant_-flexCOntantc examSubjects_-contant">
             <div className="testCreation_-list">
               <label htmlFor="exams">Select Exam:</label>
@@ -1153,20 +1088,20 @@ const PGAdminCourseUpdate = () => {
                   <div
                     className="course_frominput_container "
                     id="course_frominput_container_media"
-                    key={subject.subjectId}
+                    key={subject.departmentId}
                   >
-                    <label htmlFor={`subject-${subject.subjectId}`}>
-                      {subject.subjectName}
+                    <label htmlFor={`subject-${subject.departmentId}`}>
+                      {subject.departmentName}
                     </label>
-                    <input
+                     <input
                       className="inputLable"
                       type="checkbox"
-                      id={`subject-${subject.subjectId}`}
-                      name={`subject-${subject.subjectId}`}
-                      value={subject.subjectId}
-                      checked={selectedSubjects.includes(subject.subjectId)}
+                      id={`subject-${subject.departmentId}`}
+                      name={`subject-${subject.departmentId}`}
+                      value={subject.departmentId}
+                      checked={selectedSubjects.includes(subject.departmentId)}
                       onChange={(e) =>
-                        handleSubjectChange(e, subject.subjectId)
+                        handleSubjectChange(e, subject.departmentId)
                       }
                     />
                   </div>
@@ -1174,6 +1109,11 @@ const PGAdminCourseUpdate = () => {
               </div>
             </div>
           </div>
+
+
+
+
+
           <div className="coures-contant_-flexCOntantc examSubjects_-contant">
             <div className="testCreation_list">
               <label>Type of Questions:</label>
