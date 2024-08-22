@@ -2048,6 +2048,7 @@ const UG_OTSQuizPage = () => {
 
   const [markedForReviewQuestions, setMarkedForReviewQuestions] = useState([]);
   const [activeQuestionId, setActiveQuestionId] = useState(null);
+  const [questionss, setQuestions] = useState([]);
 
   const location = useLocation();
   const { userData } = location.state || {};
@@ -2056,6 +2057,28 @@ const UG_OTSQuizPage = () => {
   const { param1, param2 } = useParams();
   const [decryptedParam1, setDecryptedParam1] = useState("");
   const [decryptedParam2, setDecryptedParam2] = useState("");
+
+  useEffect(() => {
+    if (testData?.subjects?.length) {
+      // Flatten questions from all subjects and sections
+      const allQuestions = testData.subjects.flatMap(subject =>
+        subject.sections.flatMap(section => section.questions)
+      );
+      setQuestions(allQuestions);
+
+      // Set the first question as the selected question
+      const firstQuestion = allQuestions[0];
+      if (firstQuestion) {
+        setSelectedQuestionId(firstQuestion.question_id);
+
+        // Set the first question as visited but not answered
+        setVisitedQuestions([firstQuestion.question_id]);
+        setNotAnsweredQuestions([firstQuestion.question_id]);
+      }
+    }
+  }, [testData]);
+
+
 
   useEffect(() => {
     const token = sessionStorage.getItem("navigationToken");
@@ -2951,7 +2974,7 @@ const UG_OTSQuizPage = () => {
           const isMarkedForReview = markedForReviewQuestions.includes(
             question.question_id
           );
-          const isVisited = visitedQuestions.includes(question.question_id);
+          const isVisited = visitedQuestions.includes(question.question_id) ;
           const isActive = selectedQuestionId === question.question_id;
           // Single if-else statement to determine the button class
           if (isMarkedForReview) {
@@ -2962,7 +2985,7 @@ const UG_OTSQuizPage = () => {
           } else if (isNotAnswered) {
             buttonClass += " notAnswered"; // Visited but not answered
           } else if (isVisited) {
-            buttonClass += " question_button"; // Visited but not interacted with
+            buttonClass += " visited"; // Visited but not interacted with
           } else {
             buttonClass += " question_button"; // Not visited question
           }
@@ -2988,7 +3011,7 @@ const UG_OTSQuizPage = () => {
       <div className="counts">
         <h3>Over all Counts</h3>
         <p>Visited: {visitedCount}</p>
-        <p>Not Visited: {notVisitedCount}</p>
+        <p>Not Visited: {questions.length - visitedQuestions.length}</p>
         <p>Answered: {answeredOnlyCount}</p>
         <p>Not Answered: {notAnsweredButVisitedCount}</p>
         <p>Marked for Review: {markForReviewOnlyCount}</p>

@@ -347,6 +347,13 @@ margin-left: 15px;
 .gn_next_btn svg{
     margin-left: 10px;
 }
+.gn_next_btn_conta.iner1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    border-top: 1px solid gray;
+}
 
 @media (max-width:850px){
   
