@@ -93,6 +93,27 @@ router.post("/success", async (req, res) => {
       `,
     };
 
+
+       // Fetch user and course details
+       const getUserAndBranchDetailsQuery = `
+       SELECT l.user_Id, r.Branch_Id
+       FROM log l
+       JOIN otsstudentregistation r ON l.studentregistationId = r.studentregistationId
+       WHERE l.email = ?
+     `;
+     const [userDetails] = await db.query(getUserAndBranchDetailsQuery, [userEmail]);
+ 
+     if (!userDetails || userDetails.length === 0) {
+       console.log("User not found");
+       return res.status(404).send({ error: "User not found" });
+     }
+     const user_Id = userDetails[0].user_Id;
+     const branchId = userDetails[0].Branch_Id;
+    //  const studentRegistrationId = userDetails[0].studentregistationId;
+
+     const encodedUserId = encodeURIComponent((user_Id));
+     const encodedBranchId=encodeURIComponent((branchId))
+    
     // Send the email
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
@@ -157,7 +178,7 @@ router.post("/success", async (req, res) => {
  
               <script>
                   document.getElementById('redirectButton').addEventListener('click', function() {
-                      window.location.href = 'http://localhost:3000/UserLogin';
+                      window.location.href = 'http://localhost:3000/Student_dashboard/${encodedUserId}/${encodedBranchId}';
                   });
               </script>
           </body>

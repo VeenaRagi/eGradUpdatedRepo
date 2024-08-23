@@ -180,6 +180,7 @@ const PoopularCourses = ({userRole}) => {
                             <div className={`before_start_now ${themeDetails.themeBuyButtonInCP}`}>
                               <Link
                                 to={`/CourseRegistrationForm/${courseExamsDetails.courseCreationId}/${courseExamsDetails.Branch_Id}`}
+                                
                               >
                                 Buy Now
                               </Link>
