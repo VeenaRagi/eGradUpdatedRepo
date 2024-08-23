@@ -183,7 +183,7 @@ const StudentDashbord_BuyCourses = ({decryptedUserIdState,branchIdFromLS }) => {
   return (
     <div className="QuizBUy_courses QuizBUy_coursesinstudentdB">
       {popupContent}
-      <h1>Branch_Id:{Branch_Id}</h1>
+      {/* <h1>Branch_Id:{Branch_Id}</h1> */}
       <div className="QuizBUy_coursessub_conatiner QuizBUy_coursessub_conatinerinstudentdB">
         <div className="QuizBUy_coursesheaderwithfilteringcontainer">
           <div className="QuizBUy_coursesheaderwithfilteringcontainerwithtagline">

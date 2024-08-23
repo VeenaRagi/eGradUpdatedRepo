@@ -220,7 +220,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top: 1px solid rgba(119, 115, 115, 0.644);
+    // border-top: 1px solid rgba(119, 115, 115, 0.644);
     padding: 20px 0;
 }
 
@@ -229,10 +229,19 @@
     border: none;
 
 }
+.gn_next_btn_container1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
 
+button.gn_prev_btn {
+    height: 50px;
+}
 .gn_next_btn {
     background: #0741ff;
-    padding: 8px 60px;
+    padding: 8px 30px;
     color: #ffffff;
     font-size: 1.5rem;
     display: flex;
@@ -243,7 +252,6 @@
 }
 .gn_next_btn:hover {
     background: #0741ff;
-    padding: 8px 60px;
     color: #e4e4e4;
     font-size: 1.5rem;
     display: flex;
@@ -314,6 +322,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: 65vh;
 }
 
 .Instructions_points_list {
@@ -337,4 +346,60 @@ margin-left: 15px;
 
 .gn_next_btn svg{
     margin-left: 10px;
+}
+.gn_next_btn_conta.iner1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    border-top: 1px solid gray;
+}
+
+@media (max-width:850px){
+  
+    .gn_next_btn_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+        width: 262px;
+        height: 100px;
+        font-size: 20px;
+    }
+
+    a.gn_next_btn {
+        font-size: 20px;
+    }
+    .gn_next_btn_bull {
+        background: rgba(7, 65, 255, 0.3450980392);
+        padding: 8px 10px;
+        width: 270px;
+        color: #ffffff;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        font-weight: 700;
+    }
+    .gn_next_btn_container1 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    .gn_next_btn {
+        background: #0741ff;
+        padding: 1px 10px;
+        color: #ffffff;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        font-weight: 700;
+    }
+    .gn_next_btn:hover{
+        font-size: 1.2rem;
+    }
 }

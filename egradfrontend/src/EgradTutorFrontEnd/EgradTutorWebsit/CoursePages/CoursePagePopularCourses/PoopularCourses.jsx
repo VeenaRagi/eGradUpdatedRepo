@@ -176,7 +176,7 @@ const PoopularCourses = ({userRole}) => {
                               <span className={themeDetails.themeCourseInfoSpan}>Amount: ₹</span>
                               {courseExamsDetails.totalPrice}/-
                             </p>
-                            <p>Branch_Id:{courseExamsDetails.Branch_Id}</p>
+                            {/* <p>Branch_Id:{courseExamsDetails.Branch_Id}</p> */}
                             <div className={`before_start_now ${themeDetails.themeBuyButtonInCP}`}>
                               <Link
                                 to={`/CourseRegistrationForm/${courseExamsDetails.courseCreationId}/${courseExamsDetails.Branch_Id}`}

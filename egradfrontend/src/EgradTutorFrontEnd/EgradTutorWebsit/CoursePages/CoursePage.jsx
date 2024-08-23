@@ -44,7 +44,7 @@ const CoursePage = ({isEditMode} ) => {
       ) : (
         branches.map((branch) => (
           <div key={branch.Branch_Id}>
-            <p>{branch.Branch_Name}</p>
+            {/* <p>{branch.Branch_Name}</p> */}
           </div>
         ))
       )}

@@ -159,172 +159,172 @@ const QuizPage = () => {
   };
 
   
-  // useEffect(() => {
-  //   if ("hidden" in document) {
-  //     document.addEventListener("visibilitychange", handleVisibilityChange);
-  //   } else {
-  //     console.log("Page Visibility API is not supported");
-  //   }
+  useEffect(() => {
+    if ("hidden" in document) {
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+    } else {
+      console.log("Page Visibility API is not supported");
+    }
 
-  //   return () => {
-  //     document.removeEventListener("visibilitychange", handleVisibilityChange);
-  //   };
-  // }, []);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
-  // const handleBeforeUnload = (event) => {
-  //   const confirmationMessage = "Are you sure you want to leave this page?";
-  //   event.returnValue = confirmationMessage; // For most browsers
-  //   setShowMalPractisePopup(true);
-  //   // setAttemptedToClose(true);
-  //   return confirmationMessage; // For some older browsers
-  // };
-  // const [isShiftPressed, setIsShiftPressed] = useState(false);
-  // const [isMetaPressed, setIsMetaPressed] = useState(false);
+  const handleBeforeUnload = (event) => {
+    const confirmationMessage = "Are you sure you want to leave this page?";
+    event.returnValue = confirmationMessage; // For most browsers
+    setShowMalPractisePopup(true);
+    // setAttemptedToClose(true);
+    return confirmationMessage; // For some older browsers
+  };
+  const [isShiftPressed, setIsShiftPressed] = useState(false);
+  const [isMetaPressed, setIsMetaPressed] = useState(false);
 
-  // const handleKeyDown = (event) => {
-  //   if (event.key === "Shift") {
-  //     event.preventDefault();
-  //     setIsShiftPressed(true);
-  //   }
-  //   if (event.key === "Meta" || event.key === "Win") {
-  //     event.preventDefault();
-  //     setIsMetaPressed(true);
-  //   }
-  //   if (event.key === "s" && isShiftPressed && isMetaPressed) {
-  //     event.preventDefault();
-  //     window.history.back();
-  //     window.close();
-  //   }
+  const handleKeyDown = (event) => {
+    if (event.key === "Shift") {
+      event.preventDefault();
+      setIsShiftPressed(true);
+    }
+    if (event.key === "Meta" || event.key === "Win") {
+      event.preventDefault();
+      setIsMetaPressed(true);
+    }
+    if (event.key === "s" && isShiftPressed && isMetaPressed) {
+      event.preventDefault();
+      window.history.back();
+      window.close();
+    }
 
-  //   if (isShiftPressed && isMetaPressed) {
-  //     event.preventDefault();
-  //     setShowMalPractisePopup(true);
-  //   }
-  // };
+    if (isShiftPressed && isMetaPressed) {
+      event.preventDefault();
+      setShowMalPractisePopup(true);
+    }
+  };
 
-  // const handleKeyUp = (event) => {
-  //   if (event.key === "Shift") {
-  //     event.preventDefault();
-  //     setIsShiftPressed(false);
-  //   }
-  //   if (event.key === "Meta" || event.key === "Win") {
-  //     event.preventDefault();
-  //     setIsMetaPressed(false);
-  //   }
-  // };
+  const handleKeyUp = (event) => {
+    if (event.key === "Shift") {
+      event.preventDefault();
+      setIsShiftPressed(false);
+    }
+    if (event.key === "Meta" || event.key === "Win") {
+      event.preventDefault();
+      setIsMetaPressed(false);
+    }
+  };
 
-  // useEffect(() => {
-  //   if ("hidden" in document) {
-  //     document.addEventListener("visibilitychange", handleVisibilityChange);
+  useEffect(() => {
+    if ("hidden" in document) {
+      document.addEventListener("visibilitychange", handleVisibilityChange);
 
-  //     window.addEventListener("focus", handleFocus);
-  //     window.addEventListener("blur", handleBlur);
+      window.addEventListener("focus", handleFocus);
+      window.addEventListener("blur", handleBlur);
 
-  //     document.addEventListener("keydown", handleKeyDown);
-  //     document.addEventListener("keyup", handleKeyUp);
-  //   } else {
-  //     console.log("Page Visibility API is not supported");
-  //   }
+      document.addEventListener("keydown", handleKeyDown);
+      document.addEventListener("keyup", handleKeyUp);
+    } else {
+      console.log("Page Visibility API is not supported");
+    }
 
-  //   return () => {
-  //     document.removeEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
 
-  //     window.removeEventListener("focus", handleFocus);
-  //     window.removeEventListener("blur", handleBlur);
+      window.removeEventListener("focus", handleFocus);
+      window.removeEventListener("blur", handleBlur);
 
-  //     document.removeEventListener("keydown", handleKeyDown);
-  //     document.removeEventListener("keyup", handleKeyUp);
-  //   };
-  // }, [isShiftPressed, isMetaPressed]);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keyup", handleKeyUp);
+    };
+  }, [isShiftPressed, isMetaPressed]);
 
-  // useEffect(() => {
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleBeforeUnload);
 
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // });
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  });
 
-  // const handleMalPractiseSubmit = async () => {
-  //   console.log("Handling malpractice submit");
-  //   try {
-  //     // window.alert(
-  //     //   "Your Test has been Submitted!! Click Ok to See Result.",
-  //     //   calculateResult()
-  //     // );
-  //     setShowButtonNo(false);
-  //     setShowExamSumary(true);
-  //     setShowMalPractisePopup(false);
-  //     calculateResult();
-  //     const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
-  //     const counts = calculateQuestionCounts();
-  //     setAnsweredCount(counts.answered);
-  //     setNotAnsweredCount(counts.notAnswered);
-  //     setMarkedForReviewCount(counts.markedForReview);
-  //     setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
-  //     setVisitedCount(counts.VisitedCount);
+  const handleMalPractiseSubmit = async () => {
+    console.log("Handling malpractice submit");
+    try {
+      // window.alert(
+      //   "Your Test has been Submitted!! Click Ok to See Result.",
+      //   calculateResult()
+      // );
+      setShowButtonNo(false);
+      setShowExamSumary(true);
+      setShowMalPractisePopup(false);
+      calculateResult();
+      const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
+      const counts = calculateQuestionCounts();
+      setAnsweredCount(counts.answered);
+      setNotAnsweredCount(counts.notAnswered);
+      setMarkedForReviewCount(counts.markedForReview);
+      setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
+      setVisitedCount(counts.VisitedCount);
 
-  //     // Assuming you have these variables in your component's state
-  //     const currentQuestion = questionData.questions[currentQuestionIndex];
-  //     const questionId = currentQuestion.question_id;
+      // Assuming you have these variables in your component's state
+      const currentQuestion = questionData.questions[currentQuestionIndex];
+      const questionId = currentQuestion.question_id;
 
-  //     // Format time
-  //     const formattedTime = WformatTime(wtimer);
-  //     const response = await fetch(`${BASE_URL}/QuizPage/saveExamSummary`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         userId: decryptedParam2,
-  //         totalUnattempted: notAnsweredCount,
-  //         totalAnswered: answeredCount,
-  //         NotVisitedb: NotVisitedb,
-  //         testCreationTableId: decryptedParam1,
-  //       }),
-  //     });
-  //     const result = await response.json();
-  //     console.log("Exam summary saved:", result);
-  //     try {
-  //       // Make a POST request to your server to submit time left
-  //       const response = await fetch(`${BASE_URL}/QuizPage/submitTimeLeft`, {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
+      // Format time
+      const formattedTime = WformatTime(wtimer);
+      const response = await fetch(`${BASE_URL}/QuizPage/saveExamSummary`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: decryptedParam2,
+          totalUnattempted: notAnsweredCount,
+          totalAnswered: answeredCount,
+          NotVisitedb: NotVisitedb,
+          testCreationTableId: decryptedParam1,
+        }),
+      });
+      const result = await response.json();
+      console.log("Exam summary saved:", result);
+      try {
+        // Make a POST request to your server to submit time left
+        const response = await fetch(`${BASE_URL}/QuizPage/submitTimeLeft`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-  //         body: JSON.stringify({
-  //           userId: decryptedParam2,
-  //           testCreationTableId: decryptedParam1,
-  //           timeLeft: formattedTime,
-  //         }),
-  //       });
+          body: JSON.stringify({
+            userId: decryptedParam2,
+            testCreationTableId: decryptedParam1,
+            timeLeft: formattedTime,
+          }),
+        });
 
-  //       const result = await response.json();
+        const result = await response.json();
 
-  //       console.log("Time left submission result:", result);
-  //     } catch (error) {
-  //       console.error("Error submitting time left:", error);
-  //     } finally {
-  //       // Ensure that the questionId is correctly obtained
-  //       if (questionId) {
-  //         // Clear local storage data for the current question
-  //         try {
-  //           console.log(
-  //             "Removing from local storage for questionId:",
-  //             questionId
-  //           );
-  //           localStorage.removeItem(`calculatorValue_${questionId}`);
-  //           console.log("Item removed successfully.");
-  //         } catch (error) {
-  //           console.error("Error removing item from local storage:", error);
-  //         }
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error("Error in handleSubmit:", error);
-  //   }
-  // };
+        console.log("Time left submission result:", result);
+      } catch (error) {
+        console.error("Error submitting time left:", error);
+      } finally {
+        // Ensure that the questionId is correctly obtained
+        if (questionId) {
+          // Clear local storage data for the current question
+          try {
+            console.log(
+              "Removing from local storage for questionId:",
+              questionId
+            );
+            localStorage.removeItem(`calculatorValue_${questionId}`);
+            console.log("Item removed successfully.");
+          } catch (error) {
+            console.error("Error removing item from local storage:", error);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
+    }
+  };
 
   // --------------------------------------CONST VARIABLES DECLARATIONS--------------------------
   const [questionData, setQuestionData] = useState({ questions: [] });
@@ -2246,12 +2246,12 @@ const QuizPage = () => {
 
     <div
       className="QuestionPaper_-container"
-      // ref={quizRef}
-      // onClick={enterFullscreen}
-      // style={{ backgroundColor: "white" }}
+      ref={quizRef}
+      onClick={enterFullscreen}
+      style={{ backgroundColor: "white" }}
     >
 
-      {/* {showMalPractisePopup && (
+      {showMalPractisePopup && (
         <div className="MalPracticePopup">
           <div className="malpractice_popup_content">
             <h2>Malpractice Attempt</h2>
@@ -2270,7 +2270,7 @@ const QuizPage = () => {
             </button>
           </div>
         </div>
-      )} */}
+      )}
       <div className="quiz_exam_interface_header quiz_exam_interface_header_q_if_H">
         <div className="quiz_exam_interface_header_LOGO ">
           {/* <img src={logo} alt="" /> */}

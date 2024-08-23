@@ -205,25 +205,15 @@ body {
   background: #579ac0da;
   justify-content: center;
   color: white;
-  /* border-radius: 2rem; */
-  /* padding: 3px; */
 }
 .quiz_exam_interface_body_left_container
   .quiz_exam_interface_SUBJECTS_CONTAINER {
   width: 100%;
-  /* background: #ebe7e7; */
   display: flex;
   padding: 1rem 1rem;
-  /* height: 60px; */
-  /* justify-content: space-between; */
   justify-content: end;
   align-items: center;
-  /* margin: 20px;
-  display: flex;
-  gap: 10px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid gray; */
-  /* z-index: 1; */
+
 }
 
 .right-header {

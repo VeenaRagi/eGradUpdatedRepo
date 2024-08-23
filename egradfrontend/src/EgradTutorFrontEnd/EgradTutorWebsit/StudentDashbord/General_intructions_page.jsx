@@ -9,7 +9,7 @@ import axios from "axios";
 
 const General_intructions_page_container = () => {
   const location = useLocation();
-  const { userData } = location.state || {}; 
+  const { userData } = location.state || {};
 
   const { param1, param2, param3, param4 } = useParams();
   const navigate = useNavigate();
@@ -204,28 +204,28 @@ const General_intructions_page_container = () => {
               </p>
             </div>
           </div>
-          <div className="gn_next_btn_container1">
-        <button
-          className="gn_prev_btn"
-          onClick={() => navigate(-1)}
-        >
-          <AiOutlineArrowLeft />Previous
-        </button>
-        <div className="gn_next_btn_container">
-        {isChecked ? (
-          <Link className="gn_next_btn" onClick={openQuizPage}>
-            I am ready to begin <AiOutlineArrowRight />
-          </Link>
-        ) : (
-          <div>
-            <span className="disabled-link gn_next_btn_bull">
-              I am ready to begin <AiOutlineArrowRight />
-            </span>
+          <div className="gn_next_btn_conta iner1">
+            <button
+              className="gn_prev_btn"
+              onClick={() => navigate(-1)}
+            >
+              <AiOutlineArrowLeft />Previous
+            </button>
+            <div className="gn_next_btn_container">
+              {isChecked ? (
+                <Link className="gn_next_btn" onClick={openQuizPage}>
+                  I am ready to begin <AiOutlineArrowRight />
+                </Link>
+              ) : (
+                <div>
+                  <span className="disabled-link gn_next_btn_bull">
+                    I am ready to begin <AiOutlineArrowRight />
+                  </span>
+                </div>
+              )}
+            </div>
+
           </div>
-        )}
-        </div>
-       
-      </div>
         </div>
         <div className="pg_StudentDetails">
           {" "}
@@ -242,7 +242,7 @@ const General_intructions_page_container = () => {
         </div>
       </div>
 
-    
+
     </>
   );
 };
