@@ -7,6 +7,7 @@ import { decryptData, encryptData } from "../utils/crypto";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { MdOutlineTimer } from "react-icons/md";
 import "../Style/Watermark.css";
+import UGQuestionPaper from "./UGQuestionPaper";
 
 const UG_OTSQuizPage = () => {
   const [testData, setTestData] = useState(null);
@@ -17,10 +18,12 @@ const UG_OTSQuizPage = () => {
   const [checkboxResponses, setCheckboxResponses] = useState({});
   const [textResponses, setTextResponses] = useState({});
   const [visitedQuestions, setVisitedQuestions] = useState([]);
+  const [setNotVisitedCount] = useState([]);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [notAnsweredQuestions, setNotAnsweredQuestions] = useState([]);
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const [markedForReviewQuestions, setMarkedForReviewQuestions] = useState([]);
+  const [setAnsweredAndMarkForReviewCount] = useState([]);
   const [answeredSaved, setAnsweredSaved] = useState([]);
   const [activeQuestionId, setActiveQuestionId] = useState(null);
   const [showExamSumary, setShowExamSumary] = useState(false);
@@ -40,22 +43,29 @@ const UG_OTSQuizPage = () => {
   const [questionButtonClass, setQuestionButtonClass] = useState({});
   const [showMalPractisePopup, setShowMalPractisePopup] = useState(false);
   const [allQuestions, setAllQuestions] = useState([]);
-    const [currentQuestions, setCurrentQuestions] = useState([]);
-  
+  const [currentQuestions, setCurrentQuestions] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const openQuestionPaper = () => {
+    setShowPopup(true);
+  };
 
-    useEffect(() => {
+  const closeQuestionPaper = () => {
+    setShowPopup(false);
+  };
+
+  useEffect(() => {
     if (testData?.subjects?.length) {
       // Flatten questions from all subjects and sections
-      const allFlattenedQuestions = testData.subjects.flatMap(subject =>
-        subject.sections.flatMap(section => section.questions)
+      const allFlattenedQuestions = testData.subjects.flatMap((subject) =>
+        subject.sections.flatMap((section) => section.questions)
       );
       setAllQuestions(allFlattenedQuestions);
-  
+
       // Set the first question as the selected question
       const firstQuestion = allFlattenedQuestions[0];
       if (firstQuestion) {
         setSelectedQuestionId(firstQuestion.question_id);
-  
+
         // Set the first question as visited but not answered
         setVisitedQuestions([firstQuestion.question_id]);
         setNotAnsweredQuestions([firstQuestion.question_id]);
@@ -63,21 +73,20 @@ const UG_OTSQuizPage = () => {
     }
   }, [testData]);
 
-
   const handleSectionClick = (sectionId) => {
     setSelectedSectionId(sectionId);
-  
+
     const selectedSection = testData.subjects
       .find((subject) => subject.subjectId === selectedSubjectId)
       .sections.find((section) => section.sectionId === sectionId);
-  
+
     if (selectedSection) {
       setCurrentQuestions(selectedSection.questions);
-  
+
       const firstQuestion = selectedSection.questions[0];
       if (firstQuestion) {
         setSelectedQuestionId(firstQuestion.question_id);
-  
+
         // Check if the first question is already in visitedQuestions
         if (!visitedQuestions.includes(firstQuestion.question_id)) {
           setVisitedQuestions((prevVisited) => [
@@ -92,7 +101,6 @@ const UG_OTSQuizPage = () => {
       }
     }
   };
-
 
   useEffect(() => {
     timerId.current = setInterval(() => {
@@ -307,6 +315,33 @@ const UG_OTSQuizPage = () => {
     fetchData();
   }, [decryptedParam1, decryptedParam2]);
 
+  const [testDetails, setTestDetails] = useState([]);
+  // const firstTestCreationTableId = testData.length > 0 ? testData[0].testCreationTableId : null;
+  useEffect(() => {
+    const fetchTestDetails = async () => {
+      try {
+        const response = await fetch(
+          `${BASE_URL}/TestResultPage/testDetails/${decryptedParam1}`
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch test details");
+        }
+
+        const data = await response.json();
+        console.log(data);
+        setTestDetails(data.results);
+      } catch (error) {
+        console.log(error);
+        // setError(error.message);
+      }
+    };
+
+    if (decryptedParam1) {
+      fetchTestDetails();
+    }
+  }, [decryptedParam1]);
+
   useEffect(() => {
     if (decryptedParam2) {
       const fetchStudentDetails = async () => {
@@ -436,12 +471,48 @@ const UG_OTSQuizPage = () => {
       [questionId]: value,
     });
   };
+  const [wtimer, setWTimer] = useState(0);
+  const WformatTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+    return `${hours > 9 ? hours : "0" + hours}:${
+      minutes > 9 ? minutes : "0" + minutes
+    }:${remainingSeconds > 9 ? remainingSeconds : "0" + remainingSeconds}`;
+    // return hours * 3600 + minutes * 60 + seconds;
+  };
+  const calculateResult = () => {};
+
+  // Over all counts
+  const visitedCount = visitedQuestions.length;
+  const totalQuestions = testData?.subjects.flatMap((subject) =>
+    subject.sections.flatMap((section) => section.questions)
+  ).length;
+
+  // Calculate Answered and Marked for Review count
+  const answeredAndMarkForReviewCount = answeredQuestions.filter((id) =>
+    markedForReviewQuestions.includes(id)
+  ).length;
+
+  // Calculate counts excluding the Answered and Marked for Review count
+  const answeredOnlyCount =
+    answeredQuestions.length - answeredAndMarkForReviewCount;
+  const markForReviewOnlyCount =
+    markedForReviewQuestions.length - answeredAndMarkForReviewCount;
+
+  // Calculate Not Answered but Visited count
+  const notAnsweredButVisitedCount = visitedQuestions.filter(
+    (id) =>
+      !answeredQuestions.includes(id) && !markedForReviewQuestions.includes(id)
+  ).length;
+
+  const notVisitedCount = totalQuestions - visitedQuestions.length;
 
   const handleSubmit = async () => {
     try {
       setShowExamSumary(true);
-      // setShowButtonNo(true);
-      // calculateResult();
+      setShowButtonNo(true);
+      calculateResult();
 
       // const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
       // const counts = calculateQuestionCounts();
@@ -450,65 +521,72 @@ const UG_OTSQuizPage = () => {
       // setMarkedForReviewCount(counts.markedForReview);
       // setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
       // setVisitedCount(counts.VisitedCount);
+      // setNotVisitedCount(notVisitedCount);
+      // const NotVisitedCount  =notVisitedCount;
+      // setAnsweredQuestions(answeredOnlyCount);
+      // setNotAnsweredQuestions(notAnsweredButVisitedCount);
+      // setMarkedForReviewQuestions(markForReviewOnlyCount);
+      // setAnsweredAndMarkForReviewCount(answeredAndMarkForReviewCount);
+      // setVisitedQuestions(visitedCount);
 
       // const currentQuestion = questionData.questions[currentQuestionIndex];
-      // const questionId = currentQuestion.question_id;
+      const questionId = selectedQuestionId.question_id;
 
-      // const formattedTime = WformatTime(wtimer);
+      const formattedTime = WformatTime(wtimer);
 
-      // // Save exam summary
-      // const saveExamSummaryResponse = await fetch(
-      //   `${BASE_URL}/QuizPage/saveExamSummary`,
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({
-      //       userId: decryptedParam2,
-      //       totalUnattempted: notAnsweredCount,
-      //       totalAnswered: answeredCount,
-      //       NotVisitedb: NotVisitedb,
-      //       testCreationTableId: decryptedParam1,
-      //     }),
-      //   }
-      // );
+      // Save exam summary
+      const saveExamSummaryResponse = await fetch(
+        `${BASE_URL}/QuizPage/saveExamSummary`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: decryptedParam2,
+            totalUnattempted: notAnsweredButVisitedCount,
+            totalAnswered: answeredOnlyCount,
+            NotVisited: notVisitedCount,
+            testCreationTableId: decryptedParam1,
+          }),
+        }
+      );
 
-      // const saveExamSummaryResult = await saveExamSummaryResponse.json();
-      // console.log("Exam summary saved:", saveExamSummaryResult);
+      const saveExamSummaryResult = await saveExamSummaryResponse.json();
+      console.log("Exam summary saved:", saveExamSummaryResult);
 
-      // // Submit time left
-      // const submitTimeLeftResponse = await fetch(
-      //   `${BASE_URL}/QuizPage/submitTimeLeft`,
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({
-      //       userId: decryptedParam2,
-      //       testCreationTableId: decryptedParam1,
-      //       timeLeft: formattedTime,
-      //     }),
-      //   }
-      // );
+      // Submit time left
+      const submitTimeLeftResponse = await fetch(
+        `${BASE_URL}/QuizPage/submitTimeLeft`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: decryptedParam2,
+            testCreationTableId: decryptedParam1,
+            timeLeft: formattedTime,
+          }),
+        }
+      );
 
-      // const submitTimeLeftResult = await submitTimeLeftResponse.json();
-      // console.log("Time left submission result:", submitTimeLeftResult);
+      const submitTimeLeftResult = await submitTimeLeftResponse.json();
+      console.log("Time left submission result:", submitTimeLeftResult);
 
-      // // Clear local storage data for the current question
-      // if (questionId) {
-      //   try {
-      //     console.log(
-      //       "Removing from local storage for questionId:",
-      //       questionId
-      //     );
-      //     localStorage.removeItem(`calculatorValue_${questionId}`);
-      //     console.log("Item removed successfully.");
-      //   } catch (error) {
-      //     console.error("Error removing item from local storage:", error);
-      //   }
-      // }
+      // Clear local storage data for the current question
+      if (questionId) {
+        try {
+          console.log(
+            "Removing from local storage for questionId:",
+            questionId
+          );
+          localStorage.removeItem(`calculatorValue_${questionId}`);
+          console.log("Item removed successfully.");
+        } catch (error) {
+          console.error("Error removing item from local storage:", error);
+        }
+      }
     } catch (error) {
       console.error("Error in handleSubmit:", error);
     }
@@ -879,26 +957,6 @@ const UG_OTSQuizPage = () => {
     if (nextQuestionId) {
       setSelectedQuestionId(nextQuestionId);
 
-      // // Update the visited questions
-      // setVisitedQuestions((prev) => {
-      //   if (!prev.includes(nextQuestionId)) {
-      //     return [...prev, nextQuestionId];
-      //   }
-      //   return prev;
-      // });
-
-      // // Update the not answered questions
-      // setNotAnsweredQuestions((prev) => {
-      //   if (
-      //     !prev.includes(nextQuestionId) &&
-      //     !answeredQuestions.includes(nextQuestionId) &&
-      //     !markedForReviewQuestions.includes(nextQuestionId)
-      //   ) {
-      //     return [...prev, nextQuestionId];
-      //   }
-      //   return prev;
-      // });
-
       // Update the question button class based on the question's status
       if (isAnswered) {
         setAnsweredQuestions((prev) => [...prev, nextQuestionId]);
@@ -981,7 +1039,7 @@ const UG_OTSQuizPage = () => {
       alert("No more questions.");
       return;
     }
-   
+
     const allQuestions = testData.subjects.flatMap((subject) =>
       subject.sections.flatMap((section) => section.questions)
     );
@@ -1035,7 +1093,14 @@ const UG_OTSQuizPage = () => {
     // const answerSaved = isCurrentQuestionAnswerSaved();
 
     if (answered) {
-      setAnsweredQuestions((prev) => [...prev, selectedQuestionId]);
+      // setAnsweredQuestions((prev) => [...prev, selectedQuestionId]);
+      setAnsweredQuestions((prev) => {
+        // Only add to answeredQuestions if it's not already there
+        if (!prev.includes(selectedQuestionId)) {
+          return [...prev, selectedQuestionId];
+        }
+        return prev;
+      });
       setNotAnsweredQuestions((prev) =>
         prev.filter((id) => id !== selectedQuestionId)
       );
@@ -1146,72 +1211,11 @@ const UG_OTSQuizPage = () => {
         ...prevClasses,
         [selectedQuestionId]: "notAnswered",
       }));
-      // if (markedForReview) {
-      //   setQuestionButtonClass((prevClasses) => ({
-      //     ...prevClasses,
-      //     [selectedQuestionId]: 'blueBox',
-      //   }));
-      // } else {
-      //   setQuestionButtonClass((prevClasses) => ({
-      //     ...prevClasses,
-      //     [selectedQuestionId]: 'notAnswered',
-      //   }));
-      // }
     }
 
     // Call the function to move to the next question
     // moveToNextQuestion();
 
-    //  // Determine the status of the next question
-    //  const isAnswered = isCurrentQuestionAnswered();
-    //  const isMarkedForReview = isCurrentQuestionMarkedForReview();
-    //  const isAnswerSaved = isCurrentQuestionAnswerSaved();
- 
-    //  if (nextQuestionId) {
-    //    setSelectedQuestionId(nextQuestionId);
- 
-    
-    //    // Update the question button class based on the question's status
-    //    if (isAnswered) {
-    //      setAnsweredQuestions((prev) => [...prev, nextQuestionId]);
-    //      setNotAnsweredQuestions((prev) =>
-    //        prev.filter((id) => id !== nextQuestionId)
-    //      );
- 
-    //      if (isMarkedForReview && !isAnswerSaved) {
-    //        setQuestionButtonClass((prevClasses) => ({
-    //          ...prevClasses,
-    //          [nextQuestionId]: "purpleBox",
-    //        }));
-    //      } else if (isAnswerSaved && !isMarkedForReview) {
-    //        setQuestionButtonClass((prevClasses) => ({
-    //          ...prevClasses,
-    //          [nextQuestionId]: "answered",
-    //        }));
-    //      }
-    //    } else if (!isAnswered) {
-    //      setNotAnsweredQuestions((prev) => {
-    //        if (!prev.includes(nextQuestionId)) {
-    //          return [...prev, nextQuestionId];
-    //        }
-    //        return prev;
-    //      });
- 
-    //      if (isMarkedForReview && !isAnswerSaved) {
-    //        setQuestionButtonClass((prevClasses) => ({
-    //          ...prevClasses,
-    //          [nextQuestionId]: "blueBox",
-    //        }));
-    //      } else if (!isAnswerSaved && !isMarkedForReview) {
-    //        setQuestionButtonClass((prevClasses) => ({
-    //          ...prevClasses,
-    //          [nextQuestionId]: "notAnswered",
-    //        }));
-    //      }
-    //    }
-    //  }
-
-     
     if (nextQuestionId) {
       setSelectedQuestionId(nextQuestionId);
       setVisitedQuestions((prev) => {
@@ -1220,7 +1224,7 @@ const UG_OTSQuizPage = () => {
         }
         return prev;
       });
- 
+
       // Handle the case where the next question is not visited, not answered, and not marked for review
       setNotAnsweredQuestions((prev) => {
         if (
@@ -1233,58 +1237,15 @@ const UG_OTSQuizPage = () => {
         return prev;
       });
       setQuestionButtonClass((prevClasses) => ({
-                ...prevClasses,
-                [nextQuestionId]: "notAnswered",
-              }));
+        ...prevClasses,
+        [nextQuestionId]: "notAnswered",
+      }));
       const isCurrentQuestionMarkedForReview = () => {
         return markedForReviewQuestions.includes(selectedQuestionId);
       };
       const isCurrentQuestionAnswerSaved = () => {
         return answeredSaved.includes(selectedQuestionId);
       };
-      // // Determine the status of the next question
-      // const isAnswered = isCurrentQuestionAnswered();
-      // const isMarkedForReview = isCurrentQuestionMarkedForReview();
-      // const isAnswerSaved = isCurrentQuestionAnswerSaved();
-
-      //    // Update the question button class based on the question's status
-      //    if (isAnswered) {
-      //     setAnsweredQuestions((prev) => [...prev, nextQuestionId]);
-      //     setNotAnsweredQuestions((prev) =>
-      //       prev.filter((id) => id !== nextQuestionId)
-      //     );
-  
-      //     if (isMarkedForReview && !isAnswerSaved) {
-      //       setQuestionButtonClass((prevClasses) => ({
-      //         ...prevClasses,
-      //         [nextQuestionId]: "purpleBox",
-      //       }));
-      //     } else if (isAnswerSaved && !isMarkedForReview) {
-      //       setQuestionButtonClass((prevClasses) => ({
-      //         ...prevClasses,
-      //         [nextQuestionId]: "answered",
-      //       }));
-      //     }
-      //   } else if (!isAnswered) {
-      //     setNotAnsweredQuestions((prev) => {
-      //       if (!prev.includes(nextQuestionId)) {
-      //         return [...prev, nextQuestionId];
-      //       }
-      //       return prev;
-      //     });
-  
-      //     if (isMarkedForReview && !isAnswerSaved) {
-      //       setQuestionButtonClass((prevClasses) => ({
-      //         ...prevClasses,
-      //         [nextQuestionId]: "blueBox",
-      //       }));
-      //     } else if (!isAnswerSaved && !isMarkedForReview) {
-      //       setQuestionButtonClass((prevClasses) => ({
-      //         ...prevClasses,
-      //         [nextQuestionId]: "notAnswered",
-      //       }));
-      //     }
-      //   }
     }
   };
 
@@ -1474,62 +1435,6 @@ const UG_OTSQuizPage = () => {
     ? selectedSection.questions
     : selectedSubject.questions;
 
-  // const visitedCount = visitedQuestions.length;
-  // const totalQuestions = testData?.subjects.flatMap((subject) =>
-  //   subject.sections.flatMap((section) => section.questions)
-  // ).length;
-
-  // // Calculate Answered and Marked for Review count
-  // const answeredAndMarkForReviewCount = answeredQuestions.filter((id) =>
-  //   markedForReviewQuestions.includes(id)
-  // ).length;
-
-  // // Calculate counts excluding the Answered and Marked for Review count
-  // // const answeredOnlyCount =
-  // //   answeredQuestions.length - answeredAndMarkForReviewCount;\  
-  // const answeredOnlyCount =
-  //   answeredQuestions.length;
-  // const markForReviewOnlyCount =
-  //   markedForReviewQuestions.length - answeredAndMarkForReviewCount;
-
-  // // Calculate Not Answered but Visited count
-  // const notAnsweredButVisitedCount = visitedQuestions.filter(
-  //   (id) =>
-  //     !answeredQuestions.includes(id) && !markedForReviewQuestions.includes(id)
-  // ).length;
-
-  // const notVisitedCount = totalQuestions - visitedQuestions.length;
-
-
-
-
-// Over all counts
-const visitedCount = visitedQuestions.length;
-const totalQuestions = testData?.subjects.flatMap((subject) =>
-  subject.sections.flatMap((section) => section.questions)
-).length;
-
-// Calculate Answered and Marked for Review count
-const answeredAndMarkForReviewCount = answeredQuestions.filter((id) =>
-  markedForReviewQuestions.includes(id)
-).length;
-
-// Calculate counts excluding the Answered and Marked for Review count
-const answeredOnlyCount =
-  answeredQuestions.length - answeredAndMarkForReviewCount;
-const markForReviewOnlyCount =
-  markedForReviewQuestions.length - answeredAndMarkForReviewCount;
-
-// Calculate Not Answered but Visited count
-const notAnsweredButVisitedCount = visitedQuestions.filter(
-  (id) =>
-    !answeredQuestions.includes(id) && !markedForReviewQuestions.includes(id)
-).length;
-
-const notVisitedCount = totalQuestions - visitedQuestions.length;
-
-
-
   const toggleSidebar = () => {
     setSidebarVisible(!isSidebarVisible);
   };
@@ -1545,86 +1450,93 @@ const notVisitedCount = totalQuestions - visitedQuestions.length;
       )
     : null;
 
-  const handleMalPractiseSubmit = async () => {
-    console.log("Handling malpractice submit");
-    // try {
-    //   // window.alert(
-    //   //   "Your Test has been Submitted!! Click Ok to See Result.",
-    //   //   calculateResult()
-    //   // );
-    //   setShowButtonNo(false);
-    //   setShowExamSumary(true);
-    //   setShowMalPractisePopup(false);
-    //   calculateResult();
-    //   const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
-    //   const counts = calculateQuestionCounts();
-    //   setAnsweredCount(counts.answered);
-    //   setNotAnsweredCount(counts.notAnswered);
-    //   setMarkedForReviewCount(counts.markedForReview);
-    //   setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
-    //   setVisitedCount(counts.VisitedCount);
+  // const handleMalPractiseSubmit = async () => {
+  //   console.log("Handling malpractice submit");
+  //   try {
+  //     // window.alert(
+  //     //   "Your Test has been Submitted!! Click Ok to See Result.",
+  //     //   calculateResult()
+  //     // );
+  //     setShowButtonNo(false);
+  //     setShowExamSumary(true);
+  //     setShowMalPractisePopup(false);
+  //     calculateResult();
+  //     // const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
+  //     // const counts = calculateQuestionCounts();
+  //     // setAnsweredCount(counts.answered);
+  //     // setNotAnsweredCount(counts.notAnswered);
+  //     // setMarkedForReviewCount(counts.markedForReview);
+  //     // setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
+  //     // setVisitedCount(counts.VisitedCount);
 
-    //   // Assuming you have these variables in your component's state
-    //   const currentQuestion = questionData.questions[currentQuestionIndex];
-    //   const questionId = currentQuestion.question_id;
+  //     setNotVisitedCount(notVisitedCount);
+  //     setAnsweredQuestions(answeredOnlyCount);
+  //     setNotAnsweredQuestions(notAnsweredButVisitedCount);
+  //     setMarkedForReviewQuestions(markForReviewOnlyCount);
+  //     setAnsweredAndMarkForReviewCount(answeredAndMarkForReviewCount);
+  //     setVisitedQuestions(visitedCount);
 
-    //   // Format time
-    //   const formattedTime = WformatTime(wtimer);
-    //   const response = await fetch(`${BASE_URL}/QuizPage/saveExamSummary`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       userId: decryptedParam2,
-    //       totalUnattempted: notAnsweredCount,
-    //       totalAnswered: answeredCount,
-    //       NotVisitedb: NotVisitedb,
-    //       testCreationTableId: decryptedParam1,
-    //     }),
-    //   });
-    //   const result = await response.json();
-    //   console.log("Exam summary saved:", result);
-    //   try {
-    //     // Make a POST request to your server to submit time left
-    //     const response = await fetch(`${BASE_URL}/QuizPage/submitTimeLeft`, {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
+  //     // // Assuming you have these variables in your component's state
+  //     // const currentQuestion = questionData.questions[currentQuestionIndex];
+  //     // const questionId = currentQuestion.question_id;
 
-    //       body: JSON.stringify({
-    //         userId: decryptedParam2,
-    //         testCreationTableId: decryptedParam1,
-    //         timeLeft: formattedTime,
-    //       }),
-    //     });
+  //     // Format time
+  //     const formattedTime = WformatTime(wtimer);
+  //     const response = await fetch(`${BASE_URL}/QuizPage/saveExamSummary`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         userId: decryptedParam2,
+  //         totalUnattempted: notAnsweredButVisitedCount,
+  //           totalAnswered: answeredOnlyCount,
+  //           NotVisitedb: notVisitedCount,
+  //         testCreationTableId: decryptedParam1,
+  //       }),
+  //     });
+  //     const result = await response.json();
+  //     console.log("Exam summary saved:", result);
+  //     try {
+  //       // Make a POST request to your server to submit time left
+  //       const response = await fetch(`${BASE_URL}/QuizPage/submitTimeLeft`, {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
 
-    //     const result = await response.json();
+  //         body: JSON.stringify({
+  //           userId: decryptedParam2,
+  //           testCreationTableId: decryptedParam1,
+  //           timeLeft: formattedTime,
+  //         }),
+  //       });
 
-    //     console.log("Time left submission result:", result);
-    //   } catch (error) {
-    //     console.error("Error submitting time left:", error);
-    //   } finally {
-    //     // Ensure that the questionId is correctly obtained
-    //     if (questionId) {
-    //       // Clear local storage data for the current question
-    //       try {
-    //         console.log(
-    //           "Removing from local storage for questionId:",
-    //           questionId
-    //         );
-    //         localStorage.removeItem(`calculatorValue_${questionId}`);
-    //         console.log("Item removed successfully.");
-    //       } catch (error) {
-    //         console.error("Error removing item from local storage:", error);
-    //       }
-    //     }
-    //   }
-    // } catch (error) {
-    //   console.error("Error in handleSubmit:", error);
-    // }
-  };
+  //       const result = await response.json();
+
+  //       console.log("Time left submission result:", result);
+  //     } catch (error) {
+  //       console.error("Error submitting time left:", error);
+  //     } finally {
+  //       // Ensure that the questionId is correctly obtained
+  //       if (selectedQuestionId) {
+  //         // Clear local storage data for the current question
+  //         try {
+  //           console.log(
+  //             "Removing from local storage for questionId:",
+  //             selectedQuestionId
+  //           );
+  //           localStorage.removeItem(`calculatorValue_${selectedQuestionId}`);
+  //           console.log("Item removed successfully.");
+  //         } catch (error) {
+  //           console.error("Error removing item from local storage:", error);
+  //         }
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Error in handleSubmit:", error);
+  //   }
+  // };
 
   const handleYes = async () => {
     // setShowPopup(true);
@@ -1644,46 +1556,47 @@ const notVisitedCount = totalQuestions - visitedQuestions.length;
     } catch (error) {
       console.error("Error encrypting data:", error);
     }
-    // try {
-    //   // const userId = decryptedParam2;
-    //   console.log("sddvfnjdxnvjkncmvncx");
-    //   console.log(decryptedParam2);
-    //   const courseCreationId = testDetails?.[0]?.courseCreationId;
-    //   console.log(
-    //     courseCreationId ? courseCreationId : "Course creation ID not available"
-    //   );
-    //   console.log(decryptedParam1);
+    try {
+      // const userId = decryptedParam2;
+      console.log("sddvfnjdxnvjkncmvncx");
+      console.log(decryptedParam2);
+      // const courseCreationId = testDetails?.[0]?.courseCreationId;
+      const courseCreationId = 1;
+      console.log(
+        courseCreationId ? courseCreationId : "Course creation ID not available"
+      );
+      console.log(decryptedParam1);
 
-    //   // Prepare data for the POST request
-    //   const postData = {
-    //     userId: decryptedParam2,
-    //     courseCreationId: courseCreationId,
-    //     testCreationTableId: decryptedParam1,
-    //     test_status: "Completed",
-    //   };
+      // Prepare data for the POST request
+      const postData = {
+        userId: decryptedParam2,
+        courseCreationId: courseCreationId,
+        testCreationTableId: decryptedParam1,
+        test_status: "Completed",
+      };
 
-    //   // Make the POST request
-    //   const response = await fetch(
-    //     `${BASE_URL}/QuizPage/insertTestAttemptStatus`,
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(postData),
-    //     }
-    //   );
+      // Make the POST request
+      const response = await fetch(
+        `${BASE_URL}/QuizPage/insertTestAttemptStatus`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postData),
+        }
+      );
 
-    //   if (!response.ok) {
-    //     throw new Error("Failed to insert test attempt status");
-    //   }
-    //   console.log("Test attempt status inserted successfully");
-    //   // await fetchQuestionCount();
-    //   // Navigate to the test results page
-    //   // navigate(`/Submit_Page`);
-    // } catch (error) {
-    //   console.error("Error:", error.message);
-    // }
+      if (!response.ok) {
+        throw new Error("Failed to insert test attempt status");
+      }
+      console.log("Test attempt status inserted successfully");
+      // await fetchQuestionCount();
+      // Navigate to the test results page
+      // navigate(`/Submit_Page`);
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
   };
 
   const handleNo = () => {
@@ -1702,13 +1615,34 @@ const notVisitedCount = totalQuestions - visitedQuestions.length;
     return isAnswered ? "answered" : "question_button";
   };
 
+
   return (
     <div
       className="QuestionPaper_-container"
-      ref={quizRef}
-      onClick={enterFullscreen}
-      style={{ backgroundColor: "white" }}
+      // ref={quizRef}
+      // onClick={enterFullscreen}
+      // style={{ backgroundColor: "white" }}
     >
+      {/* {showMalPractisePopup && (
+        <div className="MalPracticePopup">
+          <div className="malpractice_popup_content">
+            <h2>Malpractice Attempt</h2>
+            <p>
+              "As per our examination rules, your test has been automatically
+              submitted as a result of a detected violation. Switching tabs
+              during the quiz is strictly prohibited."
+            </p>
+
+            <button
+              onClick={handleMalPractiseSubmit}
+              style={{ color: "red" }}
+              target="_blank"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )} */}
       <div className="quiz_exam_interface_header quiz_exam_interface_header_q_if_H">
         <div className="quiz_exam_interface_header_LOGO ">
           <img src={image} alt="Current" />
@@ -1772,7 +1706,7 @@ const notVisitedCount = totalQuestions - visitedQuestions.length;
                       <div className="qtype_timer">
                         <p className="qtype">
                           {selectedQuestion.quesion_type.map((type) => (
-                            <div key={type.quesionTypeId}>
+                            <div className="qtype_div" key={type.quesionTypeId}>
                               {type.typeofQuestion}
                             </div>
                           ))}
@@ -1781,7 +1715,7 @@ const notVisitedCount = totalQuestions - visitedQuestions.length;
                           <span id="time_left_icon">
                             <MdOutlineTimer />
                           </span>
-                          <div>
+                          <div className="time_left_ots">
                             Time Left: {hours.toString().padStart(2, "0")}:
                             {minutes.toString().padStart(2, "0")}:
                             {seconds.toString().padStart(2, "0")}
@@ -2118,66 +2052,61 @@ const notVisitedCount = totalQuestions - visitedQuestions.length;
                       <ul className="btn-ul quesAns-btn">
                         {questions.map((question, index) => {
                           // Determine if the question is the first in its section or subject and if it has been answered
-  // const isFirstQuestion = index === 0;
-  // const isAnswered = questionButtonClass[question.question_id] === "notAnswered";
+                          // const isFirstQuestion = index === 0;
+                          // const isAnswered = questionButtonClass[question.question_id] === "notAnswered";
 
-  //                         // Determine button class based on question ID
-  //                         // const buttonClass =
-  //                         //   questionButtonClass[question.question_id] ||
-  //                         //   "question_button";
+                          // Determine button class based on question ID
+                          const buttonClass =
+                            questionButtonClass[question.question_id] ||
+                            "question_button";
 
-  //                         const buttonClass = isFirstQuestion && !isAnswered
-  //                         ? "notAnswered"
-  //                         : questionButtonClass[question.question_id] || "question_button";
+                          //                         const buttonClass = isFirstQuestion && !isAnswered
+                          //                         ? "notAnswered"
+                          //                         : questionButtonClass[question.question_id] || "question_button";
 
+                          //  // Determine if the question is the first in its section or subject
+                          //  const isFirstQuestion = index === 0;
 
-  //  // Determine if the question is the first in its section or subject
-  //  const isFirstQuestion = index === 0;
+                          //  // Determine if the question has been answered
+                          //  const isAnswered = questionButtonClass[question.question_id] === "answered";
 
-  //  // Determine if the question has been answered
-  //  const isAnswered = questionButtonClass[question.question_id] === "answered";
- 
-  //  // Apply "answeredButtonClass" if answered, otherwise use "notAnsweredButtonClass" for the first question or the default class
-  //  const buttonClass = isAnswered
-  //    ? "answered"
-  //    : isFirstQuestion
-  //    ? "notAnswered"
-  //    : questionButtonClass[question.question_id] || "question_button";
+                          //  // Apply "answeredButtonClass" if answered, otherwise use "notAnsweredButtonClass" for the first question or the default class
+                          //  const buttonClass = isAnswered
+                          //    ? "answered"
+                          //    : isFirstQuestion
+                          //    ? "notAnswered"
+                          //    : questionButtonClass[question.question_id] || "question_button";
 
+                          //  // Determine if the question is the first in its section or subject
+                          //  const isFirstQuestion = index === 0;
 
+                          //  // Determine the current question status
+                          //  const isAnswered = questionButtonClass[question.question_id] === "answered";
+                          //  const isMarkedForReview = questionButtonClass[question.question_id] === "markedForReview";
+                          //  const isAnswerSaved = questionButtonClass[question.question_id] === "answered";
 
-   // Determine if the question is the first in its section or subject
-   const isFirstQuestion = index === 0;
+                          //  // Determine button class based on question status
+                          //  let buttonClass;
 
-   // Determine the current question status
-   const isAnswered = questionButtonClass[question.question_id] === "answered";
-   const isMarkedForReview = questionButtonClass[question.question_id] === "markedForReview";
-   const isAnswerSaved = questionButtonClass[question.question_id] === "answered";
- 
-   // Determine button class based on question status
-   let buttonClass;
- 
-   if (isFirstQuestion) {
-     if (isAnswered) {
-       if (isMarkedForReview && !isAnswerSaved) {
-         buttonClass = "purpleBox";
-       } else if (isAnswerSaved && !isMarkedForReview) {
-         buttonClass = "answered";
-       }
-     } else {
-       if (isMarkedForReview && !isAnswerSaved) {
-         buttonClass = "blueBox";
-       } else if (!isAnswerSaved && !isMarkedForReview) {
-         buttonClass = "notAnswered";
-       }
-     }
-   } else {
-     // Default class for other questions
-     buttonClass = questionButtonClass[question.question_id] || "question_button";
-   }
+                          //  if (isFirstQuestion) {
+                          //    if (isAnswered) {
+                          //      if (isMarkedForReview && !isAnswerSaved) {
+                          //        buttonClass = "purpleBox";
+                          //      } else if (isAnswerSaved && !isMarkedForReview) {
+                          //        buttonClass = "answered";
+                          //      }
+                          //    } else {
+                          //      if (isMarkedForReview && !isAnswerSaved) {
+                          //        buttonClass = "blueBox";
+                          //      } else if (!isAnswerSaved && !isMarkedForReview) {
+                          //        buttonClass = "notAnswered";
+                          //      }
+                          //    }
+                          //  } else {
+                          //    // Default class for other questions
+                          //    buttonClass = questionButtonClass[question.question_id] || "question_button";
+                          //  }
 
-
-   
                           return (
                             <li key={question.question_id}>
                               <button
@@ -2245,6 +2174,18 @@ const notVisitedCount = totalQuestions - visitedQuestions.length;
                       </div>
                     </div>
                   </div>
+                  <div>
+                    <button
+                      className="question_paper_btn"
+                      title="View Question Paper"
+                      onClick={openQuestionPaper}
+                    >
+                      Question Paper
+                    </button>
+                  </div>
+                  {showPopup && (
+                    <UGQuestionPaper onClose={closeQuestionPaper} />
+                  )}
                 </div>
               </div>
             </div>
@@ -2329,1077 +2270,3 @@ const notVisitedCount = totalQuestions - visitedQuestions.length;
 };
 
 export default UG_OTSQuizPage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import { useParams, useNavigate, useLocation } from "react-router-dom";
-// import "./UG_OTSQuizPage.css";
-// import BASE_URL from "../../../../apiConfig";
-// import { decryptData } from "../utils/crypto";
-
-// const UG_OTSQuizPage = () => {
-//   const [testData, setTestData] = useState(null);
-//   const [selectedSubjectId, setSelectedSubjectId] = useState(null);
-//   const [selectedSectionId, setSelectedSectionId] = useState(null);
-//   const [selectedQuestionId, setSelectedQuestionId] = useState(null);
-//   const [radioResponses, setRadioResponses] = useState({});
-//   const [checkboxResponses, setCheckboxResponses] = useState({});
-//   const [textResponses, setTextResponses] = useState({});
-//   const [visitedQuestions, setVisitedQuestions] = useState([]);
-//   const [answeredQuestions, setAnsweredQuestions] = useState([]);
-//   const [notAnsweredQuestions, setNotAnsweredQuestions] = useState([]);
-
-//   const [markedForReviewQuestions, setMarkedForReviewQuestions] = useState([]);
-//   const [activeQuestionId, setActiveQuestionId] = useState(null);
-//   const [allQuestions, setAllQuestions] = useState([]);
-//   const [currentQuestions, setCurrentQuestions] = useState([]);
-
-//   const location = useLocation();
-//   const { userData } = location.state || {};
-
-//   const navigate = useNavigate();
-//   const { param1, param2 } = useParams();
-//   const [decryptedParam1, setDecryptedParam1] = useState("");
-//   const [decryptedParam2, setDecryptedParam2] = useState("");
-
-//   useEffect(() => {
-//     if (testData?.subjects?.length) {
-//       // Flatten questions from all subjects and sections
-//       const allFlattenedQuestions = testData.subjects.flatMap(subject =>
-//         subject.sections.flatMap(section => section.questions)
-//       );
-//       setAllQuestions(allFlattenedQuestions);
-  
-//       // Set the first question as the selected question
-//       const firstQuestion = allFlattenedQuestions[0];
-//       if (firstQuestion) {
-//         setSelectedQuestionId(firstQuestion.question_id);
-  
-//         // Set the first question as visited but not answered
-//         setVisitedQuestions([firstQuestion.question_id]);
-//         setNotAnsweredQuestions([firstQuestion.question_id]);
-//       }
-//     }
-//   }, [testData]);
-  
-//   const handleSectionClick = (sectionId) => {
-//     setSelectedSectionId(sectionId);
-  
-//     const selectedSection = testData.subjects
-//       .find((subject) => subject.subjectId === selectedSubjectId)
-//       .sections.find((section) => section.sectionId === sectionId);
-  
-//     if (selectedSection) {
-//       setCurrentQuestions(selectedSection.questions);
-  
-//       const firstQuestion = selectedSection.questions[0];
-//       if (firstQuestion) {
-//         setSelectedQuestionId(firstQuestion.question_id);
-  
-//         // Check if the first question is already in visitedQuestions
-//         if (!visitedQuestions.includes(firstQuestion.question_id)) {
-//           setVisitedQuestions((prevVisited) => [
-//             ...prevVisited,
-//             firstQuestion.question_id,
-//           ]);
-//           setNotAnsweredQuestions((prevNotAnswered) => [
-//             ...prevNotAnswered,
-//             firstQuestion.question_id,
-//           ]);
-//         }
-//       }
-//     }
-//   };
-  
- 
-//   useEffect(() => {
-//     const token = sessionStorage.getItem("navigationToken");
-
-//     if (!token) {
-//       navigate("/Error");
-//       return;
-//     }
-
-//     const decryptParams = async () => {
-//       try {
-//         const decrypted1 = await decryptData(param1);
-//         const decrypted2 = await decryptData(param2);
-
-//         if (
-//           !decrypted1 ||
-//           !decrypted2 ||
-//           isNaN(parseInt(decrypted1)) ||
-//           isNaN(parseInt(decrypted2))
-//         ) {
-//           navigate("/Error");
-//           return;
-//         }
-
-//         setDecryptedParam1(decrypted1);
-//         setDecryptedParam2(decrypted2);
-//       } catch (error) {
-//         console.error("Error decrypting data:", error);
-//         navigate("/Error");
-//       }
-//     };
-
-//     decryptParams();
-//   }, [param1, param2, navigate]);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await axios.get(
-//           `${BASE_URL}/QuizPage/UG_QuestionOptions/${decryptedParam1}/${decryptedParam2}`
-//         );
-//         const data = response.data;
-
-//         if (data.subjects.length > 0) {
-//           setSelectedSubjectId(data.subjects[0].subjectId);
-//           if (data.subjects[0].sections.length > 0) {
-//             setSelectedSectionId(data.subjects[0].sections[0].sectionId);
-//             setSelectedQuestionId(
-//               data.subjects[0].sections[0].questions[0].question_id
-//             );
-//           } else {
-//             setSelectedQuestionId(data.subjects[0].questions[0].question_id);
-//           }
-//         }
-
-//         setTestData(data);
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
-//       }
-//     };
-
-//     fetchData();
-//   }, [decryptedParam1, decryptedParam2]);
-
-//   const handleSubjectClick = (subjectId) => {
-//     setSelectedSubjectId(subjectId);
-//     const selectedSubject = testData.subjects.find(
-//       (subject) => subject.subjectId === subjectId
-//     );
-//     if (selectedSubject.sections.length > 0) {
-//       setSelectedSectionId(selectedSubject.sections[0].sectionId);
-//       setSelectedQuestionId(
-//         selectedSubject.sections[0].questions[0].question_id
-//       );
-//     } else {
-//       setSelectedSectionId(null);
-//       setSelectedQuestionId(selectedSubject.questions[0].question_id);
-//     }
-//   };
-
-//   // const handleSectionClick = (sectionId) => {
-//   //   setSelectedSectionId(sectionId);
-//   //   const selectedSection = testData.subjects
-//   //     .find((subject) => subject.subjectId === selectedSubjectId)
-//   //     .sections.find((section) => section.sectionId === sectionId);
-//   //   setSelectedQuestionId(selectedSection.questions[0].question_id);
-//   // };
-
-//   const handleQuestionClick = (questionId) => {
-//     // Set the active and selected question IDs
-//     setActiveQuestionId(questionId);
-//     setSelectedQuestionId(questionId);
-
-//     // Mark the question as visited
-//     if (!visitedQuestions.includes(questionId)) {
-//       setVisitedQuestions([...visitedQuestions, questionId]);
-//     }
-
-//     // Ensure the question shows as not answered
-//     if (!answeredQuestions.includes(questionId)) {
-//       setNotAnsweredQuestions((prev) => [...prev, questionId]);
-//     }
-//   };
-
-//   const handleRadioChange = (questionId, optionId, optionIndex) => {
-//     setRadioResponses((prevResponses) => ({
-//       ...prevResponses,
-//       [questionId]: { optionId, optionIndex },
-//     }));
-//   };
-
-//   const handleCheckboxChange = (
-//     questionId,
-//     optionId,
-//     isChecked,
-//     optionIndex
-//   ) => {
-//     setCheckboxResponses((prevResponses) => {
-//       const currentOptions = prevResponses[questionId] || [];
-//       const updatedOptions = isChecked
-//         ? [...currentOptions, { optionId, optionIndex }]
-//         : currentOptions.filter((option) => option.optionId !== optionId);
-
-//       return {
-//         ...prevResponses,
-//         [questionId]: updatedOptions,
-//       };
-//     });
-//   };
-//   const handleTextChange = (questionId, value) => {
-//     setTextResponses({
-//       ...textResponses,
-//       [questionId]: value,
-//     });
-//   };
-//   const handleKeypadClick = (value) => {
-//     if (selectedQuestionId !== null) {
-//       const currentValue = textResponses[selectedQuestionId] || "";
-//       const updatedValue = value === "Clear" ? "" : currentValue + value;
-//       handleTextChange(selectedQuestionId, updatedValue);
-//     }
-//   };
-//   const handleSubmit = () => {
-//     const allQuestions = testData.subjects.flatMap((subject) =>
-//       subject.sections.flatMap((section) => section.questions)
-//     );
-//     const allAnswered = allQuestions.every((question) => {
-//       if (
-//         question.quesion_type.some((type) =>
-//           [1, 2, 7, 8].includes(type.quesionTypeId)
-//         )
-//       ) {
-//         return radioResponses[question.question_id] !== undefined;
-//       }
-//       if (
-//         question.quesion_type.some((type) =>
-//           [3, 4].includes(type.quesionTypeId)
-//         )
-//       ) {
-//         return (checkboxResponses[question.question_id] || []).length > 0;
-//       }
-//       if (
-//         question.quesion_type.some((type) =>
-//           [5, 6].includes(type.quesionTypeId)
-//         )
-//       ) {
-//         return textResponses[question.question_id] !== undefined;
-//       }
-//       return false;
-//     });
-
-//     if (!allAnswered) {
-//       alert("Please answer all questions before submitting.");
-//       return;
-//     }
-
-//     // Submit logic here (e.g., POST request)
-//     alert("Quiz submitted successfully!");
-//   };
-
-//   const handleClearResponse = async () => {
-//     // Ensure the current question is selected
-//     if (selectedQuestionId) {
-//       // Define allQuestions from testData
-//       const allQuestions = testData.subjects.flatMap((subject) =>
-//         subject.sections.flatMap((section) => section.questions)
-//       );
-
-//       // Find the question based on selectedQuestionId
-//       const question = allQuestions.find(
-//         (q) => q.question_id === selectedQuestionId
-//       );
-
-//       if (question) {
-//         // Clear the response based on question type
-//         if (
-//           question.quesion_type.some((type) =>
-//             [1, 2, 7, 8].includes(type.quesionTypeId)
-//           )
-//         ) {
-//           // Clear radio responses
-//           setRadioResponses((prev) => ({
-//             ...prev,
-//             [selectedQuestionId]: undefined,
-//           }));
-//         } else if (
-//           question.quesion_type.some((type) =>
-//             [3, 4].includes(type.quesionTypeId)
-//           )
-//         ) {
-//           // Clear checkbox responses
-//           setCheckboxResponses((prev) => ({
-//             ...prev,
-//             [selectedQuestionId]: [],
-//           }));
-//         } else if (
-//           question.quesion_type.some((type) =>
-//             [5, 6].includes(type.quesionTypeId)
-//           )
-//         ) {
-//           // Clear text responses
-//           setTextResponses((prev) => ({
-//             ...prev,
-//             [selectedQuestionId]: undefined,
-//           }));
-//         }
-
-//         // Update states to reflect the cleared response
-//         setAnsweredQuestions((prev) =>
-//           prev.filter((id) => id !== selectedQuestionId)
-//         );
-//         setMarkedForReviewQuestions((prev) =>
-//           prev.filter((id) => id !== selectedQuestionId)
-//         );
-
-//         // If the question was marked for review, ensure it shows as orange
-//         setNotAnsweredQuestions((prev) => [...prev, selectedQuestionId]);
-
-//         // Clear the response from the database
-//         try {
-//           const response = await axios.put(
-//             `http://localhost:5001/QuizPage/clearResponse/${decryptedParam2}/${decryptedParam1}/${selectedQuestionId}`
-//           );
-
-//           if (response.status === 200) {
-//             console.log("Response cleared successfully");
-//             // Additional actions can be performed if needed
-//           } else {
-//             console.error("Failed to clear response:", response.data);
-//           }
-//         } catch (error) {
-//           console.error("Error clearing response from the database:", error);
-//         }
-//       }
-//     }
-//   };
-
-//   if (!testData) {
-//     return <div>Loading...</div>;
-//   }
-
-//   const selectedSubject = testData.subjects.find(
-//     (subject) => subject.subjectId === selectedSubjectId
-//   );
-//   const selectedSection = selectedSubject?.sections.find(
-//     (section) => section.sectionId === selectedSectionId
-//   );
-//   const selectedQuestion = selectedSection
-//     ? selectedSection.questions.find(
-//         (question) => question.question_id === selectedQuestionId
-//       )
-//     : selectedSubject.questions.find(
-//         (question) => question.question_id === selectedQuestionId
-//       );
-
-//   const handlePreviousClick = () => {
-//     const selectedSubject = testData.subjects.find(
-//       (subject) => subject.subjectId === selectedSubjectId
-//     );
-//     const selectedSection = selectedSubject.sections.find(
-//       (section) => section.sectionId === selectedSectionId
-//     );
-//     const questionIndex = selectedSection.questions.findIndex(
-//       (question) => question.question_id === selectedQuestionId
-//     );
-//     const sectionIndex = selectedSubject.sections.findIndex(
-//       (section) => section.sectionId === selectedSectionId
-//     );
-//     const subjectIndex = testData.subjects.findIndex(
-//       (subject) => subject.subjectId === selectedSubjectId
-//     );
-
-//     let newQuestionId = null;
-
-//     if (questionIndex > 0) {
-//       newQuestionId = selectedSection.questions[questionIndex - 1].question_id;
-//     } else if (sectionIndex > 0) {
-//       const prevSection = selectedSubject.sections[sectionIndex - 1];
-//       newQuestionId =
-//         prevSection.questions[prevSection.questions.length - 1].question_id;
-//       setSelectedSectionId(prevSection.sectionId);
-//     } else if (subjectIndex > 0) {
-//       const prevSubject = testData.subjects[subjectIndex - 1];
-//       const prevSubjectLastSection =
-//         prevSubject.sections[prevSubject.sections.length - 1];
-//       newQuestionId =
-//         prevSubjectLastSection.questions[
-//           prevSubjectLastSection.questions.length - 1
-//         ].question_id;
-//       setSelectedSubjectId(prevSubject.subjectId);
-//       setSelectedSectionId(prevSubjectLastSection.sectionId);
-//     }
-
-//     if (newQuestionId !== null) {
-//       setSelectedQuestionId(newQuestionId);
-//       if (!visitedQuestions.includes(newQuestionId)) {
-//         setVisitedQuestions((prev) => [...prev, newQuestionId]);
-//       }
-//       // Update the question status
-//       const isNotAnswered = !answeredQuestions.includes(newQuestionId);
-//       const isMarkedForReview =
-//         markedForReviewQuestions.includes(newQuestionId);
-
-//       if (isMarkedForReview) {
-//         if (answeredQuestions.includes(newQuestionId)) {
-//           setNotAnsweredQuestions((prev) =>
-//             prev.filter((id) => id !== newQuestionId)
-//           );
-//         } else {
-//           setNotAnsweredQuestions((prev) => [...prev, newQuestionId]);
-//         }
-//       } else {
-//         if (isNotAnswered) {
-//           setNotAnsweredQuestions((prev) => [...prev, newQuestionId]);
-//         } else {
-//           setNotAnsweredQuestions((prev) =>
-//             prev.filter((id) => id !== newQuestionId)
-//           );
-//         }
-//       }
-//     }
-//   };
-
-//   const handleSaveAndNext = async () => {
-//     console.log("radioResponses", radioResponses);
-//     console.log("checkboxResponses", checkboxResponses);
-//     const allQuestions = testData.subjects.flatMap((subject) =>
-//       subject.sections.flatMap((section) => section.questions)
-//     );
-
-//     // Determine if the current question is answered
-//     const isCurrentQuestionAnswered = () => {
-//       if (selectedQuestionId) {
-//         const question = allQuestions.find(
-//           (q) => q.question_id === selectedQuestionId
-//         );
-//         if (question) {
-//           if (
-//             question.quesion_type.some((type) =>
-//               [1, 2, 7, 8].includes(type.quesionTypeId)
-//             )
-//           ) {
-//             return radioResponses[selectedQuestionId] !== undefined;
-//           }
-//           if (
-//             question.quesion_type.some((type) =>
-//               [3, 4].includes(type.quesionTypeId)
-//             )
-//           ) {
-//             return (checkboxResponses[selectedQuestionId] || []).length > 0;
-//           }
-//           if (
-//             question.quesion_type.some((type) =>
-//               [5, 6].includes(type.quesionTypeId)
-//             )
-//           ) {
-//             return textResponses[selectedQuestionId] !== undefined;
-//           }
-//         }
-//       }
-//       return false;
-//     };
-
-//     const answered = isCurrentQuestionAnswered();
-
-//     if (answered) {
-//       setAnsweredQuestions((prev) => [...prev, selectedQuestionId]);
-//       setNotAnsweredQuestions((prev) =>
-//         prev.filter((id) => id !== selectedQuestionId)
-//       );
-//     } else {
-//       setNotAnsweredQuestions((prev) => {
-//         if (!prev.includes(selectedQuestionId)) {
-//           return [...prev, selectedQuestionId];
-//         }
-//         return prev;
-//       });
-//     }
-
-//     const selectedOption1 = radioResponses[selectedQuestionId];
-//     const selectedOption2 = checkboxResponses[selectedQuestionId];
-
-//     // Extract optionIndex values
-//     const optionIndexes1 = selectedOption1 ? [selectedOption1.optionIndex] : [];
-//     const optionIndexes2 = selectedOption2
-//       ? selectedOption2.map((item) => item.optionIndex)
-//       : [];
-
-//     console.log("optionIndexes1", optionIndexes1);
-//     console.log("optionIndexes2", optionIndexes2);
-
-//     // Convert option indexes to characters
-//     const optionIndexes1CharCodes = optionIndexes1.map((index) => {
-//       return String.fromCharCode("a".charCodeAt(0) + index);
-//     });
-
-//     const optionIndexes2CharCodes = optionIndexes2.map((index) => {
-//       return String.fromCharCode("a".charCodeAt(0) + index);
-//     });
-
-//     console.log("optionIndexes1CharCodes", optionIndexes1CharCodes);
-//     console.log("optionIndexes2CharCodes", optionIndexes2CharCodes);
-
-//     const response = {
-//       userId: decryptedParam2, // Ensure userId is defined
-//       questionId: selectedQuestionId,
-//       testCreationTableId: decryptedParam1, // Ensure testCreationTableId is defined
-//       subjectId: selectedSubjectId,
-//       sectionId: selectedSectionId,
-//       [selectedQuestionId]: {
-//         optionIndexes1: selectedOption1 ? selectedOption1.optionId : "", // Radio input: single value (if needed)
-//         optionIndexes2: (checkboxResponses[selectedQuestionId] || [])
-//           .map((item) => item.optionId)
-//           .join(","), // Checkbox input: comma-separated string
-//         optionIndexes1CharCodes: optionIndexes1CharCodes,
-//         optionIndexes2CharCodes: optionIndexes2CharCodes,
-//         calculatorInputValue: textResponses[selectedQuestionId] || "", // Text input value
-//       },
-//     };
-
-//     console.log("response saving:", response);
-//     try {
-//       await fetch(`${BASE_URL}/QuizPage/response`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(response),
-//       });
-//     } catch (error) {
-//       console.error("Error saving response:", error);
-//     }
-
-//     let nextQuestionId = null;
-//     const selectedSubject = testData.subjects.find(
-//       (subject) => subject.subjectId === selectedSubjectId
-//     );
-//     const selectedSection = selectedSubject.sections.find(
-//       (section) => section.sectionId === selectedSectionId
-//     );
-//     const questionIndex = selectedSection.questions.findIndex(
-//       (question) => question.question_id === selectedQuestionId
-//     );
-//     const sectionIndex = selectedSubject.sections.findIndex(
-//       (section) => section.sectionId === selectedSectionId
-//     );
-//     const subjectIndex = testData.subjects.findIndex(
-//       (subject) => subject.subjectId === selectedSubjectId
-//     );
-
-//     if (questionIndex < selectedSection.questions.length - 1) {
-//       nextQuestionId = selectedSection.questions[questionIndex + 1].question_id;
-//     } else if (sectionIndex < selectedSubject.sections.length - 1) {
-//       const nextSection = selectedSubject.sections[sectionIndex + 1];
-//       nextQuestionId = nextSection.questions[0].question_id;
-//       setSelectedSectionId(nextSection.sectionId);
-//     } else if (subjectIndex < testData.subjects.length - 1) {
-//       const nextSubject = testData.subjects[subjectIndex + 1];
-//       setSelectedSubjectId(nextSubject.subjectId);
-//       const nextSection = nextSubject.sections[0];
-//       nextQuestionId = nextSection.questions[0].question_id;
-//       setSelectedSectionId(nextSection.sectionId);
-//     } else {
-//       alert("No more questions.");
-//       return;
-//     }
-
-//     if (nextQuestionId) {
-//       setSelectedQuestionId(nextQuestionId);
-//       setVisitedQuestions((prev) => {
-//         if (!prev.includes(nextQuestionId)) {
-//           return [...prev, nextQuestionId];
-//         }
-//         return prev;
-//       });
-
-//       // Handle the case where the next question is not visited, not answered, and not marked for review
-//       setNotAnsweredQuestions((prev) => {
-//         if (
-//           !prev.includes(nextQuestionId) &&
-//           !answeredQuestions.includes(nextQuestionId) &&
-//           !markedForReviewQuestions.includes(nextQuestionId)
-//         ) {
-//           return [...prev, nextQuestionId];
-//         }
-//         return prev;
-//       });
-//     }
-//   };
-
-//   const handleMarkForReview = () => {
-//     const allQuestions = testData.subjects.flatMap((subject) =>
-//       subject.sections.flatMap((section) => section.questions)
-//     );
-
-//     // Determine if the current question is answered
-//     const isCurrentQuestionAnswered = () => {
-//       if (selectedQuestionId) {
-//         const question = allQuestions.find(
-//           (q) => q.question_id === selectedQuestionId
-//         );
-//         if (question) {
-//           if (
-//             question.quesion_type.some((type) =>
-//               [1, 2, 7, 8].includes(type.quesionTypeId)
-//             )
-//           ) {
-//             return radioResponses[selectedQuestionId] !== undefined;
-//           }
-//           if (
-//             question.quesion_type.some((type) =>
-//               [3, 4].includes(type.quesionTypeId)
-//             )
-//           ) {
-//             return (checkboxResponses[selectedQuestionId] || []).length > 0;
-//           }
-//           if (
-//             question.quesion_type.some((type) =>
-//               [5, 6].includes(type.quesionTypeId)
-//             )
-//           ) {
-//             return textResponses[selectedQuestionId] !== undefined;
-//           }
-//         }
-//       }
-//       return false;
-//     };
-
-//     const answered = isCurrentQuestionAnswered();
-
-//     // Mark the current question for review
-//     setMarkedForReviewQuestions((prev) => [...prev, selectedQuestionId]);
-
-//     if (answered) {
-//       setAnsweredQuestions((prev) => [...prev, selectedQuestionId]);
-//       setNotAnsweredQuestions((prev) =>
-//         prev.filter((id) => id !== selectedQuestionId)
-//       );
-//     } else {
-//       setNotAnsweredQuestions((prev) => [...prev, selectedQuestionId]);
-//     }
-
-//     // Handle moving to the next question
-//     let nextQuestionId = null;
-//     const selectedSubject = testData.subjects.find(
-//       (subject) => subject.subjectId === selectedSubjectId
-//     );
-//     const selectedSection = selectedSubject.sections.find(
-//       (section) => section.sectionId === selectedSectionId
-//     );
-//     const questionIndex = selectedSection.questions.findIndex(
-//       (question) => question.question_id === selectedQuestionId
-//     );
-//     const sectionIndex = selectedSubject.sections.findIndex(
-//       (section) => section.sectionId === selectedSectionId
-//     );
-//     const subjectIndex = testData.subjects.findIndex(
-//       (subject) => subject.subjectId === selectedSubjectId
-//     );
-
-//     if (questionIndex < selectedSection.questions.length - 1) {
-//       nextQuestionId = selectedSection.questions[questionIndex + 1].question_id;
-//     } else if (sectionIndex < selectedSubject.sections.length - 1) {
-//       const nextSection = selectedSubject.sections[sectionIndex + 1];
-//       nextQuestionId = nextSection.questions[0].question_id;
-//       setSelectedSectionId(nextSection.sectionId);
-//     } else if (subjectIndex < testData.subjects.length - 1) {
-//       const nextSubject = testData.subjects[subjectIndex + 1];
-//       setSelectedSubjectId(nextSubject.subjectId);
-//       const nextSection = nextSubject.sections[0];
-//       nextQuestionId = nextSection.questions[0].question_id;
-//       setSelectedSectionId(nextSection.sectionId);
-//     } else {
-//       alert("No more questions.");
-//       return;
-//     }
-
-//     if (nextQuestionId) {
-//       setSelectedQuestionId(nextQuestionId);
-//       setVisitedQuestions((prev) => [...prev, nextQuestionId]);
-
-//       // Ensure the color reflects the correct state
-//       setNotAnsweredQuestions((prev) => {
-//         if (
-//           !prev.includes(nextQuestionId) &&
-//           !answeredQuestions.includes(nextQuestionId) &&
-//           !markedForReviewQuestions.includes(nextQuestionId)
-//         ) {
-//           return [...prev, nextQuestionId];
-//         }
-//         return prev;
-//       });
-//     }
-//   };
-
-//   const currentQuestionIndex = selectedSection
-//     ? selectedSection.questions.findIndex(
-//         (q) => q.question_id === selectedQuestionId
-//       ) + 1
-//     : null;
-
-//   const questions = selectedSection
-//     ? selectedSection.questions
-//     : selectedSubject.questions;
-
-
-// // Over all counts
-//   const visitedCount = visitedQuestions.length;
-//   const totalQuestions = testData?.subjects.flatMap((subject) =>
-//     subject.sections.flatMap((section) => section.questions)
-//   ).length;
-
-//   // Calculate Answered and Marked for Review count
-//   const answeredAndMarkForReviewCount = answeredQuestions.filter((id) =>
-//     markedForReviewQuestions.includes(id)
-//   ).length;
-
-//   // Calculate counts excluding the Answered and Marked for Review count
-//   const answeredOnlyCount =
-//     answeredQuestions.length - answeredAndMarkForReviewCount;
-//   const markForReviewOnlyCount =
-//     markedForReviewQuestions.length - answeredAndMarkForReviewCount;
-
-//   // Calculate Not Answered but Visited count
-//   const notAnsweredButVisitedCount = visitedQuestions.filter(
-//     (id) =>
-//       !answeredQuestions.includes(id) && !markedForReviewQuestions.includes(id)
-//   ).length;
-
-//   const notVisitedCount = totalQuestions - visitedQuestions.length;
-
-
-//   //subject wise and section wise counts
-//   const getCountsBySubjectAndSection = (subjects) => {
-//     // Initialize objects to hold counts
-//     const subjectCounts = {};
-//     const sectionCounts = {};
-  
-//     // Iterate through subjects and their sections
-//     subjects.forEach(subject => {
-//       subjectCounts[subject.subjectId] = {
-//         totalQuestions: subject.sections.flatMap(section => section.questions).length,
-//         answeredQuestions: answeredQuestions.filter(id =>
-//           subject.sections.flatMap(section => section.questions.map(question => question.question_id)).includes(id)
-//         ).length,
-//         markedForReviewQuestions: markedForReviewQuestions.filter(id =>
-//           subject.sections.flatMap(section => section.questions.map(question => question.question_id)).includes(id)
-//         ).length,
-//         notAnsweredButVisited: visitedQuestions.filter(id =>
-//           !answeredQuestions.includes(id) &&
-//           !markedForReviewQuestions.includes(id) &&
-//           subject.sections.flatMap(section => section.questions.map(question => question.question_id)).includes(id)
-//         ).length,
-//         notVisited: subject.sections.flatMap(section => section.questions).length - visitedQuestions.filter(id =>
-//           subject.sections.flatMap(section => section.questions.map(question => question.question_id)).includes(id)
-//         ).length,
-//       };
-  
-//       subject.sections.forEach(section => {
-//         sectionCounts[section.sectionId] = {
-//           totalQuestions: section.questions.length,
-//           answeredQuestions: answeredQuestions.filter(id =>
-//             section.questions.map(question => question.question_id).includes(id)
-//           ).length,
-//           markedForReviewQuestions: markedForReviewQuestions.filter(id =>
-//             section.questions.map(question => question.question_id).includes(id)
-//           ).length,
-//           notAnsweredButVisited: visitedQuestions.filter(id =>
-//             !answeredQuestions.includes(id) &&
-//             !markedForReviewQuestions.includes(id) &&
-//             section.questions.map(question => question.question_id).includes(id)
-//           ).length,
-//           notVisited: section.questions.length - visitedQuestions.filter(id =>
-//             section.questions.map(question => question.question_id).includes(id)
-//           ).length,
-//         };
-//       });
-//     });
-  
-//     return { subjectCounts, sectionCounts };
-//   };
-  
-//   const { subjectCounts, sectionCounts } = getCountsBySubjectAndSection(testData?.subjects || []);
-  
-
-
-//   return (
-//     <div>
-//       <div>
-//         {testData.subjects.map((subject) => (
-//           <button
-//             key={subject.subjectId}
-//             onClick={() => handleSubjectClick(subject.subjectId)}
-//             className={`sidebar-button ${
-//               subject.subjectId === selectedSubjectId ? "active" : ""
-//             }`}
-//           >
-//             {subject.SubjectName}
-//           </button>
-//         ))}
-//       </div>
-//       {selectedSubjectId && (
-//         <div>
-//           {testData.subjects
-//             .find((subject) => subject.subjectId === selectedSubjectId)
-//             .sections.map((section) => (
-//               <button
-//                 key={section.sectionId}
-//                 onClick={() => handleSectionClick(section.sectionId)}
-//                 // className={
-//                 //   selectedSectionId === section.sectionId ? "selected" : ""
-//                 // }
-//                 className={`sidebar-button ${
-//                   section.sectionId === selectedSectionId ? "active" : ""
-//                 }`}
-//               >
-//                 {section.SectionName}
-//               </button>
-//             ))}
-//         </div>
-//       )}
-//       {selectedQuestion && (
-//         <div>
-//           <div>
-//             Question:{currentQuestionIndex}
-//             <img
-//               src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${selectedQuestion.questionImgName}`}
-//               alt={`Question ${selectedQuestion.question_id}`}
-//             />
-//           </div>
-//           {selectedQuestion.quesion_type.some((type) =>
-//             [1, 2, 7, 8].includes(type.quesionTypeId)
-//           ) && (
-//             <div className="options">
-//               {selectedQuestion.options.map((option, optionIndex) => (
-//                 <div key={option.option_id}>
-//                   <input
-//                     type="radio"
-//                     name={`question_${selectedQuestion.question_id}`}
-//                     value={option.option_id}
-//                     // checked={
-//                     //   radioResponses[selectedQuestion.question_id] ===
-//                     //   option.option_id
-//                     // }
-//                     checked={
-//                       radioResponses[selectedQuestion.question_id]?.optionId ===
-//                       option.option_id
-//                     }
-//                     onChange={() =>
-//                       handleRadioChange(
-//                         selectedQuestion.question_id,
-//                         option.option_id,
-//                         optionIndex
-//                       )
-//                     }
-//                   />
-//                   ({String.fromCharCode("a".charCodeAt(0) + optionIndex)}
-//                   )
-//                   <img
-//                     src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${option.optionImgName}`}
-//                     alt={`Option ${option.option_index}`}
-//                   />
-//                 </div>
-//               ))}
-//             </div>
-//           )}
-//           {selectedQuestion.quesion_type.some((type) =>
-//             [3, 4].includes(type.quesionTypeId)
-//           ) && (
-//             <div className="options">
-//               {selectedQuestion.options.map((option, optionIndex) => (
-//                 <div key={option.option_id}>
-//                   <input
-//                     type="checkbox"
-//                     name={`question_${selectedQuestion.question_id}`}
-//                     value={option.option_id}
-//                     checked={checkboxResponses[
-//                       selectedQuestion.question_id
-//                     ]?.some((resp) => resp.optionId === option.option_id)}
-//                     onChange={(e) =>
-//                       handleCheckboxChange(
-//                         selectedQuestion.question_id,
-//                         option.option_id,
-//                         e.target.checked,
-//                         optionIndex
-//                       )
-//                     }
-//                   />
-//                   ({String.fromCharCode("a".charCodeAt(0) + optionIndex)}
-//                   )
-//                   <img
-//                     src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${option.optionImgName}`}
-//                     alt={`Option ${option.option_index}`}
-//                   />
-//                 </div>
-//               ))}
-//             </div>
-//           )}
-
-//           {selectedQuestion.quesion_type.some((type) =>
-//             [5].includes(type.quesionTypeId)
-//           ) && (
-//             <>
-//               <input
-//                 type="number"
-//                 value={textResponses[selectedQuestion.question_id] || ""}
-//                 onChange={(e) =>
-//                   handleTextChange(selectedQuestion.question_id, e.target.value)
-//                 }
-//                 // onClick={() => handleClickInput(selectedQuestion.question_id)}
-//               />
-//               {[
-//                 "1",
-//                 "2",
-//                 "3",
-//                 "4",
-//                 "5",
-//                 "6",
-//                 "7",
-//                 "8",
-//                 "9",
-//                 "0",
-//                 "Clear",
-//               ].map((key) => (
-//                 <button key={key} onClick={() => handleKeypadClick(key)}>
-//                   {key}
-//                 </button>
-//               ))}
-//             </>
-//           )}
-//             {selectedQuestion.quesion_type.some((type) =>
-//             [6].includes(type.quesionTypeId)
-//           ) && (
-//             <>
-//               <input
-//                 type="number"
-//                 value={textResponses[selectedQuestion.question_id] || ""}
-//                 onChange={(e) =>
-//                   handleTextChange(selectedQuestion.question_id, e.target.value)
-//                 }
-//                 // onClick={() => handleClickInput(selectedQuestion.question_id)}
-//               />
-//               {[
-//                 "1",
-//                 "2",
-//                 "3",
-//                 "4",
-//                 "5",
-//                 "6",
-//                 "7",
-//                 "8",
-//                 "9",
-//                 "0",
-//                 ".",
-//                 "Clear",
-//               ].map((key) => (
-//                 <button key={key} onClick={() => handleKeypadClick(key)}>
-//                   {key}
-//                 </button>
-//               ))}
-//             </>
-//           )}
-//         </div>
-//       )}
-//       <div>
-//         {questions.map((question, index) => {
-//           let buttonClass = "question_button";
-
-//           const isAnswered = answeredQuestions.includes(question.question_id);
-//           const isNotAnswered = notAnsweredQuestions.includes(
-//             question.question_id
-//           );
-//           const isMarkedForReview = markedForReviewQuestions.includes(
-//             question.question_id
-//           );
-//           const isVisited = visitedQuestions.includes(question.question_id) ;
-//           const isActive = selectedQuestionId === question.question_id;
-//           // Single if-else statement to determine the button class
-//           if (isMarkedForReview) {
-//             buttonClass += isAnswered ? " purpleBox" : " blueBox"; // Marked for review
-//           }
-//           if (isAnswered) {
-//             buttonClass += " answered"; // Answered question
-//           } else if (isNotAnswered) {
-//             buttonClass += " notAnswered"; // Visited but not answered
-//           } else if (isVisited) {
-//             buttonClass += " visited"; // Visited but not interacted with
-//           } else {
-//             buttonClass += " question_button"; // Not visited question
-//           }
-//           if (isActive) {
-//             buttonClass += " orangeBox"; // Active question, first-time visit
-//           }
-//           return (
-//             <button
-//               key={question.question_id}
-//               className={buttonClass}
-//               onClick={() => handleQuestionClick(question.question_id)}
-//             >
-//               {index + 1}
-//             </button>
-//           );
-//         })}
-//       </div>
-//       <button onClick={handlePreviousClick}>Previous</button>
-//       <button onClick={handleSaveAndNext}>Save and Next</button>
-//       <button onClick={handleMarkForReview}>Mark for Review</button>
-//       <button onClick={handleClearResponse}>Clear Response</button>
-//       <button onClick={handleSubmit}>Submit</button>
-//       <div className="counts">
-//         <h3>Over all Counts</h3>
-//         <p>Total Questions: {totalQuestions}</p>
-//         <p>Visited: {visitedCount}</p>
-//         <p>Not Visited: {totalQuestions - visitedQuestions.length}</p>
-//         <p>Answered: {answeredOnlyCount}</p>
-//         <p>Not Answered: {notAnsweredButVisitedCount}</p>
-//         <p>Marked for Review: {markForReviewOnlyCount}</p>
-//         <p>Answered and Marked for Review: {answeredAndMarkForReviewCount}</p>
-//       </div>
-//        <div>
-//     <h2>Subject-wise Counts</h2>
-//     {testData?.subjects.map(subject => (
-//       <div key={subject.subjectId}>
-//         <h3>{subject.SubjectName}</h3>
-//         <p>Total Questions: {subjectCounts[subject.subjectId]?.totalQuestions}</p>
-//         <p>Answered: {subjectCounts[subject.subjectId]?.answeredQuestions}</p>
-//         <p>Marked for Review: {subjectCounts[subject.subjectId]?.markedForReviewQuestions}</p>
-//         <p>Not Answered but Visited: {subjectCounts[subject.subjectId]?.notAnsweredButVisited}</p>
-//         <p>Not Visited: {subjectCounts[subject.subjectId]?.notVisited}</p>
-//       </div>
-//     ))}
-
-//     <h2>Section-wise Counts</h2>
-//     {testData?.subjects.flatMap(subject => subject.sections).map(section => (
-//       <div key={section.sectionId}>
-//         <h3>{section.SectionName}</h3>
-//         <p>Total Questions: {sectionCounts[section.sectionId]?.totalQuestions}</p>
-//         <p>Answered: {sectionCounts[section.sectionId]?.answeredQuestions}</p>
-//         <p>Marked for Review: {sectionCounts[section.sectionId]?.markedForReviewQuestions}</p>
-//         <p>Not Answered but Visited: {sectionCounts[section.sectionId]?.notAnsweredButVisited}</p>
-//         <p>Not Visited: {sectionCounts[section.sectionId]?.notVisited}</p>
-//       </div>
-//     ))}
-//   </div>
-//     </div>
-//   );
-// };
-
-// export default UG_OTSQuizPage;
