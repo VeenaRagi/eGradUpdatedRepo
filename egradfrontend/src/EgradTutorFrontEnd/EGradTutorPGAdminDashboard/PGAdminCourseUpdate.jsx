@@ -238,7 +238,7 @@ const PGAdminCourseUpdate = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/CoureseCreation/courseupdate/${portalId}/${courseCreationId}`
+          `${BASE_URL}/CoureseCreation/pgCourseUpdate/${portalId}/${courseCreationId}`
         );
 
         const courseData = response.data;
