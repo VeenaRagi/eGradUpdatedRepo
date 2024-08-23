@@ -5,7 +5,7 @@ const mysql = require("mysql");
     host: "localhost",
     user: "root",
     password: "",
-    database: "egraddatabase",
+    database: "ug_pg_dashboard_database",
 
     
   }); 
