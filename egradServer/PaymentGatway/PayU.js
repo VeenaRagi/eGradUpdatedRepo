@@ -157,7 +157,7 @@ router.post("/success", async (req, res) => {
  
               <script>
                   document.getElementById('redirectButton').addEventListener('click', function() {
-                      window.location.href = 'http://localhost:3000/Student_dashboard/${userIdTesting}/${encryptedBranchId}';
+                      window.location.href = 'http://localhost:3000/UserLogin';
                   });
               </script>
           </body>
