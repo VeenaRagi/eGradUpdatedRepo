@@ -233,8 +233,7 @@ router.get("/purchasedCourses/:userId/:Branch_Id", async (req, res) => {
     cct.cardImage,
     cct.Portale_Id,
     e.examId,
-      cpe.coursesPortalExamsId,
-   cpe.coursesPortalExamname,
+ e.examName,
     p.Portale_Name,
     brn.Branch_Id,
     brn.Branch_Name,
@@ -247,9 +246,9 @@ router.get("/purchasedCourses/:userId/:Branch_Id", async (req, res) => {
 FROM
     course_creation_table AS cct
 LEFT JOIN exams AS e ON e.examId = cct.examId
-LEFT JOIN coursesportalexams AS cpe On e.coursesPortalExamsId=cpe.coursesPortalExamsId
+
 LEFT JOIN branches brn ON
-    brn.Branch_Id = cpe.Branch_Id AND brn.Branch_Id = e.Branch_Id
+  brn.Branch_Id = e.BranchId
 LEFT JOIN portales AS p ON p.Portale_Id = cct.Portale_Id
 LEFT JOIN student_buy_courses AS sbc ON sbc.courseCreationId = cct.courseCreationId
 LEFT JOIN course_subjects cs ON cs.courseCreationId = cct.courseCreationId
@@ -287,7 +286,7 @@ GROUP BY
           totalPrice: result.totalPrice,
           courseCardImage: cardImage,
           examId: result.examId,
-          examName: result.coursesPortalExamname,
+          examName: result.examName,
           portalName: result.Portale_Name,
           specificPortal: result.Portale_Id,
           portal:result.Portale_Id,
@@ -429,8 +428,7 @@ router.get("/unPurchasedCourses/:userId/:Branch_Id", async (req, res) => {
     cct.Discount,    
     cct.cardImage,
     e.examId,
-    cpe.coursesPortalExamsId,
-    cpe.coursesPortalExamname,
+   e.examName,
     p.Portale_Id,
     p.Portale_Name,
     brn.Branch_Id,
@@ -442,10 +440,8 @@ FROM
     course_creation_table cct
 LEFT JOIN exams e ON
     e.examId = cct.examId
-LEFT JOIN coursesportalexams cpe ON
-    cpe.coursesPortalExamsId = e.coursesPortalExamsId
 LEFT JOIN branches brn ON
-    brn.Branch_Id = cpe.Branch_Id AND brn.Branch_Id = e.Branch_Id
+     brn.Branch_Id = e.BranchId
 LEFT JOIN portales p ON
     p.Portale_Id = cct.Portale_Id
 LEFT JOIN course_subjects cs ON
@@ -485,7 +481,7 @@ GROUP BY
         Portale_Id: portalId,
         portal: result.Portale_Name,
         examId: result.examId,
-        coursesPortalExamname: result.coursesPortalExamname,
+        coursesPortalExamname: result.examName,
         courseCreationId: result.courseCreationId,
         courseName: result.courseName,
         courseStartDate: result.courseStartDate,
