@@ -77,7 +77,7 @@ router.post("/success", async (req, res) => {
       host: "smtp.gmail.com",
       auth: {
         user: "egradtutorweb@gmail.com", // Your email address
-        pass: "zzwj ffce jrbn tlhs", // Your email password
+        pass: "jhjo bogr grvb dacd", // Your email password
       },
     });
 
@@ -410,7 +410,7 @@ router.post("/failure", async (req, res) => {
       host: "smtp.gmail.com",
       auth: {
         user: "egradtutorweb@gmail.com", // Your email address
-        pass: "zzwj ffce jrbn tlhs", // Your email password
+        pass: "jhjo bogr grvb dacd", // Your email password
       },
     });
 
