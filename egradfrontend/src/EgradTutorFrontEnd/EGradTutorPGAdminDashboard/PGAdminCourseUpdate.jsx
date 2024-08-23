@@ -155,13 +155,13 @@ const PGAdminCourseUpdate = () => {
     const fetchData = async () => {
       try {
         // Fetch types of questions
-        const questionsResponse = await fetch(`${BASE_URL}/CoureseCreation/type_of_questions`);
+        const questionsResponse = await fetch(`${BASE_URL}/CoureseCreation/pgTypeOfQuestions`);
         const questionsData = await questionsResponse.json();
         setTypeofQuestion(questionsData);
   
         // Fetch course data to get preselected question types
         const courseResponse = await fetch(
-          `${BASE_URL}/CoureseCreation/courseupdate/${portalId}/${courseCreationId}`
+          `${BASE_URL}/CoureseCreation/pgCourseUpdate/${portalId}/${courseCreationId}`
         );
         const courseData = await courseResponse.json();
         setSelectedtypeofQuestion(courseData.question_types.split(","));
@@ -238,7 +238,7 @@ const PGAdminCourseUpdate = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/CoureseCreation/courseupdate/${portalId}/${courseCreationId}`
+          `${BASE_URL}/CoureseCreation/pgCourseUpdate/${portalId}/${courseCreationId}`
         );
 
         const courseData = response.data;

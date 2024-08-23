@@ -1813,7 +1813,103 @@ router.get("/courese-exam-subjects/:examId/subjects", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+router.get("/pgCourseUpdate/:portalId/:courseCreationId", async (req, res) => {
+  const courseCreationId = req.params.courseCreationId;
+  const portalId = req.params.portalId;
+  console.log(portalId, courseCreationId);
+  const sql = `SELECT
+    cc.*,
+    subjects.subjects AS departmentName,
+    questions.quesion_types AS question_types,
+    e.examName,
+    typeOfTests.type_of_test AS type_of_test,
+    tp.topicName
+FROM
+    course_creation_table cc
+    
+ LEFT JOIN(
+    SELECT ctt.courseCreationId,
+        GROUP_CONCAT(t.typeOfTestName) AS type_of_test
+    FROM
+        course_typeoftests ctt
+    LEFT JOIN type_of_test t ON
+        ctt.typeOfTestId = t.typeOfTestId
+    GROUP BY
+        ctt.courseCreationId
+) AS typeOfTests
+ON
+    cc.courseCreationId = typeOfTests.courseCreationId   
+    
+LEFT JOIN(
+    SELECT cs.courseCreationId,
+        GROUP_CONCAT(s.departmentName) AS subjects
+    FROM
+        course_subjects cs
+    LEFT JOIN pg_departments s ON
+        cs.subjectId  = s.departmentId 
+    GROUP BY
+        cs.courseCreationId
+) AS subjects
+ON
+    cc.courseCreationId = subjects.courseCreationId
+LEFT JOIN(
+    SELECT ct.courseCreationId,
+        GROUP_CONCAT(q.typeofQuestion) AS quesion_types
+    FROM
+        course_type_of_question ct
+    LEFT JOIN quesion_type q ON
+        ct.quesionTypeId = q.quesionTypeId
+    GROUP BY
+        ct.courseCreationId
+) AS questions
+ON
+    cc.courseCreationId = questions.courseCreationId
+JOIN exams AS e
+ON
+    cc.examId = e.examId
+LEFT JOIN 
+topics tp
+ ON cc.courseCreationId=tp.courseCreationId
+WHERE
+    cc.courseCreationId = ?;
+    `;
+  db1.query(sql, [courseCreationId], (error, results) => {
+    if (error || results.length === 0) {
+      console.error("Error fetching images:", error);
+      return res.status(500).send("Internal Server Error");
+    }
 
+    // Convert BLOB data to base64
+    const dataFromBackend = results[0];
+    const base64Image = Buffer.from(
+      dataFromBackend.cardImage,
+      "binary"
+    ).toString("base64");
+
+    const imageData = {
+      courseCreationId: dataFromBackend.courseCreationId,
+      courseName: dataFromBackend.courseName,
+      courseYear: dataFromBackend.courseYear,
+      examId: dataFromBackend.examId,
+      courseStartDate: dataFromBackend.courseStartDate,
+      courseEndDate: dataFromBackend.courseEndDate,
+      cost: dataFromBackend.cost,
+      Discount: dataFromBackend.Discount,
+      totalPrice: dataFromBackend.totalPrice,
+      cardImage: `data:image/png;base64,${base64Image}`,
+      // cardImage:`${base64Image}`,
+      paymentlink: dataFromBackend.paymentlink,
+      Portale_Id: dataFromBackend.Portale_Id,
+      subjects: dataFromBackend.subjects,
+      question_types: dataFromBackend.question_types,
+      examName: dataFromBackend.examName,
+      type_of_test: dataFromBackend.type_of_test,
+      topicName: dataFromBackend.topicName,
+    };
+
+    res.status(200).json(imageData); // Send user data with image data as JSON response
+  });
+});
 
 
 
