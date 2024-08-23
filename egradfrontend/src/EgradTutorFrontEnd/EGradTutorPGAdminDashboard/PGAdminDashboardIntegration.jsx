@@ -7,7 +7,6 @@ const PGAdminDashboardIntegration = () => {
     return (
         <>
             <AdminHeader />
-            <h1>PG ADMIN DASHBOARD</h1>
             <div className="Exam_portal_admin_integration_container">
                 <PGLeftNav />
             </div>
