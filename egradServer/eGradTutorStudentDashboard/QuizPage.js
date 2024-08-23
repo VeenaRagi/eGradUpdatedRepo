@@ -1382,17 +1382,17 @@ router.get("/PG_QuestionOptions/:testCreationTableId/:userId", async (req, res) 
 
 router.post("/saveExamSummary", async (req, res) => {
   try {
-    const { userId, totalUnattempted, totalAnswered, NotVisitedb, testCreationTableId } = req.body;
+    const { userId, totalUnattempted, totalAnswered, NotVisited, testCreationTableId } = req.body;
 
     const userIdNumber = parseInt(userId, 10);
     const testCreationTableIdNumber = parseInt(testCreationTableId, 10);
 
-    if (isNaN(userIdNumber) || isNaN(testCreationTableIdNumber) || isNaN(totalUnattempted) || isNaN(totalAnswered) || isNaN(NotVisitedb)) {
+    if (isNaN(userIdNumber) || isNaN(testCreationTableIdNumber) || isNaN(totalUnattempted) || isNaN(totalAnswered) || isNaN(NotVisited)) {
       console.error("Invalid data types");
       return res.status(400).json({ success: false, message: "Invalid data types" });
     }
 
-    const checkQuery = "SELECT * FROM student_exam_summery WHERE user_id = ? AND testCreationTableId = ?";
+    const checkQuery = "SELECT * FROM student_exam_summery WHERE user_Id = ? AND testCreationTableId = ?";
     const checkValues = [userIdNumber, testCreationTableIdNumber];
     const existingEntry = await db.query(checkQuery, checkValues);
 
@@ -1400,19 +1400,19 @@ router.post("/saveExamSummary", async (req, res) => {
       const updateQuery = `
         UPDATE student_exam_summery 
         SET Total_unAttemted = ?, Total_answered = ?, Not_visited_count = ? 
-        WHERE user_id = ? AND testCreationTableId = ?
+        WHERE user_Id = ? AND testCreationTableId = ?
       `;
-      await db.query(updateQuery, [totalUnattempted, totalAnswered, NotVisitedb, userIdNumber, testCreationTableIdNumber]);
+      await db.query(updateQuery, [totalUnattempted, totalAnswered, NotVisited, userIdNumber, testCreationTableIdNumber]);
       console.log("Exam summary updated in the database");
       return res.json({ success: true, message: "Exam summary updated successfully" });
     } else {
       const insertQuery = `
         INSERT INTO student_exam_summery 
-        (user_id, Total_unAttemted, Total_answered, Not_visited_count, testCreationTableId) 
+        (user_Id, Total_unAttemted, Total_answered, Not_visited_count, testCreationTableId) 
         VALUES 
         (?, ?, ?, ?, ?)
       `;
-      await db.query(insertQuery, [userIdNumber, totalUnattempted, totalAnswered, NotVisitedb, testCreationTableIdNumber]);
+      await db.query(insertQuery, [userIdNumber, totalUnattempted, totalAnswered, NotVisited, testCreationTableIdNumber]);
       console.log("Exam summary saved to the database");
       return res.json({ success: true, message: "Exam summary saved successfully" });
     }

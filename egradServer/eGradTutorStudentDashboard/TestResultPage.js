@@ -935,35 +935,35 @@ router.get("/getTimeLeftSubmissions/:testCreationTableId/:userId",
   }
 );
 
-router.get("/testDetails", (req, res) => {
-  const { user_Id, testCreationTableId } = req.params;
+// router.get("/testDetails", (req, res) => {
+//   const { user_Id, testCreationTableId } = req.params;
 
-  // Execute the SQL query
-  db.query(
-    `SELECT test.TestName, course.courseName, exam.examName,course.courseCreationId
-     FROM test_creation_table AS test
-     JOIN course_creation_table AS course ON test.courseCreationId = course.courseCreationId
-     JOIN exams AS exam ON course.examId = exam.examId
-     JOIN user_responses AS ur ON test.testCreationTableId = ur.testCreationTableId
-     JOIN log AS l ON ur.user_Id = l.user_Id
-     WHERE ur.user_Id = ? AND ur.testCreationTableId = ?`,
-    [user_Id, testCreationTableId],
-    (error, results) => {
-      if (error) {
-        console.error("Error executing SQL query:", error);
-        return res.status(500).json({ error: "Internal server error" });
-      }
+//   // Execute the SQL query
+//   db.query(
+//     `SELECT test.TestName, course.courseName, exam.examName,course.courseCreationId
+//      FROM test_creation_table AS test
+//      JOIN course_creation_table AS course ON test.courseCreationId = course.courseCreationId
+//      JOIN exams AS exam ON course.examId = exam.examId
+//      JOIN user_responses AS ur ON test.testCreationTableId = ur.testCreationTableId
+//      JOIN log AS l ON ur.user_Id = l.user_Id
+//      WHERE ur.user_Id = ? AND ur.testCreationTableId = ?`,
+//     [user_Id, testCreationTableId],
+//     (error, results) => {
+//       if (error) {
+//         console.error("Error executing SQL query:", error);
+//         return res.status(500).json({ error: "Internal server error" });
+//       }
 
-      // Check if any results were returned
-      if (results.length === 0) {
-        return res.status(404).json({ error: "No data found" });
-      }
+//       // Check if any results were returned
+//       if (results.length === 0) {
+//         return res.status(404).json({ error: "No data found" });
+//       }
 
-      // Return the results from the query
-      res.json(results);
-    }
-  );
-});
+//       // Return the results from the query
+//       res.json(results);
+//     }
+//   );
+// });
 
 // @route   POST api/quiz /submitQuizResult/:id
 // router.get("/testDetails/:testCreationTableId/:Portale_Id", async (req, res) => {
