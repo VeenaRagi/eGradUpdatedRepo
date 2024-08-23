@@ -15,7 +15,7 @@ router.get('/unPurchasedCoursesOnHomePage/:Portale_Id/:Branch_Id',async(req,res)
   cct.cost,
   cct.Discount,
   e.examId,
-  cpe.coursesPortalExamname,
+  e.examName,
   cct.cardImage,
   p.Portale_Id,
   p.Portale_Name,
@@ -30,10 +30,8 @@ FROM
   course_creation_table cct
 LEFT JOIN exams e ON
   e.examId = cct.examId
-LEFT JOIN coursesportalexams cpe ON
-  cpe.coursesPortalExamsId = e.coursesPortalExamsId
 LEFT JOIN branches brn ON
-  brn.Branch_Id = cpe.Branch_Id
+  brn.Branch_Id =e.BranchId
 LEFT JOIN portales p ON
   p.Portale_Id = cct.Portale_Id
 LEFT JOIN course_subjects cs ON
@@ -63,7 +61,7 @@ results.forEach((result) => {
     Portale_Id: Portale_Id,
     portal: result.Portale_Name,
     examId: result.examId,
-    coursesPortalExamname: result.coursesPortalExamname,
+    coursesPortalExamname: result.examName,
     courseCreationId: result.courseCreationId,
     courseName: result.courseName,
     courseStartDate: result.courseStartDate,
