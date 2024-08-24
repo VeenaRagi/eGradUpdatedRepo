@@ -9,7 +9,7 @@ import { decryptData, encryptData } from "./utils/crypto";
 import { useLocation } from 'react-router-dom';
 import CryptoJS from 'crypto-js';
 
-const TestResultsPage = () => {
+const PgTestResultsPage = () => {
 console.log("11111111111111111111111111111111111111")
   const location = useLocation();
   const { userData } = location.state || {}; 
@@ -122,7 +122,7 @@ console.log("11111111111111111111111111111111111111")
     const fetchAnswer = async () => {
       try {
         const responseAnswer = await fetch(
-          `${BASE_URL}/TestResultPage/answer/${decryptedParam1}/${decryptedParam2}`
+          `${BASE_URL}/PgTestResultPage/answer/${decryptedParam1}/${decryptedParam2}`
         );
         const answerData = await responseAnswer.json();
         setAnswer(answerData);
@@ -173,7 +173,7 @@ console.log("11111111111111111111111111111111111111")
     const fetchQuestionCount = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/TestResultPage/questionCount/${decryptedParam1}`
+          `${BASE_URL}/PgTestResultPage/questionCount/${decryptedParam1}`
         ); // Replace "yourTestCreationTableId" with the actual testCreationTableId
         const data = await response.json();
         setQuestionCount(data);
@@ -190,7 +190,7 @@ console.log("11111111111111111111111111111111111111")
     const fetchQuestionCount = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/TestResultPage/attemptCount/${decryptedParam1}/${decryptedParam2}`
+          `${BASE_URL}/PgTestResultPage/attemptCount/${decryptedParam1}/${decryptedParam2}`
         );
         const data = await response.json();
         setAttemptCount(data);
@@ -208,7 +208,7 @@ console.log("11111111111111111111111111111111111111")
     const fetchCorrectAnswers = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/TestResultPage/correctAnswers/${decryptedParam1}/${decryptedParam2}`
+          `${BASE_URL}/PgTestResultPage/correctAnswers/${decryptedParam1}/${decryptedParam2}`
         );
         const data = await response.json();
 
@@ -228,7 +228,7 @@ console.log("11111111111111111111111111111111111111")
     const fetchCorrectAnswers = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/TestResultPage/totalcurrectans/${decryptedParam1}/${decryptedParam2}`
+          `${BASE_URL}/PgTestResultPage/totalcurrectans/${decryptedParam1}/${decryptedParam2}`
         );
 
         if (response.data && response.data.length > 0) {
@@ -251,7 +251,7 @@ console.log("11111111111111111111111111111111111111")
     const fetchQuestionCount = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/TestResultPage/incorrectAnswers/${decryptedParam1}/${decryptedParam2}`
+          `${BASE_URL}/PgTestResultPage/incorrectAnswers/${decryptedParam1}/${decryptedParam2}`
         );
         const data = await response.json();
         setIncorrectAnswersCount(data);
@@ -269,7 +269,7 @@ console.log("11111111111111111111111111111111111111")
     const fetchQuestionCount = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/TestResultPage/totalcurrectans/${decryptedParam1}/${decryptedParam2}`
+          `${BASE_URL}/PgTestResultPage/totalcurrectans/${decryptedParam1}/${decryptedParam2}`
         );
         if (response.data && response.data.length > 0) {
           // Assuming the response is an array with one item
@@ -291,7 +291,7 @@ console.log("11111111111111111111111111111111111111")
     const fetchinCorrectAnswers = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/TestResultPage/totalcurrectans/${decryptedParam1}/${decryptedParam2}`
+          `${BASE_URL}/PgTestResultPage/totalcurrectans/${decryptedParam1}/${decryptedParam2}`
         );
 
         if (response.data && response.data.length > 0) {
@@ -315,7 +315,7 @@ console.log("11111111111111111111111111111111111111")
     const fetchQuestionCount = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/TestResultPage/getStudentMarks/${decryptedParam1}/${decryptedParam2}`
+          `${BASE_URL}/PgTestResultPage/getStudentMarks/${decryptedParam1}/${decryptedParam2}`
           // `${BASE_URL}/TestResultPage/score/4/3`
         );
         const data = await response.json();
@@ -339,7 +339,7 @@ console.log("11111111111111111111111111111111111111")
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          `${BASE_URL}/TestResultPage/getEmployeeData`,
+          `${BASE_URL}/PgTestResultPage/getEmployeeData`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -372,7 +372,7 @@ console.log("11111111111111111111111111111111111111")
     const fetchQuestionCount = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/TestResultPage/getTimeLeftSubmissions/${decryptedParam1}/${decryptedParam2}`
+          `${BASE_URL}/PgTestResultPage/getTimeLeftSubmissions/${decryptedParam1}/${decryptedParam2}`
           // `${BASE_URL}/TestResultPage/score/${testCreationTableId}/${userData.id}`
           // `${BASE_URL}/TestResultPage/getTimeLeftSubmissions/3/2`
         );
@@ -396,7 +396,7 @@ console.log("11111111111111111111111111111111111111")
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/TestResultPage/user_answer`
+          `${BASE_URL}/PgTestResultPage/user_answer`
         );
         setUserResponse(response.data);
       } catch (error) {
@@ -464,7 +464,7 @@ console.log("11111111111111111111111111111111111111")
     const fetchTestDetails = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/TestResultPage/testDetails/${decryptedParam1}`
+          `${BASE_URL}/PgTestResultPage/testDetails/${decryptedParam1}`
         );
 
         if (!response.ok) {
@@ -623,7 +623,7 @@ useEffect(() => {
   );
 };
 
-export default TestResultsPage;
+export default PgTestResultsPage;
 
 
 

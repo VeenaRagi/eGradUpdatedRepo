@@ -170,7 +170,8 @@ const CoursePage = require("./eGradTutorStudentDashboard/CoursePage");
 const TestPage = require("./eGradTutorStudentDashboard/TestPage");
 const InstructionPage = require("./eGradTutorStudentDashboard/InstructionPage");
 const QuizPage = require("./eGradTutorStudentDashboard/QuizPage");
-const TestResultPage = require("./eGradTutorStudentDashboard/TestResultPage");
+const UgTestResultPage = require("./eGradTutorStudentDashboard/UgTestResultPage");
+const PgTestResultPage = require("./eGradTutorStudentDashboard/PgTestResultPage");
 const Myresult =require("./eGradTutorStudentDashboard/Myresult")
 const studentSettings=require('./eGradTutorStudentDashboard/StudentSettings')
 //================OTS_QUIZAPP_IMPORTS_END==================
@@ -182,7 +183,8 @@ app.use("/CoursePage", CoursePage);
 app.use("/TestPage", TestPage);
 app.use("/InstructionPage", InstructionPage);
 app.use("/QuizPage", QuizPage);
-app.use("/TestResultPage", TestResultPage);
+app.use("/UgTestResultPage", UgTestResultPage);
+app.use("/PgTestResultPage", PgTestResultPage);
 app.use("/Myresult",Myresult);
 app.use('/studentSettings',studentSettings)
 //================OTS_QUIZAPP_ROUTES_END===============

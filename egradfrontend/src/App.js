@@ -39,7 +39,8 @@ import PGQuestionPaper from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbo
 import UGQuestionBankQuiz from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UG_PQB/UGQuestionBankQuiz.jsx";
 import PGQuestionBankQuiz from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PG_PQB/PGQuestionBankQuiz.jsx";
 import StudentDashbord_MyResults from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/StudentDashbord_MyResults.jsx";
-import TestResultsPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/TestResultsPage.jsx";
+import UgTestResultsPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UgTestResultsPage.jsx";
+import PgTestResultsPage from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/PgTestResultsPage.jsx";
 import { UserReport } from "./EgradTutorFrontEnd/EgradTutorWebsit/StudentDashbord/UserReport.jsx";
 import ThemesSection from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/ThemesSection.jsx";
 import Leftnav from "./EgradTutorFrontEnd/EgradtutorPortalsAdmin/Leftnav.jsx";
@@ -300,8 +301,12 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
                   element={<StudentDashbord_MyResults />}
                 />
                 <Route
-                  path="/TestResultsPage/:param1/:param2"
-                  element={<TestResultsPage />}
+                  path="/UgTestResultsPage/:param1/:param2"
+                  element={<UgTestResultsPage />}
+                />
+                 <Route
+                  path="/PgTestResultsPage/:param1/:param2"
+                  element={<PgTestResultsPage />}
                 />
                 {/* <Route
          path="/UserReport/:id/:testCreationTableId/:courseCreationId"

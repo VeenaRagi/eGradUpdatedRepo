@@ -79,6 +79,9 @@ const PG_OTSQuizPage = () => {
     setShowScientificCalculator(false);
   };
 
+  console.log("decryptedParam1",decryptedParam1);
+  console.log("decryptedParam2",decryptedParam2);
+
   useEffect(() => {
     if (testData?.subjects?.length) {
       // Flatten questions from all subjects and sections
@@ -347,7 +350,7 @@ const PG_OTSQuizPage = () => {
     const fetchTestDetails = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/TestResultPage/testDetails/${decryptedParam1}`
+          `${BASE_URL}/PgTestResultPage/testDetails/${decryptedParam1}`
         );
 
         if (!response.ok) {
@@ -357,6 +360,11 @@ const PG_OTSQuizPage = () => {
         const data = await response.json();
         console.log(data);
         setTestDetails(data.results);
+        if (data.results && data.results.length > 0) {
+          const courseCreationId = data.results[0].courseCreationId;
+          console.log('courseCreationId:', courseCreationId);
+       
+        }
       } catch (error) {
         console.log(error);
         // setError(error.message);
@@ -1574,7 +1582,7 @@ const PG_OTSQuizPage = () => {
       const token = new Date().getTime().toString();
       sessionStorage.setItem("navigationToken", token);
       // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
-      const url = `/TestResultsPage/${encodeURIComponent(
+      const url = `/PgTestResultsPage/${encodeURIComponent(
         encryptedParam1
       )}/${encodeURIComponent(encryptedParam2)}`;
 
@@ -1587,11 +1595,20 @@ const PG_OTSQuizPage = () => {
       console.log("sddvfnjdxnvjkncmvncx");
       console.log(decryptedParam2);
       // const courseCreationId = testDetails?.[0]?.courseCreationId;
-      const courseCreationId = 1;
+      // const courseCreationId = 2;
+      // const courseCreationId = testDetails.results[0].courseCreationId;
+      let courseCreationId;
+      if (testDetails && testDetails.length > 0) {
+        courseCreationId = testDetails[0].courseCreationId;
+        console.log("Course Creation ID:", courseCreationId);
+      } else {
+        console.log("Test details are not available yet.");
+      }
+      
       console.log(
         courseCreationId ? courseCreationId : "Course creation ID not available"
       );
-      console.log(decryptedParam1);
+      console.log("decryptedParam1",decryptedParam1);
 
       // Prepare data for the POST request
       const postData = {
@@ -1677,35 +1694,31 @@ const PG_OTSQuizPage = () => {
       </div>
       {/* end_header_div */}
 
+    
+
       <div>
         {!showExamSumary ? (
           <div className="pg_quiz_exam_interface_body">
             <div className="quizPagewatermark">
               <div className="pg_quiz_exam_interface_body_left_container">
                 <div className="pg_quiz_exam_interface_exam_subCONTAINER">
-                  {/* start_testName_view_instructions_questionpaper_div */}
-                  <div>
-                    <p key={testName.decryptedParam1}>{testData.TestName}</p>
-                    <div>
-                      <div>
-                        <button
-                          title="View Question Paper"
-                          onClick={openQuestionPaper}
-                        >
-                          View Question Paper
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          title="View Instructions"
-                          onClick={openInstructions}
-                        >
-                          View Instructions
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  {/* end_testName_view_instructions_questionpaper_div */}
+                    {/* start_testName_view_instructions_questionpaper_div */}
+      <div>
+        <p key={testName.decryptedParam1}>{testData.TestName}</p>
+        <div>
+          <div>
+            <button title="View Question Paper" onClick={openQuestionPaper}>
+              View Question Paper
+            </button>
+          </div>
+          <div>
+            <button title="View Instructions" onClick={openInstructions}>
+              View Instructions
+            </button>
+          </div>
+        </div>
+      </div>
+      {/* end_testName_view_instructions_questionpaper_div */}
                   <div>
                     <div class="PG_SUBJECTS_CONTAINER">
                       <div className="PG_subject_container">
