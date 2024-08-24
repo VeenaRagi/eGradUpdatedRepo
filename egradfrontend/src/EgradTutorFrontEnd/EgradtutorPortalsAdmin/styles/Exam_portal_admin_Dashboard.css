@@ -80,29 +80,35 @@
 
 .Dashboard_contant:nth-child(1) i {
   color: hwb(221.54deg 46.23% 22.83%);
-  font-size: 60px;
+  font-size: 48px;
+  height:92px;
 }
 
 .Dashboard_contant:nth-child(2) i {
   color: #40e3ff;
-  font-size: 60px;
+  font-size: 48px;
+  height: 70px;
 }
 
 .Dashboard_contant:nth-child(3) i {
   color: #48b39f;
-  font-size: 60px;
+  font-size: 48px;
+  height: 92px;
 }
 .Dashboard_contant:nth-child(4) i {
   color: hsl(276, 59%, 65%);
-  font-size: 80px;
+  font-size: 48px;
+  height: 98px;
 }
 .Dashboard_contant:nth-child(5) i {
   color: #81e58e;
-  font-size: 60px;
+  font-size: 48px;
+  height: 70px;
 }
 .Dashboard_contant:nth-child(6) i {
   color: #5661ff;
-  font-size: 80px;
+  font-size: 48px;
+  height: 70px;
 }
 
 .total_list {

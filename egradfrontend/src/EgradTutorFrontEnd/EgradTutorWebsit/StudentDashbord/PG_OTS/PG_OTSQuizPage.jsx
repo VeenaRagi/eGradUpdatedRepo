@@ -1645,9 +1645,9 @@ const PG_OTSQuizPage = () => {
       )} */}
 
       {/* start_header_div */}
-      <div className="pg_quiz_exam_interface_header quiz_exam_interface_header_q_if_H">
+      <div className="pg_quiz_exam_interface_header">
         <div className="pg_quiz_exam_interface_header_LOGO ">
-          <img src={image} alt="Current" />
+          <img className="pg_header_exam_image" src={image} alt="Current" />
         </div>
       </div>
       {/* end_header_div */}

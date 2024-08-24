@@ -173,7 +173,7 @@ const AdminHeader = ({ userRole }) => {
 
   const handleLogOut = () => {
     localStorage.removeItem("tiAuth");
-    navigate("/adminLogin");
+    navigate("/");
   };
 
   // Determine active link based on current location
