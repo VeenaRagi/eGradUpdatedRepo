@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import BASE_URL from "../../apiConfig";
 import { FaSearch } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
+import '../EgradtutorPortalsAdmin/styles/css_Pg_updateForm.css'
 // import '../EgradtutorPortalsAdmin/styles/Portal_coures_creation_admin.css'
 
 function PGAdminPortalCourseCreation() {
@@ -881,7 +882,7 @@ function PGAdminPortalCourseCreation() {
       {activeForm === "form1" && (
            <div className="overlay">
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
-          <form onSubmit={handleSubmitots} className="ots_-Form">
+          <form onSubmit={handleSubmitots} className="ots_-Form pg_courses_creation_form">
             <h2 className="ots_courseTitle_text">
               PG ONLINE TEST SERIES COURSE CREATION FORM
             </h2>
@@ -1137,7 +1138,7 @@ function PGAdminPortalCourseCreation() {
       {activeForm === "form2" && (
            <div className="overlay">
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
-          <form onSubmit={handleSubmitpqb} className="ots_-Form">
+          <form onSubmit={handleSubmitpqb} className="ots_-Form pg_courses_creation_form">
             <h2 className="ots_courseTitle_text">
              PG PRACTICES QUESTION BANK COURSE CREATION FORM
             </h2>
@@ -1393,7 +1394,7 @@ function PGAdminPortalCourseCreation() {
       {activeForm === "form3" && (
            <div className="overlay">
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
-          <form onSubmit={OVLhandleSubmit} className="ots_-Form">
+          <form onSubmit={OVLhandleSubmit} className="ots_-Form pg_courses_creation_form">
             <h2 className="ots_courseTitle_text">
             PG  ONLINE VIDEO LECTURE COURSE CREATION FORM
             </h2>
@@ -1580,7 +1581,7 @@ function PGAdminPortalCourseCreation() {
       )}
       {activeForm === "form4" && (
         <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
-          <form onSubmit={handleSubmitCP} className="ots_-Form">
+          <form onSubmit={handleSubmitCP} className="ots_-Form pg_courses_creation_form">
             <h2 className="ots_courseTitle_text">
              PG COMPLETE PACKAGE COURSE CREATION FORM
             </h2>

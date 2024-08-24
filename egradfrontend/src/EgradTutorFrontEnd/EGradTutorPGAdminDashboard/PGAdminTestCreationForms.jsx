@@ -6,6 +6,7 @@ import { useNavigate, Link, navigate } from "react-router-dom";
 import moment from "moment";
 import { FaSearch } from "react-icons/fa";
 import { useParams } from "react-router-dom";
+import '../EgradtutorPortalsAdmin/styles/css_Pg_updateForm.css'
 
 function PGAdminTestCreationForms() {
   const [testform, setTestform] = useState([]);
@@ -627,7 +628,7 @@ function PGAdminTestCreationForms() {
       )}
       {activeForm === "form1" && (
         <div className="overlay">
-          <form className="admin_form_test_creation_page" onSubmit={(e) => handleSubmit(e, selectedFormId)}>
+          <form className="admin_form_test_creation_page pg_test_creation_forms_pg" onSubmit={(e) => handleSubmit(e, selectedFormId)}>
             <h2 className="ots_courseTitle_text">TEST CREATION FORM</h2>
             <div className="otsCloseBtn_Mar">
               <button
