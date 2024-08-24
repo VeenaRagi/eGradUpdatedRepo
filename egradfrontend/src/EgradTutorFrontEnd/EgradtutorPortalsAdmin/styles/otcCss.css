@@ -40,6 +40,7 @@ input[type="time"] {
   padding: 6px;
   border: none;
   box-shadow: 1px 4px 11px 0px #1a374d;
+  background-color: white !important;
 }
 
 

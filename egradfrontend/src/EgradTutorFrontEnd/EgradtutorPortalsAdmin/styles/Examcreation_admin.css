@@ -248,8 +248,8 @@
   margin: 0 auto;
   background: redwi;
   background: #edf7ff;
-  width: 100vw;
-  height: 88vh;
+  /* width: 100vw; */
+  /* height: 88vh; */
 }
 
 .examUpdate_-container form {
@@ -517,3 +517,13 @@ input[type="search"]{
 input[type="search"]:focus{
   outline:0;
 }
+
+
+
+
+.ug_form_updater{
+  height: 945px;
+  overflow-y: scroll;
+}
+
+
