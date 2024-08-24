@@ -1,0 +1,137 @@
+
+.testCreation_-list {
+  display: flex;
+    padding: 5px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.testCreation_-list input[type="text"],
+.testCreation_-list select {
+  width: 340px;
+}
+
+
+
+
+
+
+
+
+
+/* *********Pg test creation Form */
+.pg_test_creation_forms_pg{
+    width: 40%;
+    margin: 10px auto;
+}
+/* *********Pg test creation Form END */
+
+
+
+
+/* *********Pg course creation Form */
+.pg_courses_creation_form{
+    width: 40%;
+    margin: 10px auto;
+}
+/* *********Pg course creation Form END*/
+
+
+
+/* *********Ug test creation Form */
+.ug_test_creation_forms_ug{
+    width: 40%;
+    margin: 10px auto;
+}
+/* *********Ug test creation Form END*/
+
+
+
+
+/* *********Ug course creation Form */
+.ug_courses_creation_form{
+    width: 40%;
+    margin: 10px auto;
+}
+.Ug_type_of_tests{
+    display: flex;
+    flex-direction: column;
+}
+
+.ug_type_of_tests_lists{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ug_type_of_tetss{
+    width: 300px;
+    margin: 0 auto;
+}
+.ug_type_of_tets_media{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.Ug_type_of_questions_ug{
+    display: flex;
+}
+
+.Ug_type_of_tests_lists_Ug{
+    display: flex;
+    flex-direction: column;
+}
+.ug_type_of_tests_questions{
+    display: flex;
+    justify-content: space-between;
+}
+.ug_type_of_tets_media_questions{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ug_type_of_q_label{
+    text-align: start;
+}
+/* *********Ug course creation Form END*/
+
+
+/*_______________ MEDIA QUERIES _______________ */
+@media (max-width:768px){
+    .ug_test_creation_forms_ug {
+        width: 100%;
+        margin: 10px auto;
+    }
+    .pg_test_creation_forms_pg{
+        width: 100%;
+        margin: 10px auto;
+    }
+    .ug_courses_creation_form{
+        width: 100%;
+        margin: 10px auto;
+    }
+    .pg_courses_creation_form{
+        width: 100%;
+        margin: 10px auto;
+    }
+}
+@media (min-width:768px) and (max-width:1024px){
+    .ug_test_creation_forms_ug {
+        width: 70%;
+        margin: 20px auto;
+    }
+    .pg_test_creation_forms_pg{
+        width: 70%;
+        margin: 20px auto;
+    }
+    .ug_courses_creation_form{
+        width: 70%;
+        margin: 20px auto;
+    }
+    .pg_courses_creation_form{
+        width: 70%;
+        margin: 20px auto;
+    }
+}

@@ -5,6 +5,7 @@ import BASE_URL from "../../apiConfig";
 import { FaSearch } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import '../EgradtutorPortalsAdmin/styles/Portal_coures_creation_admin.css'
+import '../EgradtutorPortalsAdmin/styles/css_Pg_updateForm.css'
 
 function Portal_coures_creation_admin() {
   const [courseData, setCourseData] = useState([]);
@@ -880,7 +881,7 @@ function Portal_coures_creation_admin() {
       {/* ots */}
       {activeForm === "form1" && (
            <div className="overlay">
-        <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
+        <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM ug_courses_creation_form">
           <form onSubmit={handleSubmitots} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
               ONLINE TEST SERIES COURSE CREATION FORM
@@ -919,13 +920,13 @@ function Portal_coures_creation_admin() {
                   </select>
                 </div>
               </div>
-              <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-                <div className="testCreation_lists">
+              <div className="coures-contant_-flexCOntantc examSubjects_-contant ">
+                <div className="testCreation_lists ">
                   <label>Type of test:</label>
-                  <div className="coures_-typeOfTest">
+                  <div className="coures_-typeOfTest ">
                     {typeOfTest.map((typeofTest) => (
                       <div
-                        className="course_checkbox_continer course_frominput_container_media"
+                        className="course_checkbox_continer course_frominput_container_media ug_type_of_tets_media"
                         key={typeofTest.typeOfTestId}
                       >
                         <label htmlFor={`question-${typeofTest.typeOfTestId}`}>
@@ -994,17 +995,17 @@ function Portal_coures_creation_admin() {
                   </div>
                 </div>
               </div>
-              <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-                <div className="testCreation_list">
+              <div className="coures-contant_-flexCOntantc examSubjects_-contant Ug_type_of_questions_ug">
+                <div className="testCreation_list Ug_type_of_tests_lists_Ug ">
                   <label>Type of Questions:</label>
-                  <div className="course_checkbox_continer_content">
+                  <div className="course_checkbox_continer_content ug_type_of_tests_questions">
                     {typeofQuestion.map((type) => (
                       <div
-                        className="course_checkbox_continer course_frominput_container_media"
+                        className="course_checkbox_continer course_frominput_container_media ug_type_of_tets_media_questions"
                         key={type.quesionTypeId}
                       >
-                        <i class="fa-solid fa-caret-right"></i>
-                        <label htmlFor={`question-${type.quesionTypeId}`}>
+                        {/* <i class="fa-solid fa-caret-right"></i> */}
+                        <label className="ug_type_of_q_label" htmlFor={`question-${type.quesionTypeId}`}>
                           {type.typeofQuestion}
                         </label>
                         <input
@@ -1133,7 +1134,7 @@ function Portal_coures_creation_admin() {
       {/* pqb */}
       {activeForm === "form2" && (
            <div className="overlay">
-        <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
+        <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM ug_courses_creation_form">
           <form onSubmit={handleSubmitpqb} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
               PRACTICES QUESTION BANK COURSE CREATION FORM
@@ -1181,7 +1182,7 @@ function Portal_coures_creation_admin() {
                 <div className="coures_-typeOfTest">
                   {typeOfTest.map((typeofTest) => (
                     <div
-                      className="course_checkbox_continer course_frominput_container_media"
+                      className="course_checkbox_continer course_frominput_container_media ug_type_of_tets_media"
                       key={typeofTest.typeOfTestId}
                     >
                       <label htmlFor={`question-${typeofTest.typeOfTestId}`}>
@@ -1249,16 +1250,16 @@ function Portal_coures_creation_admin() {
                 </div>
               </div>
             </div>
-            <div className="coures-contant_-flexCOntantc examSubjects_-contant">
+            <div className="coures-contant_-flexCOntantc examSubjects_-contant Ug_type_of_questions_ug">
               <div className="testCreation_list">
                 <label>Type of Questions:</label>
-                <div className="course_checkbox_continer_content">
+                <div className="course_checkbox_continer_content ug_type_of_tests_questions">
                   {typeofQuestion.map((type) => (
                     <div
-                      className="course_checkbox_continer course_frominput_container_media"
+                      className="course_checkbox_continer course_frominput_container_media ug_type_of_tets_media_questions"
                       key={type.quesionTypeId}
                     >
-                      <i class="fa-solid fa-caret-right"></i>
+                      {/* <i class="fa-solid fa-caret-right"></i> */}
                       <label htmlFor={`question-${type.quesionTypeId}`}>
                         {type.typeofQuestion}
                       </label>
@@ -1389,7 +1390,7 @@ function Portal_coures_creation_admin() {
       {/* ovl */}
       {activeForm === "form3" && (
            <div className="overlay">
-        <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM">
+        <div className="ONLINE_TEST_SERIES_COURSE_CREATION_FORM ug_courses_creation_form">
           <form onSubmit={OVLhandleSubmit} className="ots_-Form">
             <h2 className="ots_courseTitle_text">
               ONLINE VIDEO LECTURE COURSE CREATION FORM

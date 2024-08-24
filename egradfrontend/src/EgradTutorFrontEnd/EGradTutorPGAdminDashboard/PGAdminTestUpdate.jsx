@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import moment from "moment";
 // import BASE_URL from '../../src/apiConfig'
 import '../EgradtutorPortalsAdmin/styles/ResponsiveForAdmin.css'
+import '../EgradtutorPortalsAdmin/styles/css_Pg_updateForm.css'
 import BASE_URL from "../../apiConfig";
 
 
