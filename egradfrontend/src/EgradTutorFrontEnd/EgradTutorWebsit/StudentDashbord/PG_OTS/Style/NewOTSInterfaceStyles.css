@@ -416,7 +416,7 @@
     margin-bottom: 0px !important;
     padding: 3px;
     padding-left: 10px;
-    height: 20vh;
+    height: 18vh;
     background-color: #fff;
   }
   .pg_colorboxesdiv {
@@ -495,10 +495,33 @@
     flex-direction: column;
     /* gap: 1rem; */
     /* border: 2px solid black; */
-    width: 230px;
+    width: 273px;
    height: 78vh;
   }
   
+  .Pg_time_left_tag{
+    display: flex;
+    gap:5px
+  }
+  .Pg_qtype_div{
+    border-bottom: 1px solid #80808082;
+    padding-bottom: 5px;
+  }
+
+  .pg_question_number_div{
+    display: flex;
+    gap:5px;
+  }
+
+  #pg_question_number_tag{
+font-size: 20px  !important;
+  }
+  .PG_subject_container {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 30px;
+    border-bottom: 1px solid #80808082;
+}
   .pg_Questionnop {
     font-weight: 600;
     padding-left: 10px !important;

@@ -1660,12 +1660,13 @@ const PG_OTSQuizPage = () => {
   };
 
   return (
-    <div
+    <div className="hundredVH"
 
     // ref={quizRef}
     // onClick={enterFullscreen}
     // style={{ backgroundColor: "white" }}
     >
+      <div>
       {/* {showMalPractisePopup && (
         <div className="MalPracticePopup">
           <div className="malpractice_popup_content">
@@ -1688,9 +1689,9 @@ const PG_OTSQuizPage = () => {
       )} */}
 
       {/* start_header_div */}
-      <div className="pg_quiz_exam_interface_header">
-        <div className="pg_quiz_exam_interface_header_LOGO ">
-          <img className="pg_header_exam_image" src={image} alt="Current" />
+      <div className="Pg_OtsLogo">
+        <div  className="logoImgInMockTest">
+          <img src={image} alt="Current" />
         </div>
       </div>
       {/* end_header_div */}
@@ -1704,17 +1705,17 @@ const PG_OTSQuizPage = () => {
               <div className="pg_quiz_exam_interface_body_left_container">
                 <div className="pg_quiz_exam_interface_exam_subCONTAINER">
                     {/* start_testName_view_instructions_questionpaper_div */}
-      <div>
-        <p key={testName.decryptedParam1}>{testData.TestName}</p>
+      <div className="Pg_otsheadin1" >
+        <p  className="Pg_TestName" key={testName.decryptedParam1}>{testData.TestName}</p>
         <div>
           <div>
-            <button title="View Question Paper" onClick={openQuestionPaper}>
-              View Question Paper
+            <button className="ViewQuestions" title="View Question Paper" onClick={openQuestionPaper}>
+            <i class="fa-solid fa-align-justify Pg_justify"></i> View Question Paper
             </button>
           </div>
           <div>
-            <button title="View Instructions" onClick={openInstructions}>
-              View Instructions
+            <button title="View Instructions" onClick={openInstructions} className="ViewQuestions">
+            <i class="fa-solid fa-info pg_info"></i>  View Instructions
             </button>
           </div>
         </div>
@@ -1723,7 +1724,7 @@ const PG_OTSQuizPage = () => {
                   <div>
                     <div class="PG_SUBJECTS_CONTAINER">
                       <div className="PG_subject_container">
-                        <div>
+                        <div className="messageBodyPC">
                           {testData.subjects.map((subject) => (
                             <button
                               key={subject.departmentId}
@@ -1747,10 +1748,8 @@ const PG_OTSQuizPage = () => {
                           />
                         </div>
                       </div>
-                      <div>
-                        <div>
+                      <div className="pg_Sectionsdiv">
                           <p>Sections</p>
-                        </div>
                         <div>
                           <p className="Pg_time_left_tag">
                             <span id="Pg_time_left_icon">
@@ -1764,7 +1763,7 @@ const PG_OTSQuizPage = () => {
                           </p>
                         </div>
                       </div>
-                      <div className="pg_sections_conatiner">
+                      <div className="Pg_sectiondiv">
                         {selectedSubjectId && (
                           <div className="child_sections_conatiner">
                             {testData.subjects
@@ -1784,7 +1783,7 @@ const PG_OTSQuizPage = () => {
                                       : ""
                                   }`}
                                 >
-                                  {section.SectionName} <p>i</p>
+                                  {section.SectionName}
                                 </button>
                               ))}
                           </div>
@@ -1802,8 +1801,8 @@ const PG_OTSQuizPage = () => {
                     </div>
                   </div>
                   {selectedQuestion && (
-                    <div className="pg_question_options_div">
-                      <div className="pg_paragraphQuestion_div">
+                    <div className="pg_quizpageots">
+                      <div className="pg_quizotsQuestion">
                         <div className="pg_pravagragh_container ">
                           {selectedQuestion.paragraph &&
                             selectedQuestion.paragraph.paragraphImg && (
@@ -1818,13 +1817,13 @@ const PG_OTSQuizPage = () => {
                         </div>
                       </div>
                       <div className="pg_question_number_continer">
-                        <div id="pg_question_number_div">
+                        <div className="pg_question_number_div">
                           <b>Question</b>
                           <h4 id="pg_question_number_tag">
                             {currentQuestionIndex}.
                           </h4>
                         </div>
-                        <div>
+                        <div className="pgQuestionImgDiv">
                           <img
                             className="pg_question_image"
                             src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${selectedQuestion.questionImgName}`}
@@ -2034,21 +2033,34 @@ const PG_OTSQuizPage = () => {
                   )}
                 </div>
 
-                <div>
-                  <div>
-                    <button
+                <div className="pg_handlebuttons">
+
+                <div className="pg_handleReview">
+                <button
                       className="PG_Quiz_Save_MarkforReview"
                       onClick={handleMarkForReview}
                       title="Click here to Save & Mark for Review"
                     >
                       Mark for Review & Next
                     </button>
+ 
                     <button
                       className="PG_Quiz_clearResponse"
                       onClick={handleClearResponse}
                       title="Click here to Clear Response"
                     >
                       Clear Response
+                    </button>
+                </div>
+                  <div className="pg_saveprevious">
+                  <button
+                      className="PG_previous-btn"
+                      onClick={handlePreviousClick}
+                      // disabled={currentQuestionIndex === 0}
+                      title="Click here to go Back"
+                    >
+                      {/* <i className="fa-solid fa-angles-left"></i>  */}
+                      Previous
                     </button>
                     <button
                       title="Click here to Save & Next"
@@ -2059,22 +2071,8 @@ const PG_OTSQuizPage = () => {
                     </button>
                   </div>
                   <div>
-                    <button
-                      className="PG_previous-btn"
-                      onClick={handlePreviousClick}
-                      // disabled={currentQuestionIndex === 0}
-                      title="Click here to go Back"
-                    >
-                      <i className="fa-solid fa-angles-left"></i> Back
-                    </button>
-                    <button
-                      style={{ background: "#f0a607da" }}
-                      onClick={handleSubmit}
-                      id="PG_submit_btn"
-                      title="Click here to Submit"
-                    >
-                      Submit
-                    </button>
+                
+                
                   </div>
                 </div>
               </div>
@@ -2082,37 +2080,38 @@ const PG_OTSQuizPage = () => {
 
             <div className="pg_quiz_exam_interface_body_right_container">
               <div className="pg_rightsidebar_container">
-                <div
+                {/* <div
                   className="pg_rightsidebar_container_btn_menubar"
                   onClick={toggleSidebar}
                 >
                   <BiMenuAltLeft />
-                </div>
+                </div> */}
                 <div
                   className={
                     isSidebarVisible ? "pg_norightdiv visible" : "pg_norightdiv"
                   }
                 >
-                  <div>
+                  <div className="pg_norightdiv">
                     <div>
                       {studentDetails.map((student, index) => (
                         <div key={index} className="pg_StudentDetailsots">
                           <img
-                            className="users_profile_img"
                             src={`${BASE_URL}/uploads/studentinfoimeages/${student.UplodadPhto}`}
                             alt={`no img${student.UplodadPhto}`}
+                             className="users_profile_imgots"
                           />
                           <p>Candidate Name:{student.candidateName}</p>
                         </div>
                       ))}
-                      <p key={testName.testCreationTableId}>
+                      <div className="pg_legenddiv">
+                      {/* <p key={testName.testCreationTableId}>
                         Test Name: {testData.TestName}
-                      </p>
-                    </div>
-                    <div className="pg_sidebar-footer pg_legenddiv">
+                      </p> */}
+                      <div className="pg_colorboxes ">
                       <h4 className="pg_sidebar-footer-header">Legend:</h4>
-                      <div className="pg_footer-btns">
-                        <div className="pg_inst-btns">
+                      <div >
+                        <div className="pg_colorboxotssubdiv">
+                        <div className="pg_colorboxots">
                           {" "}
                           <p
                             className="pg_question_button"
@@ -2122,7 +2121,7 @@ const PG_OTSQuizPage = () => {
                           </p>
                           <span>Not Visited</span>
                         </div>
-                        <div className="pg_inst-btns">
+                        <div className="pg_colorboxots">
                           <p
                             className="instruction-btn1 r_S_B_BTNS"
                             title="answeredCount"
@@ -2131,19 +2130,23 @@ const PG_OTSQuizPage = () => {
                           </p>
                           <span>Answered</span>
                         </div>
-                        <div className="pg_inst-btns">
+                        </div>
+                        <div className="pg_colorboxotssubdiv">
+                        <div className="pg_colorboxots">
                           <p title="notAnsweredCount">
                             {notAnsweredButVisitedCount}
                           </p>
                           <span>Not Answered</span>
                         </div>
-                        <div className="pg_inst-btns">
+                        <div className="pg_colorboxots">
                           <p title="answeredmarkedForReviewCount">
                             {markForReviewOnlyCount}
                           </p>
                           <span>Marked for Review</span>
                         </div>
-                        <div className="pg_inst-btns">
+                        </div>
+                      
+                        <div className="pg_colorboxots">
                           <p title="markedForReviewCount">
                             {answeredAndMarkForReviewCount}
                           </p>
@@ -2154,24 +2157,26 @@ const PG_OTSQuizPage = () => {
                         </div>
                       </div>
                     {/* </div> */}
+                    
+                    </div>
                     <div className="pg_buttons_container">
-                      <p className="pg_abt_Question_Palette">
+                      <div  className="Pg_sectiondivno">
                         Your viewing{" "}
                         {selectedSubjectName && (
                           <p className="pg_sub_section">
                             {selectedSubject.SubjectName}
                           </p>
-                        )}{" "}
-                        -{" "}
+                        )}
                         {selectedSectionName && (
                           <p className="pg_sub_section">
                             {selectedSection.SectionName}
                           </p>
-                        )}{" "}
-                        Question Palette
-                      </p>
+                        )}
+                       
+                      </div>
 
                       <div className="pg_ques-btn">
+                        <p> Question Palette</p>
                         <ul className="pg_btn-ul quesAns-btn pg_numberpaletdiv">
                           {questions.map((question, index) => {
                             // Determine if the question is the first in its section or subject and if it has been answered
@@ -2244,9 +2249,21 @@ const PG_OTSQuizPage = () => {
                             );
                           })}
                         </ul>
+                      
                       </div>
+                      <button
+                      style={{ background: "#f0a607da" }}
+                      onClick={handleSubmit}
+                      id="PG_submit_btn"
+                      title="Click here to Submit"
+                    >
+                      Submit
+                    </button>
                     </div>
+                      </div>
+                     
                     </div>
+                  
                   </div>
                 </div>
               </div>
@@ -2505,6 +2522,8 @@ const PG_OTSQuizPage = () => {
         {showScientificCalculator && (
           <ScientificCalculator onClose={closeScientificCalculator} />
         )}
+      </div>
+    
       </div>
     </div>
   );
