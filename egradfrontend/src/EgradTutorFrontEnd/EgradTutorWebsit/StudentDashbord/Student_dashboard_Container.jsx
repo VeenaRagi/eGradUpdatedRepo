@@ -133,6 +133,7 @@ import StudentDashboardHeader from "./StudentDashboardHeader";
 const Student_dashboard_Container = ({
   usersData,
   decryptedUserIdState,
+  decryptedBranchIdState,
   branchIdFromLS,
 }) => {
   const [activeComponent, setActiveComponent] = useState("home");
@@ -265,6 +266,7 @@ const Student_dashboard_Container = ({
             <StudentDashbord_MyResults
               usersData={usersData}
               decryptedUserIdState={decryptedUserIdState}
+              // decryptedBranchIdState={decryptedBranchIdState}
               branchIdFromLS={branchIdFromLS}
             />
           )}

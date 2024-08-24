@@ -314,7 +314,7 @@ function AppContent({ decryptedUserIdState, usersData,Branch_Id }) {
           /> */}
 
                 <Route
-                  path="/UserReport/:decryptedUserIdState/:testCreationTableId/:courseCreationId"
+                  path="/UserReport/:branchIdFromLS/:decryptedUserIdState/:testCreationTableId/:courseCreationId"
                   element={<UserReport />}
                 />
              

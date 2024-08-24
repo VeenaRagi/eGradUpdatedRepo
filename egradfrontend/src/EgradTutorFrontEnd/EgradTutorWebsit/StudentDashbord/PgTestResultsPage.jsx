@@ -64,24 +64,24 @@ console.log("11111111111111111111111111111111111111")
 
   console.log(decryptedParam1)
   // const { testCreationTableId, user_Id, userId } = useParams();
-  const [testName, setTestName] = useState("");
+  // const [testName, setTestName] = useState("");
 
-  // const [userData, setUserData] = useState({});
-  const fetchTestName = async () => {
-    try {
-      const response = await fetch(
-        `${BASE_URL}/QuizPage/questionOptions/${decryptedParam1}`
-      );
-      const data = await response.json();
-      const testName = data.questions[0].TestName;
-      setTestName(testName);
-    } catch (error) {
-      console.error("Error fetching test name:", error);
-    }
-  };
-  useEffect(() => {
-    fetchTestName();
-  }, [decryptedParam1]);
+  // // const [userData, setUserData] = useState({});
+  // const fetchTestName = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `${BASE_URL}/QuizPage/questionOptions/${decryptedParam1}`
+  //     );
+  //     const data = await response.json();
+  //     const testName = data.questions[0].TestName;
+  //     setTestName(testName);
+  //   } catch (error) {
+  //     console.error("Error fetching test name:", error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchTestName();
+  // }, [decryptedParam1]);
 
   // useEffect(() => {
   //   const fetchUserData = async () => {
@@ -391,21 +391,21 @@ console.log("11111111111111111111111111111111111111")
   console.log("hello");
   console.log("hello time", TimeSpent);
 
-  const [userResponse, setUserResponse] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${BASE_URL}/PgTestResultPage/user_answer`
-        );
-        setUserResponse(response.data);
-      } catch (error) {
-        console.error("Error fetching user response:", error.message);
-      }
-    };
+  // const [userResponse, setUserResponse] = useState([]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${BASE_URL}/PgTestResultPage/user_answer`
+  //       );
+  //       setUserResponse(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching user response:", error.message);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   // Function to group sections by subject ID and combine scores of sections A and B
   const groupSectionsBySubjectId = () => {
