@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
-import "./Style/OnlineTestSerices_pg.css"
+import "./Style/OnlineTestSerices_pg.css";
 import BASE_URL from "../../../../apiConfig";
 import { decryptData, encryptData } from "../utils/crypto";
 import { BiMenuAltLeft } from "react-icons/bi";
@@ -9,6 +9,12 @@ import { MdOutlineTimer } from "react-icons/md";
 import { FaCalculator } from "react-icons/fa";
 import "../Style/Watermark.css";
 import PGQuestionPaper from "./PGQuestionPaper";
+import grayBox from "../asserts/grayBox.png";
+import orangeBox from "../asserts/orangeBox.png";
+import greenBox from "../asserts/greenBox.png";
+import purpleBox from "../asserts/purpleBox.png";
+import purpleTickBox from "../asserts/purpleTickBox.png";
+import ScientificCalculator from "./ScientificCalculator";
 
 const PG_OTSQuizPage = () => {
   const [testData, setTestData] = useState(null);
@@ -52,6 +58,25 @@ const PG_OTSQuizPage = () => {
 
   const closeQuestionPaper = () => {
     setShowPopup(false);
+  };
+
+  const [showInstructions, setShowInstructions] = useState(false);
+  const openInstructions = () => {
+    setShowInstructions(true);
+  };
+
+  const closeInstructions = () => {
+    setShowInstructions(false);
+  };
+
+  const [showScientificCalculator, setShowScientificCalculator] =
+    useState(false);
+  const openScientificCalculator = () => {
+    setShowScientificCalculator(true);
+  };
+
+  const closeScientificCalculator = () => {
+    setShowScientificCalculator(false);
   };
 
   useEffect(() => {
@@ -287,7 +312,7 @@ const PG_OTSQuizPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}/QuizPage/UG_QuestionOptions/${decryptedParam1}/${decryptedParam2}`
+          `${BASE_URL}/QuizPage/PG_QuestionOptions/${decryptedParam1}/${decryptedParam2}`
         );
         const data = response.data;
         // Set the test name
@@ -1662,7 +1687,7 @@ const PG_OTSQuizPage = () => {
             </button>
           </div>
           <div>
-            <button title="View Instructions" onClick={openQuestionPaper}>
+            <button title="View Instructions" onClick={openInstructions}>
               View Instructions
             </button>
           </div>
@@ -1682,7 +1707,7 @@ const PG_OTSQuizPage = () => {
                         <div>
                           {testData.subjects.map((subject) => (
                             <button
-                              key={subject.subjectId}
+                              key={subject.departmentId}
                               onClick={() =>
                                 handleSubjectClick(subject.subjectId)
                               }
@@ -1697,9 +1722,10 @@ const PG_OTSQuizPage = () => {
                           ))}
                         </div>
                         <div>
-                          <button>
-                            <FaCalculator />
-                          </button>
+                          <FaCalculator
+                            title="View Scientific Calculator"
+                            onClick={openScientificCalculator}
+                          />
                         </div>
                       </div>
                       <div>
@@ -2282,7 +2308,184 @@ const PG_OTSQuizPage = () => {
         )}
       </div>
 
-      {showPopup && <PGQuestionPaper onClose={closeQuestionPaper} />}
+      <div>{showPopup && <PGQuestionPaper onClose={closeQuestionPaper} />}</div>
+
+      <div>
+        {showInstructions && (
+          <div className="questionslistpopup">
+            <p className="questionslistpopup_Instructions">Instructions</p>
+            <button onClick={closeInstructions}>Close</button>
+            <div className="questionslistpopup-content">
+              <div>
+                <p className="pg_Note">
+                  Note that the timer is ticking while you read the
+                  instructions.Close this page to return to answering the
+                  quetions.
+                </p>
+                {/* <p className="Instructionspg">Instructions</p> */}
+                <div className="pg_readinstructions">
+                  Please read the instructions carefully
+                </div>
+
+                <ul className="PG_General_Instructions_Ul_tag">
+                  <p className="pg_siteheding">General Instructions:</p>
+                  <li value="100">
+                    1.Total duration of examination is <span>180</span> minutes.
+                  </li>
+                  <li>
+                    2.The clock will be set at the server. The countdown timer
+                    in the top right corner of screen will display the remaining
+                    time available for you to complete the examination. When the
+                    timer reaches zero, the examination will end by itself. You
+                    will not be required to end or submit your examination.
+                  </li>
+                  <li>
+                    3.The Question Palette displayed on the right side of screen
+                    will show the status of each question using one of the
+                    following symbols:
+                  </li>
+                  <ul>
+                    <li>
+                      <img src={grayBox} /> You have not visited the question
+                      yet.
+                    </li>
+                    <li>
+                      <img src={orangeBox} /> You have not answered the
+                      question.
+                    </li>
+                    <li>
+                      <img src={greenBox} />
+                      You have answered the question.
+                    </li>
+                    <li>
+                      <img src={purpleBox} /> You have NOT answered the
+                      question, but have marked the question for review.
+                    </li>
+                    <li>
+                      <img src={purpleTickBox} /> The question(s) "Answered and
+                      Marked for Review" will be considered for evaluation.
+                    </li>
+                    <li>
+                      The Marked for Review status for a question simply
+                      indicates that you would like to look at that question
+                      again.
+                    </li>
+                  </ul>
+                  <li>
+                    4.You can click on the arrow which appears to the left of
+                    question palette to collapse the question palette thereby
+                    maximizing the question window. To view the question palette
+                    again, you can click on which appears on the right side of
+                    question window.
+                  </li>
+                  <li>
+                    5.You can click on your "Profile" image on top right corner
+                    of your screen to change the language during the exam for
+                    entire question paper. On clicking of Profile image you will
+                    get a drop-down to change the question content to the
+                    desired language.
+                  </li>
+                  <li>
+                    6.You can click on <i class="fa-solid fa-circle-down"></i>{" "}
+                    to navigate to the bottom and{" "}
+                    <i class="fa-solid fa-circle-up"></i> navigate to the top of
+                    the question area, without scrolling.
+                  </li>
+                  <p className="pg_siteheding">
+                    <span>Navigating to a Question:</span>
+                  </p>
+                  <li>
+                    7.To answer a question, do the following:
+                    <ul>
+                      <li>
+                        a.Click on the question number in the Question Palette
+                        at the right of your screen to go to that numbered
+                        question directly. Note that using this option does NOT
+                        save your answer to the current question.
+                      </li>
+                      <li>
+                        b.Click on <span>Save & Next</span> to save your answer
+                        for the current question and then go to the next
+                        question.
+                      </li>
+                      <li>
+                        c.Click on <span>Mark for Review & Next</span> to save
+                        your answer for the current question, mark it for
+                        review, and then go to the next question.
+                      </li>
+                    </ul>
+                  </li>
+                  <p className="pg_siteheding">
+                    <span>Answering a Question :</span>
+                  </p>
+                  <li>
+                    8.Procedure for answering a multiple choice type question
+                    <ul>
+                      <li>
+                        To select your answer, click on the button of one of the
+                        options
+                      </li>
+                      <li>
+                        To deselect your chosen answer, click on the button of
+                        the chosen option again or click on the{" "}
+                        <span>Clear Response </span>button
+                      </li>
+                      <li>
+                        To change your chosen answer, click on the button of
+                        another option
+                      </li>
+                      <li>
+                        To save your answer, you MUST click on the{" "}
+                        <span>Save & Next</span>
+                        button
+                      </li>
+                      <li>
+                        To mark the question for review, click on the{" "}
+                        <span>Mark for Review & Next button.</span>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    9.To change your answer to a question that has already been
+                    answered, first select that question for answering and then
+                    follow the procedure for answering that type of question.
+                  </li>
+                  <p className="pg_siteheding">Navigating through sections:</p>
+                  <li>
+                    10.Sections in this question paper are displayed on the top
+                    bar of the screen. Questions in a section can be viewed by
+                    clicking on the section name. The section you are currently
+                    viewing is highlighted.
+                  </li>
+                  <li>
+                    11.After clicking the Save & Next button on the last
+                    question for a section, you will automatically be taken to
+                    the first question of the next section.
+                  </li>
+                  <li>
+                    12.You can shuffle between sections and questions anytime
+                    during the examination as per your convenience only during
+                    the time stipulated.
+                  </li>
+                  <li>
+                    13.Candidate can view the corresponding section summary as
+                    part of the legend that appears in every section above the
+                    question palette.
+                  </li>
+                  <li>
+                    14.To zoom the image provided in the question roll over it.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+      <div>
+        {showScientificCalculator && (
+          <ScientificCalculator onClose={closeScientificCalculator} />
+        )}
+      </div>
     </div>
   );
 };
