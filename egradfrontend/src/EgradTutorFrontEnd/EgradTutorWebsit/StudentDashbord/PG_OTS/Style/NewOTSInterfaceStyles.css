@@ -32,6 +32,14 @@
   width:auto;
   } */
   
+  .PG_previous-btn {
+    background-color: #5eaaec;
+    color: white;
+}
+.PG_quizsave_next{
+  background-color: #5eaaec;
+  color: white;
+}
   .pg_countspan2 {
     position: absolute;
     left: 10px;
@@ -470,9 +478,9 @@
   }
   
   .pg_handleReview button,.pg_handleReview2 button:hover {
-    background: #5bbef7cc;
-    border: 1px solid #000000;
-    color: #fff;
+    background: rgb(255, 255, 255);
+    /* border: 1px solid #000000; */
+    color: #000000;
   }
   
   .pg_handleReview,.pg_handleReview2 {
