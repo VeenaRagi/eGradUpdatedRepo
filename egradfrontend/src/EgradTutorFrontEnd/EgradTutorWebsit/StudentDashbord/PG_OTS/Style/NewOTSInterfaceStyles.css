@@ -7,8 +7,8 @@
     height: inherit;
   }
   .logoImgInMockTest img{
-    height: 100%;
-    width: 100%;
+    height: 80%;
+    width: 63%;
   }
   .hundredVH{
   height: 100vh;
@@ -61,6 +61,12 @@
   
   }
 
+  #sections_heading {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
   .question_button {
     height: 2rem;
     width: 2.5rem;
@@ -109,6 +115,28 @@
     justify-content: center;
     align-items: center;
   }
+
+
+  .time_left_text {
+    font-weight: bold;
+}
+
+
+ #qtype_text {
+    margin: 0;
+    font-weight: bold;
+}
+
+  .questionslistpopup_Instructions {
+    background-color: #3db0f3;
+    margin: -1rem;
+    padding: 5px;
+    font-weight: 600;
+    font-size: 21px;
+    display: flex;
+    justify-content: space-between;
+  }
+
 
 
   .messageBodyPC {
@@ -307,7 +335,7 @@
   }
   
   .pg_Sectionsdiv {
-    border-bottom: 1px solid #eef1f1;
+    border-bottom: 1px solid #bebebe;
     display: flex;
     justify-content: space-between;
     font-size: 16px !important;
@@ -322,7 +350,7 @@
   .pgsectinddivestyle {
     padding-bottom: 5px;
     padding-top: 5px;
-    border-bottom: 1px solid #eef1f1;
+    border-bottom: 1px solid #bebebe;
 }
   .pg_Sectionsdiv p {
     /* margin-bottom: 5px ; */
@@ -1213,7 +1241,9 @@ font-size: 20px  !important;
       top: 18%;
     }
     .Pg_OtsLogo{
-      height: 9vh;
+      height: 8vh;
+      margin-left: -4rem;
+      border-bottom: 2px solid #0000006e;
      }
      .pg_otsMaindiv {
       display: flex;

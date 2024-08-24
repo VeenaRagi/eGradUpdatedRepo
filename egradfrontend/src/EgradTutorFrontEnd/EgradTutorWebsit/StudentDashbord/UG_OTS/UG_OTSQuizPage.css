@@ -25,7 +25,10 @@
   margin: 0;
   padding: 0;
 }
-
+.pg_sidebar-footer-header {
+  font-size: 20px;
+  font-weight: bold;
+}
 
 .question_button.active {
   background-color: #007bff;

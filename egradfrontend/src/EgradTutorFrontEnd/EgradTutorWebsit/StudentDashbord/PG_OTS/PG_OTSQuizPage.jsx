@@ -259,6 +259,38 @@ const PG_OTSQuizPage = () => {
     };
   });
 
+    //mouseclick disabling
+   const handleContextMenu = (e) => {
+    e.preventDefault();
+  };
+  
+  useEffect(() => {
+    document.addEventListener('contextmenu', handleContextMenu);
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+    };
+  }, []);
+
+    //keyboard disabling
+    useEffect(() => {
+      const handleKeyDown = (event) => {
+        event.preventDefault(); // Prevent default keyboard action
+        event.stopPropagation(); // Stop event propagation
+        // Optionally, you can add custom logic here to handle keydown events.
+      };
+  
+      // Attach event listener to intercept keydown events
+      document.addEventListener("keydown", handleKeyDown);
+  
+      // Cleanup function to remove event listener when component unmounts
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+      };
+    }, []); // Empty dependency array ensures the effect runs only once
+  
+
+    
   // Convert seconds to hours, minutes, and seconds
   const hours = Math.floor(countDown / 3600);
   const minutes = Math.floor((countDown % 3600) / 60);
@@ -1484,93 +1516,93 @@ const PG_OTSQuizPage = () => {
       )
     : null;
 
-  // const handleMalPractiseSubmit = async () => {
-  //   console.log("Handling malpractice submit");
-  //   try {
-  //     // window.alert(
-  //     //   "Your Test has been Submitted!! Click Ok to See Result.",
-  //     //   calculateResult()
-  //     // );
-  //     setShowButtonNo(false);
-  //     setShowExamSumary(true);
-  //     setShowMalPractisePopup(false);
-  //     calculateResult();
-  //     // const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
-  //     // const counts = calculateQuestionCounts();
-  //     // setAnsweredCount(counts.answered);
-  //     // setNotAnsweredCount(counts.notAnswered);
-  //     // setMarkedForReviewCount(counts.markedForReview);
-  //     // setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
-  //     // setVisitedCount(counts.VisitedCount);
+  const handleMalPractiseSubmit = async () => {
+    console.log("Handling malpractice submit");
+    try {
+      // window.alert(
+      //   "Your Test has been Submitted!! Click Ok to See Result.",
+      //   calculateResult()
+      // );
+      setShowButtonNo(false);
+      setShowExamSumary(true);
+      setShowMalPractisePopup(false);
+      calculateResult();
+      // const NotVisitedb = remainingQuestions < 0 ? 0 : remainingQuestions;
+      // const counts = calculateQuestionCounts();
+      // setAnsweredCount(counts.answered);
+      // setNotAnsweredCount(counts.notAnswered);
+      // setMarkedForReviewCount(counts.markedForReview);
+      // setAnsweredmarkedForReviewCount(counts.answeredmarkedForReviewCount);
+      // setVisitedCount(counts.VisitedCount);
 
-  //     setNotVisitedCount(notVisitedCount);
-  //     setAnsweredQuestions(answeredOnlyCount);
-  //     setNotAnsweredQuestions(notAnsweredButVisitedCount);
-  //     setMarkedForReviewQuestions(markForReviewOnlyCount);
-  //     setAnsweredAndMarkForReviewCount(answeredAndMarkForReviewCount);
-  //     setVisitedQuestions(visitedCount);
+      setNotVisitedCount(notVisitedCount);
+      setAnsweredQuestions(answeredOnlyCount);
+      setNotAnsweredQuestions(notAnsweredButVisitedCount);
+      setMarkedForReviewQuestions(markForReviewOnlyCount);
+      setAnsweredAndMarkForReviewCount(answeredAndMarkForReviewCount);
+      setVisitedQuestions(visitedCount);
 
-  //     // // Assuming you have these variables in your component's state
-  //     // const currentQuestion = questionData.questions[currentQuestionIndex];
-  //     // const questionId = currentQuestion.question_id;
+      // // Assuming you have these variables in your component's state
+      // const currentQuestion = questionData.questions[currentQuestionIndex];
+      // const questionId = currentQuestion.question_id;
 
-  //     // Format time
-  //     const formattedTime = WformatTime(wtimer);
-  //     const response = await fetch(`${BASE_URL}/QuizPage/saveExamSummary`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         userId: decryptedParam2,
-  //         totalUnattempted: notAnsweredButVisitedCount,
-  //           totalAnswered: answeredOnlyCount,
-  //           NotVisitedb: notVisitedCount,
-  //         testCreationTableId: decryptedParam1,
-  //       }),
-  //     });
-  //     const result = await response.json();
-  //     console.log("Exam summary saved:", result);
-  //     try {
-  //       // Make a POST request to your server to submit time left
-  //       const response = await fetch(`${BASE_URL}/QuizPage/submitTimeLeft`, {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
+      // Format time
+      const formattedTime = WformatTime(wtimer);
+      const response = await fetch(`${BASE_URL}/QuizPage/saveExamSummary`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: decryptedParam2,
+          totalUnattempted: notAnsweredButVisitedCount,
+            totalAnswered: answeredOnlyCount,
+            NotVisitedb: notVisitedCount,
+          testCreationTableId: decryptedParam1,
+        }),
+      });
+      const result = await response.json();
+      console.log("Exam summary saved:", result);
+      try {
+        // Make a POST request to your server to submit time left
+        const response = await fetch(`${BASE_URL}/QuizPage/submitTimeLeft`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-  //         body: JSON.stringify({
-  //           userId: decryptedParam2,
-  //           testCreationTableId: decryptedParam1,
-  //           timeLeft: formattedTime,
-  //         }),
-  //       });
+          body: JSON.stringify({
+            userId: decryptedParam2,
+            testCreationTableId: decryptedParam1,
+            timeLeft: formattedTime,
+          }),
+        });
 
-  //       const result = await response.json();
+        const result = await response.json();
 
-  //       console.log("Time left submission result:", result);
-  //     } catch (error) {
-  //       console.error("Error submitting time left:", error);
-  //     } finally {
-  //       // Ensure that the questionId is correctly obtained
-  //       if (selectedQuestionId) {
-  //         // Clear local storage data for the current question
-  //         try {
-  //           console.log(
-  //             "Removing from local storage for questionId:",
-  //             selectedQuestionId
-  //           );
-  //           localStorage.removeItem(`calculatorValue_${selectedQuestionId}`);
-  //           console.log("Item removed successfully.");
-  //         } catch (error) {
-  //           console.error("Error removing item from local storage:", error);
-  //         }
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error("Error in handleSubmit:", error);
-  //   }
-  // };
+        console.log("Time left submission result:", result);
+      } catch (error) {
+        console.error("Error submitting time left:", error);
+      } finally {
+        // Ensure that the questionId is correctly obtained
+        if (selectedQuestionId) {
+          // Clear local storage data for the current question
+          try {
+            console.log(
+              "Removing from local storage for questionId:",
+              selectedQuestionId
+            );
+            localStorage.removeItem(`calculatorValue_${selectedQuestionId}`);
+            console.log("Item removed successfully.");
+          } catch (error) {
+            console.error("Error removing item from local storage:", error);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
+    }
+  };
 
   const handleYes = async () => {
     // setShowPopup(true);
@@ -1662,12 +1694,12 @@ const PG_OTSQuizPage = () => {
     <div
       className="hundredVH"
 
-      // ref={quizRef}
-      // onClick={enterFullscreen}
-      // style={{ backgroundColor: "white" }}
+      ref={quizRef}
+      onClick={enterFullscreen}
+      style={{ backgroundColor: "white" }}
     >
       <div>
-        {/* {showMalPractisePopup && (
+        {showMalPractisePopup && (
         <div className="MalPracticePopup">
           <div className="malpractice_popup_content">
             <h2>Malpractice Attempt</h2>
@@ -1686,7 +1718,7 @@ const PG_OTSQuizPage = () => {
             </button>
           </div>
         </div>
-      )} */}
+      )}
 
         {/* start_header_div */}
         <div className="Pg_OtsLogo">
@@ -1752,55 +1784,55 @@ const PG_OTSQuizPage = () => {
                                 </button>
                               ))}
                             </div> */}
-                             {selectedSubjectId && (
+                            {selectedSubjectId && (
                               <div className="messageBodyPC containerpg">
                                 <div className="message-body">
-                                <div className="arrowpg"></div>
-                                {(() => {
-                                  const selectedSubject =
-                                    testData.subjects.find(
-                                      (subject) =>
-                                        subject.subjectId === selectedSubjectId
-                                    );
-                                  return selectedSubject?.sections?.length <
-                                    0 ? (
-                                    <div >
-                                      
-                                      <div className="child_sections_conatiner">
-                                        {selectedSubject.sections.map(
-                                          (section) => (
-                                            <button
-                                              key={section.sectionId}
-                                              onClick={() =>
-                                                handleSectionClick(
-                                                  section.sectionId
-                                                )
-                                              }
-                                              className={`sidebar-button ${
-                                                section.sectionId ===
-                                                selectedSectionId
-                                                  ? "active"
-                                                  : ""
-                                              }`}
-                                            >
-                                              {section.SectionName}
-                                            </button>
-                                          )
-                                        )}
+                                  <div className="arrowpg"></div>
+                                  {(() => {
+                                    const selectedSubject =
+                                      testData.subjects.find(
+                                        (subject) =>
+                                          subject.subjectId ===
+                                          selectedSubjectId
+                                      );
+                                    return selectedSubject?.sections?.length <
+                                      0 ? (
+                                      <div>
+                                        <div className="child_sections_conatiner">
+                                        {testData.subjects.map((subject) => (
+                                        <button
+                                          key={subject.departmentId}
+                                          onClick={() =>
+                                            handleSubjectClick(
+                                              subject.subjectId
+                                            )
+                                          }
+                                          className={`sidebar-button ${
+                                            subject.subjectId ===
+                                            selectedSubjectId
+                                              ? "active"
+                                              : ""
+                                          }`}
+                                        >
+                                          {subject.SubjectName}
+                                        </button>
+                                      ))}
+                                        </div>
                                       </div>
-                                    </div>
-                                  ) : <p   className="sidebar-button active">
-                                  {testData.subjects.find((subject) => subject.subjectId === selectedSubjectId)
-                                    ?.SubjectName || "No subject selected"}
-                                </p>;
-                                })()}
+                                    ) : (
+                                      <p className="sidebar-button active">
+                                        {testData.subjects.find(
+                                          (subject) =>
+                                            subject.subjectId ===
+                                            selectedSubjectId
+                                        )?.SubjectName || "No subject selected"}
+                                      </p>
+                                    );
+                                  })()}
                                 </div>
-                               
                               </div>
                             )}
-                            <div>
-                           
-                          </div>
+                          
                             <div>
                               <FaCalculator
                                 title="View Scientific Calculator"
@@ -1809,13 +1841,13 @@ const PG_OTSQuizPage = () => {
                             </div>
                           </div>
                           <div className="pg_Sectionsdiv">
-                            <p>Sections</p>
+                            <p id="sections_heading">Sections</p>
                             <div>
                               <p className="Pg_time_left_tag">
-                                <span id="Pg_time_left_icon">
+                                {/* <span id="Pg_time_left_icon">
                                   <MdOutlineTimer />
-                                </span>
-                                <div>
+                                </span> */}
+                                <div className="time_left_text">
                                   Time Left: {hours.toString().padStart(2, "0")}
                                   :{minutes.toString().padStart(2, "0")}:
                                   {seconds.toString().padStart(2, "0")}
@@ -1849,6 +1881,7 @@ const PG_OTSQuizPage = () => {
                               </div>
                             )}
                           </div> */}
+                         
                           <div>
                             {selectedSubjectId && (
                               <div className="pgsectinddivestyle">
@@ -1884,33 +1917,42 @@ const PG_OTSQuizPage = () => {
                                         )}
                                       </div>
                                     </div>
-                                  ) :  <div className="sectionButtonPC">
-                                  {testData.subjects.map((subject) => (
-                                    <button
-                                      key={subject.departmentId}
-                                      onClick={() =>
-                                        handleSubjectClick(subject.subjectId)
-                                      }
-                                      className={`sidebar-button ${
-                                        subject.subjectId === selectedSubjectId
-                                          ? "active"
-                                          : ""
-                                      }`}
-                                    >
-                                      {subject.SubjectName}
-                                    </button>
-                                  ))}
-                                </div>;
+                                  ) : (
+                                    <div className="messageBodyPC">
+                                      {testData.subjects.map((subject) => (
+                                        <button
+                                          key={subject.departmentId}
+                                          onClick={() =>
+                                            handleSubjectClick(
+                                              subject.subjectId
+                                            )
+                                          }
+                                          className={`sidebar-button ${
+                                            subject.subjectId ===
+                                            selectedSubjectId
+                                              ? "active"
+                                              : ""
+                                          }`}
+                                        >
+                                          {subject.SubjectName}
+                                        </button>
+                                      ))}
+                                    </div>
+                                  );
                                 })()}
                               </div>
                             )}
                           </div>
 
+
                           <div>
                             <div className="Pg_qtype_div">
                               {selectedQuestion.quesion_type.map((type) => (
                                 <div key={type.quesionTypeId}>
-                                  {type.typeofQuestion}
+                                 
+ <p id="qtype_text">
+                                    Question Type: {type.typeofQuestion}
+                                  </p>
                                 </div>
                               ))}
                             </div>
@@ -2289,7 +2331,7 @@ const PG_OTSQuizPage = () => {
                             </div>
                             <div className="pg_buttons_container">
                               <div className="Pg_sectiondivno">
-                                Your viewing{" "}
+                               
                                 {selectedSubjectName && (
                                   <p className="pg_sub_section">
                                     {selectedSubject.SubjectName}
@@ -2303,7 +2345,7 @@ const PG_OTSQuizPage = () => {
                               </div>
 
                               <div className="pg_ques-btn">
-                                <p> Question Palette</p>
+                              <p>Choose a Question</p>
                                 <ul className="pg_btn-ul quesAns-btn pg_numberpaletdiv">
                                   {questions.map((question, index) => {
                                     // Determine if the question is the first in its section or subject and if it has been answered
@@ -2381,7 +2423,10 @@ const PG_OTSQuizPage = () => {
                                 </ul>
                               </div>
                               <button
-                                style={{ background: "#f0a607da","margintop": "-3rem" }}
+                                style={{
+                                  background: "#f0a607da",
+                                  margintop: "-3rem",
+                                }}
                                 onClick={handleSubmit}
                                 id="PG_submit_btn"
                                 title="Click here to Submit"
@@ -2480,8 +2525,10 @@ const PG_OTSQuizPage = () => {
         <div>
           {showInstructions && (
             <div className="questionslistpopup">
-              <p className="questionslistpopup_Instructions">Instructions</p>
-              <button onClick={closeInstructions}>Close</button>
+           <div className="questionslistpopup_Instructions">
+                <p>Instructions</p>
+                <button onClick={closeInstructions}>Close</button>
+              </div>
               <div className="questionslistpopup-content">
                 <div>
                   <p className="pg_Note">
