@@ -99,7 +99,8 @@ function PGOvlVideosUpload() {
 
     try {
       await axios.delete(`${BASE_URL}/OtsvidesUploads/videslink_delete/${OVL_Linke_Id}`);
-      fetchOvlData(); // Refresh the data after deletion
+      fetchOvlData();
+      window.location.reload();  // Refresh the data after deletion
     } catch (error) {
       console.error("Error deleting video link:", error);
       alert("Failed to delete the video link.");

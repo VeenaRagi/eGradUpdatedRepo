@@ -282,7 +282,7 @@ const PGAdminTestUpdate = () => {
     <div className="examUpdate_-container">
     
         {TestForm_Id === "1" ? (
-         <form onSubmit={handleSubmitOTS_PQB}>
+         <form className="testupdate_form_pg" onSubmit={handleSubmitOTS_PQB}>
          <div className="testCreation_-contant">
            <h3 className="textColor"> PG Test Update Form</h3>
            <div className="testCreation_-contant_-flexCOntant examSubjects_-contant">
@@ -466,6 +466,7 @@ const PGAdminTestUpdate = () => {
              <div className="testCreation_-list">
          
               <div className="create_exam_header">
+              <button type="submit"  className="ots_-createBtn">Submit</button>
                   <button
              type="button"
              onClick={() => navigate("/PGCourseAdmin")}
@@ -473,7 +474,6 @@ const PGAdminTestUpdate = () => {
            >
              Cancel
            </button> 
-           <button type="submit"  className="ots_-createBtn">Submit</button>
            
            </div>
              </div>
@@ -651,6 +651,7 @@ const PGAdminTestUpdate = () => {
                 <div className="testCreation_-list">
                   <div></div>
                  <div className="create_exam_header">
+                 <button type="submit"  className="ots_-createBtn">Submit</button>
                      <button
                 type="button"
                 onClick={() => navigate("/PGCourseAdmin")}
@@ -658,7 +659,6 @@ const PGAdminTestUpdate = () => {
               >
                 Cancel
               </button> 
-              <button type="submit"  className="ots_-createBtn">Submit</button>
               
               </div>
                 </div>

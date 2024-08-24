@@ -15,6 +15,7 @@ import greenBox from "../asserts/greenBox.png";
 import purpleBox from "../asserts/purpleBox.png";
 import purpleTickBox from "../asserts/purpleTickBox.png";
 import ScientificCalculator from "./ScientificCalculator";
+import './Style/NewOTSInterfaceStyles.css'
 
 const PG_OTSQuizPage = () => {
   const [testData, setTestData] = useState(null);
@@ -1698,8 +1699,8 @@ const PG_OTSQuizPage = () => {
 
       <div>
         {!showExamSumary ? (
-          <div className="pg_quiz_exam_interface_body">
-            <div className="quizPagewatermark">
+          <div className="pg_quiz_exam_interface_body pg_otsMaindiv">
+            <div className="quizPagewatermark pgPC">
               <div className="pg_quiz_exam_interface_body_left_container">
                 <div className="pg_quiz_exam_interface_exam_subCONTAINER">
                     {/* start_testName_view_instructions_questionpaper_div */}
@@ -2089,13 +2090,13 @@ const PG_OTSQuizPage = () => {
                 </div>
                 <div
                   className={
-                    isSidebarVisible ? "rightsidebar visible" : "rightsidebar"
+                    isSidebarVisible ? "pg_norightdiv visible" : "pg_norightdiv"
                   }
                 >
                   <div>
                     <div>
                       {studentDetails.map((student, index) => (
-                        <div key={index}>
+                        <div key={index} className="pg_StudentDetailsots">
                           <img
                             className="users_profile_img"
                             src={`${BASE_URL}/uploads/studentinfoimeages/${student.UplodadPhto}`}
@@ -2108,7 +2109,7 @@ const PG_OTSQuizPage = () => {
                         Test Name: {testData.TestName}
                       </p>
                     </div>
-                    <div className="pg_sidebar-footer">
+                    <div className="pg_sidebar-footer pg_legenddiv">
                       <h4 className="pg_sidebar-footer-header">Legend:</h4>
                       <div className="pg_footer-btns">
                         <div className="pg_inst-btns">
@@ -2152,7 +2153,7 @@ const PG_OTSQuizPage = () => {
                           </span>
                         </div>
                       </div>
-                    </div>
+                    {/* </div> */}
                     <div className="pg_buttons_container">
                       <p className="pg_abt_Question_Palette">
                         Your viewing{" "}
@@ -2171,7 +2172,7 @@ const PG_OTSQuizPage = () => {
                       </p>
 
                       <div className="pg_ques-btn">
-                        <ul className="pg_btn-ul quesAns-btn">
+                        <ul className="pg_btn-ul quesAns-btn pg_numberpaletdiv">
                           {questions.map((question, index) => {
                             // Determine if the question is the first in its section or subject and if it has been answered
                             // const isFirstQuestion = index === 0;
@@ -2244,6 +2245,7 @@ const PG_OTSQuizPage = () => {
                           })}
                         </ul>
                       </div>
+                    </div>
                     </div>
                   </div>
                 </div>

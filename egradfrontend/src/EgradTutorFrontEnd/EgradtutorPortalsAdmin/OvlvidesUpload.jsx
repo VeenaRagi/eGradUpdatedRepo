@@ -97,12 +97,14 @@ function OvlvidesUpload() {
   const handleDelete = async (OVL_Linke_Id) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this video link?");
     if (!isConfirmed) {
-      return; // Exit the function if the user cancels
+      return ; // Exit the function if the user cancels
     }
 
     try {
       await axios.delete(`${BASE_URL}/OtsvidesUploads/videslink_delete/${OVL_Linke_Id}`);
-      fetchOvlData(); // Refresh the data after deletion
+      fetchOvlData(); 
+      window.location.reload();
+      
     } catch (error) {
       console.error("Error deleting video link:", error);
       alert("Failed to delete the video link.");
