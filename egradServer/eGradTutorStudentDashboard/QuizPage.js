@@ -1252,7 +1252,8 @@ router.get("/PG_QuestionOptions/:testCreationTableId/:userId", async (req, res) 
       p.paragraphImg, p.paragraph_Id,
       pq.paragraphQNo_Id, pq.paragraphQNo, qts.quesionTypeId,
       tct.TestName,
-      sub.SubjectName,
+      sub.departmentName,
+      sub.departmentId,
       sec.SectionName
   FROM 
       questions q 
@@ -1268,7 +1269,7 @@ router.get("/PG_QuestionOptions/:testCreationTableId/:userId", async (req, res) 
       LEFT OUTER JOIN ots_document doc ON q.document_Id = doc.document_Id
       LEFT OUTER JOIN user_responses ur ON q.question_id = ur.question_id 
       LEFT OUTER JOIN test_creation_table tct ON doc.testCreationTableId = tct.testCreationTableId
-      LEFT OUTER JOIN subjects sub ON doc.subjectId = sub.subjectId
+      LEFT OUTER JOIN pg_departments sub ON doc.subjectId= sub.departmentId
       LEFT OUTER JOIN sections sec ON doc.sectionId = sec.sectionId
       LEFT OUTER JOIN log l ON ur.user_Id = l.user_Id AND ur.user_Id = l.user_Id
   WHERE 
@@ -1362,7 +1363,7 @@ router.get("/PG_QuestionOptions/:testCreationTableId/:userId", async (req, res) 
 
       rows.forEach(row => {
         const categoryId = row.subjectId;
-        const categoryName = row.SubjectName;
+        const categoryName = row.departmentName;
         const sectionId = row.sectionId;
         const sectionName = row.SectionName;
 
