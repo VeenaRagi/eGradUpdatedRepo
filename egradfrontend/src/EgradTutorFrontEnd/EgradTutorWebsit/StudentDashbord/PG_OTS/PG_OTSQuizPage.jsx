@@ -1677,30 +1677,35 @@ const PG_OTSQuizPage = () => {
       </div>
       {/* end_header_div */}
 
-      {/* start_testName_view_instructions_questionpaper_div */}
-      <div>
-        <p key={testName.decryptedParam1}>{testData.TestName}</p>
-        <div>
-          <div>
-            <button title="View Question Paper" onClick={openQuestionPaper}>
-              View Question Paper
-            </button>
-          </div>
-          <div>
-            <button title="View Instructions" onClick={openInstructions}>
-              View Instructions
-            </button>
-          </div>
-        </div>
-      </div>
-      {/* end_testName_view_instructions_questionpaper_div */}
-
       <div>
         {!showExamSumary ? (
           <div className="pg_quiz_exam_interface_body">
             <div className="quizPagewatermark">
               <div className="pg_quiz_exam_interface_body_left_container">
                 <div className="pg_quiz_exam_interface_exam_subCONTAINER">
+                  {/* start_testName_view_instructions_questionpaper_div */}
+                  <div>
+                    <p key={testName.decryptedParam1}>{testData.TestName}</p>
+                    <div>
+                      <div>
+                        <button
+                          title="View Question Paper"
+                          onClick={openQuestionPaper}
+                        >
+                          View Question Paper
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          title="View Instructions"
+                          onClick={openInstructions}
+                        >
+                          View Instructions
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  {/* end_testName_view_instructions_questionpaper_div */}
                   <div>
                     <div class="PG_SUBJECTS_CONTAINER">
                       <div className="PG_subject_container">
