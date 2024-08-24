@@ -1822,56 +1822,56 @@ router.get("/pgCourseUpdate/:portalId/:courseCreationId", async (req, res) => {
     subjects.subjects AS departmentName,
     questions.quesion_types AS question_types,
     e.examName,
-    typeOfTests.type_of_test AS type_of_test,
+    typeOfTests.type_of_test,
+    typeOfTests.test_ids,
     tp.topicName
 FROM
     course_creation_table cc
     
- LEFT JOIN(
-    SELECT ctt.courseCreationId,
-        GROUP_CONCAT(t.typeOfTestName) AS type_of_test
-    FROM
+LEFT JOIN (
+    SELECT 
+        ctt.courseCreationId,
+        GROUP_CONCAT(t.typeOfTestName) AS type_of_test,
+        GROUP_CONCAT(t.typeOfTestId) AS test_ids
+    FROM 
         course_typeoftests ctt
-    LEFT JOIN type_of_test t ON
-        ctt.typeOfTestId = t.typeOfTestId
-    GROUP BY
+    LEFT JOIN 
+        type_of_test t ON ctt.typeOfTestId = t.typeOfTestId
+    GROUP BY 
         ctt.courseCreationId
-) AS typeOfTests
-ON
-    cc.courseCreationId = typeOfTests.courseCreationId   
+) AS typeOfTests ON cc.courseCreationId = typeOfTests.courseCreationId   
     
-LEFT JOIN(
-    SELECT cs.courseCreationId,
+LEFT JOIN (
+    SELECT 
+        cs.courseCreationId,
         GROUP_CONCAT(s.departmentName) AS subjects
-    FROM
+    FROM 
         course_subjects cs
-    LEFT JOIN pg_departments s ON
-        cs.subjectId  = s.departmentId 
-    GROUP BY
+    LEFT JOIN 
+        pg_departments s ON cs.subjectId = s.departmentId 
+    GROUP BY 
         cs.courseCreationId
-) AS subjects
-ON
-    cc.courseCreationId = subjects.courseCreationId
-LEFT JOIN(
-    SELECT ct.courseCreationId,
+) AS subjects ON cc.courseCreationId = subjects.courseCreationId
+
+LEFT JOIN (
+    SELECT 
+        ct.courseCreationId,
         GROUP_CONCAT(q.typeofQuestion) AS quesion_types
-    FROM
+    FROM 
         course_type_of_question ct
-    LEFT JOIN quesion_type q ON
-        ct.quesionTypeId = q.quesionTypeId
-    GROUP BY
+    LEFT JOIN 
+        quesion_type q ON ct.quesionTypeId = q.quesionTypeId
+    GROUP BY 
         ct.courseCreationId
-) AS questions
-ON
-    cc.courseCreationId = questions.courseCreationId
-JOIN exams AS e
-ON
-    cc.examId = e.examId
-LEFT JOIN 
-topics tp
- ON cc.courseCreationId=tp.courseCreationId
+) AS questions ON cc.courseCreationId = questions.courseCreationId
+
+JOIN exams AS e ON cc.examId = e.examId
+
+LEFT JOIN topics tp ON cc.courseCreationId = tp.courseCreationId
+
 WHERE
     cc.courseCreationId = ?;
+
     `;
   db1.query(sql, [courseCreationId], (error, results) => {
     if (error || results.length === 0) {
@@ -1905,15 +1905,101 @@ WHERE
       examName: dataFromBackend.examName,
       type_of_test: dataFromBackend.type_of_test,
       topicName: dataFromBackend.topicName,
+      typeOfTestId:dataFromBackend.test_ids,
     };
 
     res.status(200).json(imageData); // Send user data with image data as JSON response
   });
 });
 
+router.get("/pgCourseExams", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT  examId,examName FROM exams WHERE branchId=2");
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
+router.get("/pgCourseData", async (req, res) => {
+  try {
+    const query = `
+    SELECT
+    cc.courseCreationId,
+    cc.courseName,
+    cc.courseYear,
+    cc.courseStartDate,
+    cc.courseEndDate,
+    cc.cost,
+    cc.Discount,
+    cc.totalPrice,
+    cc.paymentlink,
+    cc.Portale_Id,
+    p.Portale_Name,
+    e.examName,
+    subjects.subjects AS subjects,
+    questions.quesion_types AS question_types,
+    typeOfTests.type_of_test AS type_of_test,
+    tp.topicName 
+  FROM
+    course_creation_table cc
+   LEFT JOIN exams e ON
+    cc.examId = e.examId
+    LEFT JOIN portales p ON
+    cc.Portale_Id = p.Portale_Id
+  LEFT JOIN (
+    SELECT cs.courseCreationId,
+      GROUP_CONCAT(s.subjectName) AS subjects
+    FROM
+      course_subjects cs
+    LEFT JOIN subjects s ON
+      cs.subjectId = s.subjectId
+    GROUP BY
+      cs.courseCreationId
+  ) AS subjects
+  ON
+    cc.courseCreationId = subjects.courseCreationId
+  LEFT JOIN (
+    SELECT ct.courseCreationId,
+      GROUP_CONCAT(q.typeofQuestion) AS quesion_types
+    FROM
+      course_type_of_question ct
+    LEFT JOIN quesion_type q ON
+      ct.quesionTypeId = q.quesionTypeId
+    GROUP BY
+      ct.courseCreationId
+  ) AS questions
+  ON
+    cc.courseCreationId = questions.courseCreationId
+  LEFT JOIN (
+    SELECT ctt.courseCreationId,
+      GROUP_CONCAT(t.typeOfTestName) AS type_of_test
+    FROM
+      course_typeoftests ctt
+    LEFT JOIN type_of_test t ON
+      ctt.typeOfTestId = t.typeOfTestId
+    GROUP BY
+      ctt.courseCreationId
+  ) AS typeOfTests
+  ON
+    cc.courseCreationId = typeOfTests.courseCreationId
+  LEFT JOIN
+    selected_test_pattern stp ON stp.courseCreationId = cc.courseCreationId
+    LEFT JOIN topics tp ON
+    cc.courseCreationId= tp.courseCreationId
+    WHERE e.branchId=2
+  GROUP BY
+    cc.courseCreationId;
+    `;
 
-
+    const [rows] = await db.query(query);
+    res.json(rows);
+  } catch (error) {
+    console.error("Error fetching course data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 
 

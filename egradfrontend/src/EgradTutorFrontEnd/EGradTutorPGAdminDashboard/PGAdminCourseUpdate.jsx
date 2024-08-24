@@ -116,36 +116,37 @@ const PGAdminCourseUpdate = () => {
   
     const fetchCourseData = async () => {
       try {
-        const response = await fetch(
-          `${BASE_URL}/CoureseCreation/type_of_PGtests`
-        );
-        const courseData2 = await response.json();
-        console.log(courseData2,"This is the courseData from api ")
-        console.log(courseData,"this is the coooooooooooooo")
+        // const response = await fetch(
+          // `${BASE_URL}/CoureseCreation/type_of_PGtests`
+        // );
         const firstObj=courseData[0];
         console.log(firstObj,"this is the first obj")
-        const newSplittedTestsArray=firstObj.type_of_test.split(",")
-        console.log(newSplittedTestsArray,"This is the new splitted array")
-        // setSelectedTypeOfTests(firstObj.type_of_test.split(","));
-        // console.log(selectedTypeOfTests,"this is the selected type of testsss")
-        // for each text obj i need to find the index by comparing this
-        let selectedTestIds = [];
+        
+        // const arrayOfTypeOfTestIds=firstObj.typeOfTestId.split(",");
+        // console.log("This is the arrayOfTypeOfTestIds",arrayOfTypeOfTestIds)
 
-        // Iterate over courseData to find matches and store the IDs
-        courseData2.forEach(course => {
-          console.log(course,"gggggggggggggggggg")
-          const courseTT=course.typeOfTestName;
-          console.log(courseTT )
-          console.log()
-          if (newSplittedTestsArray.includes(course.typeOfTestName)) {
-            selectedTestIds.push(course.typeOfTestId);
-          }
-        });
-        
-        // Now, set the selected IDs to setSelectedtypeOfTest
-        setSelectedtypeOfTest(selectedTestIds);
-        console.log(selectedtypeOfTest,"Tssssssccsssssss;l;l;l")
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       } catch (error) {
         console.error("Error fetching course data:", error);
       }
@@ -189,6 +190,11 @@ const PGAdminCourseUpdate = () => {
         );
         const courseData = await courseResponse.json();
         setSelectedtypeofQuestion(courseData.question_types.split(","));
+        const newTOTArray=courseData.typeOfTestId.split(",").map(Number);
+        console.log("This is the newTOTArray ",newTOTArray)
+        setSelectedtypeOfTest(newTOTArray)
+
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -201,7 +207,7 @@ const PGAdminCourseUpdate = () => {
   const fetchCourseData = async () => {
     try {
       const response = await fetch(
-        `${BASE_URL}/CoureseCreation/course_creation_table`
+        `${BASE_URL}/CoureseCreation/pgCourseData`
       );
       const result = await response.json();
       const coursesWithArrays = result.map((course) => ({
@@ -241,7 +247,7 @@ const PGAdminCourseUpdate = () => {
     cardImage: "",
     })
     setSelectedTypeOfTests([])
-    
+    // setSelectedTestIds([])
     setPqbFormData({
         courseName: "",
         courseYear: "",
@@ -268,7 +274,7 @@ const PGAdminCourseUpdate = () => {
         );
 
         const examsResponse = await axios.get(
-          `${BASE_URL}/CoureseCreation/courese-exams`
+          `${BASE_URL}/CoureseCreation/pgCourseExams`
         );
         const courseData = response.data;
         console.log(courseData, "courseeeeeeeeeee");
