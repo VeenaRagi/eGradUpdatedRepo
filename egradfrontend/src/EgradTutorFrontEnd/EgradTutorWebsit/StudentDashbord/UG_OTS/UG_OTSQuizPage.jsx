@@ -321,7 +321,7 @@ const UG_OTSQuizPage = () => {
     const fetchTestDetails = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/TestResultPage/testDetails/${decryptedParam1}`
+          `${BASE_URL}/UgTestResultPage/testDetails/${decryptedParam1}`
         );
 
         if (!response.ok) {

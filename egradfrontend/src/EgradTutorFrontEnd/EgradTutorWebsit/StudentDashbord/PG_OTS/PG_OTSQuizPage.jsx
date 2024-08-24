@@ -15,7 +15,7 @@ import greenBox from "../asserts/greenBox.png";
 import purpleBox from "../asserts/purpleBox.png";
 import purpleTickBox from "../asserts/purpleTickBox.png";
 import ScientificCalculator from "./ScientificCalculator";
-import './Style/NewOTSInterfaceStyles.css'
+import "./Style/NewOTSInterfaceStyles.css";
 
 const PG_OTSQuizPage = () => {
   const [testData, setTestData] = useState(null);
@@ -80,8 +80,8 @@ const PG_OTSQuizPage = () => {
     setShowScientificCalculator(false);
   };
 
-  console.log("decryptedParam1",decryptedParam1);
-  console.log("decryptedParam2",decryptedParam2);
+  console.log("decryptedParam1", decryptedParam1);
+  console.log("decryptedParam2", decryptedParam2);
 
   useEffect(() => {
     if (testData?.subjects?.length) {
@@ -363,8 +363,7 @@ const PG_OTSQuizPage = () => {
         setTestDetails(data.results);
         if (data.results && data.results.length > 0) {
           const courseCreationId = data.results[0].courseCreationId;
-          console.log('courseCreationId:', courseCreationId);
-       
+          console.log("courseCreationId:", courseCreationId);
         }
       } catch (error) {
         console.log(error);
@@ -1605,11 +1604,11 @@ const PG_OTSQuizPage = () => {
       } else {
         console.log("Test details are not available yet.");
       }
-      
+
       console.log(
         courseCreationId ? courseCreationId : "Course creation ID not available"
       );
-      console.log("decryptedParam1",decryptedParam1);
+      console.log("decryptedParam1", decryptedParam1);
 
       // Prepare data for the POST request
       const postData = {
@@ -1660,14 +1659,15 @@ const PG_OTSQuizPage = () => {
   };
 
   return (
-    <div className="hundredVH"
+    <div
+      className="hundredVH"
 
-    // ref={quizRef}
-    // onClick={enterFullscreen}
-    // style={{ backgroundColor: "white" }}
+      // ref={quizRef}
+      // onClick={enterFullscreen}
+      // style={{ backgroundColor: "white" }}
     >
       <div>
-      {/* {showMalPractisePopup && (
+        {/* {showMalPractisePopup && (
         <div className="MalPracticePopup">
           <div className="malpractice_popup_content">
             <h2>Malpractice Attempt</h2>
@@ -1688,842 +1688,972 @@ const PG_OTSQuizPage = () => {
         </div>
       )} */}
 
-      {/* start_header_div */}
-      <div className="Pg_OtsLogo">
-        <div  className="logoImgInMockTest">
-          <img src={image} alt="Current" />
+        {/* start_header_div */}
+        <div className="Pg_OtsLogo">
+          <div className="logoImgInMockTest">
+            <img src={image} alt="Current" />
+          </div>
         </div>
-      </div>
-      {/* end_header_div */}
+        {/* end_header_div */}
 
-    
-
-      <div>
-        {!showExamSumary ? (
-          <div className="pg_quiz_exam_interface_body pg_otsMaindiv">
-            <div className="quizPagewatermark pgPC">
-              <div className="pg_quiz_exam_interface_body_left_container">
-                <div className="pg_quiz_exam_interface_exam_subCONTAINER">
-                    {/* start_testName_view_instructions_questionpaper_div */}
-      <div className="Pg_otsheadin1" >
-        <p  className="Pg_TestName" key={testName.decryptedParam1}>{testData.TestName}</p>
         <div>
-          <div>
-            <button className="ViewQuestions" title="View Question Paper" onClick={openQuestionPaper}>
-            <i class="fa-solid fa-align-justify Pg_justify"></i> View Question Paper
-            </button>
-          </div>
-          <div>
-            <button title="View Instructions" onClick={openInstructions} className="ViewQuestions">
-            <i class="fa-solid fa-info pg_info"></i>  View Instructions
-            </button>
-          </div>
-        </div>
-      </div>
-      {/* end_testName_view_instructions_questionpaper_div */}
+          {!showExamSumary ? (
+            <div>
+              {/* start_testName_view_instructions_questionpaper_div */}
+              <div className="Pg_otsheadin1">
+                <p className="Pg_TestName" key={testName.decryptedParam1}>
+                  {testData.TestName}
+                </p>
+                <div>
                   <div>
-                    <div class="PG_SUBJECTS_CONTAINER">
-                      <div className="PG_subject_container">
-                        <div className="messageBodyPC">
-                          {testData.subjects.map((subject) => (
-                            <button
-                              key={subject.departmentId}
-                              onClick={() =>
-                                handleSubjectClick(subject.subjectId)
-                              }
-                              className={`sidebar-button ${
-                                subject.subjectId === selectedSubjectId
-                                  ? "active"
-                                  : ""
-                              }`}
-                            >
-                              {subject.SubjectName}
-                            </button>
-                          ))}
-                        </div>
-                        <div>
-                          <FaCalculator
-                            title="View Scientific Calculator"
-                            onClick={openScientificCalculator}
-                          />
-                        </div>
-                      </div>
-                      <div className="pg_Sectionsdiv">
-                          <p>Sections</p>
-                        <div>
-                          <p className="Pg_time_left_tag">
-                            <span id="Pg_time_left_icon">
-                              <MdOutlineTimer />
-                            </span>
-                            <div>
-                              Time Left: {hours.toString().padStart(2, "0")}:
-                              {minutes.toString().padStart(2, "0")}:
-                              {seconds.toString().padStart(2, "0")}
-                            </div>
-                          </p>
-                        </div>
-                      </div>
-                      <div className="Pg_sectiondiv">
-                        {selectedSubjectId && (
-                          <div className="child_sections_conatiner">
-                            {testData.subjects
-                              .find(
-                                (subject) =>
-                                  subject.subjectId === selectedSubjectId
-                              )
-                              .sections.map((section) => (
+                    <button
+                      className="ViewQuestions"
+                      title="View Question Paper"
+                      onClick={openQuestionPaper}
+                    >
+                      <i class="fa-solid fa-align-justify Pg_justify"></i> View
+                      Question Paper
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      title="View Instructions"
+                      onClick={openInstructions}
+                      className="ViewQuestions"
+                    >
+                      <i class="fa-solid fa-info pg_info"></i> View Instructions
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {/* end_testName_view_instructions_questionpaper_div */}
+
+              <div className="pg_quiz_exam_interface_body pg_otsMaindiv">
+                <div className="quizPagewatermark pgPC">
+                  <div className="pg_quiz_exam_interface_body_left_container">
+                    <div className="pg_quiz_exam_interface_exam_subCONTAINER">
+                      <div>
+                        <div class="PG_SUBJECTS_CONTAINER">
+                          <div className="PG_subject_container">
+                            {/* <div className="messageBodyPC">
+                              {testData.subjects.map((subject) => (
                                 <button
-                                  key={section.sectionId}
+                                  key={subject.departmentId}
                                   onClick={() =>
-                                    handleSectionClick(section.sectionId)
+                                    handleSubjectClick(subject.subjectId)
                                   }
                                   className={`sidebar-button ${
-                                    section.sectionId === selectedSectionId
+                                    subject.subjectId === selectedSubjectId
                                       ? "active"
                                       : ""
                                   }`}
                                 >
-                                  {section.SectionName}
+                                  {subject.SubjectName}
                                 </button>
                               ))}
+                            </div> */}
+                            <div>
+                            {selectedSubjectId && (
+                              <div>
+                                {(() => {
+                                  const selectedSubject =
+                                    testData.subjects.find(
+                                      (subject) =>
+                                        subject.subjectId === selectedSubjectId
+                                    );
+                                  return selectedSubject?.sections?.length <
+                                    0 ? (
+                                    <div className="Pg_sectiondiv">
+                                      <div className="child_sections_conatiner">
+                                        {selectedSubject.sections.map(
+                                          (section) => (
+                                            <button
+                                              key={section.sectionId}
+                                              onClick={() =>
+                                                handleSectionClick(
+                                                  section.sectionId
+                                                )
+                                              }
+                                              className={`sidebar-button ${
+                                                section.sectionId ===
+                                                selectedSectionId
+                                                  ? "active"
+                                                  : ""
+                                              }`}
+                                            >
+                                              {section.SectionName}
+                                            </button>
+                                          )
+                                        )}
+                                      </div>
+                                    </div>
+                                  ) : <p   className="sidebar-button active">
+                                  {testData.subjects.find((subject) => subject.subjectId === selectedSubjectId)
+                                    ?.SubjectName || "No subject selected"}
+                                </p>;
+                                })()}
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </div>
-                      <div>
-                        <div className="Pg_qtype_div">
-                          {selectedQuestion.quesion_type.map((type) => (
-                            <div key={type.quesionTypeId}>
-                              {type.typeofQuestion}
+                            <div>
+                              <FaCalculator
+                                title="View Scientific Calculator"
+                                onClick={openScientificCalculator}
+                              />
                             </div>
-                          ))}
+                          </div>
+                          <div className="pg_Sectionsdiv">
+                            <p>Sections</p>
+                            <div>
+                              <p className="Pg_time_left_tag">
+                                <span id="Pg_time_left_icon">
+                                  <MdOutlineTimer />
+                                </span>
+                                <div>
+                                  Time Left: {hours.toString().padStart(2, "0")}
+                                  :{minutes.toString().padStart(2, "0")}:
+                                  {seconds.toString().padStart(2, "0")}
+                                </div>
+                              </p>
+                            </div>
+                          </div>
+                          {/* <div className="Pg_sectiondiv">
+                            {selectedSubjectId && (
+                              <div className="child_sections_conatiner">
+                                {testData.subjects
+                                  .find(
+                                    (subject) =>
+                                      subject.subjectId === selectedSubjectId
+                                  )
+                                  .sections.map((section) => (
+                                    <button
+                                      key={section.sectionId}
+                                      onClick={() =>
+                                        handleSectionClick(section.sectionId)
+                                      }
+                                      className={`sidebar-button ${
+                                        section.sectionId === selectedSectionId
+                                          ? "active"
+                                          : ""
+                                      }`}
+                                    >
+                                      {section.SectionName}
+                                    </button>
+                                  ))}
+                              </div>
+                            )}
+                          </div> */}
+                          <div>
+                            {selectedSubjectId && (
+                              <div>
+                                {(() => {
+                                  const selectedSubject =
+                                    testData.subjects.find(
+                                      (subject) =>
+                                        subject.subjectId === selectedSubjectId
+                                    );
+                                  return selectedSubject?.sections?.length <
+                                    0 ? (
+                                    <div className="Pg_sectiondiv">
+                                      <div className="child_sections_conatiner">
+                                        {selectedSubject.sections.map(
+                                          (section) => (
+                                            <button
+                                              key={section.sectionId}
+                                              onClick={() =>
+                                                handleSectionClick(
+                                                  section.sectionId
+                                                )
+                                              }
+                                              className={`sidebar-button ${
+                                                section.sectionId ===
+                                                selectedSectionId
+                                                  ? "active"
+                                                  : ""
+                                              }`}
+                                            >
+                                              {section.SectionName}
+                                            </button>
+                                          )
+                                        )}
+                                      </div>
+                                    </div>
+                                  ) :  <div className="messageBodyPC">
+                                  {testData.subjects.map((subject) => (
+                                    <button
+                                      key={subject.departmentId}
+                                      onClick={() =>
+                                        handleSubjectClick(subject.subjectId)
+                                      }
+                                      className={`sidebar-button ${
+                                        subject.subjectId === selectedSubjectId
+                                          ? "active"
+                                          : ""
+                                      }`}
+                                    >
+                                      {subject.SubjectName}
+                                    </button>
+                                  ))}
+                                </div>;
+                                })()}
+                              </div>
+                            )}
+                          </div>
+
+                          <div>
+                            <div className="Pg_qtype_div">
+                              {selectedQuestion.quesion_type.map((type) => (
+                                <div key={type.quesionTypeId}>
+                                  {type.typeofQuestion}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         </div>
+                      </div>
+                      {selectedQuestion && (
+                        <div className="pg_quizpageots">
+                          <div className="pg_quizotsQuestion">
+                            <div className="pg_pravagragh_container ">
+                              {selectedQuestion.paragraph &&
+                                selectedQuestion.paragraph.paragraphImg && (
+                                  <div className="pg_Paragraph_div ">
+                                    <b>Paragraph:</b>
+                                    <img
+                                      src={`${BASE_URL}/uploads/${selectedQuestion.documen_name}/${selectedQuestion.paragraph.paragraphImg}`}
+                                      alt={`ParagraphImage ${selectedQuestion.paragraph.paragraph_Id}`}
+                                    />
+                                  </div>
+                                )}
+                            </div>
+                          </div>
+                          <div className="pg_question_number_continer">
+                            <div className="pg_question_number_div">
+                              <b>Question</b>
+                              <h4 id="pg_question_number_tag">
+                                {currentQuestionIndex}.
+                              </h4>
+                            </div>
+                            <div className="pgQuestionImgDiv">
+                              <img
+                                className="pg_question_image"
+                                src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${selectedQuestion.questionImgName}`}
+                                alt={`Question ${selectedQuestion.question_id}`}
+                              />
+                            </div>
+                          </div>
+                          <div className="pg_parent_div">
+                            {selectedQuestion.quesion_type.some((type) =>
+                              [1, 2, 7, 8].includes(type.quesionTypeId)
+                            ) && (
+                              <div className="options">
+                                {selectedQuestion.options.map(
+                                  (option, optionIndex) => (
+                                    <div key={option.option_id}>
+                                      <input
+                                        type="radio"
+                                        name={`question_${selectedQuestion.question_id}`}
+                                        value={option.option_id}
+                                        // checked={
+                                        //   radioResponses[selectedQuestion.question_id] ===
+                                        //   option.option_id
+                                        // }
+                                        checked={
+                                          radioResponses[
+                                            selectedQuestion.question_id
+                                          ]?.optionId === option.option_id
+                                        }
+                                        onChange={() =>
+                                          handleRadioChange(
+                                            selectedQuestion.question_id,
+                                            option.option_id,
+                                            optionIndex
+                                          )
+                                        }
+                                      />
+                                      (
+                                      {String.fromCharCode(
+                                        "a".charCodeAt(0) + optionIndex
+                                      )}
+                                      )
+                                      <img
+                                        src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${option.optionImgName}`}
+                                        alt={`Option ${option.option_index}`}
+                                      />
+                                    </div>
+                                  )
+                                )}
+                              </div>
+                            )}
+                            {selectedQuestion.quesion_type.some((type) =>
+                              [3, 4].includes(type.quesionTypeId)
+                            ) && (
+                              <div className="options">
+                                {selectedQuestion.options.map(
+                                  (option, optionIndex) => (
+                                    <div key={option.option_id}>
+                                      <input
+                                        type="checkbox"
+                                        name={`question_${selectedQuestion.question_id}`}
+                                        value={option.option_id}
+                                        checked={checkboxResponses[
+                                          selectedQuestion.question_id
+                                        ]?.some(
+                                          (resp) =>
+                                            resp.optionId === option.option_id
+                                        )}
+                                        onChange={(e) =>
+                                          handleCheckboxChange(
+                                            selectedQuestion.question_id,
+                                            option.option_id,
+                                            e.target.checked,
+                                            optionIndex
+                                          )
+                                        }
+                                      />
+                                      (
+                                      {String.fromCharCode(
+                                        "a".charCodeAt(0) + optionIndex
+                                      )}
+                                      )
+                                      <img
+                                        src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${option.optionImgName}`}
+                                        alt={`Option ${option.option_index}`}
+                                      />
+                                    </div>
+                                  )
+                                )}
+                              </div>
+                            )}
+                            <div className="quiz_exam_interface_exam_qN_Q_options_calculator_input">
+                              {selectedQuestion.quesion_type.some((type) =>
+                                [5].includes(type.quesionTypeId)
+                              ) && (
+                                <>
+                                  <div className="calculator_div">
+                                    <div className="display">
+                                      <label>Answer:</label>
+                                      <input
+                                        type="text"
+                                        id="input_number_text_box"
+                                        value={
+                                          textResponses[
+                                            selectedQuestion.question_id
+                                          ] || ""
+                                        }
+                                        placeholder="Enter your answer"
+                                        onChange={(e) =>
+                                          handleTextChange(
+                                            selectedQuestion.question_id,
+                                            e.target.value
+                                          )
+                                        }
+                                        // onClick={() => handleClickInput(selectedQuestion.question_id)}
+                                      />
+                                      <div className="input_numbers_div">
+                                        {[
+                                          "DEL",
+                                          "1",
+                                          "2",
+                                          "3",
+                                          "4",
+                                          "5",
+                                          "6",
+                                          "7",
+                                          "8",
+                                          "9",
+                                          "0",
+                                          "-",
+                                        ].map((key) => (
+                                          <button
+                                            key={key}
+                                            onClick={() =>
+                                              handleKeypadClick(key)
+                                            }
+                                            className={
+                                              key === "DEL"
+                                                ? "del_button"
+                                                : "number_btn"
+                                            }
+                                          >
+                                            {key}
+                                          </button>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </>
+                              )}
+                              {selectedQuestion.quesion_type.some((type) =>
+                                [6].includes(type.quesionTypeId)
+                              ) && (
+                                <>
+                                  <div className="calculator_div">
+                                    <div className="display">
+                                      <label>Answer:</label>
+                                      <input
+                                        type="text"
+                                        id="input_number_text_box"
+                                        value={
+                                          textResponses[
+                                            selectedQuestion.question_id
+                                          ] || ""
+                                        }
+                                        placeholder="Enter your answer"
+                                        onChange={(e) =>
+                                          handleTextChange(
+                                            selectedQuestion.question_id,
+                                            e.target.value
+                                          )
+                                        }
+                                      />
+                                      <div className="input_numbers_div">
+                                        {[
+                                          "DEL",
+                                          "1",
+                                          "2",
+                                          "3",
+                                          "4",
+                                          "5",
+                                          "6",
+                                          "7",
+                                          "8",
+                                          "9",
+                                          "0",
+                                          "-",
+                                          ".",
+                                        ].map((key) => (
+                                          <button
+                                            key={key}
+                                            onClick={() =>
+                                              handleKeypadClick(key)
+                                            }
+                                            className={
+                                              key === "DEL"
+                                                ? "del_button"
+                                                : "number_btn"
+                                            }
+                                          >
+                                            {key}
+                                          </button>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="pg_handlebuttons">
+                      <div className="pg_handleReview">
+                        <button
+                          className="PG_Quiz_Save_MarkforReview"
+                          onClick={handleMarkForReview}
+                          title="Click here to Save & Mark for Review"
+                        >
+                          Mark for Review & Next
+                        </button>
+
+                        <button
+                          className="PG_Quiz_clearResponse"
+                          onClick={handleClearResponse}
+                          title="Click here to Clear Response"
+                        >
+                          Clear Response
+                        </button>
+                      </div>
+                      <div className="pg_saveprevious">
+                        <button
+                          className="PG_previous-btn"
+                          onClick={handlePreviousClick}
+                          // disabled={currentQuestionIndex === 0}
+                          title="Click here to go Back"
+                        >
+                          {/* <i className="fa-solid fa-angles-left"></i>  */}
+                          Previous
+                        </button>
+                        <button
+                          title="Click here to Save & Next"
+                          className="PG_quizsave_next"
+                          onClick={handleSaveAndNext}
+                        >
+                          Save & Next
+                        </button>
                       </div>
                     </div>
                   </div>
-                  {selectedQuestion && (
-                    <div className="pg_quizpageots">
-                      <div className="pg_quizotsQuestion">
-                        <div className="pg_pravagragh_container ">
-                          {selectedQuestion.paragraph &&
-                            selectedQuestion.paragraph.paragraphImg && (
-                              <div className="pg_Paragraph_div ">
-                                <b>Paragraph:</b>
-                                <img
-                                  src={`${BASE_URL}/uploads/${selectedQuestion.documen_name}/${selectedQuestion.paragraph.paragraphImg}`}
-                                  alt={`ParagraphImage ${selectedQuestion.paragraph.paragraph_Id}`}
-                                />
-                              </div>
-                            )}
-                        </div>
-                      </div>
-                      <div className="pg_question_number_continer">
-                        <div className="pg_question_number_div">
-                          <b>Question</b>
-                          <h4 id="pg_question_number_tag">
-                            {currentQuestionIndex}.
-                          </h4>
-                        </div>
-                        <div className="pgQuestionImgDiv">
-                          <img
-                            className="pg_question_image"
-                            src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${selectedQuestion.questionImgName}`}
-                            alt={`Question ${selectedQuestion.question_id}`}
-                          />
-                        </div>
-                      </div>
-                      <div className="pg_parent_div">
-                        {selectedQuestion.quesion_type.some((type) =>
-                          [1, 2, 7, 8].includes(type.quesionTypeId)
-                        ) && (
-                          <div className="options">
-                            {selectedQuestion.options.map(
-                              (option, optionIndex) => (
-                                <div key={option.option_id}>
-                                  <input
-                                    type="radio"
-                                    name={`question_${selectedQuestion.question_id}`}
-                                    value={option.option_id}
-                                    // checked={
-                                    //   radioResponses[selectedQuestion.question_id] ===
-                                    //   option.option_id
-                                    // }
-                                    checked={
-                                      radioResponses[
-                                        selectedQuestion.question_id
-                                      ]?.optionId === option.option_id
-                                    }
-                                    onChange={() =>
-                                      handleRadioChange(
-                                        selectedQuestion.question_id,
-                                        option.option_id,
-                                        optionIndex
-                                      )
-                                    }
-                                  />
-                                  (
-                                  {String.fromCharCode(
-                                    "a".charCodeAt(0) + optionIndex
-                                  )}
-                                  )
-                                  <img
-                                    src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${option.optionImgName}`}
-                                    alt={`Option ${option.option_index}`}
-                                  />
-                                </div>
-                              )
-                            )}
-                          </div>
-                        )}
-                        {selectedQuestion.quesion_type.some((type) =>
-                          [3, 4].includes(type.quesionTypeId)
-                        ) && (
-                          <div className="options">
-                            {selectedQuestion.options.map(
-                              (option, optionIndex) => (
-                                <div key={option.option_id}>
-                                  <input
-                                    type="checkbox"
-                                    name={`question_${selectedQuestion.question_id}`}
-                                    value={option.option_id}
-                                    checked={checkboxResponses[
-                                      selectedQuestion.question_id
-                                    ]?.some(
-                                      (resp) =>
-                                        resp.optionId === option.option_id
-                                    )}
-                                    onChange={(e) =>
-                                      handleCheckboxChange(
-                                        selectedQuestion.question_id,
-                                        option.option_id,
-                                        e.target.checked,
-                                        optionIndex
-                                      )
-                                    }
-                                  />
-                                  (
-                                  {String.fromCharCode(
-                                    "a".charCodeAt(0) + optionIndex
-                                  )}
-                                  )
-                                  <img
-                                    src={`http://localhost:5001/uploads/${selectedQuestion.documen_name}/${option.optionImgName}`}
-                                    alt={`Option ${option.option_index}`}
-                                  />
-                                </div>
-                              )
-                            )}
-                          </div>
-                        )}
-                        <div className="quiz_exam_interface_exam_qN_Q_options_calculator_input">
-                          {selectedQuestion.quesion_type.some((type) =>
-                            [5].includes(type.quesionTypeId)
-                          ) && (
-                            <>
-                              <div className="calculator_div">
-                                <div className="display">
-                                  <label>Answer:</label>
-                                  <input
-                                    type="text"
-                                    id="input_number_text_box"
-                                    value={
-                                      textResponses[
-                                        selectedQuestion.question_id
-                                      ] || ""
-                                    }
-                                    placeholder="Enter your answer"
-                                    onChange={(e) =>
-                                      handleTextChange(
-                                        selectedQuestion.question_id,
-                                        e.target.value
-                                      )
-                                    }
-                                    // onClick={() => handleClickInput(selectedQuestion.question_id)}
-                                  />
-                                  <div className="input_numbers_div">
-                                    {[
-                                      "DEL",
-                                      "1",
-                                      "2",
-                                      "3",
-                                      "4",
-                                      "5",
-                                      "6",
-                                      "7",
-                                      "8",
-                                      "9",
-                                      "0",
-                                      "-",
-                                    ].map((key) => (
-                                      <button
-                                        key={key}
-                                        onClick={() => handleKeypadClick(key)}
-                                        className={
-                                          key === "DEL"
-                                            ? "del_button"
-                                            : "number_btn"
-                                        }
-                                      >
-                                        {key}
-                                      </button>
-                                    ))}
-                                  </div>
-                                </div>
-                              </div>
-                            </>
-                          )}
-                          {selectedQuestion.quesion_type.some((type) =>
-                            [6].includes(type.quesionTypeId)
-                          ) && (
-                            <>
-                              <div className="calculator_div">
-                                <div className="display">
-                                  <label>Answer:</label>
-                                  <input
-                                    type="text"
-                                    id="input_number_text_box"
-                                    value={
-                                      textResponses[
-                                        selectedQuestion.question_id
-                                      ] || ""
-                                    }
-                                    placeholder="Enter your answer"
-                                    onChange={(e) =>
-                                      handleTextChange(
-                                        selectedQuestion.question_id,
-                                        e.target.value
-                                      )
-                                    }
-                                  />
-                                  <div className="input_numbers_div">
-                                    {[
-                                      "DEL",
-                                      "1",
-                                      "2",
-                                      "3",
-                                      "4",
-                                      "5",
-                                      "6",
-                                      "7",
-                                      "8",
-                                      "9",
-                                      "0",
-                                      "-",
-                                      ".",
-                                    ].map((key) => (
-                                      <button
-                                        key={key}
-                                        onClick={() => handleKeypadClick(key)}
-                                        className={
-                                          key === "DEL"
-                                            ? "del_button"
-                                            : "number_btn"
-                                        }
-                                      >
-                                        {key}
-                                      </button>
-                                    ))}
-                                  </div>
-                                </div>
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  )}
                 </div>
 
-                <div className="pg_handlebuttons">
-
-                <div className="pg_handleReview">
-                <button
-                      className="PG_Quiz_Save_MarkforReview"
-                      onClick={handleMarkForReview}
-                      title="Click here to Save & Mark for Review"
-                    >
-                      Mark for Review & Next
-                    </button>
- 
-                    <button
-                      className="PG_Quiz_clearResponse"
-                      onClick={handleClearResponse}
-                      title="Click here to Clear Response"
-                    >
-                      Clear Response
-                    </button>
-                </div>
-                  <div className="pg_saveprevious">
-                  <button
-                      className="PG_previous-btn"
-                      onClick={handlePreviousClick}
-                      // disabled={currentQuestionIndex === 0}
-                      title="Click here to go Back"
-                    >
-                      {/* <i className="fa-solid fa-angles-left"></i>  */}
-                      Previous
-                    </button>
-                    <button
-                      title="Click here to Save & Next"
-                      className="PG_quizsave_next"
-                      onClick={handleSaveAndNext}
-                    >
-                      Save & Next
-                    </button>
-                  </div>
-                  <div>
-                
-                
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="pg_quiz_exam_interface_body_right_container">
-              <div className="pg_rightsidebar_container">
-                {/* <div
+                <div className="pg_quiz_exam_interface_body_right_container">
+                  <div className="pg_rightsidebar_container">
+                    {/* <div
                   className="pg_rightsidebar_container_btn_menubar"
                   onClick={toggleSidebar}
                 >
                   <BiMenuAltLeft />
                 </div> */}
-                <div
-                  className={
-                    isSidebarVisible ? "pg_norightdiv visible" : "pg_norightdiv"
-                  }
-                >
-                  <div className="pg_norightdiv">
-                    <div>
-                      {studentDetails.map((student, index) => (
-                        <div key={index} className="pg_StudentDetailsots">
-                          <img
-                            src={`${BASE_URL}/uploads/studentinfoimeages/${student.UplodadPhto}`}
-                            alt={`no img${student.UplodadPhto}`}
-                             className="users_profile_imgots"
-                          />
-                          <p>Candidate Name:{student.candidateName}</p>
-                        </div>
-                      ))}
-                      <div className="pg_legenddiv">
-                      {/* <p key={testName.testCreationTableId}>
+                    <div
+                      className={
+                        isSidebarVisible
+                          ? "pg_norightdiv visible"
+                          : "pg_norightdiv"
+                      }
+                    >
+                      <div className="pg_norightdiv">
+                        <div>
+                          {studentDetails.map((student, index) => (
+                            <div key={index} className="pg_StudentDetailsots">
+                              <img
+                                src={`${BASE_URL}/uploads/studentinfoimeages/${student.UplodadPhto}`}
+                                alt={`no img${student.UplodadPhto}`}
+                                className="users_profile_imgots"
+                              />
+                              <p>Candidate Name:{student.candidateName}</p>
+                            </div>
+                          ))}
+                          <div className="pg_legenddiv">
+                            {/* <p key={testName.testCreationTableId}>
                         Test Name: {testData.TestName}
                       </p> */}
-                      <div className="pg_colorboxes ">
-                      <h4 className="pg_sidebar-footer-header">Legend:</h4>
-                      <div >
-                        <div className="pg_colorboxotssubdiv">
-                        <div className="pg_colorboxots">
-                          {" "}
-                          <p
-                            className="pg_question_button"
-                            title="VisitedCount"
-                          >
-                            {notVisitedCount}
-                          </p>
-                          <span>Not Visited</span>
-                        </div>
-                        <div className="pg_colorboxots">
-                          <p
-                            className="instruction-btn1 r_S_B_BTNS"
-                            title="answeredCount"
-                          >
-                            {answeredOnlyCount}
-                          </p>
-                          <span>Answered</span>
-                        </div>
-                        </div>
-                        <div className="pg_colorboxotssubdiv">
-                        <div className="pg_colorboxots">
-                          <p title="notAnsweredCount">
-                            {notAnsweredButVisitedCount}
-                          </p>
-                          <span>Not Answered</span>
-                        </div>
-                        <div className="pg_colorboxots">
-                          <p title="answeredmarkedForReviewCount">
-                            {markForReviewOnlyCount}
-                          </p>
-                          <span>Marked for Review</span>
-                        </div>
-                        </div>
-                      
-                        <div className="pg_colorboxots">
-                          <p title="markedForReviewCount">
-                            {answeredAndMarkForReviewCount}
-                          </p>
-                          <span>
-                            Answered & Marked for Review (will be considered for
-                            evaluation)
-                          </span>
+                            <div className="pg_colorboxes ">
+                              <h4 className="pg_sidebar-footer-header">
+                                Legend:
+                              </h4>
+                              <div>
+                                <div className="pg_colorboxotssubdiv">
+                                  <div className="pg_colorboxots">
+                                    {" "}
+                                    <p
+                                      className="question_button"
+                                      title="VisitedCount"
+                                    >
+                                      {notVisitedCount}
+                                    </p>
+                                    <span>Not Visited</span>
+                                  </div>
+                                  <div className="pg_colorboxots">
+                                    <p
+                                      className="instruction-btn1 r_S_B_BTNS"
+                                      title="answeredCount"
+                                    >
+                                      {answeredOnlyCount}
+                                    </p>
+                                    <span>Answered</span>
+                                  </div>
+                                </div>
+                                <div className="pg_colorboxotssubdiv">
+                                  <div className="pg_colorboxots">
+                                    <p
+                                      className="instruction-btn2 r_S_B_BTNS"
+                                      title="notAnsweredCount"
+                                    >
+                                      {notAnsweredButVisitedCount}
+                                    </p>
+                                    <span>Not Answered</span>
+                                  </div>
+                                  <div className="pg_colorboxots">
+                                    <p
+                                      className="instruction-btn3 r_S_B_BTNS"
+                                      title="answeredmarkedForReviewCount"
+                                    >
+                                      {markForReviewOnlyCount}
+                                    </p>
+                                    <span>Marked for Review</span>
+                                  </div>
+                                </div>
+
+                                <div className="pg_colorboxots">
+                                  <p
+                                    className="instruction-btn4 r_S_B_BTNS"
+                                    title="markedForReviewCount"
+                                  >
+                                    {answeredAndMarkForReviewCount}
+                                  </p>
+                                  <span>
+                                    Answered & Marked for Review (will be
+                                    considered for evaluation)
+                                  </span>
+                                </div>
+                              </div>
+                              {/* </div> */}
+                            </div>
+                            <div className="pg_buttons_container">
+                              <div className="Pg_sectiondivno">
+                                Your viewing{" "}
+                                {selectedSubjectName && (
+                                  <p className="pg_sub_section">
+                                    {selectedSubject.SubjectName}
+                                  </p>
+                                )}
+                                {selectedSectionName && (
+                                  <p className="pg_sub_section">
+                                    {selectedSection.SectionName}
+                                  </p>
+                                )}
+                              </div>
+
+                              <div className="pg_ques-btn">
+                                <p> Question Palette</p>
+                                <ul className="pg_btn-ul quesAns-btn pg_numberpaletdiv">
+                                  {questions.map((question, index) => {
+                                    // Determine if the question is the first in its section or subject and if it has been answered
+                                    // const isFirstQuestion = index === 0;
+                                    // const isAnswered = questionButtonClass[question.question_id] === "notAnswered";
+
+                                    // Determine button class based on question ID
+                                    const buttonClass =
+                                      questionButtonClass[
+                                        question.question_id
+                                      ] || "question_button";
+
+                                    //                         const buttonClass = isFirstQuestion && !isAnswered
+                                    //                         ? "notAnswered"
+                                    //                         : questionButtonClass[question.question_id] || "question_button";
+
+                                    //  // Determine if the question is the first in its section or subject
+                                    //  const isFirstQuestion = index === 0;
+
+                                    //  // Determine if the question has been answered
+                                    //  const isAnswered = questionButtonClass[question.question_id] === "answered";
+
+                                    //  // Apply "answeredButtonClass" if answered, otherwise use "notAnsweredButtonClass" for the first question or the default class
+                                    //  const buttonClass = isAnswered
+                                    //    ? "answered"
+                                    //    : isFirstQuestion
+                                    //    ? "notAnswered"
+                                    //    : questionButtonClass[question.question_id] || "question_button";
+
+                                    //  // Determine if the question is the first in its section or subject
+                                    //  const isFirstQuestion = index === 0;
+
+                                    //  // Determine the current question status
+                                    //  const isAnswered = questionButtonClass[question.question_id] === "answered";
+                                    //  const isMarkedForReview = questionButtonClass[question.question_id] === "markedForReview";
+                                    //  const isAnswerSaved = questionButtonClass[question.question_id] === "answered";
+
+                                    //  // Determine button class based on question status
+                                    //  let buttonClass;
+
+                                    //  if (isFirstQuestion) {
+                                    //    if (isAnswered) {
+                                    //      if (isMarkedForReview && !isAnswerSaved) {
+                                    //        buttonClass = "purpleBox";
+                                    //      } else if (isAnswerSaved && !isMarkedForReview) {
+                                    //        buttonClass = "answered";
+                                    //      }
+                                    //    } else {
+                                    //      if (isMarkedForReview && !isAnswerSaved) {
+                                    //        buttonClass = "blueBox";
+                                    //      } else if (!isAnswerSaved && !isMarkedForReview) {
+                                    //        buttonClass = "notAnswered";
+                                    //      }
+                                    //    }
+                                    //  } else {
+                                    //    // Default class for other questions
+                                    //    buttonClass = questionButtonClass[question.question_id] || "question_button";
+                                    //  }
+
+                                    return (
+                                      <li key={question.question_id}>
+                                        <button
+                                          className={buttonClass}
+                                          onClick={() =>
+                                            handleQuestionClick(
+                                              question.question_id
+                                            )
+                                          }
+                                        >
+                                          {index + 1}
+                                        </button>
+                                      </li>
+                                    );
+                                  })}
+                                </ul>
+                              </div>
+                              <button
+                                style={{ background: "#f0a607da" }}
+                                onClick={handleSubmit}
+                                id="PG_submit_btn"
+                                title="Click here to Submit"
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    {/* </div> */}
-                    
                     </div>
-                    <div className="pg_buttons_container">
-                      <div  className="Pg_sectiondivno">
-                        Your viewing{" "}
-                        {selectedSubjectName && (
-                          <p className="pg_sub_section">
-                            {selectedSubject.SubjectName}
-                          </p>
-                        )}
-                        {selectedSectionName && (
-                          <p className="pg_sub_section">
-                            {selectedSection.SectionName}
-                          </p>
-                        )}
-                       
-                      </div>
-
-                      <div className="pg_ques-btn">
-                        <p> Question Palette</p>
-                        <ul className="pg_btn-ul quesAns-btn pg_numberpaletdiv">
-                          {questions.map((question, index) => {
-                            // Determine if the question is the first in its section or subject and if it has been answered
-                            // const isFirstQuestion = index === 0;
-                            // const isAnswered = questionButtonClass[question.question_id] === "notAnswered";
-
-                            // Determine button class based on question ID
-                            const buttonClass =
-                              questionButtonClass[question.question_id] ||
-                              "question_button";
-
-                            //                         const buttonClass = isFirstQuestion && !isAnswered
-                            //                         ? "notAnswered"
-                            //                         : questionButtonClass[question.question_id] || "question_button";
-
-                            //  // Determine if the question is the first in its section or subject
-                            //  const isFirstQuestion = index === 0;
-
-                            //  // Determine if the question has been answered
-                            //  const isAnswered = questionButtonClass[question.question_id] === "answered";
-
-                            //  // Apply "answeredButtonClass" if answered, otherwise use "notAnsweredButtonClass" for the first question or the default class
-                            //  const buttonClass = isAnswered
-                            //    ? "answered"
-                            //    : isFirstQuestion
-                            //    ? "notAnswered"
-                            //    : questionButtonClass[question.question_id] || "question_button";
-
-                            //  // Determine if the question is the first in its section or subject
-                            //  const isFirstQuestion = index === 0;
-
-                            //  // Determine the current question status
-                            //  const isAnswered = questionButtonClass[question.question_id] === "answered";
-                            //  const isMarkedForReview = questionButtonClass[question.question_id] === "markedForReview";
-                            //  const isAnswerSaved = questionButtonClass[question.question_id] === "answered";
-
-                            //  // Determine button class based on question status
-                            //  let buttonClass;
-
-                            //  if (isFirstQuestion) {
-                            //    if (isAnswered) {
-                            //      if (isMarkedForReview && !isAnswerSaved) {
-                            //        buttonClass = "purpleBox";
-                            //      } else if (isAnswerSaved && !isMarkedForReview) {
-                            //        buttonClass = "answered";
-                            //      }
-                            //    } else {
-                            //      if (isMarkedForReview && !isAnswerSaved) {
-                            //        buttonClass = "blueBox";
-                            //      } else if (!isAnswerSaved && !isMarkedForReview) {
-                            //        buttonClass = "notAnswered";
-                            //      }
-                            //    }
-                            //  } else {
-                            //    // Default class for other questions
-                            //    buttonClass = questionButtonClass[question.question_id] || "question_button";
-                            //  }
-
-                            return (
-                              <li key={question.question_id}>
-                                <button
-                                  className={buttonClass}
-                                  onClick={() =>
-                                    handleQuestionClick(question.question_id)
-                                  }
-                                >
-                                  {index + 1}
-                                </button>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      
-                      </div>
-                      <button
-                      style={{ background: "#f0a607da" }}
-                      onClick={handleSubmit}
-                      id="PG_submit_btn"
-                      title="Click here to Submit"
-                    >
-                      Submit
-                    </button>
-                    </div>
-                      </div>
-                     
-                    </div>
-                  
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ) : (
-          <div className="examSummary_quizPagewatermark">
-            <h3 className="Exam_summary_heading">Exam Summary</h3>
+          ) : (
+            <div className="examSummary_quizPagewatermark">
+              <h3 className="Exam_summary_heading">Exam Summary</h3>
 
-            <div className="Exam_summary_table">
-              <table id="customers" className="exam_summary_table">
-                <tr className="exam_summary_table_tr">
-                  <td>Total Questions</td>
-                  <td>Answered Questions</td>
-                  <td>Not Answered Questions</td>
-                  <td>Not Visited Count</td>
-                  <td>Marked for Review Questions</td>
-                  <td>Answered & Marked for Review Questions</td>
-                </tr>
-                <tr>
-                  <td>{notVisitedCount}</td>
-                  <td>{answeredOnlyCount}</td>
-                  <td>{notAnsweredButVisitedCount}</td>
-                  <td>{notVisitedCount}</td>
-                  <td>{markForReviewOnlyCount}</td>
-                  <td>{answeredAndMarkForReviewCount}</td>
-                </tr>
-              </table>
-            </div>
+              <div className="Exam_summary_table">
+                <table id="customers" className="exam_summary_table">
+                  <tr className="exam_summary_table_tr">
+                    <td>Total Questions</td>
+                    <td>Answered Questions</td>
+                    <td>Not Answered Questions</td>
+                    <td>Not Visited Count</td>
+                    <td>Marked for Review Questions</td>
+                    <td>Answered & Marked for Review Questions</td>
+                  </tr>
+                  <tr>
+                    <td>{notVisitedCount}</td>
+                    <td>{answeredOnlyCount}</td>
+                    <td>{notAnsweredButVisitedCount}</td>
+                    <td>{notVisitedCount}</td>
+                    <td>{markForReviewOnlyCount}</td>
+                    <td>{answeredAndMarkForReviewCount}</td>
+                  </tr>
+                </table>
+              </div>
 
-            <div>
-              {showButtonNo === false ? (
-                <h2 className="Exam_summary_question_tag">
-                  Please press okay to view your result.
-                </h2>
-              ) : (
-                <h2 className="Exam_summary_question_tag">
-                  Are you sure you want to submit ? <br />
-                  No changes will be allowed after submission.
-                </h2>
-              )}
-
-              <div className="Exam_summary_btns">
+              <div>
                 {showButtonNo === false ? (
-                  <>
-                    <Link
-                      className="es_btn"
-                      onClick={handleYes}
-                      title="Click here to go Next"
-                    >
-                      Okay
-                    </Link>
-                  </>
+                  <h2 className="Exam_summary_question_tag">
+                    Please press okay to view your result.
+                  </h2>
                 ) : (
-                  <>
-                    <Link
+                  <h2 className="Exam_summary_question_tag">
+                    Are you sure you want to submit ? <br />
+                    No changes will be allowed after submission.
+                  </h2>
+                )}
+
+                <div className="Exam_summary_btns">
+                  {showButtonNo === false ? (
+                    <>
+                      <Link
+                        className="es_btn"
+                        onClick={handleYes}
+                        title="Click here to go Next"
+                      >
+                        Okay
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        className="es_btn"
+                        // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
+                        // to='/Submit_Page'
+                        onClick={handleYes}
+                        title="Click here to go Next"
+                      >
+                        Yes
+                      </Link>
+                    </>
+                  )}
+                  {showButtonNo && (
+                    <button
                       className="es_btn"
-                      // to={`/TestResultsPage/${decryptedParam1}/${userData.id}`}
-                      // to='/Submit_Page'
-                      onClick={handleYes}
-                      title="Click here to go Next"
+                      title="Click here to go Back"
+                      onClick={handleNo}
                     >
-                      Yes
-                    </Link>
-                  </>
-                )}
-                {showButtonNo && (
-                  <button
-                    className="es_btn"
-                    title="Click here to go Back"
-                    onClick={handleNo}
-                  >
-                    NO
-                  </button>
-                )}
+                      NO
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
 
-      <div>{showPopup && <PGQuestionPaper onClose={closeQuestionPaper} />}</div>
+        <div>
+          {showPopup && <PGQuestionPaper onClose={closeQuestionPaper} />}
+        </div>
 
-      <div>
-        {showInstructions && (
-          <div className="questionslistpopup">
-            <p className="questionslistpopup_Instructions">Instructions</p>
-            <button onClick={closeInstructions}>Close</button>
-            <div className="questionslistpopup-content">
-              <div>
-                <p className="pg_Note">
-                  Note that the timer is ticking while you read the
-                  instructions.Close this page to return to answering the
-                  quetions.
-                </p>
-                {/* <p className="Instructionspg">Instructions</p> */}
-                <div className="pg_readinstructions">
-                  Please read the instructions carefully
-                </div>
-
-                <ul className="PG_General_Instructions_Ul_tag">
-                  <p className="pg_siteheding">General Instructions:</p>
-                  <li value="100">
-                    1.Total duration of examination is <span>180</span> minutes.
-                  </li>
-                  <li>
-                    2.The clock will be set at the server. The countdown timer
-                    in the top right corner of screen will display the remaining
-                    time available for you to complete the examination. When the
-                    timer reaches zero, the examination will end by itself. You
-                    will not be required to end or submit your examination.
-                  </li>
-                  <li>
-                    3.The Question Palette displayed on the right side of screen
-                    will show the status of each question using one of the
-                    following symbols:
-                  </li>
-                  <ul>
-                    <li>
-                      <img src={grayBox} /> You have not visited the question
-                      yet.
-                    </li>
-                    <li>
-                      <img src={orangeBox} /> You have not answered the
-                      question.
-                    </li>
-                    <li>
-                      <img src={greenBox} />
-                      You have answered the question.
-                    </li>
-                    <li>
-                      <img src={purpleBox} /> You have NOT answered the
-                      question, but have marked the question for review.
-                    </li>
-                    <li>
-                      <img src={purpleTickBox} /> The question(s) "Answered and
-                      Marked for Review" will be considered for evaluation.
-                    </li>
-                    <li>
-                      The Marked for Review status for a question simply
-                      indicates that you would like to look at that question
-                      again.
-                    </li>
-                  </ul>
-                  <li>
-                    4.You can click on the arrow which appears to the left of
-                    question palette to collapse the question palette thereby
-                    maximizing the question window. To view the question palette
-                    again, you can click on which appears on the right side of
-                    question window.
-                  </li>
-                  <li>
-                    5.You can click on your "Profile" image on top right corner
-                    of your screen to change the language during the exam for
-                    entire question paper. On clicking of Profile image you will
-                    get a drop-down to change the question content to the
-                    desired language.
-                  </li>
-                  <li>
-                    6.You can click on <i class="fa-solid fa-circle-down"></i>{" "}
-                    to navigate to the bottom and{" "}
-                    <i class="fa-solid fa-circle-up"></i> navigate to the top of
-                    the question area, without scrolling.
-                  </li>
-                  <p className="pg_siteheding">
-                    <span>Navigating to a Question:</span>
+        <div>
+          {showInstructions && (
+            <div className="questionslistpopup">
+              <p className="questionslistpopup_Instructions">Instructions</p>
+              <button onClick={closeInstructions}>Close</button>
+              <div className="questionslistpopup-content">
+                <div>
+                  <p className="pg_Note">
+                    Note that the timer is ticking while you read the
+                    instructions.Close this page to return to answering the
+                    quetions.
                   </p>
-                  <li>
-                    7.To answer a question, do the following:
+                  {/* <p className="Instructionspg">Instructions</p> */}
+                  <div className="pg_readinstructions">
+                    Please read the instructions carefully
+                  </div>
+
+                  <ul className="PG_General_Instructions_Ul_tag">
+                    <p className="pg_siteheding">General Instructions:</p>
+                    <li value="100">
+                      1.Total duration of examination is <span>180</span>{" "}
+                      minutes.
+                    </li>
+                    <li>
+                      2.The clock will be set at the server. The countdown timer
+                      in the top right corner of screen will display the
+                      remaining time available for you to complete the
+                      examination. When the timer reaches zero, the examination
+                      will end by itself. You will not be required to end or
+                      submit your examination.
+                    </li>
+                    <li>
+                      3.The Question Palette displayed on the right side of
+                      screen will show the status of each question using one of
+                      the following symbols:
+                    </li>
                     <ul>
                       <li>
-                        a.Click on the question number in the Question Palette
-                        at the right of your screen to go to that numbered
-                        question directly. Note that using this option does NOT
-                        save your answer to the current question.
+                        <img src={grayBox} /> You have not visited the question
+                        yet.
                       </li>
                       <li>
-                        b.Click on <span>Save & Next</span> to save your answer
-                        for the current question and then go to the next
+                        <img src={orangeBox} /> You have not answered the
                         question.
                       </li>
                       <li>
-                        c.Click on <span>Mark for Review & Next</span> to save
-                        your answer for the current question, mark it for
-                        review, and then go to the next question.
+                        <img src={greenBox} />
+                        You have answered the question.
+                      </li>
+                      <li>
+                        <img src={purpleBox} /> You have NOT answered the
+                        question, but have marked the question for review.
+                      </li>
+                      <li>
+                        <img src={purpleTickBox} /> The question(s) "Answered
+                        and Marked for Review" will be considered for
+                        evaluation.
+                      </li>
+                      <li>
+                        The Marked for Review status for a question simply
+                        indicates that you would like to look at that question
+                        again.
                       </li>
                     </ul>
-                  </li>
-                  <p className="pg_siteheding">
-                    <span>Answering a Question :</span>
-                  </p>
-                  <li>
-                    8.Procedure for answering a multiple choice type question
-                    <ul>
-                      <li>
-                        To select your answer, click on the button of one of the
-                        options
-                      </li>
-                      <li>
-                        To deselect your chosen answer, click on the button of
-                        the chosen option again or click on the{" "}
-                        <span>Clear Response </span>button
-                      </li>
-                      <li>
-                        To change your chosen answer, click on the button of
-                        another option
-                      </li>
-                      <li>
-                        To save your answer, you MUST click on the{" "}
-                        <span>Save & Next</span>
-                        button
-                      </li>
-                      <li>
-                        To mark the question for review, click on the{" "}
-                        <span>Mark for Review & Next button.</span>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    9.To change your answer to a question that has already been
-                    answered, first select that question for answering and then
-                    follow the procedure for answering that type of question.
-                  </li>
-                  <p className="pg_siteheding">Navigating through sections:</p>
-                  <li>
-                    10.Sections in this question paper are displayed on the top
-                    bar of the screen. Questions in a section can be viewed by
-                    clicking on the section name. The section you are currently
-                    viewing is highlighted.
-                  </li>
-                  <li>
-                    11.After clicking the Save & Next button on the last
-                    question for a section, you will automatically be taken to
-                    the first question of the next section.
-                  </li>
-                  <li>
-                    12.You can shuffle between sections and questions anytime
-                    during the examination as per your convenience only during
-                    the time stipulated.
-                  </li>
-                  <li>
-                    13.Candidate can view the corresponding section summary as
-                    part of the legend that appears in every section above the
-                    question palette.
-                  </li>
-                  <li>
-                    14.To zoom the image provided in the question roll over it.
-                  </li>
-                </ul>
+                    <li>
+                      4.You can click on the arrow which appears to the left of
+                      question palette to collapse the question palette thereby
+                      maximizing the question window. To view the question
+                      palette again, you can click on which appears on the right
+                      side of question window.
+                    </li>
+                    <li>
+                      5.You can click on your "Profile" image on top right
+                      corner of your screen to change the language during the
+                      exam for entire question paper. On clicking of Profile
+                      image you will get a drop-down to change the question
+                      content to the desired language.
+                    </li>
+                    <li>
+                      6.You can click on <i class="fa-solid fa-circle-down"></i>{" "}
+                      to navigate to the bottom and{" "}
+                      <i class="fa-solid fa-circle-up"></i> navigate to the top
+                      of the question area, without scrolling.
+                    </li>
+                    <p className="pg_siteheding">
+                      <span>Navigating to a Question:</span>
+                    </p>
+                    <li>
+                      7.To answer a question, do the following:
+                      <ul>
+                        <li>
+                          a.Click on the question number in the Question Palette
+                          at the right of your screen to go to that numbered
+                          question directly. Note that using this option does
+                          NOT save your answer to the current question.
+                        </li>
+                        <li>
+                          b.Click on <span>Save & Next</span> to save your
+                          answer for the current question and then go to the
+                          next question.
+                        </li>
+                        <li>
+                          c.Click on <span>Mark for Review & Next</span> to save
+                          your answer for the current question, mark it for
+                          review, and then go to the next question.
+                        </li>
+                      </ul>
+                    </li>
+                    <p className="pg_siteheding">
+                      <span>Answering a Question :</span>
+                    </p>
+                    <li>
+                      8.Procedure for answering a multiple choice type question
+                      <ul>
+                        <li>
+                          To select your answer, click on the button of one of
+                          the options
+                        </li>
+                        <li>
+                          To deselect your chosen answer, click on the button of
+                          the chosen option again or click on the{" "}
+                          <span>Clear Response </span>button
+                        </li>
+                        <li>
+                          To change your chosen answer, click on the button of
+                          another option
+                        </li>
+                        <li>
+                          To save your answer, you MUST click on the{" "}
+                          <span>Save & Next</span>
+                          button
+                        </li>
+                        <li>
+                          To mark the question for review, click on the{" "}
+                          <span>Mark for Review & Next button.</span>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      9.To change your answer to a question that has already
+                      been answered, first select that question for answering
+                      and then follow the procedure for answering that type of
+                      question.
+                    </li>
+                    <p className="pg_siteheding">
+                      Navigating through sections:
+                    </p>
+                    <li>
+                      10.Sections in this question paper are displayed on the
+                      top bar of the screen. Questions in a section can be
+                      viewed by clicking on the section name. The section you
+                      are currently viewing is highlighted.
+                    </li>
+                    <li>
+                      11.After clicking the Save & Next button on the last
+                      question for a section, you will automatically be taken to
+                      the first question of the next section.
+                    </li>
+                    <li>
+                      12.You can shuffle between sections and questions anytime
+                      during the examination as per your convenience only during
+                      the time stipulated.
+                    </li>
+                    <li>
+                      13.Candidate can view the corresponding section summary as
+                      part of the legend that appears in every section above the
+                      question palette.
+                    </li>
+                    <li>
+                      14.To zoom the image provided in the question roll over
+                      it.
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
-      <div>
-        {showScientificCalculator && (
-          <ScientificCalculator onClose={closeScientificCalculator} />
-        )}
-      </div>
-    
+          )}
+        </div>
+        <div>
+          {showScientificCalculator && (
+            <ScientificCalculator onClose={closeScientificCalculator} />
+          )}
+        </div>
       </div>
     </div>
   );

@@ -25,6 +25,7 @@ export const StudentDashbord_MyResults = ({
   const [testPageHeading, setTestPageHeading] = useState([]);
   const { testCreationTableId, courseCreationId } = useParams();
   const  Branch_Id= branchIdFromLS;
+  
   useEffect(() => {
     const fetchTestDetails = async () => {
       try {
