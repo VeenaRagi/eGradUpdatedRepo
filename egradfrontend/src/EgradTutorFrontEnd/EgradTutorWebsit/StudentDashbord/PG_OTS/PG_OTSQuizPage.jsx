@@ -1752,9 +1752,10 @@ const PG_OTSQuizPage = () => {
                                 </button>
                               ))}
                             </div> */}
-                            <div>
-                            {selectedSubjectId && (
-                              <div>
+                             {selectedSubjectId && (
+                              <div className="messageBodyPC containerpg">
+                                <div className="message-body">
+                                <div className="arrowpg"></div>
                                 {(() => {
                                   const selectedSubject =
                                     testData.subjects.find(
@@ -1763,7 +1764,8 @@ const PG_OTSQuizPage = () => {
                                     );
                                   return selectedSubject?.sections?.length <
                                     0 ? (
-                                    <div className="Pg_sectiondiv">
+                                    <div >
+                                      
                                       <div className="child_sections_conatiner">
                                         {selectedSubject.sections.map(
                                           (section) => (
@@ -1792,8 +1794,12 @@ const PG_OTSQuizPage = () => {
                                     ?.SubjectName || "No subject selected"}
                                 </p>;
                                 })()}
+                                </div>
+                               
                               </div>
                             )}
+                            <div>
+                           
                           </div>
                             <div>
                               <FaCalculator
@@ -1845,7 +1851,7 @@ const PG_OTSQuizPage = () => {
                           </div> */}
                           <div>
                             {selectedSubjectId && (
-                              <div>
+                              <div className="pgsectinddivestyle">
                                 {(() => {
                                   const selectedSubject =
                                     testData.subjects.find(
@@ -1878,7 +1884,7 @@ const PG_OTSQuizPage = () => {
                                         )}
                                       </div>
                                     </div>
-                                  ) :  <div className="messageBodyPC">
+                                  ) :  <div className="sectionButtonPC">
                                   {testData.subjects.map((subject) => (
                                     <button
                                       key={subject.departmentId}
@@ -2203,7 +2209,7 @@ const PG_OTSQuizPage = () => {
                           : "pg_norightdiv"
                       }
                     >
-                      <div className="pg_norightdiv">
+                      <div className="pg_norightdiv1">
                         <div>
                           {studentDetails.map((student, index) => (
                             <div key={index} className="pg_StudentDetailsots">
@@ -2375,7 +2381,7 @@ const PG_OTSQuizPage = () => {
                                 </ul>
                               </div>
                               <button
-                                style={{ background: "#f0a607da" }}
+                                style={{ background: "#f0a607da","margintop": "-3rem" }}
                                 onClick={handleSubmit}
                                 id="PG_submit_btn"
                                 title="Click here to Submit"

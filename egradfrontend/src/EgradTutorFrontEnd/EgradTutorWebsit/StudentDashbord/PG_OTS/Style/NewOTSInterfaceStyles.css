@@ -104,7 +104,7 @@
     height: 35px;
     background: url(../../asserts/purpleBox.png);
     background-size: cover;
-    padding: 9px;
+    padding: 19px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -246,7 +246,7 @@
     align-items: center;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: #eef1f1;
+    /* background-color: #eef1f1; */
     /* height: 3rem; */
     /* padding-bottom: 0.5rem; */
     display: flex;
@@ -318,6 +318,12 @@
   
   }
   
+
+  .pgsectinddivestyle {
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-bottom: 1px solid #eef1f1;
+}
   .pg_Sectionsdiv p {
     /* margin-bottom: 5px ; */
   }
@@ -482,7 +488,7 @@
     margin-bottom: 0px !important;
     padding: 3px;
     padding-left: 10px;
-    height: 18vh;
+    height: 20vh;
     background-color: #fff;
   }
   .pg_colorboxesdiv {
@@ -562,7 +568,7 @@
     /* gap: 1rem; */
     border: 2px solid black;
     width: 273px;
-   height: 78vh;
+   height: 74vh;
   }
   
   .Pg_time_left_tag{
@@ -1192,7 +1198,7 @@ font-size: 20px  !important;
   }
   @media (min-width: 1200px) {
     .pg_quizpageots {
-      min-height: 58vh;
+      min-height: 62vh;
     }
   }
   @media (min-width: 768px) and (max-width: 944px) {
