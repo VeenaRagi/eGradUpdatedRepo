@@ -1,6 +1,6 @@
  @media (max-width: 1024px) {
   .examUpdate_-container {
-    height: 100vh;
+    height: 100%;
     width: 100%;
   }
   .coures-contant_-flexCOntantc {
@@ -13,6 +13,18 @@
     display: block;
     gap: 1.6rem;
   }
+  
+form.testupdate_form_pg {
+  height: 100vh;
+  background-color: #edf7ff;
+  overflow: scroll;
+}
+ 
+}
+
+form.testupdate_form_pg {
+  height: 100vh;
+  background-color: #edf7ff;
 }
 @media (max-width: 768px) {
   .ots_-Form {
@@ -25,6 +37,7 @@
   }
   .examUpdate_-container form {
     padding: 0.2rem;
+    margin: 0 auto;
   }
   .examUpdate_-container {
     display: block;
@@ -79,6 +92,11 @@
     display: flex;
     flex-direction: column;
   }
+  form.testupdate_form_pg {
+    height: 100vh;
+    background-color: #edf7ff;
+    overflow: scroll;
+  }
 }
 @media (max-width: 425px) {
   .textColor {
@@ -102,6 +120,9 @@
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
+}
+.examUpdate_-container {
+  height: 100vh;
 }
 }
 

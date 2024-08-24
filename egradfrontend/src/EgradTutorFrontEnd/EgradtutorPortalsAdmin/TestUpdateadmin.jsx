@@ -466,6 +466,7 @@ const TestUpdateForm = () => {
              <div className="testCreation_-list">
          
               <div className="create_exam_header">
+              <button type="submit"  className="ots_-createBtn">Submit</button>
                   <button
              type="button"
              onClick={() => navigate("/CourseAdmin")}
@@ -473,7 +474,7 @@ const TestUpdateForm = () => {
            >
              Cancel
            </button> 
-           <button type="submit"  className="ots_-createBtn">Submit</button>
+          
            
            </div>
              </div>
@@ -651,6 +652,7 @@ const TestUpdateForm = () => {
                 <div className="testCreation_-list">
                   <div></div>
                  <div className="create_exam_header">
+                 <button type="submit"  className="ots_-createBtn">Submit</button>
                      <button
                 type="button"
                 onClick={() => navigate("/CourseAdmin")}
@@ -658,7 +660,6 @@ const TestUpdateForm = () => {
               >
                 Cancel
               </button> 
-              <button type="submit"  className="ots_-createBtn">Submit</button>
               
               </div>
                 </div>
