@@ -22,6 +22,57 @@
     display: block;
   }
 
+  .questionslistpopup {
+    position: fixed;
+    top: 11%;
+    left: 9%;
+    width: 83%;
+    height: 80%;
+    padding: 1rem;
+    transition: visibility 0s, opacity 0.3s ease;
+    background-color: #fff;
+    overflow-y: auto;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 10;
+  }
+  
+  
+  .ViewQuestions {
+    background-color: #000000 !important;
+    color: #fff !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+  }
+
+.questionslistpopup_Instructions {
+  background-color: #3db0f3;
+  margin: -1rem;
+  padding: 5px;
+  font-weight: 600;
+  font-size: 21px;
+  text-align: center;
+}
+.pg_Note {
+  color: red;
+  font-size: 18px;
+  margin-top: 1.5rem;
+  font-weight: 500;
+}
+.Instructionspg{
+  text-align: center;
+  color: #3db0f3;
+  font-size: large;
+}
+.questionslistpopup-content:nth-child(2) h3 {
+    /* color: red;  */
+    padding-top: 20px;
+  }
+
+
   @media (max-width: 768px) {
     .pg_quiz_exam_interface_header {
       padding: 10px 15px; 

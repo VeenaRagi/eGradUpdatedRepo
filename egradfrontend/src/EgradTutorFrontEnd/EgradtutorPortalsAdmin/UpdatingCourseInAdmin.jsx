@@ -1068,7 +1068,7 @@ navigate("/CourseAdmin")
   return (
     <div className="examUpdate_-container">
       {portalId === "1" && (
-        <form onSubmit={handleSubmitots}>
+        <form className="ug_form_updater" onSubmit={handleSubmitots}>
           <h3 className="textColor">ONLINE TEST SERIES COURSE CREATION FORM</h3>
 
           <div className="coures-contant_-flexCOntantc examSubjects_-contant">
