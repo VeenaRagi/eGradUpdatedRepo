@@ -4,22 +4,22 @@ const db = require("../DataBase/db2");
 
 
 
-router.get("/questionCount", async (req, res) => {
-  const { testCreationTableId, subjectId, sectionId } = req.params;
-  try {
-    const [results, fields] = await db.execute(
-      `SELECT t.testCreationTableId, COUNT(q.question_id) AS total_question_count
-        FROM
-        test_creation_table t
-        LEFT JOIN questions q ON t.testCreationTableId = q.testCreationTableId
-        WHERE t.testCreationTableId = ?;`
-    );
-    res.json(results);
-  } catch (error) {
-    console.error("Error fetching course count:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+// router.get("/questionCount", async (req, res) => {
+//   const { testCreationTableId, subjectId, sectionId } = req.params;
+//   try {
+//     const [results, fields] = await db.execute(
+//       `SELECT t.testCreationTableId, COUNT(q.question_id) AS total_question_count
+//         FROM
+//         test_creation_table t
+//         LEFT JOIN questions q ON t.testCreationTableId = q.testCreationTableId
+//         WHERE t.testCreationTableId = ?;`
+//     );
+//     res.json(results);
+//   } catch (error) {
+//     console.error("Error fetching course count:", error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
 
 router.get("/questionCount/:testCreationTableId", async (req, res) => {
   const { testCreationTableId } = req.params;

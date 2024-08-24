@@ -1,0 +1,1623 @@
+.Pg_OtsLogo img {
+    width: 200px;
+    padding-left: 1rem;
+  }
+  .logoImgInMockTest {
+    width: 220px;
+    height: inherit;
+  }
+  .logoImgInMockTest img{
+    height: 100%;
+    width: 100%;
+  }
+  .hundredVH{
+  height: 100vh;
+  /* border: 2px solid ; */
+  }
+  .questionsContainer{
+    width: 95%;
+   }
+   .Pg_OtsLogo{
+    height: 6vh;
+   }
+  
+   /* question div */
+   /* .pgQuestionImgDiv {
+    width: 50%;
+    border: 1px solid; 
+  }
+    
+  .pgQuestionImgDiv img{
+  height: auto;
+  width:auto;
+  } */
+  
+  .pg_countspan2 {
+    position: absolute;
+    left: 10px;
+    top: 5px;
+  }
+  .ToBeRelative{
+    position: relative; 
+  }
+  .qTypeImages {
+    height: 30px;
+    width: 30px;
+    position: relative;
+  }
+  .pg_colorboxots img {
+    width: 30px;
+    height: 30px;
+  }
+  .colorBoxPC{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-direction: column;
+  }
+  .boxesToBeFlexed>*{
+    line-height: 142%;
+  
+  }
+
+  .question_button {
+    height: 2rem;
+    width: 2.5rem;
+    background-size: cover;
+    background-image: url('../../asserts/grayBox.png');
+  }
+
+  .instruction-btn1 {
+    border: none;
+    background: url(../../asserts/greenBox.png);
+    background-size: cover;
+    color: white;
+    padding: 5px;
+   width: 40px;
+    height: 30px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .instruction-btn2 {
+    border: none;
+    background: url(../../asserts/orangeBox.png);
+    background-size: cover;
+    color: white;
+    padding: 5px;
+    width: 40px;
+    height: 30px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .instruction-btn3 {
+    border: none;
+    color: white;
+   width: 34px;
+    height: 35px;
+    background: url(../../asserts/purpleBox.png);
+    background-size: cover;
+    padding: 19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .messageBodyPC {
+    display: flex;
+    gap: 1rem;
+        margin: 7px 7px;
+  }
+
+  
+
+  .boxesToBeFlexed {
+    display: flex;
+    gap: 8px;
+    /* font-size: 12px; */
+    align-items: center;
+    justify-content: center;
+  }
+  .pg_colorboxotsC2 {
+    display: flex;
+    position: relative;
+    gap: 14px;
+  }
+  .toBeOnImgC2{
+    position: absolute;
+      left: 11px;
+      top: 10px;
+  }
+  
+   .pgPC{
+    display: flex;
+    width: 95%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .pg_otsMaindiv {
+    display: flex;
+    height: 88vh;
+  }
+   /* styles for responsiveness */
+   @media screen and (max-width: 940px) {
+    .questionsContainer {
+      min-width: 65%;
+    }
+  .questionsContainer p{
+    font-size: 13px;
+  }
+  }
+  .Pg_sectiondiv button{
+    padding:8px 12px;
+  
+  }
+  
+  .pg_Sectionsdiv p{
+    padding-bottom: 0;
+  }
+  
+  .Pg_otsheadin1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 0.3rem 0.5rem 0 0.5rem;
+    height: 5vh;
+  }
+  .markedForReviewP{
+    text-align: unset;
+  }
+  
+  .Pg_TestName {
+    font-size: 15px;
+    color: yellow;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .Pg_otsheadin1 div {
+    display: flex;
+    color: #fff;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .Pg_justify {
+    border-radius: 50%;
+    background-color: #349b79;
+    width: 20px;
+    height: 20px;
+    font-size: 13px;
+    padding: 3px;
+    text-align: center;
+    color: #fff !important;
+  }
+  
+  .pg_info {
+    border-radius: 50%;
+    background-color: #44d0e9bd;
+    width: 20px;
+    height: 20px;
+    font-size: 13px;
+    padding: 3px;
+    text-align: center;
+    color: #fff !important;
+  }
+  
+  .pg_otsMaindiv {
+    display: flex;
+  }
+  
+  .pg_subjectname {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .subject-title {
+    cursor: pointer;
+    font-weight: normal;
+  
+    font-size: 15px !important;
+    text-align: center;
+    padding-top: 24px;
+  }
+  
+  .subject-title.selected {
+    font-weight: bold;
+    font-size: 13px !important;
+  }
+  
+  .subject-title1 {
+    font-size: 15px !important;
+  }
+  .containerpg {
+    clear: both;
+    position: relative;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    /* background-color: #eef1f1; */
+    /* height: 3rem; */
+    /* padding-bottom: 0.5rem; */
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .containerpg .arrowpg {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #3db0f3; /* Change this color to match your box's background */
+    position: absolute;
+    bottom: -10px; /* Position the arrow below the box */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: transparent;
+  }
+  
+  .containerpg .arrowpg .outer {
+    width: 0;
+    height: 0;
+    border-right: 20px solid #000000;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .containerpg .arrowpg .inner {
+    width: 0;
+    height: 0;
+    border-right: 20px solid #ffffff;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 2px;
+  }
+  
+  .containerpg .message-body {
+    height: 2rem;
+    gap: 10px;
+    display: flex;
+    background-color: #3db0f3;
+    color: white;
+    border-radius: 5px;
+    padding: 4px;
+    position: relative;
+    text-align: center;
+  }
+  
+  .containerpg .message-body h2 {
+    margin: 0;
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .pg_Sectionsdiv {
+    border-bottom: 1px solid #eef1f1;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px !important;
+    align-items: center;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+  
+  }
+  
+
+  .pgsectinddivestyle {
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-bottom: 1px solid #eef1f1;
+}
+  .pg_Sectionsdiv p {
+    /* margin-bottom: 5px ; */
+  }
+  
+  .Pg_otsheadin1 p {
+    margin-bottom: 0rem !important;
+  }
+  
+  .Pg_section.active {
+    background-color: #3db0f3 !important;
+    color: #fff !important;
+  }
+  
+  .Pg_section {
+    border: 1px solid #eef1f1;
+    /* height: 2rem; */
+    color: #3db0f3 !important;
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    background-color: #fff !important;
+    padding-bottom: 5px;
+  }
+  
+  .Pg_section button:hover {
+    background: #fcfcfc !important;
+    color: #3db0f3;
+  }
+  
+  .pg_quizotsoptions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+  }
+  .Pg_sectiondiv {
+    display: flex;
+    border: 1px solid #eef1f1;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0rem !important;
+    /* height: 2rem; */
+    padding-left: 12px;
+  }
+  
+  .pg_buttons_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+ 
+  
+  .pg_Questiontypep {
+    padding-left: 10px;
+    margin-bottom: 0px !important;
+  }
+  .Pg_sectiondiv p {
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .pg_Questiontypediv {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eef1f1;
+    margin-bottom: 0rem !important;
+    text-align: center;
+    align-items: center;
+    /* padding: 9px 0; */
+  }
+  
+  .pg_markingdiv {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding-right: 10px;
+  }
+  
+  .pg_Questionnodiv {
+    border-bottom: 1px solid #eef1f1;
+    margin-bottom: 0rem !important;
+  }
+  
+  /* .pg_quizpageots {
+    padding:0 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid #eef1f1;
+  } */
+  .pg_quizpageots {
+    /* height: 41rem; */
+    /* background-color: aliceblue; */
+    padding: 0 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid #eef1f1;
+    /* min-height: 34rem; */
+  }
+  .pg_handlebuttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #eef1f1;
+    flex-wrap: wrap;
+  }
+  
+  .pg_handleReview button, .pg_handleReview2 button{
+    border: 1px solid #979797;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;
+    padding: 5px 5px 5px 3px;
+    font-size: 15px;
+  }
+  
+  .pg_handleReview button,.pg_handleReview2 button:hover {
+    background: #5bbef7cc;
+    border: 1px solid #000000;
+    color: #fff;
+  }
+  
+  .pg_handleReview,.pg_handleReview2 {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  .pg_saveandnextots {
+    background-color: #3db0f3;
+    color: #fff;
+    border: 1px solid #cecece;
+  }
+  
+  .pg_saveandnextots:hover {
+    border: 1px solid #000000;
+    background-color: #3db0f3;
+    color: #fff;
+  }
+  
+  .pg_saveprevious {
+    display: flex;
+    gap: 1rem;
+  }
+  .pg_norightdiv {
+    /* width: 20%; */
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    height: 88vh;
+    background-color: #eaf6fd;
+  }
+  
+  .pg_colorboxes {
+    display: flex;
+    flex-direction: column;
+    /* grid-template-columns: auto auto; */
+    font-size: 13px !important;
+    margin-bottom: 0px !important;
+    padding: 3px;
+    padding-left: 10px;
+    height: 20vh;
+    background-color: #fff;
+  }
+  .pg_colorboxesdiv {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .pg_colorboxotssubdiv {
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 14px;
+  }
+  .mfrText{
+    width: 64%;
+  }
+  .pg_colorboxotssubdivPC {
+    gap: 12px;
+    padding: 3px;
+  }
+  .pg_colorboxotsFW {
+    display: flex;
+    padding: 0 10px 12px 10px;
+    gap: 10px;
+  }
+  .pRelative{
+    position: relative;
+  }
+  span.toBeOnImg {
+    position: relative;
+    top: -25px;
+    left: 8px;
+  }
+  /* .pg_colorboxes5 {
+    grid-column: 1/4;
+    margin-top: 0rem;
+  } */
+  .important-padding {
+    padding-left: 10px !important;
+    color: #fff;
+    font-weight: 600;
+  }
+  .pg_colorboxots {
+    display: flex;
+    /* align-items: center; */
+    /* flex-direction: column; */
+  /* width: 50%; */
+  }
+  /* .pg_colorboxots div{
+    display: flex;
+  } */
+  .toBeFlexClrBoxes {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    text-align: start;
+    gap: 6px;
+    text-wrap: wrap;
+    font-size: 14px;
+  }
+  /* .pg_colorboxots img {
+    width: 30px;
+    height: 30px;
+  } */
+  .legendImgDiv img{
+    height: 100%;
+    width: 100%;
+  }
+  .legendImgDiv{
+    height: 30px;
+    width: 30px;
+  
+  }
+  
+  .pg_legenddiv {
+    display: flex;
+    flex-direction: column;
+    /* gap: 1rem; */
+    border: 2px solid black;
+    width: 273px;
+   height: 74vh;
+  }
+  
+  .Pg_time_left_tag{
+    display: flex;
+    gap:5px
+  }
+  .Pg_qtype_div{
+    border-bottom: 1px solid #80808082;
+    padding-bottom: 5px;
+  }
+
+  .pg_question_number_div{
+    display: flex;
+    gap:5px;
+  }
+
+  #pg_question_number_tag{
+font-size: 20px  !important;
+  }
+  .PG_subject_container {
+    display: flex;
+    justify-content: space-between;
+   height: 3rem;
+    padding: 10px 10px;
+    border-bottom: 1px solid #80808082;
+}
+  .pg_Questionnop {
+    font-weight: 600;
+    padding-left: 10px !important;
+    margin-bottom: 0px !important;
+  }
+  
+  .pg_numberpaletdiv {
+    display: grid;
+    column-gap: 14px;
+    row-gap: 12px !important;
+    height: 40vh;
+    padding: 0.5rem;
+    /* height: 15rem; */
+    overflow-y: auto;
+    grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
+  }
+  
+  .pg_numberpaletdiv button:hover {
+    color: #000000 !important;
+  }
+  .pg_divotsnumber {
+    background-color: #e9f6fd;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-weight: 700;
+    position: relative;
+  }
+  .Pg_sectiondivno {
+    background-color: #54b1f6;
+    color: white;
+    font-weight: 600;
+    padding-left: 5px;
+  }
+  
+  .studentdata_pgots {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    flex-direction: row;
+    padding-top: 15px;
+    text-align: center;
+  }
+  .pg_StudentDetailsots img {
+    width: 100px;
+    height: 100px;
+  }
+  .pg_StudentDetailsots p {
+    text-align: center;
+    padding-top: 30px;
+    font-weight: 700;
+  }
+  .divWidth50 {
+    width: 90%;
+    font-size: 15px;
+  }
+  .option {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 3px;
+    cursor: pointer;
+  }
+  
+  .pgquestion-palette .marked {
+    /* background: url("../../MockTest/asserts/purpleBox.png") no-repeat center */
+      /* center; */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    color: white;
+    padding: 2px 10px;
+    width: 40px;
+    height: 35px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; 
+  }
+  
+  .pgquestion-palette .marked-answered {
+    /* background: url(../../MockTest/asserts/purple.png) no-repeat center center; */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    color: white;
+    padding: 2px 10px;
+    width: 40px;
+    height: 35px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  .pgquestion-palette .active {
+    /* background: url(../../MockTest/asserts/orangeBox.png); */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    color: white;
+    padding: 2px 10px;
+    width: 40px;
+    height: 30px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  .pgquestion-palette .viewed {
+    /* background: url(../../MockTest/asserts/orangeBox.png); */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    color: white;
+    padding: 2px 10px;
+    width: 40px;
+    height: 30px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  .pgquestion-palette .answered {
+    /* background: url(../../MockTest/asserts/greenBox.png); */
+    background-size: cover;
+    border: none;
+    color: white;
+    padding: 5px;
+    width: 40px;
+    height: 30px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  .pgquestion-number-palette button {
+    /* margin: 0 5px; */
+    padding: 2px 10px;
+    /* border: none; */
+    /* border-radius: 50%; */
+    /* background-color: #ddd; */
+    background: azure;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid black;
+  }
+  
+  .pgquestion-number-palette button.answered {
+    /* background-color: rgb(47, 226, 47); */
+    /* background: url(../../MockTest/asserts/greenBox.png); */
+    background-size: contain;
+    border: none;
+    color: white;
+    background-repeat: no-repeat;
+    padding: 2px 10px;
+    width: 40px;
+    height: 30px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  .pgquestion-number-palette button.skipped {
+    /* background-color: rgb(253, 58, 58); */
+    /* background: url(../../MockTest/asserts/orangeBox.png); */
+    /* color: #fff; */
+    background-size: cover;
+    border: none;
+    color: white;
+    padding: 5px;
+    width: 40px;
+    height: 30px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  .pgquestion-number-palette button.markedForReview {
+    /* background-color: rgb(253, 58, 58); */
+    /* background: url(../../MockTest/asserts/purpleBox.png); */
+    /* color: #fff; */
+    background-size: cover;
+    border: none;
+    color: white;
+    padding: 5px;
+    width: 40px;
+    height: 30px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  .pg_StudentDetailsots {
+    display: flex;
+    padding: 5px;
+    height: 12vh;
+  }
+  
+  .pg_countspan {
+    position: relative;
+    left: 4px;
+    top: -38px;
+    display: flex;
+    align-items: stretch;
+    padding: 6px;
+    text-align: center;
+  }
+  .pg_countspan {
+    position: relative;
+    left: 4px;
+    top: -39px;
+    display: flex;
+    align-items: stretch;
+    padding: 6px;
+    text-align: center;
+  }
+  
+  .pg_markedForReviewCount {
+    position: relative;
+    left: -28px;
+    top: 3px;
+    display: flex;
+    align-items: stretch;
+    padding: 6px;
+    text-align: center;
+  }
+  
+  .handleIconClick {
+    /* position: fixed;
+    top: 8rem;
+    right: 18rem; */
+  }
+  
+  .handleIconClick1 {
+    /* position: fixed;
+    top: 6rem;
+    right: 18rem; */
+    color: #5e87c9;
+    cursor: pointer;
+  }
+  
+  .handleIconClick1 i {
+    color: #5e87c9 !important;
+    font-size: 22px;
+  }
+  .Calculatorheaderright i{
+    font-size: 22px;
+  }
+  
+  .Quetionpaperdiv {
+    margin: 1rem;
+  }
+  
+  .Quetionpaperdiv ul li {
+    display: flex;
+    /* flex-direction: column; */
+    padding-top: 3px;
+    border-bottom: 2px solid;
+    gap: 10px;
+    align-items: start;
+    justify-content: start;
+    font-size: 13px;
+    width: max-content;
+   
+  }
+  .questionImageDiv {
+    height: 100%;
+    /* width: 30rem; */
+    /* border: 1px solid; */
+  }
+  .Quetionpaperdiv img {
+    /* width: 50rem; */
+    /* border-bottom: 2px solid black; */
+    padding-bottom: 3px;
+    height: 100%;
+    /* width: 100%; */
+  }
+  .profileClose{
+    display: none;
+  }
+  /* The popup container */
+  .questionslistpopup {
+    position: fixed;
+    top: 11%;
+    left: 9%;
+    width: 83%;
+    height: 80%;
+    padding: 1rem;
+    transition: visibility 0s, opacity 0.3s ease;
+    background-color: #fff;
+    overflow-y: auto;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 10;
+  }
+  
+  
+  .ViewQuestions {
+    background-color: #000000 !important;
+    color: #fff !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+  }
+  .Calculatormaindivpopup {
+    position: fixed;
+    top: 151px;
+    right: 289px; 
+    width: 28%;
+    height: 44%;
+    padding: 1rem;
+    transition: visibility 0s, opacity 0.3s ease;
+    background-color: #fff;
+    overflow-y: auto;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  
+  
+  /* The popup content */
+  .questionslistpopup-content {
+    /* background-color: #fff;/ */
+    /* padding: 20px; */
+    /* border-radius: 8px; */
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);/ */
+    /* width: 90%; */
+    /* max-width: 500px; */
+    /* position: relative; */
+  }
+  
+  /* Close button */
+  .questionslistpopup-close {
+    /* position: absolute; */
+    /* top: 10px; */
+    /* right: 15px; */
+    /* font-size: 20px;/ */
+    /* color: #333; */
+    /* cursor: pointer; */
+  }
+  
+  /* Show the popup */
+  .questionslistpopup.show {
+    /* visibility: visible; */
+    /* opacity: 1; */
+  }
+  
+  .number-pad {
+    display: inline-block;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .number-row {
+    display: flex;
+    justify-content: space-between;
+    /* margin-bottom: 10px; */
+  }
+  
+  .number-row:last-child {
+    margin-bottom: 0;
+  }
+  
+  .number-pad button {
+    width: 45px;
+    height: 45px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+  
+  .number-pad button:hover {
+    background-color: #e6e6e6;
+    border-color: #ccc;
+  }
+  
+  .number-pad button:active {
+    background-color: #d9d9d9;
+    border-color: #bbb;
+  }
+  
+  .natd-input-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+   
+  }
+  
+  .natd-input{
+    height: 40px;
+    border: 1px solid black;
+  
+  }
+  
+  .onebuttonrow button{
+    width: 110px;
+    background-color: #bab9b9;
+  }
+  .number-row1 button{
+    background-color: #bab9b9;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  /************* Hover mock details ***************/
+  
+  
+  .pg_countspan_mock{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .pg_colorboxots_mock {
+    display: flex;
+    color: black;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .Mock_test_details_structure {
+    display: none; 
+    position: absolute; 
+    top: 100%; 
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc; 
+    padding: 10px;
+    width: 218px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    z-index: 1000; 
+  }
+  
+  .i_symbol_mock_exam {
+    position: relative;
+    flex-wrap: wrap;
+  }
+  
+  .i_symbol_mock_exam:hover .Mock_test_details_structure {
+    display: block; 
+  }
+  .i_symbol_mock_exam2:hover .Mock_test_details_structure {
+    display: block; 
+  }
+  .pg_colorboxots_mock .mock_paras {
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    white-space: pre wrap;
+    text-align: start;
+    text-wrap: wrap;
+    font-size: 13px;
+    padding-left: 10px;
+    font-weight: 400;
+  }
+  .mock_test_count_details {
+    height: 38px;
+  }
+  /* @media (max-height: 2560px) and (min-height: 1825px) {
+    .pg_quizpageots{
+      min-height: 40rem;
+    }
+  } */
+  
+  /* @media (max-height: 2560px) and (min-height: 1825px) {
+    .pg_quizpageots{
+      height: 45rem;
+      border: 4px solid;
+    }
+  } */
+  /* @media (min-height:1825px) and (max-height:2560px) {
+    .pg_quizpageots{
+      height: 45rem;
+      background-color: red;
+      border: 4px solid;
+    }
+    .pg_otsMaindiv{
+      background-color: red;
+    }
+  } */
+  .questionslistpopup_Instructions {
+    background-color: #3db0f3;
+    margin: -1rem;
+    padding: 5px;
+    font-weight: 600;
+    font-size: 21px;
+    text-align: center;
+  }
+  .pg_Note {
+    color: red;
+    font-size: 18px;
+    margin-top: 1.5rem;
+    font-weight: 500;
+  }
+  .Instructionspg{
+    text-align: center;
+    color: #3db0f3;
+    font-size: large;
+  }
+  
+  .pg_quizpageotsPC {
+    /* padding: 0 1rem ; */
+  }
+  .pg_quizpageotsPC {
+    /* border: 2px solid red; */
+    /* overflow-x: auto; */
+  }
+  /* newly added  */
+  @media (max-width: 1000px) {
+  .pg_quizpageotsPC {
+    width: 76vw;
+  
+  }
+  }
+  .pg_quizpageotsPC {
+    /* border: 2px solid red; */
+    overflow-x: auto;
+    height: 63vh;
+  }
+  .jcContainer1{
+    /* height: 15vh; */
+  }
+  .prevButtonForMobile{
+    display: none;
+  }
+  button.Quiz_mockbtns.Quiz_mockbtnssubmit.subButtonInMW {
+    display: none;
+  }
+  .pg_Questiontypediv p{
+    font-size: 14px;
+  }
+  .questionslistpopup-content:nth-child(2) h3 {
+    /* color: red;  */
+    padding-top: 20px;
+  }
+  .leftArrowOfQP,.rightArrowOfQP{
+    display: none;
+  }
+  /* for HMenu of the profile */
+  .hMenuDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* margin: 0 10px; */
+    padding-right: 20px;
+    background-color: #54b1f6;
+  }
+  .hMenuIcon{
+    display: none;
+  }
+  
+  
+  @media (min-width: 1000px) and (max-width: 1440px) {
+    .pg_quizpageots {
+      height: 59vh;
+  }
+  }
+  @media (max-width: 1000px) {
+    .pg_quizpageots {
+    }
+  }
+  @media (min-width: 1200px) {
+    .pg_quizpageots {
+      min-height: 62vh;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 944px) {
+    .pgPC{
+      min-width: 68%;
+  
+    }
+  }
+  /* .pgPC */
+  @media (min-width: 1825px) and (max-width: 2560px) {
+    .questionslistpopup{
+      top: 18%;
+    }
+    .Pg_OtsLogo{
+      height: 9vh;
+     }
+     .pg_otsMaindiv {
+      display: flex;
+      height: 85vh;
+    }
+    .logoImgInMockTest {
+      width: 400px;
+      height: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  .pg_norightdiv {
+    height: 85vh;
+  }
+  }
+  @media (max-width: 768px) {
+    .containerpg .message-body{
+      display: none;
+    }
+    .containerpg{
+      display: none;
+    }
+    .Quetionpaperdiv ul{
+      width: max-content;
+    }
+  .questionImageDiv {
+    height: 100%;
+    /* width: 30rem; */
+  }
+  .Quetionpaperdiv img {
+    padding-bottom: 3px;
+    height: 100%;
+  }
+    .hMenuIcon {
+      display: flex;
+      font-size: 24px;
+      background-color: white;
+      padding: 3px 6px;
+      cursor: pointer;
+  }
+  .showRightSideProfile.pg_StudentDetailsots {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    background-color: #a3a3a3;
+    z-index: 16;
+    height: 80vh;
+    width: 200px;
+    right: 0;
+    top: 12%;
+    /* right: -5%; */
+    /* padding-right: 20px; */
+    /* left: -9px; */
+    color: white;
+    margin-right: 2px;
+    align-items: center;
+    transition: transform 0.5s ease;
+    /* transform: translateX(100%); */
+    border: 1px solid white;
+    border-radius: 6px;
+  }
+  .profileCloseDivInMT {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    font-size: 33px;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+  }
+  .profileClose{
+    display: flex;
+  }
+    .Quetionpaperdiv ul li{
+      font-size: 12px;
+    }
+    .logoImgInMockTest {
+      width: 200px;
+      height: inherit;
+  }
+  
+    .pg_quizpageotsPC{
+      height: unset;
+      width: 100%;
+    }
+    .pg_Questiontypediv p {
+      font-size: 14px;
+      width: 50%;
+      word-spacing: 0px;
+  }
+  .pg_markingdiv{
+    width: 75%;
+  }
+  .pg_markingdiv {
+    padding-right: 0;
+  }
+    .messageBodyPC{
+      display: flex;
+      flex-direction: row;
+      align-items: start ;
+    }
+    .number-pad button {
+      /* width: 30px; */
+      padding: 0;
+      height: 30px;
+      margin: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      background-color: #fff;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+    .prevButtonForMobile{
+      display: block;
+    }
+    .Quiz_mockbtns.Quiz_mockbtnssubmit{
+      display: none;
+    }
+    .prevButtonAtMW{
+      display: none;
+    }
+    button.Quiz_mockbtns.Quiz_mockbtnssubmit.subButtonInMW{
+      display: block;
+      padding: 5px 5px 5px 3px;
+    }
+    .pg_otsMaindiv {
+      display: flex;
+      justify-content: start;
+      flex-direction: column-reverse;
+  }
+  .pg_handleReview2 {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+  }
+  .pg_handleReview2 button{
+    width: 50%;
+    margin: 10px 0;
+  }
+  
+  .pg_handlebuttons{
+    flex-direction: column;
+  }
+  .ViewQuestions{
+    padding: 0;
+  }
+  .Pg_otsheadin1 {
+    height: 6vh;
+  }
+  .pgPC {
+   width: 100%;
+   height: 100%;
+  }
+  .pg_colorboxes{
+    display: none;
+  }
+  .pg_norightdiv{
+    flex-direction: row;
+    height: auto;
+  }
+  .pg_StudentDetailsots{
+    display: none;
+  }
+  .pg_legenddiv {
+    height: auto;
+    width: 100%;
+    /* width: 80%; */
+  }
+  /* .pg_otsMaindiv{
+    height: unset;
+  } */
+  .pg_otsMaindiv {
+    display: flex;
+    height: 87vh;
+  }
+  .pg_numberpaletdiv {
+    height: auto;
+    display: flex;
+    overflow: hidden;
+    overflow-x: scroll;
+    margin: 0 20px;
+  }
+  .leftArrowOfQP, .rightArrowOfQP {
+    display: flex;
+    position: absolute;
+    top: 37px;
+  }
+  .rightArrowOfQP{
+    right: 0;
+  }
+  .pg_quizpageots {
+    height: 363px;
+  }
+  .Pg_TestName {
+    font-size: 14px;
+  }
+  }
+  .snaps-inline{
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline:10px ;
+  }
+  /* .snaps-inline>button{
+    scroll-snap-align: start;
+  } */
+  
+  @media (max-width: 579px) {
+    .ViewQuestions p{
+      display: none;
+      }
+  }
+  .sectionDropDownArrow{
+    display: none;
+  
+  }
+  .sectionsDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+  }
+  .infoForMW{
+    display: none;
+  
+  }
+  .Mock_test_details_structureDB{
+    display: flex;
+  }
+  .pg_Questiontypediv2 {
+    display: none;
+  }
+  @media (max-width: 600px) {
+  .pg_Questiontypediv{
+    /* asdf */
+    display: none;
+  }
+  .infoForMW{
+    display: block;
+  }
+  .i_symbol_mock_exam{
+    display: none;
+  }
+  .pg_Questiontypediv2 {
+    display: block;
+    position: absolute;
+    background-color: white;
+    top: 30px;
+    right: 6px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    font-size: 13px;
+    height: 230px;
+    overflow-y: scroll;
+  }
+  .pg_countspan2 {
+    position: relative;
+    left: 5px;
+    top: -36px;
+    display: flex;
+    align-items: stretch;
+    padding: 6px;
+    text-align: center;
+  }
+  .pg_Questionnodiv {
+    border-bottom: 1px solid #eef1f1;
+    margin-bottom: 0rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    position: relative;
+  }
+  }
+  /* sections div  */
+  /* for 425px */
+  @media (max-width: 425px) {
+    .Pg_sectiondiv{
+      display: none;
+    }
+    
+  .pg_quizpageots {
+    border: none;
+  }
+   
+    .Pg_section.active {
+      background-color: #3db0f3 !important;
+      color: #fff !important;
+      width: 100%;
+  }
+  .leftArrowOfQP,.rightArrowOfQP{
+    display: flex;
+    position: absolute;
+    top: 37px;
+  }
+  
+    .sectionButtonPC {
+      width: 100%;
+      border-bottom: 1px solid #80808082;
+      /* padding-bottom: 5px; */
+  }
+  .Pg_sectiondiv button:hover{
+  
+  }
+    .sectionDropDownArrow{
+      display: flex;
+      cursor: pointer;
+    }
+    .displaySecButtons .Pg_sectiondiv{
+      display: flex;
+      flex-direction: column;
+      border: none;
+    }
+    .closeSecButtons .Pg_sectiondiv{
+      display: none;
+    }
+    .displaySecButtons {
+      position: absolute;
+      background-color: white;
+      padding: 20px;
+      margin-left: 10px;
+      border: 1px solid rgb(78 77 77 / 40%);
+      border-radius: 8px;
+      /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+      /* box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; */
+      box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+      z-index: 10;
+  }
+  .Pg_sectiondiv {
+    padding: 0;
+    gap: 10px;
+    align-items: start;
+    width: 100%;
+  }
+  .Pg_sectiondiv button {
+    padding: 8px;
+    border: none;
+  
+  }
+  .Quetionpaperdiv{
+    margin: 0;
+  }
+  .Quetionpaperdiv ul{
+    padding: 0;
+    margin: 0;
+  }
+  .questionslistpopup-content h3{
+    font-size: 14px;
+  }
+  
+  
+  
+  
+    .logoImgInMockTest {
+      width: 187px;
+      height: inherit;
+  }
+  
+  .pg_handleReview {
+    flex-wrap: wrap;
+  }
+  .pg_quizpageots {
+    height: 262px;
+  }
+  }
+  @media (max-width:320px) {
+    .pg_quizpageots {
+      height: 262px;
+    }
+  }
+  
+  /* hMenuDiv */
+  /* .hMenuDiv{
+    display: flex;
+  } */
+  .pg_Sectionsdiv {
+    position: relative;
+  }
+  
+  .dropdown-buttons {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    padding: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .dropdown-buttons.show {
+      display: block; /* Show when active */
+    }
+  
+    .pg_Sectionsdiv span {
+      cursor: pointer; /* Indicate clickable */
+    }
+  }
+  

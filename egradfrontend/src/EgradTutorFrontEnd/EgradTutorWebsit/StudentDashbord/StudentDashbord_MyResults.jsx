@@ -12,6 +12,7 @@ import UserContext from '../../../UserContext';
 export const StudentDashbord_MyResults = ({
   usersData,
   decryptedUserIdState,
+  decryptedBranchIdState,
   branchIdFromLS
 }) => {
   const user_Id =
@@ -24,6 +25,7 @@ export const StudentDashbord_MyResults = ({
   const [testPageHeading, setTestPageHeading] = useState([]);
   const { testCreationTableId, courseCreationId } = useParams();
   const  Branch_Id= branchIdFromLS;
+  
   useEffect(() => {
     const fetchTestDetails = async () => {
       try {
@@ -143,25 +145,27 @@ export const StudentDashbord_MyResults = ({
   //   navigate(`/UserReport/${decryptedUserIdState}/${testCreationTableId}/${courseCreationId}`, { state: { usersData, decryptedUserIdState } });
   // };
 
-  const { setDecryptedUserIdState, setUsersData } = useContext(UserContext);
+  const { setDecryptedUserIdState,setBranchIdFromLS, setUsersData } = useContext(UserContext);
 
 
 
   const handleResultAnalysisClick = (
     decryptedUserIdState,
+    branchIdFromLS,
     testCreationTableId,
     courseCreationId,
     usersData
   ) => {
     setDecryptedUserIdState(decryptedUserIdState);
+    setBranchIdFromLS(branchIdFromLS);
     setUsersData(usersData);
-    const url = `/UserReport/${decryptedUserIdState}/${testCreationTableId}/${courseCreationId}`;
+    const url = `/UserReport/${branchIdFromLS}/${decryptedUserIdState}/${testCreationTableId}/${courseCreationId}`;
     // navigate({ pathname: url, state: { usersData, decryptedUserIdState } })
     return (
       // navigate({ pathname: url, state: { usersData, decryptedUserIdState } })
       <Link
         className="Result_Analysis"
-        to={{ pathname: url, state: { usersData, decryptedUserIdState } }}
+        to={{ pathname: url, state: { usersData,branchIdFromLS, decryptedUserIdState } }}
         style={{
           backgroundColor: "green",
           color: "white",
@@ -179,7 +183,7 @@ export const StudentDashbord_MyResults = ({
   return (
     <div className="card_container_dashbordflowtest">
       <div className="test_card_subcontainer">
-      {/* <h1>Branch_Id:{Branch_Id}</h1> */}
+      <h1>Branch_Id:{Branch_Id}</h1>
         {" "}
         {/* {usersData.users && usersData.users.length > 0 && (
           <ul>
@@ -245,6 +249,7 @@ export const StudentDashbord_MyResults = ({
                           <div>
                             {handleResultAnalysisClick(
                               decryptedUserIdState,
+                              branchIdFromLS,
                               test.testCreationTableId,
                               test.courseCreationId
                             )}

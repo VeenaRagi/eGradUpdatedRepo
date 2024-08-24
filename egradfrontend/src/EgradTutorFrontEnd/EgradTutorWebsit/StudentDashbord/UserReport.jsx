@@ -21,6 +21,7 @@ import UserContext from '../../../UserContext';
 
 export const UserReport = ( ) => {
   const { decryptedUserIdState, usersData } = useContext(UserContext);
+  const { branchIdFromLS } = useContext(UserContext);
   const { decryptedUserIdState: paramUserId } = useParams();
 
 
@@ -1394,27 +1395,38 @@ console.log("jhopeeeeeeeeeeeeeeeee")
 //   }, []);
   
 const [encodedUserId, setEncodedUserId] = useState('');
+const [encodedBranchId, setEncodedBranchId] = useState('');
 
 const encryptUserId = (decryptedUserIdState) => {
   const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
   return CryptoJS.AES.encrypt(decryptedUserIdState.toString(), secretKey).toString();
 };
 
+const encryptBranchId = (branchIdFromLS) => {
+  const secretKey = process.env.REACT_APP_LOCAL_STORAGE_SECRET_KEY_FOR_USER_ID;
+  return CryptoJS.AES.encrypt(branchIdFromLS.toString(), secretKey).toString();
+};
+
 useEffect(() => {
-  if (decryptedUserIdState) {
+  if (decryptedUserIdState,branchIdFromLS) {
     const encryptedUserId = encryptUserId(decryptedUserIdState);
+    const encryptedBranchId = encryptBranchId(branchIdFromLS);
+
     const encodedUserId = encodeURIComponent(encryptedUserId);
+    const encodedBranchId = encodeURIComponent(encryptedBranchId);
+
     setEncodedUserId(encodedUserId);
+    setEncodedBranchId(encodedBranchId);
   }
-}, [decryptedUserIdState]);
+}, [decryptedUserIdState,branchIdFromLS]);
 
 console.log("Shinchannnnnnnnnnnnnnnn",decryptedUserIdState)
 
 
 console.log("Doremonnnnnnnnnnnnnnnnn",encodedUserId)
+console.log("Shizukaaaaaaaaaa",branchIdFromLS);
 
-
-
+// Branch_Id
   return (
     <div className="resultContainerSection">
       <div className="StudentDashbord_Container">
@@ -1424,7 +1436,7 @@ console.log("Doremonnnnnnnnnnnnnnnnn",encodedUserId)
             <span>
               {" "}
               <div className="Go_back_from_test_section">
-                <Link to={`/Student_dashboard/${encodedUserId}`} style={{ color: "black" }}>
+                <Link to={`/Student_dashboard/${encodedUserId}/${encodedBranchId}`} style={{ color: "black" }}>
                   Go Back
                 </Link>
               </div>

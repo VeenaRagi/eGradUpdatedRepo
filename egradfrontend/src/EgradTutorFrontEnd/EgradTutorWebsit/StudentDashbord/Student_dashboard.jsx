@@ -16,6 +16,7 @@ const Student_dashboard = () => {
   // -----------------CONST_VARIABLES_DECLARATION_START---------------
   const navigate = useNavigate();
   const [decryptedUserIdState, setDecryptedUserIdState] = useState("");
+  const [decryptedBranchIdState, setDecryptedBranchIdState] = useState("");
   const [tiAuth, settiAuth] = useTIAuth();
   const [usersData, setUsersData] = useState("");
   const[branchIdFromLS,setBranchIdFromLS]=useState("")
@@ -38,6 +39,7 @@ const Student_dashboard = () => {
         );
         console.log(response.data, "Response from backend");
         setDecryptedUserIdState(response.data.userId);
+        setDecryptedBranchIdState(response.data.Branch_Id);
         setUsersData(response.data);
         console.log(usersData); // Update state with decrypted user ID
         settiAuth({
@@ -162,6 +164,7 @@ useEffect(() => {
 
             usersData={usersData}
             decryptedUserIdState={decryptedUserIdState}
+            // decryptedBranchIdState={decryptedBranchIdState}
             // Branch_Id={Branch_Id}
             branchIdFromLS={branchIdFromLS}
             // decryptedBranchId={decryptedBranchId}
