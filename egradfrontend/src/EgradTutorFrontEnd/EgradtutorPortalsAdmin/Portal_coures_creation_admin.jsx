@@ -1177,7 +1177,7 @@ function Portal_coures_creation_admin() {
               </div>
             </div>
             <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-              <div className="testCreation_list">
+              <div className="testCreation_list testCreation_lists">
                 <label>Type of test:</label>
                 <div className="coures_-typeOfTest">
                   {typeOfTest.map((typeofTest) => (
@@ -1251,7 +1251,7 @@ function Portal_coures_creation_admin() {
               </div>
             </div>
             <div className="coures-contant_-flexCOntantc examSubjects_-contant Ug_type_of_questions_ug">
-              <div className="testCreation_list">
+              <div className="testCreation_list testCreation_lists">
                 <label>Type of Questions:</label>
                 <div className="course_checkbox_continer_content ug_type_of_tests_questions">
                   {typeofQuestion.map((type) => (
