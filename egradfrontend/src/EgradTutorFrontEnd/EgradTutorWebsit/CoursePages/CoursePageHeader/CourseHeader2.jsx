@@ -137,7 +137,7 @@ const CourseHeader2 = ({ isEditMode, userRole,Branch_Id }) => {
             </div>
             {/* this should be hidden at mobile width and should be shown upon click  */}
             <nav className={`navDiv`} ref={navRef}>
-            <p>{Branch_Id}</p>
+            {/* <p>{Branch_Id}</p> */}
                 <ul className={`ulDiv ${themeDetails.themeulCPDiv}`}>
                     {headers.length > 0 ? (
                         headers.map((headeritem) => (

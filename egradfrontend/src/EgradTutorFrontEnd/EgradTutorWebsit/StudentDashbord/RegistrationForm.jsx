@@ -306,7 +306,7 @@ console.log("Branch_Id_from_query",Branch_Id_from_query)
       ) : (
         branches.map((branch) => (
           <div key={branch.Branch_Id}>
-            <h1>{branch.Branch_Id}</h1>
+            {/* <h1>{branch.Branch_Id}</h1> */}
           </div>
         ))
       )}

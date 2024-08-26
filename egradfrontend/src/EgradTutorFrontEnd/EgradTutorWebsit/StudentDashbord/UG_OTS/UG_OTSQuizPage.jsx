@@ -229,6 +229,38 @@ const UG_OTSQuizPage = () => {
     };
   });
 
+      //mouseclick disabling
+      const handleContextMenu = (e) => {
+        e.preventDefault();
+      };
+      
+      useEffect(() => {
+        document.addEventListener('contextmenu', handleContextMenu);
+    
+        return () => {
+          document.removeEventListener('contextmenu', handleContextMenu);
+        };
+      }, []);
+    
+        //keyboard disabling
+        useEffect(() => {
+          const handleKeyDown = (event) => {
+            event.preventDefault(); // Prevent default keyboard action
+            event.stopPropagation(); // Stop event propagation
+            // Optionally, you can add custom logic here to handle keydown events.
+          };
+      
+          // Attach event listener to intercept keydown events
+          document.addEventListener("keydown", handleKeyDown);
+      
+          // Cleanup function to remove event listener when component unmounts
+          return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+          };
+        }, []); // Empty dependency array ensures the effect runs only once
+  
+        
+        
   // Convert seconds to hours, minutes, and seconds
   const hours = Math.floor(countDown / 3600);
   const minutes = Math.floor((countDown % 3600) / 60);
