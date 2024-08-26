@@ -713,7 +713,8 @@ p.instruction-btn4.r_S_B_BTNS {
     margin: 0px 1rem;
 }
 p.ots_quiz_testname {
-  text-align: end;
+  text-align: start;
+  padding-left: 200px;
 }
 .sidebar-footer {
   padding-top: 5rem;
