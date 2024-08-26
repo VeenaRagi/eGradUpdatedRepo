@@ -921,12 +921,12 @@ function PGAdminPortalCourseCreation() {
                 </div>
               </div>
               <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-                <div className="testCreation_lists">
+                <div className="testCreation_lists" >
                   <label>Type of test:</label>
                   <div className="coures_-typeOfTest">
                     {typeOfTest.map((typeofTest) => (
                       <div
-                        className="course_checkbox_continer course_frominput_container_media"
+                        className="course_checkbox_continer course_frominput_container_media ug_type_of_tets_media"
                         key={typeofTest.typeOfTestId}
                       >
                         <label htmlFor={`question-${typeofTest.typeOfTestId}`}>
@@ -998,16 +998,16 @@ function PGAdminPortalCourseCreation() {
                   </div>
                 </div>
               </div>
-              <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-                <div className="testCreation_list">
+              <div className="coures-contant_-flexCOntantc examSubjects_-contant Ug_type_of_questions_ug">
+                <div className="testCreation_list Ug_type_of_tests_lists_Ug">
                   <label>Type of Questions:</label>
-                  <div className="course_checkbox_continer_content">
+                  <div className="course_checkbox_continer_content ug_type_of_tests_questions">
                     {typeofQuestion.map((type) => (
                       <div
-                        className="course_checkbox_continer course_frominput_container_media"
+                        className="course_checkbox_continer course_frominput_container_media ug_type_of_tets_media_questions"
                         key={type.quesionTypeId}
                       >
-                        <i class="fa-solid fa-caret-right"></i>
+                        {/* <i class="fa-solid fa-caret-right"></i> */}
                         <label htmlFor={`question-${type.quesionTypeId}`}>
                           {type.typeofQuestion}
                         </label>
@@ -1180,12 +1180,12 @@ function PGAdminPortalCourseCreation() {
               </div>
             </div>
             <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-              <div className="testCreation_list">
+              <div className="testCreation_lists" >
                 <label>Type of test:</label>
                 <div className="coures_-typeOfTest">
                   {typeOfTest.map((typeofTest) => (
                     <div
-                      className="course_checkbox_continer course_frominput_container_media"
+                      className="course_checkbox_continer course_frominput_container_media ug_type_of_tets_media"
                       key={typeofTest.typeOfTestId}
                     >
                       <label htmlFor={`question-${typeofTest.typeOfTestId}`}>
@@ -1253,16 +1253,16 @@ function PGAdminPortalCourseCreation() {
                 </div>
               </div>
             </div>
-            <div className="coures-contant_-flexCOntantc examSubjects_-contant">
-              <div className="testCreation_list">
+            <div className="coures-contant_-flexCOntantc examSubjects_-contant Ug_type_of_questions_ug">
+              <div className="testCreation_list Ug_type_of_tests_lists_Ug">
                 <label>Type of Questions:</label>
                 <div className="course_checkbox_continer_content">
                   {typeofQuestion.map((type) => (
                     <div
-                      className="course_checkbox_continer course_frominput_container_media"
+                      className="course_checkbox_continer course_frominput_container_media ug_type_of_tets_media"
                       key={type.quesionTypeId}
                     >
-                      <i class="fa-solid fa-caret-right"></i>
+                      {/* <i class="fa-solid fa-caret-right"></i> */}
                       <label htmlFor={`question-${type.quesionTypeId}`}>
                         {type.typeofQuestion}
                       </label>
